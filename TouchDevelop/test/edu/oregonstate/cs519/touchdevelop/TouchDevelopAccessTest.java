@@ -25,4 +25,11 @@ public class TouchDevelopAccessTest {
 		List<Script> scripts = TouchDevelopAccess.getScripts(52);
 		assertEquals(52, scripts.size());
 	}
+	
+	@Test
+	public void testGetScriptSuccessors() {
+		List<Script> scripts = TouchDevelopAccess.getSuccessors("qoipfdvx");
+		assertEquals(1, scripts.size());
+		assertEquals("qfbr",scripts.get(0).getID());
+	}
 }

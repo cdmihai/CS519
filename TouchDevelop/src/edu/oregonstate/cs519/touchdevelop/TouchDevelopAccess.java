@@ -69,5 +69,12 @@ class TouchDevelopAccess {
 		scripts.addAll(currentScripts);
 		return (String) responseMap.get("continuation");
 	}
+
+	public static List<Script> getSuccessors(String scriptID) {
+		String call = API_ROOT + scriptID + "/successors";
+		Map<String, Object> responseMap = doCall(call);
+		List<Script> successors = getScriptsFromMap(responseMap);
+		return successors;
+	}
 	
 }
