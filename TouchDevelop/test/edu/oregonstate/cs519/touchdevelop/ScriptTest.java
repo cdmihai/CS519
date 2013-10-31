@@ -23,4 +23,25 @@ public class ScriptTest {
 		Script script = new Script(hashMap);
 		assertEquals("TestScript",script.getName());
 	}
+	
+	@Test
+	public void testCreateScriptWithId() {
+		hashMap.put(Script.ID, "aaaa");
+		Script script = new Script(hashMap);
+		assertEquals("aaaa", script.getID());
+	}
+	
+	@Test
+	public void testCreateScriptWithUserId() {
+		hashMap.put(Script.USER_ID, "bob");
+		Script script = new Script(hashMap);
+		assertEquals("bob",script.getUserID());
+	}
+	
+	@Test
+	public void testCreateScriptWithRootId() {
+		hashMap.put(Script.ROOT_ID, "bbbb");
+		Script script = new Script(hashMap);
+		assertEquals(script.getRootID(), "bbbb");
+	}
 }
