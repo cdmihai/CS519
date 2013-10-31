@@ -14,11 +14,11 @@ public class Script {
 	private String userID;
 	private String rootID;
 
-	public Script(Map<String, String> hashMap) {
-		scriptName = hashMap.get(NAME);
-		id = hashMap.get(ID);
-		userID = hashMap.get(USER_ID);
-		rootID = hashMap.get(ROOT_ID);
+	public Script(Map<String, Object> hashMap) {
+		scriptName = (String) hashMap.get(NAME);
+		id = (String) hashMap.get(ID);
+		userID = (String) hashMap.get(USER_ID);
+		rootID = (String) hashMap.get(ROOT_ID);
 	}
 
 	public String getName() {

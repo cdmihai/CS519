@@ -10,11 +10,11 @@ import org.junit.Test;
 
 public class ScriptTest {
 	
-	private Map<String,String> hashMap;
+	private Map<String,Object> hashMap;
 
 	@Before
 	public void setUp() {
-		hashMap = new HashMap<String, String>();
+		hashMap = new HashMap<String, Object>();
 	}
 
 	@Test
