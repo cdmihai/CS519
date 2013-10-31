@@ -9,37 +9,29 @@ public class Script {
 	public static final String USER_ID = "userid";
 	public static final String ROOT_ID = "rootid";
 	
-	private String scriptName;
-	private String id;
-	private String userID;
-	private String rootID;
-	private Map<String, Object> map;
+	private Map<String, Object> hashMap;
 
 	public Script(Map<String, Object> hashMap) {
-		this.map = hashMap;
-		scriptName = (String) hashMap.get(NAME);
-		id = (String) hashMap.get(ID);
-		userID = (String) hashMap.get(USER_ID);
-		rootID = (String) hashMap.get(ROOT_ID);
+		this.hashMap = hashMap;
 	}
 
 	public String getName() {
-		return scriptName;
+		return (String) hashMap.get(NAME);
 	}
 
 	public String getID() {
-		return id;
+		return (String) hashMap.get(ID);
 	}
 
 	public String getUserID() {
-		return userID;
+		return (String) hashMap.get(USER_ID);
 	}
 
 	public String getRootID() {
-		return rootID;
+		return (String) hashMap.get(ROOT_ID);
 	}
 
 	public Map<String, Object> getHashMap() {
-		return map;
+		return hashMap;
 	}
 }
