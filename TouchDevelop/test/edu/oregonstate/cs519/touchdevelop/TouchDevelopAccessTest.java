@@ -32,4 +32,13 @@ public class TouchDevelopAccessTest {
 		assertEquals(1, scripts.size());
 		assertEquals("qfbr",scripts.get(0).getID());
 	}
+	
+	@Test
+	public void getParticularScript() {
+		Script script = TouchDevelopAccess.getScript("qoipfdvx");
+		assertEquals("qoipfdvx", script.getID());
+		assertEquals("Bike maintenance", script.getName());
+		assertEquals("qoipfdvx",script.getRootID());
+		assertEquals("antga",script.getUserID());
+	}
 }
