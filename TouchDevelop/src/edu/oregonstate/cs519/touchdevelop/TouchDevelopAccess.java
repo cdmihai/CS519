@@ -32,6 +32,11 @@ class TouchDevelopAccess {
 	public static List<Script> getScripts() {
 		String call = API_ROOT + "scripts";
 		Map<String, Object> map = doCall(call);
+		List<Script> scripts = getScriptsFromMap(map);
+		return scripts;
+	}
+
+	private static List<Script> getScriptsFromMap(Map<String, Object> map) {
 		List<Map> listOfMapScripts = (List<Map>) map.get("items");
 		List<Script> scripts = new ArrayList<Script>();
 		for (Map<String, Object> mapScript : listOfMapScripts) {
@@ -44,6 +49,25 @@ class TouchDevelopAccess {
 		String response = HttpRequest.get(call).body();
 		Map<String, Object> map = (Map<String, Object>) JSONValue.parse(response);
 		return map;
+	}
+
+	public static List<Script> getScripts(int number) {
+		List<Script> scripts = new ArrayList<Script>();
+		String continuation = null;
+		while(scripts.size() < number) {
+			continuation = getScripts(scripts, continuation);
+		}
+		return scripts.subList(0, number);
+	}
+
+	private static String getScripts(List<Script> scripts, String continuation) {
+		String call = API_ROOT + "scripts";
+		if (continuation != null)
+			call = call + "?continuation=" + continuation;
+		Map<String, Object> responseMap = doCall(call);
+		List<Script> currentScripts = getScriptsFromMap(responseMap);
+		scripts.addAll(currentScripts);
+		return (String) responseMap.get("continuation");
 	}
 	
 }
