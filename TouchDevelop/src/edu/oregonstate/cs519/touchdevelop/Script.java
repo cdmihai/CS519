@@ -13,8 +13,10 @@ public class Script {
 	private String id;
 	private String userID;
 	private String rootID;
+	private Map<String, Object> map;
 
 	public Script(Map<String, Object> hashMap) {
+		this.map = hashMap;
 		scriptName = (String) hashMap.get(NAME);
 		id = (String) hashMap.get(ID);
 		userID = (String) hashMap.get(USER_ID);
@@ -35,5 +37,9 @@ public class Script {
 
 	public String getRootID() {
 		return rootID;
+	}
+
+	public Map<String, Object> getHashMap() {
+		return map;
 	}
 }
