@@ -9,11 +9,11 @@ import java.util.Map;
 
 import org.json.simple.JSONObject;
 
-public class FileDumper {
+public class FileLibrary {
 
 	private Path directory;
 
-	public FileDumper(String string) {
+	public FileLibrary(String string) {
 		try {
 			Path dirPath = Paths.get(string);
 			directory = Files.createDirectory(dirPath);
@@ -22,7 +22,7 @@ public class FileDumper {
 		}
 	}
 
-	public void dumpFile(Script script) {
+	public void writeScript(Script script) {
 		Map<String, Object> map = script.getHashMap();
 		String string = JSONObject.toJSONString(map);
 		try {
@@ -33,5 +33,5 @@ public class FileDumper {
 			e.printStackTrace();
 		}
 	}
-
+	
 }

@@ -18,12 +18,12 @@ import org.junit.Test;
 
 public class FileDumperTest {
 	
-	private FileDumper fileDumper;
+	private FileLibrary fileDumper;
 	private String testFolder = "test-files";
 
 	@Before
 	public void setUp() {
-		fileDumper = new FileDumper(testFolder);
+		fileDumper = new FileLibrary(testFolder);
 	}
 	
 	@After
@@ -69,7 +69,7 @@ public class FileDumperTest {
 		hashMap.put(Script.NAME,"test");
 		hashMap.put(Script.USER_ID,"test_usr");
 		Script script = new Script(hashMap );
-		fileDumper.dumpFile(script);
+		fileDumper.writeScript(script);
 		byte[] fileBytes = Files.readAllBytes(Paths.get(testFolder+"/test"));
 		String contents = new String(fileBytes);
 		assertEquals("{\"name\":\"test\",\"userid\":\"test_usr\"}",contents);
