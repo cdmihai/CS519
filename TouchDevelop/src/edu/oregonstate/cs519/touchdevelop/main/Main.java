@@ -20,7 +20,7 @@ public class Main {
 		for (Script script : scripts) {
 			instance.addScript(script);
 			List<Script> successors = script.getSuccessors();
-			if (successors.size() > 2)
+			if (successors.size() > 1)
 				scriptsWithTwoOrMoreSuccessors.add(script);
 		}
 		
