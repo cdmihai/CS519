@@ -1,5 +1,6 @@
 package edu.oregonstate.cs519.touchdevelop;
 
+import java.util.List;
 import java.util.Map;
 
 public class Script {
@@ -10,6 +11,7 @@ public class Script {
 	public static final String ROOT_ID = "rootid";
 	
 	private Map<String, Object> hashMap;
+	private List<Script> successors = null;
 
 	public Script(Map<String, Object> hashMap) {
 		this.hashMap = hashMap;
@@ -33,5 +35,11 @@ public class Script {
 
 	public Map<String, Object> getHashMap() {
 		return hashMap;
+	}
+
+	public List<Script> getSuccessors() {
+		if (successors == null)
+			successors = TouchDevelopAccess.getSuccessors(getID());
+		return successors;
 	}
 }

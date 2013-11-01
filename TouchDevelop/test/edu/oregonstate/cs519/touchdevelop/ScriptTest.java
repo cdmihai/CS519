@@ -3,6 +3,7 @@ package edu.oregonstate.cs519.touchdevelop;
 import static org.junit.Assert.*;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.junit.Before;
@@ -43,5 +44,14 @@ public class ScriptTest {
 		hashMap.put(Script.ROOT_ID, "bbbb");
 		Script script = new Script(hashMap);
 		assertEquals(script.getRootID(), "bbbb");
+	}
+	
+	@Test
+	public void testGetSuccessors() {
+		hashMap.put(Script.ID, "qoipfdvx");
+		Script script = new Script(hashMap);
+		List<Script> successors = script.getSuccessors();
+		assertEquals(1, successors.size());
+		assertEquals("qfbr",successors.get(0).getID());
 	}
 }
