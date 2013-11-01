@@ -16,7 +16,7 @@ import com.github.kevinsawicki.http.HttpRequest;
  * @author caius
  * 
  */
-class TouchDevelopAccess {
+public class TouchDevelopAccess {
 
 	private static final String API_ROOT = "http://www.touchdevelop.com/api/";
 
