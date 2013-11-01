@@ -3,15 +3,14 @@ package edu.oregonstate.cs519.touchdevelop;
 import java.util.HashMap;
 import java.util.Map;
 
-
 public class ScriptLibrary {
-	
+
 	private static ScriptLibrary instance = null;
-	
+
 	private Map<String, Script> library;
 
 	private FileLibrary fileLibrary;
-	
+
 	private ScriptLibrary() {
 		library = new HashMap<String, Script>();
 	}
@@ -21,7 +20,7 @@ public class ScriptLibrary {
 			instance = new ScriptLibrary();
 		return instance;
 	}
-	
+
 	public void setPersitanceDestination(String location) {
 		fileLibrary = new FileLibrary(location);
 	}
