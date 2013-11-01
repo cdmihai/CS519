@@ -58,5 +58,31 @@ public class ScriptLibraryTest {
 		assertEquals("antga",script.getUserID());
 		TestUtils.deleteTestFiles();
 	}
+	
+	@Test
+	public void testSaveLibraryToFiles() throws Exception {
+		HashMap<String, Object> scriptMap1 = new HashMap<String, Object>();
+		scriptMap1.put(Script.ID, "aaaa1");
+		scriptMap1.put(Script.NAME, "test");
+		scriptMap1.put(Script.USER_ID, "test_usr");
+		
+		HashMap<String, Object> scriptMap2 = new HashMap<String, Object>();
+		scriptMap2.put(Script.ID, "bbbb1");
+		scriptMap2.put(Script.NAME, "test2");
+		scriptMap2.put(Script.USER_ID, "test_usr2");
+		
+		instance.addScript(new Script(scriptMap1));
+		instance.addScript(new Script(scriptMap2));
+		instance.save();
+		
+		byte[] byte1 = Files.readAllBytes(Paths.get(TestUtils.TEST_FOLDER + "/aaaa1"));
+		byte[] byte2 = Files.readAllBytes(Paths.get(TestUtils.TEST_FOLDER + "/bbbb1"));
+		
+		String file1 = new String(byte1);
+		String file2 = new String(byte2);
+		
+		assertEquals("{\"id\":\"aaaa1\",\"name\":\"test\",\"userid\":\"test_usr\"}",file1);
+		assertEquals("{\"id\":\"bbbb1\",\"name\":\"test2\",\"userid\":\"test_usr2\"}", file2);
+	}
 
 }

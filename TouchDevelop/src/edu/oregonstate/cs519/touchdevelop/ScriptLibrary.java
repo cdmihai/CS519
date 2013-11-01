@@ -1,7 +1,9 @@
 package edu.oregonstate.cs519.touchdevelop;
 
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Set;
 
 public class ScriptLibrary {
 
@@ -42,5 +44,12 @@ public class ScriptLibrary {
 				addScript(script);
 		}
 		return script;
+	}
+
+	public void save() {
+		Collection<Script> scripts = library.values();
+		for (Script script : scripts) {
+			fileLibrary.writeScript(script);
+		}
 	}
 }
