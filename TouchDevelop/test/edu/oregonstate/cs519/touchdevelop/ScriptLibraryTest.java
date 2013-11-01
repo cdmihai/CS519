@@ -19,6 +19,7 @@ public class ScriptLibraryTest {
 	@Before
 	public void setUp() {
 		instance = ScriptLibrary.getInstance();
+		instance.setPersitanceDestination(TestUtils.TEST_FOLDER);
 	}
 
 	@Test
@@ -39,8 +40,7 @@ public class ScriptLibraryTest {
 		Files.write(Paths.get(TestUtils.TEST_FOLDER + "/bbbb"),
 				"{\"id\":\"bbbb\",\"name\":\"test1\",\"userid\":\"test_usr\"}"
 						.getBytes(), StandardOpenOption.CREATE);
-		ScriptLibrary.getInstance().setPersitanceDestination(TestUtils.TEST_FOLDER);
-		Script script = ScriptLibrary.getInstance().getScript("bbbb");
+		Script script = instance.getScript("bbbb");
 		assertNotNull(script);
 		assertEquals("bbbb", script.getID());
 		assertEquals("test1", script.getName());
