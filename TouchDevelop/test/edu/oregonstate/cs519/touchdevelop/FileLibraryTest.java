@@ -2,7 +2,6 @@ package edu.oregonstate.cs519.touchdevelop;
 
 import static org.junit.Assert.assertEquals;
 
-import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;

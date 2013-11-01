@@ -28,7 +28,6 @@ class TouchDevelopAccess {
 	 * 
 	 * @return a list of scripts
 	 */
-	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public static List<Script> getScripts() {
 		String call = API_ROOT + "scripts";
 		Map<String, Object> map = doCall(call);
@@ -36,6 +35,7 @@ class TouchDevelopAccess {
 		return scripts;
 	}
 
+	@SuppressWarnings({ "rawtypes", "unchecked" })
 	private static List<Script> getScriptsFromMap(Map<String, Object> map) {
 		List<Map> listOfMapScripts = (List<Map>) map.get("items");
 		List<Script> scripts = new ArrayList<Script>();
@@ -45,6 +45,7 @@ class TouchDevelopAccess {
 		return scripts;
 	}
 
+	@SuppressWarnings("unchecked")
 	private static Map<String, Object> doCall(String call) {
 		String response = HttpRequest.get(call).body();
 		Map<String, Object> map = (Map<String, Object>) JSONValue.parse(response);
