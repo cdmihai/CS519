@@ -54,4 +54,16 @@ public class ScriptTest {
 		assertEquals(1, successors.size());
 		assertEquals("qfbr",successors.get(0).getID());
 	}
+	
+	@SuppressWarnings("unchecked")
+	@Test
+	public void testGetSuccessorsInMap() {
+		hashMap.put(Script.ID, "qoipfdvx");
+		Script script = new Script(hashMap);
+		script.getSuccessors();
+		Map<String, Object> scriptMap = script.getHashMap();
+		List<String> successors = (List<String>) scriptMap.get(Script.SUCCESSORS);
+		assertEquals(1, successors.size());
+		assertEquals("qfbr", successors.get(0));
+	}
 }
