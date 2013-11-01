@@ -2,6 +2,7 @@ package edu.oregonstate.cs519.touchdevelop;
 
 import static org.junit.Assert.*;
 
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -66,4 +67,24 @@ public class ScriptTest {
 		assertEquals(1, successors.size());
 		assertEquals("qfbr", successors.get(0));
 	}
+	
+	@Test
+	public void testGetSuccessorsFromMap() {
+		// base script
+		hashMap.put(Script.ID,"qoipfdvx");
+		List<String> scriptList = Collections.singletonList("aaaaa");
+		hashMap.put(Script.SUCCESSORS, scriptList);
+		Script script = new Script(hashMap);
+		
+		// successor script
+		HashMap<String, Object> successorScriptMap = new HashMap<String,Object>();
+		successorScriptMap.put(Script.ID, "aaaaa");
+		ScriptLibrary.getInstance().addScript(new Script(successorScriptMap));
+		
+		// testing the thing
+		List<Script> successors = script.getSuccessors();
+		assertEquals(1, successors.size());
+		assertEquals("aaaaa", successors.get(0).getID());
+	}
+	
 }

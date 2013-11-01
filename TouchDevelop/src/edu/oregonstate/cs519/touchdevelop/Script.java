@@ -11,7 +11,7 @@ public class Script {
 	public static final String ID = "id";
 	public static final String USER_ID = "userid";
 	public static final String ROOT_ID = "rootid";
-	
+
 	private Map<String, Object> hashMap;
 	private List<Script> successors = null;
 
@@ -39,14 +39,25 @@ public class Script {
 		return hashMap;
 	}
 
+	@SuppressWarnings("unchecked")
 	public List<Script> getSuccessors() {
 		if (successors == null) {
-			successors = TouchDevelopAccess.getSuccessors(getID());
-			List<String> successorsIDs = new ArrayList<String>();
-			for (Script successor : successors) {
-				successorsIDs.add(successor.getID());
+			successors = new ArrayList<Script>();
+			List<String> successorsIDs = (List<String>) hashMap.get(SUCCESSORS);
+			if (successorsIDs != null) {
+				for (String id : successorsIDs) {
+					ScriptLibrary instance = ScriptLibrary.getInstance();
+					Script script = instance.getScript(id);
+					successors.add(script);
+				}
+			} else {
+				successors = TouchDevelopAccess.getSuccessors(getID());
+				successorsIDs = new ArrayList<String>();
+				for (Script successor : successors) {
+					successorsIDs.add(successor.getID());
+				}
+				hashMap.put(SUCCESSORS, successorsIDs);
 			}
-			hashMap.put(SUCCESSORS, successorsIDs);
 		}
 		return successors;
 	}
