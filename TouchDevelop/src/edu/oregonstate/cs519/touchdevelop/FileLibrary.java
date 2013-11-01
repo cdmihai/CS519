@@ -8,6 +8,7 @@ import java.nio.file.StandardOpenOption;
 import java.util.Map;
 
 import org.json.simple.JSONObject;
+import org.json.simple.JSONValue;
 
 public class FileLibrary {
 
@@ -26,12 +27,31 @@ public class FileLibrary {
 		Map<String, Object> map = script.getHashMap();
 		String string = JSONObject.toJSONString(map);
 		try {
-			Path filePath = directory.resolve(Paths.get(script.getName()));
+			String scriptID = script.getID();
+			Path filePath = resolveScriptPath(scriptID);
 			Path file = Files.createFile(filePath);
 			Files.write(file, string.getBytes(), StandardOpenOption.WRITE);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+	}
+
+	private Path resolveScriptPath(String scriptID) {
+		return directory.resolve(Paths.get(scriptID));
+	}
+
+	@SuppressWarnings("unchecked")
+	public Script getScript(String scriptID) {
+		Path filePath = resolveScriptPath(scriptID);
+		byte[] bytes;
+		try {
+			bytes = Files.readAllBytes(filePath);
+		} catch (IOException e) {
+			return null;
+		}
+		String scriptJSON = new String(bytes);
+		Map<String, Object> scriptMap = (Map<String, Object>) JSONValue.parse(scriptJSON);
+		return new Script(scriptMap);
 	}
 	
 }

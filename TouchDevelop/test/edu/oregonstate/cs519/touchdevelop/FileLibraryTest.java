@@ -8,6 +8,7 @@ import java.nio.file.FileVisitor;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.nio.file.StandardOpenOption;
 import java.nio.file.attribute.BasicFileAttributes;
 import java.util.HashMap;
 import java.util.Map;
@@ -66,13 +67,22 @@ public class FileLibraryTest {
 	@Test
 	public void testDumpScript() throws Exception {
 		Map<String, Object> hashMap = new HashMap<String, Object>();
+		hashMap.put(Script.ID,"aaaa");
 		hashMap.put(Script.NAME,"test");
 		hashMap.put(Script.USER_ID,"test_usr");
 		Script script = new Script(hashMap );
 		fileDumper.writeScript(script);
-		byte[] fileBytes = Files.readAllBytes(Paths.get(testFolder+"/test"));
+		byte[] fileBytes = Files.readAllBytes(Paths.get(testFolder+"/aaaa"));
 		String contents = new String(fileBytes);
-		assertEquals("{\"name\":\"test\",\"userid\":\"test_usr\"}",contents);
+		assertEquals("{\"id\":\"aaaa\",\"name\":\"test\",\"userid\":\"test_usr\"}",contents);
+	}
+	
+	@Test
+	public void testGetScript() throws Exception {
+		Files.write(Paths.get(testFolder+"/test"), "{\"name\":\"test\",\"userid\":\"test_usr\"}".getBytes(), StandardOpenOption.CREATE);
+		Script script = fileDumper.getScript("test");
+		assertEquals("test", script.getName());
+		assertEquals("test_usr", script.getUserID());
 	}
 
 }
