@@ -1,6 +1,7 @@
 package edu.oregonstate.cs519.touchdevelop;
 
 import java.io.IOException;
+import java.nio.file.FileAlreadyExistsException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -15,9 +16,11 @@ class FileLibrary {
 	private Path directory;
 
 	public FileLibrary(String string) {
+		Path dirPath = Paths.get(string);
 		try {
-			Path dirPath = Paths.get(string);
 			directory = Files.createDirectory(dirPath);
+		} catch (FileAlreadyExistsException e) {
+			directory = dirPath;
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

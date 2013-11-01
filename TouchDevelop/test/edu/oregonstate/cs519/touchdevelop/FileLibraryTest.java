@@ -2,6 +2,7 @@ package edu.oregonstate.cs519.touchdevelop;
 
 import static org.junit.Assert.assertEquals;
 
+import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
@@ -50,6 +51,14 @@ public class FileLibraryTest {
 		Script script = fileDumper.getScript("test");
 		assertEquals("test", script.getName());
 		assertEquals("test_usr", script.getUserID());
+	}
+	
+	@Test
+	public void testCreateOnExistingPath() throws Exception {
+		fileDumper = new FileLibrary(TestUtils.TEST_FOLDER);
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put(Script.ID,"xxxxx");
+		fileDumper.writeScript(new Script(map));
 	}
 
 }
