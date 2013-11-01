@@ -32,8 +32,16 @@ public class ScriptLibrary {
 
 	public Script getScript(String id) {
 		Script script = library.get(id);
-		if (script == null)
+		if (script == null) {
 			script = fileLibrary.getScript(id);
+			if (script != null)
+				addScript(script);
+		}
+		if (script == null) {
+			script = TouchDevelopAccess.getScript(id);
+			if (script != null)
+				addScript(script);
+		}
 		return script;
 	}
 }

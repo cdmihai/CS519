@@ -47,5 +47,16 @@ public class ScriptLibraryTest {
 		assertEquals("test_usr", script.getUserID());
 		TestUtils.deleteTestFiles();
 	}
+	
+	@Test
+	public void testGetScriptFromCloud() throws Exception {
+		Script script = instance.getScript("qoipfdvx");
+		assertNotNull(script);
+		assertEquals("qoipfdvx", script.getID());
+		assertEquals("Bike maintenance", script.getName());
+		assertEquals("qoipfdvx",script.getRootID());
+		assertEquals("antga",script.getUserID());
+		TestUtils.deleteTestFiles();
+	}
 
 }
