@@ -11,7 +11,7 @@ public class Main {
 
 	public static void main(String[] args) {
 		ScriptLibrary instance = ScriptLibrary.getInstance();
-		instance.setPersitanceDestination("~/Downloads/TouchDevelopScripts");
+		instance.setPersitanceDestination("/Users/caius/Downloads/TouchDevelopScripts");
 		
 		List<Script> scripts = TouchDevelopAccess.getScripts(2000);
 		List<Script> scriptsWithTwoOrMoreSuccessors = new ArrayList<Script>();
