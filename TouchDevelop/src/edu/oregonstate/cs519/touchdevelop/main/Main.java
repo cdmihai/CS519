@@ -13,12 +13,12 @@ public class Main {
 		ScriptLibrary instance = ScriptLibrary.getInstance();
 		instance.setPersitanceDestination("/Users/caius/Downloads/TouchDevelopScripts");
 		
-		List<Script> scripts = TouchDevelopAccess.getScripts(2000);
+		List<Script> scripts = TouchDevelopAccess.getScripts(20);
 		List<Script> scriptsWithTwoOrMoreSuccessors = new ArrayList<Script>();
 		for (Script script : scripts) {
 			instance.addScript(script);
 			List<Script> successors = script.getSuccessors();
-			if (successors.size() > 2);
+			if (successors.size() > 2)
 				scriptsWithTwoOrMoreSuccessors.add(script);
 		}
 		
