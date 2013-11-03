@@ -1,5 +1,6 @@
 package edu.oregonstate.cs519.touchdevelop;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.nio.file.FileAlreadyExistsException;
 import java.nio.file.Files;
@@ -52,6 +53,8 @@ class FileLibrary implements ScriptManager {
 		byte[] bytes;
 		try {
 			bytes = Files.readAllBytes(filePath);
+		} catch (FileNotFoundException e){
+			return next.getScript(scriptID);
 		} catch (IOException e) {
 			return null;
 		}

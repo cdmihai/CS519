@@ -18,8 +18,7 @@ public class ScriptLibraryTest {
 
 	@Before
 	public void setUp() {
-		instance = MemoryLibrary.getInstance();
-		instance.setPersitanceDestination(TestUtils.TEST_FOLDER);
+		instance = new MemoryLibrary(new FileLibrary(TestUtils.TEST_FOLDER, new NullLibrary()));
 	}
 
 	@Test
