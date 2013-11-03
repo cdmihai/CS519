@@ -46,7 +46,7 @@ public class Script {
 			List<String> successorsIDs = (List<String>) hashMap.get(SUCCESSORS);
 			if (successorsIDs != null) {
 				for (String id : successorsIDs) {
-					ScriptLibrary instance = ScriptLibrary.getInstance();
+					MemoryLibrary instance = MemoryLibrary.getInstance();
 					Script script = instance.getScript(id);
 					successors.add(script);
 				}

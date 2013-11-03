@@ -14,11 +14,11 @@ import org.junit.Test;
 
 public class ScriptLibraryTest {
 
-	private ScriptLibrary instance;
+	private MemoryLibrary instance;
 
 	@Before
 	public void setUp() {
-		instance = ScriptLibrary.getInstance();
+		instance = MemoryLibrary.getInstance();
 		instance.setPersitanceDestination(TestUtils.TEST_FOLDER);
 	}
 

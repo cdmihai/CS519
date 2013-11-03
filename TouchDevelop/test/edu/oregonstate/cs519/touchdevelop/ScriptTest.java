@@ -79,7 +79,7 @@ public class ScriptTest {
 		// successor script
 		HashMap<String, Object> successorScriptMap = new HashMap<String,Object>();
 		successorScriptMap.put(Script.ID, "aaaaa");
-		ScriptLibrary.getInstance().addScript(new Script(successorScriptMap));
+		MemoryLibrary.getInstance().addScript(new Script(successorScriptMap));
 		
 		// testing the thing
 		List<Script> successors = script.getSuccessors();

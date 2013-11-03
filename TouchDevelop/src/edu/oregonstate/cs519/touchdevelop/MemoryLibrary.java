@@ -4,21 +4,21 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
-public class ScriptLibrary {
+public class MemoryLibrary {
 
-	private static ScriptLibrary instance = null;
+	private static MemoryLibrary instance = null;
 
 	private Map<String, Script> library;
 
 	private FileLibrary fileLibrary;
 
-	private ScriptLibrary() {
+	private MemoryLibrary() {
 		library = new HashMap<String, Script>();
 	}
 
-	public static ScriptLibrary getInstance() {
+	public static MemoryLibrary getInstance() {
 		if (instance == null)
-			instance = new ScriptLibrary();
+			instance = new MemoryLibrary();
 		return instance;
 	}
 
