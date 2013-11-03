@@ -27,7 +27,7 @@ public class MemoryLibrary implements ScriptManager {
 	}
 
 	public void setPersitanceDestination(String location) {
-		fileLibrary = new FileLibrary(location);
+		fileLibrary = new FileLibrary(location, new NullLibrary());
 	}
 
 	/* (non-Javadoc)

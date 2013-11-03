@@ -14,8 +14,10 @@ import org.json.simple.JSONValue;
 class FileLibrary {
 
 	private Path directory;
-
-	public FileLibrary(String string) {
+	private ScriptManager next;
+	
+	public FileLibrary(String string, ScriptManager next) {
+		this.next = next;
 		Path dirPath = Paths.get(string);
 		try {
 			directory = Files.createDirectory(dirPath);

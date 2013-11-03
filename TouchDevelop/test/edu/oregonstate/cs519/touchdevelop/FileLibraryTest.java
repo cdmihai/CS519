@@ -18,7 +18,7 @@ public class FileLibraryTest {
 
 	@Before
 	public void setUp() {
-		fileDumper = new FileLibrary(TestUtils.TEST_FOLDER);
+		fileDumper = new FileLibrary(TestUtils.TEST_FOLDER, new NullLibrary());
 	}
 
 	@After
@@ -54,7 +54,7 @@ public class FileLibraryTest {
 	
 	@Test
 	public void testCreateOnExistingPath() throws Exception {
-		fileDumper = new FileLibrary(TestUtils.TEST_FOLDER);
+		fileDumper = new FileLibrary(TestUtils.TEST_FOLDER, new NullLibrary());
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		map.put(Script.ID,"xxxxx");
 		fileDumper.writeScript(new Script(map));
