@@ -4,7 +4,7 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
-public class MemoryLibrary {
+public class MemoryLibrary implements ScriptManager {
 
 	private static MemoryLibrary instance = null;
 
@@ -26,10 +26,18 @@ public class MemoryLibrary {
 		fileLibrary = new FileLibrary(location);
 	}
 
+	/* (non-Javadoc)
+	 * @see edu.oregonstate.cs519.touchdevelop.IScriptLibrary#addScript(edu.oregonstate.cs519.touchdevelop.Script)
+	 */
+	@Override
 	public void addScript(Script script) {
 		library.put(script.getID(), script);
 	}
 
+	/* (non-Javadoc)
+	 * @see edu.oregonstate.cs519.touchdevelop.IScriptLibrary#getScript(java.lang.String)
+	 */
+	@Override
 	public Script getScript(String id) {
 		Script script = library.get(id);
 		if (script == null) {
