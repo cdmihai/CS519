@@ -2,6 +2,7 @@ package edu.oregonstate.cs519.touchdevelop;
 
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class MemoryLibrary implements ScriptManager {
@@ -58,5 +59,17 @@ public class MemoryLibrary implements ScriptManager {
 		for (Script script : scripts) {
 			fileLibrary.writeScript(script);
 		}
+	}
+
+	@Override
+	public List<Script> getScripts(int number) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Script> getAllScripts() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }
