@@ -6,12 +6,13 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
+import java.util.List;
 import java.util.Map;
 
 import org.json.simple.JSONObject;
 import org.json.simple.JSONValue;
 
-class FileLibrary {
+class FileLibrary implements ScriptManager {
 
 	private Path directory;
 	private ScriptManager next;
@@ -57,6 +58,24 @@ class FileLibrary {
 		String scriptJSON = new String(bytes);
 		Map<String, Object> scriptMap = (Map<String, Object>) JSONValue.parse(scriptJSON);
 		return new Script(scriptMap);
+	}
+
+	@Override
+	public void addScript(Script script) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public List<Script> getScripts(int number) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Script> getAllScripts() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 	
 }
