@@ -18,7 +18,7 @@ public class ScriptLibraryTest {
 
 	@Before
 	public void setUp() {
-		instance = new MemoryLibrary(new FileLibrary(TestUtils.TEST_FOLDER, new NullLibrary()));
+		instance = new MemoryLibrary(new FileLibrary(TestUtils.TEST_FOLDER, new CloudManager()));
 	}
 
 	@Test
@@ -72,7 +72,6 @@ public class ScriptLibraryTest {
 		
 		instance.addScript(new Script(scriptMap1));
 		instance.addScript(new Script(scriptMap2));
-		instance.save();
 		
 		byte[] byte1 = Files.readAllBytes(Paths.get(TestUtils.TEST_FOLDER + "/aaaa1"));
 		byte[] byte2 = Files.readAllBytes(Paths.get(TestUtils.TEST_FOLDER + "/bbbb1"));

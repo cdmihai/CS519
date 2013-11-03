@@ -33,7 +33,7 @@ public class FileLibraryTest {
 		hashMap.put(Script.NAME, "test");
 		hashMap.put(Script.USER_ID, "test_usr");
 		Script script = new Script(hashMap);
-		fileDumper.writeScript(script);
+		fileDumper.addScript(script);
 		byte[] fileBytes = Files.readAllBytes(Paths
 				.get(TestUtils.TEST_FOLDER + "/aaaa"));
 		String contents = new String(fileBytes);
@@ -57,7 +57,7 @@ public class FileLibraryTest {
 		fileDumper = new FileLibrary(TestUtils.TEST_FOLDER, new NullLibrary());
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		map.put(Script.ID,"xxxxx");
-		fileDumper.writeScript(new Script(map));
+		fileDumper.addScript(new Script(map));
 	}
 
 }

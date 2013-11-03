@@ -22,7 +22,7 @@ public class MemoryLibrary implements ScriptManager {
 
 	public static MemoryLibrary getInstance() {
 		if (instance == null)
-			instance = new MemoryLibrary(null);
+			instance = new MemoryLibrary(new NullLibrary());
 		return instance;
 	}
 
@@ -36,6 +36,7 @@ public class MemoryLibrary implements ScriptManager {
 	@Override
 	public void addScript(Script script) {
 		library.put(script.getID(), script);
+		next.addScript(script);
 	}
 
 	/* (non-Javadoc)
@@ -47,13 +48,6 @@ public class MemoryLibrary implements ScriptManager {
 		if (script == null)
 			script = next.getScript(id);
 		return script;
-	}
-
-	public void save() {
-		Collection<Script> scripts = library.values();
-		for (Script script : scripts) {
-			fileLibrary.writeScript(script);
-		}
 	}
 
 	@Override

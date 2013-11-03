@@ -1,9 +1,9 @@
 package edu.oregonstate.cs519.touchdevelop;
 
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.nio.file.FileAlreadyExistsException;
 import java.nio.file.Files;
+import java.nio.file.NoSuchFileException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
@@ -30,17 +30,24 @@ class FileLibrary implements ScriptManager {
 		}
 	}
 
-	public void writeScript(Script script) {
+	@Override
+	public void addScript(Script script) {
+		next.addScript(script);
 		Map<String, Object> map = script.getHashMap();
 		String string = JSONObject.toJSONString(map);
-		try {
 			String scriptID = script.getID();
 			Path filePath = resolveScriptPath(scriptID);
-			Path file = Files.createFile(filePath);
-			Files.write(file, string.getBytes(), StandardOpenOption.WRITE);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+			try {
+				Files.createFile(filePath);
+			} catch (FileAlreadyExistsException e) {
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			try {
+				Files.write(filePath, string.getBytes(), StandardOpenOption.WRITE);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 	}
 
 	private Path resolveScriptPath(String scriptID) {
@@ -61,12 +68,6 @@ class FileLibrary implements ScriptManager {
 		String scriptJSON = new String(bytes);
 		Map<String, Object> scriptMap = (Map<String, Object>) JSONValue.parse(scriptJSON);
 		return new Script(scriptMap);
-	}
-
-	@Override
-	public void addScript(Script script) {
-		// TODO Auto-generated method stub
-		
 	}
 
 	@Override
