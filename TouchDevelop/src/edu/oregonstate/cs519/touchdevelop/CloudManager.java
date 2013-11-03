@@ -20,8 +20,7 @@ public class CloudManager implements ScriptManager {
 
 	@Override
 	public List<Script> getAllScripts() {
-		return null;
-		//return TouchDevelopAccess.getAllScripts();
+		return TouchDevelopAccess.getAllScripts();
 	}
 
 }

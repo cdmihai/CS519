@@ -84,4 +84,13 @@ public class TouchDevelopAccess {
 		return new Script(responseMap);
 	}
 	
+	public static List<Script> getAllScripts() {
+		ArrayList<Script> scripts = new ArrayList<Script>();
+		String continuation = null;
+		do {
+			continuation = getScripts(scripts, continuation);
+		} while(continuation != null);
+		return scripts;
+	}
+	
 }
