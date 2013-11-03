@@ -53,7 +53,7 @@ class FileLibrary implements ScriptManager {
 		byte[] bytes;
 		try {
 			bytes = Files.readAllBytes(filePath);
-		} catch (FileNotFoundException e){
+		} catch (NoSuchFileException e){
 			return next.getScript(scriptID);
 		} catch (IOException e) {
 			return null;
