@@ -13,13 +13,16 @@ public class MemoryLibrary implements ScriptManager {
 
 	private FileLibrary fileLibrary;
 
-	private MemoryLibrary() {
+	private ScriptManager next;
+
+	public MemoryLibrary(ScriptManager next) {
+		this.next = next;
 		library = new HashMap<String, Script>();
 	}
 
 	public static MemoryLibrary getInstance() {
 		if (instance == null)
-			instance = new MemoryLibrary();
+			instance = new MemoryLibrary(null);
 		return instance;
 	}
 
