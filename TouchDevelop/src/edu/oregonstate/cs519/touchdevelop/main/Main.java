@@ -13,7 +13,6 @@ public class Main {
 		int noOfScripts = 5000;
 		
 		MemoryLibrary instance = MemoryLibrary.getInstance();
-		instance.setPersitanceDestination("/Users/caius/Downloads/TouchDevelopScripts");
 		
 		List<Script> scripts = TouchDevelopAccess.getScripts(noOfScripts);
 		List<Script> scriptsWithTwoOrMoreSuccessors = new ArrayList<Script>();
