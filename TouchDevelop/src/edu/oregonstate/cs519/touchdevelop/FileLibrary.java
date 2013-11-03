@@ -2,11 +2,15 @@ package edu.oregonstate.cs519.touchdevelop;
 
 import java.io.IOException;
 import java.nio.file.FileAlreadyExistsException;
+import java.nio.file.FileVisitResult;
+import java.nio.file.FileVisitor;
 import java.nio.file.Files;
 import java.nio.file.NoSuchFileException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
+import java.nio.file.attribute.BasicFileAttributes;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -78,8 +82,43 @@ class FileLibrary implements ScriptManager {
 
 	@Override
 	public List<Script> getAllScripts() {
-		// TODO Auto-generated method stub
-		return null;
+		final ArrayList<Script> scripts = new ArrayList<Script>();
+		try {
+			Files.walkFileTree(directory, new FileVisitor<Path>() {
+
+				@Override
+				public FileVisitResult preVisitDirectory(Path dir,
+						BasicFileAttributes attrs) throws IOException {
+					// TODO Auto-generated method stub
+					return FileVisitResult.CONTINUE;
+				}
+
+				@SuppressWarnings("unchecked")
+				@Override
+				public FileVisitResult visitFile(Path file,
+						BasicFileAttributes attrs) throws IOException {
+					byte[] bytes = Files.readAllBytes(file);
+					String content = new String(bytes);
+					scripts.add(new Script((Map<String,Object>) JSONValue.parse(content)));
+					return FileVisitResult.CONTINUE;
+				}
+
+				@Override
+				public FileVisitResult visitFileFailed(Path file, IOException exc)
+						throws IOException {
+					return FileVisitResult.CONTINUE;
+				}
+
+				@Override
+				public FileVisitResult postVisitDirectory(Path dir, IOException exc)
+						throws IOException {
+					return FileVisitResult.CONTINUE;
+				}
+			});
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return scripts;
 	}
 	
 }

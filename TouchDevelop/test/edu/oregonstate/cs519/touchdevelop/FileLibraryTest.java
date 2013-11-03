@@ -6,6 +6,7 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.junit.After;
@@ -58,6 +59,22 @@ public class FileLibraryTest {
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		map.put(Script.ID,"xxxxx");
 		fileDumper.addScript(new Script(map));
+	}
+	
+	@Test
+	public void testGetAllScripts() throws Exception {
+		Files.write(Paths.get(TestUtils.TEST_FOLDER + "/test"),
+				"{\"name\":\"test\",\"userid\":\"test_usr\"}".getBytes(),
+				StandardOpenOption.CREATE);
+		Files.write(Paths.get(TestUtils.TEST_FOLDER + "/test2"),
+				"{\"name\":\"test2\",\"userid\":\"test_usr\"}".getBytes(),
+				StandardOpenOption.CREATE);
+		List<Script> allScripts = fileDumper.getAllScripts();
+		assertEquals(2, allScripts.size());
+		Script script = allScripts.get(0);
+		assertEquals("test", script.getName());
+		script = allScripts.get(1);
+		assertEquals("test2", script.getName());
 	}
 
 }
