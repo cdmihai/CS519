@@ -35,8 +35,12 @@ public class MemoryLibrary implements ScriptManager {
 	 */
 	@Override
 	public void addScript(Script script) {
-		library.put(script.getID(), script);
+		knowScript(script);
 		next.addScript(script);
+	}
+
+	public void knowScript(Script script) {
+		library.put(script.getID(), script);
 	}
 
 	/* (non-Javadoc)
@@ -45,8 +49,10 @@ public class MemoryLibrary implements ScriptManager {
 	@Override
 	public Script getScript(String id) {
 		Script script = library.get(id);
-		if (script == null)
+		if (script == null) {
 			script = next.getScript(id);
+			knowScript(script);
+		}
 		return script;
 	}
 

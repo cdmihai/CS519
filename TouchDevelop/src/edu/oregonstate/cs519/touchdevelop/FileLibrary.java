@@ -36,7 +36,11 @@ class FileLibrary implements ScriptManager {
 
 	@Override
 	public void addScript(Script script) {
+		knowScript(script);
 		next.addScript(script);
+	}
+
+	public void knowScript(Script script) {
 		Map<String, Object> map = script.getHashMap();
 		String string = JSONObject.toJSONString(map);
 			String scriptID = script.getID();
