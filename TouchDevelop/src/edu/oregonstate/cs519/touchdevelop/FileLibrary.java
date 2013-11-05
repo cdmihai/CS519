@@ -17,7 +17,7 @@ import java.util.Map;
 import org.json.simple.JSONObject;
 import org.json.simple.JSONValue;
 
-class FileLibrary implements ScriptManager {
+public class FileLibrary implements ScriptManager {
 
 	private Path directory;
 	private ScriptManager next;
