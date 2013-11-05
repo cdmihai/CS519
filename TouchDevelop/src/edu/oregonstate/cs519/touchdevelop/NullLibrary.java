@@ -20,6 +20,11 @@ public class NullLibrary implements ScriptManager {
 	}
 
 	@Override
+	public List<Script> getKnownScripts() {
+		return new ArrayList<Script>();
+	}
+
+	@Override
 	public List<Script> getAllScripts() {
 		return new ArrayList<Script>();
 	}

@@ -12,7 +12,7 @@ public class Main {
 	public static void main(String[] args) {
 		int noOfScripts = 5000;
 		
-		MemoryLibrary instance = MemoryLibrary.getInstance();
+		MemoryLibrary insta	nce = MemoryLibrary.getInstance();
 		
 		List<Script> scripts = TouchDevelopAccess.getScripts(noOfScripts);
 		List<Script> scriptsWithTwoOrMoreSuccessors = new ArrayList<Script>();

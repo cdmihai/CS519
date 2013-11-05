@@ -69,7 +69,7 @@ public class FileLibraryTest {
 		Files.write(Paths.get(TestUtils.TEST_FOLDER + "/test2"),
 				"{\"name\":\"test2\",\"userid\":\"test_usr\"}".getBytes(),
 				StandardOpenOption.CREATE);
-		List<Script> allScripts = fileDumper.getAllScripts();
+		List<Script> allScripts = fileDumper.getKnownScripts();
 		assertEquals(2, allScripts.size());
 		Script script = allScripts.get(0);
 		assertEquals("test", script.getName());

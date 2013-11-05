@@ -10,6 +10,8 @@ public interface ScriptManager {
 	
 	public List<Script> getScripts(int number);
 	
+	public List<Script> getKnownScripts();
+	
 	public List<Script> getAllScripts();
 
 }

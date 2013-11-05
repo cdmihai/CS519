@@ -56,8 +56,17 @@ public class MemoryLibrary implements ScriptManager {
 	}
 
 	@Override
+	public List<Script> getKnownScripts() {
+		return (List<Script>) library.values();
+	}
+
+	@Override
 	public List<Script> getAllScripts() {
-		// TODO Auto-generated method stub
-		return null;
+		library.clear();
+		List<Script> allScripts = next.getAllScripts();
+		for (Script script : allScripts) {
+			knowScript(script);
+		}
+		return allScripts;
 	}
 }

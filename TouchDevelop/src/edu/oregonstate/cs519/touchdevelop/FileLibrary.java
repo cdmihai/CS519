@@ -85,7 +85,7 @@ class FileLibrary implements ScriptManager {
 	}
 
 	@Override
-	public List<Script> getAllScripts() {
+	public List<Script> getKnownScripts() {
 		final ArrayList<Script> scripts = new ArrayList<Script>();
 		try {
 			Files.walkFileTree(directory, new FileVisitor<Path>() {
@@ -123,6 +123,15 @@ class FileLibrary implements ScriptManager {
 			e.printStackTrace();
 		}
 		return scripts;
+	}
+
+	@Override
+	public List<Script> getAllScripts() {
+		List<Script> allScripts = next.getAllScripts();
+		for (Script script : allScripts) {
+			knowScript(script);
+		}
+		return allScripts;
 	}
 	
 }

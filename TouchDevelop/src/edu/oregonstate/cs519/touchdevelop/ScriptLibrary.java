@@ -26,6 +26,12 @@ public class ScriptLibrary implements ScriptManager {
 	}
 
 	@Override
+	public List<Script> getKnownScripts() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
 	public List<Script> getAllScripts() {
 		// TODO Auto-generated method stub
 		return null;
