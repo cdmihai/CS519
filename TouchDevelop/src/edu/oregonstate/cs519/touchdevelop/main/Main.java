@@ -1,30 +1,28 @@
 package edu.oregonstate.cs519.touchdevelop.main;
 
-import java.util.ArrayList;
 import java.util.List;
 
-import edu.oregonstate.cs519.touchdevelop.Script;
+import edu.oregonstate.cs519.touchdevelop.CloudManager;
+import edu.oregonstate.cs519.touchdevelop.FileLibrary;
 import edu.oregonstate.cs519.touchdevelop.MemoryLibrary;
-import edu.oregonstate.cs519.touchdevelop.TouchDevelopAccess;
+import edu.oregonstate.cs519.touchdevelop.Script;
 
 public class Main {
 
 	public static void main(String[] args) {
-		int noOfScripts = 5000;
+		int noOfScriptsWithMoreThanOneSuccessor = 0;
+
+		MemoryLibrary library = new MemoryLibrary(new FileLibrary("/Users/caius/Downloads/TouchDevelopScripts",new CloudManager()));
 		
-		MemoryLibrary insta	nce = MemoryLibrary.getInstance();
-		
-		List<Script> scripts = TouchDevelopAccess.getScripts(noOfScripts);
-		List<Script> scriptsWithTwoOrMoreSuccessors = new ArrayList<Script>();
-		for (Script script : scripts) {
-			instance.addScript(script);
+		List<Script> allScripts = library.getAllScripts();
+		for (Script script : allScripts) {
 			List<Script> successors = script.getSuccessors();
 			if (successors.size() > 1)
-				scriptsWithTwoOrMoreSuccessors.add(script);
+				noOfScriptsWithMoreThanOneSuccessor++;
+			library.addScript(script);
 		}
 		
-		System.out.println("Number of scripts with two or more successors is: " + scriptsWithTwoOrMoreSuccessors.size());
-		System.out.println("This is " + scriptsWithTwoOrMoreSuccessors.size()/noOfScripts * 100 + "% of all scripts");
+		System.out.println(noOfScriptsWithMoreThanOneSuccessor);
 	}
 
 }
