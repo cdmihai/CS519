@@ -22,6 +22,10 @@ public class MemoryLibrary implements ScriptManager {
 			instance = new MemoryLibrary(new NullLibrary());
 		return instance;
 	}
+	
+	public void setNext(ScriptManager next) {
+		this.next = next;
+	}
 
 	/* (non-Javadoc)
 	 * @see edu.oregonstate.cs519.touchdevelop.IScriptLibrary#addScript(edu.oregonstate.cs519.touchdevelop.Script)
