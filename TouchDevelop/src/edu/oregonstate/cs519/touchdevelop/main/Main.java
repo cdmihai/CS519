@@ -16,7 +16,6 @@ import edu.oregonstate.cs519.touchdevelop.Script;
 public class Main {
 
 	public static void main(String[] args) {
-		int noOfScriptsWithMoreThanOneSuccessor = 0;
 
 		FileLibrary fileLibrary = new FileLibrary("/Users/caius/Downloads/TouchDevelopScripts",new CloudManager());
 		MemoryLibrary library = MemoryLibrary.getInstance();
@@ -41,7 +40,7 @@ public class Main {
 				Path filePath = Paths.get("good.txt");
 				if (!Files.exists(filePath))
 					Files.createFile(filePath);
-				Files.write(filePath, script.getID().getBytes(), StandardOpenOption.APPEND);
+				Files.write(filePath, (script.getID()+"\n").getBytes(), StandardOpenOption.APPEND);
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
