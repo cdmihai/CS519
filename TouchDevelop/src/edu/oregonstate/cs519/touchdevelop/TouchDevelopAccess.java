@@ -92,5 +92,10 @@ public class TouchDevelopAccess {
 		} while(continuation != null);
 		return scripts;
 	}
+
+	public static String getText(String scriptID) {
+		String call = API_ROOT + scriptID + "/text";
+		return HttpRequest.get(call).body();
+	}
 	
 }
