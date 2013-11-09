@@ -17,7 +17,7 @@ public class Main {
 
 	public static void main(String[] args) {
 
-		FileLibrary fileLibrary = new FileLibrary("/Users/caius/Downloads/TouchDevelopScripts",new CloudManager());
+		FileLibrary fileLibrary = new FileLibrary("/Volumes/RAM Disk/TouchDevelopScripts",new CloudManager());
 		MemoryLibrary library = MemoryLibrary.getInstance();
 		library.setNext(fileLibrary);
 		
