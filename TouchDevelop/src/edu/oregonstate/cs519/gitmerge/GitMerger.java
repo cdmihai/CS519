@@ -19,7 +19,7 @@ public class GitMerger {
 	private static final String MASTER_BRANCH = "master";
 	private static final String B_BRANCH = "b";
 	private static final String A_BRANCH = "a";
-	private static final String TEST_FILE = "test_file";
+	private static final String TEST_FILE = "test_file.txt";
 	private static final String REPO_LOCATION = "/Volumes/RAM Disk/repos/";
 	
 
