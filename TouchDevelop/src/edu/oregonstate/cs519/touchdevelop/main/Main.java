@@ -3,6 +3,7 @@ package edu.oregonstate.cs519.touchdevelop.main;
 import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.eclipse.jgit.api.MergeResult;
@@ -26,10 +27,14 @@ public class Main {
 			Script script = library.getScript(scriptID);
 			List<Script> successors = script.getSuccessors();
 			String base = script.getText();
+			List<Script> seen = new ArrayList<>();
 			for (Script successor : successors) {
 				String a = successor.getText();
+				seen.add(successor);
 				for (Script successor2 : successors) {
 					if (successor2.equals(successor))
+						continue;
+					if (seen.contains(successor2))
 						continue;
 					String b = successor2.getText();
 					MergeResult result = GitMerger.merge(base, a, b);
