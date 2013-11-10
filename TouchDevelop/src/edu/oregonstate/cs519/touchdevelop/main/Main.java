@@ -1,13 +1,13 @@
 package edu.oregonstate.cs519.touchdevelop.main;
 
-import java.io.IOException;
+import java.nio.charset.Charset;
 import java.nio.file.Files;
-import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.nio.file.StandardOpenOption;
-import java.util.ArrayList;
 import java.util.List;
 
+import org.eclipse.jgit.api.MergeResult;
+
+import edu.oregonstate.cs519.gitmerge.GitMerger;
 import edu.oregonstate.cs519.touchdevelop.CloudManager;
 import edu.oregonstate.cs519.touchdevelop.FileLibrary;
 import edu.oregonstate.cs519.touchdevelop.MemoryLibrary;
@@ -15,36 +15,29 @@ import edu.oregonstate.cs519.touchdevelop.Script;
 
 public class Main {
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws Exception {
 
 		FileLibrary fileLibrary = new FileLibrary("/Volumes/RAM Disk/TouchDevelopScripts",new CloudManager());
 		MemoryLibrary library = MemoryLibrary.getInstance();
 		library.setNext(fileLibrary);
 		
-		List<Script> knownScripts = fileLibrary.getKnownScripts();
-		int all = knownScripts.size();
-		List<Script> scriptsWithMoreThanTwoSuccessors = new ArrayList<Script>();
-		int current = 0;
-		for (Script script : knownScripts) {
-			current++;
-			System.out.println("Processing " + current + "/" + all);
+		List<String> lines = Files.readAllLines(Paths.get("good.txt"), Charset.defaultCharset());
+		for (String scriptID : lines) {
+			Script script = library.getScript(scriptID);
 			List<Script> successors = script.getSuccessors();
-			if (successors.size() > 1)
-				scriptsWithMoreThanTwoSuccessors.add(script);
-		}
-		
-		System.out.println((float)(scriptsWithMoreThanTwoSuccessors.size())/(float)(knownScripts.size()));
-		
-		for (Script script : scriptsWithMoreThanTwoSuccessors) {
-			try {
-				Path filePath = Paths.get("good.txt");
-				if (!Files.exists(filePath))
-					Files.createFile(filePath);
-				Files.write(filePath, (script.getID()+"\n").getBytes(), StandardOpenOption.APPEND);
-			} catch (IOException e) {
-				e.printStackTrace();
+			String base = script.getText();
+			for (Script successor : successors) {
+				String a = successor.getText();
+				for (Script successor2 : successors) {
+					if (successor2.equals(script))
+						continue;
+					String b = successor2.getText();
+					MergeResult result = GitMerger.merge(base, a, b);
+					System.out.println(successor.getID() + " with " + successor2.getID() + " => " + result.getMergeStatus().toString());
+				}
 			}
 		}
+		
 	}
 
 }
