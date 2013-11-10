@@ -29,7 +29,7 @@ public class Main {
 			for (Script successor : successors) {
 				String a = successor.getText();
 				for (Script successor2 : successors) {
-					if (successor2.equals(script))
+					if (successor2.equals(successor))
 						continue;
 					String b = successor2.getText();
 					MergeResult result = GitMerger.merge(base, a, b);
