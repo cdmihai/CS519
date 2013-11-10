@@ -63,7 +63,16 @@ public class Script {
 	}
 	
 	public String getText() {
-		return TouchDevelopAccess.getText(getID());
+		String text = TouchDevelopAccess.getText(getID());
+		String[] lines = text.split("\n");
+		StringBuffer buffer = new StringBuffer();
+		for (String line : lines) {
+			if (line.startsWith("meta"))
+				continue;
+			buffer.append(line);
+			buffer.append("\n");
+		}
+		return buffer.toString();
 	}
 	
 	@Override
