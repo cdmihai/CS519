@@ -61,4 +61,15 @@ public class Script {
 		}
 		return successors;
 	}
+	
+	public String getText() {
+		return TouchDevelopAccess.getText(getID());
+	}
+	
+	@Override
+	public boolean equals(Object obj) {
+		if (!(obj instanceof Script))
+			return false;
+		return ((Script)obj).getID().equals(getID());
+	}
 }
