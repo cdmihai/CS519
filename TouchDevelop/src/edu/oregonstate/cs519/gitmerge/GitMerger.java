@@ -5,6 +5,11 @@ import java.io.PrintWriter;
 
 import org.eclipse.jgit.api.Git;
 import org.eclipse.jgit.api.MergeResult;
+import org.eclipse.jgit.api.errors.CheckoutConflictException;
+import org.eclipse.jgit.api.errors.GitAPIException;
+import org.eclipse.jgit.api.errors.InvalidRefNameException;
+import org.eclipse.jgit.api.errors.RefAlreadyExistsException;
+import org.eclipse.jgit.api.errors.RefNotFoundException;
 import org.eclipse.jgit.lib.PersonIdent;
 import org.eclipse.jgit.revwalk.RevCommit;
 
@@ -37,13 +42,11 @@ public class GitMerger {
 			String baseCommitMsg = "first";
 			commit(base, author, repo, file, baseCommitMsg);
 			
-			repo.branchCreate().setName(A_BRANCH).call();
-			repo.checkout().setName(A_BRANCH).call();
+			createAndCheckoutBranch(repo, A_BRANCH);
 			RevCommit aCommit = commit(a, author, repo, file, "second");
 			repo.checkout().setName(MASTER_BRANCH).call();
 			
-			repo.branchCreate().setName(B_BRANCH).call();
-			repo.checkout().setName(B_BRANCH).call();
+			createAndCheckoutBranch(repo, B_BRANCH);
 			commit(b, author, repo, file, "third");
 			
 			MergeResult result = repo.merge().include(aCommit).call();
@@ -54,6 +57,14 @@ public class GitMerger {
 			deleteDirectory(gitDir);
 		}
 		return null;
+	}
+
+	public static void createAndCheckoutBranch(Git repo, String branchName)
+			throws GitAPIException, RefAlreadyExistsException,
+			RefNotFoundException, InvalidRefNameException,
+			CheckoutConflictException {
+		repo.branchCreate().setName(branchName).call();
+		repo.checkout().setName(branchName).call();
 	}
 
 	private static RevCommit commit(String content, PersonIdent author, Git repo,
