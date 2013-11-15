@@ -1,8 +1,16 @@
 package edu.oregonstate.cs519.touchdevelop;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.nio.file.StandardOpenOption;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import org.json.simple.JSONArray;
+import org.json.simple.JSONValue;
 
 public class MemoryLibrary implements ScriptManager {
 
@@ -10,11 +18,26 @@ public class MemoryLibrary implements ScriptManager {
 
 	private Map<String, Script> library;
 
-	private ScriptManager next;
+	private String libraryFile;
 
 	public MemoryLibrary(ScriptManager next) {
-		this.next = next;
 		library = new HashMap<String, Script>();
+	}
+	
+	public MemoryLibrary(String libraryFile) {
+		this.libraryFile = libraryFile;
+		library = new HashMap<String, Script>();
+		try {
+			byte[] jsonBytes = Files.readAllBytes(Paths.get(libraryFile));
+			String jsonString = new String(jsonBytes);
+			List<Map> listOfScripts = (List<Map>) JSONValue.parse(jsonString);
+			for (Map scriptMap : listOfScripts) {
+				Script script = new Script(scriptMap);
+				addScript(script);
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 
 	public static MemoryLibrary getInstance() {
@@ -24,7 +47,6 @@ public class MemoryLibrary implements ScriptManager {
 	}
 	
 	public void setNext(ScriptManager next) {
-		this.next = next;
 	}
 
 	/* (non-Javadoc)
@@ -32,11 +54,6 @@ public class MemoryLibrary implements ScriptManager {
 	 */
 	@Override
 	public void addScript(Script script) {
-		knowScript(script);
-		next.addScript(script);
-	}
-
-	public void knowScript(Script script) {
 		library.put(script.getID(), script);
 	}
 
@@ -45,12 +62,7 @@ public class MemoryLibrary implements ScriptManager {
 	 */
 	@Override
 	public Script getScript(String id) {
-		Script script = library.get(id);
-		if (script == null) {
-			script = next.getScript(id);
-			knowScript(script);
-		}
-		return script;
+		return library.get(id);
 	}
 
 	@Override
@@ -61,16 +73,30 @@ public class MemoryLibrary implements ScriptManager {
 
 	@Override
 	public List<Script> getKnownScripts() {
-		return (List<Script>) library.values();
+		return (List<Script>) getAllScripts();
 	}
 
 	@Override
 	public List<Script> getAllScripts() {
-		library.clear();
-		List<Script> allScripts = next.getAllScripts();
-		for (Script script : allScripts) {
-			knowScript(script);
+		ArrayList<Script> list = new ArrayList<Script>();
+		list.addAll(library.values());
+		return list;
+	}
+	
+	public void saveScriptsToFile() {
+		List<Script> scripts = getAllScripts();
+		List<Map> listOfMaps = new ArrayList<Map>();
+		int all = scripts.size();
+		int current = 0;
+		for (Script script : scripts) {
+			System.out.println((++current) + "/" + all + ": " + script.getID());
+			Map<String, Object> map = script.getHashMap();
+			listOfMaps.add(map);
 		}
-		return allScripts;
+		String jsonString = JSONArray.toJSONString(listOfMaps);
+		try {
+			Files.write(Paths.get(libraryFile), jsonString.getBytes(), StandardOpenOption.CREATE);
+		} catch (IOException e) {
+		}
 	}
 }

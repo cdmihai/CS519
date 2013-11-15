@@ -3,22 +3,33 @@ package edu.oregonstate.cs519.touchdevelop;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
+import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
 public class ScriptLibraryTest {
 
+	private static final String TEST_FILE = "test.json";
 	private MemoryLibrary instance;
 
 	@Before
 	public void setUp() {
-		instance = new MemoryLibrary(new FileLibrary(TestUtils.TEST_FOLDER, new CloudManager()));
+		instance = new MemoryLibrary(TEST_FILE);
+	}
+	
+	@After
+	public void tearDown() {
+		try {
+			Files.delete(Paths.get(TEST_FILE));
+		} catch (IOException e) {
+		}
 	}
 
 	@Test
@@ -34,27 +45,16 @@ public class ScriptLibraryTest {
 	}
 
 	@Test
-	public void testGetScriptFromFile() throws Exception {
-		Files.createDirectories(Paths.get(TestUtils.TEST_FOLDER));
-		Files.write(Paths.get(TestUtils.TEST_FOLDER + "/bbbb"),
-				"{\"id\":\"bbbb\",\"name\":\"test1\",\"userid\":\"test_usr\"}"
+	public void testGetScriptsFromFile() throws Exception {
+		Files.write(Paths.get(TEST_FILE),
+				"[{\"id\":\"bbbb\",\"name\":\"test1\",\"userid\":\"test_usr\"}]"
 						.getBytes(), StandardOpenOption.CREATE);
+		instance = new MemoryLibrary(TEST_FILE);
 		Script script = instance.getScript("bbbb");
 		assertNotNull(script);
 		assertEquals("bbbb", script.getID());
 		assertEquals("test1", script.getName());
 		assertEquals("test_usr", script.getUserID());
-		TestUtils.deleteTestFiles();
-	}
-	
-	@Test
-	public void testGetScriptFromCloud() throws Exception {
-		Script script = instance.getScript("qoipfdvx");
-		assertNotNull(script);
-		assertEquals("qoipfdvx", script.getID());
-		assertEquals("Bike maintenance", script.getName());
-		assertEquals("qoipfdvx",script.getRootID());
-		assertEquals("antga",script.getUserID());
 		TestUtils.deleteTestFiles();
 	}
 	
@@ -72,15 +72,13 @@ public class ScriptLibraryTest {
 		
 		instance.addScript(new Script(scriptMap1));
 		instance.addScript(new Script(scriptMap2));
+		instance.saveScriptsToFile();
 		
-		byte[] byte1 = Files.readAllBytes(Paths.get(TestUtils.TEST_FOLDER + "/aaaa1"));
-		byte[] byte2 = Files.readAllBytes(Paths.get(TestUtils.TEST_FOLDER + "/bbbb1"));
+		byte[] bytes = Files.readAllBytes(Paths.get(TEST_FILE));
 		
-		String file1 = new String(byte1);
-		String file2 = new String(byte2);
+		String file = new String(bytes);
 		
-		assertEquals("{\"id\":\"aaaa1\",\"name\":\"test\",\"userid\":\"test_usr\"}",file1);
-		assertEquals("{\"id\":\"bbbb1\",\"name\":\"test2\",\"userid\":\"test_usr2\"}", file2);
+		assertEquals("[{\"id\":\"bbbb1\",\"name\":\"test2\",\"userid\":\"test_usr2\"},{\"id\":\"aaaa1\",\"name\":\"test\",\"userid\":\"test_usr\"}]",file);
 	}
 
 }
