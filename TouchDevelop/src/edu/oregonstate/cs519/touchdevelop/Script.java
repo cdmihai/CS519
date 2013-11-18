@@ -11,6 +11,7 @@ public class Script {
 	public static final String ID = "id";
 	public static final String USER_ID = "userid";
 	public static final String ROOT_ID = "rootid";
+	public static final String TEXT = "text";
 
 	private Map<String, Object> hashMap;
 	private List<Script> successors = null;
@@ -63,7 +64,11 @@ public class Script {
 	}
 	
 	public String getText() {
-		String text = TouchDevelopAccess.getText(getID());
+		String text = (String) hashMap.get(TEXT);
+		if (text != null)
+			return text;
+		
+		text = TouchDevelopAccess.getText(getID());
 		String[] lines = text.split("\n");
 		StringBuffer buffer = new StringBuffer();
 		for (String line : lines) {
@@ -72,7 +77,9 @@ public class Script {
 			buffer.append(line);
 			buffer.append("\n");
 		}
-		return buffer.toString();
+		String finalText = buffer.toString();
+		hashMap.put(TEXT, finalText);
+		return finalText;
 	}
 	
 	@Override
