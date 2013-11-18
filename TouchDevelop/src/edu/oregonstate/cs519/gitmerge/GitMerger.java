@@ -27,11 +27,14 @@ public class GitMerger {
 	private static final String TEST_FILE = "test_file.txt";
 	private static final String REPO_LOCATION = "/Volumes/RAM Disk/repos/";
 	
-
 	public static MergeResult merge(String base, String a, String b){
+		return merge(base, a, b, true, System.nanoTime() + "");
+	}
+
+	public static MergeResult merge(String base, String a, String b, boolean deleteFolder, String folderName){
 		PersonIdent author = new PersonIdent("TestUser", "test.user@example.com");
 		
-		File gitDir = new File(REPO_LOCATION + System.nanoTime());
+		File gitDir = new File(REPO_LOCATION + folderName);
 		try {
 			gitDir.mkdir();
 			Git repo = Git.init().setDirectory(gitDir).setBare(false).call();
@@ -54,7 +57,7 @@ public class GitMerger {
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
-			deleteDirectory(gitDir);
+//			deleteDirectory(gitDir);
 		}
 		return null;
 	}
