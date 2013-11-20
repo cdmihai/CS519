@@ -3,6 +3,7 @@ package edu.oregonstate.cs519.touchdevelop.ast;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import org.json.simple.JSONAware;
 import org.json.simple.JSONObject;
@@ -25,27 +26,37 @@ public class ASTNode implements JSONAware {
 	public ASTNode(Map<String, Object> map) {
 		this.map = map;
 		ASTNodeManager.getInstance().addNode(this);
+		Set<String> keys = map.keySet();
+		for (String key : keys) {
+			Object thing = map.get(key);
+			expandProperty(key, thing);
+		}
 	}
 
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public Object getProperty(String name) {
 		Object object = map.get(name);
 		
-		if (object instanceof List) {
-			List temp = new ArrayList<ASTNode>();
-			for (Object item : (List) object) {
-				temp.add(new ASTNode((Map)item));
-			}
-			map.put(name, temp);
-			object = temp;
-		}
-		
-		if (object instanceof Map) {
-			object = new ASTNode((Map) object);
-			map.put(name,object);
-		}
+		object = expandProperty(name, object);
 		
 		return object;
+	}
+
+	public Object expandProperty(String propertyName, Object contents) {
+		if (contents instanceof List) {
+			List temp = new ArrayList<ASTNode>();
+			for (Object item : (List) contents) {
+				temp.add(new ASTNode((Map)item));
+			}
+			map.put(propertyName, temp);
+			contents = temp;
+		}
+		
+		if (contents instanceof Map) {
+			contents = new ASTNode((Map) contents);
+			map.put(propertyName,contents);
+		}
+		return contents;
 	}
 
 	public void updateProperty(String name, String newProperty) {
