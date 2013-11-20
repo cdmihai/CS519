@@ -10,39 +10,42 @@ import org.junit.Test;
 
 public class UpdateTest {
 
-	private String initialProgram = "{\n"
-			+ "      \"textVersion\": \"v2.2,js,ctx\",\n"
-			+ "      \"jsonVersion\": \"v1.0,resolved,short\",\n"
-			+ "      \"name\": \"edits-test-dumb\",\n"
-			+ "      \"comment\": \"\",\n" + "      \"autoIcon\": \"Exit\",\n"
-			+ "      \"autoColor\": \"#EEDC82\",\n"
-			+ "      \"platform\": \"current\",\n"
-			+ "      \"rootId\": \"ycXVAstFZ325M0PRsuXtUu7F\",\n"
-			+ "      \"showAd\": false,\n" + "      \"isLibrary\": false,\n"
-			+ "      \"allowExport\": false,\n"
-			+ "      \"hasUniqueIds\": false,\n" + "      \"decls\": [\n"
-			+ "        {\n" + "          \"name\": \"main\",\n"
-			+ "          \"inParameters\": [],\n"
-			+ "          \"outParameters\": [],\n"
-			+ "          \"isPrivate\": false,\n"
-			+ "          \"isOffloaded\": false,\n"
-			+ "          \"isTest\": false,\n"
-			+ "          \"isAsync\": false,\n"
-			+ "          \"nodeType\": \"action\",\n"
-			+ "          \"body\": [\n" + "            {\n"
-			+ "              \"expr\": \"\",\n"
-			+ "              \"nodeType\": \"exprStmt\",\n"
-			+ "              \"id\": \"x0jQd1BtQGFLL1XBIeiT9kmL\",\n"
-			+ "              \"locals\": []\n" + "            }\n"
-			+ "          ],\n"
-			+ "          \"id\": \"SZwwuN9ffv5TLJuO8buwjifz\"\n"
-			+ "        }\n" + "      ],\n" + "      \"deletedDecls\": [],\n"
-			+ "      \"nodeType\": \"app\",\n" + "      \"id\": \"app\"\n"
-			+ "    }";
+	private String initialProgram;
 	private ASTNode program;
 
 	@Before
 	public void setUp() {
+		initialProgram = "{\n" + "      \"textVersion\": \"v2.2,js,ctx\",\n"
+				+ "      \"jsonVersion\": \"v1.0,resolved,short\",\n"
+				+ "      \"name\": \"edits-test-dumb\",\n"
+				+ "      \"comment\": \"\",\n"
+				+ "      \"autoIcon\": \"Exit\",\n"
+				+ "      \"autoColor\": \"#EEDC82\",\n"
+				+ "      \"platform\": \"current\",\n"
+				+ "      \"rootId\": \"ycXVAstFZ325M0PRsuXtUu7F\",\n"
+				+ "      \"showAd\": false,\n"
+				+ "      \"isLibrary\": false,\n"
+				+ "      \"allowExport\": false,\n"
+				+ "      \"hasUniqueIds\": false,\n" + "      \"decls\": [\n"
+				+ "        {\n" + "          \"name\": \"main\",\n"
+				+ "          \"inParameters\": [],\n"
+				+ "          \"outParameters\": [],\n"
+				+ "          \"isPrivate\": false,\n"
+				+ "          \"isOffloaded\": false,\n"
+				+ "          \"isTest\": false,\n"
+				+ "          \"isAsync\": false,\n"
+				+ "          \"nodeType\": \"action\",\n"
+				+ "          \"body\": [\n" + "            {\n"
+				+ "              \"expr\": \"\",\n"
+				+ "              \"nodeType\": \"exprStmt\",\n"
+				+ "              \"id\": \"x0jQd1BtQGFLL1XBIeiT9kmL\",\n"
+				+ "              \"locals\": []\n" + "            }\n"
+				+ "          ],\n"
+				+ "          \"id\": \"SZwwuN9ffv5TLJuO8buwjifz\"\n"
+				+ "        }\n" + "      ],\n"
+				+ "      \"deletedDecls\": [],\n"
+				+ "      \"nodeType\": \"app\",\n" + "      \"id\": \"app\"\n"
+				+ "    }";
 		program = new ASTNode(initialProgram);
 	}
 
