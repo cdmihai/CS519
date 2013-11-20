@@ -51,11 +51,7 @@ public class UpdateTest {
 	public void testChangeEmptyExpressionStatement() {
 		String updateJSON = "{\n\"expr\": \"'/0022Hello_World/0021/0022\"\n}";
 		String nodeID = "x0jQd1BtQGFLL1XBIeiT9kmL";
-		Update update = new Update(
-				ASTNodeManager.getInstance().getNode(nodeID),
-				(Map<String, Object>) JSONValue.parse(updateJSON));
-		update.apply();
-		String afterJSON = program.getJSON();
+		String afterJSON = applyUpdateToProgram(updateJSON, nodeID);
 		assertEquals(
 				"{\"isLibrary\":false,\"jsonVersion\":\"v1.0,resolved,short\",\"platform\":\"current\",\"textVersion\":\"v2.2,js,ctx\",\"rootId\":\"ycXVAstFZ325M0PRsuXtUu7F\",\"allowExport\":false,\"id\":\"app\",\"autoColor\":\"#EEDC82\",\"deletedDecls\":[],\"name\":\"edits-test-dumb\",\"autoIcon\":\"Exit\",\"hasUniqueIds\":false,\"decls\":[{\"id\":\"SZwwuN9ffv5TLJuO8buwjifz\",\"inParameters\":[],\"body\":[{\"id\":\"x0jQd1BtQGFLL1XBIeiT9kmL\",\"locals\":[],\"expr\":\"'\\/0022Hello_World\\/0021\\/0022\",\"nodeType\":\"exprStmt\"}],\"isPrivate\":false,\"isOffloaded\":false,\"name\":\"main\",\"isAsync\":false,\"isTest\":false,\"outParameters\":[],\"nodeType\":\"action\"}],\"nodeType\":\"app\",\"comment\":\"\",\"showAd\":false}",
 				afterJSON);
@@ -65,13 +61,18 @@ public class UpdateTest {
 	public void testChangeEmtpyExpressionStatementAgain() {
 		String updateJSON = "{\n\"expr\": \"'/0022Hello_World/0021/0022 .post_to_wall\"\n}";
 		String nodeID = "x0jQd1BtQGFLL1XBIeiT9kmL";
-		Update update = new Update(
-				ASTNodeManager.getInstance().getNode(nodeID),
-				(Map<String, Object>) JSONValue.parse(updateJSON));
-		update.apply();
-		String afterJSON = program.getJSON();
+		String afterJSON = applyUpdateToProgram(updateJSON, nodeID);
 		assertEquals(
 				"{\"isLibrary\":false,\"jsonVersion\":\"v1.0,resolved,short\",\"platform\":\"current\",\"textVersion\":\"v2.2,js,ctx\",\"rootId\":\"ycXVAstFZ325M0PRsuXtUu7F\",\"allowExport\":false,\"id\":\"app\",\"autoColor\":\"#EEDC82\",\"deletedDecls\":[],\"name\":\"edits-test-dumb\",\"autoIcon\":\"Exit\",\"hasUniqueIds\":false,\"decls\":[{\"id\":\"SZwwuN9ffv5TLJuO8buwjifz\",\"inParameters\":[],\"body\":[{\"id\":\"x0jQd1BtQGFLL1XBIeiT9kmL\",\"locals\":[],\"expr\":\"'\\/0022Hello_World\\/0021\\/0022 .post_to_wall\",\"nodeType\":\"exprStmt\"}],\"isPrivate\":false,\"isOffloaded\":false,\"name\":\"main\",\"isAsync\":false,\"isTest\":false,\"outParameters\":[],\"nodeType\":\"action\"}],\"nodeType\":\"app\",\"comment\":\"\",\"showAd\":false}",
 				afterJSON);
 	}
+
+	public String applyUpdateToProgram(String updateJSON, String nodeID) {
+		Update update = new Update(nodeID,
+				(Map<String, Object>) JSONValue.parse(updateJSON));
+		update.apply();
+		String afterJSON = program.getJSON();
+		return afterJSON;
+	}
+	
 }
