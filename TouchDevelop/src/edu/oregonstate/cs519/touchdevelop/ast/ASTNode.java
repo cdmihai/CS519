@@ -19,11 +19,12 @@ public class ASTNode implements JSONAware {
 	
 	@SuppressWarnings("unchecked")
 	public ASTNode(String JSONString) {
-		map = (Map<String, Object>) JSONValue.parse(JSONString);
+		this((Map<String, Object>) JSONValue.parse(JSONString));
 	}
 
 	public ASTNode(Map<String, Object> map) {
 		this.map = map;
+		ASTNodeManager.getInstance().addNode(this);
 	}
 
 	@SuppressWarnings({ "rawtypes", "unchecked" })
