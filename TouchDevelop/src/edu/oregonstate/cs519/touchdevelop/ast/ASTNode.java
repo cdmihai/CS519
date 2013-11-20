@@ -63,6 +63,6 @@ public class ASTNode implements JSONAware {
 	
 	@Override
 	public String toString() {
-		return toJSONString();
+		return getProperty(ID).toString();
 	}
 }
