@@ -4,10 +4,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import org.json.simple.JSONAware;
 import org.json.simple.JSONObject;
 import org.json.simple.JSONValue;
 
-public class ASTNode {
+public class ASTNode implements JSONAware {
 	
 	public static final String ID = "id";
 	public static final String AST = "ast";
@@ -34,11 +35,13 @@ public class ASTNode {
 			for (Object item : (List) object) {
 				temp.add(new ASTNode((Map)item));
 			}
+			map.put(name, temp);
 			object = temp;
 		}
 		
 		if (object instanceof Map) {
 			object = new ASTNode((Map) object);
+			map.put(name,object);
 		}
 		
 		return object;
@@ -50,5 +53,15 @@ public class ASTNode {
 	
 	public String getJSON() {
 		return JSONObject.toJSONString(map);
+	}
+	
+	@Override
+	public String toJSONString() {
+		return JSONObject.toJSONString(map);
+	}
+	
+	@Override
+	public String toString() {
+		return toJSONString();
 	}
 }
