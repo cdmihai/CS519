@@ -17,7 +17,7 @@ public class Update {
 		ASTNode affectedNode = getNode(affectedNodeID);
 		Set<String> keys = updates.keySet();
 		for (String property: keys) {
-			affectedNode.updateProperty(property, updates.get(property));
+			affectedNode.updateProperty(property, (String) updates.get(property));
 		}
 	}
 
