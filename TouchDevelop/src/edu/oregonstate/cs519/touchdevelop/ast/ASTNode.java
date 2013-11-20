@@ -57,7 +57,7 @@ public class ASTNode implements JSONAware {
 		return contents;
 	}
 
-	public void updateProperty(String name, String newProperty) {
+	public void updateProperty(String name, Object newProperty) {
 		map.put(name, newProperty);
 	}
 	
