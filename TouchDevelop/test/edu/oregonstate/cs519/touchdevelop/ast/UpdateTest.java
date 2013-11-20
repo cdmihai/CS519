@@ -75,4 +75,18 @@ public class UpdateTest {
 		return afterJSON;
 	}
 	
+	@Test
+	public void testAddGlobalVariable() {
+		String updateJSON = "{\n\"name\": \"string\"\n}";
+		String nodeID = "wAHj4rpF7s1v6qxVEDsWsDWL";
+		String after = applyUpdateToProgram(updateJSON, nodeID);
+		assertEquals("{\"isLibrary\":false,\"jsonVersion\":\"v1.0,resolved,short\",\"platform\":\"current\",\"textVersion\":\"v2.2,js,ctx\",\"rootId\":\"ycXVAstFZ325M0PRsuXtUu7F\",\"allowExport\":false,\"id\":\"app\",\"autoColor\":\"#EEDC82\",\"deletedDecls\":[],\"name\":\"edits-test-dumb\",\"autoIcon\":\"Exit\",\"hasUniqueIds\":false,\"decls\":[{\"id\":\"SZwwuN9ffv5TLJuO8buwjifz\",\"inParameters\":[],\"body\":[{\"id\":\"x0jQd1BtQGFLL1XBIeiT9kmL\",\"locals\":[],\"expr\":\"\",\"nodeType\":\"exprStmt\"}],\"isPrivate\":false,\"isOffloaded\":false,\"name\":\"main\",\"isAsync\":false,\"isTest\":false,\"outParameters\":[],\"nodeType\":\"action\"}],\"nodeType\":\"app\",\"comment\":\"\",\"showAd\":false}", after);
+		after = applyUpdateToProgram("{\n" + 
+				"        \"decls\": [\n" + 
+				"          \"r30huGANszn4eu9yZRG1gXcH\",\n" + 
+				"          \"wAHj4rpF7s1v6qxVEDsWsDWL\"\n" + 
+				"        ]\n" + 
+				"      }", "app");
+		assertEquals("",after);
+	}
 }
