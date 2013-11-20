@@ -44,7 +44,12 @@ public class ASTNode implements JSONAware {
 		if (contents instanceof List) {
 			List temp = new ArrayList<ASTNode>();
 			for (Object item : (List) contents) {
-				temp.add(new ASTNode((Map)item));
+				if (item instanceof Map)
+					temp.add(new ASTNode((Map)item));
+				else if (item instanceof String) {
+					ASTNode node = ASTNodeManager.getInstance().getNode((String) item);
+					temp.add(node);
+				}
 			}
 			map.put(propertyName, temp);
 			contents = temp;
@@ -58,7 +63,8 @@ public class ASTNode implements JSONAware {
 	}
 
 	public void updateProperty(String name, Object newProperty) {
-		map.put(name, newProperty);
+		Object expandedProperty = expandProperty(name, newProperty);
+		map.put(name, expandedProperty);
 	}
 	
 	public String getJSON() {
