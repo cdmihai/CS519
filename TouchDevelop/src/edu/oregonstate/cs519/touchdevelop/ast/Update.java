@@ -23,6 +23,8 @@ public class Update {
 
 	private ASTNode getNode(String affectedNodeID) {
 		ASTNode node = ASTNodeManager.getInstance().getNode(affectedNodeID);
+		if (node == null)
+			node = new ASTNode("{\"id\":\"" + affectedNodeID + "\"}");
 		return node;
 	}
 }
