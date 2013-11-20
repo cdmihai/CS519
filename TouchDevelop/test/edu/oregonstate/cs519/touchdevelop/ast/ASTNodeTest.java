@@ -1,11 +1,9 @@
 package edu.oregonstate.cs519.touchdevelop.ast;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 import java.util.List;
 import java.util.Map;
-
-import javax.lang.model.type.DeclaredType;
 
 import org.json.simple.JSONValue;
 import org.junit.Test;
