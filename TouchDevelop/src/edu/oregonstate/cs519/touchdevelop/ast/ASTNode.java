@@ -46,7 +46,7 @@ public class ASTNode implements JSONAware {
 			for (Object item : (List) contents) {
 				if (item instanceof Map)
 					temp.add(new ASTNode((Map)item));
-				else if (item instanceof String) {
+				else if (item instanceof String) { // references to other nodes
 					ASTNode node = ASTNodeManager.getInstance().getNode((String) item);
 					temp.add(node);
 				}
