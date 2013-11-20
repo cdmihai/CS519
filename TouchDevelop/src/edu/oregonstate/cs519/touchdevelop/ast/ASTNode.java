@@ -37,8 +37,6 @@ public class ASTNode implements JSONAware {
 	public Object getProperty(String name) {
 		Object object = map.get(name);
 		
-		object = expandProperty(name, object);
-		
 		return object;
 	}
 
