@@ -49,9 +49,7 @@ public class UpdateTest {
 	@SuppressWarnings("unchecked")
 	@Test
 	public void testChangeEmptyExpressionStatement() {
-		String updateJSON = "{\n"
-				+ "        \"expr\": \"'/0022Hello_World/0021/0022\"\n"
-				+ "      }";
+		String updateJSON = "{\n\"expr\": \"'/0022Hello_World/0021/0022\"\n}";
 		String nodeID = "x0jQd1BtQGFLL1XBIeiT9kmL";
 		Update update = new Update(
 				ASTNodeManager.getInstance().getNode(nodeID),
@@ -65,9 +63,7 @@ public class UpdateTest {
 
 	@Test
 	public void testChangeEmtpyExpressionStatementAgain() {
-		String updateJSON = "{\n"
-				+ "        \"expr\": \"'/0022Hello_World/0021/0022 .post_to_wall\"\n"
-				+ "      }";
+		String updateJSON = "{\n\"expr\": \"'/0022Hello_World/0021/0022 .post_to_wall\"\n}";
 		String nodeID = "x0jQd1BtQGFLL1XBIeiT9kmL";
 		Update update = new Update(
 				ASTNodeManager.getInstance().getNode(nodeID),
