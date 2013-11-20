@@ -99,5 +99,64 @@ public class UpdateTest {
 				"      }", "app");
 		assertEquals("{\"isLibrary\":false,\"jsonVersion\":\"v1.0,resolved,short\",\"platform\":\"current\",\"textVersion\":\"v2.2,js,ctx\",\"rootId\":\"ycXVAstFZ325M0PRsuXtUu7F\",\"allowExport\":false,\"id\":\"app\",\"autoColor\":\"#EEDC82\",\"deletedDecls\":[],\"name\":\"edits-test-dumb\",\"autoIcon\":\"Exit\",\"hasUniqueIds\":false,\"decls\":[{\"id\":\"SZwwuN9ffv5TLJuO8buwjifz\",\"inParameters\":[],\"body\":[{\"id\":\"x0jQd1BtQGFLL1XBIeiT9kmL\",\"locals\":[],\"expr\":\"\",\"nodeType\":\"exprStmt\"}],\"isPrivate\":false,\"isOffloaded\":false,\"name\":\"main\",\"isAsync\":false,\"isTest\":false,\"outParameters\":[],\"nodeType\":\"action\"},{\"id\":\"wAHj4rpF7s1v6qxVEDsWsDWL\",\"name\":\"s\",\"isTransient\":true,\"isReadonly\":false,\"comment\":\"\",\"type\":\"String\",\"nodeType\":\"data\"}],\"nodeType\":\"app\",\"comment\":\"\",\"showAd\":false}",after);
 	}
+
+	@Test
+	public void testUseGlobalVariable() {
+		initialProgram = "{\n"
+				+ "  \"isLibrary\": false,\n"
+				+ "  \"jsonVersion\": \"v1.0,resolved,short\",\n"
+				+ "  \"platform\": \"current\",\n"
+				+ "  \"textVersion\": \"v2.2,js,ctx\",\n"
+				+ "  \"rootId\": \"ycXVAstFZ325M0PRsuXtUu7F\",\n"
+				+ "  \"allowExport\": false,\n"
+				+ "  \"id\": \"app\",\n"
+				+ "  \"autoColor\": \"#EEDC82\",\n"
+				+ "  \"deletedDecls\": [\n"
+				+ "    \n"
+				+ "  ],\n"
+				+ "  \"name\": \"edits-test-dumb\",\n"
+				+ "  \"autoIcon\": \"Exit\",\n"
+				+ "  \"hasUniqueIds\": false,\n"
+				+ "  \"decls\": [\n"
+				+ "    {\n"
+				+ "      \"id\": \"SZwwuN9ffv5TLJuO8buwjifz\",\n"
+				+ "      \"inParameters\": [\n"
+				+ "        \n"
+				+ "      ],\n"
+				+ "      \"body\": [\n"
+				+ "        {\n"
+				+ "          \"id\": \"x0jQd1BtQGFLL1XBIeiT9kmL\",\n"
+				+ "          \"locals\": [\n"
+				+ "            \n"
+				+ "          ],\n"
+				+ "          \"expr\": \"'/0022Hello_World/0021/0022 .post_to_wall\",\n"
+				+ "          \"nodeType\": \"exprStmt\"\n" + "        }\n"
+				+ "      ],\n" + "      \"isPrivate\": false,\n"
+				+ "      \"isOffloaded\": false,\n"
+				+ "      \"name\": \"main\",\n" + "      \"isAsync\": false,\n"
+				+ "      \"isTest\": false,\n" + "      \"outParameters\": [\n"
+				+ "        \n" + "      ],\n"
+				+ "      \"nodeType\": \"action\"\n" + "    },\n" + "    {\n"
+				+ "      \"id\": \"wAHj4rpF7s1v6qxVEDsWsDWL\",\n"
+				+ "      \"name\": \"s\",\n" + "      \"isTransient\": true,\n"
+				+ "      \"isReadonly\": false,\n"
+				+ "      \"comment\": \"\",\n"
+				+ "      \"type\": \"String\",\n"
+				+ "      \"nodeType\": \"data\"\n" + "    }\n" + "  ],\n"
+				+ "  \"nodeType\": \"app\",\n" + "  \"comment\": \"\",\n"
+				+ "  \"showAd\": false\n" + "}";
+		program = new ASTNode(initialProgram);
+		String after = applyUpdateToProgram(
+				"{\n"
+						+ "        \"expr\": \":data #wAHj4rpF7s1v6qxVEDsWsDWL ,:= 'How/0027s_it_going/003f\"\n,\n"
+						+ "        \"nodeType\": \"exprStmt\",\n"
+						+ "        \"locals\": []" + "}",
+				"w7Xl21sA24EA0Lpp43qMgHGH");
+		after = applyUpdateToProgram("{\n" + "        \"body\": [\n"
+				+ "          \"x0jQd1BtQGFLL1XBIeiT9kmL\",\n"
+				+ "          \"w7Xl21sA24EA0Lpp43qMgHGH\"\n" + "        ]\n"
+				+ "      }", "SZwwuN9ffv5TLJuO8buwjifz");
+		assertEquals("{\"isLibrary\":false,\"jsonVersion\":\"v1.0,resolved,short\",\"platform\":\"current\",\"textVersion\":\"v2.2,js,ctx\",\"rootId\":\"ycXVAstFZ325M0PRsuXtUu7F\",\"allowExport\":false,\"id\":\"app\",\"autoColor\":\"#EEDC82\",\"deletedDecls\":[],\"name\":\"edits-test-dumb\",\"autoIcon\":\"Exit\",\"hasUniqueIds\":false,\"decls\":[{\"inParameters\":[],\"id\":\"SZwwuN9ffv5TLJuO8buwjifz\",\"body\":[{\"id\":\"x0jQd1BtQGFLL1XBIeiT9kmL\",\"locals\":[],\"expr\":\"'\\/0022Hello_World\\/0021\\/0022 .post_to_wall\",\"nodeType\":\"exprStmt\"},{\"id\":\"w7Xl21sA24EA0Lpp43qMgHGH\",\"locals\":[],\"expr\":\":data #wAHj4rpF7s1v6qxVEDsWsDWL ,:= 'How\\/0027s_it_going\\/003f\",\"nodeType\":\"exprStmt\"}],\"isPrivate\":false,\"name\":\"main\",\"isOffloaded\":false,\"isAsync\":false,\"isTest\":false,\"outParameters\":[],\"nodeType\":\"action\"},{\"id\":\"wAHj4rpF7s1v6qxVEDsWsDWL\",\"isTransient\":true,\"name\":\"s\",\"isReadonly\":false,\"nodeType\":\"data\",\"type\":\"String\",\"comment\":\"\"}],\"comment\":\"\",\"nodeType\":\"app\",\"showAd\":false}", after);
+	}
 	
 }
