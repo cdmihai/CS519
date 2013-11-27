@@ -14,6 +14,38 @@ import org.junit.Test;
 
 public class ASTNodeTest {
 
+	private String initialProgramWithOneEmptyStatement = "{\n" + "      \"textVersion\": \"v2.2,js,ctx\",\n"
+			+ "      \"jsonVersion\": \"v1.0,resolved,short\",\n"
+			+ "      \"name\": \"edits-test-dumb\",\n"
+			+ "      \"comment\": \"\",\n"
+			+ "      \"autoIcon\": \"Exit\",\n"
+			+ "      \"autoColor\": \"#EEDC82\",\n"
+			+ "      \"platform\": \"current\",\n"
+			+ "      \"rootId\": \"ycXVAstFZ325M0PRsuXtUu7F\",\n"
+			+ "      \"showAd\": false,\n"
+			+ "      \"isLibrary\": false,\n"
+			+ "      \"allowExport\": false,\n"
+			+ "      \"hasUniqueIds\": false,\n" + "      \"decls\": [\n"
+			+ "        {\n" + "          \"name\": \"main\",\n"
+			+ "          \"inParameters\": [],\n"
+			+ "          \"outParameters\": [],\n"
+			+ "          \"isPrivate\": false,\n"
+			+ "          \"isOffloaded\": false,\n"
+			+ "          \"isTest\": false,\n"
+			+ "          \"isAsync\": false,\n"
+			+ "          \"nodeType\": \"action\",\n"
+			+ "          \"body\": [\n" + "            {\n"
+			+ "              \"expr\": \"\",\n"
+			+ "              \"nodeType\": \"exprStmt\",\n"
+			+ "              \"id\": \"x0jQd1BtQGFLL1XBIeiT9kmL\",\n"
+			+ "              \"locals\": []\n" + "            }\n"
+			+ "          ],\n"
+			+ "          \"id\": \"SZwwuN9ffv5TLJuO8buwjifz\"\n"
+			+ "        }\n" + "      ],\n"
+			+ "      \"deletedDecls\": [],\n"
+			+ "      \"nodeType\": \"app\",\n" + "      \"id\": \"app\"\n"
+			+ "    }";
+
 	@Test
 	public void testEmptyAppCreation() {
 		String json = "{\"textVersion\": \"v2.2,js,ctx\",\n"
@@ -75,37 +107,8 @@ public class ASTNodeTest {
 
 	@Test
 	public void testAppWithMainAndBodyCreation() {
-		String json = "{\"textVersion\": \"v2.2,js,ctx\",\n"
-				+ "      \"jsonVersion\": \"v1.0,resolved,short\",\n"
-				+ "      \"name\": \"edits-test-dumb\",\n"
-				+ "      \"comment\": \"\",\n"
-				+ "      \"autoIcon\": \"Exit\",\n"
-				+ "      \"autoColor\": \"#EEDC82\",\n"
-				+ "      \"platform\": \"current\",\n"
-				+ "      \"rootId\": \"ycXVAstFZ325M0PRsuXtUu7F\",\n"
-				+ "      \"showAd\": false,\n"
-				+ "      \"isLibrary\": false,\n"
-				+ "      \"allowExport\": false,\n"
-				+ "      \"hasUniqueIds\": false,\n" + "      \"decls\": [{\n"
-				+ "          \"name\": \"main\",\n"
-				+ "          \"inParameters\": [],\n"
-				+ "          \"outParameters\": [],\n"
-				+ "          \"isPrivate\": false,\n"
-				+ "          \"isOffloaded\": false,\n"
-				+ "          \"isTest\": false,\n"
-				+ "          \"isAsync\": false,\n"
-				+ "          \"nodeType\": \"action\",\n"
-				+ "          \"body\": [\n" + "            {\n"
-				+ "              \"expr\": \"\",\n"
-				+ "              \"nodeType\": \"exprStmt\",\n"
-				+ "              \"id\": \"xXuJlIY4hsjAK1ZU1ew8yqJt\",\n"
-				+ "              \"locals\": []\n" + "            }\n"
-				+ "          ],\n"
-				+ "          \"id\": \"gCZN28r7NjF4okBgicbUzSTA\"\n"
-				+ "        }],\n" + "      \"deletedDecls\": [],\n"
-				+ "      \"nodeType\": \"app\",\n" + "      \"id\": \"app\"}";
 
-		Map<String, Object> map = (Map<String, Object>) JSONValue.parse(json);
+		Map<String, Object> map = (Map<String, Object>) JSONValue.parse(initialProgramWithOneEmptyStatement);
 		ASTNode astNode = new ASTNode(map);
 		List<ASTNode> decls = (List<ASTNode>) astNode
 				.getProperty(ASTNode.DECLARATIONS);
@@ -118,37 +121,7 @@ public class ASTNodeTest {
 
 	@Test
 	public void testUnpackAndPack() {
-		String json = "{\"textVersion\": \"v2.2,js,ctx\",\n"
-				+ "      \"jsonVersion\": \"v1.0,resolved,short\",\n"
-				+ "      \"name\": \"edits-test-dumb\",\n"
-				+ "      \"comment\": \"\",\n"
-				+ "      \"autoIcon\": \"Exit\",\n"
-				+ "      \"autoColor\": \"#EEDC82\",\n"
-				+ "      \"platform\": \"current\",\n"
-				+ "      \"rootId\": \"ycXVAstFZ325M0PRsuXtUu7F\",\n"
-				+ "      \"showAd\": false,\n"
-				+ "      \"isLibrary\": false,\n"
-				+ "      \"allowExport\": false,\n"
-				+ "      \"hasUniqueIds\": false,\n" + "      \"decls\": [{\n"
-				+ "          \"name\": \"main\",\n"
-				+ "          \"inParameters\": [],\n"
-				+ "          \"outParameters\": [],\n"
-				+ "          \"isPrivate\": false,\n"
-				+ "          \"isOffloaded\": false,\n"
-				+ "          \"isTest\": false,\n"
-				+ "          \"isAsync\": false,\n"
-				+ "          \"nodeType\": \"action\",\n"
-				+ "          \"body\": [\n" + "            {\n"
-				+ "              \"expr\": \"\",\n"
-				+ "              \"nodeType\": \"exprStmt\",\n"
-				+ "              \"id\": \"xXuJlIY4hsjAK1ZU1ew8yqJt\",\n"
-				+ "              \"locals\": []\n" + "            }\n"
-				+ "          ],\n"
-				+ "          \"id\": \"gCZN28r7NjF4okBgicbUzSTA\"\n"
-				+ "        }],\n" + "      \"deletedDecls\": [],\n"
-				+ "      \"nodeType\": \"app\",\n" + "      \"id\": \"app\"}";
-
-		packAndUnpackAndAssert(json);
+		packAndUnpackAndAssert(initialProgramWithOneEmptyStatement);
 	}
 
 	public void packAndUnpackAndAssert(String json) {
