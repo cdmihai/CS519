@@ -15,6 +15,8 @@ public class ASTNode implements JSONAware {
 	public static final String AST = "ast";
 	public static final String DECLARATIONS = "decls";
 	public static final String BODY = "body";
+	
+	private ASTNode parent;
 
 	private Map<String, Object> map;
 	
@@ -23,8 +25,9 @@ public class ASTNode implements JSONAware {
 		this((Map<String, Object>) JSONValue.parse(JSONString));
 	}
 
-	public ASTNode(Map<String, Object> map) {
+	public ASTNode(Map<String, Object> map, ASTNode parent) {
 		this.map = map;
+		this.parent = parent;
 		ASTNodeManager.getInstance().addNode(this);
 		Set<String> keys = map.keySet();
 		for (String key : keys) {
@@ -32,20 +35,25 @@ public class ASTNode implements JSONAware {
 			expandProperty(key, thing);
 		}
 	}
+	
+	public ASTNode(Map<String, Object> map) {
+		this(map ,null);
+	}
 
-	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public Object getProperty(String name) {
 		Object object = map.get(name);
-		
 		return object;
 	}
 
+	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public Object expandProperty(String propertyName, Object contents) {
+		
+		//list of nodes
 		if (contents instanceof List) {
 			List temp = new ArrayList<ASTNode>();
 			for (Object item : (List) contents) {
-				if (item instanceof Map)
-					temp.add(new ASTNode((Map)item));
+				if (item instanceof Map) //actual nodes
+					temp.add(new ASTNode((Map)item, this));
 				else if (item instanceof String) { // references to other nodes
 					ASTNode node = ASTNodeManager.getInstance().getNode((String) item);
 					temp.add(node);
@@ -55,8 +63,9 @@ public class ASTNode implements JSONAware {
 			contents = temp;
 		}
 		
+		//actual node
 		if (contents instanceof Map) {
-			contents = new ASTNode((Map) contents);
+			contents = new ASTNode((Map) contents, this);
 			map.put(propertyName,contents);
 		}
 		return contents;
@@ -79,5 +88,9 @@ public class ASTNode implements JSONAware {
 	@Override
 	public String toString() {
 		return getProperty(ID).toString();
+	}
+	
+	public ASTNode getParent() {
+		return parent;
 	}
 }

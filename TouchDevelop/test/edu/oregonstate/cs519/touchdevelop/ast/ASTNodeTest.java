@@ -145,4 +145,13 @@ public class ASTNodeTest {
 		
 		packAndUnpackAndAssert(json);
 	}
+	
+	@Test
+	public void testParentNode() {
+		ASTNode rootNode = new ASTNode(initialProgramWithOneEmptyStatement);
+		assertNull(rootNode.getParent());
+		ASTNode expr = ASTNodeManager.getInstance().getNode("x0jQd1BtQGFLL1XBIeiT9kmL");
+		assertNotNull(expr.getParent());
+		assertEquals(expr.getParent().getProperty(ASTNode.ID),"SZwwuN9ffv5TLJuO8buwjifz");
+	}
 }
