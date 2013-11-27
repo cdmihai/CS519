@@ -158,4 +158,10 @@ public class UpdateTest {
 				+ "      }", "SZwwuN9ffv5TLJuO8buwjifz");
 		assertEquals("{\"isLibrary\":false,\"jsonVersion\":\"v1.0,resolved,short\",\"platform\":\"current\",\"textVersion\":\"v2.2,js,ctx\",\"rootId\":\"ycXVAstFZ325M0PRsuXtUu7F\",\"allowExport\":false,\"id\":\"app\",\"autoColor\":\"#EEDC82\",\"deletedDecls\":[],\"name\":\"edits-test-dumb\",\"autoIcon\":\"Exit\",\"hasUniqueIds\":false,\"decls\":[{\"inParameters\":[],\"id\":\"SZwwuN9ffv5TLJuO8buwjifz\",\"body\":[{\"id\":\"x0jQd1BtQGFLL1XBIeiT9kmL\",\"locals\":[],\"expr\":\"'\\/0022Hello_World\\/0021\\/0022 .post_to_wall\",\"nodeType\":\"exprStmt\"},{\"id\":\"w7Xl21sA24EA0Lpp43qMgHGH\",\"locals\":[],\"expr\":\":data #wAHj4rpF7s1v6qxVEDsWsDWL ,:= 'How\\/0027s_it_going\\/003f\",\"nodeType\":\"exprStmt\"}],\"isPrivate\":false,\"name\":\"main\",\"isOffloaded\":false,\"isAsync\":false,\"isTest\":false,\"outParameters\":[],\"nodeType\":\"action\"},{\"id\":\"wAHj4rpF7s1v6qxVEDsWsDWL\",\"isTransient\":true,\"name\":\"s\",\"isReadonly\":false,\"nodeType\":\"data\",\"type\":\"String\",\"comment\":\"\"}],\"comment\":\"\",\"nodeType\":\"app\",\"showAd\":false}", after);
 	}
+	
+	@Test
+	public void testDeleteNode() {
+		String after = applyUpdateToProgram("null","x0jQd1BtQGFLL1XBIeiT9kmL");
+		assertEquals("{\"isLibrary\":false,\"jsonVersion\":\"v1.0,resolved,short\",\"platform\":\"current\",\"textVersion\":\"v2.2,js,ctx\",\"rootId\":\"ycXVAstFZ325M0PRsuXtUu7F\",\"allowExport\":false,\"id\":\"app\",\"autoColor\":\"#EEDC82\",\"deletedDecls\":[],\"name\":\"edits-test-dumb\",\"autoIcon\":\"Exit\",\"hasUniqueIds\":false,\"decls\":[{\"id\":\"SZwwuN9ffv5TLJuO8buwjifz\",\"inParameters\":[],\"body\":[],\"isPrivate\":false,\"isOffloaded\":false,\"name\":\"main\",\"isAsync\":false,\"isTest\":false,\"outParameters\":[],\"nodeType\":\"action\"}],\"nodeType\":\"app\",\"comment\":\"\",\"showAd\":false}",after);
+	}
 }

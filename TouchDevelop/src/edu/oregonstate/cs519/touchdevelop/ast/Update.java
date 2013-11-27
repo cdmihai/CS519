@@ -15,6 +15,10 @@ public class Update {
 	
 	public void apply() {
 		ASTNode affectedNode = getNode(affectedNodeID);
+		if (updates == null) {
+			affectedNode.delete();
+			return;
+		}
 		Set<String> keys = updates.keySet();
 		for (String property: keys) {
 			affectedNode.updateProperty(property, updates.get(property));
