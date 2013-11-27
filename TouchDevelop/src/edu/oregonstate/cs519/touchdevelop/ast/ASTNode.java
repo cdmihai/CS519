@@ -92,6 +92,7 @@ public class ASTNode implements JSONAware {
 
 	public void delete() {
 		parent.removeNode(this);
+		ASTNodeManager.getInstance().deleteNode(this);
 	}
 
 	private void removeNode(ASTNode astNode) {

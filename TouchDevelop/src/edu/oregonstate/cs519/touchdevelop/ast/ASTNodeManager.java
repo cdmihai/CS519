@@ -25,4 +25,8 @@ public class ASTNodeManager {
 	public void addNode(ASTNode node) {
 		mapOfNodes.put((String) node.getProperty(ASTNode.ID), node);
 	}
+
+	protected void deleteNode(ASTNode nodeToRemove) {
+		mapOfNodes.remove(nodeToRemove.getProperty(ASTNode.ID));
+	}
 }
