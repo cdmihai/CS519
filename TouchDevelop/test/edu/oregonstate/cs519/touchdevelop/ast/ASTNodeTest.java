@@ -115,7 +115,7 @@ public class ASTNodeTest {
 		List<ASTNode> body = (List<ASTNode>) decls.get(0).getProperty(
 				ASTNode.BODY);
 		assertEquals(1, body.size());
-		assertEquals("xXuJlIY4hsjAK1ZU1ew8yqJt",
+		assertEquals("x0jQd1BtQGFLL1XBIeiT9kmL",
 				body.get(0).getProperty(ASTNode.ID));
 	}
 
