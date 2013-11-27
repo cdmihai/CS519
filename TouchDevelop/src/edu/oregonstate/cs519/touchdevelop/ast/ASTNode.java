@@ -89,6 +89,38 @@ public class ASTNode implements JSONAware {
 	public String toString() {
 		return getProperty(ID).toString();
 	}
+
+	public void delete() {
+		parent.removeNode(this);
+	}
+
+	private void removeNode(ASTNode astNode) {
+		Set<String> keys = map.keySet();
+		ASTNode toRemove = null;
+		for (String key : keys) {
+			Object thing = map.get(key);
+			if (thing instanceof ASTNode)
+				if (thing == astNode) {
+					toRemove = (ASTNode) thing;
+					break;
+				}
+			if (thing instanceof List) {
+				List list = (List) thing;
+				for (Object element : list) {
+					if (element instanceof ASTNode)
+						if (element == astNode) {
+							toRemove = (ASTNode) element;
+							break;
+						}
+				}
+				if (toRemove != null) {
+					list.remove(toRemove);
+					return;
+				}
+			}
+		}
+		map.remove(toRemove);
+	}
 	
 	public ASTNode getParent() {
 		return parent;
