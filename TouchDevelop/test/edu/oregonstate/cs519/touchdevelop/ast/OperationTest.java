@@ -8,7 +8,7 @@ public class OperationTest {
 
 	@Test
 	public void testCreateAST() {
-		String operationThing = "  {\n"
+		String operationJSON = "  {\n"
 				+ "    \"time\": 1384813540,\n"
 				+ "    \"seqNo\": 1,\n"
 				+ "    \"scriptId\": null,\n"
@@ -45,10 +45,9 @@ public class OperationTest {
 				+ "      \"deletedDecls\": [],\n"
 				+ "      \"nodeType\": \"app\",\n" + "      \"id\": \"app\"\n"
 				+ "    }\n" + "  }";
-		Operation operation = new Operation(operationThing);
+		Operation operation = new Operation(operationJSON);
 		ASTNode program = operation.apply();
 		assertEquals("{\"isLibrary\":false,\"jsonVersion\":\"v1.0,resolved,short\",\"platform\":\"current\",\"textVersion\":\"v2.2,js,ctx\",\"rootId\":\"ycXVAstFZ325M0PRsuXtUu7F\",\"allowExport\":false,\"id\":\"app\",\"autoColor\":\"#EEDC82\",\"deletedDecls\":[],\"name\":\"edits-test-dumb\",\"autoIcon\":\"Exit\",\"hasUniqueIds\":false,\"decls\":[{\"id\":\"fTJdDeXA1eAMLaJKf4SR8Aoi\",\"inParameters\":[],\"body\":[{\"id\":\"a9vsqHIOdhPUYO8444rZV07a\",\"locals\":[],\"expr\":\"\",\"nodeType\":\"exprStmt\"}],\"isPrivate\":false,\"isOffloaded\":false,\"name\":\"main\",\"isAsync\":false,\"isTest\":false,\"outParameters\":[],\"nodeType\":\"action\"}],\"nodeType\":\"app\",\"comment\":\"\",\"showAd\":false}", program.getJSON());
-		
 	}
 
 }
