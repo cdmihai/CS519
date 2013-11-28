@@ -31,7 +31,7 @@ public class GitMerger {
 		return merge(base, a, b, true, System.nanoTime() + "");
 	}
 
-	public static MergeResult merge(String base, String a, String b, boolean deleteFolder, String folderName){
+	public static MergeResult merge(String base, String a, String b, boolean shouldDelete, String folderName){
 		PersonIdent author = new PersonIdent("TestUser", "test.user@example.com");
 		
 		File gitDir = new File(REPO_LOCATION + folderName);
@@ -57,7 +57,8 @@ public class GitMerger {
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
-//			deleteDirectory(gitDir);
+			if (shouldDelete)
+				deleteDirectory(gitDir);
 		}
 		return null;
 	}
