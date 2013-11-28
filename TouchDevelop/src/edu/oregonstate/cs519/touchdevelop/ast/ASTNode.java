@@ -95,6 +95,7 @@ public class ASTNode implements JSONAware {
 		ASTNodeManager.getInstance().deleteNode(this);
 	}
 
+	@SuppressWarnings("rawtypes")
 	private void removeNode(ASTNode astNode) {
 		Set<String> keys = map.keySet();
 		ASTNode toRemove = null;

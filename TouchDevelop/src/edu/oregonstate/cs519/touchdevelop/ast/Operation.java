@@ -5,11 +5,18 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import org.json.simple.JSONValue;
+
 public class Operation {
 
 	private Map<String, Object> map;
 	private ASTNode initialProgram;
 	private List<Update> updates;
+	
+	@SuppressWarnings("unchecked")
+	protected Operation(String jsonString) {
+		this((Map<String, Object>) JSONValue.parse(jsonString));
+	}
 
 	public Operation(Map<String, Object> map) {
 		this.map = map;
@@ -17,6 +24,7 @@ public class Operation {
 		createUpdates();
 	}
 
+	@SuppressWarnings({ "rawtypes", "unchecked" })
 	private void createUpdates() {
 		Map mapOfUpdates = (Map) map.get("updates");
 		if (mapOfUpdates == null) {
@@ -30,7 +38,15 @@ public class Operation {
 			}
 		}
 	}
+	
+	public ASTNode apply() {
+		return initialProgram;
+	}
 
-	public void apply() {
+	public ASTNode apply(ASTNode node) {
+		for (Update update : updates) {
+			update.apply();
+		}
+		return initialProgram;
 	}
 }
