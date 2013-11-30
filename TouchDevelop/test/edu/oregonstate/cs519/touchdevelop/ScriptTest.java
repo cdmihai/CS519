@@ -91,7 +91,7 @@ public class ScriptTest {
 		hashMap.put(Script.ID, scriptId);
 		Script script = new Script(hashMap);
 
-		assertEquals(expectedDepth, script.treeDepth());
+		assertEquals(expectedDepth, script.successorTreeDepth());
 	}
 
 	@Test
@@ -118,7 +118,7 @@ public class ScriptTest {
 		hashMap.put(Script.ID, scriptId);
 		Script script = new Script(hashMap);
 
-		assertEquals(expectedWidth, script.treeWidth());
+		assertEquals(expectedWidth, script.successorTreeWidth());
 	}
 
 	@Test

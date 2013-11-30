@@ -90,11 +90,11 @@ public class Script {
 		return ((Script) obj).getID().equals(getID());
 	}
 
-	public int treeDepth() {
+	public int successorTreeDepth() {
 		ArrayList<Integer> depths = new ArrayList<>();
 
 		for (Script successor : getSuccessors()) {
-			depths.add(successor.treeDepth());
+			depths.add(successor.successorTreeDepth());
 		}
 
 		int maxDepth = depths.isEmpty() ? 0 : Collections.max(depths);
@@ -102,11 +102,11 @@ public class Script {
 		return 1 + maxDepth;
 	}
 
-	public int treeWidth() {
+	public int successorTreeWidth() {
 		ArrayList<Integer> widths = new ArrayList<>();
 
 		for (Script successor : getSuccessors()) {
-			widths.add(successor.treeWidth());
+			widths.add(successor.successorTreeWidth());
 		}
 
 		int maxSuccWidth = widths.isEmpty() ? 0 : Collections.max(widths);
