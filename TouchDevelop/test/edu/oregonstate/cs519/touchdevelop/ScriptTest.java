@@ -1,6 +1,6 @@
 package edu.oregonstate.cs519.touchdevelop;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 import java.util.Collections;
 import java.util.HashMap;
@@ -112,5 +112,32 @@ public class ScriptTest {
 	@Test
 	public void testTreeDepthFour() throws Exception {
 		assertTreeDepth(4, "dkagdijf");
+	}
+
+	private void assertTreeWidth(int expectedWidth, String scriptId) {
+		hashMap.put(Script.ID, scriptId);
+		Script script = new Script(hashMap);
+
+		assertEquals(expectedWidth, script.treeWidth());
+	}
+
+	@Test
+	public void testWidthOne() throws Exception {
+		assertTreeWidth(1, "nxeqstmo");
+	}
+
+	@Test
+	public void testWidthTwo() throws Exception {
+		assertTreeWidth(2, "rzirrqjl");
+	}
+
+	@Test
+	public void testWidthThree() throws Exception {
+		assertTreeWidth(3, "yrwtmtde");
+	}
+
+	@Test
+	public void testWidthThreeForDepthTwo() throws Exception {
+		assertTreeWidth(3, "rmxlwvli");
 	}
 }

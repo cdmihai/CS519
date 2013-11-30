@@ -1,7 +1,6 @@
 package edu.oregonstate.cs519.touchdevelop;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
@@ -101,5 +100,17 @@ public class Script {
 		int maxDepth = depths.isEmpty() ? 0 : Collections.max(depths);
 
 		return 1 + maxDepth;
+	}
+
+	public int treeWidth() {
+		ArrayList<Integer> widths = new ArrayList<>();
+
+		for (Script successor : getSuccessors()) {
+			widths.add(successor.treeWidth());
+		}
+
+		int maxSuccWidth = widths.isEmpty() ? 0 : Collections.max(widths);
+
+		return Math.max(1, Math.max(getSuccessors().size(), maxSuccWidth));
 	}
 }
