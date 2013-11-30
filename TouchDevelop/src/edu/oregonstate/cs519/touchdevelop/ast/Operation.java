@@ -43,7 +43,8 @@ public class Operation {
 		return initialProgram;
 	}
 
-	public ASTNode apply(ASTNode node) {
+	public ASTNode apply(ASTNode program) {
+		initialProgram = program;
 		for (Update update : updates) {
 			update.apply();
 		}
