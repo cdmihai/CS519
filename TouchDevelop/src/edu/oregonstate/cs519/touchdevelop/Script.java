@@ -1,6 +1,8 @@
 package edu.oregonstate.cs519.touchdevelop;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
@@ -62,12 +64,12 @@ public class Script {
 		}
 		return successors;
 	}
-	
+
 	public String getText() {
 		String text = (String) hashMap.get(TEXT);
 		if (text != null)
 			return text;
-		
+
 		text = TouchDevelopAccess.getText(getID());
 		String[] lines = text.split("\n");
 		StringBuffer buffer = new StringBuffer();
@@ -81,11 +83,23 @@ public class Script {
 		hashMap.put(TEXT, finalText);
 		return finalText;
 	}
-	
+
 	@Override
 	public boolean equals(Object obj) {
 		if (!(obj instanceof Script))
 			return false;
-		return ((Script)obj).getID().equals(getID());
+		return ((Script) obj).getID().equals(getID());
+	}
+
+	public int treeDepth() {
+		ArrayList<Integer> depths = new ArrayList<>();
+
+		for (Script successor : getSuccessors()) {
+			depths.add(successor.treeDepth());
+		}
+
+		int maxDepth = depths.isEmpty() ? 0 : Collections.max(depths);
+
+		return 1 + maxDepth;
 	}
 }

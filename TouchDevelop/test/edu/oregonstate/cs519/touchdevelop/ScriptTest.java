@@ -11,8 +11,8 @@ import org.junit.Before;
 import org.junit.Test;
 
 public class ScriptTest {
-	
-	private Map<String,Object> hashMap;
+
+	private Map<String, Object> hashMap;
 
 	@Before
 	public void setUp() {
@@ -23,39 +23,39 @@ public class ScriptTest {
 	public void testCreateScriptWithName() {
 		hashMap.put(Script.NAME, "TestScript");
 		Script script = new Script(hashMap);
-		assertEquals("TestScript",script.getName());
+		assertEquals("TestScript", script.getName());
 	}
-	
+
 	@Test
 	public void testCreateScriptWithId() {
 		hashMap.put(Script.ID, "aaaa");
 		Script script = new Script(hashMap);
 		assertEquals("aaaa", script.getID());
 	}
-	
+
 	@Test
 	public void testCreateScriptWithUserId() {
 		hashMap.put(Script.USER_ID, "bob");
 		Script script = new Script(hashMap);
-		assertEquals("bob",script.getUserID());
+		assertEquals("bob", script.getUserID());
 	}
-	
+
 	@Test
 	public void testCreateScriptWithRootId() {
 		hashMap.put(Script.ROOT_ID, "bbbb");
 		Script script = new Script(hashMap);
 		assertEquals(script.getRootID(), "bbbb");
 	}
-	
+
 	@Test
 	public void testGetSuccessors() {
 		hashMap.put(Script.ID, "qoipfdvx");
 		Script script = new Script(hashMap);
 		List<Script> successors = script.getSuccessors();
 		assertEquals(1, successors.size());
-		assertEquals("qfbr",successors.get(0).getID());
+		assertEquals("qfbr", successors.get(0).getID());
 	}
-	
+
 	@SuppressWarnings("unchecked")
 	@Test
 	public void testGetSuccessorsInMap() {
@@ -67,24 +67,50 @@ public class ScriptTest {
 		assertEquals(1, successors.size());
 		assertEquals("qfbr", successors.get(0));
 	}
-	
+
 	@Test
 	public void testGetSuccessorsFromMap() {
 		// base script
-		hashMap.put(Script.ID,"qoipfdvx");
+		hashMap.put(Script.ID, "qoipfdvx");
 		List<String> scriptList = Collections.singletonList("aaaaa");
 		hashMap.put(Script.SUCCESSORS, scriptList);
 		Script script = new Script(hashMap);
-		
+
 		// successor script
-		HashMap<String, Object> successorScriptMap = new HashMap<String,Object>();
+		HashMap<String, Object> successorScriptMap = new HashMap<String, Object>();
 		successorScriptMap.put(Script.ID, "aaaaa");
 		MemoryLibrary.getInstance().addScript(new Script(successorScriptMap));
-		
+
 		// testing the thing
 		List<Script> successors = script.getSuccessors();
 		assertEquals(1, successors.size());
 		assertEquals("aaaaa", successors.get(0).getID());
 	}
-	
+
+	private void assertTreeDepth(int expectedDepth, String scriptId) {
+		hashMap.put(Script.ID, scriptId);
+		Script script = new Script(hashMap);
+
+		assertEquals(expectedDepth, script.treeDepth());
+	}
+
+	@Test
+	public void testTreeDepthOne() throws Exception {
+		assertTreeDepth(1, "qvutzxps");
+	}
+
+	@Test
+	public void testTreeDepthTwo() throws Exception {
+		assertTreeDepth(2, "vftdahsd");
+	}
+
+	@Test
+	public void testTreeDepthThree() throws Exception {
+		assertTreeDepth(3, "tkjtgiyt");
+	}
+
+	@Test
+	public void testTreeDepthFour() throws Exception {
+		assertTreeDepth(4, "dkagdijf");
+	}
 }
