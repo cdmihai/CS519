@@ -1,11 +1,15 @@
 package edu.oregonstate.cs519.touchdevelop;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -120,6 +124,19 @@ public class ScriptTest {
 
 		assertEquals(expectedWidth, script.successorTreeWidth());
 	}
+	
+	private void assertTransitiveSuccessors(Set<String> expectedTransitiveSuccessors, String scriptId) {
+		hashMap.put(Script.ID, scriptId);
+		Script script = new Script(hashMap);
+
+		Set<Script> actualTransitiveSuccessors = script.getTransitiveSuccessors();
+
+		assertEquals(expectedTransitiveSuccessors.size(), actualTransitiveSuccessors.size());
+		
+		for (Script succScript : actualTransitiveSuccessors) {
+			assertTrue(expectedTransitiveSuccessors.contains(succScript.getID()));
+		}
+	}
 
 	@Test
 	public void testWidthOne() throws Exception {
@@ -139,5 +156,37 @@ public class ScriptTest {
 	@Test
 	public void testWidthThreeForDepthTwo() throws Exception {
 		assertTreeWidth(3, "rmxlwvli");
+	}
+	
+	@Test
+	public void testGetTransitiveSuccessorsZero() throws Exception {
+		assertTransitiveSuccessors(new HashSet<String>(), "wgzxzgav");
+	}
+	
+	@Test
+	public void testGetTransitiveSuccessorsOne() throws Exception {
+		Set<String> expectedTrans = new HashSet<>();
+		expectedTrans.add("xplgtpnn");
+		assertTransitiveSuccessors(expectedTrans, "clrfwzok");
+	}
+	
+	@Test
+	public void testGetTransitiveSuccessorsTwo() throws Exception {
+		Set<String> expectedTrans = new HashSet<>();
+		expectedTrans.add("nxeqstmo");
+		expectedTrans.add("ykoqzvfk");
+		assertTransitiveSuccessors(expectedTrans, "rzirrqjl");
+	}
+	
+	@Test
+	public void testGetTransitiveSuccessorsMany() throws Exception {
+		Set<String> expectedTrans = new HashSet<>();
+		expectedTrans.add("rkxtbcaf");
+		expectedTrans.add("rmxlwvli");
+		expectedTrans.add("znzbinys");
+		expectedTrans.add("akegupsx");
+		expectedTrans.add("xplgtpnn");
+		expectedTrans.add("clrfwzok");
+		assertTransitiveSuccessors(expectedTrans, "yrwtmtde");
 	}
 }

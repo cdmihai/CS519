@@ -2,8 +2,10 @@ package edu.oregonstate.cs519.touchdevelop;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 public class Script {
 
@@ -112,5 +114,21 @@ public class Script {
 		int maxSuccWidth = widths.isEmpty() ? 0 : Collections.max(widths);
 
 		return Math.max(1, Math.max(getSuccessors().size(), maxSuccWidth));
+	}
+
+	public Set<Script> getTransitiveSuccessors() {
+		Set<Script> collectedSuccessors = new HashSet<>();
+		
+		collectTransitiveSuccessorsFor(this, collectedSuccessors);
+		
+		return collectedSuccessors;
+	}
+
+	private void collectTransitiveSuccessorsFor(Script rootScript, Set<Script> collectedSuccessors) {
+		collectedSuccessors.addAll(rootScript.getSuccessors());
+		
+		for (Script script : rootScript.getSuccessors()) {
+			collectTransitiveSuccessorsFor(script, collectedSuccessors);
+		}
 	}
 }
