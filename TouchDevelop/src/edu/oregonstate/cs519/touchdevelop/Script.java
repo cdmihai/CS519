@@ -1,8 +1,11 @@
 package edu.oregonstate.cs519.touchdevelop;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 public class Script {
 
@@ -62,12 +65,12 @@ public class Script {
 		}
 		return successors;
 	}
-	
+
 	public String getText() {
 		String text = (String) hashMap.get(TEXT);
 		if (text != null)
 			return text;
-		
+
 		text = TouchDevelopAccess.getText(getID());
 		String[] lines = text.split("\n");
 		StringBuffer buffer = new StringBuffer();
@@ -81,11 +84,51 @@ public class Script {
 		hashMap.put(TEXT, finalText);
 		return finalText;
 	}
-	
+
 	@Override
 	public boolean equals(Object obj) {
 		if (!(obj instanceof Script))
 			return false;
-		return ((Script)obj).getID().equals(getID());
+		return ((Script) obj).getID().equals(getID());
+	}
+
+	public int successorTreeDepth() {
+		ArrayList<Integer> depths = new ArrayList<>();
+
+		for (Script successor : getSuccessors()) {
+			depths.add(successor.successorTreeDepth());
+		}
+
+		int maxDepth = depths.isEmpty() ? 0 : Collections.max(depths);
+
+		return 1 + maxDepth;
+	}
+
+	public int successorTreeWidth() {
+		ArrayList<Integer> widths = new ArrayList<>();
+
+		for (Script successor : getSuccessors()) {
+			widths.add(successor.successorTreeWidth());
+		}
+
+		int maxSuccWidth = widths.isEmpty() ? 0 : Collections.max(widths);
+
+		return Math.max(1, Math.max(getSuccessors().size(), maxSuccWidth));
+	}
+
+	public Set<Script> getTransitiveSuccessors() {
+		Set<Script> collectedSuccessors = new HashSet<>();
+		
+		collectTransitiveSuccessorsFor(this, collectedSuccessors);
+		
+		return collectedSuccessors;
+	}
+
+	private void collectTransitiveSuccessorsFor(Script rootScript, Set<Script> collectedSuccessors) {
+		collectedSuccessors.addAll(rootScript.getSuccessors());
+		
+		for (Script script : rootScript.getSuccessors()) {
+			collectTransitiveSuccessorsFor(script, collectedSuccessors);
+		}
 	}
 }
