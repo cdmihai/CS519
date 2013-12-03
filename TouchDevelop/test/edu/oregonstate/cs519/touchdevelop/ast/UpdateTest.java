@@ -49,7 +49,6 @@ public class UpdateTest {
 		program = new ASTNode(initialProgram);
 	}
 
-	@SuppressWarnings("unchecked")
 	@Test
 	public void testChangeEmptyExpressionStatement() {
 		String updateJSON = "{\n\"expr\": \"'/0022Hello_World/0021/0022\"\n}";
@@ -70,6 +69,7 @@ public class UpdateTest {
 				afterJSON);
 	}
 
+	@SuppressWarnings("unchecked")
 	public String applyUpdateToProgram(String updateJSON, String nodeID) {
 		Update update = new Update(nodeID,
 				(Map<String, Object>) JSONValue.parse(updateJSON));

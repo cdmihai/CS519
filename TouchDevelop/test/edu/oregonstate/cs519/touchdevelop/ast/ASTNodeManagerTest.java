@@ -1,12 +1,13 @@
 package edu.oregonstate.cs519.touchdevelop.ast;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 
-import org.junit.Assert;
 import org.junit.Test;
 
 public class ASTNodeManagerTest {
 
+	@SuppressWarnings("unused")
 	@Test
 	public void testAddNode() {
 		ASTNodeManager nodeManager = ASTNodeManager.getInstance();

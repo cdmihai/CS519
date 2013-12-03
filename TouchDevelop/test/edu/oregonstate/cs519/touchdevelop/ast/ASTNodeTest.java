@@ -1,18 +1,19 @@
 package edu.oregonstate.cs519.touchdevelop.ast;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
 
-import java.util.Collection;
-import java.util.Collections;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 import org.json.simple.JSONValue;
 import org.junit.Before;
 import org.junit.Test;
 
+@SuppressWarnings("unchecked")
 public class ASTNodeTest {
 
 	private String initialProgramWithOneEmptyStatement = "{\n" + "      \"textVersion\": \"v2.2,js,ctx\",\n"
@@ -131,6 +132,7 @@ public class ASTNodeTest {
 		packAndUnpackAndAssert(initialProgramWithOneEmptyStatement);
 	}
 
+	@SuppressWarnings("rawtypes")
 	public void packAndUnpackAndAssert(String json) {
 		Map<String, Object> map = (Map<String, Object>) JSONValue.parse(json);
 		ASTNode astNode = new ASTNode(map);
