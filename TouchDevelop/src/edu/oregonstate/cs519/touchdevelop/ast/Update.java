@@ -23,7 +23,7 @@ public class Update {
 	public void apply() throws ConflictException {
 		ASTNode affectedNode = getNode(affectedNodeID);
 		if (updates == null) {
-			affectedNode.delete();
+			affectedNode.delete(owner);
 			return;
 		}
 		Set<String> keys = updates.keySet();
