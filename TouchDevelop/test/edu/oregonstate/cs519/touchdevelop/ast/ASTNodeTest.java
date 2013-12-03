@@ -176,5 +176,8 @@ public class ASTNodeTest {
 
 	@Test
 	public void testSimpleMarkupOfProperty() {
+		root.updateProperty(ASTNode.ID, "test1");
+		assertTrue(root.isPropertyChanged(ASTNode.ID));
+		assertFalse(root.isPropertyChanged(ASTNode.DECLARATIONS));
 	}
 }
