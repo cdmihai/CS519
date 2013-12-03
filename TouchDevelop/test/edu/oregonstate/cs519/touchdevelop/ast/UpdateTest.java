@@ -211,4 +211,10 @@ public class UpdateTest {
 		ASTNode globalVariable = ASTNodeManager.getInstance().getNode("wAHj4rpF7s1v6qxVEDsWsDWL");
 		assertEquals(anotherUser,globalVariable.getOwner("name"));
 	}
+	
+	@Test(expected=ConflictException.class)
+	public void testConflictingUpdates() throws ConflictException {
+		applyUpdateToProgram("{\n\"expr\": \"'/0022Hello_World/0021/0022\"\n}","x0jQd1BtQGFLL1XBIeiT9kmL", TEST_USER);
+		applyUpdateToProgram("{\n\"expr\": \"'/0022Hello_World/0021/0022 .post_to_wall\"\n}","x0jQd1BtQGFLL1XBIeiT9kmL", "Another");
+	}
 }
