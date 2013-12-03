@@ -89,7 +89,7 @@ public class ASTNode implements JSONAware {
 	public void updateProperty(String name, Object newProperty, String origin) throws ConflictException {
 		if (isPropertyChanged(name))
 			if (currentOriginIsNotOwner(name, origin))
-				throw new ConflictException();
+			throw new ConflictException(getProperty(ID) + ":" + name + ":" + newProperty);
 		Object expandedProperty = expandProperty(name, newProperty);
 		map.put(name, expandedProperty);
 		propertiesChanged.put(name, origin);
