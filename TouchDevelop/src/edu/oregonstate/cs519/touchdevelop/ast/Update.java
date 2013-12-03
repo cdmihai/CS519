@@ -7,10 +7,16 @@ public class Update {
 
 	private Map<String, Object> updates;
 	private String affectedNodeID;
+	private String owner;
 
 	public Update(String affectedNode, Map<String, Object> updates) {
+		this(affectedNode, updates, ASTNode.DEFAULT_OWNER);
+	}
+
+	public Update(String affectedNode, Map<String, Object> updates, String owner) {
 		this.affectedNodeID = affectedNode;
 		this.updates = updates;
+		this.owner = owner;
 	}
 	
 	public void apply() {
@@ -21,7 +27,7 @@ public class Update {
 		}
 		Set<String> keys = updates.keySet();
 		for (String property: keys) {
-			affectedNode.updateProperty(property, updates.get(property));
+			affectedNode.updateProperty(property, updates.get(property),owner);
 		}
 	}
 
