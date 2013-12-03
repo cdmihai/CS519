@@ -189,4 +189,9 @@ public class ASTNodeTest {
 		assertEquals(root.getOwner(ASTNode.ID),ASTNode.DEFAULT_OWNER);
 	}
 	
+	@Test
+	public void testNoChangeBaseOwnership() {
+		assertEquals(root.getOwner(ASTNode.ID),ASTNode.BASE_OWNER);
+	}
+	
 }

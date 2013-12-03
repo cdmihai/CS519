@@ -17,6 +17,7 @@ public class ASTNode implements JSONAware {
 	public static final String DECLARATIONS = "decls";
 	public static final String BODY = "body";
 	public static final String DEFAULT_OWNER = "default";
+	public static final String BASE_OWNER = "base";
 	
 	private ASTNode parent;
 	private HashMap<String,String> propertiesChanged;
@@ -76,6 +77,7 @@ public class ASTNode implements JSONAware {
 	}
 
 	public void updateProperty(String name, Object newProperty) {
+		updateProperty(name, newProperty, DEFAULT_OWNER);
 	}
 
 	public void updateProperty(String name, Object newProperty, String origin) {
@@ -145,6 +147,9 @@ public class ASTNode implements JSONAware {
 	}
 
 	public String getOwner(String propertyName) {
-		return propertiesChanged.get(propertyName);
+		String owner = propertiesChanged.get(propertyName);
+		if (owner == null)
+			return BASE_OWNER;
+		return owner;
 	}
 }
