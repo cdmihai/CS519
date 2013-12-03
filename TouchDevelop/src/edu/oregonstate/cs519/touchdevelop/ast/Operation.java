@@ -61,7 +61,11 @@ public class Operation {
 	public ASTNode apply(ASTNode program) {
 		initialProgram = program;
 		for (Update update : updates) {
-			update.apply();
+			try {
+				update.apply();
+			} catch (ConflictException e) {
+				e.printStackTrace();
+			}
 		}
 		return initialProgram;
 	}

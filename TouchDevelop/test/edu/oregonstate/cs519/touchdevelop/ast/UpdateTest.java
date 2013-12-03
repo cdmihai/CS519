@@ -51,7 +51,7 @@ public class UpdateTest {
 	}
 
 	@Test
-	public void testChangeEmptyExpressionStatement() {
+	public void testChangeEmptyExpressionStatement() throws Exception {
 		String updateJSON = "{\n\"expr\": \"'/0022Hello_World/0021/0022\"\n}";
 		String nodeID = "x0jQd1BtQGFLL1XBIeiT9kmL";
 		String afterJSON = applyUpdateToProgram(updateJSON, nodeID, TEST_USER);
@@ -61,7 +61,7 @@ public class UpdateTest {
 	}
 
 	@Test
-	public void testChangeEmtpyExpressionStatementAgain() {
+	public void testChangeEmtpyExpressionStatementAgain() throws Exception {
 		String updateJSON = "{\n\"expr\": \"'/0022Hello_World/0021/0022 .post_to_wall\"\n}";
 		String nodeID = "x0jQd1BtQGFLL1XBIeiT9kmL";
 		String afterJSON = applyUpdateToProgram(updateJSON, nodeID, TEST_USER);
@@ -71,12 +71,12 @@ public class UpdateTest {
 	}
 
 	@SuppressWarnings("unchecked")
-	private String applyUpdateToProgram(String updateJSON, String nodeID) {
+	private String applyUpdateToProgram(String updateJSON, String nodeID) throws ConflictException {
 		return applyUpdateToProgram(updateJSON, nodeID, TEST_USER);
 	}
 
 	@SuppressWarnings("unchecked")
-	private String applyUpdateToProgram(String updateJSON, String nodeID, String owner) {
+	private String applyUpdateToProgram(String updateJSON, String nodeID, String owner) throws ConflictException {
 		Update update = new Update(nodeID,
 				(Map<String, Object>) JSONValue.parse(updateJSON), owner);
 		update.apply();
@@ -85,7 +85,7 @@ public class UpdateTest {
 	}
 
 	@Test
-	public void testAddGlobalVariable() {
+	public void testAddGlobalVariable() throws Exception {
 		String updateJSON = "{\n" + "        \"name\": \"s\",\n"
 				+ "        \"comment\": \"\",\n"
 				+ "        \"type\": \"String\",\n"
@@ -107,7 +107,7 @@ public class UpdateTest {
 	}
 
 	@Test
-	public void testUseGlobalVariable() {
+	public void testUseGlobalVariable() throws Exception {
 		initialProgram = "{\n"
 				+ "  \"isLibrary\": false,\n"
 				+ "  \"jsonVersion\": \"v1.0,resolved,short\",\n"
@@ -166,20 +166,20 @@ public class UpdateTest {
 	}
 	
 	@Test
-	public void testDeleteNode() {
+	public void testDeleteNode() throws Exception {
 		String after = applyUpdateToProgram("null","x0jQd1BtQGFLL1XBIeiT9kmL", TEST_USER);
 		assertEquals("{\"isLibrary\":false,\"jsonVersion\":\"v1.0,resolved,short\",\"platform\":\"current\",\"textVersion\":\"v2.2,js,ctx\",\"rootId\":\"ycXVAstFZ325M0PRsuXtUu7F\",\"allowExport\":false,\"id\":\"app\",\"autoColor\":\"#EEDC82\",\"deletedDecls\":[],\"name\":\"edits-test-dumb\",\"autoIcon\":\"Exit\",\"hasUniqueIds\":false,\"decls\":[{\"id\":\"SZwwuN9ffv5TLJuO8buwjifz\",\"inParameters\":[],\"body\":[],\"isPrivate\":false,\"isOffloaded\":false,\"name\":\"main\",\"isAsync\":false,\"isTest\":false,\"outParameters\":[],\"nodeType\":\"action\"}],\"nodeType\":\"app\",\"comment\":\"\",\"showAd\":false}",after);
 	}
 	
 	@Test
-	public void testChangeNodeWithChangeOwner() {
+	public void testChangeNodeWithChangeOwner() throws Exception {
 		String after = applyUpdateToProgram("{\n\"expr\": \"'/0022Hello_World/0021/0022\"\n}","x0jQd1BtQGFLL1XBIeiT9kmL", TEST_USER);
 		ASTNode nodeChanged = ASTNodeManager.getInstance().getNode("x0jQd1BtQGFLL1XBIeiT9kmL");
 		assertEquals(TEST_USER, nodeChanged.getOwner(ASTNode.EXPRESSION));
 	}
 	
 	@Test
-	public void testAddNodeWithChangeOwner() {
+	public void testAddNodeWithChangeOwner() throws Exception {
 		String after = applyUpdateToProgram("{\n" + "        \"name\": \"s\",\n"
 				+ "        \"comment\": \"\",\n"
 				+ "        \"type\": \"String\",\n"
@@ -191,7 +191,7 @@ public class UpdateTest {
 	}
 	
 	@Test
-	public void testNonConflicting() {
+	public void testNonConflicting() throws Exception {
 		String anotherUser = "Somebody else";
 		
 		applyUpdateToProgram("{\n\"expr\": \"'/0022Hello_World/0021/0022\"\n}","x0jQd1BtQGFLL1XBIeiT9kmL", TEST_USER);

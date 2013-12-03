@@ -171,20 +171,20 @@ public class ASTNodeTest {
 	}
 	
 	@Test
-	public void testSimpleMarkupOfNode() {
+	public void testSimpleMarkupOfNode() throws Exception {
 		root.updateProperty(ASTNode.ID, "test1");
 		assertTrue(root.isNodeChanged());
 	}
 
 	@Test
-	public void testSimpleMarkupOfProperty() {
+	public void testSimpleMarkupOfProperty() throws Exception {
 		root.updateProperty(ASTNode.ID, "test1");
 		assertTrue(root.isPropertyChanged(ASTNode.ID));
 		assertFalse(root.isPropertyChanged(ASTNode.DECLARATIONS));
 	}
 	
 	@Test
-	public void testSimpleMarkupAndOwnership() {
+	public void testSimpleMarkupAndOwnership() throws Exception {
 		root.updateProperty(ASTNode.ID, "test1");
 		assertEquals(root.getOwner(ASTNode.ID),ASTNode.DEFAULT_OWNER);
 	}

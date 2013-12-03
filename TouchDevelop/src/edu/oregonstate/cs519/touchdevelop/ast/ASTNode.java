@@ -82,16 +82,26 @@ public class ASTNode implements JSONAware {
 		return contents;
 	}
 
-	public void updateProperty(String name, Object newProperty) {
+	public void updateProperty(String name, Object newProperty) throws ConflictException {
 		updateProperty(name, newProperty, DEFAULT_OWNER);
 	}
 
-	public void updateProperty(String name, Object newProperty, String origin) {
+	public void updateProperty(String name, Object newProperty, String origin) throws ConflictException {
+		if (isPropertyChanged(name))
+			if (currentOriginIsNotOwner(name, origin))
+				throw new ConflictException();
 		Object expandedProperty = expandProperty(name, newProperty);
 		map.put(name, expandedProperty);
 		propertiesChanged.put(name, origin);
 	}
 	
+	private boolean currentOriginIsNotOwner(String propertyName, String newOwner) {
+		String owner = propertiesChanged.get(propertyName);
+		if (owner == null)
+			return false;
+		return !owner.equals(newOwner);
+	}
+
 	public String getJSON() {
 		return JSONObject.toJSONString(map);
 	}
@@ -127,11 +137,11 @@ public class ASTNode implements JSONAware {
 		return parent;
 	}
 
-	public boolean isNodeChanged() {
+	protected boolean isNodeChanged() {
 		return !propertiesChanged.isEmpty();
 	}
 
-	public boolean isPropertyChanged(String property) {
+	protected boolean isPropertyChanged(String property) {
 		return propertiesChanged.keySet().contains(property);
 	}
 
