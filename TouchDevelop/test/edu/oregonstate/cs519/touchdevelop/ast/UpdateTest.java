@@ -54,7 +54,7 @@ public class UpdateTest {
 	public void testChangeEmptyExpressionStatement() {
 		String updateJSON = "{\n\"expr\": \"'/0022Hello_World/0021/0022\"\n}";
 		String nodeID = "x0jQd1BtQGFLL1XBIeiT9kmL";
-		String afterJSON = applyUpdateToProgram(updateJSON, nodeID);
+		String afterJSON = applyUpdateToProgram(updateJSON, nodeID, TEST_USER);
 		assertEquals(
 				"{\"isLibrary\":false,\"jsonVersion\":\"v1.0,resolved,short\",\"platform\":\"current\",\"textVersion\":\"v2.2,js,ctx\",\"rootId\":\"ycXVAstFZ325M0PRsuXtUu7F\",\"allowExport\":false,\"id\":\"app\",\"autoColor\":\"#EEDC82\",\"deletedDecls\":[],\"name\":\"edits-test-dumb\",\"autoIcon\":\"Exit\",\"hasUniqueIds\":false,\"decls\":[{\"id\":\"SZwwuN9ffv5TLJuO8buwjifz\",\"inParameters\":[],\"body\":[{\"id\":\"x0jQd1BtQGFLL1XBIeiT9kmL\",\"locals\":[],\"expr\":\"'\\/0022Hello_World\\/0021\\/0022\",\"nodeType\":\"exprStmt\"}],\"isPrivate\":false,\"isOffloaded\":false,\"name\":\"main\",\"isAsync\":false,\"isTest\":false,\"outParameters\":[],\"nodeType\":\"action\"}],\"nodeType\":\"app\",\"comment\":\"\",\"showAd\":false}",
 				afterJSON);
@@ -64,14 +64,19 @@ public class UpdateTest {
 	public void testChangeEmtpyExpressionStatementAgain() {
 		String updateJSON = "{\n\"expr\": \"'/0022Hello_World/0021/0022 .post_to_wall\"\n}";
 		String nodeID = "x0jQd1BtQGFLL1XBIeiT9kmL";
-		String afterJSON = applyUpdateToProgram(updateJSON, nodeID);
+		String afterJSON = applyUpdateToProgram(updateJSON, nodeID, TEST_USER);
 		assertEquals(
 				"{\"isLibrary\":false,\"jsonVersion\":\"v1.0,resolved,short\",\"platform\":\"current\",\"textVersion\":\"v2.2,js,ctx\",\"rootId\":\"ycXVAstFZ325M0PRsuXtUu7F\",\"allowExport\":false,\"id\":\"app\",\"autoColor\":\"#EEDC82\",\"deletedDecls\":[],\"name\":\"edits-test-dumb\",\"autoIcon\":\"Exit\",\"hasUniqueIds\":false,\"decls\":[{\"id\":\"SZwwuN9ffv5TLJuO8buwjifz\",\"inParameters\":[],\"body\":[{\"id\":\"x0jQd1BtQGFLL1XBIeiT9kmL\",\"locals\":[],\"expr\":\"'\\/0022Hello_World\\/0021\\/0022 .post_to_wall\",\"nodeType\":\"exprStmt\"}],\"isPrivate\":false,\"isOffloaded\":false,\"name\":\"main\",\"isAsync\":false,\"isTest\":false,\"outParameters\":[],\"nodeType\":\"action\"}],\"nodeType\":\"app\",\"comment\":\"\",\"showAd\":false}",
 				afterJSON);
 	}
 
 	@SuppressWarnings("unchecked")
-	public String applyUpdateToProgram(String updateJSON, String nodeID) {
+	private String applyUpdateToProgram(String updateJSON, String nodeID) {
+		return applyUpdateToProgram(updateJSON, nodeID, TEST_USER);
+	}
+
+	@SuppressWarnings("unchecked")
+	private String applyUpdateToProgram(String updateJSON, String nodeID, String owner) {
 		Update update = new Update(nodeID,
 				(Map<String, Object>) JSONValue.parse(updateJSON), TEST_USER);
 		update.apply();
@@ -88,14 +93,14 @@ public class UpdateTest {
 				+ "        \"isTransient\": true,\n"
 				+ "        \"nodeType\": \"data\"\n" + "      }";
 		String nodeID = "wAHj4rpF7s1v6qxVEDsWsDWL";
-		String after = applyUpdateToProgram(updateJSON, nodeID);
+		String after = applyUpdateToProgram(updateJSON, nodeID, TEST_USER);
 		assertEquals(
 				"{\"isLibrary\":false,\"jsonVersion\":\"v1.0,resolved,short\",\"platform\":\"current\",\"textVersion\":\"v2.2,js,ctx\",\"rootId\":\"ycXVAstFZ325M0PRsuXtUu7F\",\"allowExport\":false,\"id\":\"app\",\"autoColor\":\"#EEDC82\",\"deletedDecls\":[],\"name\":\"edits-test-dumb\",\"autoIcon\":\"Exit\",\"hasUniqueIds\":false,\"decls\":[{\"id\":\"SZwwuN9ffv5TLJuO8buwjifz\",\"inParameters\":[],\"body\":[{\"id\":\"x0jQd1BtQGFLL1XBIeiT9kmL\",\"locals\":[],\"expr\":\"\",\"nodeType\":\"exprStmt\"}],\"isPrivate\":false,\"isOffloaded\":false,\"name\":\"main\",\"isAsync\":false,\"isTest\":false,\"outParameters\":[],\"nodeType\":\"action\"}],\"nodeType\":\"app\",\"comment\":\"\",\"showAd\":false}",
 				after);
 		after = applyUpdateToProgram("{\n" + "        \"decls\": [\n"
 				+ "          \"SZwwuN9ffv5TLJuO8buwjifz\",\n"
 				+ "          \"wAHj4rpF7s1v6qxVEDsWsDWL\"\n" + "        ]\n"
-				+ "      }", "app");
+				+ "      }", "app", TEST_USER);
 		assertEquals(
 				"{\"isLibrary\":false,\"jsonVersion\":\"v1.0,resolved,short\",\"platform\":\"current\",\"textVersion\":\"v2.2,js,ctx\",\"rootId\":\"ycXVAstFZ325M0PRsuXtUu7F\",\"allowExport\":false,\"id\":\"app\",\"autoColor\":\"#EEDC82\",\"deletedDecls\":[],\"name\":\"edits-test-dumb\",\"autoIcon\":\"Exit\",\"hasUniqueIds\":false,\"decls\":[{\"id\":\"SZwwuN9ffv5TLJuO8buwjifz\",\"inParameters\":[],\"body\":[{\"id\":\"x0jQd1BtQGFLL1XBIeiT9kmL\",\"locals\":[],\"expr\":\"\",\"nodeType\":\"exprStmt\"}],\"isPrivate\":false,\"isOffloaded\":false,\"name\":\"main\",\"isAsync\":false,\"isTest\":false,\"outParameters\":[],\"nodeType\":\"action\"},{\"id\":\"wAHj4rpF7s1v6qxVEDsWsDWL\",\"isTransient\":true,\"name\":\"s\",\"isReadonly\":false,\"nodeType\":\"data\",\"type\":\"String\",\"comment\":\"\"}],\"nodeType\":\"app\",\"comment\":\"\",\"showAd\":false}",
 				after);
@@ -152,23 +157,23 @@ public class UpdateTest {
 						+ "        \"expr\": \":data #wAHj4rpF7s1v6qxVEDsWsDWL ,:= 'How/0027s_it_going/003f\"\n,\n"
 						+ "        \"nodeType\": \"exprStmt\",\n"
 						+ "        \"locals\": []" + "}",
-				"w7Xl21sA24EA0Lpp43qMgHGH");
+				"w7Xl21sA24EA0Lpp43qMgHGH", TEST_USER);
 		after = applyUpdateToProgram("{\n" + "        \"body\": [\n"
 				+ "          \"x0jQd1BtQGFLL1XBIeiT9kmL\",\n"
 				+ "          \"w7Xl21sA24EA0Lpp43qMgHGH\"\n" + "        ]\n"
-				+ "      }", "SZwwuN9ffv5TLJuO8buwjifz");
+				+ "      }", "SZwwuN9ffv5TLJuO8buwjifz", TEST_USER);
 		assertEquals("{\"isLibrary\":false,\"jsonVersion\":\"v1.0,resolved,short\",\"platform\":\"current\",\"textVersion\":\"v2.2,js,ctx\",\"rootId\":\"ycXVAstFZ325M0PRsuXtUu7F\",\"allowExport\":false,\"id\":\"app\",\"autoColor\":\"#EEDC82\",\"deletedDecls\":[],\"name\":\"edits-test-dumb\",\"autoIcon\":\"Exit\",\"hasUniqueIds\":false,\"decls\":[{\"inParameters\":[],\"id\":\"SZwwuN9ffv5TLJuO8buwjifz\",\"body\":[{\"id\":\"x0jQd1BtQGFLL1XBIeiT9kmL\",\"locals\":[],\"expr\":\"'\\/0022Hello_World\\/0021\\/0022 .post_to_wall\",\"nodeType\":\"exprStmt\"},{\"id\":\"w7Xl21sA24EA0Lpp43qMgHGH\",\"locals\":[],\"expr\":\":data #wAHj4rpF7s1v6qxVEDsWsDWL ,:= 'How\\/0027s_it_going\\/003f\",\"nodeType\":\"exprStmt\"}],\"isPrivate\":false,\"name\":\"main\",\"isOffloaded\":false,\"isAsync\":false,\"isTest\":false,\"outParameters\":[],\"nodeType\":\"action\"},{\"id\":\"wAHj4rpF7s1v6qxVEDsWsDWL\",\"isTransient\":true,\"name\":\"s\",\"isReadonly\":false,\"nodeType\":\"data\",\"type\":\"String\",\"comment\":\"\"}],\"comment\":\"\",\"nodeType\":\"app\",\"showAd\":false}", after);
 	}
 	
 	@Test
 	public void testDeleteNode() {
-		String after = applyUpdateToProgram("null","x0jQd1BtQGFLL1XBIeiT9kmL");
+		String after = applyUpdateToProgram("null","x0jQd1BtQGFLL1XBIeiT9kmL", TEST_USER);
 		assertEquals("{\"isLibrary\":false,\"jsonVersion\":\"v1.0,resolved,short\",\"platform\":\"current\",\"textVersion\":\"v2.2,js,ctx\",\"rootId\":\"ycXVAstFZ325M0PRsuXtUu7F\",\"allowExport\":false,\"id\":\"app\",\"autoColor\":\"#EEDC82\",\"deletedDecls\":[],\"name\":\"edits-test-dumb\",\"autoIcon\":\"Exit\",\"hasUniqueIds\":false,\"decls\":[{\"id\":\"SZwwuN9ffv5TLJuO8buwjifz\",\"inParameters\":[],\"body\":[],\"isPrivate\":false,\"isOffloaded\":false,\"name\":\"main\",\"isAsync\":false,\"isTest\":false,\"outParameters\":[],\"nodeType\":\"action\"}],\"nodeType\":\"app\",\"comment\":\"\",\"showAd\":false}",after);
 	}
 	
 	@Test
 	public void testChangeNodeWithChangeOwner() {
-		String after = applyUpdateToProgram("{\n\"expr\": \"'/0022Hello_World/0021/0022\"\n}","x0jQd1BtQGFLL1XBIeiT9kmL");
+		String after = applyUpdateToProgram("{\n\"expr\": \"'/0022Hello_World/0021/0022\"\n}","x0jQd1BtQGFLL1XBIeiT9kmL", TEST_USER);
 		ASTNode nodeChanged = ASTNodeManager.getInstance().getNode("x0jQd1BtQGFLL1XBIeiT9kmL");
 		assertEquals(TEST_USER, nodeChanged.getOwner(ASTNode.EXPRESSION));
 	}
