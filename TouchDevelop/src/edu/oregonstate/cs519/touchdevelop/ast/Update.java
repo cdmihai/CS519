@@ -9,6 +9,7 @@ public class Update {
 	private String affectedNodeID;
 	private String owner;
 
+	@Deprecated
 	public Update(String affectedNode, Map<String, Object> updates) {
 		this(affectedNode, updates, ASTNode.DEFAULT_OWNER);
 	}
