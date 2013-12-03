@@ -2,7 +2,6 @@ package edu.oregonstate.cs519.touchdevelop.ast;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -17,6 +16,7 @@ public class ASTNode implements JSONAware {
 	public static final String AST = "ast";
 	public static final String DECLARATIONS = "decls";
 	public static final String BODY = "body";
+	public static final String DEFAULT_OWNER = "default";
 	
 	private ASTNode parent;
 	private HashMap<String,String> propertiesChanged;
@@ -76,7 +76,6 @@ public class ASTNode implements JSONAware {
 	}
 
 	public void updateProperty(String name, Object newProperty) {
-		updateProperty(name, newProperty, "default");
 	}
 
 	public void updateProperty(String name, Object newProperty, String origin) {

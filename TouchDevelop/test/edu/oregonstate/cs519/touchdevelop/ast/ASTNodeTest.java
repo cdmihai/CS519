@@ -186,7 +186,7 @@ public class ASTNodeTest {
 	@Test
 	public void testSimpleMarkupAndOwnership() {
 		root.updateProperty(ASTNode.ID, "test1");
-		assertEquals(root.getOwner(ASTNode.ID),"default");
+		assertEquals(root.getOwner(ASTNode.ID),ASTNode.DEFAULT_OWNER);
 	}
 	
 }
