@@ -189,4 +189,26 @@ public class UpdateTest {
 		ASTNode node = ASTNodeManager.getInstance().getNode("wAHj4rpF7s1v6qxVEDsWsDWL");
 		assertEquals("Somebody else",node.getOwner("name"));
 	}
+	
+	@Test
+	public void testNonConflicting() {
+		String anotherUser = "Somebody else";
+		
+		applyUpdateToProgram("{\n\"expr\": \"'/0022Hello_World/0021/0022\"\n}","x0jQd1BtQGFLL1XBIeiT9kmL", TEST_USER);
+		applyUpdateToProgram("{\n" + "        \"name\": \"s\",\n"
+				+ "        \"comment\": \"\",\n"
+				+ "        \"type\": \"String\",\n"
+				+ "        \"isReadonly\": false,\n"
+				+ "        \"isTransient\": true,\n"
+				+ "        \"nodeType\": \"data\"\n" + "      }","wAHj4rpF7s1v6qxVEDsWsDWL", anotherUser);
+		applyUpdateToProgram("{\n" + "        \"decls\": [\n"
+				+ "          \"SZwwuN9ffv5TLJuO8buwjifz\",\n"
+				+ "          \"wAHj4rpF7s1v6qxVEDsWsDWL\"\n" + "        ]\n"
+				+ "      }","app",anotherUser);
+		
+		ASTNode app = ASTNodeManager.getInstance().getNode("app");
+		assertEquals(anotherUser,app.getOwner(ASTNode.DECLARATIONS));
+		ASTNode globalVariable = ASTNodeManager.getInstance().getNode("wAHj4rpF7s1v6qxVEDsWsDWL");
+		assertEquals(anotherUser,globalVariable.getOwner("name"));
+	}
 }
