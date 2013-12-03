@@ -182,4 +182,11 @@ public class ASTNodeTest {
 		assertTrue(root.isPropertyChanged(ASTNode.ID));
 		assertFalse(root.isPropertyChanged(ASTNode.DECLARATIONS));
 	}
+	
+	@Test
+	public void testSimpleMarkupAndOwnership() {
+		root.updateProperty(ASTNode.ID, "test1");
+		assertEquals(root.getOwner(ASTNode.ID),"default");
+	}
+	
 }

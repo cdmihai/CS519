@@ -1,6 +1,7 @@
 package edu.oregonstate.cs519.touchdevelop.ast;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
@@ -18,7 +19,7 @@ public class ASTNode implements JSONAware {
 	public static final String BODY = "body";
 	
 	private ASTNode parent;
-	private Set<String> propertiesChanged;
+	private HashMap<String,String> propertiesChanged;
 	
 	private Map<String, Object> map;
 	
@@ -36,7 +37,7 @@ public class ASTNode implements JSONAware {
 			Object thing = map.get(key);
 			expandProperty(key, thing);
 		}
-		propertiesChanged = new HashSet<String>();
+		propertiesChanged = new HashMap<String,String>();
 	}
 	
 	public ASTNode(Map<String, Object> map) {
@@ -75,9 +76,13 @@ public class ASTNode implements JSONAware {
 	}
 
 	public void updateProperty(String name, Object newProperty) {
+		updateProperty(name, newProperty, "default");
+	}
+
+	public void updateProperty(String name, Object newProperty, String origin) {
 		Object expandedProperty = expandProperty(name, newProperty);
 		map.put(name, expandedProperty);
-		propertiesChanged.add(name);
+		propertiesChanged.put(name, origin);
 	}
 	
 	public String getJSON() {
@@ -137,6 +142,10 @@ public class ASTNode implements JSONAware {
 	}
 
 	public boolean isPropertyChanged(String property) {
-		return propertiesChanged.contains(property);
+		return propertiesChanged.keySet().contains(property);
+	}
+
+	public String getOwner(String propertyName) {
+		return propertiesChanged.get(propertyName);
 	}
 }
