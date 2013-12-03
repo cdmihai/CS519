@@ -180,13 +180,13 @@ public class UpdateTest {
 	
 	@Test
 	public void testAddNodeWithChangeOwner() throws Exception {
-		String after = applyUpdateToProgram("{\n" + "        \"name\": \"s\",\n"
+		applyUpdateToProgram("{\n" + "        \"name\": \"s\",\n"
 				+ "        \"comment\": \"\",\n"
 				+ "        \"type\": \"String\",\n"
 				+ "        \"isReadonly\": false,\n"
 				+ "        \"isTransient\": true,\n"
-				+ "        \"nodeType\": \"data\"\n" + "      }","wAHj4rpF7s1v6qxVEDsWsDWL", "Somebody else");
-		ASTNode node = ASTNodeManager.getInstance().getNode("wAHj4rpF7s1v6qxVEDsWsDWL");
+				+ "        \"nodeType\": \"data\"\n" + "      }","wAHj4rpF7s1v6qxVEDsWsDWx", "Somebody else");
+		ASTNode node = ASTNodeManager.getInstance().getNode("wAHj4rpF7s1v6qxVEDsWsDWx");
 		assertEquals("Somebody else",node.getOwner("name"));
 	}
 	
