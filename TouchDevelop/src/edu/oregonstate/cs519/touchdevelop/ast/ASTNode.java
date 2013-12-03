@@ -17,7 +17,8 @@ public class ASTNode implements JSONAware {
 	public static final String BODY = "body";
 	
 	private ASTNode parent;
-
+	private boolean isChanged;
+	
 	private Map<String, Object> map;
 	
 	@SuppressWarnings("unchecked")
@@ -34,6 +35,7 @@ public class ASTNode implements JSONAware {
 			Object thing = map.get(key);
 			expandProperty(key, thing);
 		}
+		isChanged = false;
 	}
 	
 	public ASTNode(Map<String, Object> map) {
@@ -74,6 +76,7 @@ public class ASTNode implements JSONAware {
 	public void updateProperty(String name, Object newProperty) {
 		Object expandedProperty = expandProperty(name, newProperty);
 		map.put(name, expandedProperty);
+		isChanged = true;
 	}
 	
 	public String getJSON() {
@@ -126,5 +129,9 @@ public class ASTNode implements JSONAware {
 	
 	public ASTNode getParent() {
 		return parent;
+	}
+
+	public boolean isNodeChanged() {
+		return isChanged;
 	}
 }

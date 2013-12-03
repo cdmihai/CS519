@@ -163,4 +163,10 @@ public class ASTNodeTest {
 		assertNull(ASTNodeManager.getInstance().getNode("x0jQd1BtQGFLL1XBIeiT9kmL"));
 	}
 	
+	@Test
+	public void testSimpleMarkupOfNode() {
+		ASTNode root = new ASTNode(initialProgramWithOneEmptyStatement);
+		root.updateProperty(ASTNode.ID, "test1");
+		assertTrue(root.isNodeChanged());
+	}
 }
