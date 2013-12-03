@@ -7,6 +7,8 @@ import org.junit.Test;
 
 public class HistoryTest {
 	
+	private static final String TEST_USER = "test-user";
+	
 	String historyJSON = "[\n" + 
 			"  {\n" + 
 			"    \"time\": 1384813540,\n" + 
@@ -90,7 +92,7 @@ public class HistoryTest {
 	
 	@Before
 	public void setUp() {
-		history = new History(historyJSON);
+		history = new History(historyJSON, TEST_USER);
 	}
 
 	@Test
@@ -103,6 +105,14 @@ public class HistoryTest {
 	public void testApplyOperations() {
 		ASTNode program = history.apply();
 		assertEquals("{\"isLibrary\":false,\"jsonVersion\":\"v1.0,resolved,short\",\"platform\":\"current\",\"textVersion\":\"v2.2,js,ctx\",\"rootId\":\"ycXVAstFZ325M0PRsuXtUu7F\",\"allowExport\":false,\"id\":\"app\",\"autoColor\":\"#EEDC82\",\"deletedDecls\":[],\"name\":\"edits-test-dumb\",\"autoIcon\":\"Exit\",\"hasUniqueIds\":false,\"decls\":[{\"id\":\"z2Iug4rSoCRK0hlSjOJqGYCN\",\"inParameters\":[],\"body\":[{\"id\":\"JOF2BhU1xtg02wXfidtW0SWv\",\"locals\":[],\"expr\":\"'\\/0022Hello_World\\/0021\\/0022 .post_to_wall\",\"nodeType\":\"exprStmt\"}],\"isPrivate\":false,\"isOffloaded\":false,\"name\":\"main\",\"isAsync\":false,\"isTest\":false,\"outParameters\":[],\"nodeType\":\"action\"}],\"nodeType\":\"app\",\"comment\":\"\",\"showAd\":false}", program.getJSON());
+	}
+	
+	@Test
+	public void testApplyOperationsWithOwnerInfo() {
+		ASTNode program = history.apply();
+		ASTNode changedNode = ASTNodeManager.getInstance().getNode("JOF2BhU1xtg02wXfidtW0SWv");
+		assertEquals(TEST_USER,changedNode.getOwner(ASTNode.EXPRESSION));
+		assertEquals(ASTNode.BASE_OWNER,changedNode.getOwner(ASTNode.ID));
 	}
 
 }

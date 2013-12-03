@@ -13,18 +13,26 @@ public class History {
 	private List<Operation> operations;
 	private ASTNode program;
 
+	/**
+	 * @deprecated Use {@link #History(String,String)} instead
+	 */
 	@SuppressWarnings({ "unchecked" })
 	public History(String historyJSON) {
+		this(historyJSON, ASTNode.DEFAULT_OWNER);
+	}
+
+	@SuppressWarnings({ "unchecked" })
+	public History(String historyJSON, String owner) {
 		Object listOfOperations = JSONValue.parse(historyJSON);
 		this.listOfOperations = (List<Map>) listOfOperations;
 		Map initialEvent = this.listOfOperations.get(0);
-		Operation initialOperation = new Operation(initialEvent);
+		Operation initialOperation = new Operation(initialEvent, owner);
 		program = initialOperation.apply();
 		
 		this.listOfOperations.remove(0);
 		operations = new ArrayList<Operation>();
 		for (Map operationMap : this.listOfOperations) {
-			operations.add(new Operation(operationMap));
+			operations.add(new Operation(operationMap, owner));
 		}
 	}
 
