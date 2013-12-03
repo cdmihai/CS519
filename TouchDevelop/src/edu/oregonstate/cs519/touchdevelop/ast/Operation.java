@@ -12,14 +12,29 @@ public class Operation {
 	private Map<String, Object> map;
 	private ASTNode initialProgram;
 	private List<Update> updates;
+	private String owner;
 	
+	/**
+	 * @deprecated Use {@link #Operation(String,String)} instead
+	 */
 	@SuppressWarnings("unchecked")
 	protected Operation(String jsonString) {
-		this((Map<String, Object>) JSONValue.parse(jsonString));
+		this(jsonString, null);
 	}
 
+	@SuppressWarnings("unchecked")
+	protected Operation(String jsonString, String owner) {
+		this((Map<String, Object>) JSONValue.parse(jsonString), owner);
+	}
+
+	@Deprecated
 	public Operation(Map<String, Object> map) {
+		this(map, null);
+	}
+
+	public Operation(Map<String, Object> map, String owner) {
 		this.map = map;
+		this.owner = owner;
 		updates = new ArrayList<Update>();
 		createUpdates();
 	}
@@ -34,7 +49,7 @@ public class Operation {
 			Set<String> affectedNodes = mapOfUpdates.keySet();
 			for (String affectedNode : affectedNodes) {
 				updates.add(new Update(affectedNode, (Map<String, Object>) mapOfUpdates
-						.get(affectedNode)));
+						.get(affectedNode),owner));
 			}
 		}
 	}

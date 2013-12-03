@@ -6,6 +6,8 @@ import org.junit.Test;
 
 public class OperationTest {
 
+	private static final String TEST_USER = "test-user";
+	
 	private ASTNode initialProgram = new ASTNode("{\"textVersion\": \"v2.2,js,ctx\",\n"
 			+ "      \"jsonVersion\": \"v1.0,resolved,short\",\n"
 			+ "      \"name\": \"edits-test-dumb\",\n"
@@ -99,5 +101,25 @@ public class OperationTest {
 		Operation operation = new Operation(operationJSONString);
 		ASTNode program = operation.apply(initialProgram);
 		assertEquals("{\"isLibrary\":false,\"jsonVersion\":\"v1.0,resolved,short\",\"platform\":\"current\",\"textVersion\":\"v2.2,js,ctx\",\"rootId\":\"ycXVAstFZ325M0PRsuXtUu7F\",\"allowExport\":false,\"id\":\"app\",\"autoColor\":\"#EEDC82\",\"deletedDecls\":[],\"name\":\"edits-test-dumb\",\"autoIcon\":\"Exit\",\"hasUniqueIds\":false,\"decls\":[{\"id\":\"fTJdDeXA1eAMLaJKf4SR8Aoi\",\"inParameters\":[],\"body\":[{\"id\":\"a9vsqHIOdhPUYO8444rZV07a\",\"locals\":[],\"expr\":\"'\\/0022Hello_World\\/0021\\/0022\",\"nodeType\":\"exprStmt\"}],\"isPrivate\":false,\"isOffloaded\":false,\"name\":\"main\",\"isAsync\":false,\"isTest\":false,\"outParameters\":[],\"nodeType\":\"action\"}],\"nodeType\":\"app\",\"comment\":\"\",\"showAd\":false}", program.getJSON());
+	}
+	
+	@Test
+	public void testApplyOperationWithOwner() {
+		String operationJSONString = "{\n" + 
+				"    \"time\": 1384813654,\n" + 
+				"    \"seqNo\": 2,\n" + 
+				"    \"scriptId\": null,\n" + 
+				"    \"historyId\": \"252017487145170404008ac4b91-05c6-4524-9212-0fbd950d5bfe\",\n" + 
+				"    \"updateSize\": 67,\n" + 
+				"    \"updates\": {\n" + 
+				"      \"a9vsqHIOdhPUYO8444rZV07a\": {\n" + 
+				"        \"expr\": \"'/0022Hello_World/0021/0022\"\n" + 
+				"      }\n" + 
+				"    }\n" + 
+				"  }";
+		Operation operation = new Operation(operationJSONString,TEST_USER);
+		ASTNode program = operation.apply(initialProgram);
+		ASTNode node = ASTNodeManager.getInstance().getNode("a9vsqHIOdhPUYO8444rZV07a");
+		assertEquals(TEST_USER,node.getOwner(ASTNode.EXPRESSION));
 	}
 }
