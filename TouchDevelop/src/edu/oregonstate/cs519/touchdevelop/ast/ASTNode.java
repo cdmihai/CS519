@@ -26,8 +26,12 @@ public class ASTNode implements JSONAware {
 	
 	private Map<String, Object> map;
 	
-	@SuppressWarnings("unchecked")
 	public ASTNode(String JSONString) {
+		this(JSONString, DEFAULT_OWNER);
+	}
+
+	@SuppressWarnings("unchecked")
+	public ASTNode(String JSONString, String owner) {
 		this((Map<String, Object>) JSONValue.parse(JSONString));
 	}
 
