@@ -10,6 +10,7 @@ import java.util.Map;
 import java.util.Set;
 
 import org.json.simple.JSONValue;
+import org.junit.Before;
 import org.junit.Test;
 
 public class ASTNodeTest {
@@ -45,6 +46,12 @@ public class ASTNodeTest {
 			+ "      \"deletedDecls\": [],\n"
 			+ "      \"nodeType\": \"app\",\n" + "      \"id\": \"app\"\n"
 			+ "    }";
+	private ASTNode root;
+	
+	@Before
+	public void setUp() {
+		root = new ASTNode(initialProgramWithOneEmptyStatement);
+	}
 
 	@Test
 	public void testEmptyAppCreation() {
@@ -148,8 +155,7 @@ public class ASTNodeTest {
 	
 	@Test
 	public void testParentNode() {
-		ASTNode rootNode = new ASTNode(initialProgramWithOneEmptyStatement);
-		assertNull(rootNode.getParent());
+		assertNull(root.getParent());
 		ASTNode expr = ASTNodeManager.getInstance().getNode("x0jQd1BtQGFLL1XBIeiT9kmL");
 		assertNotNull(expr.getParent());
 		assertEquals(expr.getParent().getProperty(ASTNode.ID),"SZwwuN9ffv5TLJuO8buwjifz");
@@ -157,7 +163,6 @@ public class ASTNodeTest {
 	
 	@Test
 	public void testDelete() {
-		ASTNode root = new ASTNode(initialProgramWithOneEmptyStatement);
 		ASTNodeManager.getInstance().getNode("x0jQd1BtQGFLL1XBIeiT9kmL").delete();
 		assertEquals("{\"isLibrary\":false,\"jsonVersion\":\"v1.0,resolved,short\",\"platform\":\"current\",\"textVersion\":\"v2.2,js,ctx\",\"rootId\":\"ycXVAstFZ325M0PRsuXtUu7F\",\"allowExport\":false,\"id\":\"app\",\"autoColor\":\"#EEDC82\",\"deletedDecls\":[],\"name\":\"edits-test-dumb\",\"autoIcon\":\"Exit\",\"hasUniqueIds\":false,\"decls\":[{\"id\":\"SZwwuN9ffv5TLJuO8buwjifz\",\"inParameters\":[],\"body\":[],\"isPrivate\":false,\"isOffloaded\":false,\"name\":\"main\",\"isAsync\":false,\"isTest\":false,\"outParameters\":[],\"nodeType\":\"action\"}],\"nodeType\":\"app\",\"comment\":\"\",\"showAd\":false}",root.getJSON());
 		assertNull(ASTNodeManager.getInstance().getNode("x0jQd1BtQGFLL1XBIeiT9kmL"));
@@ -165,8 +170,11 @@ public class ASTNodeTest {
 	
 	@Test
 	public void testSimpleMarkupOfNode() {
-		ASTNode root = new ASTNode(initialProgramWithOneEmptyStatement);
 		root.updateProperty(ASTNode.ID, "test1");
 		assertTrue(root.isNodeChanged());
+	}
+
+	@Test
+	public void testSimpleMarkupOfProperty() {
 	}
 }
