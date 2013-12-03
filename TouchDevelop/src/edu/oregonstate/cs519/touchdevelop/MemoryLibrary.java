@@ -63,7 +63,11 @@ public class MemoryLibrary implements ScriptManager {
 	 */
 	@Override
 	public Script getScript(String id) {
-		return library.get(id);
+		Script script = library.get(id);
+		if (script == null) {
+			script = TouchDevelopAccess.getScript(id);
+		}
+		return script;
 	}
 
 	@Override
