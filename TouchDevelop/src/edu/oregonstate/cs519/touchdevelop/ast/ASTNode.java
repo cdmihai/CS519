@@ -16,6 +16,8 @@ public class ASTNode implements JSONAware {
 	public static final String AST = "ast";
 	public static final String DECLARATIONS = "decls";
 	public static final String BODY = "body";
+	public static final String EXPRESSION = "expr";
+	
 	public static final String DEFAULT_OWNER = "default";
 	public static final String BASE_OWNER = "base";
 	
