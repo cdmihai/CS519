@@ -159,7 +159,7 @@ public class ScriptTest {
 	
 	@Test
 	public void testGetTransitiveSuccessorsZero() throws Exception {
-		assertTransitiveSuccessors(new HashSet<String>(), "momcsvev");
+		assertTransitiveSuccessors(new HashSet<String>(), "pwrjydht");
 	}
 	
 	@Test
