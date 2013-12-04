@@ -20,10 +20,10 @@ public class Update {
 		this.owner = owner;
 	}
 	
-	public void apply() {
+	public void apply() throws ConflictException {
 		ASTNode affectedNode = getNode(affectedNodeID);
 		if (updates == null) {
-			affectedNode.delete();
+			affectedNode.delete(owner);
 			return;
 		}
 		Set<String> keys = updates.keySet();
@@ -35,7 +35,7 @@ public class Update {
 	private ASTNode getNode(String affectedNodeID) {
 		ASTNode node = ASTNodeManager.getInstance().getNode(affectedNodeID);
 		if (node == null)
-			node = new ASTNode("{\"id\":\"" + affectedNodeID + "\"}");
+			node = new ASTNode("{\"id\":\"" + affectedNodeID + "\"}",owner);
 		return node;
 	}
 }

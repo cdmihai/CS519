@@ -6,6 +6,7 @@ import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 
+import java.beans.Expression;
 import java.util.List;
 import java.util.Map;
 
@@ -163,28 +164,30 @@ public class ASTNodeTest {
 		assertEquals(expr.getParent().getProperty(ASTNode.ID),"SZwwuN9ffv5TLJuO8buwjifz");
 	}
 	
+	@SuppressWarnings("deprecation")
 	@Test
-	public void testDelete() {
-		ASTNodeManager.getInstance().getNode("x0jQd1BtQGFLL1XBIeiT9kmL").delete();
+	public void testDelete() throws Exception {
+		ASTNode expression = ASTNodeManager.getInstance().getNode("x0jQd1BtQGFLL1XBIeiT9kmL");
+		expression.delete();
 		assertEquals("{\"isLibrary\":false,\"jsonVersion\":\"v1.0,resolved,short\",\"platform\":\"current\",\"textVersion\":\"v2.2,js,ctx\",\"rootId\":\"ycXVAstFZ325M0PRsuXtUu7F\",\"allowExport\":false,\"id\":\"app\",\"autoColor\":\"#EEDC82\",\"deletedDecls\":[],\"name\":\"edits-test-dumb\",\"autoIcon\":\"Exit\",\"hasUniqueIds\":false,\"decls\":[{\"id\":\"SZwwuN9ffv5TLJuO8buwjifz\",\"inParameters\":[],\"body\":[],\"isPrivate\":false,\"isOffloaded\":false,\"name\":\"main\",\"isAsync\":false,\"isTest\":false,\"outParameters\":[],\"nodeType\":\"action\"}],\"nodeType\":\"app\",\"comment\":\"\",\"showAd\":false}",root.getJSON());
-		assertNull(ASTNodeManager.getInstance().getNode("x0jQd1BtQGFLL1XBIeiT9kmL"));
+		assertTrue(expression.isDeleted());
 	}
 	
 	@Test
-	public void testSimpleMarkupOfNode() {
+	public void testSimpleMarkupOfNode() throws Exception {
 		root.updateProperty(ASTNode.ID, "test1");
 		assertTrue(root.isNodeChanged());
 	}
 
 	@Test
-	public void testSimpleMarkupOfProperty() {
+	public void testSimpleMarkupOfProperty() throws Exception {
 		root.updateProperty(ASTNode.ID, "test1");
 		assertTrue(root.isPropertyChanged(ASTNode.ID));
 		assertFalse(root.isPropertyChanged(ASTNode.DECLARATIONS));
 	}
 	
 	@Test
-	public void testSimpleMarkupAndOwnership() {
+	public void testSimpleMarkupAndOwnership() throws Exception {
 		root.updateProperty(ASTNode.ID, "test1");
 		assertEquals(root.getOwner(ASTNode.ID),ASTNode.DEFAULT_OWNER);
 	}
@@ -194,4 +197,24 @@ public class ASTNodeTest {
 		assertEquals(root.getOwner(ASTNode.ID),ASTNode.BASE_OWNER);
 	}
 	
+	@Test(expected=ConflictException.class)
+	public void testThrowExceptionOnConflictingChange() throws Exception {
+		ASTNode exprNode = ASTNodeManager.getInstance().getNode("x0jQd1BtQGFLL1XBIeiT9kmL");
+		exprNode.updateProperty(ASTNode.EXPRESSION, "", "somebody");
+		exprNode.updateProperty(ASTNode.EXPRESSION, "", "somebody else");
+	}
+	
+	@Test(expected=ConflictException.class)
+	public void testThrowExceptionOnDeleteOfChangedNode() throws Exception {	
+		ASTNode exprNode = ASTNodeManager.getInstance().getNode("x0jQd1BtQGFLL1XBIeiT9kmL");
+		exprNode.updateProperty(ASTNode.EXPRESSION, "", "somebody");
+		exprNode.delete("somebody else");
+	}
+
+	@Test(expected=ConflictException.class)
+	public void testDeleteAndThenUpdateConflict() throws Exception {
+		ASTNode exprNode = ASTNodeManager.getInstance().getNode("x0jQd1BtQGFLL1XBIeiT9kmL");
+		exprNode.delete();
+		exprNode.updateProperty("expr", "");
+	}
 }

@@ -12,22 +12,34 @@ public class History {
 	private List<Map> listOfOperations;
 	private List<Operation> operations;
 	private ASTNode program;
+	
+	private List<ConflictException> conflicts = new ArrayList<ConflictException>();
 
 	/**
 	 * @deprecated Use {@link #History(String,String)} instead
 	 */
-	@SuppressWarnings({ "unchecked" })
 	public History(String historyJSON) {
 		this(historyJSON, ASTNode.DEFAULT_OWNER);
+	}
+	
+	public History(ASTNode program, String historyJSON, String owner) {
+		this.program = program;
+		parseHistory(historyJSON, owner);
 	}
 
 	@SuppressWarnings({ "unchecked" })
 	public History(String historyJSON, String owner) {
+		parseHistory(historyJSON, owner);
+	}
+
+	public void parseHistory(String historyJSON, String owner) {
 		Object listOfOperations = JSONValue.parse(historyJSON);
 		this.listOfOperations = (List<Map>) listOfOperations;
 		Map initialEvent = this.listOfOperations.get(0);
-		Operation initialOperation = new Operation(initialEvent, owner);
-		program = initialOperation.apply();
+		if (program == null) {
+			Operation initialOperation = new Operation(initialEvent, owner);
+			program = initialOperation.apply();
+		}
 		
 		this.listOfOperations.remove(0);
 		operations = new ArrayList<Operation>();
@@ -43,7 +55,12 @@ public class History {
 	public ASTNode apply() {
 		for (Operation operation : operations) {
 			program = operation.apply(program);
+			conflicts.addAll(operation.getConflicts());
 		}
 		return program;
+	}
+	
+	public List<ConflictException> getConflicts() {
+		return conflicts;
 	}
 }

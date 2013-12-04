@@ -22,12 +22,17 @@ public class ASTNode implements JSONAware {
 	public static final String BASE_OWNER = "base";
 	
 	private ASTNode parent;
+	private boolean deleted = false;
 	private HashMap<String,String> propertiesChanged;
 	
 	private Map<String, Object> map;
 	
-	@SuppressWarnings("unchecked")
 	public ASTNode(String JSONString) {
+		this(JSONString, DEFAULT_OWNER);
+	}
+
+	@SuppressWarnings("unchecked")
+	public ASTNode(String JSONString, String owner) {
 		this((Map<String, Object>) JSONValue.parse(JSONString));
 	}
 
@@ -78,16 +83,28 @@ public class ASTNode implements JSONAware {
 		return contents;
 	}
 
-	public void updateProperty(String name, Object newProperty) {
+	public void updateProperty(String name, Object newProperty) throws ConflictException {
 		updateProperty(name, newProperty, DEFAULT_OWNER);
 	}
 
-	public void updateProperty(String name, Object newProperty, String origin) {
+	public void updateProperty(String name, Object newProperty, String origin) throws ConflictException {
+		if (currentOriginIsNotOwner(name, origin) || isDeleted())
+			throw new ConflictException(getProperty(ID) + ":" + name + ":" + newProperty);
 		Object expandedProperty = expandProperty(name, newProperty);
 		map.put(name, expandedProperty);
 		propertiesChanged.put(name, origin);
 	}
 	
+	private boolean currentOriginIsNotOwner(String propertyName, String newOwner) {
+		if (isPropertyChanged(propertyName)) {
+			String owner = propertiesChanged.get(propertyName);
+			if (owner == null)
+				return false;
+			return !owner.equals(newOwner);
+		}
+		return false;
+	}
+
 	public String getJSON() {
 		return JSONObject.toJSONString(map);
 	}
@@ -102,49 +119,42 @@ public class ASTNode implements JSONAware {
 		return getProperty(ID).toString();
 	}
 
-	public void delete() {
+	@Deprecated
+	public void delete() throws ConflictException {
+		delete("");
+	}
+
+	public void delete(String origin) throws ConflictException {
+		for (String key : map.keySet()) {
+			if(currentOriginIsNotOwner(key, origin))
+				throw new ConflictException(getProperty(ID) + ":delete");
+		}
 		parent.removeNode(this);
-		ASTNodeManager.getInstance().deleteNode(this);
+		//ASTNodeManager.getInstance().deleteNode(this);
+		deleted = true;
 	}
 
 	@SuppressWarnings("rawtypes")
 	private void removeNode(ASTNode astNode) {
 		Set<String> keys = map.keySet();
-		ASTNode toRemove = null;
 		for (String key : keys) {
 			Object thing = map.get(key);
-			if (thing instanceof ASTNode)
-				if (thing == astNode) {
-					toRemove = (ASTNode) thing;
-					break;
-				}
 			if (thing instanceof List) {
-				List list = (List) thing;
-				for (Object element : list) {
-					if (element instanceof ASTNode)
-						if (element == astNode) {
-							toRemove = (ASTNode) element;
-							break;
-						}
-				}
-				if (toRemove != null) {
-					list.remove(toRemove);
-					return;
-				}
+				((List) thing).remove(astNode);
 			}
 		}
-		map.remove(toRemove);
+		map.remove(astNode);
 	}
-	
+
 	public ASTNode getParent() {
 		return parent;
 	}
 
-	public boolean isNodeChanged() {
+	protected boolean isNodeChanged() {
 		return !propertiesChanged.isEmpty();
 	}
 
-	public boolean isPropertyChanged(String property) {
+	protected boolean isPropertyChanged(String property) {
 		return propertiesChanged.keySet().contains(property);
 	}
 
@@ -153,5 +163,9 @@ public class ASTNode implements JSONAware {
 		if (owner == null)
 			return BASE_OWNER;
 		return owner;
+	}
+
+	public boolean isDeleted() {
+		return deleted;
 	}
 }

@@ -51,36 +51,41 @@ public class UpdateTest {
 	}
 
 	@Test
-	public void testChangeEmptyExpressionStatement() {
+	public void testChangeEmptyExpressionStatement() throws Exception {
 		String updateJSON = "{\n\"expr\": \"'/0022Hello_World/0021/0022\"\n}";
 		String nodeID = "x0jQd1BtQGFLL1XBIeiT9kmL";
-		String afterJSON = applyUpdateToProgram(updateJSON, nodeID);
+		String afterJSON = applyUpdateToProgram(updateJSON, nodeID, TEST_USER);
 		assertEquals(
 				"{\"isLibrary\":false,\"jsonVersion\":\"v1.0,resolved,short\",\"platform\":\"current\",\"textVersion\":\"v2.2,js,ctx\",\"rootId\":\"ycXVAstFZ325M0PRsuXtUu7F\",\"allowExport\":false,\"id\":\"app\",\"autoColor\":\"#EEDC82\",\"deletedDecls\":[],\"name\":\"edits-test-dumb\",\"autoIcon\":\"Exit\",\"hasUniqueIds\":false,\"decls\":[{\"id\":\"SZwwuN9ffv5TLJuO8buwjifz\",\"inParameters\":[],\"body\":[{\"id\":\"x0jQd1BtQGFLL1XBIeiT9kmL\",\"locals\":[],\"expr\":\"'\\/0022Hello_World\\/0021\\/0022\",\"nodeType\":\"exprStmt\"}],\"isPrivate\":false,\"isOffloaded\":false,\"name\":\"main\",\"isAsync\":false,\"isTest\":false,\"outParameters\":[],\"nodeType\":\"action\"}],\"nodeType\":\"app\",\"comment\":\"\",\"showAd\":false}",
 				afterJSON);
 	}
 
 	@Test
-	public void testChangeEmtpyExpressionStatementAgain() {
+	public void testChangeEmtpyExpressionStatementAgain() throws Exception {
 		String updateJSON = "{\n\"expr\": \"'/0022Hello_World/0021/0022 .post_to_wall\"\n}";
 		String nodeID = "x0jQd1BtQGFLL1XBIeiT9kmL";
-		String afterJSON = applyUpdateToProgram(updateJSON, nodeID);
+		String afterJSON = applyUpdateToProgram(updateJSON, nodeID, TEST_USER);
 		assertEquals(
 				"{\"isLibrary\":false,\"jsonVersion\":\"v1.0,resolved,short\",\"platform\":\"current\",\"textVersion\":\"v2.2,js,ctx\",\"rootId\":\"ycXVAstFZ325M0PRsuXtUu7F\",\"allowExport\":false,\"id\":\"app\",\"autoColor\":\"#EEDC82\",\"deletedDecls\":[],\"name\":\"edits-test-dumb\",\"autoIcon\":\"Exit\",\"hasUniqueIds\":false,\"decls\":[{\"id\":\"SZwwuN9ffv5TLJuO8buwjifz\",\"inParameters\":[],\"body\":[{\"id\":\"x0jQd1BtQGFLL1XBIeiT9kmL\",\"locals\":[],\"expr\":\"'\\/0022Hello_World\\/0021\\/0022 .post_to_wall\",\"nodeType\":\"exprStmt\"}],\"isPrivate\":false,\"isOffloaded\":false,\"name\":\"main\",\"isAsync\":false,\"isTest\":false,\"outParameters\":[],\"nodeType\":\"action\"}],\"nodeType\":\"app\",\"comment\":\"\",\"showAd\":false}",
 				afterJSON);
 	}
 
 	@SuppressWarnings("unchecked")
-	public String applyUpdateToProgram(String updateJSON, String nodeID) {
+	private String applyUpdateToProgram(String updateJSON, String nodeID) throws ConflictException {
+		return applyUpdateToProgram(updateJSON, nodeID, TEST_USER);
+	}
+
+	@SuppressWarnings("unchecked")
+	private String applyUpdateToProgram(String updateJSON, String nodeID, String owner) throws ConflictException {
 		Update update = new Update(nodeID,
-				(Map<String, Object>) JSONValue.parse(updateJSON), TEST_USER);
+				(Map<String, Object>) JSONValue.parse(updateJSON), owner);
 		update.apply();
 		String afterJSON = program.getJSON();
 		return afterJSON;
 	}
 
 	@Test
-	public void testAddGlobalVariable() {
+	public void testAddGlobalVariable() throws Exception {
 		String updateJSON = "{\n" + "        \"name\": \"s\",\n"
 				+ "        \"comment\": \"\",\n"
 				+ "        \"type\": \"String\",\n"
@@ -88,21 +93,21 @@ public class UpdateTest {
 				+ "        \"isTransient\": true,\n"
 				+ "        \"nodeType\": \"data\"\n" + "      }";
 		String nodeID = "wAHj4rpF7s1v6qxVEDsWsDWL";
-		String after = applyUpdateToProgram(updateJSON, nodeID);
+		String after = applyUpdateToProgram(updateJSON, nodeID, TEST_USER);
 		assertEquals(
 				"{\"isLibrary\":false,\"jsonVersion\":\"v1.0,resolved,short\",\"platform\":\"current\",\"textVersion\":\"v2.2,js,ctx\",\"rootId\":\"ycXVAstFZ325M0PRsuXtUu7F\",\"allowExport\":false,\"id\":\"app\",\"autoColor\":\"#EEDC82\",\"deletedDecls\":[],\"name\":\"edits-test-dumb\",\"autoIcon\":\"Exit\",\"hasUniqueIds\":false,\"decls\":[{\"id\":\"SZwwuN9ffv5TLJuO8buwjifz\",\"inParameters\":[],\"body\":[{\"id\":\"x0jQd1BtQGFLL1XBIeiT9kmL\",\"locals\":[],\"expr\":\"\",\"nodeType\":\"exprStmt\"}],\"isPrivate\":false,\"isOffloaded\":false,\"name\":\"main\",\"isAsync\":false,\"isTest\":false,\"outParameters\":[],\"nodeType\":\"action\"}],\"nodeType\":\"app\",\"comment\":\"\",\"showAd\":false}",
 				after);
 		after = applyUpdateToProgram("{\n" + "        \"decls\": [\n"
 				+ "          \"SZwwuN9ffv5TLJuO8buwjifz\",\n"
 				+ "          \"wAHj4rpF7s1v6qxVEDsWsDWL\"\n" + "        ]\n"
-				+ "      }", "app");
+				+ "      }", "app", TEST_USER);
 		assertEquals(
 				"{\"isLibrary\":false,\"jsonVersion\":\"v1.0,resolved,short\",\"platform\":\"current\",\"textVersion\":\"v2.2,js,ctx\",\"rootId\":\"ycXVAstFZ325M0PRsuXtUu7F\",\"allowExport\":false,\"id\":\"app\",\"autoColor\":\"#EEDC82\",\"deletedDecls\":[],\"name\":\"edits-test-dumb\",\"autoIcon\":\"Exit\",\"hasUniqueIds\":false,\"decls\":[{\"id\":\"SZwwuN9ffv5TLJuO8buwjifz\",\"inParameters\":[],\"body\":[{\"id\":\"x0jQd1BtQGFLL1XBIeiT9kmL\",\"locals\":[],\"expr\":\"\",\"nodeType\":\"exprStmt\"}],\"isPrivate\":false,\"isOffloaded\":false,\"name\":\"main\",\"isAsync\":false,\"isTest\":false,\"outParameters\":[],\"nodeType\":\"action\"},{\"id\":\"wAHj4rpF7s1v6qxVEDsWsDWL\",\"isTransient\":true,\"name\":\"s\",\"isReadonly\":false,\"nodeType\":\"data\",\"type\":\"String\",\"comment\":\"\"}],\"nodeType\":\"app\",\"comment\":\"\",\"showAd\":false}",
 				after);
 	}
 
 	@Test
-	public void testUseGlobalVariable() {
+	public void testUseGlobalVariable() throws Exception {
 		initialProgram = "{\n"
 				+ "  \"isLibrary\": false,\n"
 				+ "  \"jsonVersion\": \"v1.0,resolved,short\",\n"
@@ -152,24 +157,76 @@ public class UpdateTest {
 						+ "        \"expr\": \":data #wAHj4rpF7s1v6qxVEDsWsDWL ,:= 'How/0027s_it_going/003f\"\n,\n"
 						+ "        \"nodeType\": \"exprStmt\",\n"
 						+ "        \"locals\": []" + "}",
-				"w7Xl21sA24EA0Lpp43qMgHGH");
+				"w7Xl21sA24EA0Lpp43qMgHGH", TEST_USER);
 		after = applyUpdateToProgram("{\n" + "        \"body\": [\n"
 				+ "          \"x0jQd1BtQGFLL1XBIeiT9kmL\",\n"
 				+ "          \"w7Xl21sA24EA0Lpp43qMgHGH\"\n" + "        ]\n"
-				+ "      }", "SZwwuN9ffv5TLJuO8buwjifz");
+				+ "      }", "SZwwuN9ffv5TLJuO8buwjifz", TEST_USER);
 		assertEquals("{\"isLibrary\":false,\"jsonVersion\":\"v1.0,resolved,short\",\"platform\":\"current\",\"textVersion\":\"v2.2,js,ctx\",\"rootId\":\"ycXVAstFZ325M0PRsuXtUu7F\",\"allowExport\":false,\"id\":\"app\",\"autoColor\":\"#EEDC82\",\"deletedDecls\":[],\"name\":\"edits-test-dumb\",\"autoIcon\":\"Exit\",\"hasUniqueIds\":false,\"decls\":[{\"inParameters\":[],\"id\":\"SZwwuN9ffv5TLJuO8buwjifz\",\"body\":[{\"id\":\"x0jQd1BtQGFLL1XBIeiT9kmL\",\"locals\":[],\"expr\":\"'\\/0022Hello_World\\/0021\\/0022 .post_to_wall\",\"nodeType\":\"exprStmt\"},{\"id\":\"w7Xl21sA24EA0Lpp43qMgHGH\",\"locals\":[],\"expr\":\":data #wAHj4rpF7s1v6qxVEDsWsDWL ,:= 'How\\/0027s_it_going\\/003f\",\"nodeType\":\"exprStmt\"}],\"isPrivate\":false,\"name\":\"main\",\"isOffloaded\":false,\"isAsync\":false,\"isTest\":false,\"outParameters\":[],\"nodeType\":\"action\"},{\"id\":\"wAHj4rpF7s1v6qxVEDsWsDWL\",\"isTransient\":true,\"name\":\"s\",\"isReadonly\":false,\"nodeType\":\"data\",\"type\":\"String\",\"comment\":\"\"}],\"comment\":\"\",\"nodeType\":\"app\",\"showAd\":false}", after);
 	}
 	
 	@Test
-	public void testDeleteNode() {
-		String after = applyUpdateToProgram("null","x0jQd1BtQGFLL1XBIeiT9kmL");
+	public void testDeleteNode() throws Exception {
+		String after = applyUpdateToProgram("null","x0jQd1BtQGFLL1XBIeiT9kmL", TEST_USER);
 		assertEquals("{\"isLibrary\":false,\"jsonVersion\":\"v1.0,resolved,short\",\"platform\":\"current\",\"textVersion\":\"v2.2,js,ctx\",\"rootId\":\"ycXVAstFZ325M0PRsuXtUu7F\",\"allowExport\":false,\"id\":\"app\",\"autoColor\":\"#EEDC82\",\"deletedDecls\":[],\"name\":\"edits-test-dumb\",\"autoIcon\":\"Exit\",\"hasUniqueIds\":false,\"decls\":[{\"id\":\"SZwwuN9ffv5TLJuO8buwjifz\",\"inParameters\":[],\"body\":[],\"isPrivate\":false,\"isOffloaded\":false,\"name\":\"main\",\"isAsync\":false,\"isTest\":false,\"outParameters\":[],\"nodeType\":\"action\"}],\"nodeType\":\"app\",\"comment\":\"\",\"showAd\":false}",after);
 	}
 	
 	@Test
-	public void testChangeNodeWithChangeOwner() {
-		String after = applyUpdateToProgram("{\n\"expr\": \"'/0022Hello_World/0021/0022\"\n}","x0jQd1BtQGFLL1XBIeiT9kmL");
+	public void testChangeNodeWithChangeOwner() throws Exception {
+		String after = applyUpdateToProgram("{\n\"expr\": \"'/0022Hello_World/0021/0022\"\n}","x0jQd1BtQGFLL1XBIeiT9kmL", TEST_USER);
 		ASTNode nodeChanged = ASTNodeManager.getInstance().getNode("x0jQd1BtQGFLL1XBIeiT9kmL");
 		assertEquals(TEST_USER, nodeChanged.getOwner(ASTNode.EXPRESSION));
+	}
+	
+	@Test
+	public void testAddNodeWithChangeOwner() throws Exception {
+		applyUpdateToProgram("{\n" + "        \"name\": \"s\",\n"
+				+ "        \"comment\": \"\",\n"
+				+ "        \"type\": \"String\",\n"
+				+ "        \"isReadonly\": false,\n"
+				+ "        \"isTransient\": true,\n"
+				+ "        \"nodeType\": \"data\"\n" + "      }","wAHj4rpF7s1v6qxVEDsWsDWx", "Somebody else");
+		ASTNode node = ASTNodeManager.getInstance().getNode("wAHj4rpF7s1v6qxVEDsWsDWx");
+		assertEquals("Somebody else",node.getOwner("name"));
+	}
+	
+	@Test
+	public void testNonConflicting() throws Exception {
+		String anotherUser = "Somebody else";
+		
+		applyUpdateToProgram("{\n\"expr\": \"'/0022Hello_World/0021/0022\"\n}","x0jQd1BtQGFLL1XBIeiT9kmL", TEST_USER);
+		applyUpdateToProgram("{\n" + "        \"name\": \"s\",\n"
+				+ "        \"comment\": \"\",\n"
+				+ "        \"type\": \"String\",\n"
+				+ "        \"isReadonly\": false,\n"
+				+ "        \"isTransient\": true,\n"
+				+ "        \"nodeType\": \"data\"\n" + "      }","wAHj4rpF7s1v6qxVEDsWsDWL", anotherUser);
+		applyUpdateToProgram("{\n" + "        \"decls\": [\n"
+				+ "          \"SZwwuN9ffv5TLJuO8buwjifz\",\n"
+				+ "          \"wAHj4rpF7s1v6qxVEDsWsDWL\"\n" + "        ]\n"
+				+ "      }","app",anotherUser);
+		
+		ASTNode app = ASTNodeManager.getInstance().getNode("app");
+		assertEquals(anotherUser,app.getOwner(ASTNode.DECLARATIONS));
+		ASTNode globalVariable = ASTNodeManager.getInstance().getNode("wAHj4rpF7s1v6qxVEDsWsDWL");
+		assertEquals(anotherUser,globalVariable.getOwner("name"));
+	}
+	
+	@Test(expected=ConflictException.class)
+	public void testConflictingUpdates() throws ConflictException {
+		applyUpdateToProgram("{\n\"expr\": \"'/0022Hello_World/0021/0022\"\n}","x0jQd1BtQGFLL1XBIeiT9kmL", TEST_USER);
+		applyUpdateToProgram("{\n\"expr\": \"'/0022Hello_World/0021/0022 .post_to_wall\"\n}","x0jQd1BtQGFLL1XBIeiT9kmL", "Another");
+	}
+	
+	@Test(expected=ConflictException.class)
+	public void testConflictDeleteUpdate() throws ConflictException {
+		applyUpdateToProgram("{\n\"expr\": \"'/0022Hello_World/0021/0022\"\n}","x0jQd1BtQGFLL1XBIeiT9kmL", "Another");
+		applyUpdateToProgram("null","x0jQd1BtQGFLL1XBIeiT9kmL", TEST_USER);
+	}
+	
+	@Test(expected=ConflictException.class)
+	public void testConflictUpdateDelete() throws ConflictException {
+		applyUpdateToProgram("null","x0jQd1BtQGFLL1XBIeiT9kmL", TEST_USER);
+		applyUpdateToProgram("{\n\"expr\": \"'/0022Hello_World/0021/0022\"\n}","x0jQd1BtQGFLL1XBIeiT9kmL", "Another");
 	}
 }

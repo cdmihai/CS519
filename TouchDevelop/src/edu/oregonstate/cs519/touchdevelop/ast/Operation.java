@@ -14,6 +14,8 @@ public class Operation {
 	private List<Update> updates;
 	private String owner;
 	
+	private List<ConflictException> conflicts = new ArrayList<ConflictException>();
+	
 	/**
 	 * @deprecated Use {@link #Operation(String,String)} instead
 	 */
@@ -61,8 +63,16 @@ public class Operation {
 	public ASTNode apply(ASTNode program) {
 		initialProgram = program;
 		for (Update update : updates) {
-			update.apply();
+			try {
+				update.apply();
+			} catch (ConflictException e) {
+				conflicts.add(e);
+			}
 		}
 		return initialProgram;
+	}
+	
+	public List<ConflictException> getConflicts() {
+		return conflicts;
 	}
 }
