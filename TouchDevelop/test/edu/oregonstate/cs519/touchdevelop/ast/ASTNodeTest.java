@@ -210,4 +210,11 @@ public class ASTNodeTest {
 		exprNode.updateProperty(ASTNode.EXPRESSION, "", "somebody");
 		exprNode.delete("somebody else");
 	}
+
+	@Test(expected=ConflictException.class)
+	public void testDeleteAndThenUpdateConflict() throws Exception {
+		ASTNode exprNode = ASTNodeManager.getInstance().getNode("x0jQd1BtQGFLL1XBIeiT9kmL");
+		exprNode.delete();
+		exprNode.updateProperty("expr", "");
+	}
 }
