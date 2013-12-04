@@ -2,6 +2,8 @@ package edu.oregonstate.cs519.touchdevelop.ast;
 
 import static org.junit.Assert.assertEquals;
 
+import java.util.List;
+
 import org.junit.Test;
 
 public class OperationTest {
@@ -121,5 +123,40 @@ public class OperationTest {
 		ASTNode program = operation.apply(initialProgram);
 		ASTNode node = ASTNodeManager.getInstance().getNode("a9vsqHIOdhPUYO8444rZV07a");
 		assertEquals(TEST_USER,node.getOwner(ASTNode.EXPRESSION));
+	}
+	
+	@Test
+	public void testApplyConflictingEdits() {
+		String operationJSONString = "{\n" + 
+				"    \"time\": 1384813654,\n" + 
+				"    \"seqNo\": 2,\n" + 
+				"    \"scriptId\": null,\n" + 
+				"    \"historyId\": \"252017487145170404008ac4b91-05c6-4524-9212-0fbd950d5bfe\",\n" + 
+				"    \"updateSize\": 67,\n" + 
+				"    \"updates\": {\n" + 
+				"      \"a9vsqHIOdhPUYO8444rZV07a\": {\n" + 
+				"        \"expr\": \"'/0022Hello_World/0021/0022\"\n" + 
+				"      }\n" + 
+				"    }\n" + 
+				"  }";
+		Operation operation = new Operation(operationJSONString,TEST_USER);
+		ASTNode program = operation.apply(initialProgram);
+		operationJSONString = "{\n" + 
+				"    \"time\": 1384813654,\n" + 
+				"    \"seqNo\": 2,\n" + 
+				"    \"scriptId\": null,\n" + 
+				"    \"historyId\": \"252017487145170404008ac4b91-05c6-4524-9212-0fbd950d5bfe\",\n" + 
+				"    \"updateSize\": 67,\n" + 
+				"    \"updates\": {\n" + 
+				"      \"a9vsqHIOdhPUYO8444rZV07a\": {\n" + 
+				"        \"expr\": \"\"\n" + 
+				"      }\n" + 
+				"    }\n" + 
+				"  }";
+		operation = new Operation(operationJSONString,"somebody_else");
+		operation.apply(program);
+		List<ConflictException> conflicts = operation.getConflicts();
+		assertEquals(1,conflicts.size());
+		assertEquals("a9vsqHIOdhPUYO8444rZV07a:expr:",conflicts.get(0).getProblemUpdate());
 	}
 }

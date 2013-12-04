@@ -14,6 +14,8 @@ public class Operation {
 	private List<Update> updates;
 	private String owner;
 	
+	private List<ConflictException> conflicts = new ArrayList<ConflictException>();
+	
 	/**
 	 * @deprecated Use {@link #Operation(String,String)} instead
 	 */
@@ -64,9 +66,13 @@ public class Operation {
 			try {
 				update.apply();
 			} catch (ConflictException e) {
-				e.printStackTrace();
+				conflicts.add(e);
 			}
 		}
 		return initialProgram;
+	}
+	
+	public List<ConflictException> getConflicts() {
+		return conflicts;
 	}
 }
