@@ -222,6 +222,11 @@ public class UpdateTest {
 	public void testConflictDeleteUpdate() throws ConflictException {
 		applyUpdateToProgram("{\n\"expr\": \"'/0022Hello_World/0021/0022\"\n}","x0jQd1BtQGFLL1XBIeiT9kmL", "Another");
 		applyUpdateToProgram("null","x0jQd1BtQGFLL1XBIeiT9kmL", TEST_USER);
-
+	}
+	
+	@Test(expected=ConflictException.class)
+	public void testConflictUpdateDelete() throws ConflictException {
+		applyUpdateToProgram("null","x0jQd1BtQGFLL1XBIeiT9kmL", TEST_USER);
+		applyUpdateToProgram("{\n\"expr\": \"'/0022Hello_World/0021/0022\"\n}","x0jQd1BtQGFLL1XBIeiT9kmL", "Another");
 	}
 }
