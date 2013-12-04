@@ -17,6 +17,7 @@ public class ForMergeMain {
 		History history2 = new History(program, json2, "b");
 		ASTNode program2 = history2.apply();
 		System.out.println(program2.toJSONString());
+		System.out.println("There were " + history2.getConflicts().size() + " conflicts");
 	}
 
 }
