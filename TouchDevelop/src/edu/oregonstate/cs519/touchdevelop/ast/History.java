@@ -16,7 +16,6 @@ public class History {
 	/**
 	 * @deprecated Use {@link #History(String,String)} instead
 	 */
-	@SuppressWarnings({ "unchecked" })
 	public History(String historyJSON) {
 		this(historyJSON, ASTNode.DEFAULT_OWNER);
 	}
