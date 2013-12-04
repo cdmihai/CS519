@@ -22,6 +22,7 @@ public class ASTNode implements JSONAware {
 	public static final String BASE_OWNER = "base";
 	
 	private ASTNode parent;
+	private boolean deleted = false;
 	private HashMap<String,String> propertiesChanged;
 	
 	private Map<String, Object> map;
@@ -129,7 +130,8 @@ public class ASTNode implements JSONAware {
 				throw new ConflictException(getProperty(ID) + ":delete");
 		}
 		parent.removeNode(this);
-		ASTNodeManager.getInstance().deleteNode(this);
+		//ASTNodeManager.getInstance().deleteNode(this);
+		deleted = true;
 	}
 
 	@SuppressWarnings("rawtypes")
@@ -161,5 +163,9 @@ public class ASTNode implements JSONAware {
 		if (owner == null)
 			return BASE_OWNER;
 		return owner;
+	}
+
+	public boolean isDeleted() {
+		return deleted;
 	}
 }
