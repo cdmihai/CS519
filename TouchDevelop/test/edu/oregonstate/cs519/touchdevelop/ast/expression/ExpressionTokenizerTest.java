@@ -42,6 +42,38 @@ public class ExpressionTokenizerTest {
 				tokenizer.createOperator("5"));
 	}
 	
+	@Test
+	public void testMethodCall() throws Exception {
+		assertTokens("$xOlX69iyNsS9wnlj0uFrZtLbL0 ,:= :code #vVOK9ePVR7FvRuQgfyH6tNln ,( $mNMHXmR6bIKpou2PYSrG7Dv4L0 ,, $xBTNp286Ucy26f9tjIaqATEqL0 ,)", 
+				tokenizer.createLocalRef("xOlX69iyNsS9wnlj0uFrZtLbL0"),
+				tokenizer.createOperator(":="),
+				tokenizer.createSingletonRef("code"),
+				tokenizer.createPropertyRefDeclid("vVOK9ePVR7FvRuQgfyH6tNln"),
+				tokenizer.createOperator("("),
+				tokenizer.createLocalRef("mNMHXmR6bIKpou2PYSrG7Dv4L0"),
+				tokenizer.createOperator(","),
+				tokenizer.createLocalRef("xBTNp286Ucy26f9tjIaqATEqL0"),
+				tokenizer.createOperator(")"));
+	}
+	
+	@Test
+	public void testBoolOp() {
+		assertTokens("$EWzImiHGvsT0TzruK4EXIh1wL0 ,:= T ,and F", 
+				tokenizer.createLocalRef("EWzImiHGvsT0TzruK4EXIh1wL0"),
+				tokenizer.createOperator(":="),
+				tokenizer.createBooleanLiteral((1 == 1) + ""),
+				tokenizer.createOperator("and"),
+				tokenizer.createBooleanLiteral((1 != 1) + ""));
+	}
+	
+	@Test
+	public void testStringAndProperty() {
+		assertTokens("'asd .is_empty .post_to_wall", 
+				tokenizer.createStringLiteral("asd"),
+				tokenizer.createPropertyRefName("is empty"),
+				tokenizer.createPropertyRefName("post to wall"));
+	}
+	
 	// @formatter:on
 
 	private void assertTokens(String inputString, JSONObject... tokens) {
