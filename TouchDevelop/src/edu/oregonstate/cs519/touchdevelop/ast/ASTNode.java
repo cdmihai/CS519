@@ -190,11 +190,11 @@ public class ASTNode implements JSONAware {
 					for (ASTNode otherElement : (List<ASTNode>) this.getProperty(property))
 						if (element.matchWith(otherElement)) {
 							matched = true;
+							otherElement.map.put("matched", "true");
 							break;
 						}
 					if (!matched)
 						return false;
-							
 				}
 			} else {
 				if (!value.equals(this.getProperty(property)))
