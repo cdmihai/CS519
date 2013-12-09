@@ -283,4 +283,12 @@ public class ASTNodeTest {
 		assertTrue(node1.matchWith(node2));
 		assertEquals(node1.getProperty(ASTNode.ID), node2.getProperty(ASTNode.ID));
 	}
+	
+	@Test
+	public void testMatchIfPropertiesAndChildrenMatch() {
+		ASTNode node1 = new ASTNode("{\"id\": \"bla\",\"nodeType\": \"app\",\"px\": \"this\",\"body\":{\"id\": \"smth\", \"py\": \"this\"}}");
+		ASTNode node2 = new ASTNode("{\"id\": \"bla2\",\"nodeType\": \"app\",\"px\": \"this\",\"body\":{\"id\": \"smth2\", \"py\": \"this\"}}");
+		assertTrue(node1.matchWith(node2));
+		assertEquals(node1.getProperty(ASTNode.ID), node2.getProperty(ASTNode.ID));
+	}
 }
