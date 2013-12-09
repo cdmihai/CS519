@@ -171,9 +171,13 @@ public class ASTNode implements JSONAware {
 	}
 
 	public boolean matchWith(ASTNode node) {
-		Object type = node.getProperty(NODE_TYPE);
-		if (type != null && !type.equals(getProperty(NODE_TYPE)))
-			return false;
+		Set<String> properties = map.keySet();
+		for (String property : properties) {
+			if (property.equals(ASTNode.ID))
+				continue;
+			if (!node.getProperty(property).equals(this.getProperty(property)))
+				return false;
+		}
 		
 		try {
 			updateProperty(ID, node.getProperty(ID), BASE_OWNER);
