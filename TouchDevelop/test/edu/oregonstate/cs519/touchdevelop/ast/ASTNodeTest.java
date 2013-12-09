@@ -7,6 +7,9 @@ import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 
 import java.beans.Expression;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.List;
 import java.util.Map;
 
@@ -314,6 +317,15 @@ public class ASTNodeTest {
 		ASTNode node2 = new ASTNode("{\"id\": \"bla2\",\"nodeType\": \"app\",\"px\": \"this\",\"body\":[{\"id\": \"smth2\", \"py\": \"this\"},{\"id\": \"smth3\", \"py\": \"this\"}]}");
 		assertFalse(node1.matchWith(node2));
 		assertFalse(node1.getProperty(ASTNode.ID).equals(node2.getProperty(ASTNode.ID)));
+	}
+	
+	@Test
+	public void testMatchTwoRealPrograms() throws Exception {
+		String json1 = new String(Files.readAllBytes(Paths.get("test-scripts/matchIDs1.json")));
+		String json2 = new String(Files.readAllBytes(Paths.get("test-scripts/matchIDs2.json")));
+		ASTNode program1 = new ASTNode(json1);
+		ASTNode program2 = new ASTNode(json2);
+		assertTrue(program1.matchWith(program2));
 	}
 	
 }
