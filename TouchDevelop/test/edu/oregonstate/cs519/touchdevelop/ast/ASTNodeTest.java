@@ -252,4 +252,22 @@ public class ASTNodeTest {
 		assertEquals("bla",node1.getProperty(ASTNode.ID));
 		assertEquals("bla2", node2.getProperty(ASTNode.ID));
 	}
+	
+	@Test
+	public void testDontMatchIfPropertiesAreMissing() {
+		ASTNode node1 = new ASTNode("{\"id\": \"bla\",\"nodeType\": \"app\"}");
+		ASTNode node2 = new ASTNode("{\"id\": \"bla2\",\"nodeType\": \"app\",\"px\": \"that\"}");
+		assertFalse(node1.matchWith(node2));
+		assertEquals("bla",node1.getProperty(ASTNode.ID));
+		assertEquals("bla2", node2.getProperty(ASTNode.ID));
+	}
+	
+	@Test
+	public void testDontMatchIfPropertiesAreMissing2() {
+		ASTNode node1 = new ASTNode("{\"id\": \"bla\",\"nodeType\": \"app\",\"px\": \"this\"}");
+		ASTNode node2 = new ASTNode("{\"id\": \"bla2\",\"nodeType\": \"app\"}");
+		assertFalse(node1.matchWith(node2));
+		assertEquals("bla",node1.getProperty(ASTNode.ID));
+		assertEquals("bla2", node2.getProperty(ASTNode.ID));
+	}
 }

@@ -172,6 +172,9 @@ public class ASTNode implements JSONAware {
 
 	public boolean matchWith(ASTNode node) {
 		Set<String> properties = map.keySet();
+		if (properties.size() != node.map.size())
+			return false;
+		
 		for (String property : properties) {
 			if (property.equals(ASTNode.ID))
 				continue;
