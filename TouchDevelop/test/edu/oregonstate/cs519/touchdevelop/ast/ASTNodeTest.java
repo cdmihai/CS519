@@ -303,7 +303,15 @@ public class ASTNodeTest {
 	@Test
 	public void testDontMatchForMultipleIdenticalChildren() {
 		ASTNode node1 = new ASTNode("{\"id\": \"bla\",\"nodeType\": \"app\",\"px\": \"this\",\"body\":[{\"id\": \"smth\", \"py\": \"this\"}]}");
-		ASTNode node2 = new ASTNode("{\"id\": \"bla2\",\"nodeType\": \"app\",\"px\": \"this\",\"body\":[{\"id\": \"smth2\", \"py\": \"this\"},{\"id\": \"smth2\", \"py\": \"this\"}]}");
+		ASTNode node2 = new ASTNode("{\"id\": \"bla2\",\"nodeType\": \"app\",\"px\": \"this\",\"body\":[{\"id\": \"smth2\", \"py\": \"this\"},{\"id\": \"smth3\", \"py\": \"this\"}]}");
+		assertFalse(node1.matchWith(node2));
+		assertFalse(node1.getProperty(ASTNode.ID).equals(node2.getProperty(ASTNode.ID)));
+	}
+	
+	@Test
+	public void testDontMatchForMultipleIdenticalChildren2() {
+		ASTNode node1 = new ASTNode("{\"id\": \"bla\",\"nodeType\": \"app\",\"px\": \"this\",\"body\":[{\"id\": \"smth\", \"py\": \"this\"},{\"id\": \"smth4\", \"py\": \"that\"}]}");
+		ASTNode node2 = new ASTNode("{\"id\": \"bla2\",\"nodeType\": \"app\",\"px\": \"this\",\"body\":[{\"id\": \"smth2\", \"py\": \"this\"},{\"id\": \"smth3\", \"py\": \"this\"}]}");
 		assertFalse(node1.matchWith(node2));
 		assertFalse(node1.getProperty(ASTNode.ID).equals(node2.getProperty(ASTNode.ID)));
 	}
