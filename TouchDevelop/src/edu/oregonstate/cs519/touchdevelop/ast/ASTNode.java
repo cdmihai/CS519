@@ -178,7 +178,10 @@ public class ASTNode implements JSONAware {
 		for (String property : properties) {
 			if (property.equals(ASTNode.ID))
 				continue;
-			if (!node.getProperty(property).equals(this.getProperty(property)))
+			Object value = node.getProperty(property);
+			if (value == null)
+				return false;
+			if (!value.equals(this.getProperty(property)))
 				return false;
 		}
 		

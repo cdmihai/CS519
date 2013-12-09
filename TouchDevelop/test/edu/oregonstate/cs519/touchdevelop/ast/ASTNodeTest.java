@@ -270,4 +270,13 @@ public class ASTNodeTest {
 		assertEquals("bla",node1.getProperty(ASTNode.ID));
 		assertEquals("bla2", node2.getProperty(ASTNode.ID));
 	}
+	
+	@Test
+	public void testDontMatchIfPropertyTypesAreNotMatching() {
+		ASTNode node1 = new ASTNode("{\"id\": \"bla\",\"nodeType\": \"app\",\"px\": \"this\"}");
+		ASTNode node2 = new ASTNode("{\"id\": \"bla2\",\"nodeType\": \"app\",\"py\": \"this\"}");
+		assertFalse(node1.matchWith(node2));
+		assertEquals("bla",node1.getProperty(ASTNode.ID));
+		assertEquals("bla2", node2.getProperty(ASTNode.ID));
+	}
 }
