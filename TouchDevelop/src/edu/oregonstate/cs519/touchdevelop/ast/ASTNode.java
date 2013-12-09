@@ -168,4 +168,13 @@ public class ASTNode implements JSONAware {
 	public boolean isDeleted() {
 		return deleted;
 	}
+
+	public boolean matchWith(ASTNode node) {
+		try {
+			updateProperty(ID, node.getProperty(ID), BASE_OWNER);
+		} catch (ConflictException e) {
+			return false;
+		}
+		return true;
+	}
 }

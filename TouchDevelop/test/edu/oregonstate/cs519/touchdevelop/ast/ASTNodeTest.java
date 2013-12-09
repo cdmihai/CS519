@@ -217,4 +217,13 @@ public class ASTNodeTest {
 		exprNode.delete();
 		exprNode.updateProperty("expr", "");
 	}
+	
+	@Test
+	public void testMatchNode() {
+		ASTNode node1 = new ASTNode("{\"id\": \"bla\"}");
+		ASTNode node2 = new ASTNode("{\"id\": \"bla2\"}");
+		assertTrue(node1.matchWith(node2));
+		assertEquals("bla2",node1.getProperty(ASTNode.ID));
+	}
+	
 }
