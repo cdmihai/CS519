@@ -17,6 +17,7 @@ public class ASTNode implements JSONAware {
 	public static final String DECLARATIONS = "decls";
 	public static final String BODY = "body";
 	public static final String EXPRESSION = "expr";
+	public static final String NODE_TYPE = "nodeType";
 	
 	public static final String DEFAULT_OWNER = "default";
 	public static final String BASE_OWNER = "base";
@@ -170,6 +171,10 @@ public class ASTNode implements JSONAware {
 	}
 
 	public boolean matchWith(ASTNode node) {
+		Object type = node.getProperty(NODE_TYPE);
+		if (type != null && !type.equals(getProperty(NODE_TYPE)))
+			return false;
+		
 		try {
 			updateProperty(ID, node.getProperty(ID), BASE_OWNER);
 		} catch (ConflictException e) {

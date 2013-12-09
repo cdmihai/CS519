@@ -226,4 +226,21 @@ public class ASTNodeTest {
 		assertEquals("bla2",node1.getProperty(ASTNode.ID));
 	}
 	
+	@Test
+	public void testDontMatchIfTypesDiffer() {
+		ASTNode node1 = new ASTNode("{\"id\": \"bla\",\"nodeType\": \"app\"}");
+		ASTNode node2 = new ASTNode("{\"id\": \"bla2\",\"nodeType\": \"method\"}");
+		assertFalse(node1.matchWith(node2));
+		assertEquals("bla",node1.getProperty(ASTNode.ID));
+		assertEquals("bla2", node2.getProperty(ASTNode.ID));
+	}
+	
+	@Test
+	public void testMatchIfTheSameType() {
+		ASTNode node1 = new ASTNode("{\"id\": \"bla\",\"nodeType\": \"app\"}");
+		ASTNode node2 = new ASTNode("{\"id\": \"bla2\",\"nodeType\": \"app\"}");
+		assertTrue(node1.matchWith(node2));
+		assertEquals("bla2",node1.getProperty(ASTNode.ID));
+		assertEquals("bla2", node2.getProperty(ASTNode.ID));
+	}
 }
