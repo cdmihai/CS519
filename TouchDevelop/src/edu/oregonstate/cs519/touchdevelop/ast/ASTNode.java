@@ -185,22 +185,10 @@ public class ASTNode implements JSONAware {
 				if (!((ASTNode)value).matchWith((ASTNode) this.getProperty(property)))
 					return false;
 			} else if (value instanceof List) {
-				for (ASTNode element : (List<ASTNode>) value) {
-					boolean matched = false;
-					for (ASTNode otherElement : (List<ASTNode>) this.getProperty(property))
-						if (element.matchWith(otherElement)) {
-							matched = true;
-							otherElement.map.put("matched", "true");
-							break;
-						}
-					if (!matched)
-						return false;
-				}
-				for (ASTNode element : (List<ASTNode>) this.getProperty(property)) {
-					Object v = element.map.remove("matched");
-					if (v == null)
-						return false;
-				}
+				List<ASTNode> list = (List<ASTNode>) value;
+				List<ASTNode> theOtherList = (List<ASTNode>) this.getProperty(property);
+				if (!matchTwoLists(list, theOtherList))
+					return false;
 			} else {
 				if (!value.equals(this.getProperty(property)))
 					return false;
@@ -212,6 +200,27 @@ public class ASTNode implements JSONAware {
 		} catch (ConflictException e) {
 			return false;
 		}
+		return true;
+	}
+
+	private boolean matchTwoLists(List<ASTNode> list, List<ASTNode> theOtherList) {
+		for (ASTNode element : list) {
+			boolean matched = false;
+			for (ASTNode otherElement : theOtherList)
+				if (element.matchWith(otherElement)) {
+					matched = true;
+					otherElement.map.put("matched", "true");
+					break;
+				}
+			if (!matched)
+				return false;
+		}
+		for (ASTNode element : theOtherList) {
+			Object v = element.map.remove("matched");
+			if (v == null)
+				return false;
+		}
+		
 		return true;
 	}
 }
