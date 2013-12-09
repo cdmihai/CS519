@@ -196,6 +196,11 @@ public class ASTNode implements JSONAware {
 					if (!matched)
 						return false;
 				}
+				for (ASTNode element : (List<ASTNode>) this.getProperty(property)) {
+					Object v = element.map.remove("matched");
+					if (v == null)
+						return false;
+				}
 			} else {
 				if (!value.equals(this.getProperty(property)))
 					return false;
