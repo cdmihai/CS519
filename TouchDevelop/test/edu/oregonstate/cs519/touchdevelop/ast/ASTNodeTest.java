@@ -223,7 +223,7 @@ public class ASTNodeTest {
 		ASTNode node1 = new ASTNode("{\"id\": \"bla\"}");
 		ASTNode node2 = new ASTNode("{\"id\": \"bla2\"}");
 		assertTrue(node1.matchWith(node2));
-		assertEquals("bla2",node1.getProperty(ASTNode.ID));
+		assertEquals(node2.getProperty(ASTNode.ID),node1.getProperty(ASTNode.ID));
 	}
 	
 	@Test
@@ -231,8 +231,7 @@ public class ASTNodeTest {
 		ASTNode node1 = new ASTNode("{\"id\": \"bla\",\"nodeType\": \"app\"}");
 		ASTNode node2 = new ASTNode("{\"id\": \"bla2\",\"nodeType\": \"method\"}");
 		assertFalse(node1.matchWith(node2));
-		assertEquals("bla",node1.getProperty(ASTNode.ID));
-		assertEquals("bla2", node2.getProperty(ASTNode.ID));
+		assertFalse(node1.getProperty(ASTNode.ID).equals(node2.getProperty(ASTNode.ID)));
 	}
 	
 	@Test
@@ -240,8 +239,7 @@ public class ASTNodeTest {
 		ASTNode node1 = new ASTNode("{\"id\": \"bla\",\"nodeType\": \"app\"}");
 		ASTNode node2 = new ASTNode("{\"id\": \"bla2\",\"nodeType\": \"app\"}");
 		assertTrue(node1.matchWith(node2));
-		assertEquals("bla2",node1.getProperty(ASTNode.ID));
-		assertEquals("bla2", node2.getProperty(ASTNode.ID));
+		assertEquals(node1.getProperty(ASTNode.ID), node2.getProperty(ASTNode.ID));
 	}
 	
 	@Test
@@ -249,8 +247,8 @@ public class ASTNodeTest {
 		ASTNode node1 = new ASTNode("{\"id\": \"bla\",\"nodeType\": \"app\",\"px\": \"this\"}");
 		ASTNode node2 = new ASTNode("{\"id\": \"bla2\",\"nodeType\": \"app\",\"px\": \"that\"}");
 		assertFalse(node1.matchWith(node2));
-		assertEquals("bla",node1.getProperty(ASTNode.ID));
-		assertEquals("bla2", node2.getProperty(ASTNode.ID));
+		assertFalse(node1.getProperty(ASTNode.ID).equals(node2.getProperty(ASTNode.ID)));
+
 	}
 	
 	@Test
@@ -258,8 +256,7 @@ public class ASTNodeTest {
 		ASTNode node1 = new ASTNode("{\"id\": \"bla\",\"nodeType\": \"app\"}");
 		ASTNode node2 = new ASTNode("{\"id\": \"bla2\",\"nodeType\": \"app\",\"px\": \"that\"}");
 		assertFalse(node1.matchWith(node2));
-		assertEquals("bla",node1.getProperty(ASTNode.ID));
-		assertEquals("bla2", node2.getProperty(ASTNode.ID));
+		assertFalse(node1.getProperty(ASTNode.ID).equals(node2.getProperty(ASTNode.ID)));
 	}
 	
 	@Test
@@ -276,8 +273,7 @@ public class ASTNodeTest {
 		ASTNode node1 = new ASTNode("{\"id\": \"bla\",\"nodeType\": \"app\",\"px\": \"this\"}");
 		ASTNode node2 = new ASTNode("{\"id\": \"bla2\",\"nodeType\": \"app\",\"py\": \"this\"}");
 		assertFalse(node1.matchWith(node2));
-		assertEquals("bla",node1.getProperty(ASTNode.ID));
-		assertEquals("bla2", node2.getProperty(ASTNode.ID));
+		assertFalse(node1.getProperty(ASTNode.ID).equals(node2.getProperty(ASTNode.ID)));
 	}
 	
 	@Test
@@ -285,7 +281,6 @@ public class ASTNodeTest {
 		ASTNode node1 = new ASTNode("{\"id\": \"bla\",\"nodeType\": \"app\",\"px\": \"this\"}");
 		ASTNode node2 = new ASTNode("{\"id\": \"bla2\",\"nodeType\": \"app\",\"px\": \"this\"}");
 		assertTrue(node1.matchWith(node2));
-		assertEquals("bla2",node1.getProperty(ASTNode.ID));
-		assertEquals("bla2", node2.getProperty(ASTNode.ID));
+		assertEquals(node1.getProperty(ASTNode.ID), node2.getProperty(ASTNode.ID));
 	}
 }
