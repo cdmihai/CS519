@@ -19,7 +19,7 @@ public class ASTNode implements JSONAware {
 	public static final String EXPRESSION = "expr";
 	public static final String NODE_TYPE = "nodeType";
 	
-	public static final String DEFAULT_OWNER = "default";
+	public static final String DEFAULT_OWNER = "base";
 	public static final String BASE_OWNER = "base";
 	
 	private ASTNode parent;
@@ -196,7 +196,7 @@ public class ASTNode implements JSONAware {
 		}
 		
 		try {
-			updateProperty(ID, node.getProperty(ID), BASE_OWNER);
+			updateProperty(ID, node.getProperty(ID), DEFAULT_OWNER);
 		} catch (ConflictException e) {
 			return false;
 		}
