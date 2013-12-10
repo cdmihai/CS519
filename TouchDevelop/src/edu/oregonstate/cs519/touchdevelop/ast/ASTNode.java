@@ -35,6 +35,7 @@ public class ASTNode implements JSONAware {
 	@SuppressWarnings("unchecked")
 	public ASTNode(String JSONString, String owner) {
 		this((Map<String, Object>) JSONValue.parse(JSONString));
+		propertiesChanged.put(ASTNode.ID, owner);
 	}
 
 	public ASTNode(Map<String, Object> map, ASTNode parent) {
