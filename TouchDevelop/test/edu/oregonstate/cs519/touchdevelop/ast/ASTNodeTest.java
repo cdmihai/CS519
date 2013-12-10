@@ -6,7 +6,8 @@ import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 
-import java.beans.Expression;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.List;
 import java.util.Map;
 
@@ -194,7 +195,7 @@ public class ASTNodeTest {
 	
 	@Test
 	public void testNoChangeBaseOwnership() {
-		assertEquals(root.getOwner(ASTNode.ID),ASTNode.BASE_OWNER);
+		assertEquals(root.getOwner(ASTNode.ID),ASTNode.DEFAULT_OWNER);
 	}
 	
 	@Test(expected=ConflictException.class)
@@ -217,4 +218,133 @@ public class ASTNodeTest {
 		exprNode.delete();
 		exprNode.updateProperty("expr", "");
 	}
+	
+	@Test
+	public void testAddTwoStatementsConcurently() throws ConflictException {
+		ASTNode method = ASTNodeManager.getInstance().getNode("SZwwuN9ffv5TLJuO8buwjifz");
+		ASTNode node = new ASTNode("{\"id\": \"new-one\"}","first");
+		method.updateProperty(ASTNode.BODY, JSONValue.parse("[\"SZwwuN9ffv5TLJuO8buwjifz\",\"new-one\"]"),"first");
+		node = new ASTNode("{\"id\": \"another-new-one\"}","second");
+		method.updateProperty(ASTNode.BODY, JSONValue.parse("[\"SZwwuN9ffv5TLJuO8buwjifz\",\"another-new-one\"]"),"second");
+		assertEquals(3,((List)method.getProperty(ASTNode.BODY)).size());
+	}
+	
+	@Test
+	public void testDeleteAndAddStatement() throws ConflictException {
+		ASTNode method = ASTNodeManager.getInstance().getNode("SZwwuN9ffv5TLJuO8buwjifz");
+		method.updateProperty(ASTNode.BODY, JSONValue.parse("[]"),"first");
+		ASTNode node = new ASTNode("{\"id\": \"another-new-one\"}","second");
+		method.updateProperty(ASTNode.BODY, JSONValue.parse("[\"SZwwuN9ffv5TLJuO8buwjifz\",\"another-new-one\"]"),"second");
+		// I revive the deleted statement, for correctness
+		// not because I'm too lazy to change a good chunk of the code
+		assertEquals(2,((List)method.getProperty(ASTNode.BODY)).size());
+	}
+	
+	@Test
+	public void testMatchNode() {
+		ASTNode node1 = new ASTNode("{\"id\": \"bla\"}");
+		ASTNode node2 = new ASTNode("{\"id\": \"bla2\"}");
+		assertTrue(node1.matchWith(node2));
+		assertEquals(node2.getProperty(ASTNode.ID),node1.getProperty(ASTNode.ID));
+	}
+	
+	@Test
+	public void testDontMatchIfTypesDiffer() {
+		ASTNode node1 = new ASTNode("{\"id\": \"bla\",\"nodeType\": \"app\"}");
+		ASTNode node2 = new ASTNode("{\"id\": \"bla2\",\"nodeType\": \"method\"}");
+		assertFalse(node1.matchWith(node2));
+		assertFalse(node1.getProperty(ASTNode.ID).equals(node2.getProperty(ASTNode.ID)));
+	}
+	
+	@Test
+	public void testMatchIfTheSameType() {
+		ASTNode node1 = new ASTNode("{\"id\": \"bla\",\"nodeType\": \"app\"}");
+		ASTNode node2 = new ASTNode("{\"id\": \"bla2\",\"nodeType\": \"app\"}");
+		assertTrue(node1.matchWith(node2));
+		assertEquals(node1.getProperty(ASTNode.ID), node2.getProperty(ASTNode.ID));
+	}
+	
+	@Test
+	public void testDontMatchIfSomePropertiesDiffer() {
+		ASTNode node1 = new ASTNode("{\"id\": \"bla\",\"nodeType\": \"app\",\"px\": \"this\"}");
+		ASTNode node2 = new ASTNode("{\"id\": \"bla2\",\"nodeType\": \"app\",\"px\": \"that\"}");
+		assertFalse(node1.matchWith(node2));
+		assertFalse(node1.getProperty(ASTNode.ID).equals(node2.getProperty(ASTNode.ID)));
+
+	}
+	
+	@Test
+	public void testDontMatchIfPropertiesAreMissing() {
+		ASTNode node1 = new ASTNode("{\"id\": \"bla\",\"nodeType\": \"app\"}");
+		ASTNode node2 = new ASTNode("{\"id\": \"bla2\",\"nodeType\": \"app\",\"px\": \"that\"}");
+		assertFalse(node1.matchWith(node2));
+		assertFalse(node1.getProperty(ASTNode.ID).equals(node2.getProperty(ASTNode.ID)));
+	}
+	
+	@Test
+	public void testDontMatchIfPropertiesAreMissing2() {
+		ASTNode node1 = new ASTNode("{\"id\": \"bla\",\"nodeType\": \"app\",\"px\": \"this\"}");
+		ASTNode node2 = new ASTNode("{\"id\": \"bla2\",\"nodeType\": \"app\"}");
+		assertFalse(node1.matchWith(node2));
+		assertEquals("bla",node1.getProperty(ASTNode.ID));
+		assertEquals("bla2", node2.getProperty(ASTNode.ID));
+	}
+	
+	@Test
+	public void testDontMatchIfPropertyTypesAreNotMatching() {
+		ASTNode node1 = new ASTNode("{\"id\": \"bla\",\"nodeType\": \"app\",\"px\": \"this\"}");
+		ASTNode node2 = new ASTNode("{\"id\": \"bla2\",\"nodeType\": \"app\",\"py\": \"this\"}");
+		assertFalse(node1.matchWith(node2));
+		assertFalse(node1.getProperty(ASTNode.ID).equals(node2.getProperty(ASTNode.ID)));
+	}
+	
+	@Test
+	public void testMatchingWithMoreProperties() {
+		ASTNode node1 = new ASTNode("{\"id\": \"bla\",\"nodeType\": \"app\",\"px\": \"this\"}");
+		ASTNode node2 = new ASTNode("{\"id\": \"bla2\",\"nodeType\": \"app\",\"px\": \"this\"}");
+		assertTrue(node1.matchWith(node2));
+		assertEquals(node1.getProperty(ASTNode.ID), node2.getProperty(ASTNode.ID));
+	}
+	
+	@Test
+	public void testMatchIfPropertiesAndChildrenMatch() {
+		ASTNode node1 = new ASTNode("{\"id\": \"bla\",\"nodeType\": \"app\",\"px\": \"this\",\"body\":{\"id\": \"smth\", \"py\": \"this\"}}");
+		ASTNode node2 = new ASTNode("{\"id\": \"bla2\",\"nodeType\": \"app\",\"px\": \"this\",\"body\":{\"id\": \"smth2\", \"py\": \"this\"}}");
+		assertTrue(node1.matchWith(node2));
+		assertEquals(node1.getProperty(ASTNode.ID), node2.getProperty(ASTNode.ID));
+	}
+	
+	@Test
+	public void testMatchIfPropertiesandListOfNodesMatch() {
+		ASTNode node1 = new ASTNode("{\"id\": \"bla\",\"nodeType\": \"app\",\"px\": \"this\",\"body\":[{\"id\": \"smth\", \"py\": \"this\"}]}");
+		ASTNode node2 = new ASTNode("{\"id\": \"bla2\",\"nodeType\": \"app\",\"px\": \"this\",\"body\":[{\"id\": \"smth2\", \"py\": \"this\"}]}");
+		assertTrue(node1.matchWith(node2));
+		assertEquals(node1.getProperty(ASTNode.ID), node2.getProperty(ASTNode.ID));
+	}
+	
+	@Test
+	public void testDontMatchForMultipleIdenticalChildren() {
+		ASTNode node1 = new ASTNode("{\"id\": \"bla\",\"nodeType\": \"app\",\"px\": \"this\",\"body\":[{\"id\": \"smth\", \"py\": \"this\"}]}");
+		ASTNode node2 = new ASTNode("{\"id\": \"bla2\",\"nodeType\": \"app\",\"px\": \"this\",\"body\":[{\"id\": \"smth2\", \"py\": \"this\"},{\"id\": \"smth3\", \"py\": \"this\"}]}");
+		assertFalse(node1.matchWith(node2));
+		assertFalse(node1.getProperty(ASTNode.ID).equals(node2.getProperty(ASTNode.ID)));
+	}
+	
+	@Test
+	public void testDontMatchForMultipleIdenticalChildren2() {
+		ASTNode node1 = new ASTNode("{\"id\": \"bla\",\"nodeType\": \"app\",\"px\": \"this\",\"body\":[{\"id\": \"smth\", \"py\": \"this\"},{\"id\": \"smth4\", \"py\": \"that\"}]}");
+		ASTNode node2 = new ASTNode("{\"id\": \"bla2\",\"nodeType\": \"app\",\"px\": \"this\",\"body\":[{\"id\": \"smth2\", \"py\": \"this\"},{\"id\": \"smth3\", \"py\": \"this\"}]}");
+		assertFalse(node1.matchWith(node2));
+		assertFalse(node1.getProperty(ASTNode.ID).equals(node2.getProperty(ASTNode.ID)));
+	}
+	
+	@Test
+	public void testMatchTwoRealPrograms() throws Exception {
+		String json1 = new String(Files.readAllBytes(Paths.get("test-scripts/matchIDs1.json")));
+		String json2 = new String(Files.readAllBytes(Paths.get("test-scripts/matchIDs2.json")));
+		ASTNode program1 = new ASTNode(json1);
+		ASTNode program2 = new ASTNode(json2);
+		assertTrue(program1.matchWith(program2));
+	}
+	
 }
