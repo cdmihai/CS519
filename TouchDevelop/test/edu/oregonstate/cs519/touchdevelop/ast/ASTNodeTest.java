@@ -6,8 +6,6 @@ import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 
-import java.beans.Expression;
-import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.List;
@@ -219,6 +217,27 @@ public class ASTNodeTest {
 		ASTNode exprNode = ASTNodeManager.getInstance().getNode("x0jQd1BtQGFLL1XBIeiT9kmL");
 		exprNode.delete();
 		exprNode.updateProperty("expr", "");
+	}
+	
+	@Test
+	public void testAddTwoStatementsConcurently() throws ConflictException {
+		ASTNode method = ASTNodeManager.getInstance().getNode("SZwwuN9ffv5TLJuO8buwjifz");
+		ASTNode node = new ASTNode("{\"id\": \"new-one\"}","first");
+		method.updateProperty(ASTNode.BODY, JSONValue.parse("[\"SZwwuN9ffv5TLJuO8buwjifz\",\"new-one\"]"),"first");
+		node = new ASTNode("{\"id\": \"another-new-one\"}","second");
+		method.updateProperty(ASTNode.BODY, JSONValue.parse("[\"SZwwuN9ffv5TLJuO8buwjifz\",\"another-new-one\"]"),"second");
+		assertEquals(3,((List)method.getProperty(ASTNode.BODY)).size());
+	}
+	
+	@Test
+	public void testDeleteAndAddStatement() throws ConflictException {
+		ASTNode method = ASTNodeManager.getInstance().getNode("SZwwuN9ffv5TLJuO8buwjifz");
+		method.updateProperty(ASTNode.BODY, JSONValue.parse("[]"),"first");
+		ASTNode node = new ASTNode("{\"id\": \"another-new-one\"}","second");
+		method.updateProperty(ASTNode.BODY, JSONValue.parse("[\"SZwwuN9ffv5TLJuO8buwjifz\",\"another-new-one\"]"),"second");
+		// I revive the deleted statement, for correctness
+		// not because I'm too lazy to change a good chunk of the code
+		assertEquals(2,((List)method.getProperty(ASTNode.BODY)).size());
 	}
 	
 	@Test

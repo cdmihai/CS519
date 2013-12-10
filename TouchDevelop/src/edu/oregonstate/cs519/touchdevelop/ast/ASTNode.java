@@ -91,12 +91,42 @@ public class ASTNode implements JSONAware {
 
 	public void updateProperty(String name, Object newProperty, String origin) throws ConflictException {
 		if (currentOriginIsNotOwner(name, origin) || isDeleted())
-			throw new ConflictException(getProperty(ID) + ":" + name + ":" + newProperty);
+			if (newProperty instanceof List)
+				newProperty = mergeList((List) newProperty, name);
+			else
+				throw new ConflictException(getProperty(ID) + ":" + name + ":" + newProperty);
 		Object expandedProperty = expandProperty(name, newProperty);
 		map.put(name, expandedProperty);
 		propertiesChanged.put(name, origin);
 	}
 	
+	private List mergeList(List newProperty, String propertyName) {
+		List currentList = (List) map.get(propertyName);
+		List newList = new ArrayList();
+		int j = 0;
+		for (int i=0; i<currentList.size();i++) {
+			ASTNode currentNode = (ASTNode) currentList.get(i);
+			String nodeID = (String) newProperty.get(j);
+			ASTNode newNode = ASTNodeManager.getInstance().getNode(nodeID);
+			if (currentNode.getProperty(ASTNode.ID).equals(newNode.getProperty(ASTNode.ID))) {
+				j++;
+				newList.add(currentNode.getProperty(ID));
+				continue;
+			}
+			String currentOwner = currentNode.getOwner(ID);
+			String newOwner = newNode.getOwner(ID);
+			if (currentOwner != newOwner) {
+				newList.add(currentNode.getProperty(ID));
+			}
+			newList.add(newNode.getProperty(ID));
+			j++;
+		}
+		if (j < newProperty.size())
+			for(; j < newProperty.size(); j++)
+				newList.add(newProperty.get(j));
+		return newList;
+	}
+
 	private boolean currentOriginIsNotOwner(String propertyName, String newOwner) {
 		if (isPropertyChanged(propertyName)) {
 			String owner = propertiesChanged.get(propertyName);
