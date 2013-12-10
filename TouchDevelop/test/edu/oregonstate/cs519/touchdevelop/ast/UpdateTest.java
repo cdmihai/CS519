@@ -2,6 +2,7 @@ package edu.oregonstate.cs519.touchdevelop.ast;
 
 import static org.junit.Assert.*;
 
+import java.util.List;
 import java.util.Map;
 
 import org.json.simple.JSONValue;
@@ -228,5 +229,20 @@ public class UpdateTest {
 	public void testConflictUpdateDelete() throws ConflictException {
 		applyUpdateToProgram("null","x0jQd1BtQGFLL1XBIeiT9kmL", TEST_USER);
 		applyUpdateToProgram("{\n\"expr\": \"'/0022Hello_World/0021/0022\"\n}","x0jQd1BtQGFLL1XBIeiT9kmL", "Another");
+	}
+	
+	@Test
+	public void testAddOneExpressionEach() throws ConflictException {
+		String anotherUser = "somebody";
+		
+		applyUpdateToProgram("{\n\"expr\": \"'/0022Hello_World/0021/0022\"\n}","one", TEST_USER);
+		applyUpdateToProgram("{\"body\":[\"x0jQd1BtQGFLL1XBIeiT9kmL\",\"one\"]}","SZwwuN9ffv5TLJuO8buwjifz",TEST_USER);
+		applyUpdateToProgram("{\n\"expr\": \"'/0022Hello_World/0021/0022\"\n}","two", anotherUser );
+		applyUpdateToProgram("{\"body\":[\"x0jQd1BtQGFLL1XBIeiT9kmL\",\"two\"]}","SZwwuN9ffv5TLJuO8buwjifz",anotherUser);
+
+		ASTNode declsNode = ASTNodeManager.getInstance().getNode("SZwwuN9ffv5TLJuO8buwjifz");
+		List bodyNodes = (List) declsNode.getProperty(ASTNode.BODY);
+		assertEquals(3,bodyNodes.size());
+		
 	}
 }
