@@ -1,0 +1,2712 @@
+{
+  "userid": "pboj",
+  "guid": "42b3409e-4835-4eb1-819b-666e88218d7e",
+  "lastStatus": "published",
+  "items": [
+    {
+      "seqNo": 0,
+      "time": 1349392909,
+      "scriptId": "bgek",
+      "historyId": "252052907890024389342b3409e-4835-4eb1-819b-666e88218d7e",
+      "updateSize": 53551,
+      "ast": {
+        "textVersion": "v2.2,js,ctx",
+        "jsonVersion": "v1.0,resolved,short",
+        "name": "puzzleCam",
+        "comment": "Simple Camera-, Picture Puzzle.\n\nSelect: MODE & MATRIX.\ncamera or library / 3x4, 4x5, 5x6. App cuts the Picture into tiny squares and mixes their order. Drag or Tab the pieces, to get back to Original. Tab two pieces to swap their Position. V2.0 adds tapped sorting, solves the hidden pieces Problem.\nV2.1 fixes problem with TD 2.10",
+        "icon": "camera",
+        "color": "#ff007fff",
+        "autoIcon": "camera",
+        "autoColor": "#007fff",
+        "platform": "current",
+        "rootId": "gtSFjVpDJ27Ghn6pO2dyGXlv",
+        "showAd": false,
+        "isLibrary": false,
+        "allowExport": false,
+        "hasUniqueIds": false,
+        "decls": [
+          {
+            "name": "nX",
+            "comment": "",
+            "type": "Number",
+            "isReadonly": false,
+            "isTransient": false,
+            "nodeType": "data",
+            "id": "gUeQ2vuZsDrl927y4dg6E8eW"
+          },
+          {
+            "name": "nY",
+            "comment": "",
+            "type": "Number",
+            "isReadonly": false,
+            "isTransient": false,
+            "nodeType": "data",
+            "id": "b2JVVwstn7ohCOFMy5kS6L3N"
+          },
+          {
+            "name": "board",
+            "comment": "",
+            "type": "Board",
+            "isReadonly": false,
+            "isTransient": true,
+            "nodeType": "data",
+            "id": "xAp2Efu3NiYqdknPmIarQsQg"
+          },
+          {
+            "name": "pic set",
+            "comment": "",
+            "type": "Sprite Set",
+            "isReadonly": false,
+            "isTransient": true,
+            "nodeType": "data",
+            "id": "Yr494mFsvGl2LbFGXA2Z5iBL"
+          },
+          {
+            "name": "turn pic 90deg",
+            "inParameters": [
+              {
+                "name": "pic",
+                "type": "Picture",
+                "nodeType": "localDef",
+                "id": "X1No0MN4BujYdRSh5RP9ViSUP0"
+              }
+            ],
+            "outParameters": [
+              {
+                "name": "pic1",
+                "type": "Picture",
+                "nodeType": "localDef",
+                "id": "X1No0MN4BujYdRSh5RP9ViSUP1"
+              }
+            ],
+            "isPrivate": true,
+            "isOffloaded": false,
+            "isTest": false,
+            "isAsync": false,
+            "nodeType": "action",
+            "body": [
+              {
+                "expr": "$xjyXuyEzPSjMm2dfbg1QYEiGL0 ,:= $X1No0MN4BujYdRSh5RP9ViSUP0 .height",
+                "nodeType": "exprStmt",
+                "id": "xjyXuyEzPSjMm2dfbg1QYEiG",
+                "locals": [
+                  {
+                    "name": "pHigh",
+                    "type": "Number",
+                    "nodeType": "localDef",
+                    "id": "xjyXuyEzPSjMm2dfbg1QYEiGL0"
+                  }
+                ]
+              },
+              {
+                "expr": "$PIAd2CqWRj81UHFIK0yf9qzmL0 ,:= $X1No0MN4BujYdRSh5RP9ViSUP0 .width",
+                "nodeType": "exprStmt",
+                "id": "PIAd2CqWRj81UHFIK0yf9qzm",
+                "locals": [
+                  {
+                    "name": "pWith",
+                    "type": "Number",
+                    "nodeType": "localDef",
+                    "id": "PIAd2CqWRj81UHFIK0yf9qzmL0"
+                  }
+                ]
+              },
+              {
+                "expr": "$X1No0MN4BujYdRSh5RP9ViSUP1 ,:= :media .create_picture ,( $xjyXuyEzPSjMm2dfbg1QYEiGL0 ,, $PIAd2CqWRj81UHFIK0yf9qzmL0 ,)",
+                "nodeType": "exprStmt",
+                "id": "cpCk0tqbZ9jxrLb4Cq2axORH",
+                "locals": []
+              },
+              {
+                "expr": "$X1No0MN4BujYdRSh5RP9ViSUP1 .blend ,( $X1No0MN4BujYdRSh5RP9ViSUP0 ,, $xjyXuyEzPSjMm2dfbg1QYEiGL0 ,, ,0 ,, ,9 ,0 ,, ,1 ,)",
+                "nodeType": "exprStmt",
+                "id": "EjxHGlT246x5ysxeJXX9utAb",
+                "locals": []
+              },
+              {
+                "expr": ":time .sleep ,( ,0 ,. ,2 ,)",
+                "nodeType": "exprStmt",
+                "id": "SecJEwmE6pOx44vaVTyUlV8K",
+                "locals": []
+              }
+            ],
+            "id": "X1No0MN4BujYdRSh5RP9ViSU"
+          },
+          {
+            "name": "drag sprite in pic set",
+            "inParameters": [
+              {
+                "name": "sprite",
+                "type": "Sprite",
+                "nodeType": "localDef",
+                "id": "VAk8V3bUpLRbZUnmLzpX2XQ4P0"
+              },
+              {
+                "name": "index in set",
+                "type": "Number",
+                "nodeType": "localDef",
+                "id": "VAk8V3bUpLRbZUnmLzpX2XQ4P1"
+              },
+              {
+                "name": "x",
+                "type": "Number",
+                "nodeType": "localDef",
+                "id": "VAk8V3bUpLRbZUnmLzpX2XQ4P2"
+              },
+              {
+                "name": "y",
+                "type": "Number",
+                "nodeType": "localDef",
+                "id": "VAk8V3bUpLRbZUnmLzpX2XQ4P3"
+              },
+              {
+                "name": "delta x",
+                "type": "Number",
+                "nodeType": "localDef",
+                "id": "VAk8V3bUpLRbZUnmLzpX2XQ4P4"
+              },
+              {
+                "name": "delta y",
+                "type": "Number",
+                "nodeType": "localDef",
+                "id": "VAk8V3bUpLRbZUnmLzpX2XQ4P5"
+              }
+            ],
+            "outParameters": [],
+            "isPrivate": true,
+            "isOffloaded": false,
+            "isTest": false,
+            "isAsync": true,
+            "nodeType": "event",
+            "eventName": "drag sprite in ",
+            "eventVariableId": "Yr494mFsvGl2LbFGXA2Z5iBL",
+            "body": [
+              {
+                "expr": ":code #kMpWN2cDH3CMUCmBcdAutOJ6 ,( $VAk8V3bUpLRbZUnmLzpX2XQ4P2 ,, $VAk8V3bUpLRbZUnmLzpX2XQ4P3 ,, $VAk8V3bUpLRbZUnmLzpX2XQ4P0 ,)",
+                "nodeType": "exprStmt",
+                "id": "fVlsGb3iyZdK42Q2SEgblMal",
+                "locals": []
+              },
+              {
+                "expr": ":data #xAp2Efu3NiYqdknPmIarQsQg .update_on_wall",
+                "nodeType": "exprStmt",
+                "id": "D3Xp9Gdh2EblxQgOrED4D8YK",
+                "locals": []
+              }
+            ],
+            "id": "VAk8V3bUpLRbZUnmLzpX2XQ4"
+          },
+          {
+            "name": "cam pic menu",
+            "comment": "",
+            "type": "Sprite Set",
+            "isReadonly": false,
+            "isTransient": true,
+            "nodeType": "data",
+            "id": "rnobDRxrkeAavbJOgi0ykbWX"
+          },
+          {
+            "name": "create Cam Menu",
+            "inParameters": [],
+            "outParameters": [],
+            "isPrivate": true,
+            "isOffloaded": false,
+            "isTest": false,
+            "isAsync": false,
+            "nodeType": "action",
+            "body": [
+              {
+                "expr": ":data #rnobDRxrkeAavbJOgi0ykbWX ,:= :data #xAp2Efu3NiYqdknPmIarQsQg .create_sprite_set",
+                "nodeType": "exprStmt",
+                "id": "K4g1lu22TBYmcMNYJlad01d5",
+                "locals": []
+              },
+              {
+                "expr": "$V4FSZxkc0JOlPW67nDhbRhloL0 ,:= ,9 ,0",
+                "nodeType": "exprStmt",
+                "id": "V4FSZxkc0JOlPW67nDhbRhlo",
+                "locals": [
+                  {
+                    "name": "offset",
+                    "type": "Number",
+                    "nodeType": "localDef",
+                    "id": "V4FSZxkc0JOlPW67nDhbRhloL0"
+                  }
+                ]
+              },
+              {
+                "expr": "$ZtQnurjhAsVnAKoFWSxqY4cKL0 ,:= :data #xAp2Efu3NiYqdknPmIarQsQg .height ,/ ,2",
+                "nodeType": "exprStmt",
+                "id": "ZtQnurjhAsVnAKoFWSxqY4cK",
+                "locals": [
+                  {
+                    "name": "halfH",
+                    "type": "Number",
+                    "nodeType": "localDef",
+                    "id": "ZtQnurjhAsVnAKoFWSxqY4cKL0"
+                  }
+                ]
+              },
+              {
+                "expr": "$I5hzHsT2NG7vYAyfpBVy16jvL0 ,:= :data #xAp2Efu3NiYqdknPmIarQsQg .width ,/ ,2",
+                "nodeType": "exprStmt",
+                "id": "I5hzHsT2NG7vYAyfpBVy16jv",
+                "locals": [
+                  {
+                    "name": "halfW",
+                    "type": "Number",
+                    "nodeType": "localDef",
+                    "id": "I5hzHsT2NG7vYAyfpBVy16jvL0"
+                  }
+                ]
+              },
+              {
+                "expr": "$x85ofWhMElmPcZJx0MwGVIzzL0 ,:= :media .create_picture ,( ,1 ,9 ,0 ,, ,1 ,9 ,0 ,)",
+                "nodeType": "exprStmt",
+                "id": "x85ofWhMElmPcZJx0MwGVIzz",
+                "locals": [
+                  {
+                    "name": "pic1",
+                    "type": "Picture",
+                    "nodeType": "localDef",
+                    "id": "x85ofWhMElmPcZJx0MwGVIzzL0"
+                  }
+                ]
+              },
+              {
+                "expr": "$x85ofWhMElmPcZJx0MwGVIzzL0 .resize ,( ,1 ,9 ,0 ,, ,- ,1 ,)",
+                "nodeType": "exprStmt",
+                "id": "fk3yiciLw26T3L6AAgiQAJHB",
+                "locals": []
+              },
+              {
+                "expr": "$x85ofWhMElmPcZJx0MwGVIzzL0 .draw_text ,( ,4 ,5 ,, ,4 ,5 ,, '/d83d/dcf7 ,, ,1 ,0 ,0 ,, ,0 ,, :colors .accent ,)",
+                "nodeType": "exprStmt",
+                "id": "xL1mizySx5zt4r72yogwfSe4",
+                "locals": []
+              },
+              {
+                "expr": "$A3Z0MEpXR2hjTvX5GmzpCC1ZL0 ,:= :media .create_picture ,( ,1 ,9 ,0 ,, ,1 ,9 ,0 ,)",
+                "nodeType": "exprStmt",
+                "id": "A3Z0MEpXR2hjTvX5GmzpCC1Z",
+                "locals": [
+                  {
+                    "name": "pic2",
+                    "type": "Picture",
+                    "nodeType": "localDef",
+                    "id": "A3Z0MEpXR2hjTvX5GmzpCC1ZL0"
+                  }
+                ]
+              },
+              {
+                "expr": "$A3Z0MEpXR2hjTvX5GmzpCC1ZL0 .draw_text ,( ,5 ,5 ,, ,4 ,5 ,, '/d83d/dcc2 ,, ,1 ,0 ,0 ,, ,0 ,, :colors .foreground ,)",
+                "nodeType": "exprStmt",
+                "id": "XoArglz02sH5deLhX8lBr6XJ",
+                "locals": []
+              },
+              {
+                "text": "",
+                "nodeType": "comment",
+                "id": "dF86rKRBH0rRXqBXLkYX37gP"
+              },
+              {
+                "expr": "$x85ofWhMElmPcZJx0MwGVIzzL0 .tint ,( :colors .from_argb ,( ,0 ,. ,8 ,, ,0 ,. ,8 ,, ,0 ,, ,0 ,. ,6 ,) ,)",
+                "nodeType": "exprStmt",
+                "id": "wmsodybIqmDVC2bUv4cOp0s2",
+                "locals": []
+              },
+              {
+                "expr": "$A3Z0MEpXR2hjTvX5GmzpCC1ZL0 .tint ,( :colors .from_argb ,( ,0 ,. ,8 ,, ,0 ,. ,6 ,, ,0 ,, ,0 ,. ,8 ,) ,)",
+                "nodeType": "exprStmt",
+                "id": "xMq3PM3SXgCwedbAkC45Qesn",
+                "locals": []
+              },
+              {
+                "expr": "$mDIXhVAXNqKJrCG09LU2iBEZL0 ,:= :data #xAp2Efu3NiYqdknPmIarQsQg .create_picture ,( $x85ofWhMElmPcZJx0MwGVIzzL0 ,)",
+                "nodeType": "exprStmt",
+                "id": "mDIXhVAXNqKJrCG09LU2iBEZ",
+                "locals": [
+                  {
+                    "name": "camera",
+                    "type": "Sprite",
+                    "nodeType": "localDef",
+                    "id": "mDIXhVAXNqKJrCG09LU2iBEZL0"
+                  }
+                ]
+              },
+              {
+                "text": "",
+                "nodeType": "comment",
+                "id": "w2W4dpCDMzsV2hCRcsRpnQ6s"
+              },
+              {
+                "expr": "$mDIXhVAXNqKJrCG09LU2iBEZL0 .set_pos ,( $I5hzHsT2NG7vYAyfpBVy16jvL0 ,- $V4FSZxkc0JOlPW67nDhbRhloL0 ,, $ZtQnurjhAsVnAKoFWSxqY4cKL0 ,- $V4FSZxkc0JOlPW67nDhbRhloL0 ,)",
+                "nodeType": "exprStmt",
+                "id": "AE24LB4iHcvT6FNOD5DFVyrT",
+                "locals": []
+              },
+              {
+                "expr": "$dUhEzsZNAlu2PkSsAtSGOdOwL0 ,:= :data #xAp2Efu3NiYqdknPmIarQsQg .create_picture ,( $A3Z0MEpXR2hjTvX5GmzpCC1ZL0 ,)",
+                "nodeType": "exprStmt",
+                "id": "dUhEzsZNAlu2PkSsAtSGOdOw",
+                "locals": [
+                  {
+                    "name": "openFolder",
+                    "type": "Sprite",
+                    "nodeType": "localDef",
+                    "id": "dUhEzsZNAlu2PkSsAtSGOdOwL0"
+                  }
+                ]
+              },
+              {
+                "expr": "$dUhEzsZNAlu2PkSsAtSGOdOwL0 .set_pos ,( $I5hzHsT2NG7vYAyfpBVy16jvL0 ,+ $V4FSZxkc0JOlPW67nDhbRhloL0 ,, $ZtQnurjhAsVnAKoFWSxqY4cKL0 ,- $V4FSZxkc0JOlPW67nDhbRhloL0 ,)",
+                "nodeType": "exprStmt",
+                "id": "xNBm5S1TW0GXOsXlvxzTj2Rt",
+                "locals": []
+              },
+              {
+                "expr": "$xcdKTEYCdZSEUpY63YAwyyTjL0 ,:= :data #xAp2Efu3NiYqdknPmIarQsQg .create_text ,( ,8 ,0 ,, ,2 ,0 ,, ,1 ,8 ,, 'camera ,)",
+                "nodeType": "exprStmt",
+                "id": "xcdKTEYCdZSEUpY63YAwyyTj",
+                "locals": [
+                  {
+                    "name": "lableCam",
+                    "type": "Sprite",
+                    "nodeType": "localDef",
+                    "id": "xcdKTEYCdZSEUpY63YAwyyTjL0"
+                  }
+                ]
+              },
+              {
+                "expr": "$xcdKTEYCdZSEUpY63YAwyyTjL0 .set_pos ,( $I5hzHsT2NG7vYAyfpBVy16jvL0 ,- $V4FSZxkc0JOlPW67nDhbRhloL0 ,, $ZtQnurjhAsVnAKoFWSxqY4cKL0 ,- ,3 ,0 ,)",
+                "nodeType": "exprStmt",
+                "id": "CEHVpB1mtm1TsrAqMb4Fm7Tz",
+                "locals": []
+              },
+              {
+                "expr": "$xOou4SWrkK7L0hzknMpQFCIML0 ,:= :data #xAp2Efu3NiYqdknPmIarQsQg .create_text ,( ,8 ,0 ,, ,2 ,0 ,, ,1 ,8 ,, 'picture ,)",
+                "nodeType": "exprStmt",
+                "id": "xOou4SWrkK7L0hzknMpQFCIM",
+                "locals": [
+                  {
+                    "name": "lable picture",
+                    "type": "Sprite",
+                    "nodeType": "localDef",
+                    "id": "xOou4SWrkK7L0hzknMpQFCIML0"
+                  }
+                ]
+              },
+              {
+                "expr": "$xOou4SWrkK7L0hzknMpQFCIML0 .set_pos ,( $I5hzHsT2NG7vYAyfpBVy16jvL0 ,+ $V4FSZxkc0JOlPW67nDhbRhloL0 ,, $ZtQnurjhAsVnAKoFWSxqY4cKL0 ,- ,3 ,0 ,)",
+                "nodeType": "exprStmt",
+                "id": "acRLRhi29KCwi0OYJmA7bcWt",
+                "locals": []
+              },
+              {
+                "expr": "$x00YKF0Fr29UlhPPnLvLsj32L0 ,:= :data #xAp2Efu3NiYqdknPmIarQsQg .create_text ,( ,2 ,0 ,0 ,, ,2 ,0 ,, ,1 ,6 ,, 'select_Mode_/0026_Puzzle_Size ,)",
+                "nodeType": "exprStmt",
+                "id": "x00YKF0Fr29UlhPPnLvLsj32",
+                "locals": [
+                  {
+                    "name": "lable Txt",
+                    "type": "Sprite",
+                    "nodeType": "localDef",
+                    "id": "x00YKF0Fr29UlhPPnLvLsj32L0"
+                  }
+                ]
+              },
+              {
+                "expr": "$x00YKF0Fr29UlhPPnLvLsj32L0 .set_pos ,( $I5hzHsT2NG7vYAyfpBVy16jvL0 ,, $ZtQnurjhAsVnAKoFWSxqY4cKL0 ,+ ,2 ,0 ,)",
+                "nodeType": "exprStmt",
+                "id": "P6uPkvkS8mtwXgn7EpOt34ep",
+                "locals": []
+              },
+              {
+                "expr": ":data #rnobDRxrkeAavbJOgi0ykbWX .add ,( $mDIXhVAXNqKJrCG09LU2iBEZL0 ,)",
+                "nodeType": "exprStmt",
+                "id": "Xi0Yz3DsBNtHSkwCPqDAGTZ3",
+                "locals": []
+              },
+              {
+                "expr": ":data #rnobDRxrkeAavbJOgi0ykbWX .add ,( $dUhEzsZNAlu2PkSsAtSGOdOwL0 ,)",
+                "nodeType": "exprStmt",
+                "id": "Ar4dwqVw84beK1EE1d1hPbJ2",
+                "locals": []
+              },
+              {
+                "expr": ":data #xAp2Efu3NiYqdknPmIarQsQg .update_on_wall",
+                "nodeType": "exprStmt",
+                "id": "osv47yTBKG9pc2ov2zgCxmHv",
+                "locals": []
+              }
+            ],
+            "id": "k3dMj5kLcEkUS40feOjGCxla"
+          },
+          {
+            "name": "tap sprite in cam pic menu",
+            "inParameters": [
+              {
+                "name": "sprite",
+                "type": "Sprite",
+                "nodeType": "localDef",
+                "id": "xkdhdbtvrKffNVL8DO5VjTptP0"
+              },
+              {
+                "name": "index in set",
+                "type": "Number",
+                "nodeType": "localDef",
+                "id": "xkdhdbtvrKffNVL8DO5VjTptP1"
+              },
+              {
+                "name": "x",
+                "type": "Number",
+                "nodeType": "localDef",
+                "id": "xkdhdbtvrKffNVL8DO5VjTptP2"
+              },
+              {
+                "name": "y",
+                "type": "Number",
+                "nodeType": "localDef",
+                "id": "xkdhdbtvrKffNVL8DO5VjTptP3"
+              }
+            ],
+            "outParameters": [],
+            "isPrivate": true,
+            "isOffloaded": false,
+            "isTest": false,
+            "isAsync": true,
+            "nodeType": "event",
+            "eventName": "tap sprite in ",
+            "eventVariableId": "rnobDRxrkeAavbJOgi0ykbWX",
+            "body": [
+              {
+                "nodeType": "if",
+                "condition": "$xkdhdbtvrKffNVL8DO5VjTptP1 ,< ,1",
+                "thenBody": [
+                  {
+                    "expr": ":data #jxFGgxjcKbBFPPpL0NCxu0OU ,:= T",
+                    "nodeType": "exprStmt",
+                    "id": "LogQL1U4cSfXtph1RXw76Ifb",
+                    "locals": []
+                  }
+                ],
+                "elseBody": [
+                  {
+                    "expr": ":data #jxFGgxjcKbBFPPpL0NCxu0OU ,:= F",
+                    "nodeType": "exprStmt",
+                    "id": "kNWmHQ9y5FH86XYNOVq662iB",
+                    "locals": []
+                  }
+                ],
+                "isElseIf": false,
+                "id": "cvJ4SFA6FPDtNGt6VsJXjeSw",
+                "locals": []
+              },
+              {
+                "text": "",
+                "nodeType": "comment",
+                "id": "T4iqVUcjsS9evnzFcRjEL9CS"
+              },
+              {
+                "expr": ":data #LUcRAZEqNL7G77YhG9SaY4yu ,:= :data #LUcRAZEqNL7G77YhG9SaY4yu ,+ ,1",
+                "nodeType": "exprStmt",
+                "id": "nT0DU1dTMdoUeFzUJB7lFczB",
+                "locals": []
+              },
+              {
+                "nodeType": "if",
+                "condition": ":data #LUcRAZEqNL7G77YhG9SaY4yu ,> ,1",
+                "thenBody": [
+                  {
+                    "expr": ":code #xqnBDj6id0l9FH1gHUYP6LyA",
+                    "nodeType": "exprStmt",
+                    "id": "apEg6O22ikzlN0OkSqtbyDdn",
+                    "locals": []
+                  }
+                ],
+                "isElseIf": false,
+                "id": "lJGeUCexmnJHlZQZSdCUiYcP",
+                "locals": []
+              }
+            ],
+            "id": "xkdhdbtvrKffNVL8DO5VjTpt"
+          },
+          {
+            "name": "cameraMode",
+            "comment": "",
+            "type": "Boolean",
+            "isReadonly": false,
+            "isTransient": false,
+            "nodeType": "data",
+            "id": "jxFGgxjcKbBFPPpL0NCxu0OU"
+          },
+          {
+            "name": "pattern menu",
+            "comment": "",
+            "type": "Sprite Set",
+            "isReadonly": false,
+            "isTransient": true,
+            "nodeType": "data",
+            "id": "Qazy0E24TgQnX0tatf2NpleR"
+          },
+          {
+            "name": "create Pattern Menu",
+            "inParameters": [],
+            "outParameters": [],
+            "isPrivate": true,
+            "isOffloaded": false,
+            "isTest": false,
+            "isAsync": false,
+            "nodeType": "action",
+            "body": [
+              {
+                "expr": ":data #Qazy0E24TgQnX0tatf2NpleR ,:= :data #xAp2Efu3NiYqdknPmIarQsQg .create_sprite_set",
+                "nodeType": "exprStmt",
+                "id": "kWtQ2xZQ081t32NeFtP11o9M",
+                "locals": []
+              },
+              {
+                "expr": "$P24YuX40RvWAJmxrL8ZCblqZL0 ,:= ,1 ,2 ,0",
+                "nodeType": "exprStmt",
+                "id": "P24YuX40RvWAJmxrL8ZCblqZ",
+                "locals": [
+                  {
+                    "name": "offset",
+                    "type": "Number",
+                    "nodeType": "localDef",
+                    "id": "P24YuX40RvWAJmxrL8ZCblqZL0"
+                  }
+                ]
+              },
+              {
+                "expr": "$ctcp9yX2ZyYbLlf2lNrBlSkML0 ,:= ,9 ,0",
+                "nodeType": "exprStmt",
+                "id": "ctcp9yX2ZyYbLlf2lNrBlSkM",
+                "locals": [
+                  {
+                    "name": "offset y",
+                    "type": "Number",
+                    "nodeType": "localDef",
+                    "id": "ctcp9yX2ZyYbLlf2lNrBlSkML0"
+                  }
+                ]
+              },
+              {
+                "expr": "$SsdlGJHMeZLclsX62xdxapUKL0 ,:= :data #xAp2Efu3NiYqdknPmIarQsQg .height ,/ ,2",
+                "nodeType": "exprStmt",
+                "id": "SsdlGJHMeZLclsX62xdxapUK",
+                "locals": [
+                  {
+                    "name": "halfH",
+                    "type": "Number",
+                    "nodeType": "localDef",
+                    "id": "SsdlGJHMeZLclsX62xdxapUKL0"
+                  }
+                ]
+              },
+              {
+                "expr": "$MSCU272E7Bj3TCHoEHZcw0rAL0 ,:= :data #xAp2Efu3NiYqdknPmIarQsQg .width ,/ ,2",
+                "nodeType": "exprStmt",
+                "id": "MSCU272E7Bj3TCHoEHZcw0rA",
+                "locals": [
+                  {
+                    "name": "halfW",
+                    "type": "Number",
+                    "nodeType": "localDef",
+                    "id": "MSCU272E7Bj3TCHoEHZcw0rAL0"
+                  }
+                ]
+              },
+              {
+                "expr": "$f07QFrWARgAFBJfK95rgZSelL0 ,:= :media .create_picture ,( ,1 ,8 ,0 ,, ,1 ,8 ,0 ,)",
+                "nodeType": "exprStmt",
+                "id": "f07QFrWARgAFBJfK95rgZSel",
+                "locals": [
+                  {
+                    "name": "pic1",
+                    "type": "Picture",
+                    "nodeType": "localDef",
+                    "id": "f07QFrWARgAFBJfK95rgZSelL0"
+                  }
+                ]
+              },
+              {
+                "expr": "$f07QFrWARgAFBJfK95rgZSelL0 .draw_text ,( ,3 ,0 ,, ,2 ,0 ,, '/25a6 ,, ,1 ,3 ,0 ,, ,0 ,, :colors .green ,)",
+                "nodeType": "exprStmt",
+                "id": "UK1rYVoRTwSSFPSk0Kg9jras",
+                "locals": []
+              },
+              {
+                "expr": "$f07QFrWARgAFBJfK95rgZSelL0 .resize ,( ,1 ,8 ,0 ,, ,- ,1 ,)",
+                "nodeType": "exprStmt",
+                "id": "lgddmsyRucMGj3oDN471QRNA",
+                "locals": []
+              },
+              {
+                "expr": "$ZtE0OZgHGxCOhVCj2IOy8zgGL0 ,:= :media .create_picture ,( ,1 ,8 ,0 ,, ,1 ,8 ,0 ,)",
+                "nodeType": "exprStmt",
+                "id": "ZtE0OZgHGxCOhVCj2IOy8zgG",
+                "locals": [
+                  {
+                    "name": "pic2",
+                    "type": "Picture",
+                    "nodeType": "localDef",
+                    "id": "ZtE0OZgHGxCOhVCj2IOy8zgGL0"
+                  }
+                ]
+              },
+              {
+                "expr": "$ZtE0OZgHGxCOhVCj2IOy8zgGL0 .draw_text ,( ,3 ,0 ,, ,2 ,0 ,, '/25a9 ,, ,1 ,3 ,0 ,, ,0 ,, :colors .green ,)",
+                "nodeType": "exprStmt",
+                "id": "wEK9LHhWVrnrkiq2Mf2iWpIQ",
+                "locals": []
+              },
+              {
+                "expr": "$ZtE0OZgHGxCOhVCj2IOy8zgGL0 .resize ,( ,1 ,8 ,0 ,, ,- ,1 ,)",
+                "nodeType": "exprStmt",
+                "id": "wePqXjXT1w86kQMN4pPNwCxj",
+                "locals": []
+              },
+              {
+                "text": "",
+                "nodeType": "comment",
+                "id": "sALXcUpYOKz1D8Y9MzubLd2r"
+              },
+              {
+                "expr": "$lhxpodo6TZxo8lKA4o4Br0hmL0 ,:= :media .create_picture ,( ,1 ,8 ,0 ,, ,1 ,8 ,0 ,)",
+                "nodeType": "exprStmt",
+                "id": "lhxpodo6TZxo8lKA4o4Br0hm",
+                "locals": [
+                  {
+                    "name": "pic3",
+                    "type": "Picture",
+                    "nodeType": "localDef",
+                    "id": "lhxpodo6TZxo8lKA4o4Br0hmL0"
+                  }
+                ]
+              },
+              {
+                "expr": "$lhxpodo6TZxo8lKA4o4Br0hmL0 .draw_text ,( ,3 ,0 ,, ,2 ,0 ,, '/25a6 ,, ,1 ,3 ,0 ,, ,0 ,, :colors .green ,)",
+                "nodeType": "exprStmt",
+                "id": "LdfAgh8F0zJQQWTORxwllxS6",
+                "locals": []
+              },
+              {
+                "expr": "$lhxpodo6TZxo8lKA4o4Br0hmL0 .resize ,( ,1 ,8 ,0 ,, ,- ,1 ,)",
+                "nodeType": "exprStmt",
+                "id": "xjYfMCG3JGxkMXv99O2sZTrY",
+                "locals": []
+              },
+              {
+                "text": "",
+                "nodeType": "comment",
+                "id": "UCqChW1EiuLWc6FCVeI4cXrI"
+              },
+              {
+                "expr": "$f07QFrWARgAFBJfK95rgZSelL0 .tint ,( :colors .from_argb ,( ,0 ,. ,8 ,, ,0 ,, ,0 ,. ,6 ,, ,0 ,. ,8 ,) ,)",
+                "nodeType": "exprStmt",
+                "id": "yV6LU7Uz541Lr0Om2rePELyS",
+                "locals": []
+              },
+              {
+                "expr": "$ZtE0OZgHGxCOhVCj2IOy8zgGL0 .tint ,( :colors .from_argb ,( ,0 ,. ,8 ,, ,0 ,, ,0 ,. ,8 ,, ,0 ,. ,6 ,) ,)",
+                "nodeType": "exprStmt",
+                "id": "CS0hwJfBHXDTPgScB1EFu2CD",
+                "locals": []
+              },
+              {
+                "expr": "$lhxpodo6TZxo8lKA4o4Br0hmL0 .tint ,( :colors .from_argb ,( ,0 ,. ,8 ,, ,0 ,. ,8 ,, ,0 ,. ,6 ,, ,0 ,. ,4 ,) ,)",
+                "nodeType": "exprStmt",
+                "id": "gUa0ASVnAWrE0ksmYjSFE2WP",
+                "locals": []
+              },
+              {
+                "text": "",
+                "nodeType": "comment",
+                "id": "vNDFN6Uxi89zReFfGIeGORKF"
+              },
+              {
+                "expr": "$pMT3Fwx2ywJ9B8tM6QflQu2HL0 ,:= :data #xAp2Efu3NiYqdknPmIarQsQg .create_picture ,( $f07QFrWARgAFBJfK95rgZSelL0 ,)",
+                "nodeType": "exprStmt",
+                "id": "pMT3Fwx2ywJ9B8tM6QflQu2H",
+                "locals": [
+                  {
+                    "name": "3x4 Squares",
+                    "type": "Sprite",
+                    "nodeType": "localDef",
+                    "id": "pMT3Fwx2ywJ9B8tM6QflQu2HL0"
+                  }
+                ]
+              },
+              {
+                "expr": "$pMT3Fwx2ywJ9B8tM6QflQu2HL0 .set_pos ,( $MSCU272E7Bj3TCHoEHZcw0rAL0 ,- $P24YuX40RvWAJmxrL8ZCblqZL0 ,, $SsdlGJHMeZLclsX62xdxapUKL0 ,+ $ctcp9yX2ZyYbLlf2lNrBlSkML0 ,)",
+                "nodeType": "exprStmt",
+                "id": "we3TgeS7GKX4MvdXTC4hiSe2",
+                "locals": []
+              },
+              {
+                "expr": "$x1ElfsLMY2wjv04UtFVPJANlL0 ,:= :data #xAp2Efu3NiYqdknPmIarQsQg .create_picture ,( $ZtE0OZgHGxCOhVCj2IOy8zgGL0 ,)",
+                "nodeType": "exprStmt",
+                "id": "x1ElfsLMY2wjv04UtFVPJANl",
+                "locals": [
+                  {
+                    "name": "4x5 Squares",
+                    "type": "Sprite",
+                    "nodeType": "localDef",
+                    "id": "x1ElfsLMY2wjv04UtFVPJANlL0"
+                  }
+                ]
+              },
+              {
+                "expr": "$x1ElfsLMY2wjv04UtFVPJANlL0 .set_pos ,( $MSCU272E7Bj3TCHoEHZcw0rAL0 ,, $SsdlGJHMeZLclsX62xdxapUKL0 ,+ $ctcp9yX2ZyYbLlf2lNrBlSkML0 ,)",
+                "nodeType": "exprStmt",
+                "id": "xmku84tceHM152YiP62tVKjp",
+                "locals": []
+              },
+              {
+                "expr": "$xgemTI64A8V5AfG4ZM6Hp3hHL0 ,:= :data #xAp2Efu3NiYqdknPmIarQsQg .create_picture ,( $lhxpodo6TZxo8lKA4o4Br0hmL0 ,)",
+                "nodeType": "exprStmt",
+                "id": "xgemTI64A8V5AfG4ZM6Hp3hH",
+                "locals": [
+                  {
+                    "name": "5x6 Squares",
+                    "type": "Sprite",
+                    "nodeType": "localDef",
+                    "id": "xgemTI64A8V5AfG4ZM6Hp3hHL0"
+                  }
+                ]
+              },
+              {
+                "expr": "$xgemTI64A8V5AfG4ZM6Hp3hHL0 .set_pos ,( $MSCU272E7Bj3TCHoEHZcw0rAL0 ,+ $P24YuX40RvWAJmxrL8ZCblqZL0 ,, $SsdlGJHMeZLclsX62xdxapUKL0 ,+ $ctcp9yX2ZyYbLlf2lNrBlSkML0 ,)",
+                "nodeType": "exprStmt",
+                "id": "xRruNocOj3GkoWF4k2nLB2PK",
+                "locals": []
+              },
+              {
+                "text": "",
+                "nodeType": "comment",
+                "id": "MXLUlhB9yoE7OTw4aNWNSZNP"
+              },
+              {
+                "expr": "$lYA2f3N23LThd1sCI4xYnhumL0 ,:= :data #xAp2Efu3NiYqdknPmIarQsQg .create_text ,( ,8 ,0 ,, ,2 ,0 ,, ,1 ,8 ,, '3_x_4 ,)",
+                "nodeType": "exprStmt",
+                "id": "lYA2f3N23LThd1sCI4xYnhum",
+                "locals": [
+                  {
+                    "name": "lable3x4",
+                    "type": "Sprite",
+                    "nodeType": "localDef",
+                    "id": "lYA2f3N23LThd1sCI4xYnhumL0"
+                  }
+                ]
+              },
+              {
+                "expr": "$E0ywkA0rX7O8IuZMzy1uw5DxL0 ,:= :data #xAp2Efu3NiYqdknPmIarQsQg .create_text ,( ,8 ,0 ,, ,2 ,0 ,, ,1 ,8 ,, '5_x_6 ,)",
+                "nodeType": "exprStmt",
+                "id": "E0ywkA0rX7O8IuZMzy1uw5Dx",
+                "locals": [
+                  {
+                    "name": "label5x6",
+                    "type": "Sprite",
+                    "nodeType": "localDef",
+                    "id": "E0ywkA0rX7O8IuZMzy1uw5DxL0"
+                  }
+                ]
+              },
+              {
+                "expr": "$Yo78l0FIeB1owK4KZ194Yp4lL0 ,:= :data #xAp2Efu3NiYqdknPmIarQsQg .create_text ,( ,8 ,0 ,, ,2 ,0 ,, ,1 ,8 ,, '4_x_5 ,)",
+                "nodeType": "exprStmt",
+                "id": "Yo78l0FIeB1owK4KZ194Yp4l",
+                "locals": [
+                  {
+                    "name": "lable4x5",
+                    "type": "Sprite",
+                    "nodeType": "localDef",
+                    "id": "Yo78l0FIeB1owK4KZ194Yp4lL0"
+                  }
+                ]
+              },
+              {
+                "text": "",
+                "nodeType": "comment",
+                "id": "Pxzf8QwQzkmOl8Mk4UJqWP5S"
+              },
+              {
+                "expr": "$lYA2f3N23LThd1sCI4xYnhumL0 .set_pos ,( $MSCU272E7Bj3TCHoEHZcw0rAL0 ,- $P24YuX40RvWAJmxrL8ZCblqZL0 ,, $SsdlGJHMeZLclsX62xdxapUKL0 ,+ ,1 ,5 ,0 ,)",
+                "nodeType": "exprStmt",
+                "id": "tJ6QatN0COfrH3qfxXhBL86H",
+                "locals": []
+              },
+              {
+                "expr": "$Yo78l0FIeB1owK4KZ194Yp4lL0 .set_pos ,( $MSCU272E7Bj3TCHoEHZcw0rAL0 ,, $SsdlGJHMeZLclsX62xdxapUKL0 ,+ ,1 ,5 ,0 ,)",
+                "nodeType": "exprStmt",
+                "id": "UZgU8TV46yFuZ406gweA2V2P",
+                "locals": []
+              },
+              {
+                "expr": "$E0ywkA0rX7O8IuZMzy1uw5DxL0 .set_pos ,( $MSCU272E7Bj3TCHoEHZcw0rAL0 ,+ $P24YuX40RvWAJmxrL8ZCblqZL0 ,, $SsdlGJHMeZLclsX62xdxapUKL0 ,+ ,1 ,5 ,0 ,)",
+                "nodeType": "exprStmt",
+                "id": "nv4XhZz3NvcLQX9nDDaBTsWS",
+                "locals": []
+              },
+              {
+                "expr": ":data #Qazy0E24TgQnX0tatf2NpleR .add ,( $pMT3Fwx2ywJ9B8tM6QflQu2HL0 ,)",
+                "nodeType": "exprStmt",
+                "id": "q90gnNBNQsDuYCHHeIBZzFLP",
+                "locals": []
+              },
+              {
+                "expr": ":data #Qazy0E24TgQnX0tatf2NpleR .add ,( $x1ElfsLMY2wjv04UtFVPJANlL0 ,)",
+                "nodeType": "exprStmt",
+                "id": "IkAUcT3HYN8UxceS3P4eMWRV",
+                "locals": []
+              },
+              {
+                "expr": ":data #Qazy0E24TgQnX0tatf2NpleR .add ,( $xgemTI64A8V5AfG4ZM6Hp3hHL0 ,)",
+                "nodeType": "exprStmt",
+                "id": "H1JjetY1MG6wm8UKmAzAs5qs",
+                "locals": []
+              },
+              {
+                "expr": ":data #xAp2Efu3NiYqdknPmIarQsQg .update_on_wall",
+                "nodeType": "exprStmt",
+                "id": "nzobHv1FZJHr1gvWNvOFlkWJ",
+                "locals": []
+              }
+            ],
+            "id": "cJOX4w4X0Cw2hu2zRGK39A4G"
+          },
+          {
+            "name": "tap sprite in pattern menu",
+            "inParameters": [
+              {
+                "name": "sprite",
+                "type": "Sprite",
+                "nodeType": "localDef",
+                "id": "QDFezapMZ8DJyEIerJ4pRkPcP0"
+              },
+              {
+                "name": "index in set",
+                "type": "Number",
+                "nodeType": "localDef",
+                "id": "QDFezapMZ8DJyEIerJ4pRkPcP1"
+              },
+              {
+                "name": "x",
+                "type": "Number",
+                "nodeType": "localDef",
+                "id": "QDFezapMZ8DJyEIerJ4pRkPcP2"
+              },
+              {
+                "name": "y",
+                "type": "Number",
+                "nodeType": "localDef",
+                "id": "QDFezapMZ8DJyEIerJ4pRkPcP3"
+              }
+            ],
+            "outParameters": [],
+            "isPrivate": true,
+            "isOffloaded": false,
+            "isTest": false,
+            "isAsync": true,
+            "nodeType": "event",
+            "eventName": "tap sprite in ",
+            "eventVariableId": "Qazy0E24TgQnX0tatf2NpleR",
+            "body": [
+              {
+                "nodeType": "if",
+                "condition": "$QDFezapMZ8DJyEIerJ4pRkPcP1 ,= ,0",
+                "thenBody": [
+                  {
+                    "expr": ":data #gUeQ2vuZsDrl927y4dg6E8eW ,:= ,3",
+                    "nodeType": "exprStmt",
+                    "id": "xV4CP1smHMIF8zw67EBFDnKF",
+                    "locals": []
+                  },
+                  {
+                    "expr": ":data #b2JVVwstn7ohCOFMy5kS6L3N ,:= ,4",
+                    "nodeType": "exprStmt",
+                    "id": "wh02dAvFvDH7J3T19bRRvkwu",
+                    "locals": []
+                  }
+                ],
+                "isElseIf": false,
+                "id": "Rwn8ZOhW4t482vUylPNGMeq6",
+                "locals": []
+              },
+              {
+                "nodeType": "if",
+                "condition": "$QDFezapMZ8DJyEIerJ4pRkPcP1 ,= ,1",
+                "thenBody": [
+                  {
+                    "expr": ":data #gUeQ2vuZsDrl927y4dg6E8eW ,:= ,4",
+                    "nodeType": "exprStmt",
+                    "id": "w2GZVruo9MrKyAp2Klkgqrvp",
+                    "locals": []
+                  },
+                  {
+                    "expr": ":data #b2JVVwstn7ohCOFMy5kS6L3N ,:= ,5",
+                    "nodeType": "exprStmt",
+                    "id": "s09UixKm68NbLcMdGgMLCrMi",
+                    "locals": []
+                  }
+                ],
+                "elseBody": [
+                  {
+                    "expr": ":data #gUeQ2vuZsDrl927y4dg6E8eW ,:= ,5",
+                    "nodeType": "exprStmt",
+                    "id": "BJUsGL7bMPx77AVWs9jSSyQy",
+                    "locals": []
+                  },
+                  {
+                    "expr": ":data #b2JVVwstn7ohCOFMy5kS6L3N ,:= ,6",
+                    "nodeType": "exprStmt",
+                    "id": "xby5QJZ9MwXpeWt3mOELoUWL",
+                    "locals": []
+                  }
+                ],
+                "isElseIf": true,
+                "id": "smmABA1TT1qCxKG46w0JPOOJ",
+                "locals": []
+              },
+              {
+                "text": "",
+                "nodeType": "comment",
+                "id": "e8Jz4iO4SLUUyNmZcNB4vLbB"
+              },
+              {
+                "expr": ":data #LUcRAZEqNL7G77YhG9SaY4yu ,:= :data #LUcRAZEqNL7G77YhG9SaY4yu ,+ ,1",
+                "nodeType": "exprStmt",
+                "id": "IXEe9dITnBZStNpkRjNpwtor",
+                "locals": []
+              },
+              {
+                "nodeType": "if",
+                "condition": ":data #LUcRAZEqNL7G77YhG9SaY4yu ,> ,1",
+                "thenBody": [
+                  {
+                    "expr": ":code #xqnBDj6id0l9FH1gHUYP6LyA",
+                    "nodeType": "exprStmt",
+                    "id": "Zo7mJWWTaycAOsXEgWXLC9fm",
+                    "locals": []
+                  }
+                ],
+                "isElseIf": false,
+                "id": "tMrvk7q4t8HCijQ4uq79LnxI",
+                "locals": []
+              }
+            ],
+            "id": "QDFezapMZ8DJyEIerJ4pRkPc"
+          },
+          {
+            "name": "go",
+            "comment": "if 2 menuselection is done\n",
+            "type": "Number",
+            "isReadonly": false,
+            "isTransient": false,
+            "nodeType": "data",
+            "id": "LUcRAZEqNL7G77YhG9SaY4yu"
+          },
+          {
+            "name": "run Cam or Pic mode",
+            "inParameters": [],
+            "outParameters": [],
+            "isPrivate": true,
+            "isOffloaded": false,
+            "isTest": false,
+            "isAsync": false,
+            "nodeType": "action",
+            "body": [
+              {
+                "expr": ":wall .clear",
+                "nodeType": "exprStmt",
+                "id": "tg3iO8RBctlosN0CbG2aCa28",
+                "locals": []
+              },
+              {
+                "expr": ":data #LUcRAZEqNL7G77YhG9SaY4yu ,:= ,2",
+                "nodeType": "exprStmt",
+                "id": "gSCkjp4aoBIzl6hJp5L4WYeQ",
+                "locals": []
+              },
+              {
+                "expr": "$Bard4G9KPZVrtGlvjCDrZ7soL0 ,:= :media .create_picture ,( ,4 ,8 ,0 ,, ,6 ,4 ,0 ,)",
+                "nodeType": "exprStmt",
+                "id": "Bard4G9KPZVrtGlvjCDrZ7so",
+                "locals": [
+                  {
+                    "name": "pic",
+                    "type": "Picture",
+                    "nodeType": "localDef",
+                    "id": "Bard4G9KPZVrtGlvjCDrZ7soL0"
+                  }
+                ]
+              },
+              {
+                "nodeType": "if",
+                "condition": ":data #jxFGgxjcKbBFPPpL0NCxu0OU",
+                "thenBody": [
+                  {
+                    "expr": "$Bard4G9KPZVrtGlvjCDrZ7soL0 ,:= :code #x9E2A6FvqO42jjrPlW2W4qp1",
+                    "nodeType": "exprStmt",
+                    "id": "x9YUr1Nq2P9H8gjQneWwSZXk",
+                    "locals": []
+                  }
+                ],
+                "elseBody": [
+                  {
+                    "expr": "$Bard4G9KPZVrtGlvjCDrZ7soL0 ,:= :media .choose_picture",
+                    "nodeType": "exprStmt",
+                    "id": "psZ2mI4lRIM47kYttkgzoKgK",
+                    "locals": []
+                  },
+                  {
+                    "nodeType": "if",
+                    "condition": "$Bard4G9KPZVrtGlvjCDrZ7soL0 .is_invalid",
+                    "thenBody": [
+                      {
+                        "expr": ":time .stop",
+                        "nodeType": "exprStmt",
+                        "id": "EunW4gI2ZUIC23cYbmN0NvmV",
+                        "locals": []
+                      }
+                    ],
+                    "elseBody": [
+                      {
+                        "nodeType": "if",
+                        "condition": "$Bard4G9KPZVrtGlvjCDrZ7soL0 .is_panorama",
+                        "thenBody": [
+                          {
+                            "expr": "$Bard4G9KPZVrtGlvjCDrZ7soL0 ,:= :code #X1No0MN4BujYdRSh5RP9ViSU ,( $Bard4G9KPZVrtGlvjCDrZ7soL0 ,)",
+                            "nodeType": "exprStmt",
+                            "id": "ddHvyJCL1A8YW9ipRr7GwfL1",
+                            "locals": []
+                          }
+                        ],
+                        "isElseIf": false,
+                        "id": "iNGoOZItAt9mJngmUXE9o42t",
+                        "locals": []
+                      },
+                      {
+                        "expr": "$Bard4G9KPZVrtGlvjCDrZ7soL0 .resize ,( ,4 ,8 ,0 ,, ,- ,1 ,)",
+                        "nodeType": "exprStmt",
+                        "id": "js2bsTkW5EEmbYOOZlE27Z4R",
+                        "locals": []
+                      }
+                    ],
+                    "isElseIf": false,
+                    "id": "UGh2mR4pqrCI6awLccWVugfP",
+                    "locals": []
+                  }
+                ],
+                "isElseIf": false,
+                "id": "dTBEFURLHACCd7Ag1qI04Hj8",
+                "locals": []
+              },
+              {
+                "expr": ":code #YYjtZEae24JnjcOsMvhE2kQU",
+                "nodeType": "exprStmt",
+                "id": "r5fhH0MLAV6AZQehkDXZAMb0",
+                "locals": []
+              },
+              {
+                "expr": ":code #d9uJMiACTz791D1Fivg814wk",
+                "nodeType": "exprStmt",
+                "id": "Azhk4O5uL4GFrArBoJPtnoMt",
+                "locals": []
+              },
+              {
+                "expr": ":code #oMk75UBmlpxqMR6COtFg2jiI ,( $Bard4G9KPZVrtGlvjCDrZ7soL0 ,)",
+                "nodeType": "exprStmt",
+                "id": "x7OFiW43fReDdm8HZpdwxk5Q",
+                "locals": []
+              },
+              {
+                "expr": ":code #qw5JjbeqkigUA5nU3WLvFJpO",
+                "nodeType": "exprStmt",
+                "id": "xsYDtdqMXRTKQRpTRyh63Ve3",
+                "locals": []
+              },
+              {
+                "expr": ":data #xAp2Efu3NiYqdknPmIarQsQg .post_to_wall",
+                "nodeType": "exprStmt",
+                "id": "a26vrSHQrkNvEkmExsJBRdNP",
+                "locals": []
+              },
+              {
+                "expr": ":time .sleep ,( ,1 ,. ,5 ,)",
+                "nodeType": "exprStmt",
+                "id": "Zv9AR3t9cQtrH4mcnAugRV4X",
+                "locals": []
+              },
+              {
+                "expr": ":code #dKddzge2Y2cML6B7EUvliVZH",
+                "nodeType": "exprStmt",
+                "id": "Io22aNZvjpEnBAom5NhHvEv4",
+                "locals": []
+              },
+              {
+                "expr": ":data #xAp2Efu3NiYqdknPmIarQsQg .update_on_wall",
+                "nodeType": "exprStmt",
+                "id": "xJ0RX8SlcJCy432Ya63M7Ald",
+                "locals": []
+              }
+            ],
+            "id": "xqnBDj6id0l9FH1gHUYP6LyA"
+          },
+          {
+            "name": "sp dimX",
+            "comment": "",
+            "type": "Number",
+            "isReadonly": false,
+            "isTransient": false,
+            "nodeType": "data",
+            "id": "E4LU0ecftO2NLUBUyUXWJ5Ks"
+          },
+          {
+            "name": "sp dimY",
+            "comment": "",
+            "type": "Number",
+            "isReadonly": false,
+            "isTransient": false,
+            "nodeType": "data",
+            "id": "F29KrwdZV4LPZpi5Zu4Rys2p"
+          },
+          {
+            "nodeType": "record",
+            "name": "pic pattern pos",
+            "sourceName": "pic pattern pos index",
+            "comment": "",
+            "category": "index",
+            "isCloudEnabled": false,
+            "keys": [
+              {
+                "nodeType": "recordKey",
+                "name": "idx x",
+                "type": "Number",
+                "id": "zAS4Y7jpAWiEOsVnCg4IV8G1"
+              },
+              {
+                "nodeType": "recordKey",
+                "name": "idx y",
+                "type": "Number",
+                "id": "D05L4B8j6K6kj46dhV6hhRvZ"
+              }
+            ],
+            "fields": [
+              {
+                "nodeType": "recordField",
+                "name": "x sp pos",
+                "type": "Number",
+                "id": "PCBWJtbXkZLO1v0uEK9Db1R2"
+              },
+              {
+                "nodeType": "recordField",
+                "name": "y sp pos",
+                "type": "Number",
+                "id": "NtWCT9KgMMQaZE8EIvNPSu2Z"
+              },
+              {
+                "nodeType": "recordField",
+                "name": "x crop",
+                "type": "Number",
+                "id": "e2WdObea7keNV1Q00RhyrSmY"
+              },
+              {
+                "nodeType": "recordField",
+                "name": "y crop",
+                "type": "Number",
+                "id": "CGfjw4Pjia2EY0KRmxZJqV5l"
+              }
+            ],
+            "id": "NzDLCLN48kMMC3MRHh2WEiV8"
+          },
+          {
+            "nodeType": "record",
+            "name": "thing",
+            "sourceName": "Sprite decorator",
+            "comment": "",
+            "category": "decorator",
+            "isCloudEnabled": false,
+            "keys": [
+              {
+                "nodeType": "recordKey",
+                "name": "target",
+                "type": "Sprite",
+                "id": "dELY2NdLQhXEdsmuW4qseSbn"
+              }
+            ],
+            "fields": [
+              {
+                "nodeType": "recordField",
+                "name": "x",
+                "type": "Number",
+                "id": "VMraZaGFbfXxjZs040t7QsBu"
+              },
+              {
+                "nodeType": "recordField",
+                "name": "y",
+                "type": "Number",
+                "id": "iqwpRy1SaVQEMxaQaxRKt3M8"
+              }
+            ],
+            "id": "HWlHNq1zulRDZ5uynzm2QXxC"
+          },
+          {
+            "nodeType": "record",
+            "name": "matrix idx",
+            "sourceName": "matrix idx index",
+            "comment": "",
+            "category": "index",
+            "isCloudEnabled": false,
+            "keys": [
+              {
+                "nodeType": "recordKey",
+                "name": "idx",
+                "type": "Number",
+                "id": "uWj71HIgogezy7242NkJVViw"
+              }
+            ],
+            "fields": [
+              {
+                "nodeType": "recordField",
+                "name": "x",
+                "type": "Number",
+                "id": "rLaJXcwIFL2j9qPUx5wqXMAQ"
+              },
+              {
+                "nodeType": "recordField",
+                "name": "y",
+                "type": "Number",
+                "id": "x8ynq12MRWipGayU3YJm3pr1"
+              },
+              {
+                "nodeType": "recordField",
+                "name": "x crop",
+                "type": "Number",
+                "id": "mZVjg7nh2NAWF61ccrLKHG1q"
+              },
+              {
+                "nodeType": "recordField",
+                "name": "y crop",
+                "type": "Number",
+                "id": "xeG6ej3yfvfYhQs261XunO4S"
+              }
+            ],
+            "id": "xnq0EHc4EUU22FiOFBvLdtxd"
+          },
+          {
+            "name": "clear & init globals",
+            "inParameters": [],
+            "outParameters": [],
+            "isPrivate": false,
+            "isOffloaded": false,
+            "isTest": false,
+            "isAsync": false,
+            "nodeType": "action",
+            "body": [
+              {
+                "expr": ":wall .clear",
+                "nodeType": "exprStmt",
+                "id": "sQD4Cxg9p6NaqXpoh8KZKAcf",
+                "locals": []
+              },
+              {
+                "expr": ":records #NzDLCLN48kMMC3MRHh2WEiV8 .clear",
+                "nodeType": "exprStmt",
+                "id": "PFrKQNJARQGtmDwx93TbtPxI",
+                "locals": []
+              },
+              {
+                "expr": ":records #xnq0EHc4EUU22FiOFBvLdtxd .clear",
+                "nodeType": "exprStmt",
+                "id": "xZbypP3UIgha88o4BP4wUR3m",
+                "locals": []
+              },
+              {
+                "expr": ":records #HWlHNq1zulRDZ5uynzm2QXxC .clear",
+                "nodeType": "exprStmt",
+                "id": "xGvH9OOO7tPFzktvv64MGpjg",
+                "locals": []
+              },
+              {
+                "expr": ":data #Yr494mFsvGl2LbFGXA2Z5iBL ,:= :invalid .sprite_set",
+                "nodeType": "exprStmt",
+                "id": "o4aalE2SssV0EJ22VN9Ei2mo",
+                "locals": []
+              },
+              {
+                "expr": ":data #Qazy0E24TgQnX0tatf2NpleR ,:= :invalid .sprite_set",
+                "nodeType": "exprStmt",
+                "id": "LZO1AixN9TmRupnTafg9gimJ",
+                "locals": []
+              },
+              {
+                "expr": ":data #rnobDRxrkeAavbJOgi0ykbWX ,:= :invalid .sprite_set",
+                "nodeType": "exprStmt",
+                "id": "xh0T1GwcrnCyjdVWF1ZjF1UC",
+                "locals": []
+              },
+              {
+                "expr": ":data #LUcRAZEqNL7G77YhG9SaY4yu ,:= ,0",
+                "nodeType": "exprStmt",
+                "id": "MkmCZt6R61TYgY2P0D5lus6o",
+                "locals": []
+              },
+              {
+                "expr": ":data #fVk6iFZtIsjrsb0p0aCxNx2I ,:= F",
+                "nodeType": "exprStmt",
+                "id": "iW344kuc4NjZIxy8WC02dYiP",
+                "locals": []
+              },
+              {
+                "expr": ":data #BtiTjvPARvgN5eyZJylbX26v ,:= ,0",
+                "nodeType": "exprStmt",
+                "id": "fxsizQJpTwDVzoyvl2iSiQjg",
+                "locals": []
+              },
+              {
+                "expr": ":data #xHxHiT5jSWiC6UPcrgk3CsKP ,:= ,0",
+                "nodeType": "exprStmt",
+                "id": "LXqNSSl8J0hFoaJv2ibwzntP",
+                "locals": []
+              },
+              {
+                "expr": ":data #E4LU0ecftO2NLUBUyUXWJ5Ks ,:= ,0",
+                "nodeType": "exprStmt",
+                "id": "V192hFPub7FpWlIGmvYF7i3h",
+                "locals": []
+              },
+              {
+                "expr": ":data #F29KrwdZV4LPZpi5Zu4Rys2p ,:= ,0",
+                "nodeType": "exprStmt",
+                "id": "yFZuT2I7XfCrHkbJrZCekrSi",
+                "locals": []
+              }
+            ],
+            "id": "ABYbK4Y1pCbGmXkWWmQhuAkl"
+          },
+          {
+            "name": "clear records",
+            "inParameters": [],
+            "outParameters": [],
+            "isPrivate": true,
+            "isOffloaded": false,
+            "isTest": false,
+            "isAsync": false,
+            "nodeType": "action",
+            "body": [
+              {
+                "collection": ":records #xnq0EHc4EUU22FiOFBvLdtxd",
+                "conditions": [
+                  {
+                    "condition": "T",
+                    "nodeType": "where",
+                    "id": "aLhYRa4CU41BetDn8QQZduXy",
+                    "locals": []
+                  }
+                ],
+                "body": [
+                  {
+                    "expr": "$FrpD2i1PfyWuraeHJ4M39brnB0 .x_crop .clear",
+                    "nodeType": "exprStmt",
+                    "id": "yS4GNWg3OxlDVrlayv0kb4VW",
+                    "locals": []
+                  },
+                  {
+                    "expr": "$FrpD2i1PfyWuraeHJ4M39brnB0 .y_crop .clear",
+                    "nodeType": "exprStmt",
+                    "id": "Z0pLvj0m2I7lZrIVbjT5LJKb",
+                    "locals": []
+                  }
+                ],
+                "nodeType": "foreach",
+                "id": "FrpD2i1PfyWuraeHJ4M39brn",
+                "locals": [
+                  {
+                    "name": "mi",
+                    "type": "{\"o\":\"matrix idx\"}",
+                    "nodeType": "localDef",
+                    "id": "FrpD2i1PfyWuraeHJ4M39brnB0"
+                  }
+                ]
+              },
+              {
+                "collection": ":records #NzDLCLN48kMMC3MRHh2WEiV8",
+                "conditions": [
+                  {
+                    "condition": "T",
+                    "nodeType": "where",
+                    "id": "en4s8exLlc7vkMWslqSA8Ajt",
+                    "locals": []
+                  }
+                ],
+                "body": [
+                  {
+                    "expr": "$xC0mUsUpfL68RlTMonON9Ae6B0 .x_crop .clear",
+                    "nodeType": "exprStmt",
+                    "id": "cqLZzl8NfN2tB4FgQSUHPEJ7",
+                    "locals": []
+                  },
+                  {
+                    "expr": "$xC0mUsUpfL68RlTMonON9Ae6B0 .y_crop .clear",
+                    "nodeType": "exprStmt",
+                    "id": "C44IvTqfn63a2eCv8kcV0uMz",
+                    "locals": []
+                  }
+                ],
+                "nodeType": "foreach",
+                "id": "xC0mUsUpfL68RlTMonON9Ae6",
+                "locals": [
+                  {
+                    "name": "ppp",
+                    "type": "{\"o\":\"pic pattern pos\"}",
+                    "nodeType": "localDef",
+                    "id": "xC0mUsUpfL68RlTMonON9Ae6B0"
+                  }
+                ]
+              }
+            ],
+            "id": "qw5JjbeqkigUA5nU3WLvFJpO"
+          },
+          {
+            "name": "create sp pic pattern",
+            "inParameters": [
+              {
+                "name": "pic",
+                "type": "Picture",
+                "nodeType": "localDef",
+                "id": "oMk75UBmlpxqMR6COtFg2jiIP0"
+              }
+            ],
+            "outParameters": [],
+            "isPrivate": true,
+            "isOffloaded": false,
+            "isTest": false,
+            "isAsync": false,
+            "nodeType": "action",
+            "body": [
+              {
+                "bound": ":records #xnq0EHc4EUU22FiOFBvLdtxd .count",
+                "body": [
+                  {
+                    "expr": "$xSph6pP1VbpZUN0qdcia2TzXL0 ,:= $oMk75UBmlpxqMR6COtFg2jiIP0 .clone",
+                    "nodeType": "exprStmt",
+                    "id": "xSph6pP1VbpZUN0qdcia2TzX",
+                    "locals": [
+                      {
+                        "name": "pic1",
+                        "type": "Picture",
+                        "nodeType": "localDef",
+                        "id": "xSph6pP1VbpZUN0qdcia2TzXL0"
+                      }
+                    ]
+                  },
+                  {
+                    "expr": "$DMlYu7Ar8sTbnCqcHJGk5ESxL0 ,:= :records #xnq0EHc4EUU22FiOFBvLdtxd .at ,( $fgm91WSkMc7nhdMoE6U4GgwyB0 ,) .x .get",
+                    "nodeType": "exprStmt",
+                    "id": "DMlYu7Ar8sTbnCqcHJGk5ESx",
+                    "locals": [
+                      {
+                        "name": "x",
+                        "type": "Number",
+                        "nodeType": "localDef",
+                        "id": "DMlYu7Ar8sTbnCqcHJGk5ESxL0"
+                      }
+                    ]
+                  },
+                  {
+                    "expr": "$Rv2vZD0wCyzUp94mndcg2uePL0 ,:= :records #xnq0EHc4EUU22FiOFBvLdtxd .at ,( $fgm91WSkMc7nhdMoE6U4GgwyB0 ,) .y .get",
+                    "nodeType": "exprStmt",
+                    "id": "Rv2vZD0wCyzUp94mndcg2ueP",
+                    "locals": [
+                      {
+                        "name": "y",
+                        "type": "Number",
+                        "nodeType": "localDef",
+                        "id": "Rv2vZD0wCyzUp94mndcg2uePL0"
+                      }
+                    ]
+                  },
+                  {
+                    "expr": "$n9peIrFxXZ52iUjdWnIyxgUUL0 ,:= :records #xnq0EHc4EUU22FiOFBvLdtxd .at ,( $fgm91WSkMc7nhdMoE6U4GgwyB0 ,) .x_crop .get",
+                    "nodeType": "exprStmt",
+                    "id": "n9peIrFxXZ52iUjdWnIyxgUU",
+                    "locals": [
+                      {
+                        "name": "x crop",
+                        "type": "Number",
+                        "nodeType": "localDef",
+                        "id": "n9peIrFxXZ52iUjdWnIyxgUUL0"
+                      }
+                    ]
+                  },
+                  {
+                    "expr": "$xUJ1MNhIE6sbZZnQ49lI7SAML0 ,:= :records #xnq0EHc4EUU22FiOFBvLdtxd .at ,( $fgm91WSkMc7nhdMoE6U4GgwyB0 ,) .y_crop .get",
+                    "nodeType": "exprStmt",
+                    "id": "xUJ1MNhIE6sbZZnQ49lI7SAM",
+                    "locals": [
+                      {
+                        "name": "y crop",
+                        "type": "Number",
+                        "nodeType": "localDef",
+                        "id": "xUJ1MNhIE6sbZZnQ49lI7SAML0"
+                      }
+                    ]
+                  },
+                  {
+                    "expr": "$xSph6pP1VbpZUN0qdcia2TzXL0 .crop ,( $n9peIrFxXZ52iUjdWnIyxgUUL0 ,, $xUJ1MNhIE6sbZZnQ49lI7SAML0 ,, :data #E4LU0ecftO2NLUBUyUXWJ5Ks ,, :data #F29KrwdZV4LPZpi5Zu4Rys2p ,)",
+                    "nodeType": "exprStmt",
+                    "id": "i4tCYEvS4cLw1A3fAL3j4dme",
+                    "locals": []
+                  },
+                  {
+                    "expr": "$R7Zj1DsE2Q5qp8KLTnV03yuLL0 ,:= :data #xAp2Efu3NiYqdknPmIarQsQg .create_picture ,( $xSph6pP1VbpZUN0qdcia2TzXL0 ,)",
+                    "nodeType": "exprStmt",
+                    "id": "R7Zj1DsE2Q5qp8KLTnV03yuL",
+                    "locals": [
+                      {
+                        "name": "sprite",
+                        "type": "Sprite",
+                        "nodeType": "localDef",
+                        "id": "R7Zj1DsE2Q5qp8KLTnV03yuLL0"
+                      }
+                    ]
+                  },
+                  {
+                    "expr": ":records #HWlHNq1zulRDZ5uynzm2QXxC .at ,( $R7Zj1DsE2Q5qp8KLTnV03yuLL0 ,) .x .set ,( $DMlYu7Ar8sTbnCqcHJGk5ESxL0 ,)",
+                    "nodeType": "exprStmt",
+                    "id": "wbCOUbgQwbDC2r4cj9Zd6WPK",
+                    "locals": []
+                  },
+                  {
+                    "expr": ":records #HWlHNq1zulRDZ5uynzm2QXxC .at ,( $R7Zj1DsE2Q5qp8KLTnV03yuLL0 ,) .y .set ,( $Rv2vZD0wCyzUp94mndcg2uePL0 ,)",
+                    "nodeType": "exprStmt",
+                    "id": "UD9EYhCrz5ha78dmY9o2oa9U",
+                    "locals": []
+                  },
+                  {
+                    "expr": "$R7Zj1DsE2Q5qp8KLTnV03yuLL0 .set_pos ,( $DMlYu7Ar8sTbnCqcHJGk5ESxL0 ,, $Rv2vZD0wCyzUp94mndcg2uePL0 ,)",
+                    "nodeType": "exprStmt",
+                    "id": "JxKh4cSDLpHlQJDeySMOsFQ2",
+                    "locals": []
+                  },
+                  {
+                    "expr": ":data #Yr494mFsvGl2LbFGXA2Z5iBL .add ,( $R7Zj1DsE2Q5qp8KLTnV03yuLL0 ,)",
+                    "nodeType": "exprStmt",
+                    "id": "AgqmLdp0YylHfEFb0ZvKp2iu",
+                    "locals": []
+                  }
+                ],
+                "nodeType": "for",
+                "id": "fgm91WSkMc7nhdMoE6U4Ggwy",
+                "locals": [
+                  {
+                    "name": "i",
+                    "type": "Number",
+                    "nodeType": "localDef",
+                    "id": "fgm91WSkMc7nhdMoE6U4GgwyB0"
+                  }
+                ]
+              }
+            ],
+            "id": "oMk75UBmlpxqMR6COtFg2jiI"
+          },
+          {
+            "name": "idx",
+            "comment": "",
+            "type": "Number",
+            "isReadonly": false,
+            "isTransient": false,
+            "nodeType": "data",
+            "id": "BtiTjvPARvgN5eyZJylbX26v"
+          },
+          {
+            "name": "init matrix",
+            "inParameters": [],
+            "outParameters": [],
+            "isPrivate": true,
+            "isOffloaded": false,
+            "isTest": false,
+            "isAsync": false,
+            "nodeType": "action",
+            "body": [
+              {
+                "expr": "$U3ELCGPlZ8bujEnww0TLCt8jL0 ,:= :data #xAp2Efu3NiYqdknPmIarQsQg .width ,- ,5",
+                "nodeType": "exprStmt",
+                "id": "U3ELCGPlZ8bujEnww0TLCt8j",
+                "locals": [
+                  {
+                    "name": "w",
+                    "type": "Number",
+                    "nodeType": "localDef",
+                    "id": "U3ELCGPlZ8bujEnww0TLCt8jL0"
+                  }
+                ]
+              },
+              {
+                "expr": "$OXMH40CdihVJLJK9L6FrVasVL0 ,:= :data #xAp2Efu3NiYqdknPmIarQsQg .height ,- ,3",
+                "nodeType": "exprStmt",
+                "id": "OXMH40CdihVJLJK9L6FrVasV",
+                "locals": [
+                  {
+                    "name": "h",
+                    "type": "Number",
+                    "nodeType": "localDef",
+                    "id": "OXMH40CdihVJLJK9L6FrVasVL0"
+                  }
+                ]
+              },
+              {
+                "expr": ":data #E4LU0ecftO2NLUBUyUXWJ5Ks ,:= $U3ELCGPlZ8bujEnww0TLCt8jL0 ,/ :data #gUeQ2vuZsDrl927y4dg6E8eW",
+                "nodeType": "exprStmt",
+                "id": "xTZwucbMio0tSXNz2uWwwTYS",
+                "locals": []
+              },
+              {
+                "expr": ":data #F29KrwdZV4LPZpi5Zu4Rys2p ,:= $OXMH40CdihVJLJK9L6FrVasVL0 ,/ :data #b2JVVwstn7ohCOFMy5kS6L3N",
+                "nodeType": "exprStmt",
+                "id": "xe3OPPhFlJ5iayB2ngnLNYb8",
+                "locals": []
+              },
+              {
+                "bound": ":data #b2JVVwstn7ohCOFMy5kS6L3N",
+                "body": [
+                  {
+                    "bound": ":data #gUeQ2vuZsDrl927y4dg6E8eW",
+                    "body": [
+                      {
+                        "expr": "$oadthi2tBWs58GuwEoBJTfFLL0 ,:= :records #NzDLCLN48kMMC3MRHh2WEiV8 .at ,( $IHyirTXa4wo9AG1WngpjOCIDB0 ,, $jMXVcQaHXdW8KMHdjeooCJ2iB0 ,)",
+                        "nodeType": "exprStmt",
+                        "id": "oadthi2tBWs58GuwEoBJTfFL",
+                        "locals": [
+                          {
+                            "name": "ppp",
+                            "type": "{\"o\":\"pic pattern pos\"}",
+                            "nodeType": "localDef",
+                            "id": "oadthi2tBWs58GuwEoBJTfFLL0"
+                          }
+                        ]
+                      },
+                      {
+                        "expr": "$oadthi2tBWs58GuwEoBJTfFLL0 .x_sp_pos .set ,( :data #E4LU0ecftO2NLUBUyUXWJ5Ks ,/ ,2 ,+ $IHyirTXa4wo9AG1WngpjOCIDB0 ,* :data #E4LU0ecftO2NLUBUyUXWJ5Ks ,)",
+                        "nodeType": "exprStmt",
+                        "id": "xGunDJfnjPxLMNK6m8402sS6",
+                        "locals": []
+                      },
+                      {
+                        "expr": "$oadthi2tBWs58GuwEoBJTfFLL0 .y_sp_pos .set ,( :data #F29KrwdZV4LPZpi5Zu4Rys2p ,/ ,2 ,+ $jMXVcQaHXdW8KMHdjeooCJ2iB0 ,* :data #F29KrwdZV4LPZpi5Zu4Rys2p ,)",
+                        "nodeType": "exprStmt",
+                        "id": "xBEfsDDO9HIPAbkJwLxJpUy5",
+                        "locals": []
+                      },
+                      {
+                        "expr": "$oadthi2tBWs58GuwEoBJTfFLL0 .x_crop .set ,( $IHyirTXa4wo9AG1WngpjOCIDB0 ,* :data #E4LU0ecftO2NLUBUyUXWJ5Ks ,)",
+                        "nodeType": "exprStmt",
+                        "id": "eDHsA1nWb2M4X2JUiMcKGYeJ",
+                        "locals": []
+                      },
+                      {
+                        "expr": "$oadthi2tBWs58GuwEoBJTfFLL0 .y_crop .set ,( $jMXVcQaHXdW8KMHdjeooCJ2iB0 ,* :data #F29KrwdZV4LPZpi5Zu4Rys2p ,)",
+                        "nodeType": "exprStmt",
+                        "id": "fp2k1ttrUcW25HWObrN225Qm",
+                        "locals": []
+                      }
+                    ],
+                    "nodeType": "for",
+                    "id": "IHyirTXa4wo9AG1WngpjOCID",
+                    "locals": [
+                      {
+                        "name": "idxX",
+                        "type": "Number",
+                        "nodeType": "localDef",
+                        "id": "IHyirTXa4wo9AG1WngpjOCIDB0"
+                      }
+                    ]
+                  }
+                ],
+                "nodeType": "for",
+                "id": "jMXVcQaHXdW8KMHdjeooCJ2i",
+                "locals": [
+                  {
+                    "name": "idxY",
+                    "type": "Number",
+                    "nodeType": "localDef",
+                    "id": "jMXVcQaHXdW8KMHdjeooCJ2iB0"
+                  }
+                ]
+              }
+            ],
+            "id": "YYjtZEae24JnjcOsMvhE2kQU"
+          },
+          {
+            "name": "init x y idx",
+            "inParameters": [],
+            "outParameters": [],
+            "isPrivate": true,
+            "isOffloaded": false,
+            "isTest": false,
+            "isAsync": false,
+            "nodeType": "action",
+            "body": [
+              {
+                "expr": "$f4k3vqpsLvJ592OWonUvkT4gL0 ,:= ,0",
+                "nodeType": "exprStmt",
+                "id": "f4k3vqpsLvJ592OWonUvkT4g",
+                "locals": [
+                  {
+                    "name": "idx",
+                    "type": "Number",
+                    "nodeType": "localDef",
+                    "id": "f4k3vqpsLvJ592OWonUvkT4gL0"
+                  }
+                ]
+              },
+              {
+                "collection": ":records #NzDLCLN48kMMC3MRHh2WEiV8",
+                "conditions": [
+                  {
+                    "condition": "T",
+                    "nodeType": "where",
+                    "id": "gtkLranCqd3RvteEE9Dv9G9F",
+                    "locals": []
+                  }
+                ],
+                "body": [
+                  {
+                    "expr": ":records #xnq0EHc4EUU22FiOFBvLdtxd .at ,( $f4k3vqpsLvJ592OWonUvkT4gL0 ,) .x .set ,( $q4dc2li4nZBcoy8Se2a6NptCB0 .x_sp_pos .get ,)",
+                    "nodeType": "exprStmt",
+                    "id": "K9SYir4a1JCY4Gr3XytBcro3",
+                    "locals": []
+                  },
+                  {
+                    "expr": ":records #xnq0EHc4EUU22FiOFBvLdtxd .at ,( $f4k3vqpsLvJ592OWonUvkT4gL0 ,) .y .set ,( $q4dc2li4nZBcoy8Se2a6NptCB0 .y_sp_pos .get ,)",
+                    "nodeType": "exprStmt",
+                    "id": "mbngB0V5EbB6yaDvCzvCepqb",
+                    "locals": []
+                  },
+                  {
+                    "expr": ":records #xnq0EHc4EUU22FiOFBvLdtxd .at ,( $f4k3vqpsLvJ592OWonUvkT4gL0 ,) .x_crop .set ,( $q4dc2li4nZBcoy8Se2a6NptCB0 .x_crop .get ,)",
+                    "nodeType": "exprStmt",
+                    "id": "giiaQlKh4rPZXJPGC3A5fCzv",
+                    "locals": []
+                  },
+                  {
+                    "expr": ":records #xnq0EHc4EUU22FiOFBvLdtxd .at ,( $f4k3vqpsLvJ592OWonUvkT4gL0 ,) .y_crop .set ,( $q4dc2li4nZBcoy8Se2a6NptCB0 .y_crop .get ,)",
+                    "nodeType": "exprStmt",
+                    "id": "Y54YDXjuP22y1z3p7iDF2du8",
+                    "locals": []
+                  },
+                  {
+                    "expr": "$f4k3vqpsLvJ592OWonUvkT4gL0 ,:= $f4k3vqpsLvJ592OWonUvkT4gL0 ,+ ,1",
+                    "nodeType": "exprStmt",
+                    "id": "kDSBm5STUOKcPBSPraBpj1ux",
+                    "locals": []
+                  }
+                ],
+                "nodeType": "foreach",
+                "id": "q4dc2li4nZBcoy8Se2a6NptC",
+                "locals": [
+                  {
+                    "name": "ppp",
+                    "type": "{\"o\":\"pic pattern pos\"}",
+                    "nodeType": "localDef",
+                    "id": "q4dc2li4nZBcoy8Se2a6NptCB0"
+                  }
+                ]
+              }
+            ],
+            "id": "d9uJMiACTz791D1Fivg814wk"
+          },
+          {
+            "name": "take pic",
+            "inParameters": [],
+            "outParameters": [
+              {
+                "name": "pic",
+                "type": "Picture",
+                "nodeType": "localDef",
+                "id": "x9E2A6FvqO42jjrPlW2W4qp1P0"
+              }
+            ],
+            "isPrivate": true,
+            "isOffloaded": false,
+            "isTest": false,
+            "isAsync": false,
+            "nodeType": "action",
+            "body": [
+              {
+                "expr": "$x9E2A6FvqO42jjrPlW2W4qp1P0 ,:= :senses .take_camera_picture",
+                "nodeType": "exprStmt",
+                "id": "VmwiF1Z8zHcEumqNFiG5PZVg",
+                "locals": []
+              },
+              {
+                "nodeType": "if",
+                "condition": "$x9E2A6FvqO42jjrPlW2W4qp1P0 .is_invalid",
+                "thenBody": [
+                  {
+                    "expr": ":time .stop",
+                    "nodeType": "exprStmt",
+                    "id": "w6M2sj0yso4DiK2hycbHOIj6",
+                    "locals": []
+                  }
+                ],
+                "isElseIf": false,
+                "id": "YBRwBNxa1JGWFZ4b9aQvZCct",
+                "locals": []
+              },
+              {
+                "expr": "$x9E2A6FvqO42jjrPlW2W4qp1P0 ,:= :code #X1No0MN4BujYdRSh5RP9ViSU ,( $x9E2A6FvqO42jjrPlW2W4qp1P0 ,)",
+                "nodeType": "exprStmt",
+                "id": "NCjjqKzaIfES4HsrL5nqOG9R",
+                "locals": []
+              },
+              {
+                "expr": "$x9E2A6FvqO42jjrPlW2W4qp1P0 .resize ,( :data #xAp2Efu3NiYqdknPmIarQsQg .width ,, :data #xAp2Efu3NiYqdknPmIarQsQg .height ,)",
+                "nodeType": "exprStmt",
+                "id": "b18KuBhZBFrSKnRHWlufOTNp",
+                "locals": []
+              }
+            ],
+            "id": "x9E2A6FvqO42jjrPlW2W4qp1"
+          },
+          {
+            "name": "main",
+            "inParameters": [],
+            "outParameters": [],
+            "isPrivate": false,
+            "isOffloaded": false,
+            "isTest": false,
+            "isAsync": false,
+            "nodeType": "action",
+            "body": [
+              {
+                "text": "UniCodes 📷 📂  ░ ▒ ▦ ▩",
+                "nodeType": "comment",
+                "id": "kGKJgZbVmnTsEqGjYYupEreA"
+              },
+              {
+                "expr": ":code #ABYbK4Y1pCbGmXkWWmQhuAkl",
+                "nodeType": "exprStmt",
+                "id": "kBfXv2vo4A81ipnTPm9AjnXg",
+                "locals": []
+              },
+              {
+                "expr": ":code #i2OxsS4P4gxSEkjiqdLSw7EK",
+                "nodeType": "exprStmt",
+                "id": "BY4VQQ9o4MUpZnesOjRPspau",
+                "locals": []
+              },
+              {
+                "expr": ":code #k3dMj5kLcEkUS40feOjGCxla",
+                "nodeType": "exprStmt",
+                "id": "xwWG0MWiw2KtLbqW72HsKhhs",
+                "locals": []
+              },
+              {
+                "expr": ":code #cJOX4w4X0Cw2hu2zRGK39A4G",
+                "nodeType": "exprStmt",
+                "id": "bOI65VTnm8AG4e71FzznIfc3",
+                "locals": []
+              },
+              {
+                "expr": ":data #xAp2Efu3NiYqdknPmIarQsQg .update_on_wall",
+                "nodeType": "exprStmt",
+                "id": "MO4zkhma1snzvb0a0oxdUgDM",
+                "locals": []
+              }
+            ],
+            "id": "dwjeWnPGpozxBBPRB3go9ccg"
+          },
+          {
+            "name": "init boards",
+            "inParameters": [],
+            "outParameters": [],
+            "isPrivate": true,
+            "isOffloaded": false,
+            "isTest": false,
+            "isAsync": false,
+            "nodeType": "action",
+            "body": [
+              {
+                "expr": ":data #xAp2Efu3NiYqdknPmIarQsQg ,:= :media .create_board ,( ,6 ,4 ,0 ,)",
+                "nodeType": "exprStmt",
+                "id": "D7QUSrIV249gL5KYT32NlF8Y",
+                "locals": []
+              },
+              {
+                "expr": ":data #xAp2Efu3NiYqdknPmIarQsQg .set_debug_mode ,( F ,)",
+                "nodeType": "exprStmt",
+                "id": "Fy5ACZvZkVwMpkhym2VApO8o",
+                "locals": []
+              },
+              {
+                "expr": ":data #Yr494mFsvGl2LbFGXA2Z5iBL ,:= :data #xAp2Efu3NiYqdknPmIarQsQg .create_sprite_set",
+                "nodeType": "exprStmt",
+                "id": "s5hJ5CbH6tImqYfF2F8D42Pi",
+                "locals": []
+              },
+              {
+                "expr": ":wall .add_button ,( 'refresh ,, ' ,)",
+                "nodeType": "exprStmt",
+                "id": "XbrT4jOxeWct6r2bQTpxcpPb",
+                "locals": []
+              },
+              {
+                "expr": ":data #gUeQ2vuZsDrl927y4dg6E8eW ,:= ,3",
+                "nodeType": "exprStmt",
+                "id": "UUOTjFDNVEIfYRpaKm8FjDwF",
+                "locals": []
+              },
+              {
+                "expr": ":data #b2JVVwstn7ohCOFMy5kS6L3N ,:= ,4",
+                "nodeType": "exprStmt",
+                "id": "D04S11BPTydJeoVmUmu2ms2A",
+                "locals": []
+              },
+              {
+                "expr": ":data #xAp2Efu3NiYqdknPmIarQsQg .post_to_wall",
+                "nodeType": "exprStmt",
+                "id": "xlQ3sRNRtDf3HH2n1dswoHbj",
+                "locals": []
+              }
+            ],
+            "id": "i2OxsS4P4gxSEkjiqdLSw7EK"
+          },
+          {
+            "name": "mix pics",
+            "inParameters": [],
+            "outParameters": [],
+            "isPrivate": true,
+            "isOffloaded": false,
+            "isTest": false,
+            "isAsync": false,
+            "nodeType": "action",
+            "body": [
+              {
+                "bound": ":data #gUeQ2vuZsDrl927y4dg6E8eW ,* :data #b2JVVwstn7ohCOFMy5kS6L3N ,- ,1",
+                "body": [
+                  {
+                    "expr": "$FtFvi4kXeEMexPgTsctA69EVL0 ,:= :data #gUeQ2vuZsDrl927y4dg6E8eW ,* :data #b2JVVwstn7ohCOFMy5kS6L3N",
+                    "nodeType": "exprStmt",
+                    "id": "FtFvi4kXeEMexPgTsctA69EV",
+                    "locals": [
+                      {
+                        "name": "n",
+                        "type": "Number",
+                        "nodeType": "localDef",
+                        "id": "FtFvi4kXeEMexPgTsctA69EVL0"
+                      }
+                    ]
+                  },
+                  {
+                    "expr": "$MLFAqrVIRXbP8KmX4chV77Y6L0 ,:= :math .random ,( $FtFvi4kXeEMexPgTsctA69EVL0 ,)",
+                    "nodeType": "exprStmt",
+                    "id": "MLFAqrVIRXbP8KmX4chV77Y6",
+                    "locals": [
+                      {
+                        "name": "rnd idx",
+                        "type": "Number",
+                        "nodeType": "localDef",
+                        "id": "MLFAqrVIRXbP8KmX4chV77Y6L0"
+                      }
+                    ]
+                  },
+                  {
+                    "expr": "$C6nFvfbC32dIJ660xSB2nCjkL0 ,:= :records #xnq0EHc4EUU22FiOFBvLdtxd .at ,( $RET80M2j2eG4pXtbrDPU5ON9B0 ,) .x .get",
+                    "nodeType": "exprStmt",
+                    "id": "C6nFvfbC32dIJ660xSB2nCjk",
+                    "locals": [
+                      {
+                        "name": "x",
+                        "type": "Number",
+                        "nodeType": "localDef",
+                        "id": "C6nFvfbC32dIJ660xSB2nCjkL0"
+                      }
+                    ]
+                  },
+                  {
+                    "expr": "$tE6G7zidZGF3ud8G1D8FfdLyL0 ,:= :records #xnq0EHc4EUU22FiOFBvLdtxd .at ,( $RET80M2j2eG4pXtbrDPU5ON9B0 ,) .y .get",
+                    "nodeType": "exprStmt",
+                    "id": "tE6G7zidZGF3ud8G1D8FfdLy",
+                    "locals": [
+                      {
+                        "name": "y",
+                        "type": "Number",
+                        "nodeType": "localDef",
+                        "id": "tE6G7zidZGF3ud8G1D8FfdLyL0"
+                      }
+                    ]
+                  },
+                  {
+                    "expr": ":code #kMpWN2cDH3CMUCmBcdAutOJ6 ,( $C6nFvfbC32dIJ660xSB2nCjkL0 ,, $tE6G7zidZGF3ud8G1D8FfdLyL0 ,, :data #Yr494mFsvGl2LbFGXA2Z5iBL .at ,( $MLFAqrVIRXbP8KmX4chV77Y6L0 ,) ,)",
+                    "nodeType": "exprStmt",
+                    "id": "vFXKxqankI4WR0pQUC9Hn8HY",
+                    "locals": []
+                  },
+                  {
+                    "expr": ":time .sleep ,( ,0 ,. ,2 ,)",
+                    "nodeType": "exprStmt",
+                    "id": "xO8PU2oulkp4iuOavH4040sV",
+                    "locals": []
+                  },
+                  {
+                    "expr": ":data #xAp2Efu3NiYqdknPmIarQsQg .update_on_wall",
+                    "nodeType": "exprStmt",
+                    "id": "xtxXoJ6li669CKZJKYLR4X02",
+                    "locals": []
+                  }
+                ],
+                "nodeType": "for",
+                "id": "RET80M2j2eG4pXtbrDPU5ON9",
+                "locals": [
+                  {
+                    "name": "i",
+                    "type": "Number",
+                    "nodeType": "localDef",
+                    "id": "RET80M2j2eG4pXtbrDPU5ON9B0"
+                  }
+                ]
+              }
+            ],
+            "id": "dKddzge2Y2cML6B7EUvliVZH"
+          },
+          {
+            "name": "tap wall Page Button",
+            "inParameters": [
+              {
+                "name": "item",
+                "type": "Page Button",
+                "nodeType": "localDef",
+                "id": "x91nutaGwmZglvhRH18RpXq7P0"
+              }
+            ],
+            "outParameters": [],
+            "isPrivate": true,
+            "isOffloaded": false,
+            "isTest": false,
+            "isAsync": true,
+            "nodeType": "event",
+            "eventName": "tap wall Page Button",
+            "eventVariableId": null,
+            "body": [
+              {
+                "expr": ":code #dKddzge2Y2cML6B7EUvliVZH",
+                "nodeType": "exprStmt",
+                "id": "FP0g4vcR0VKI0hrE1cCs2vjA",
+                "locals": []
+              },
+              {
+                "expr": ":data #xAp2Efu3NiYqdknPmIarQsQg .update_on_wall",
+                "nodeType": "exprStmt",
+                "id": "xHb8mxDlBjb39ylahZWk6V4W",
+                "locals": []
+              }
+            ],
+            "id": "x91nutaGwmZglvhRH18RpXq7"
+          },
+          {
+            "name": "drag and swap sprites",
+            "inParameters": [
+              {
+                "name": "x",
+                "type": "Number",
+                "nodeType": "localDef",
+                "id": "kMpWN2cDH3CMUCmBcdAutOJ6P0"
+              },
+              {
+                "name": "y",
+                "type": "Number",
+                "nodeType": "localDef",
+                "id": "kMpWN2cDH3CMUCmBcdAutOJ6P1"
+              },
+              {
+                "name": "sprite",
+                "type": "Sprite",
+                "nodeType": "localDef",
+                "id": "kMpWN2cDH3CMUCmBcdAutOJ6P2"
+              }
+            ],
+            "outParameters": [],
+            "isPrivate": true,
+            "isOffloaded": false,
+            "isTest": false,
+            "isAsync": false,
+            "nodeType": "action",
+            "body": [
+              {
+                "expr": "$TK9Gjh2FwpWpsrxaGyZKDYWBL0 ,, $TK9Gjh2FwpWpsrxaGyZKDYWBL1 ,:= :code #OeJkogp3yptS2dFMFKcdhkx7 ,( $kMpWN2cDH3CMUCmBcdAutOJ6P0 ,, $kMpWN2cDH3CMUCmBcdAutOJ6P1 ,)",
+                "nodeType": "exprStmt",
+                "id": "TK9Gjh2FwpWpsrxaGyZKDYWB",
+                "locals": [
+                  {
+                    "name": "x1",
+                    "type": "Number",
+                    "nodeType": "localDef",
+                    "id": "TK9Gjh2FwpWpsrxaGyZKDYWBL0"
+                  },
+                  {
+                    "name": "y1",
+                    "type": "Number",
+                    "nodeType": "localDef",
+                    "id": "TK9Gjh2FwpWpsrxaGyZKDYWBL1"
+                  }
+                ]
+              },
+              {
+                "expr": "$kMpWN2cDH3CMUCmBcdAutOJ6P2 .set_pos ,( $TK9Gjh2FwpWpsrxaGyZKDYWBL0 ,, $TK9Gjh2FwpWpsrxaGyZKDYWBL1 ,)",
+                "nodeType": "exprStmt",
+                "id": "zThItEp9FLcGtIlsAFib66j5",
+                "locals": []
+              },
+              {
+                "expr": "$RKLTrAhL6Qaj1TEQSYXs5dZpL0 ,:= :records #HWlHNq1zulRDZ5uynzm2QXxC .at ,( $kMpWN2cDH3CMUCmBcdAutOJ6P2 ,)",
+                "nodeType": "exprStmt",
+                "id": "RKLTrAhL6Qaj1TEQSYXs5dZp",
+                "locals": [
+                  {
+                    "name": "sp deco",
+                    "type": "{\"o\":\"thing\"}",
+                    "nodeType": "localDef",
+                    "id": "RKLTrAhL6Qaj1TEQSYXs5dZpL0"
+                  }
+                ]
+              },
+              {
+                "expr": "$xa22lilXjPf5ubkrcDmJjjW2L0 ,:= $kMpWN2cDH3CMUCmBcdAutOJ6P2 .overlap_with ,( :data #Yr494mFsvGl2LbFGXA2Z5iBL ,)",
+                "nodeType": "exprStmt",
+                "id": "xa22lilXjPf5ubkrcDmJjjW2",
+                "locals": [
+                  {
+                    "name": "ov sp set",
+                    "type": "Sprite Set",
+                    "nodeType": "localDef",
+                    "id": "xa22lilXjPf5ubkrcDmJjjW2L0"
+                  }
+                ]
+              },
+              {
+                "expr": "$G3GjR625r8zF3W6qgvIrkSl1L0 ,:= $RKLTrAhL6Qaj1TEQSYXs5dZpL0 .x .get",
+                "nodeType": "exprStmt",
+                "id": "G3GjR625r8zF3W6qgvIrkSl1",
+                "locals": [
+                  {
+                    "name": "x2",
+                    "type": "Number",
+                    "nodeType": "localDef",
+                    "id": "G3GjR625r8zF3W6qgvIrkSl1L0"
+                  }
+                ]
+              },
+              {
+                "expr": "$KdBBtv8NpK3vEeupqkttYmloL0 ,:= $RKLTrAhL6Qaj1TEQSYXs5dZpL0 .y .get",
+                "nodeType": "exprStmt",
+                "id": "KdBBtv8NpK3vEeupqkttYmlo",
+                "locals": [
+                  {
+                    "name": "y2",
+                    "type": "Number",
+                    "nodeType": "localDef",
+                    "id": "KdBBtv8NpK3vEeupqkttYmloL0"
+                  }
+                ]
+              },
+              {
+                "nodeType": "if",
+                "condition": "$xa22lilXjPf5ubkrcDmJjjW2L0 .count ,> ,0",
+                "thenBody": [
+                  {
+                    "expr": "$qb6Wwu8qz9qKz4f7KTkHDa00L0 ,:= $xa22lilXjPf5ubkrcDmJjjW2L0 .at ,( ,0 ,)",
+                    "nodeType": "exprStmt",
+                    "id": "qb6Wwu8qz9qKz4f7KTkHDa00",
+                    "locals": [
+                      {
+                        "name": "ov sp0",
+                        "type": "Sprite",
+                        "nodeType": "localDef",
+                        "id": "qb6Wwu8qz9qKz4f7KTkHDa00L0"
+                      }
+                    ]
+                  },
+                  {
+                    "expr": "$Bh5CfBkuFSCZn7UFi027FWZFL0 ,:= :records #HWlHNq1zulRDZ5uynzm2QXxC .at ,( $qb6Wwu8qz9qKz4f7KTkHDa00L0 ,)",
+                    "nodeType": "exprStmt",
+                    "id": "Bh5CfBkuFSCZn7UFi027FWZF",
+                    "locals": [
+                      {
+                        "name": "ov sp0 deco",
+                        "type": "{\"o\":\"thing\"}",
+                        "nodeType": "localDef",
+                        "id": "Bh5CfBkuFSCZn7UFi027FWZFL0"
+                      }
+                    ]
+                  },
+                  {
+                    "expr": "$qb6Wwu8qz9qKz4f7KTkHDa00L0 .set_pos ,( $G3GjR625r8zF3W6qgvIrkSl1L0 ,, $KdBBtv8NpK3vEeupqkttYmloL0 ,)",
+                    "nodeType": "exprStmt",
+                    "id": "RU6Ef8uKfjh4yDrUOIRXdw4H",
+                    "locals": []
+                  },
+                  {
+                    "expr": "$RKLTrAhL6Qaj1TEQSYXs5dZpL0 .x .set ,( $TK9Gjh2FwpWpsrxaGyZKDYWBL0 ,)",
+                    "nodeType": "exprStmt",
+                    "id": "WSjUL4xtN0SyYLp8T42nwO9F",
+                    "locals": []
+                  },
+                  {
+                    "expr": "$RKLTrAhL6Qaj1TEQSYXs5dZpL0 .y .set ,( $TK9Gjh2FwpWpsrxaGyZKDYWBL1 ,)",
+                    "nodeType": "exprStmt",
+                    "id": "VvWpamD71As2irVN5ERoOSlQ",
+                    "locals": []
+                  },
+                  {
+                    "expr": "$Bh5CfBkuFSCZn7UFi027FWZFL0 .x .set ,( $G3GjR625r8zF3W6qgvIrkSl1L0 ,)",
+                    "nodeType": "exprStmt",
+                    "id": "yzc7qrZ377Owj3loJEk5IuCK",
+                    "locals": []
+                  },
+                  {
+                    "expr": "$Bh5CfBkuFSCZn7UFi027FWZFL0 .y .set ,( $KdBBtv8NpK3vEeupqkttYmloL0 ,)",
+                    "nodeType": "exprStmt",
+                    "id": "EnE3fqoKQRb2ES3N3lvy7eDw",
+                    "locals": []
+                  }
+                ],
+                "isElseIf": false,
+                "id": "XbKC2Be017CGw5RvTkrsjMcb",
+                "locals": []
+              }
+            ],
+            "id": "kMpWN2cDH3CMUCmBcdAutOJ6"
+          },
+          {
+            "name": "tap sprite in pic set",
+            "inParameters": [
+              {
+                "name": "sprite",
+                "type": "Sprite",
+                "nodeType": "localDef",
+                "id": "yENUZOx2qsq42LsGcbKhgEzqP0"
+              },
+              {
+                "name": "index in set",
+                "type": "Number",
+                "nodeType": "localDef",
+                "id": "yENUZOx2qsq42LsGcbKhgEzqP1"
+              },
+              {
+                "name": "x",
+                "type": "Number",
+                "nodeType": "localDef",
+                "id": "yENUZOx2qsq42LsGcbKhgEzqP2"
+              },
+              {
+                "name": "y",
+                "type": "Number",
+                "nodeType": "localDef",
+                "id": "yENUZOx2qsq42LsGcbKhgEzqP3"
+              }
+            ],
+            "outParameters": [],
+            "isPrivate": true,
+            "isOffloaded": false,
+            "isTest": false,
+            "isAsync": true,
+            "nodeType": "event",
+            "eventName": "tap sprite in ",
+            "eventVariableId": "Yr494mFsvGl2LbFGXA2Z5iBL",
+            "body": [
+              {
+                "text": "",
+                "nodeType": "comment",
+                "id": "eqcGeyp3wm4gkxFywEx4DkPH"
+              },
+              {
+                "nodeType": "if",
+                "condition": ":data #fVk6iFZtIsjrsb0p0aCxNx2I",
+                "thenBody": [
+                  {
+                    "expr": "$de851CwNRBLNjr7QSmuwWNHEL0 ,:= $yENUZOx2qsq42LsGcbKhgEzqP0 .x",
+                    "nodeType": "exprStmt",
+                    "id": "de851CwNRBLNjr7QSmuwWNHE",
+                    "locals": [
+                      {
+                        "name": "x2",
+                        "type": "Number",
+                        "nodeType": "localDef",
+                        "id": "de851CwNRBLNjr7QSmuwWNHEL0"
+                      }
+                    ]
+                  },
+                  {
+                    "expr": "$JBww1EJus3VM7Nruz35SdLCEL0 ,:= $yENUZOx2qsq42LsGcbKhgEzqP0 .y",
+                    "nodeType": "exprStmt",
+                    "id": "JBww1EJus3VM7Nruz35SdLCE",
+                    "locals": [
+                      {
+                        "name": "y2",
+                        "type": "Number",
+                        "nodeType": "localDef",
+                        "id": "JBww1EJus3VM7Nruz35SdLCEL0"
+                      }
+                    ]
+                  },
+                  {
+                    "expr": "$eGadJmZ8dtNeUkGuVYwDnf48L0 ,:= :data #Yr494mFsvGl2LbFGXA2Z5iBL .at ,( :data #xHxHiT5jSWiC6UPcrgk3CsKP ,)",
+                    "nodeType": "exprStmt",
+                    "id": "eGadJmZ8dtNeUkGuVYwDnf48",
+                    "locals": [
+                      {
+                        "name": "sprite prev",
+                        "type": "Sprite",
+                        "nodeType": "localDef",
+                        "id": "eGadJmZ8dtNeUkGuVYwDnf48L0"
+                      }
+                    ]
+                  },
+                  {
+                    "expr": "$pV7JqKRHZuzpMfx9Bi5UGkHHL0 ,:= $eGadJmZ8dtNeUkGuVYwDnf48L0 .x",
+                    "nodeType": "exprStmt",
+                    "id": "pV7JqKRHZuzpMfx9Bi5UGkHH",
+                    "locals": [
+                      {
+                        "name": "x3",
+                        "type": "Number",
+                        "nodeType": "localDef",
+                        "id": "pV7JqKRHZuzpMfx9Bi5UGkHHL0"
+                      }
+                    ]
+                  },
+                  {
+                    "expr": "$oe5dNfeFIBut1eWAVSeG0IRcL0 ,:= $eGadJmZ8dtNeUkGuVYwDnf48L0 .y",
+                    "nodeType": "exprStmt",
+                    "id": "oe5dNfeFIBut1eWAVSeG0IRc",
+                    "locals": [
+                      {
+                        "name": "y3",
+                        "type": "Number",
+                        "nodeType": "localDef",
+                        "id": "oe5dNfeFIBut1eWAVSeG0IRcL0"
+                      }
+                    ]
+                  },
+                  {
+                    "expr": "$eGadJmZ8dtNeUkGuVYwDnf48L0 .set_pos ,( $de851CwNRBLNjr7QSmuwWNHEL0 ,, $JBww1EJus3VM7Nruz35SdLCEL0 ,)",
+                    "nodeType": "exprStmt",
+                    "id": "xF7zbmuEbORN4jyapUh7ld6T",
+                    "locals": []
+                  },
+                  {
+                    "expr": "$yENUZOx2qsq42LsGcbKhgEzqP0 .set_pos ,( $pV7JqKRHZuzpMfx9Bi5UGkHHL0 ,, $oe5dNfeFIBut1eWAVSeG0IRcL0 ,)",
+                    "nodeType": "exprStmt",
+                    "id": "qXOIBmM165eEhL2ygZtZSfNW",
+                    "locals": []
+                  },
+                  {
+                    "expr": ":records #HWlHNq1zulRDZ5uynzm2QXxC .at ,( $yENUZOx2qsq42LsGcbKhgEzqP0 ,) .x .set ,( $pV7JqKRHZuzpMfx9Bi5UGkHHL0 ,)",
+                    "nodeType": "exprStmt",
+                    "id": "U0gsg2mYdFSS7zLl3VL4qiH2",
+                    "locals": []
+                  },
+                  {
+                    "expr": ":records #HWlHNq1zulRDZ5uynzm2QXxC .at ,( $yENUZOx2qsq42LsGcbKhgEzqP0 ,) .y .set ,( $oe5dNfeFIBut1eWAVSeG0IRcL0 ,)",
+                    "nodeType": "exprStmt",
+                    "id": "Tiltm6axTopvaFNNAC0jxD24",
+                    "locals": []
+                  },
+                  {
+                    "expr": ":records #HWlHNq1zulRDZ5uynzm2QXxC .at ,( $eGadJmZ8dtNeUkGuVYwDnf48L0 ,) .x .set ,( $de851CwNRBLNjr7QSmuwWNHEL0 ,)",
+                    "nodeType": "exprStmt",
+                    "id": "IKbfqA2o2urV9CrBcTXWpUPN",
+                    "locals": []
+                  },
+                  {
+                    "expr": ":records #HWlHNq1zulRDZ5uynzm2QXxC .at ,( $eGadJmZ8dtNeUkGuVYwDnf48L0 ,) .y .set ,( $JBww1EJus3VM7Nruz35SdLCEL0 ,)",
+                    "nodeType": "exprStmt",
+                    "id": "sdKO6NLXjy5A1Zje67R41u2Z",
+                    "locals": []
+                  }
+                ],
+                "isElseIf": false,
+                "id": "i94E7Ipovi4qFgvMxck2M852",
+                "locals": []
+              },
+              {
+                "expr": ":data #fVk6iFZtIsjrsb0p0aCxNx2I ,:= ,not :data #fVk6iFZtIsjrsb0p0aCxNx2I",
+                "nodeType": "exprStmt",
+                "id": "xuExsgIzIMrmf7tubSmYfzD8",
+                "locals": []
+              },
+              {
+                "expr": ":data #xHxHiT5jSWiC6UPcrgk3CsKP ,:= $yENUZOx2qsq42LsGcbKhgEzqP1",
+                "nodeType": "exprStmt",
+                "id": "xCLDHF79NhB03mdmq2LeLgSU",
+                "locals": []
+              },
+              {
+                "expr": ":data #xAp2Efu3NiYqdknPmIarQsQg .update_on_wall",
+                "nodeType": "exprStmt",
+                "id": "O4cRzwDgs9BrKL2vl6W3hQS5",
+                "locals": []
+              }
+            ],
+            "id": "yENUZOx2qsq42LsGcbKhgEzq"
+          },
+          {
+            "name": "idx prev",
+            "comment": "",
+            "type": "Number",
+            "isReadonly": false,
+            "isTransient": false,
+            "nodeType": "data",
+            "id": "xHxHiT5jSWiC6UPcrgk3CsKP"
+          },
+          {
+            "name": "move",
+            "comment": "",
+            "type": "Boolean",
+            "isReadonly": false,
+            "isTransient": false,
+            "nodeType": "data",
+            "id": "fVk6iFZtIsjrsb0p0aCxNx2I"
+          },
+          {
+            "name": "convert to matrix",
+            "inParameters": [
+              {
+                "name": "x",
+                "type": "Number",
+                "nodeType": "localDef",
+                "id": "OeJkogp3yptS2dFMFKcdhkx7P0"
+              },
+              {
+                "name": "y",
+                "type": "Number",
+                "nodeType": "localDef",
+                "id": "OeJkogp3yptS2dFMFKcdhkx7P1"
+              }
+            ],
+            "outParameters": [
+              {
+                "name": "x1",
+                "type": "Number",
+                "nodeType": "localDef",
+                "id": "OeJkogp3yptS2dFMFKcdhkx7P2"
+              },
+              {
+                "name": "y1",
+                "type": "Number",
+                "nodeType": "localDef",
+                "id": "OeJkogp3yptS2dFMFKcdhkx7P3"
+              }
+            ],
+            "isPrivate": true,
+            "isOffloaded": false,
+            "isTest": false,
+            "isAsync": false,
+            "nodeType": "action",
+            "body": [
+              {
+                "text": "Input x, y Output: x, y Matrix konform",
+                "nodeType": "comment",
+                "id": "xJxWO3kWaGU1xaxDuhMdVvSa"
+              },
+              {
+                "expr": "$tlDkNHeASHVp08oJrUjGNkzGL0 ,:= ,( ,( :data #E4LU0ecftO2NLUBUyUXWJ5Ks ,/ ,2 ,+ $OeJkogp3yptS2dFMFKcdhkx7P0 ,) ,/ :data #E4LU0ecftO2NLUBUyUXWJ5Ks ,)",
+                "nodeType": "exprStmt",
+                "id": "tlDkNHeASHVp08oJrUjGNkzG",
+                "locals": [
+                  {
+                    "name": "nx",
+                    "type": "Number",
+                    "nodeType": "localDef",
+                    "id": "tlDkNHeASHVp08oJrUjGNkzGL0"
+                  }
+                ]
+              },
+              {
+                "expr": "$tlDkNHeASHVp08oJrUjGNkzGL0 ,:= :code #KAzrObNpzw288nB29lBYrnGZ ,( :data #E4LU0ecftO2NLUBUyUXWJ5Ks ,+ $OeJkogp3yptS2dFMFKcdhkx7P0 ,, :data #E4LU0ecftO2NLUBUyUXWJ5Ks ,) ,- ,1",
+                "nodeType": "exprStmt",
+                "id": "QwtAPtkZk44xrIX0xf9gZwUo",
+                "locals": []
+              },
+              {
+                "expr": "$Z3xB5jo4ilG3lwAoGUF8c417L0 ,:= ,( ,( :data #F29KrwdZV4LPZpi5Zu4Rys2p ,/ ,2 ,+ $OeJkogp3yptS2dFMFKcdhkx7P1 ,) ,/ :data #F29KrwdZV4LPZpi5Zu4Rys2p ,)",
+                "nodeType": "exprStmt",
+                "id": "Z3xB5jo4ilG3lwAoGUF8c417",
+                "locals": [
+                  {
+                    "name": "ny",
+                    "type": "Number",
+                    "nodeType": "localDef",
+                    "id": "Z3xB5jo4ilG3lwAoGUF8c417L0"
+                  }
+                ]
+              },
+              {
+                "expr": "$Z3xB5jo4ilG3lwAoGUF8c417L0 ,:= :code #KAzrObNpzw288nB29lBYrnGZ ,( :data #F29KrwdZV4LPZpi5Zu4Rys2p ,+ $OeJkogp3yptS2dFMFKcdhkx7P1 ,, :data #F29KrwdZV4LPZpi5Zu4Rys2p ,) ,- ,1",
+                "nodeType": "exprStmt",
+                "id": "Jh7TqtDaYJr44Itwi1fobb4Q",
+                "locals": []
+              },
+              {
+                "nodeType": "if",
+                "condition": "$tlDkNHeASHVp08oJrUjGNkzGL0 ,≤ ,- ,1",
+                "thenBody": [
+                  {
+                    "expr": "$tlDkNHeASHVp08oJrUjGNkzGL0 ,:= ,0",
+                    "nodeType": "exprStmt",
+                    "id": "xzUEsCjNVF3ExD3LWIabnQk1",
+                    "locals": []
+                  }
+                ],
+                "isElseIf": false,
+                "id": "fOlg7QLMbtYiaKxbzZ1hHQUy",
+                "locals": []
+              },
+              {
+                "nodeType": "if",
+                "condition": "$Z3xB5jo4ilG3lwAoGUF8c417L0 ,≤ ,- ,1",
+                "thenBody": [
+                  {
+                    "expr": "$Z3xB5jo4ilG3lwAoGUF8c417L0 ,:= ,0",
+                    "nodeType": "exprStmt",
+                    "id": "UNHCqcpYIUVl5hxwg7gC3aK2",
+                    "locals": []
+                  }
+                ],
+                "isElseIf": false,
+                "id": "Skpniwo5Lv0qtKnKzcDXkf4h",
+                "locals": []
+              },
+              {
+                "nodeType": "if",
+                "condition": "$tlDkNHeASHVp08oJrUjGNkzGL0 ,≥ :data #gUeQ2vuZsDrl927y4dg6E8eW",
+                "thenBody": [
+                  {
+                    "expr": "$tlDkNHeASHVp08oJrUjGNkzGL0 ,:= :data #gUeQ2vuZsDrl927y4dg6E8eW ,- ,1",
+                    "nodeType": "exprStmt",
+                    "id": "VmLQPzOvpB8o2u6ExsNlzuck",
+                    "locals": []
+                  }
+                ],
+                "isElseIf": false,
+                "id": "xMOhfbRDuIAf57QtB0NZyzvO",
+                "locals": []
+              },
+              {
+                "nodeType": "if",
+                "condition": "$Z3xB5jo4ilG3lwAoGUF8c417L0 ,≥ :data #b2JVVwstn7ohCOFMy5kS6L3N",
+                "thenBody": [
+                  {
+                    "expr": "$Z3xB5jo4ilG3lwAoGUF8c417L0 ,:= :data #b2JVVwstn7ohCOFMy5kS6L3N ,- ,1",
+                    "nodeType": "exprStmt",
+                    "id": "ypi21JoQZYV3PuEEITiPBaeJ",
+                    "locals": []
+                  }
+                ],
+                "isElseIf": false,
+                "id": "YDR0dbtP8SX5jci46PKS1JGn",
+                "locals": []
+              },
+              {
+                "expr": "$OeJkogp3yptS2dFMFKcdhkx7P2 ,:= :records #NzDLCLN48kMMC3MRHh2WEiV8 .at ,( $tlDkNHeASHVp08oJrUjGNkzGL0 ,, $Z3xB5jo4ilG3lwAoGUF8c417L0 ,) .x_sp_pos .get",
+                "nodeType": "exprStmt",
+                "id": "X05D7OC0KYQhWPQk8oHgQ3uz",
+                "locals": []
+              },
+              {
+                "expr": "$OeJkogp3yptS2dFMFKcdhkx7P3 ,:= :records #NzDLCLN48kMMC3MRHh2WEiV8 .at ,( $tlDkNHeASHVp08oJrUjGNkzGL0 ,, $Z3xB5jo4ilG3lwAoGUF8c417L0 ,) .y_sp_pos .get",
+                "nodeType": "exprStmt",
+                "id": "KBMnOCB2dG4IaO3qYKQKdr0e",
+                "locals": []
+              }
+            ],
+            "id": "OeJkogp3yptS2dFMFKcdhkx7"
+          },
+          {
+            "name": "round low",
+            "inParameters": [
+              {
+                "name": "x",
+                "type": "Number",
+                "nodeType": "localDef",
+                "id": "KAzrObNpzw288nB29lBYrnGZP0"
+              },
+              {
+                "name": "x1",
+                "type": "Number",
+                "nodeType": "localDef",
+                "id": "KAzrObNpzw288nB29lBYrnGZP1"
+              }
+            ],
+            "outParameters": [
+              {
+                "name": "result",
+                "type": "Number",
+                "nodeType": "localDef",
+                "id": "KAzrObNpzw288nB29lBYrnGZP2"
+              }
+            ],
+            "isPrivate": true,
+            "isOffloaded": false,
+            "isTest": false,
+            "isAsync": false,
+            "nodeType": "action",
+            "body": [
+              {
+                "expr": "$ZmNQN4F9tgR3ACms4kJL2i0mL0 ,:= :math .mod ,( $KAzrObNpzw288nB29lBYrnGZP0 ,, $KAzrObNpzw288nB29lBYrnGZP1 ,)",
+                "nodeType": "exprStmt",
+                "id": "ZmNQN4F9tgR3ACms4kJL2i0m",
+                "locals": [
+                  {
+                    "name": "mod",
+                    "type": "Number",
+                    "nodeType": "localDef",
+                    "id": "ZmNQN4F9tgR3ACms4kJL2i0mL0"
+                  }
+                ]
+              },
+              {
+                "expr": "$wS0wrJpwE6Tluo4mfcrc26E6L0 ,:= $ZmNQN4F9tgR3ACms4kJL2i0mL0 ,/ $KAzrObNpzw288nB29lBYrnGZP1",
+                "nodeType": "exprStmt",
+                "id": "wS0wrJpwE6Tluo4mfcrc26E6",
+                "locals": [
+                  {
+                    "name": "diff",
+                    "type": "Number",
+                    "nodeType": "localDef",
+                    "id": "wS0wrJpwE6Tluo4mfcrc26E6L0"
+                  }
+                ]
+              },
+              {
+                "expr": "$KAzrObNpzw288nB29lBYrnGZP2 ,:= :math .round ,( $KAzrObNpzw288nB29lBYrnGZP0 ,/ $KAzrObNpzw288nB29lBYrnGZP1 ,- $wS0wrJpwE6Tluo4mfcrc26E6L0 ,)",
+                "nodeType": "exprStmt",
+                "id": "x5AlvCLirn7OMJyiPLLBm58V",
+                "locals": []
+              }
+            ],
+            "id": "KAzrObNpzw288nB29lBYrnGZ"
+          }
+        ],
+        "deletedDecls": [],
+        "nodeType": "app",
+        "id": "app"
+      }
+    },
+    {
+      "seqNo": 1,
+      "time": 1351360690,
+      "scriptId": "bgek",
+      "historyId": "2520509401097430987ef002752-80a5-4416-aada-1990726551f6",
+      "updateSize": 45,
+      "updates": {
+        "app": {
+          "rootId": "kec4nTLXwBQXAQu2aY25939M"
+        }
+      }
+    }
+  ]
+}

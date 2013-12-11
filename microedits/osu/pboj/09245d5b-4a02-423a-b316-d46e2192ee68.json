@@ -1,0 +1,370 @@
+{
+  "userid": "pboj",
+  "guid": "09245d5b-4a02-423a-b316-d46e2192ee68",
+  "lastStatus": "published",
+  "items": [
+    {
+      "seqNo": 0,
+      "time": 1342466084,
+      "scriptId": "fpkj",
+      "historyId": "25205983471567202509c57d808-783d-44ff-a318-40b2742b0d13",
+      "updateSize": 2760,
+      "ast": {
+        "textVersion": "v2.2,js,ctx",
+        "jsonVersion": "v1.0,resolved,short",
+        "name": "forgotten songs",
+        "comment": "A game where the goal is to count how much music you have not listened yet.",
+        "icon": "megaphone",
+        "color": "#ffff00ff",
+        "autoIcon": "megaphone",
+        "autoColor": "#ff00ff",
+        "platform": "current",
+        "rootId": "AkwgRFk6oGM29Lr42pGruloa",
+        "showAd": false,
+        "isLibrary": false,
+        "allowExport": false,
+        "hasUniqueIds": false,
+        "decls": [
+          {
+            "name": "main",
+            "inParameters": [],
+            "outParameters": [],
+            "isPrivate": false,
+            "isOffloaded": false,
+            "isTest": false,
+            "isAsync": false,
+            "nodeType": "action",
+            "body": [
+              {
+                "text": "Count how many minutes of songs for which play count is zero.",
+                "nodeType": "comment",
+                "id": "xMHqdPWnDf0NzCHNV0PYhLbd"
+              },
+              {
+                "expr": "$F9Pzx8xkoTzl2T09IYnWp4JyL0 ,:= :media .songs",
+                "nodeType": "exprStmt",
+                "id": "F9Pzx8xkoTzl2T09IYnWp4Jy",
+                "locals": [
+                  {
+                    "name": "songs",
+                    "type": "Songs",
+                    "nodeType": "localDef",
+                    "id": "F9Pzx8xkoTzl2T09IYnWp4JyL0"
+                  }
+                ]
+              },
+              {
+                "expr": "$waPsCZzddRrjK0HqnMzrGvz0L0 ,:= ,0",
+                "nodeType": "exprStmt",
+                "id": "waPsCZzddRrjK0HqnMzrGvz0",
+                "locals": [
+                  {
+                    "name": "x",
+                    "type": "Number",
+                    "nodeType": "localDef",
+                    "id": "waPsCZzddRrjK0HqnMzrGvz0L0"
+                  }
+                ]
+              },
+              {
+                "collection": "$F9Pzx8xkoTzl2T09IYnWp4JyL0",
+                "conditions": [
+                  {
+                    "condition": "$xEcJHrn349PAVUAM9CQvGxHgB0 .play_count ,= ,0",
+                    "nodeType": "where",
+                    "id": "bdgVR8fb3FNVPB956q82BbSa",
+                    "locals": []
+                  }
+                ],
+                "body": [
+                  {
+                    "expr": "$waPsCZzddRrjK0HqnMzrGvz0L0 ,:= $waPsCZzddRrjK0HqnMzrGvz0L0 ,+ $xEcJHrn349PAVUAM9CQvGxHgB0 .duration",
+                    "nodeType": "exprStmt",
+                    "id": "T1KHMTmEZJlnZ1ZIk6OvBlEB",
+                    "locals": []
+                  }
+                ],
+                "nodeType": "foreach",
+                "id": "xEcJHrn349PAVUAM9CQvGxHg",
+                "locals": [
+                  {
+                    "name": "song",
+                    "type": "Song",
+                    "nodeType": "localDef",
+                    "id": "xEcJHrn349PAVUAM9CQvGxHgB0"
+                  }
+                ]
+              },
+              {
+                "expr": "$xFQqM8Mn2TVu1c4WN4YNt6qiL0 ,:= :math .round ,( $waPsCZzddRrjK0HqnMzrGvz0L0 ,/ ,6 ,0 ,)",
+                "nodeType": "exprStmt",
+                "id": "xFQqM8Mn2TVu1c4WN4YNt6qi",
+                "locals": [
+                  {
+                    "name": "min",
+                    "type": "Number",
+                    "nodeType": "localDef",
+                    "id": "xFQqM8Mn2TVu1c4WN4YNt6qiL0"
+                  }
+                ]
+              },
+              {
+                "text": "Ask user to publish score.",
+                "nodeType": "comment",
+                "id": "zVeiYJ26Q1JJmR5ZU7Wl6o0w"
+              },
+              {
+                "expr": "$xxJi239gjHuxu17vRpYQKHuNL0 ,:= :wall .ask_boolean ,( $xFQqM8Mn2TVu1c4WN4YNt6qiL0 ,∥ '_minutes_of_music_not_played/0021 ,, 'Do_you_want_to_post_your_score_to_the_leaderboard/003f ,)",
+                "nodeType": "exprStmt",
+                "id": "xxJi239gjHuxu17vRpYQKHuN",
+                "locals": [
+                  {
+                    "name": "b",
+                    "type": "Boolean",
+                    "nodeType": "localDef",
+                    "id": "xxJi239gjHuxu17vRpYQKHuNL0"
+                  }
+                ]
+              },
+              {
+                "nodeType": "if",
+                "condition": "$xxJi239gjHuxu17vRpYQKHuNL0",
+                "thenBody": [
+                  {
+                    "expr": ":bazaar .post_leaderboard_score ,( $waPsCZzddRrjK0HqnMzrGvz0L0 ,)",
+                    "nodeType": "exprStmt",
+                    "id": "t5KmIzs7ACiYLJdg6HG1U7qN",
+                    "locals": []
+                  }
+                ],
+                "isElseIf": false,
+                "id": "VktegG8EIG3DBaSookfb9JfU",
+                "locals": []
+              },
+              {
+                "expr": ":bazaar .post_leaderboard_to_wall",
+                "nodeType": "exprStmt",
+                "id": "xd83sNBcun12AE5CNUv1i0Ek",
+                "locals": []
+              }
+            ],
+            "id": "tW4Z6uEUyPIdWlNJ1U2x4bLh"
+          }
+        ],
+        "deletedDecls": [],
+        "nodeType": "app",
+        "id": "app"
+      }
+    },
+    {
+      "seqNo": 1,
+      "time": 1342466090,
+      "scriptId": "fpkj",
+      "historyId": "252059834709766342026ca0b8a-df36-42ed-8be9-5258fecf0fd5",
+      "updateSize": 45,
+      "updates": {
+        "app": {
+          "rootId": "xf8YmQuJGr4DnBFxOHYVZAom"
+        }
+      }
+    },
+    {
+      "seqNo": 2,
+      "time": 1343408233,
+      "scriptId": "urll",
+      "historyId": "25205889256677429111a901658-80b4-4264-b156-14ecad3d213a",
+      "updateSize": 593,
+      "updates": {
+        "NWoNsQwkw08P9tmxNze4K6Ez": {
+          "expr": ":bazaar .post_leaderboard_to_wall",
+          "nodeType": "exprStmt",
+          "locals": []
+        },
+        "VktegG8EIG3DBaSookfb9JfU": {
+          "elseBody": [
+            "NWoNsQwkw08P9tmxNze4K6Ez"
+          ]
+        },
+        "tW4Z6uEUyPIdWlNJ1U2x4bLh": {
+          "body": [
+            "xMHqdPWnDf0NzCHNV0PYhLbd",
+            "F9Pzx8xkoTzl2T09IYnWp4Jy",
+            "waPsCZzddRrjK0HqnMzrGvz0",
+            "xEcJHrn349PAVUAM9CQvGxHg",
+            "xFQqM8Mn2TVu1c4WN4YNt6qi",
+            "zVeiYJ26Q1JJmR5ZU7Wl6o0w",
+            "xxJi239gjHuxu17vRpYQKHuN",
+            "VktegG8EIG3DBaSookfb9JfU"
+          ]
+        },
+        "app": {
+          "comment": "A game where the goal is to count how much music you are not listening to.",
+          "rootId": "Dz87d754ogvVQSxY7Vd7cghX"
+        },
+        "xd83sNBcun12AE5CNUv1i0Ek": null
+      }
+    },
+    {
+      "seqNo": 3,
+      "time": 1343498446,
+      "scriptId": "fpkj",
+      "historyId": "252058802353102191318d56b4c-e838-4aec-a818-aa4f02bd8fa1",
+      "updateSize": 597,
+      "updates": {
+        "VktegG8EIG3DBaSookfb9JfU": {
+          "elseBody": null
+        },
+        "hCM9Eu68R9tsXeHGghP5ZBHG": {
+          "expr": ":bazaar .post_leaderboard_to_wall",
+          "nodeType": "exprStmt",
+          "locals": []
+        },
+        "tW4Z6uEUyPIdWlNJ1U2x4bLh": {
+          "body": [
+            "xMHqdPWnDf0NzCHNV0PYhLbd",
+            "F9Pzx8xkoTzl2T09IYnWp4Jy",
+            "waPsCZzddRrjK0HqnMzrGvz0",
+            "xEcJHrn349PAVUAM9CQvGxHg",
+            "xFQqM8Mn2TVu1c4WN4YNt6qi",
+            "zVeiYJ26Q1JJmR5ZU7Wl6o0w",
+            "xxJi239gjHuxu17vRpYQKHuN",
+            "VktegG8EIG3DBaSookfb9JfU",
+            "hCM9Eu68R9tsXeHGghP5ZBHG"
+          ]
+        },
+        "app": {
+          "comment": "A game where the goal is to count how much music you have not listened yet.",
+          "rootId": "xf8YmQuJGr4DnBFxOHYVZAom"
+        },
+        "NWoNsQwkw08P9tmxNze4K6Ez": null
+      }
+    },
+    {
+      "seqNo": 4,
+      "time": 1343741877,
+      "scriptId": "urll",
+      "historyId": "25205855892222054150f59f5d9-a0ba-42c1-9e59-dbb87e2ad8af",
+      "updateSize": 593,
+      "updates": {
+        "NWoNsQwkw08P9tmxNze4K6Ez": {
+          "expr": ":bazaar .post_leaderboard_to_wall",
+          "nodeType": "exprStmt",
+          "locals": []
+        },
+        "VktegG8EIG3DBaSookfb9JfU": {
+          "elseBody": [
+            "NWoNsQwkw08P9tmxNze4K6Ez"
+          ]
+        },
+        "tW4Z6uEUyPIdWlNJ1U2x4bLh": {
+          "body": [
+            "xMHqdPWnDf0NzCHNV0PYhLbd",
+            "F9Pzx8xkoTzl2T09IYnWp4Jy",
+            "waPsCZzddRrjK0HqnMzrGvz0",
+            "xEcJHrn349PAVUAM9CQvGxHg",
+            "xFQqM8Mn2TVu1c4WN4YNt6qi",
+            "zVeiYJ26Q1JJmR5ZU7Wl6o0w",
+            "xxJi239gjHuxu17vRpYQKHuN",
+            "VktegG8EIG3DBaSookfb9JfU"
+          ]
+        },
+        "app": {
+          "comment": "A game where the goal is to count how much music you are not listening to.",
+          "rootId": "ddqGWD3WYyFUM2X5MQUNsnsz"
+        },
+        "hCM9Eu68R9tsXeHGghP5ZBHG": null
+      }
+    },
+    {
+      "seqNo": 5,
+      "time": 1343756084,
+      "scriptId": "fpkj",
+      "historyId": "25205854471540017880cf27a37-a448-4fda-99db-a2f187bf0cdb",
+      "updateSize": 597,
+      "updates": {
+        "VktegG8EIG3DBaSookfb9JfU": {
+          "elseBody": null
+        },
+        "NVleU6sI4qmPtYosS2gdpULY": {
+          "expr": ":bazaar .post_leaderboard_to_wall",
+          "nodeType": "exprStmt",
+          "locals": []
+        },
+        "tW4Z6uEUyPIdWlNJ1U2x4bLh": {
+          "body": [
+            "xMHqdPWnDf0NzCHNV0PYhLbd",
+            "F9Pzx8xkoTzl2T09IYnWp4Jy",
+            "waPsCZzddRrjK0HqnMzrGvz0",
+            "xEcJHrn349PAVUAM9CQvGxHg",
+            "xFQqM8Mn2TVu1c4WN4YNt6qi",
+            "zVeiYJ26Q1JJmR5ZU7Wl6o0w",
+            "xxJi239gjHuxu17vRpYQKHuN",
+            "VktegG8EIG3DBaSookfb9JfU",
+            "NVleU6sI4qmPtYosS2gdpULY"
+          ]
+        },
+        "app": {
+          "comment": "A game where the goal is to count how much music you have not listened yet.",
+          "rootId": "xf8YmQuJGr4DnBFxOHYVZAom"
+        },
+        "NWoNsQwkw08P9tmxNze4K6Ez": null
+      }
+    },
+    {
+      "seqNo": 6,
+      "time": 1343832894,
+      "scriptId": "urll",
+      "historyId": "2520584679058492478ee94950f-568c-4116-986b-137d03205e1b",
+      "updateSize": 593,
+      "updates": {
+        "NWoNsQwkw08P9tmxNze4K6Ez": {
+          "expr": ":bazaar .post_leaderboard_to_wall",
+          "nodeType": "exprStmt",
+          "locals": []
+        },
+        "VktegG8EIG3DBaSookfb9JfU": {
+          "elseBody": [
+            "NWoNsQwkw08P9tmxNze4K6Ez"
+          ]
+        },
+        "tW4Z6uEUyPIdWlNJ1U2x4bLh": {
+          "body": [
+            "xMHqdPWnDf0NzCHNV0PYhLbd",
+            "F9Pzx8xkoTzl2T09IYnWp4Jy",
+            "waPsCZzddRrjK0HqnMzrGvz0",
+            "xEcJHrn349PAVUAM9CQvGxHg",
+            "xFQqM8Mn2TVu1c4WN4YNt6qi",
+            "zVeiYJ26Q1JJmR5ZU7Wl6o0w",
+            "xxJi239gjHuxu17vRpYQKHuN",
+            "VktegG8EIG3DBaSookfb9JfU"
+          ]
+        },
+        "app": {
+          "comment": "A game where the goal is to count how much music you are not listening to.",
+          "rootId": "ddqGWD3WYyFUM2X5MQUNsnsz"
+        },
+        "NVleU6sI4qmPtYosS2gdpULY": null
+      }
+    },
+    {
+      "seqNo": 7,
+      "time": 1346281471,
+      "scriptId": "urll",
+      "historyId": "25205601932883568469c425e76-0fc7-4cc3-9219-a3d7c97ba63b",
+      "updateSize": 2,
+      "updates": {}
+    },
+    {
+      "seqNo": 8,
+      "time": 1351360689,
+      "scriptId": "urll",
+      "historyId": "25205094011035283253bec5f1c-5ee9-45e1-928d-c358a8103210",
+      "updateSize": 45,
+      "updates": {
+        "app": {
+          "rootId": "Dz87d754ogvVQSxY7Vd7cghX"
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,673 @@
+{
+  "userid": "ajlk",
+  "guid": "17843c2f-b223-4475-877a-2049ee9cd298",
+  "lastStatus": "published",
+  "items": [
+    {
+      "seqNo": 0,
+      "time": 1350496149,
+      "scriptId": "ppyd",
+      "historyId": "2520518046506684620422da5f4-a74e-4e91-b921-d87bd62524fb",
+      "updateSize": 12711,
+      "ast": {
+        "textVersion": "v2.2,js,ctx",
+        "jsonVersion": "v1.0,resolved,short",
+        "name": "search and translation",
+        "comment": "Various ways to search, translate and transform text",
+        "icon": "Binoculars",
+        "color": "#ff004b49",
+        "autoIcon": "Binoculars",
+        "autoColor": "#004b49",
+        "platform": "current",
+        "rootId": "baaLZHzTgmK4K4hlWQrWQ6op",
+        "showAd": false,
+        "isLibrary": false,
+        "allowExport": false,
+        "hasUniqueIds": false,
+        "decls": [
+          {
+            "name": "search speech",
+            "inParameters": [
+              {
+                "name": "term",
+                "type": "String",
+                "nodeType": "localDef",
+                "id": "IVSWjTC2fVlV4xhxA47rNTRoP0"
+              }
+            ],
+            "outParameters": [],
+            "isPrivate": false,
+            "isOffloaded": false,
+            "isTest": false,
+            "isAsync": false,
+            "nodeType": "action",
+            "body": [
+              {
+                "text": "Uses the MAVIS service to search videos through speech",
+                "nodeType": "comment",
+                "id": "xZUXaLgTWZtItgJFINi9BmVP"
+              },
+              {
+                "expr": "$Rsz1i92jDREPrbpZioH23jQAL0 ,:= 'http/003a/002f/002fwww/002emsravs/002ecom/002faudiosearch/005fdemo/002fExecuteQuery/002easpx/003findex/003dall/0026q/003d ,∥ :web .url_encode ,( $IVSWjTC2fVlV4xhxA47rNTRoP0 ,)",
+                "nodeType": "exprStmt",
+                "id": "Rsz1i92jDREPrbpZioH23jQA",
+                "locals": [
+                  {
+                    "name": "url",
+                    "type": "String",
+                    "nodeType": "localDef",
+                    "id": "Rsz1i92jDREPrbpZioH23jQAL0"
+                  }
+                ]
+              },
+              {
+                "text": "the url that encodes the search query",
+                "nodeType": "comment",
+                "id": "xaCMLzV1dXhH24GTmoqI05yq"
+              },
+              {
+                "expr": "$OyKGuu3fcveMcv1pAKp23bpKL0 ,:= :web .download ,( $Rsz1i92jDREPrbpZioH23jQAL0 ,)",
+                "nodeType": "exprStmt",
+                "id": "OyKGuu3fcveMcv1pAKp23bpK",
+                "locals": [
+                  {
+                    "name": "xml",
+                    "type": "String",
+                    "nodeType": "localDef",
+                    "id": "OyKGuu3fcveMcv1pAKp23bpKL0"
+                  }
+                ]
+              },
+              {
+                "text": "MAVIS returns an RSS file with the list of videos.",
+                "nodeType": "comment",
+                "id": "OFv2DCHAC9ntpFgZlXxKygtr"
+              },
+              {
+                "expr": "$xszedzhpJIlWML2qVM4stKyKL0 ,:= :web .rss ,( $OyKGuu3fcveMcv1pAKp23bpKL0 ,)",
+                "nodeType": "exprStmt",
+                "id": "xszedzhpJIlWML2qVM4stKyK",
+                "locals": [
+                  {
+                    "name": "rss",
+                    "type": "Message Collection",
+                    "nodeType": "localDef",
+                    "id": "xszedzhpJIlWML2qVM4stKyKL0"
+                  }
+                ]
+              },
+              {
+                "text": "Parse the xml into message and display them to the wall",
+                "nodeType": "comment",
+                "id": "ig3zKwCwGGtK4Ta5clWomeMx"
+              },
+              {
+                "expr": "$xszedzhpJIlWML2qVM4stKyKL0 .post_to_wall",
+                "nodeType": "exprStmt",
+                "id": "U1EFHimt3jqYdYLFUaClpes6",
+                "locals": []
+              }
+            ],
+            "id": "IVSWjTC2fVlV4xhxA47rNTRo"
+          },
+          {
+            "name": "search news",
+            "inParameters": [],
+            "outParameters": [],
+            "isPrivate": false,
+            "isOffloaded": false,
+            "isTest": false,
+            "isAsync": false,
+            "nodeType": "action",
+            "body": [
+              {
+                "text": "Searches Bing for news about Microsoft and displays the results.",
+                "nodeType": "comment",
+                "id": "xU2T7dG3H6ERyZJI6eDEXCgD"
+              },
+              {
+                "expr": "$VnzQ93gPYEh3CrfkaJCx13RKL0 ,:= :web .search_news ,( 'Microsoft ,)",
+                "nodeType": "exprStmt",
+                "id": "VnzQ93gPYEh3CrfkaJCx13RK",
+                "locals": [
+                  {
+                    "name": "links",
+                    "type": "Link Collection",
+                    "nodeType": "localDef",
+                    "id": "VnzQ93gPYEh3CrfkaJCx13RKL0"
+                  }
+                ]
+              },
+              {
+                "expr": "$VnzQ93gPYEh3CrfkaJCx13RKL0 .post_to_wall",
+                "nodeType": "exprStmt",
+                "id": "xEFtA5mvbL2bAXM7ViJ4689O",
+                "locals": []
+              }
+            ],
+            "id": "pAL9Vlb76v1v37MKKPus3YKV"
+          },
+          {
+            "name": "local search news",
+            "inParameters": [
+              {
+                "name": "terms",
+                "type": "String",
+                "nodeType": "localDef",
+                "id": "qfllwk47OeRE86S3xISZPvc2P0"
+              }
+            ],
+            "outParameters": [],
+            "isPrivate": false,
+            "isOffloaded": false,
+            "isTest": false,
+            "isAsync": false,
+            "nodeType": "action",
+            "body": [
+              {
+                "text": "Searches Bing for news locally and displays the results.",
+                "nodeType": "comment",
+                "id": "qR75iXxpbLCUWzfmZUPpZcRp"
+              },
+              {
+                "expr": "$rVKVNwoeOnmUWy912aAx34sFL0 ,:= :web .search_news_nearby ,( $qfllwk47OeRE86S3xISZPvc2P0 ,, :senses .current_location ,, ,- ,1 ,. ,0 ,)",
+                "nodeType": "exprStmt",
+                "id": "rVKVNwoeOnmUWy912aAx34sF",
+                "locals": [
+                  {
+                    "name": "links",
+                    "type": "Link Collection",
+                    "nodeType": "localDef",
+                    "id": "rVKVNwoeOnmUWy912aAx34sFL0"
+                  }
+                ]
+              },
+              {
+                "expr": "$rVKVNwoeOnmUWy912aAx34sFL0 .post_to_wall",
+                "nodeType": "exprStmt",
+                "id": "SlrT4MR1bIB05YRtRWdSoO7c",
+                "locals": []
+              }
+            ],
+            "id": "qfllwk47OeRE86S3xISZPvc2"
+          },
+          {
+            "name": "local search pizza",
+            "inParameters": [],
+            "outParameters": [],
+            "isPrivate": false,
+            "isOffloaded": false,
+            "isTest": false,
+            "isAsync": false,
+            "nodeType": "action",
+            "body": [
+              {
+                "text": "Searches Bing for pizza locally and displays the results.",
+                "nodeType": "comment",
+                "id": "nuSMFgHUkc238RhjyJVm8m7y"
+              },
+              {
+                "expr": "$xX4cxqDOYSbilvmR6h8bFyFfL0 ,:= :web .search_phone_numbers_nearby ,( 'pizza ,, :senses .current_location ,, ,5 ,0 ,0 ,0 ,)",
+                "nodeType": "exprStmt",
+                "id": "xX4cxqDOYSbilvmR6h8bFyFf",
+                "locals": [
+                  {
+                    "name": "links",
+                    "type": "Link Collection",
+                    "nodeType": "localDef",
+                    "id": "xX4cxqDOYSbilvmR6h8bFyFfL0"
+                  }
+                ]
+              },
+              {
+                "expr": "$xX4cxqDOYSbilvmR6h8bFyFfL0 .post_to_wall",
+                "nodeType": "exprStmt",
+                "id": "mX4ycAjF72qSv47szSvOcbhJ",
+                "locals": []
+              }
+            ],
+            "id": "dUi4nKubt484GPfsxr790O71"
+          },
+          {
+            "name": "local search Bing",
+            "inParameters": [
+              {
+                "name": "terms",
+                "type": "String",
+                "nodeType": "localDef",
+                "id": "Pwe7ZRRof7T8540ffTsAKFQ6P0"
+              }
+            ],
+            "outParameters": [],
+            "isPrivate": false,
+            "isOffloaded": false,
+            "isTest": false,
+            "isAsync": false,
+            "nodeType": "action",
+            "body": [
+              {
+                "text": "Searches Bing locally and displays the results.",
+                "nodeType": "comment",
+                "id": "EzPzgP445wv9O5Lo1foetnoQ"
+              },
+              {
+                "expr": "$xOVRhbiTVzsLVaLSBtA8bsetL0 ,:= :web .search_nearby ,( $Pwe7ZRRof7T8540ffTsAKFQ6P0 ,, :senses .current_location ,, ,- ,1 ,)",
+                "nodeType": "exprStmt",
+                "id": "xOVRhbiTVzsLVaLSBtA8bset",
+                "locals": [
+                  {
+                    "name": "links",
+                    "type": "Link Collection",
+                    "nodeType": "localDef",
+                    "id": "xOVRhbiTVzsLVaLSBtA8bsetL0"
+                  }
+                ]
+              },
+              {
+                "expr": "$xOVRhbiTVzsLVaLSBtA8bsetL0 .post_to_wall",
+                "nodeType": "exprStmt",
+                "id": "WONfGGfDmoYyFz6WSe2Vlbi2",
+                "locals": []
+              }
+            ],
+            "id": "Pwe7ZRRof7T8540ffTsAKFQ6"
+          },
+          {
+            "name": "search Bing",
+            "inParameters": [],
+            "outParameters": [],
+            "isPrivate": false,
+            "isOffloaded": false,
+            "isTest": false,
+            "isAsync": false,
+            "nodeType": "action",
+            "body": [
+              {
+                "text": "Searches Bing and displays the result.",
+                "nodeType": "comment",
+                "id": "qSb9JIlxgcYGCe72Lh82Mrkx"
+              },
+              {
+                "expr": "$xoZj24abJu6qB9uV915Ne2gQL0 ,:= :wall .ask_string ,( 'What_are_you_looking_for_today/003f_/0028Powered_by_Bing/0029 ,)",
+                "nodeType": "exprStmt",
+                "id": "xoZj24abJu6qB9uV915Ne2gQ",
+                "locals": [
+                  {
+                    "name": "s",
+                    "type": "String",
+                    "nodeType": "localDef",
+                    "id": "xoZj24abJu6qB9uV915Ne2gQL0"
+                  }
+                ]
+              },
+              {
+                "expr": "$duS2sBLbZhb5LwWSsck4VOiDL0 ,:= :web .search ,( $xoZj24abJu6qB9uV915Ne2gQL0 ,)",
+                "nodeType": "exprStmt",
+                "id": "duS2sBLbZhb5LwWSsck4VOiD",
+                "locals": [
+                  {
+                    "name": "links",
+                    "type": "Link Collection",
+                    "nodeType": "localDef",
+                    "id": "duS2sBLbZhb5LwWSsck4VOiDL0"
+                  }
+                ]
+              },
+              {
+                "expr": "$duS2sBLbZhb5LwWSsck4VOiDL0 .post_to_wall",
+                "nodeType": "exprStmt",
+                "id": "xNrG1FYAvE6WVCbpLBTbJP2m",
+                "locals": []
+              }
+            ],
+            "id": "D423aCpdlCSsNFnL1GNjVRxd"
+          },
+          {
+            "name": "picture to text",
+            "inParameters": [],
+            "outParameters": [],
+            "isPrivate": false,
+            "isOffloaded": false,
+            "isTest": false,
+            "isAsync": false,
+            "nodeType": "action",
+            "body": [
+              {
+                "text": "Performs text recognition on a camera picture.",
+                "nodeType": "comment",
+                "id": "LNwJtI7ESrOX4c0baAbm1r44"
+              },
+              {
+                "expr": "$v3gsy4D5LtH1MkFBx5G4tPe7L0 ,:= :senses .take_camera_picture",
+                "nodeType": "exprStmt",
+                "id": "v3gsy4D5LtH1MkFBx5G4tPe7",
+                "locals": [
+                  {
+                    "name": "pic",
+                    "type": "Picture",
+                    "nodeType": "localDef",
+                    "id": "v3gsy4D5LtH1MkFBx5G4tPe7L0"
+                  }
+                ]
+              },
+              {
+                "expr": "$v3gsy4D5LtH1MkFBx5G4tPe7L0 .post_to_wall",
+                "nodeType": "exprStmt",
+                "id": "xrpFtINp2h074s95Ydo2F4mw",
+                "locals": []
+              },
+              {
+                "expr": "$BTtbl5eifB6uL1T6AOTALI2bL0 ,:= :languages .picture_to_text ,( 'en ,, $v3gsy4D5LtH1MkFBx5G4tPe7L0 ,)",
+                "nodeType": "exprStmt",
+                "id": "BTtbl5eifB6uL1T6AOTALI2b",
+                "locals": [
+                  {
+                    "name": "en",
+                    "type": "String",
+                    "nodeType": "localDef",
+                    "id": "BTtbl5eifB6uL1T6AOTALI2bL0"
+                  }
+                ]
+              },
+              {
+                "expr": "$BTtbl5eifB6uL1T6AOTALI2bL0 .post_to_wall",
+                "nodeType": "exprStmt",
+                "id": "LkGxMylncOd87M0s9XcYGqzF",
+                "locals": []
+              }
+            ],
+            "id": "YtyJBguXe9CNM3riwtTVshFn"
+          },
+          {
+            "name": "speak",
+            "inParameters": [],
+            "outParameters": [],
+            "isPrivate": false,
+            "isOffloaded": false,
+            "isTest": false,
+            "isAsync": false,
+            "nodeType": "action",
+            "body": [
+              {
+                "expr": "$bnnocQg9gXmYq5UkkYCrPxGpL0 ,:= :languages .speak ,( 'en ,, 'Hello_world ,)",
+                "nodeType": "exprStmt",
+                "id": "bnnocQg9gXmYq5UkkYCrPxGp",
+                "locals": [
+                  {
+                    "name": "s",
+                    "type": "Sound",
+                    "nodeType": "localDef",
+                    "id": "bnnocQg9gXmYq5UkkYCrPxGpL0"
+                  }
+                ]
+              },
+              {
+                "expr": "$bnnocQg9gXmYq5UkkYCrPxGpL0 .post_to_wall ,( ,)",
+                "nodeType": "exprStmt",
+                "id": "reX1sJE3ORiXfyMPpLmPlEBf",
+                "locals": []
+              },
+              {
+                "expr": "$bnnocQg9gXmYq5UkkYCrPxGpL0 .play ,( ,)",
+                "nodeType": "exprStmt",
+                "id": "xx5l4524sBZjSWnn0yeVODEA",
+                "locals": []
+              }
+            ],
+            "id": "V2GcNvunfsBLB4Ec8FKX0Vp7"
+          },
+          {
+            "name": "search images",
+            "inParameters": [],
+            "outParameters": [],
+            "isPrivate": false,
+            "isOffloaded": false,
+            "isTest": false,
+            "isAsync": false,
+            "nodeType": "action",
+            "body": [
+              {
+                "text": "Searching Bing for images and displays the results.",
+                "nodeType": "comment",
+                "id": "xBV9KcLn7PISZD5tCLmCGZgk"
+              },
+              {
+                "expr": "$OPbVjKdE0wYPzX0mlgqKyzdwL0 ,:= :web .search_images ,( 'Windows_Phone_7 ,)",
+                "nodeType": "exprStmt",
+                "id": "OPbVjKdE0wYPzX0mlgqKyzdw",
+                "locals": [
+                  {
+                    "name": "links",
+                    "type": "Link Collection",
+                    "nodeType": "localDef",
+                    "id": "OPbVjKdE0wYPzX0mlgqKyzdwL0"
+                  }
+                ]
+              },
+              {
+                "expr": "$OPbVjKdE0wYPzX0mlgqKyzdwL0 .post_to_wall",
+                "nodeType": "exprStmt",
+                "id": "RdSZYbgD1mXYRTcHaQPTw1Ei",
+                "locals": []
+              }
+            ],
+            "id": "xBgIOnp1d5wBITHezEbpq65V"
+          },
+          {
+            "name": "speech to text",
+            "inParameters": [],
+            "outParameters": [],
+            "isPrivate": false,
+            "isOffloaded": false,
+            "isTest": false,
+            "isAsync": false,
+            "nodeType": "action",
+            "body": [
+              {
+                "text": "Records the microphone and attempts to translate the speech to text.",
+                "nodeType": "comment",
+                "id": "eC7Fe7zE5IrPKZmbkfRZK0jS"
+              },
+              {
+                "expr": "$TRe9gECcpkXWRyJ2qTHIvJHrL0 ,:= :senses .record_microphone",
+                "nodeType": "exprStmt",
+                "id": "TRe9gECcpkXWRyJ2qTHIvJHr",
+                "locals": [
+                  {
+                    "name": "sound",
+                    "type": "Sound",
+                    "nodeType": "localDef",
+                    "id": "TRe9gECcpkXWRyJ2qTHIvJHrL0"
+                  }
+                ]
+              },
+              {
+                "expr": "$TRe9gECcpkXWRyJ2qTHIvJHrL0 .post_to_wall",
+                "nodeType": "exprStmt",
+                "id": "x0XgYtsOHPcJbnJLQFqUC3tW",
+                "locals": []
+              },
+              {
+                "expr": "$gg3IHDi2qqJux8Aw9Jm04gsGL0 ,:= :languages .speech_to_text ,( 'en ,, $TRe9gECcpkXWRyJ2qTHIvJHrL0 ,)",
+                "nodeType": "exprStmt",
+                "id": "gg3IHDi2qqJux8Aw9Jm04gsG",
+                "locals": [
+                  {
+                    "name": "s",
+                    "type": "String",
+                    "nodeType": "localDef",
+                    "id": "gg3IHDi2qqJux8Aw9Jm04gsGL0"
+                  }
+                ]
+              },
+              {
+                "expr": "$gg3IHDi2qqJux8Aw9Jm04gsGL0 .post_to_wall",
+                "nodeType": "exprStmt",
+                "id": "Oj6jmFCvmlueUsP1ytm45L24",
+                "locals": []
+              }
+            ],
+            "id": "mJ3pvS4vptTd23Suj6YLsSm1"
+          },
+          {
+            "name": "translate to german",
+            "inParameters": [],
+            "outParameters": [],
+            "isPrivate": false,
+            "isOffloaded": false,
+            "isTest": false,
+            "isAsync": false,
+            "nodeType": "action",
+            "body": [
+              {
+                "text": "Uses Bing to translate English to German text.",
+                "nodeType": "comment",
+                "id": "gVTqWrocPBocxfD349W1Y317"
+              },
+              {
+                "expr": "$Lzs4n78k2FqjMr9dckX7yFHnL0 ,:= :wall .ask_string ,( 'Enter_English_text_to_be_translated_in_German/002e ,)",
+                "nodeType": "exprStmt",
+                "id": "Lzs4n78k2FqjMr9dckX7yFHn",
+                "locals": [
+                  {
+                    "name": "en",
+                    "type": "String",
+                    "nodeType": "localDef",
+                    "id": "Lzs4n78k2FqjMr9dckX7yFHnL0"
+                  }
+                ]
+              },
+              {
+                "expr": "$Lzs4n78k2FqjMr9dckX7yFHnL0 .post_to_wall",
+                "nodeType": "exprStmt",
+                "id": "czECkSAB65O2nLPQrmx1iOhd",
+                "locals": []
+              },
+              {
+                "expr": "$Ol2GLeN13qNbMsmKgRGhrh1JL0 ,:= :languages .translate ,( 'en ,, 'de ,, $Lzs4n78k2FqjMr9dckX7yFHnL0 ,)",
+                "nodeType": "exprStmt",
+                "id": "Ol2GLeN13qNbMsmKgRGhrh1J",
+                "locals": [
+                  {
+                    "name": "de",
+                    "type": "String",
+                    "nodeType": "localDef",
+                    "id": "Ol2GLeN13qNbMsmKgRGhrh1JL0"
+                  }
+                ]
+              },
+              {
+                "expr": "$Ol2GLeN13qNbMsmKgRGhrh1JL0 .post_to_wall",
+                "nodeType": "exprStmt",
+                "id": "AeA6LXX9cXYva2y7IlJQXtWq",
+                "locals": []
+              },
+              {
+                "expr": "$W5iN21CE5WTsUs22mS6BY2T3L0 ,:= :languages .speak ,( 'de ,, $Ol2GLeN13qNbMsmKgRGhrh1JL0 ,)",
+                "nodeType": "exprStmt",
+                "id": "W5iN21CE5WTsUs22mS6BY2T3",
+                "locals": [
+                  {
+                    "name": "speech",
+                    "type": "Sound",
+                    "nodeType": "localDef",
+                    "id": "W5iN21CE5WTsUs22mS6BY2T3L0"
+                  }
+                ]
+              },
+              {
+                "expr": "$W5iN21CE5WTsUs22mS6BY2T3L0 .post_to_wall",
+                "nodeType": "exprStmt",
+                "id": "dzAx4gIKKUb32U56c4poAOQ1",
+                "locals": []
+              },
+              {
+                "expr": "$W5iN21CE5WTsUs22mS6BY2T3L0 .play ,( ,)",
+                "nodeType": "exprStmt",
+                "id": "ZX2ykjii0j127CWy4hM8Kn2l",
+                "locals": []
+              }
+            ],
+            "id": "rvmmqfF4ufrHyEyVwMGwGxXu"
+          },
+          {
+            "name": "detect language",
+            "inParameters": [],
+            "outParameters": [],
+            "isPrivate": false,
+            "isOffloaded": false,
+            "isTest": false,
+            "isAsync": false,
+            "nodeType": "action",
+            "body": [
+              {
+                "text": "Uses Bing to detect the language of a piece of text.",
+                "nodeType": "comment",
+                "id": "b1nwUS2zqnECq1KoAY3A11i4"
+              },
+              {
+                "expr": "$A0zqaOIhvpUveUDPG4bay2OkL0 ,:= 'Bonjour_tout_le_monde/0021",
+                "nodeType": "exprStmt",
+                "id": "A0zqaOIhvpUveUDPG4bay2Ok",
+                "locals": [
+                  {
+                    "name": "text",
+                    "type": "String",
+                    "nodeType": "localDef",
+                    "id": "A0zqaOIhvpUveUDPG4bay2OkL0"
+                  }
+                ]
+              },
+              {
+                "expr": "$Td0P0Esh32kTpkHsTmgPn2irL0 ,:= :languages .detect_language ,( $A0zqaOIhvpUveUDPG4bay2OkL0 ,)",
+                "nodeType": "exprStmt",
+                "id": "Td0P0Esh32kTpkHsTmgPn2ir",
+                "locals": [
+                  {
+                    "name": "lang",
+                    "type": "String",
+                    "nodeType": "localDef",
+                    "id": "Td0P0Esh32kTpkHsTmgPn2irL0"
+                  }
+                ]
+              },
+              {
+                "text": "lang contains the language code detected by bing. we can use this code to translate the text into another language",
+                "nodeType": "comment",
+                "id": "rKwmyl2CmnTwJTd85uJDf4u2"
+              },
+              {
+                "expr": "$HtZHNTR1gh9UwGcjnCp1lI3WL0 ,:= :languages .translate ,( $Td0P0Esh32kTpkHsTmgPn2irL0 ,, :languages .current_language ,, $A0zqaOIhvpUveUDPG4bay2OkL0 ,)",
+                "nodeType": "exprStmt",
+                "id": "HtZHNTR1gh9UwGcjnCp1lI3W",
+                "locals": [
+                  {
+                    "name": "translated",
+                    "type": "String",
+                    "nodeType": "localDef",
+                    "id": "HtZHNTR1gh9UwGcjnCp1lI3WL0"
+                  }
+                ]
+              },
+              {
+                "text": "translated should contain 'hello everyone' in your language, translated from French",
+                "nodeType": "comment",
+                "id": "Ratr6hHNGhryOJ6zvfIkD51q"
+              },
+              {
+                "expr": "$HtZHNTR1gh9UwGcjnCp1lI3WL0 .post_to_wall",
+                "nodeType": "exprStmt",
+                "id": "Bw5ZEqML8zK5n2fKihssJmHZ",
+                "locals": []
+              }
+            ],
+            "id": "r2VIW8kegtLsIyItVC3iDzqA"
+          }
+        ],
+        "deletedDecls": [],
+        "nodeType": "app",
+        "id": "app"
+      }
+    }
+  ]
+}

@@ -1,0 +1,1793 @@
+{
+  "userid": "pboj",
+  "guid": "8fcbf9be-d0fb-4544-bbb8-d1edbc89ed1b",
+  "lastStatus": "published",
+  "items": [
+    {
+      "seqNo": 0,
+      "time": 1342466090,
+      "scriptId": "kvcb",
+      "historyId": "252059834709746260884bb0c8a-e92d-4fb8-9e22-72699af2fd98",
+      "updateSize": 5081,
+      "ast": {
+        "textVersion": "v2.2,js,ctx",
+        "jsonVersion": "v1.0,resolved,short",
+        "name": "stackoverflow search",
+        "comment": "Searching http://StackOverflow.com.",
+        "icon": "Wifi",
+        "color": "#ffe25822",
+        "autoIcon": "Wifi",
+        "autoColor": "#e25822",
+        "platform": "current",
+        "rootId": "NOUKTclCP7081s8tG6bL2WJl",
+        "showAd": false,
+        "isLibrary": false,
+        "allowExport": false,
+        "hasUniqueIds": false,
+        "decls": [
+          {
+            "name": "main",
+            "inParameters": [],
+            "outParameters": [],
+            "isPrivate": false,
+            "isOffloaded": false,
+            "isTest": false,
+            "isAsync": false,
+            "nodeType": "action",
+            "body": [
+              {
+                "text": "Searches for tagged questions on stackoverflow...",
+                "nodeType": "comment",
+                "id": "x0vcUz4jTHQXrqysS0xV2sVO"
+              },
+              {
+                "text": "We start by asking the user for a search term",
+                "nodeType": "comment",
+                "id": "xpCRLcbNFmFMG2W9oJQIfMku"
+              },
+              {
+                "expr": "$RGRKwen10P5sv4s2EPk5stXNL0 ,:= :wall .ask_string ,( 'Search_stackoverflow/002ecom ,)",
+                "nodeType": "exprStmt",
+                "id": "RGRKwen10P5sv4s2EPk5stXN",
+                "locals": [
+                  {
+                    "name": "terms",
+                    "type": "String",
+                    "nodeType": "localDef",
+                    "id": "RGRKwen10P5sv4s2EPk5stXNL0"
+                  }
+                ]
+              },
+              {
+                "text": "We build the query url. note how we escape the terms using 'url encode'",
+                "nodeType": "comment",
+                "id": "EmEbJTR1VEDJcRYMvknByELF"
+              },
+              {
+                "expr": "$xC1b4FkniVOdWrI04iKtlzkHL0 ,:= 'http/003a/002f/002fapi/002estackoverflow/002ecom/002f1/002e1/002fsearch/003ftagged/003d ,∥ :web .url_encode ,( $RGRKwen10P5sv4s2EPk5stXNL0 ,)",
+                "nodeType": "exprStmt",
+                "id": "xC1b4FkniVOdWrI04iKtlzkH",
+                "locals": [
+                  {
+                    "name": "url",
+                    "type": "String",
+                    "nodeType": "localDef",
+                    "id": "xC1b4FkniVOdWrI04iKtlzkHL0"
+                  }
+                ]
+              },
+              {
+                "text": "This line does 2 things: it downloads the result and parses it into a json data structure",
+                "nodeType": "comment",
+                "id": "xvUvDjeSDCRfliA8lJt6mlxw"
+              },
+              {
+                "expr": "$qlx8iTLhLk2sJm6YjQn8r6KHL0 ,:= :web .json ,( :web .download ,( $xC1b4FkniVOdWrI04iKtlzkHL0 ,) ,)",
+                "nodeType": "exprStmt",
+                "id": "qlx8iTLhLk2sJm6YjQn8r6KH",
+                "locals": [
+                  {
+                    "name": "json",
+                    "type": "Json Object",
+                    "nodeType": "localDef",
+                    "id": "qlx8iTLhLk2sJm6YjQn8r6KHL0"
+                  }
+                ]
+              },
+              {
+                "text": "We fetch the questions field from the json object. this should be an array of results that we can enumerate in a foreach loop",
+                "nodeType": "comment",
+                "id": "WNe7vai25qy5RNcoK9JNNAb9"
+              },
+              {
+                "expr": "$xf5BSoTOvZ4Yk5ovDRJ2XKQ1L0 ,:= $qlx8iTLhLk2sJm6YjQn8r6KHL0 .field ,( 'questions ,)",
+                "nodeType": "exprStmt",
+                "id": "xf5BSoTOvZ4Yk5ovDRJ2XKQ1",
+                "locals": [
+                  {
+                    "name": "qs",
+                    "type": "Json Object",
+                    "nodeType": "localDef",
+                    "id": "xf5BSoTOvZ4Yk5ovDRJ2XKQ1L0"
+                  }
+                ]
+              },
+              {
+                "collection": "$xf5BSoTOvZ4Yk5ovDRJ2XKQ1L0",
+                "conditions": [
+                  {
+                    "condition": "T",
+                    "nodeType": "where",
+                    "id": "HmC3wkdOd9RQ0imLFPHs6Tuk",
+                    "locals": []
+                  }
+                ],
+                "body": [
+                  {
+                    "text": "We create a message, the basic data structure to hold messages from social services",
+                    "nodeType": "comment",
+                    "id": "vgn3voARWf2ypNbQcsuUK7se"
+                  },
+                  {
+                    "expr": "$SsYwggOVQEB930xj42wbscP2L0 ,:= :social .create_message ,( $xLob102Q9p7A24FLvfpHzpBhB0 .string ,( 'title ,) ,)",
+                    "nodeType": "exprStmt",
+                    "id": "SsYwggOVQEB930xj42wbscP2",
+                    "locals": [
+                      {
+                        "name": "msg",
+                        "type": "Message",
+                        "nodeType": "localDef",
+                        "id": "SsYwggOVQEB930xj42wbscP2L0"
+                      }
+                    ]
+                  },
+                  {
+                    "text": "The information about the author is stored in a nested field owner",
+                    "nodeType": "comment",
+                    "id": "IgeZuGb1M6VB42eDrvP1rzNb"
+                  },
+                  {
+                    "expr": "$ZSA3estJRzDPeCHEVZKg10QoL0 ,:= $xLob102Q9p7A24FLvfpHzpBhB0 .field ,( 'owner ,)",
+                    "nodeType": "exprStmt",
+                    "id": "ZSA3estJRzDPeCHEVZKg10Qo",
+                    "locals": [
+                      {
+                        "name": "owner",
+                        "type": "Json Object",
+                        "nodeType": "localDef",
+                        "id": "ZSA3estJRzDPeCHEVZKg10QoL0"
+                      }
+                    ]
+                  },
+                  {
+                    "expr": "$SsYwggOVQEB930xj42wbscP2L0 .set_from ,( $ZSA3estJRzDPeCHEVZKg10QoL0 .string ,( 'display/005fname ,) ,)",
+                    "nodeType": "exprStmt",
+                    "id": "KCib1H3Os0qLfszHCWkHDdm3",
+                    "locals": []
+                  },
+                  {
+                    "text": "The link to the question page can easily be recreated from the question id. we don't need to url escape the number as it has been converter to a Number by the json parser.",
+                    "nodeType": "comment",
+                    "id": "CewctbbpNt13zKvPgMv89A1j"
+                  },
+                  {
+                    "expr": "$SsYwggOVQEB930xj42wbscP2L0 .set_link ,( 'http/003a/002f/002fwww/002estackoverflow/002ecom/002fquestions/002f ,∥ $xLob102Q9p7A24FLvfpHzpBhB0 .number ,( 'question/005fid ,) ,)",
+                    "nodeType": "exprStmt",
+                    "id": "xqpHJFxLcwXDRQzSc6zfuQdB",
+                    "locals": []
+                  },
+                  {
+                    "text": "Gravatar is a web service that provides a unique and stable image for email addresses. it is used in many different web sites to associate a photo to a user email address. StackOverflow makes our life easier here by providing the hash of the email that can be used to get the gravatar easily.",
+                    "nodeType": "comment",
+                    "id": "Fvp9hlqqAkiLqk9nYYnoiOzp"
+                  },
+                  {
+                    "expr": "$SsYwggOVQEB930xj42wbscP2L0 .set_picture_link ,( 'http/003a/002f/002fwww/002egravatar/002ecom/002favatar/002f ,∥ :web .url_encode ,( $ZSA3estJRzDPeCHEVZKg10QoL0 .string ,( 'email/005fhash ,) ,) ,∥ '/003fs/003d72 ,)",
+                    "nodeType": "exprStmt",
+                    "id": "c49TPtt1aWxMiICBLgfBJAnk",
+                    "locals": []
+                  },
+                  {
+                    "expr": "$SsYwggOVQEB930xj42wbscP2L0 .set_source ,( 'StackOverflow ,)",
+                    "nodeType": "exprStmt",
+                    "id": "PFy4h7L4hIEoRCvSwTUD79Dz",
+                    "locals": []
+                  },
+                  {
+                    "expr": "$SsYwggOVQEB930xj42wbscP2L0 .post_to_wall",
+                    "nodeType": "exprStmt",
+                    "id": "SaCCXxZkcSiLAwkjS6J7O71v",
+                    "locals": []
+                  }
+                ],
+                "nodeType": "foreach",
+                "id": "xLob102Q9p7A24FLvfpHzpBh",
+                "locals": [
+                  {
+                    "name": "q",
+                    "type": "Json Object",
+                    "nodeType": "localDef",
+                    "id": "xLob102Q9p7A24FLvfpHzpBhB0"
+                  }
+                ]
+              }
+            ],
+            "id": "IheY2ZwJUSOHYNrFcGDZQ6Tv"
+          }
+        ],
+        "deletedDecls": [],
+        "nodeType": "app",
+        "id": "app"
+      }
+    },
+    {
+      "seqNo": 1,
+      "time": 1343408234,
+      "scriptId": "smtr",
+      "historyId": "2520588925655400188afa28175-a751-4ab5-9cb9-fc38f272b934",
+      "updateSize": 7483,
+      "updates": {
+        "dGlKClUsg7p4q06KYG4WgmecP0": {
+          "name": "terms",
+          "type": "String",
+          "nodeType": "localDef"
+        },
+        "dGlKClUsg7p4q06KYG4WgmecP1": {
+          "name": "msgs",
+          "type": "Message Collection",
+          "nodeType": "localDef"
+        },
+        "eldIfg69ONLUamHp3f4JFpem": {
+          "text": "Searches stackoverflow",
+          "nodeType": "comment"
+        },
+        "xyegeQx1y2laKvp8lfaHXCzy": {
+          "text": "We build the query url. note how we escape the terms using 'url encode'",
+          "nodeType": "comment"
+        },
+        "u8ElcFHmqsQbxwf24RZjWdQML0": {
+          "name": "url",
+          "type": "String",
+          "nodeType": "localDef"
+        },
+        "u8ElcFHmqsQbxwf24RZjWdQM": {
+          "expr": "$u8ElcFHmqsQbxwf24RZjWdQML0 ,:= 'http/003a/002f/002fapi/002estackoverflow/002ecom/002f1/002e1/002fsearch/003ftagged/003d ,∥ :web .url_encode ,( $dGlKClUsg7p4q06KYG4WgmecP0 ,)",
+          "nodeType": "exprStmt",
+          "locals": [
+            "u8ElcFHmqsQbxwf24RZjWdQML0"
+          ]
+        },
+        "Au4tbCRA2MqOp6nNAVOrH2gg": {
+          "text": "This line does 2 things: it downloads the result and parses it into a json data structure",
+          "nodeType": "comment"
+        },
+        "n84Y422FSI1O8pZAllZKnE3JL0": {
+          "name": "request",
+          "type": "Web Request",
+          "nodeType": "localDef"
+        },
+        "n84Y422FSI1O8pZAllZKnE3J": {
+          "expr": "$n84Y422FSI1O8pZAllZKnE3JL0 ,:= :web .create_request ,( $u8ElcFHmqsQbxwf24RZjWdQML0 ,)",
+          "nodeType": "exprStmt",
+          "locals": [
+            "n84Y422FSI1O8pZAllZKnE3JL0"
+          ]
+        },
+        "VTHcYJcy6BaW2NUrKnNV781J": {
+          "expr": "$n84Y422FSI1O8pZAllZKnE3JL0 .set_header ,( 'Accept ,, 'application/002fjson ,)",
+          "nodeType": "exprStmt",
+          "locals": []
+        },
+        "gvWE8Hcq12JD0VXuUEK8okU4L0": {
+          "name": "response",
+          "type": "Web Response",
+          "nodeType": "localDef"
+        },
+        "gvWE8Hcq12JD0VXuUEK8okU4": {
+          "expr": "$gvWE8Hcq12JD0VXuUEK8okU4L0 ,:= $n84Y422FSI1O8pZAllZKnE3JL0 .send",
+          "nodeType": "exprStmt",
+          "locals": [
+            "gvWE8Hcq12JD0VXuUEK8okU4L0"
+          ]
+        },
+        "YL9zv2WSuz0Af46vzDCVeIZ3L0": {
+          "name": "json",
+          "type": "Json Object",
+          "nodeType": "localDef"
+        },
+        "YL9zv2WSuz0Af46vzDCVeIZ3": {
+          "expr": "$YL9zv2WSuz0Af46vzDCVeIZ3L0 ,:= $gvWE8Hcq12JD0VXuUEK8okU4L0 .content_as_json",
+          "nodeType": "exprStmt",
+          "locals": [
+            "YL9zv2WSuz0Af46vzDCVeIZ3L0"
+          ]
+        },
+        "rZ1R0YfA4Rehj253eAxUZNp8": {
+          "text": "We fetch the questions field from the json object. this should be an array of results that we can enumerate in a foreach loop",
+          "nodeType": "comment"
+        },
+        "R7qgub5E9qsK0WlN13XdIZIM": {
+          "expr": "$dGlKClUsg7p4q06KYG4WgmecP1 ,:= :collections .create_message_collection",
+          "nodeType": "exprStmt",
+          "locals": []
+        },
+        "RMgHhUnVzN9DUcrFPBWxQSt8L0": {
+          "name": "qs",
+          "type": "Json Object",
+          "nodeType": "localDef"
+        },
+        "RMgHhUnVzN9DUcrFPBWxQSt8": {
+          "expr": "$RMgHhUnVzN9DUcrFPBWxQSt8L0 ,:= $YL9zv2WSuz0Af46vzDCVeIZ3L0 .field ,( 'questions ,)",
+          "nodeType": "exprStmt",
+          "locals": [
+            "RMgHhUnVzN9DUcrFPBWxQSt8L0"
+          ]
+        },
+        "EvcoEGjrBc9SJZHQUbduD3bo": {
+          "condition": "T",
+          "nodeType": "where",
+          "locals": []
+        },
+        "x7z7Oy96uVIBh4rxgIiUIiFIL0": {
+          "name": "msg",
+          "type": "Message",
+          "nodeType": "localDef"
+        },
+        "x7z7Oy96uVIBh4rxgIiUIiFI": {
+          "expr": "$x7z7Oy96uVIBh4rxgIiUIiFIL0 ,:= :code #IheY2ZwJUSOHYNrFcGDZQ6Tv ,( $bg44uOA38WxOWU8DYs9CzXJcB0 ,)",
+          "nodeType": "exprStmt",
+          "locals": [
+            "x7z7Oy96uVIBh4rxgIiUIiFIL0"
+          ]
+        },
+        "A2exkAIn204zKQ5gtSQeW0Qa": {
+          "expr": "$dGlKClUsg7p4q06KYG4WgmecP1 .add ,( $x7z7Oy96uVIBh4rxgIiUIiFIL0 ,)",
+          "nodeType": "exprStmt",
+          "locals": []
+        },
+        "bg44uOA38WxOWU8DYs9CzXJcB0": {
+          "name": "q",
+          "type": "Json Object",
+          "nodeType": "localDef"
+        },
+        "bg44uOA38WxOWU8DYs9CzXJc": {
+          "collection": "$RMgHhUnVzN9DUcrFPBWxQSt8L0",
+          "conditions": [
+            "EvcoEGjrBc9SJZHQUbduD3bo"
+          ],
+          "body": [
+            "x7z7Oy96uVIBh4rxgIiUIiFI",
+            "A2exkAIn204zKQ5gtSQeW0Qa"
+          ],
+          "nodeType": "foreach",
+          "locals": [
+            "bg44uOA38WxOWU8DYs9CzXJcB0"
+          ]
+        },
+        "dGlKClUsg7p4q06KYG4Wgmec": {
+          "name": "search",
+          "inParameters": [
+            "dGlKClUsg7p4q06KYG4WgmecP0"
+          ],
+          "outParameters": [
+            "dGlKClUsg7p4q06KYG4WgmecP1"
+          ],
+          "isPrivate": false,
+          "isOffloaded": false,
+          "isTest": false,
+          "isAsync": false,
+          "nodeType": "action",
+          "body": [
+            "eldIfg69ONLUamHp3f4JFpem",
+            "xyegeQx1y2laKvp8lfaHXCzy",
+            "u8ElcFHmqsQbxwf24RZjWdQM",
+            "Au4tbCRA2MqOp6nNAVOrH2gg",
+            "n84Y422FSI1O8pZAllZKnE3J",
+            "VTHcYJcy6BaW2NUrKnNV781J",
+            "gvWE8Hcq12JD0VXuUEK8okU4",
+            "YL9zv2WSuz0Af46vzDCVeIZ3",
+            "rZ1R0YfA4Rehj253eAxUZNp8",
+            "R7qgub5E9qsK0WlN13XdIZIM",
+            "RMgHhUnVzN9DUcrFPBWxQSt8",
+            "bg44uOA38WxOWU8DYs9CzXJc"
+          ]
+        },
+        "IheY2ZwJUSOHYNrFcGDZQ6TvP0": {
+          "name": "q",
+          "type": "Json Object",
+          "nodeType": "localDef"
+        },
+        "IheY2ZwJUSOHYNrFcGDZQ6TvP1": {
+          "name": "msg",
+          "type": "Message",
+          "nodeType": "localDef"
+        },
+        "u7N9d40KhEHzTfnfw4FZhfFV": {
+          "text": "We create a message, the basic data structure to hold messages from social services",
+          "nodeType": "comment"
+        },
+        "TGosQWd14PRPbKL6vGKixTNK": {
+          "expr": "$IheY2ZwJUSOHYNrFcGDZQ6TvP1 ,:= :social .create_message ,( $IheY2ZwJUSOHYNrFcGDZQ6TvP0 .string ,( 'title ,) ,)",
+          "nodeType": "exprStmt",
+          "locals": []
+        },
+        "AZWvl52coZRCp8gXNjcP5stp": {
+          "text": "The information about the author is stored in a nested field owner",
+          "nodeType": "comment"
+        },
+        "xf5BSoTOvZ4Yk5ovDRJ2XKQ1L0": {
+          "name": "owner"
+        },
+        "xf5BSoTOvZ4Yk5ovDRJ2XKQ1": {
+          "expr": "$xf5BSoTOvZ4Yk5ovDRJ2XKQ1L0 ,:= $IheY2ZwJUSOHYNrFcGDZQ6TvP0 .field ,( 'owner ,)"
+        },
+        "UXx44HfX4zE8Q51H5lc6lVD9": {
+          "expr": "$IheY2ZwJUSOHYNrFcGDZQ6TvP1 .set_from ,( $xf5BSoTOvZ4Yk5ovDRJ2XKQ1L0 .string ,( 'display/005fname ,) ,)",
+          "nodeType": "exprStmt",
+          "locals": []
+        },
+        "zX0UjHzF2EIXX9Vw0RdTpak4": {
+          "text": "The link to the question page can easily be recreated from the question id. we don't need to url escape the number as it has been converter to a Number by the json parser.",
+          "nodeType": "comment"
+        },
+        "D9eBY5dNjY6NYccPSOATDdUD": {
+          "expr": "$IheY2ZwJUSOHYNrFcGDZQ6TvP1 .set_link ,( 'http/003a/002f/002fwww/002estackoverflow/002ecom/002fquestions/002f ,∥ $IheY2ZwJUSOHYNrFcGDZQ6TvP0 .number ,( 'question/005fid ,) ,)",
+          "nodeType": "exprStmt",
+          "locals": []
+        },
+        "emRQAcU902ZD87ltcPPz6Rnf": {
+          "text": "Gravatar is a web service that provides a unique and stable image for email addresses. it is used in many different web sites to associate a photo to a user email address. StackOverflow makes our life easier here by providing the hash of the email that can be used to get the gravatar easily.",
+          "nodeType": "comment"
+        },
+        "MeNazSib7EWgA2ihC2y44h08": {
+          "expr": "$IheY2ZwJUSOHYNrFcGDZQ6TvP1 .set_picture_link ,( 'http/003a/002f/002fwww/002egravatar/002ecom/002favatar/002f ,∥ :web .url_encode ,( $xf5BSoTOvZ4Yk5ovDRJ2XKQ1L0 .string ,( 'email/005fhash ,) ,) ,∥ '/003fs/003d72 ,)",
+          "nodeType": "exprStmt",
+          "locals": []
+        },
+        "TnzSaKCSINGSO4I24aW782Wc": {
+          "expr": "$IheY2ZwJUSOHYNrFcGDZQ6TvP1 .set_source ,( 'StackOverflow ,)",
+          "nodeType": "exprStmt",
+          "locals": []
+        },
+        "IheY2ZwJUSOHYNrFcGDZQ6Tv": {
+          "name": "create message",
+          "inParameters": [
+            "IheY2ZwJUSOHYNrFcGDZQ6TvP0"
+          ],
+          "outParameters": [
+            "IheY2ZwJUSOHYNrFcGDZQ6TvP1"
+          ],
+          "isPrivate": true,
+          "body": [
+            "u7N9d40KhEHzTfnfw4FZhfFV",
+            "TGosQWd14PRPbKL6vGKixTNK",
+            "AZWvl52coZRCp8gXNjcP5stp",
+            "xf5BSoTOvZ4Yk5ovDRJ2XKQ1",
+            "UXx44HfX4zE8Q51H5lc6lVD9",
+            "zX0UjHzF2EIXX9Vw0RdTpak4",
+            "D9eBY5dNjY6NYccPSOATDdUD",
+            "emRQAcU902ZD87ltcPPz6Rnf",
+            "MeNazSib7EWgA2ihC2y44h08",
+            "TnzSaKCSINGSO4I24aW782Wc"
+          ]
+        },
+        "app": {
+          "rootId": "Aq5OQfJlT3uMIbLtxLLw2z0K",
+          "isLibrary": true,
+          "decls": [
+            "dGlKClUsg7p4q06KYG4Wgmec",
+            "IheY2ZwJUSOHYNrFcGDZQ6Tv"
+          ]
+        },
+        "x0vcUz4jTHQXrqysS0xV2sVO": null,
+        "xpCRLcbNFmFMG2W9oJQIfMku": null,
+        "RGRKwen10P5sv4s2EPk5stXN": null,
+        "RGRKwen10P5sv4s2EPk5stXNL0": null,
+        "EmEbJTR1VEDJcRYMvknByELF": null,
+        "xC1b4FkniVOdWrI04iKtlzkH": null,
+        "xC1b4FkniVOdWrI04iKtlzkHL0": null,
+        "xvUvDjeSDCRfliA8lJt6mlxw": null,
+        "qlx8iTLhLk2sJm6YjQn8r6KH": null,
+        "qlx8iTLhLk2sJm6YjQn8r6KHL0": null,
+        "WNe7vai25qy5RNcoK9JNNAb9": null,
+        "xLob102Q9p7A24FLvfpHzpBh": null,
+        "HmC3wkdOd9RQ0imLFPHs6Tuk": null,
+        "vgn3voARWf2ypNbQcsuUK7se": null,
+        "SsYwggOVQEB930xj42wbscP2": null,
+        "SsYwggOVQEB930xj42wbscP2L0": null,
+        "IgeZuGb1M6VB42eDrvP1rzNb": null,
+        "ZSA3estJRzDPeCHEVZKg10Qo": null,
+        "ZSA3estJRzDPeCHEVZKg10QoL0": null,
+        "KCib1H3Os0qLfszHCWkHDdm3": null,
+        "CewctbbpNt13zKvPgMv89A1j": null,
+        "xqpHJFxLcwXDRQzSc6zfuQdB": null,
+        "Fvp9hlqqAkiLqk9nYYnoiOzp": null,
+        "c49TPtt1aWxMiICBLgfBJAnk": null,
+        "PFy4h7L4hIEoRCvSwTUD79Dz": null,
+        "SaCCXxZkcSiLAwkjS6J7O71v": null,
+        "xLob102Q9p7A24FLvfpHzpBhB0": null
+      }
+    },
+    {
+      "seqNo": 2,
+      "time": 1343498449,
+      "scriptId": "kvcb",
+      "historyId": "2520588023502430725443bb670-9238-4b9e-b80e-dd81d0d7f177",
+      "updateSize": 6368,
+      "updates": {
+        "LoI2b9xQ2jr5Ud4PiciqIZrC": {
+          "text": "Searches for tagged questions on stackoverflow...",
+          "nodeType": "comment"
+        },
+        "xVG2LEDAGuMrHnM1cgntNOPj": {
+          "text": "We start by asking the user for a search term",
+          "nodeType": "comment"
+        },
+        "TnzSaKCSINGSO4I24aW782WcL0": {
+          "name": "terms",
+          "type": "String",
+          "nodeType": "localDef"
+        },
+        "TnzSaKCSINGSO4I24aW782Wc": {
+          "expr": "$TnzSaKCSINGSO4I24aW782WcL0 ,:= :wall .ask_string ,( 'Search_stackoverflow/002ecom ,)",
+          "locals": [
+            "TnzSaKCSINGSO4I24aW782WcL0"
+          ]
+        },
+        "zTTMrut2i7Z4DsHPAllu1Nx2": {
+          "text": "We build the query url. note how we escape the terms using 'url encode'",
+          "nodeType": "comment"
+        },
+        "R1Ymar2INn1Abvst4xN9ApWKL0": {
+          "name": "url",
+          "type": "String",
+          "nodeType": "localDef"
+        },
+        "R1Ymar2INn1Abvst4xN9ApWK": {
+          "expr": "$R1Ymar2INn1Abvst4xN9ApWKL0 ,:= 'http/003a/002f/002fapi/002estackoverflow/002ecom/002f1/002e1/002fsearch/003ftagged/003d ,∥ :web .url_encode ,( $TnzSaKCSINGSO4I24aW782WcL0 ,)",
+          "nodeType": "exprStmt",
+          "locals": [
+            "R1Ymar2INn1Abvst4xN9ApWKL0"
+          ]
+        },
+        "xezWLSGXX0bMYQjHCmgROOsW": {
+          "text": "This line does 2 things: it downloads the result and parses it into a json data structure",
+          "nodeType": "comment"
+        },
+        "xH8ksbb4Emmp79X9GvmLbBN8L0": {
+          "name": "json",
+          "type": "Json Object",
+          "nodeType": "localDef"
+        },
+        "xH8ksbb4Emmp79X9GvmLbBN8": {
+          "expr": "$xH8ksbb4Emmp79X9GvmLbBN8L0 ,:= :web .json ,( :web .download ,( $R1Ymar2INn1Abvst4xN9ApWKL0 ,) ,)",
+          "nodeType": "exprStmt",
+          "locals": [
+            "xH8ksbb4Emmp79X9GvmLbBN8L0"
+          ]
+        },
+        "xjWI7sazGEj1VelPj1LRrLy3": {
+          "text": "We fetch the questions field from the json object. this should be an array of results that we can enumerate in a foreach loop",
+          "nodeType": "comment"
+        },
+        "xf5BSoTOvZ4Yk5ovDRJ2XKQ1L0": {
+          "name": "qs"
+        },
+        "xf5BSoTOvZ4Yk5ovDRJ2XKQ1": {
+          "expr": "$xf5BSoTOvZ4Yk5ovDRJ2XKQ1L0 ,:= $xH8ksbb4Emmp79X9GvmLbBN8L0 .field ,( 'questions ,)"
+        },
+        "ziAREmryaumGnCwfD2pCDeMj": {
+          "condition": "T",
+          "nodeType": "where",
+          "locals": []
+        },
+        "a33D32dvBixR224j2WDKBber": {
+          "text": "We create a message, the basic data structure to hold messages from social services",
+          "nodeType": "comment"
+        },
+        "r9M0wMmXkykZyn6F4TTRAYA8L0": {
+          "name": "msg",
+          "type": "Message",
+          "nodeType": "localDef"
+        },
+        "r9M0wMmXkykZyn6F4TTRAYA8": {
+          "expr": "$r9M0wMmXkykZyn6F4TTRAYA8L0 ,:= :social .create_message ,( $Lnt8bJjly4zY9caxCr9N4W4SB0 .string ,( 'title ,) ,)",
+          "nodeType": "exprStmt",
+          "locals": [
+            "r9M0wMmXkykZyn6F4TTRAYA8L0"
+          ]
+        },
+        "xhR4Cn60QJ6FvJBpNd7LzhjN": {
+          "text": "The information about the author is stored in a nested field owner",
+          "nodeType": "comment"
+        },
+        "AfEXlARLuMnLY9k2MuuF2mDQL0": {
+          "name": "owner",
+          "type": "Json Object",
+          "nodeType": "localDef"
+        },
+        "AfEXlARLuMnLY9k2MuuF2mDQ": {
+          "expr": "$AfEXlARLuMnLY9k2MuuF2mDQL0 ,:= $Lnt8bJjly4zY9caxCr9N4W4SB0 .field ,( 'owner ,)",
+          "nodeType": "exprStmt",
+          "locals": [
+            "AfEXlARLuMnLY9k2MuuF2mDQL0"
+          ]
+        },
+        "crT3WB6Z4I2dchgkAKVOayFk": {
+          "expr": "$r9M0wMmXkykZyn6F4TTRAYA8L0 .set_from ,( $AfEXlARLuMnLY9k2MuuF2mDQL0 .string ,( 'display/005fname ,) ,)",
+          "nodeType": "exprStmt",
+          "locals": []
+        },
+        "DDfAf7ceX18Zl64nT8Ucj3Vs": {
+          "text": "The link to the question page can easily be recreated from the question id. we don't need to url escape the number as it has been converter to a Number by the json parser.",
+          "nodeType": "comment"
+        },
+        "w8WlGTqky4qrYQ37AgxZjyl2": {
+          "expr": "$r9M0wMmXkykZyn6F4TTRAYA8L0 .set_link ,( 'http/003a/002f/002fwww/002estackoverflow/002ecom/002fquestions/002f ,∥ $Lnt8bJjly4zY9caxCr9N4W4SB0 .number ,( 'question/005fid ,) ,)",
+          "nodeType": "exprStmt",
+          "locals": []
+        },
+        "Ekcqtq2v6iXWggY8f5qMYoO3": {
+          "text": "Gravatar is a web service that provides a unique and stable image for email addresses. it is used in many different web sites to associate a photo to a user email address. StackOverflow makes our life easier here by providing the hash of the email that can be used to get the gravatar easily.",
+          "nodeType": "comment"
+        },
+        "knwtvBhvKj9UNQT252CI0HTN": {
+          "expr": "$r9M0wMmXkykZyn6F4TTRAYA8L0 .set_picture_link ,( 'http/003a/002f/002fwww/002egravatar/002ecom/002favatar/002f ,∥ :web .url_encode ,( $AfEXlARLuMnLY9k2MuuF2mDQL0 .string ,( 'email/005fhash ,) ,) ,∥ '/003fs/003d72 ,)",
+          "nodeType": "exprStmt",
+          "locals": []
+        },
+        "G2n4Zq584voNM3D9Oc08US8Z": {
+          "expr": "$r9M0wMmXkykZyn6F4TTRAYA8L0 .set_source ,( 'StackOverflow ,)",
+          "nodeType": "exprStmt",
+          "locals": []
+        },
+        "pwZNtZXmuWsa9ys400zQ6JNl": {
+          "expr": "$r9M0wMmXkykZyn6F4TTRAYA8L0 .post_to_wall",
+          "nodeType": "exprStmt",
+          "locals": []
+        },
+        "Lnt8bJjly4zY9caxCr9N4W4SB0": {
+          "name": "q",
+          "type": "Json Object",
+          "nodeType": "localDef"
+        },
+        "Lnt8bJjly4zY9caxCr9N4W4S": {
+          "collection": "$xf5BSoTOvZ4Yk5ovDRJ2XKQ1L0",
+          "conditions": [
+            "ziAREmryaumGnCwfD2pCDeMj"
+          ],
+          "body": [
+            "a33D32dvBixR224j2WDKBber",
+            "r9M0wMmXkykZyn6F4TTRAYA8",
+            "xhR4Cn60QJ6FvJBpNd7LzhjN",
+            "AfEXlARLuMnLY9k2MuuF2mDQ",
+            "crT3WB6Z4I2dchgkAKVOayFk",
+            "DDfAf7ceX18Zl64nT8Ucj3Vs",
+            "w8WlGTqky4qrYQ37AgxZjyl2",
+            "Ekcqtq2v6iXWggY8f5qMYoO3",
+            "knwtvBhvKj9UNQT252CI0HTN",
+            "G2n4Zq584voNM3D9Oc08US8Z",
+            "pwZNtZXmuWsa9ys400zQ6JNl"
+          ],
+          "nodeType": "foreach",
+          "locals": [
+            "Lnt8bJjly4zY9caxCr9N4W4SB0"
+          ]
+        },
+        "IheY2ZwJUSOHYNrFcGDZQ6Tv": {
+          "name": "main",
+          "inParameters": [],
+          "outParameters": [],
+          "isPrivate": false,
+          "body": [
+            "LoI2b9xQ2jr5Ud4PiciqIZrC",
+            "xVG2LEDAGuMrHnM1cgntNOPj",
+            "TnzSaKCSINGSO4I24aW782Wc",
+            "zTTMrut2i7Z4DsHPAllu1Nx2",
+            "R1Ymar2INn1Abvst4xN9ApWK",
+            "xezWLSGXX0bMYQjHCmgROOsW",
+            "xH8ksbb4Emmp79X9GvmLbBN8",
+            "xjWI7sazGEj1VelPj1LRrLy3",
+            "xf5BSoTOvZ4Yk5ovDRJ2XKQ1",
+            "Lnt8bJjly4zY9caxCr9N4W4S"
+          ]
+        },
+        "app": {
+          "rootId": "NOUKTclCP7081s8tG6bL2WJl",
+          "isLibrary": false,
+          "decls": [
+            "IheY2ZwJUSOHYNrFcGDZQ6Tv"
+          ]
+        },
+        "dGlKClUsg7p4q06KYG4Wgmec": null,
+        "dGlKClUsg7p4q06KYG4WgmecP0": null,
+        "dGlKClUsg7p4q06KYG4WgmecP1": null,
+        "eldIfg69ONLUamHp3f4JFpem": null,
+        "xyegeQx1y2laKvp8lfaHXCzy": null,
+        "u8ElcFHmqsQbxwf24RZjWdQM": null,
+        "u8ElcFHmqsQbxwf24RZjWdQML0": null,
+        "Au4tbCRA2MqOp6nNAVOrH2gg": null,
+        "n84Y422FSI1O8pZAllZKnE3J": null,
+        "n84Y422FSI1O8pZAllZKnE3JL0": null,
+        "VTHcYJcy6BaW2NUrKnNV781J": null,
+        "gvWE8Hcq12JD0VXuUEK8okU4": null,
+        "gvWE8Hcq12JD0VXuUEK8okU4L0": null,
+        "YL9zv2WSuz0Af46vzDCVeIZ3": null,
+        "YL9zv2WSuz0Af46vzDCVeIZ3L0": null,
+        "rZ1R0YfA4Rehj253eAxUZNp8": null,
+        "R7qgub5E9qsK0WlN13XdIZIM": null,
+        "RMgHhUnVzN9DUcrFPBWxQSt8": null,
+        "RMgHhUnVzN9DUcrFPBWxQSt8L0": null,
+        "bg44uOA38WxOWU8DYs9CzXJc": null,
+        "EvcoEGjrBc9SJZHQUbduD3bo": null,
+        "x7z7Oy96uVIBh4rxgIiUIiFI": null,
+        "x7z7Oy96uVIBh4rxgIiUIiFIL0": null,
+        "A2exkAIn204zKQ5gtSQeW0Qa": null,
+        "bg44uOA38WxOWU8DYs9CzXJcB0": null,
+        "IheY2ZwJUSOHYNrFcGDZQ6TvP0": null,
+        "IheY2ZwJUSOHYNrFcGDZQ6TvP1": null,
+        "u7N9d40KhEHzTfnfw4FZhfFV": null,
+        "TGosQWd14PRPbKL6vGKixTNK": null,
+        "AZWvl52coZRCp8gXNjcP5stp": null,
+        "UXx44HfX4zE8Q51H5lc6lVD9": null,
+        "zX0UjHzF2EIXX9Vw0RdTpak4": null,
+        "D9eBY5dNjY6NYccPSOATDdUD": null,
+        "emRQAcU902ZD87ltcPPz6Rnf": null,
+        "MeNazSib7EWgA2ihC2y44h08": null
+      }
+    },
+    {
+      "seqNo": 3,
+      "time": 1343741878,
+      "scriptId": "smtr",
+      "historyId": "25205855892102174102f72ee1f-c631-42ae-9200-2b8773792822",
+      "updateSize": 7483,
+      "updates": {
+        "EUinaZhJ2beiPhJu73H0zX5JP0": {
+          "name": "terms",
+          "type": "String",
+          "nodeType": "localDef"
+        },
+        "EUinaZhJ2beiPhJu73H0zX5JP1": {
+          "name": "msgs",
+          "type": "Message Collection",
+          "nodeType": "localDef"
+        },
+        "xmNMbjvW74aT6P8hdCOAcLdA": {
+          "text": "Searches stackoverflow",
+          "nodeType": "comment"
+        },
+        "xcBl8oLfQYObbR48mAG7uzDc": {
+          "text": "We build the query url. note how we escape the terms using 'url encode'",
+          "nodeType": "comment"
+        },
+        "YH5rozdM2IvQCStBVGveUCK0L0": {
+          "name": "url",
+          "type": "String",
+          "nodeType": "localDef"
+        },
+        "YH5rozdM2IvQCStBVGveUCK0": {
+          "expr": "$YH5rozdM2IvQCStBVGveUCK0L0 ,:= 'http/003a/002f/002fapi/002estackoverflow/002ecom/002f1/002e1/002fsearch/003ftagged/003d ,∥ :web .url_encode ,( $EUinaZhJ2beiPhJu73H0zX5JP0 ,)",
+          "nodeType": "exprStmt",
+          "locals": [
+            "YH5rozdM2IvQCStBVGveUCK0L0"
+          ]
+        },
+        "gcEL4C4zfh45oCkVLuNA2qOw": {
+          "text": "This line does 2 things: it downloads the result and parses it into a json data structure",
+          "nodeType": "comment"
+        },
+        "UwzhAP5wXXVXj86GIH1naiv2L0": {
+          "name": "request",
+          "type": "Web Request",
+          "nodeType": "localDef"
+        },
+        "UwzhAP5wXXVXj86GIH1naiv2": {
+          "expr": "$UwzhAP5wXXVXj86GIH1naiv2L0 ,:= :web .create_request ,( $YH5rozdM2IvQCStBVGveUCK0L0 ,)",
+          "nodeType": "exprStmt",
+          "locals": [
+            "UwzhAP5wXXVXj86GIH1naiv2L0"
+          ]
+        },
+        "x0FgvPTa4Z3JxNePfFjaMSF4": {
+          "expr": "$UwzhAP5wXXVXj86GIH1naiv2L0 .set_header ,( 'Accept ,, 'application/002fjson ,)",
+          "nodeType": "exprStmt",
+          "locals": []
+        },
+        "WJ8EFKkioUUZrvHJqiCPzRFwL0": {
+          "name": "response",
+          "type": "Web Response",
+          "nodeType": "localDef"
+        },
+        "WJ8EFKkioUUZrvHJqiCPzRFw": {
+          "expr": "$WJ8EFKkioUUZrvHJqiCPzRFwL0 ,:= $UwzhAP5wXXVXj86GIH1naiv2L0 .send",
+          "nodeType": "exprStmt",
+          "locals": [
+            "WJ8EFKkioUUZrvHJqiCPzRFwL0"
+          ]
+        },
+        "xOJ8ycunCnoxkb2RS86zw2QgL0": {
+          "name": "json",
+          "type": "Json Object",
+          "nodeType": "localDef"
+        },
+        "xOJ8ycunCnoxkb2RS86zw2Qg": {
+          "expr": "$xOJ8ycunCnoxkb2RS86zw2QgL0 ,:= $WJ8EFKkioUUZrvHJqiCPzRFwL0 .content_as_json",
+          "nodeType": "exprStmt",
+          "locals": [
+            "xOJ8ycunCnoxkb2RS86zw2QgL0"
+          ]
+        },
+        "tG12MaymDX8PpyHXGaTo4Tvk": {
+          "text": "We fetch the questions field from the json object. this should be an array of results that we can enumerate in a foreach loop",
+          "nodeType": "comment"
+        },
+        "VaB9HnRUZoWtbBq79eLEh2x2": {
+          "expr": "$EUinaZhJ2beiPhJu73H0zX5JP1 ,:= :collections .create_message_collection",
+          "nodeType": "exprStmt",
+          "locals": []
+        },
+        "pfQ5FYSYhFntaahgoa4w4wB0L0": {
+          "name": "qs",
+          "type": "Json Object",
+          "nodeType": "localDef"
+        },
+        "pfQ5FYSYhFntaahgoa4w4wB0": {
+          "expr": "$pfQ5FYSYhFntaahgoa4w4wB0L0 ,:= $xOJ8ycunCnoxkb2RS86zw2QgL0 .field ,( 'questions ,)",
+          "nodeType": "exprStmt",
+          "locals": [
+            "pfQ5FYSYhFntaahgoa4w4wB0L0"
+          ]
+        },
+        "ToOQx9ROYgOuqygHpfO2BsBn": {
+          "condition": "T",
+          "nodeType": "where",
+          "locals": []
+        },
+        "dyBQqNGY8T6z9O1T94ToRagAL0": {
+          "name": "msg",
+          "type": "Message",
+          "nodeType": "localDef"
+        },
+        "dyBQqNGY8T6z9O1T94ToRagA": {
+          "expr": "$dyBQqNGY8T6z9O1T94ToRagAL0 ,:= :code #IheY2ZwJUSOHYNrFcGDZQ6Tv ,( $OqcguymFrDkuRIcEecgPjBNZB0 ,)",
+          "nodeType": "exprStmt",
+          "locals": [
+            "dyBQqNGY8T6z9O1T94ToRagAL0"
+          ]
+        },
+        "KbNKF2X1zVz0FGRiNZsuirzh": {
+          "expr": "$EUinaZhJ2beiPhJu73H0zX5JP1 .add ,( $dyBQqNGY8T6z9O1T94ToRagAL0 ,)",
+          "nodeType": "exprStmt",
+          "locals": []
+        },
+        "OqcguymFrDkuRIcEecgPjBNZB0": {
+          "name": "q",
+          "type": "Json Object",
+          "nodeType": "localDef"
+        },
+        "OqcguymFrDkuRIcEecgPjBNZ": {
+          "collection": "$pfQ5FYSYhFntaahgoa4w4wB0L0",
+          "conditions": [
+            "ToOQx9ROYgOuqygHpfO2BsBn"
+          ],
+          "body": [
+            "dyBQqNGY8T6z9O1T94ToRagA",
+            "KbNKF2X1zVz0FGRiNZsuirzh"
+          ],
+          "nodeType": "foreach",
+          "locals": [
+            "OqcguymFrDkuRIcEecgPjBNZB0"
+          ]
+        },
+        "EUinaZhJ2beiPhJu73H0zX5J": {
+          "name": "search",
+          "inParameters": [
+            "EUinaZhJ2beiPhJu73H0zX5JP0"
+          ],
+          "outParameters": [
+            "EUinaZhJ2beiPhJu73H0zX5JP1"
+          ],
+          "isPrivate": false,
+          "isOffloaded": false,
+          "isTest": false,
+          "isAsync": false,
+          "nodeType": "action",
+          "body": [
+            "xmNMbjvW74aT6P8hdCOAcLdA",
+            "xcBl8oLfQYObbR48mAG7uzDc",
+            "YH5rozdM2IvQCStBVGveUCK0",
+            "gcEL4C4zfh45oCkVLuNA2qOw",
+            "UwzhAP5wXXVXj86GIH1naiv2",
+            "x0FgvPTa4Z3JxNePfFjaMSF4",
+            "WJ8EFKkioUUZrvHJqiCPzRFw",
+            "xOJ8ycunCnoxkb2RS86zw2Qg",
+            "tG12MaymDX8PpyHXGaTo4Tvk",
+            "VaB9HnRUZoWtbBq79eLEh2x2",
+            "pfQ5FYSYhFntaahgoa4w4wB0",
+            "OqcguymFrDkuRIcEecgPjBNZ"
+          ]
+        },
+        "IheY2ZwJUSOHYNrFcGDZQ6TvP0": {
+          "name": "q",
+          "type": "Json Object",
+          "nodeType": "localDef"
+        },
+        "IheY2ZwJUSOHYNrFcGDZQ6TvP1": {
+          "name": "msg",
+          "type": "Message",
+          "nodeType": "localDef"
+        },
+        "ksYPrBMuJy4J8ML8J0rPJBUN": {
+          "text": "We create a message, the basic data structure to hold messages from social services",
+          "nodeType": "comment"
+        },
+        "trTQQ2krRlGhHD04LolFwwgL": {
+          "expr": "$IheY2ZwJUSOHYNrFcGDZQ6TvP1 ,:= :social .create_message ,( $IheY2ZwJUSOHYNrFcGDZQ6TvP0 .string ,( 'title ,) ,)",
+          "nodeType": "exprStmt",
+          "locals": []
+        },
+        "x96cUOnLb4jr2hT937hJ4LnC": {
+          "text": "The information about the author is stored in a nested field owner",
+          "nodeType": "comment"
+        },
+        "xf5BSoTOvZ4Yk5ovDRJ2XKQ1L0": {
+          "name": "owner"
+        },
+        "xf5BSoTOvZ4Yk5ovDRJ2XKQ1": {
+          "expr": "$xf5BSoTOvZ4Yk5ovDRJ2XKQ1L0 ,:= $IheY2ZwJUSOHYNrFcGDZQ6TvP0 .field ,( 'owner ,)"
+        },
+        "z2Eidu3rqdkv7zwYm6VoWf6L": {
+          "expr": "$IheY2ZwJUSOHYNrFcGDZQ6TvP1 .set_from ,( $xf5BSoTOvZ4Yk5ovDRJ2XKQ1L0 .string ,( 'display/005fname ,) ,)",
+          "nodeType": "exprStmt",
+          "locals": []
+        },
+        "wonaNn6Na8UTKbA22WpZaxw7": {
+          "text": "The link to the question page can easily be recreated from the question id. we don't need to url escape the number as it has been converter to a Number by the json parser.",
+          "nodeType": "comment"
+        },
+        "I01HPc1axsZR8kWiU5gLzhjB": {
+          "expr": "$IheY2ZwJUSOHYNrFcGDZQ6TvP1 .set_link ,( 'http/003a/002f/002fwww/002estackoverflow/002ecom/002fquestions/002f ,∥ $IheY2ZwJUSOHYNrFcGDZQ6TvP0 .number ,( 'question/005fid ,) ,)",
+          "nodeType": "exprStmt",
+          "locals": []
+        },
+        "G7WRhy9AaLO4ghNf7R2KvS8q": {
+          "text": "Gravatar is a web service that provides a unique and stable image for email addresses. it is used in many different web sites to associate a photo to a user email address. StackOverflow makes our life easier here by providing the hash of the email that can be used to get the gravatar easily.",
+          "nodeType": "comment"
+        },
+        "vee6OL5nMvdOhlawsCDXnobV": {
+          "expr": "$IheY2ZwJUSOHYNrFcGDZQ6TvP1 .set_picture_link ,( 'http/003a/002f/002fwww/002egravatar/002ecom/002favatar/002f ,∥ :web .url_encode ,( $xf5BSoTOvZ4Yk5ovDRJ2XKQ1L0 .string ,( 'email/005fhash ,) ,) ,∥ '/003fs/003d72 ,)",
+          "nodeType": "exprStmt",
+          "locals": []
+        },
+        "SbT3yEhBcTOUX0zFojyFw4DO": {
+          "expr": "$IheY2ZwJUSOHYNrFcGDZQ6TvP1 .set_source ,( 'StackOverflow ,)",
+          "nodeType": "exprStmt",
+          "locals": []
+        },
+        "IheY2ZwJUSOHYNrFcGDZQ6Tv": {
+          "name": "create message",
+          "inParameters": [
+            "IheY2ZwJUSOHYNrFcGDZQ6TvP0"
+          ],
+          "outParameters": [
+            "IheY2ZwJUSOHYNrFcGDZQ6TvP1"
+          ],
+          "isPrivate": true,
+          "body": [
+            "ksYPrBMuJy4J8ML8J0rPJBUN",
+            "trTQQ2krRlGhHD04LolFwwgL",
+            "x96cUOnLb4jr2hT937hJ4LnC",
+            "xf5BSoTOvZ4Yk5ovDRJ2XKQ1",
+            "z2Eidu3rqdkv7zwYm6VoWf6L",
+            "wonaNn6Na8UTKbA22WpZaxw7",
+            "I01HPc1axsZR8kWiU5gLzhjB",
+            "G7WRhy9AaLO4ghNf7R2KvS8q",
+            "vee6OL5nMvdOhlawsCDXnobV",
+            "SbT3yEhBcTOUX0zFojyFw4DO"
+          ]
+        },
+        "app": {
+          "rootId": "DDLtPrSI6u7XWLaFsdqIuiex",
+          "isLibrary": true,
+          "decls": [
+            "EUinaZhJ2beiPhJu73H0zX5J",
+            "IheY2ZwJUSOHYNrFcGDZQ6Tv"
+          ]
+        },
+        "LoI2b9xQ2jr5Ud4PiciqIZrC": null,
+        "xVG2LEDAGuMrHnM1cgntNOPj": null,
+        "TnzSaKCSINGSO4I24aW782Wc": null,
+        "TnzSaKCSINGSO4I24aW782WcL0": null,
+        "zTTMrut2i7Z4DsHPAllu1Nx2": null,
+        "R1Ymar2INn1Abvst4xN9ApWK": null,
+        "R1Ymar2INn1Abvst4xN9ApWKL0": null,
+        "xezWLSGXX0bMYQjHCmgROOsW": null,
+        "xH8ksbb4Emmp79X9GvmLbBN8": null,
+        "xH8ksbb4Emmp79X9GvmLbBN8L0": null,
+        "xjWI7sazGEj1VelPj1LRrLy3": null,
+        "Lnt8bJjly4zY9caxCr9N4W4S": null,
+        "ziAREmryaumGnCwfD2pCDeMj": null,
+        "a33D32dvBixR224j2WDKBber": null,
+        "r9M0wMmXkykZyn6F4TTRAYA8": null,
+        "r9M0wMmXkykZyn6F4TTRAYA8L0": null,
+        "xhR4Cn60QJ6FvJBpNd7LzhjN": null,
+        "AfEXlARLuMnLY9k2MuuF2mDQ": null,
+        "AfEXlARLuMnLY9k2MuuF2mDQL0": null,
+        "crT3WB6Z4I2dchgkAKVOayFk": null,
+        "DDfAf7ceX18Zl64nT8Ucj3Vs": null,
+        "w8WlGTqky4qrYQ37AgxZjyl2": null,
+        "Ekcqtq2v6iXWggY8f5qMYoO3": null,
+        "knwtvBhvKj9UNQT252CI0HTN": null,
+        "G2n4Zq584voNM3D9Oc08US8Z": null,
+        "pwZNtZXmuWsa9ys400zQ6JNl": null,
+        "Lnt8bJjly4zY9caxCr9N4W4SB0": null
+      }
+    },
+    {
+      "seqNo": 4,
+      "time": 1343756085,
+      "scriptId": "kvcb",
+      "historyId": "2520585447147127360f3fabcb2-5f5f-404d-b679-bf2706a2ffde",
+      "updateSize": 6368,
+      "updates": {
+        "d2s30141UbURzWwgGPrkaxk2": {
+          "text": "Searches for tagged questions on stackoverflow...",
+          "nodeType": "comment"
+        },
+        "WIx3sX2CuQ75iSLhh5C25EMx": {
+          "text": "We start by asking the user for a search term",
+          "nodeType": "comment"
+        },
+        "SbT3yEhBcTOUX0zFojyFw4DOL0": {
+          "name": "terms",
+          "type": "String",
+          "nodeType": "localDef"
+        },
+        "SbT3yEhBcTOUX0zFojyFw4DO": {
+          "expr": "$SbT3yEhBcTOUX0zFojyFw4DOL0 ,:= :wall .ask_string ,( 'Search_stackoverflow/002ecom ,)",
+          "locals": [
+            "SbT3yEhBcTOUX0zFojyFw4DOL0"
+          ]
+        },
+        "yvZ2bDVc5b92emAnH5j7igDW": {
+          "text": "We build the query url. note how we escape the terms using 'url encode'",
+          "nodeType": "comment"
+        },
+        "UPmmd2SwraSxh2Kc6I5MK92jL0": {
+          "name": "url",
+          "type": "String",
+          "nodeType": "localDef"
+        },
+        "UPmmd2SwraSxh2Kc6I5MK92j": {
+          "expr": "$UPmmd2SwraSxh2Kc6I5MK92jL0 ,:= 'http/003a/002f/002fapi/002estackoverflow/002ecom/002f1/002e1/002fsearch/003ftagged/003d ,∥ :web .url_encode ,( $SbT3yEhBcTOUX0zFojyFw4DOL0 ,)",
+          "nodeType": "exprStmt",
+          "locals": [
+            "UPmmd2SwraSxh2Kc6I5MK92jL0"
+          ]
+        },
+        "xrBPRcIxDbkO6oL5G8D0MP2Z": {
+          "text": "This line does 2 things: it downloads the result and parses it into a json data structure",
+          "nodeType": "comment"
+        },
+        "QCOm3FMB6NhLjAaJcNkXQD8dL0": {
+          "name": "json",
+          "type": "Json Object",
+          "nodeType": "localDef"
+        },
+        "QCOm3FMB6NhLjAaJcNkXQD8d": {
+          "expr": "$QCOm3FMB6NhLjAaJcNkXQD8dL0 ,:= :web .json ,( :web .download ,( $UPmmd2SwraSxh2Kc6I5MK92jL0 ,) ,)",
+          "nodeType": "exprStmt",
+          "locals": [
+            "QCOm3FMB6NhLjAaJcNkXQD8dL0"
+          ]
+        },
+        "BkB2ictnXer2urqc2KXQ2Q3T": {
+          "text": "We fetch the questions field from the json object. this should be an array of results that we can enumerate in a foreach loop",
+          "nodeType": "comment"
+        },
+        "xf5BSoTOvZ4Yk5ovDRJ2XKQ1L0": {
+          "name": "qs"
+        },
+        "xf5BSoTOvZ4Yk5ovDRJ2XKQ1": {
+          "expr": "$xf5BSoTOvZ4Yk5ovDRJ2XKQ1L0 ,:= $QCOm3FMB6NhLjAaJcNkXQD8dL0 .field ,( 'questions ,)"
+        },
+        "b242k2vi2Rge0SskE2gwxCG7": {
+          "condition": "T",
+          "nodeType": "where",
+          "locals": []
+        },
+        "S5ZDPrwONnm3vY4SAmENyTWk": {
+          "text": "We create a message, the basic data structure to hold messages from social services",
+          "nodeType": "comment"
+        },
+        "cCK6lRMLfuJhSOdRIN6j17OlL0": {
+          "name": "msg",
+          "type": "Message",
+          "nodeType": "localDef"
+        },
+        "cCK6lRMLfuJhSOdRIN6j17Ol": {
+          "expr": "$cCK6lRMLfuJhSOdRIN6j17OlL0 ,:= :social .create_message ,( $RhGJZz9V4HH4N3wA7ZgL9S3cB0 .string ,( 'title ,) ,)",
+          "nodeType": "exprStmt",
+          "locals": [
+            "cCK6lRMLfuJhSOdRIN6j17OlL0"
+          ]
+        },
+        "ELwR4rOFcIfEYGrB3Xpra4H4": {
+          "text": "The information about the author is stored in a nested field owner",
+          "nodeType": "comment"
+        },
+        "jwN28RLdWarNO84L1PiTXEQFL0": {
+          "name": "owner",
+          "type": "Json Object",
+          "nodeType": "localDef"
+        },
+        "jwN28RLdWarNO84L1PiTXEQF": {
+          "expr": "$jwN28RLdWarNO84L1PiTXEQFL0 ,:= $RhGJZz9V4HH4N3wA7ZgL9S3cB0 .field ,( 'owner ,)",
+          "nodeType": "exprStmt",
+          "locals": [
+            "jwN28RLdWarNO84L1PiTXEQFL0"
+          ]
+        },
+        "WGlge2zPh0dGg23mGvmvJhzm": {
+          "expr": "$cCK6lRMLfuJhSOdRIN6j17OlL0 .set_from ,( $jwN28RLdWarNO84L1PiTXEQFL0 .string ,( 'display/005fname ,) ,)",
+          "nodeType": "exprStmt",
+          "locals": []
+        },
+        "bQuu2Kjyw6BFQNTa6neOKTBE": {
+          "text": "The link to the question page can easily be recreated from the question id. we don't need to url escape the number as it has been converter to a Number by the json parser.",
+          "nodeType": "comment"
+        },
+        "JcjNkzSCUuyT4pGmeLKOixpt": {
+          "expr": "$cCK6lRMLfuJhSOdRIN6j17OlL0 .set_link ,( 'http/003a/002f/002fwww/002estackoverflow/002ecom/002fquestions/002f ,∥ $RhGJZz9V4HH4N3wA7ZgL9S3cB0 .number ,( 'question/005fid ,) ,)",
+          "nodeType": "exprStmt",
+          "locals": []
+        },
+        "ufFc4FNbDAStIRc2fBHc1M4m": {
+          "text": "Gravatar is a web service that provides a unique and stable image for email addresses. it is used in many different web sites to associate a photo to a user email address. StackOverflow makes our life easier here by providing the hash of the email that can be used to get the gravatar easily.",
+          "nodeType": "comment"
+        },
+        "xSds1yfcbd13lEJ25vA6cVDm": {
+          "expr": "$cCK6lRMLfuJhSOdRIN6j17OlL0 .set_picture_link ,( 'http/003a/002f/002fwww/002egravatar/002ecom/002favatar/002f ,∥ :web .url_encode ,( $jwN28RLdWarNO84L1PiTXEQFL0 .string ,( 'email/005fhash ,) ,) ,∥ '/003fs/003d72 ,)",
+          "nodeType": "exprStmt",
+          "locals": []
+        },
+        "RiScmeBuunxFqKvZRw4maodQ": {
+          "expr": "$cCK6lRMLfuJhSOdRIN6j17OlL0 .set_source ,( 'StackOverflow ,)",
+          "nodeType": "exprStmt",
+          "locals": []
+        },
+        "xmqFLt2njFjc3bP9vNcJjHmc": {
+          "expr": "$cCK6lRMLfuJhSOdRIN6j17OlL0 .post_to_wall",
+          "nodeType": "exprStmt",
+          "locals": []
+        },
+        "RhGJZz9V4HH4N3wA7ZgL9S3cB0": {
+          "name": "q",
+          "type": "Json Object",
+          "nodeType": "localDef"
+        },
+        "RhGJZz9V4HH4N3wA7ZgL9S3c": {
+          "collection": "$xf5BSoTOvZ4Yk5ovDRJ2XKQ1L0",
+          "conditions": [
+            "b242k2vi2Rge0SskE2gwxCG7"
+          ],
+          "body": [
+            "S5ZDPrwONnm3vY4SAmENyTWk",
+            "cCK6lRMLfuJhSOdRIN6j17Ol",
+            "ELwR4rOFcIfEYGrB3Xpra4H4",
+            "jwN28RLdWarNO84L1PiTXEQF",
+            "WGlge2zPh0dGg23mGvmvJhzm",
+            "bQuu2Kjyw6BFQNTa6neOKTBE",
+            "JcjNkzSCUuyT4pGmeLKOixpt",
+            "ufFc4FNbDAStIRc2fBHc1M4m",
+            "xSds1yfcbd13lEJ25vA6cVDm",
+            "RiScmeBuunxFqKvZRw4maodQ",
+            "xmqFLt2njFjc3bP9vNcJjHmc"
+          ],
+          "nodeType": "foreach",
+          "locals": [
+            "RhGJZz9V4HH4N3wA7ZgL9S3cB0"
+          ]
+        },
+        "IheY2ZwJUSOHYNrFcGDZQ6Tv": {
+          "name": "main",
+          "inParameters": [],
+          "outParameters": [],
+          "isPrivate": false,
+          "body": [
+            "d2s30141UbURzWwgGPrkaxk2",
+            "WIx3sX2CuQ75iSLhh5C25EMx",
+            "SbT3yEhBcTOUX0zFojyFw4DO",
+            "yvZ2bDVc5b92emAnH5j7igDW",
+            "UPmmd2SwraSxh2Kc6I5MK92j",
+            "xrBPRcIxDbkO6oL5G8D0MP2Z",
+            "QCOm3FMB6NhLjAaJcNkXQD8d",
+            "BkB2ictnXer2urqc2KXQ2Q3T",
+            "xf5BSoTOvZ4Yk5ovDRJ2XKQ1",
+            "RhGJZz9V4HH4N3wA7ZgL9S3c"
+          ]
+        },
+        "app": {
+          "rootId": "s7XILduDsd83JB77qYv034k4",
+          "isLibrary": false,
+          "decls": [
+            "IheY2ZwJUSOHYNrFcGDZQ6Tv"
+          ]
+        },
+        "EUinaZhJ2beiPhJu73H0zX5J": null,
+        "EUinaZhJ2beiPhJu73H0zX5JP0": null,
+        "EUinaZhJ2beiPhJu73H0zX5JP1": null,
+        "xmNMbjvW74aT6P8hdCOAcLdA": null,
+        "xcBl8oLfQYObbR48mAG7uzDc": null,
+        "YH5rozdM2IvQCStBVGveUCK0": null,
+        "YH5rozdM2IvQCStBVGveUCK0L0": null,
+        "gcEL4C4zfh45oCkVLuNA2qOw": null,
+        "UwzhAP5wXXVXj86GIH1naiv2": null,
+        "UwzhAP5wXXVXj86GIH1naiv2L0": null,
+        "x0FgvPTa4Z3JxNePfFjaMSF4": null,
+        "WJ8EFKkioUUZrvHJqiCPzRFw": null,
+        "WJ8EFKkioUUZrvHJqiCPzRFwL0": null,
+        "xOJ8ycunCnoxkb2RS86zw2Qg": null,
+        "xOJ8ycunCnoxkb2RS86zw2QgL0": null,
+        "tG12MaymDX8PpyHXGaTo4Tvk": null,
+        "VaB9HnRUZoWtbBq79eLEh2x2": null,
+        "pfQ5FYSYhFntaahgoa4w4wB0": null,
+        "pfQ5FYSYhFntaahgoa4w4wB0L0": null,
+        "OqcguymFrDkuRIcEecgPjBNZ": null,
+        "ToOQx9ROYgOuqygHpfO2BsBn": null,
+        "dyBQqNGY8T6z9O1T94ToRagA": null,
+        "dyBQqNGY8T6z9O1T94ToRagAL0": null,
+        "KbNKF2X1zVz0FGRiNZsuirzh": null,
+        "OqcguymFrDkuRIcEecgPjBNZB0": null,
+        "IheY2ZwJUSOHYNrFcGDZQ6TvP0": null,
+        "IheY2ZwJUSOHYNrFcGDZQ6TvP1": null,
+        "ksYPrBMuJy4J8ML8J0rPJBUN": null,
+        "trTQQ2krRlGhHD04LolFwwgL": null,
+        "x96cUOnLb4jr2hT937hJ4LnC": null,
+        "z2Eidu3rqdkv7zwYm6VoWf6L": null,
+        "wonaNn6Na8UTKbA22WpZaxw7": null,
+        "I01HPc1axsZR8kWiU5gLzhjB": null,
+        "G7WRhy9AaLO4ghNf7R2KvS8q": null,
+        "vee6OL5nMvdOhlawsCDXnobV": null
+      }
+    },
+    {
+      "seqNo": 5,
+      "time": 1343832895,
+      "scriptId": "smtr",
+      "historyId": "252058467904712007003b14c24-fc66-4b0e-9494-d8ae683bcce5",
+      "updateSize": 7483,
+      "updates": {
+        "CQOTapQaCCFQEBWLavT3hs42P0": {
+          "name": "terms",
+          "type": "String",
+          "nodeType": "localDef"
+        },
+        "CQOTapQaCCFQEBWLavT3hs42P1": {
+          "name": "msgs",
+          "type": "Message Collection",
+          "nodeType": "localDef"
+        },
+        "xJXnNvoryZLgLPrt3rrWbLSy": {
+          "text": "Searches stackoverflow",
+          "nodeType": "comment"
+        },
+        "xVLCD2muC3XxKE4GfsdPls6Z": {
+          "text": "We build the query url. note how we escape the terms using 'url encode'",
+          "nodeType": "comment"
+        },
+        "PJ4uyq7gMdxBQwlX4eN2FQmlL0": {
+          "name": "url",
+          "type": "String",
+          "nodeType": "localDef"
+        },
+        "PJ4uyq7gMdxBQwlX4eN2FQml": {
+          "expr": "$PJ4uyq7gMdxBQwlX4eN2FQmlL0 ,:= 'http/003a/002f/002fapi/002estackoverflow/002ecom/002f1/002e1/002fsearch/003ftagged/003d ,∥ :web .url_encode ,( $CQOTapQaCCFQEBWLavT3hs42P0 ,)",
+          "nodeType": "exprStmt",
+          "locals": [
+            "PJ4uyq7gMdxBQwlX4eN2FQmlL0"
+          ]
+        },
+        "CPme9Bf4kvwWni1UE4Ksrtvt": {
+          "text": "This line does 2 things: it downloads the result and parses it into a json data structure",
+          "nodeType": "comment"
+        },
+        "Xpq4RfdbD2Jnoyww01dyjcPNL0": {
+          "name": "request",
+          "type": "Web Request",
+          "nodeType": "localDef"
+        },
+        "Xpq4RfdbD2Jnoyww01dyjcPN": {
+          "expr": "$Xpq4RfdbD2Jnoyww01dyjcPNL0 ,:= :web .create_request ,( $PJ4uyq7gMdxBQwlX4eN2FQmlL0 ,)",
+          "nodeType": "exprStmt",
+          "locals": [
+            "Xpq4RfdbD2Jnoyww01dyjcPNL0"
+          ]
+        },
+        "xwBZpXAclg84gc6UwysDPnoM": {
+          "expr": "$Xpq4RfdbD2Jnoyww01dyjcPNL0 .set_header ,( 'Accept ,, 'application/002fjson ,)",
+          "nodeType": "exprStmt",
+          "locals": []
+        },
+        "yTtBVj8iCgF2kHtxpRsSNF80L0": {
+          "name": "response",
+          "type": "Web Response",
+          "nodeType": "localDef"
+        },
+        "yTtBVj8iCgF2kHtxpRsSNF80": {
+          "expr": "$yTtBVj8iCgF2kHtxpRsSNF80L0 ,:= $Xpq4RfdbD2Jnoyww01dyjcPNL0 .send",
+          "nodeType": "exprStmt",
+          "locals": [
+            "yTtBVj8iCgF2kHtxpRsSNF80L0"
+          ]
+        },
+        "MRReqjxsr3JSPEU6OXCgn7xrL0": {
+          "name": "json",
+          "type": "Json Object",
+          "nodeType": "localDef"
+        },
+        "MRReqjxsr3JSPEU6OXCgn7xr": {
+          "expr": "$MRReqjxsr3JSPEU6OXCgn7xrL0 ,:= $yTtBVj8iCgF2kHtxpRsSNF80L0 .content_as_json",
+          "nodeType": "exprStmt",
+          "locals": [
+            "MRReqjxsr3JSPEU6OXCgn7xrL0"
+          ]
+        },
+        "eReUK7dglIg0ldiwgUCYbPhR": {
+          "text": "We fetch the questions field from the json object. this should be an array of results that we can enumerate in a foreach loop",
+          "nodeType": "comment"
+        },
+        "KicHCBXEQY49RKk6NnHwex4m": {
+          "expr": "$CQOTapQaCCFQEBWLavT3hs42P1 ,:= :collections .create_message_collection",
+          "nodeType": "exprStmt",
+          "locals": []
+        },
+        "xFMcN0O2FBcD23nco8PqrOKlL0": {
+          "name": "qs",
+          "type": "Json Object",
+          "nodeType": "localDef"
+        },
+        "xFMcN0O2FBcD23nco8PqrOKl": {
+          "expr": "$xFMcN0O2FBcD23nco8PqrOKlL0 ,:= $MRReqjxsr3JSPEU6OXCgn7xrL0 .field ,( 'questions ,)",
+          "nodeType": "exprStmt",
+          "locals": [
+            "xFMcN0O2FBcD23nco8PqrOKlL0"
+          ]
+        },
+        "xTQEkyaEK2Bd5Tqueh9iB2vK": {
+          "condition": "T",
+          "nodeType": "where",
+          "locals": []
+        },
+        "Me4vk0iYrtRCRvjHwk0EbjIwL0": {
+          "name": "msg",
+          "type": "Message",
+          "nodeType": "localDef"
+        },
+        "Me4vk0iYrtRCRvjHwk0EbjIw": {
+          "expr": "$Me4vk0iYrtRCRvjHwk0EbjIwL0 ,:= :code #IheY2ZwJUSOHYNrFcGDZQ6Tv ,( $vP5tUGtuwQVUeCZ2KQ4fSo8bB0 ,)",
+          "nodeType": "exprStmt",
+          "locals": [
+            "Me4vk0iYrtRCRvjHwk0EbjIwL0"
+          ]
+        },
+        "ToQxHLs4FqWY5wZSvmoKw9Ni": {
+          "expr": "$CQOTapQaCCFQEBWLavT3hs42P1 .add ,( $Me4vk0iYrtRCRvjHwk0EbjIwL0 ,)",
+          "nodeType": "exprStmt",
+          "locals": []
+        },
+        "vP5tUGtuwQVUeCZ2KQ4fSo8bB0": {
+          "name": "q",
+          "type": "Json Object",
+          "nodeType": "localDef"
+        },
+        "vP5tUGtuwQVUeCZ2KQ4fSo8b": {
+          "collection": "$xFMcN0O2FBcD23nco8PqrOKlL0",
+          "conditions": [
+            "xTQEkyaEK2Bd5Tqueh9iB2vK"
+          ],
+          "body": [
+            "Me4vk0iYrtRCRvjHwk0EbjIw",
+            "ToQxHLs4FqWY5wZSvmoKw9Ni"
+          ],
+          "nodeType": "foreach",
+          "locals": [
+            "vP5tUGtuwQVUeCZ2KQ4fSo8bB0"
+          ]
+        },
+        "CQOTapQaCCFQEBWLavT3hs42": {
+          "name": "search",
+          "inParameters": [
+            "CQOTapQaCCFQEBWLavT3hs42P0"
+          ],
+          "outParameters": [
+            "CQOTapQaCCFQEBWLavT3hs42P1"
+          ],
+          "isPrivate": false,
+          "isOffloaded": false,
+          "isTest": false,
+          "isAsync": false,
+          "nodeType": "action",
+          "body": [
+            "xJXnNvoryZLgLPrt3rrWbLSy",
+            "xVLCD2muC3XxKE4GfsdPls6Z",
+            "PJ4uyq7gMdxBQwlX4eN2FQml",
+            "CPme9Bf4kvwWni1UE4Ksrtvt",
+            "Xpq4RfdbD2Jnoyww01dyjcPN",
+            "xwBZpXAclg84gc6UwysDPnoM",
+            "yTtBVj8iCgF2kHtxpRsSNF80",
+            "MRReqjxsr3JSPEU6OXCgn7xr",
+            "eReUK7dglIg0ldiwgUCYbPhR",
+            "KicHCBXEQY49RKk6NnHwex4m",
+            "xFMcN0O2FBcD23nco8PqrOKl",
+            "vP5tUGtuwQVUeCZ2KQ4fSo8b"
+          ]
+        },
+        "IheY2ZwJUSOHYNrFcGDZQ6TvP0": {
+          "name": "q",
+          "type": "Json Object",
+          "nodeType": "localDef"
+        },
+        "IheY2ZwJUSOHYNrFcGDZQ6TvP1": {
+          "name": "msg",
+          "type": "Message",
+          "nodeType": "localDef"
+        },
+        "t9ZRB2JHfbqoRLBgv1MINLa5": {
+          "text": "We create a message, the basic data structure to hold messages from social services",
+          "nodeType": "comment"
+        },
+        "zIdMHT7l952QD7CeGGhWylBv": {
+          "expr": "$IheY2ZwJUSOHYNrFcGDZQ6TvP1 ,:= :social .create_message ,( $IheY2ZwJUSOHYNrFcGDZQ6TvP0 .string ,( 'title ,) ,)",
+          "nodeType": "exprStmt",
+          "locals": []
+        },
+        "ipakJkmgwkmpk424DITHY30d": {
+          "text": "The information about the author is stored in a nested field owner",
+          "nodeType": "comment"
+        },
+        "xf5BSoTOvZ4Yk5ovDRJ2XKQ1L0": {
+          "name": "owner"
+        },
+        "xf5BSoTOvZ4Yk5ovDRJ2XKQ1": {
+          "expr": "$xf5BSoTOvZ4Yk5ovDRJ2XKQ1L0 ,:= $IheY2ZwJUSOHYNrFcGDZQ6TvP0 .field ,( 'owner ,)"
+        },
+        "I76MnfPokKwOz6POSu7tVefY": {
+          "expr": "$IheY2ZwJUSOHYNrFcGDZQ6TvP1 .set_from ,( $xf5BSoTOvZ4Yk5ovDRJ2XKQ1L0 .string ,( 'display/005fname ,) ,)",
+          "nodeType": "exprStmt",
+          "locals": []
+        },
+        "yxcOP3EUR2A32uJtuTX6Q89M": {
+          "text": "The link to the question page can easily be recreated from the question id. we don't need to url escape the number as it has been converter to a Number by the json parser.",
+          "nodeType": "comment"
+        },
+        "ebaq5wMNJfLAegW4tYyC8cZt": {
+          "expr": "$IheY2ZwJUSOHYNrFcGDZQ6TvP1 .set_link ,( 'http/003a/002f/002fwww/002estackoverflow/002ecom/002fquestions/002f ,∥ $IheY2ZwJUSOHYNrFcGDZQ6TvP0 .number ,( 'question/005fid ,) ,)",
+          "nodeType": "exprStmt",
+          "locals": []
+        },
+        "dyj4tQFD9bIMwX2ih2h5Menr": {
+          "text": "Gravatar is a web service that provides a unique and stable image for email addresses. it is used in many different web sites to associate a photo to a user email address. StackOverflow makes our life easier here by providing the hash of the email that can be used to get the gravatar easily.",
+          "nodeType": "comment"
+        },
+        "lKMOdAxxJUPyl40t2VnQmdem": {
+          "expr": "$IheY2ZwJUSOHYNrFcGDZQ6TvP1 .set_picture_link ,( 'http/003a/002f/002fwww/002egravatar/002ecom/002favatar/002f ,∥ :web .url_encode ,( $xf5BSoTOvZ4Yk5ovDRJ2XKQ1L0 .string ,( 'email/005fhash ,) ,) ,∥ '/003fs/003d72 ,)",
+          "nodeType": "exprStmt",
+          "locals": []
+        },
+        "Fgl0YtWPK4LRk7z97oc1C4Pq": {
+          "expr": "$IheY2ZwJUSOHYNrFcGDZQ6TvP1 .set_source ,( 'StackOverflow ,)",
+          "nodeType": "exprStmt",
+          "locals": []
+        },
+        "IheY2ZwJUSOHYNrFcGDZQ6Tv": {
+          "name": "create message",
+          "inParameters": [
+            "IheY2ZwJUSOHYNrFcGDZQ6TvP0"
+          ],
+          "outParameters": [
+            "IheY2ZwJUSOHYNrFcGDZQ6TvP1"
+          ],
+          "isPrivate": true,
+          "body": [
+            "t9ZRB2JHfbqoRLBgv1MINLa5",
+            "zIdMHT7l952QD7CeGGhWylBv",
+            "ipakJkmgwkmpk424DITHY30d",
+            "xf5BSoTOvZ4Yk5ovDRJ2XKQ1",
+            "I76MnfPokKwOz6POSu7tVefY",
+            "yxcOP3EUR2A32uJtuTX6Q89M",
+            "ebaq5wMNJfLAegW4tYyC8cZt",
+            "dyj4tQFD9bIMwX2ih2h5Menr",
+            "lKMOdAxxJUPyl40t2VnQmdem",
+            "Fgl0YtWPK4LRk7z97oc1C4Pq"
+          ]
+        },
+        "app": {
+          "rootId": "Aq5OQfJlT3uMIbLtxLLw2z0K",
+          "isLibrary": true,
+          "decls": [
+            "CQOTapQaCCFQEBWLavT3hs42",
+            "IheY2ZwJUSOHYNrFcGDZQ6Tv"
+          ]
+        },
+        "d2s30141UbURzWwgGPrkaxk2": null,
+        "WIx3sX2CuQ75iSLhh5C25EMx": null,
+        "SbT3yEhBcTOUX0zFojyFw4DO": null,
+        "SbT3yEhBcTOUX0zFojyFw4DOL0": null,
+        "yvZ2bDVc5b92emAnH5j7igDW": null,
+        "UPmmd2SwraSxh2Kc6I5MK92j": null,
+        "UPmmd2SwraSxh2Kc6I5MK92jL0": null,
+        "xrBPRcIxDbkO6oL5G8D0MP2Z": null,
+        "QCOm3FMB6NhLjAaJcNkXQD8d": null,
+        "QCOm3FMB6NhLjAaJcNkXQD8dL0": null,
+        "BkB2ictnXer2urqc2KXQ2Q3T": null,
+        "RhGJZz9V4HH4N3wA7ZgL9S3c": null,
+        "b242k2vi2Rge0SskE2gwxCG7": null,
+        "S5ZDPrwONnm3vY4SAmENyTWk": null,
+        "cCK6lRMLfuJhSOdRIN6j17Ol": null,
+        "cCK6lRMLfuJhSOdRIN6j17OlL0": null,
+        "ELwR4rOFcIfEYGrB3Xpra4H4": null,
+        "jwN28RLdWarNO84L1PiTXEQF": null,
+        "jwN28RLdWarNO84L1PiTXEQFL0": null,
+        "WGlge2zPh0dGg23mGvmvJhzm": null,
+        "bQuu2Kjyw6BFQNTa6neOKTBE": null,
+        "JcjNkzSCUuyT4pGmeLKOixpt": null,
+        "ufFc4FNbDAStIRc2fBHc1M4m": null,
+        "xSds1yfcbd13lEJ25vA6cVDm": null,
+        "RiScmeBuunxFqKvZRw4maodQ": null,
+        "xmqFLt2njFjc3bP9vNcJjHmc": null,
+        "RhGJZz9V4HH4N3wA7ZgL9S3cB0": null
+      }
+    },
+    {
+      "seqNo": 6,
+      "time": 1346281483,
+      "scriptId": "smtr",
+      "historyId": "252056019316696712933000864-0ca5-4754-8554-e2392b7e1268",
+      "updateSize": 45,
+      "updates": {
+        "app": {
+          "rootId": "DDLtPrSI6u7XWLaFsdqIuiex"
+        }
+      }
+    },
+    {
+      "seqNo": 7,
+      "time": 1351360690,
+      "scriptId": "smtr",
+      "historyId": "2520509401090551939835f5ffd-0899-4ce0-a8b8-7f96600367a0",
+      "updateSize": 2,
+      "updates": {}
+    },
+    {
+      "seqNo": 8,
+      "time": 1355212204,
+      "scriptId": null,
+      "historyId": "2520470885953213124c1146266-285f-41eb-9b8c-6cfcb4d03cff",
+      "updateSize": 4163,
+      "updates": {
+        "q0aB6DGGr8DB8tmhljVVfxS4L0": {
+          "name": "qs",
+          "type": "Json Object",
+          "nodeType": "localDef"
+        },
+        "q0aB6DGGr8DB8tmhljVVfxS4": {
+          "expr": "$q0aB6DGGr8DB8tmhljVVfxS4L0 ,:= $MRReqjxsr3JSPEU6OXCgn7xrL0 .field ,( 'questions ,)",
+          "nodeType": "exprStmt",
+          "locals": [
+            "q0aB6DGGr8DB8tmhljVVfxS4L0"
+          ]
+        },
+        "rT3GMKAovAw9YxBtL6bzS4PN": {
+          "condition": "T",
+          "nodeType": "where",
+          "locals": []
+        },
+        "uCaRPq6WTKr6mo7Po9SBaRuOL0": {
+          "name": "msg",
+          "type": "Message",
+          "nodeType": "localDef"
+        },
+        "uCaRPq6WTKr6mo7Po9SBaRuO": {
+          "expr": "$uCaRPq6WTKr6mo7Po9SBaRuOL0 ,:= :code #IheY2ZwJUSOHYNrFcGDZQ6Tv ,( $cdYl4GRkBhRmghKkraIapl0wB0 ,)",
+          "nodeType": "exprStmt",
+          "locals": [
+            "uCaRPq6WTKr6mo7Po9SBaRuOL0"
+          ]
+        },
+        "Tg2PN2i6VzJTfn7NZ4t3Mwqo": {
+          "expr": "$CQOTapQaCCFQEBWLavT3hs42P1 .add ,( $uCaRPq6WTKr6mo7Po9SBaRuOL0 ,)",
+          "nodeType": "exprStmt",
+          "locals": []
+        },
+        "cdYl4GRkBhRmghKkraIapl0wB0": {
+          "name": "q",
+          "type": "Json Object",
+          "nodeType": "localDef"
+        },
+        "cdYl4GRkBhRmghKkraIapl0w": {
+          "collection": "$q0aB6DGGr8DB8tmhljVVfxS4L0",
+          "conditions": [
+            "rT3GMKAovAw9YxBtL6bzS4PN"
+          ],
+          "body": [
+            "uCaRPq6WTKr6mo7Po9SBaRuO",
+            "Tg2PN2i6VzJTfn7NZ4t3Mwqo"
+          ],
+          "nodeType": "foreach",
+          "locals": [
+            "cdYl4GRkBhRmghKkraIapl0wB0"
+          ]
+        },
+        "JYj9DIwYNRHdmLcKl4xi4mK9": {
+          "nodeType": "if",
+          "condition": ",not $MRReqjxsr3JSPEU6OXCgn7xrL0 .is_invalid",
+          "thenBody": [
+            "q0aB6DGGr8DB8tmhljVVfxS4",
+            "cdYl4GRkBhRmghKkraIapl0w"
+          ],
+          "isElseIf": false,
+          "locals": []
+        },
+        "CQOTapQaCCFQEBWLavT3hs42": {
+          "body": [
+            "xJXnNvoryZLgLPrt3rrWbLSy",
+            "xVLCD2muC3XxKE4GfsdPls6Z",
+            "PJ4uyq7gMdxBQwlX4eN2FQml",
+            "CPme9Bf4kvwWni1UE4Ksrtvt",
+            "Xpq4RfdbD2Jnoyww01dyjcPN",
+            "xwBZpXAclg84gc6UwysDPnoM",
+            "yTtBVj8iCgF2kHtxpRsSNF80",
+            "KicHCBXEQY49RKk6NnHwex4m",
+            "MRReqjxsr3JSPEU6OXCgn7xr",
+            "eReUK7dglIg0ldiwgUCYbPhR",
+            "JYj9DIwYNRHdmLcKl4xi4mK9"
+          ]
+        },
+        "SmqKnUYnaLgHscD13JJq1KcJ": {
+          "expr": "$IheY2ZwJUSOHYNrFcGDZQ6TvP1 .set_from ,( $xf5BSoTOvZ4Yk5ovDRJ2XKQ1L0 .string ,( 'display/005fname ,) ,)",
+          "nodeType": "exprStmt",
+          "locals": []
+        },
+        "x49HNVXRm00IM4gFYKh23EH3": {
+          "text": "Gravatar is a web service that provides a unique and stable image for email addresses. it is used in many different web sites to associate a photo to a user email address. StackOverflow makes our life easier here by providing the hash of the email that can be used to get the gravatar easily.",
+          "nodeType": "comment"
+        },
+        "qGre2t5mWXyTPYmts4mHaxv6": {
+          "expr": "$IheY2ZwJUSOHYNrFcGDZQ6TvP1 .set_picture_link ,( 'http/003a/002f/002fwww/002egravatar/002ecom/002favatar/002f ,∥ :web .url_encode ,( $xf5BSoTOvZ4Yk5ovDRJ2XKQ1L0 .string ,( 'email/005fhash ,) ,) ,∥ '/003fs/003d72 ,)",
+          "nodeType": "exprStmt",
+          "locals": []
+        },
+        "wMx4P6rVFjVPZb8TSdl3fMNr": {
+          "nodeType": "if",
+          "condition": ",not $xf5BSoTOvZ4Yk5ovDRJ2XKQ1L0 .is_invalid",
+          "thenBody": [
+            "SmqKnUYnaLgHscD13JJq1KcJ",
+            "x49HNVXRm00IM4gFYKh23EH3",
+            "qGre2t5mWXyTPYmts4mHaxv6"
+          ],
+          "isElseIf": false,
+          "locals": []
+        },
+        "IheY2ZwJUSOHYNrFcGDZQ6Tv": {
+          "body": [
+            "t9ZRB2JHfbqoRLBgv1MINLa5",
+            "zIdMHT7l952QD7CeGGhWylBv",
+            "yxcOP3EUR2A32uJtuTX6Q89M",
+            "ebaq5wMNJfLAegW4tYyC8cZt",
+            "Fgl0YtWPK4LRk7z97oc1C4Pq",
+            "ipakJkmgwkmpk424DITHY30d",
+            "xf5BSoTOvZ4Yk5ovDRJ2XKQ1",
+            "wMx4P6rVFjVPZb8TSdl3fMNr"
+          ]
+        },
+        "d4ZukIb8RGCJTzwXr5PpPmCZ": {
+          "text": "This library searches stackoverflow.com.",
+          "nodeType": "comment"
+        },
+        "La4KassMANvNTyhpYDCR0maqL0": {
+          "name": "msgs",
+          "type": "Message Collection",
+          "nodeType": "localDef"
+        },
+        "La4KassMANvNTyhpYDCR0maq": {
+          "expr": "$La4KassMANvNTyhpYDCR0maqL0 ,:= :code #CQOTapQaCCFQEBWLavT3hs42 ,( 'scrub0 ,)",
+          "nodeType": "exprStmt",
+          "locals": [
+            "La4KassMANvNTyhpYDCR0maqL0"
+          ]
+        },
+        "kPhiZzighlTFmQsJKzgIUYad": {
+          "expr": "$La4KassMANvNTyhpYDCR0maqL0 .post_to_wall",
+          "nodeType": "exprStmt",
+          "locals": []
+        },
+        "gfAX3UGRZxqNwyamjXD45vdZ": {
+          "name": "example",
+          "inParameters": [],
+          "outParameters": [],
+          "isPrivate": false,
+          "isOffloaded": false,
+          "isTest": false,
+          "isAsync": false,
+          "nodeType": "action",
+          "body": [
+            "d4ZukIb8RGCJTzwXr5PpPmCZ",
+            "La4KassMANvNTyhpYDCR0maq",
+            "kPhiZzighlTFmQsJKzgIUYad"
+          ]
+        },
+        "app": {
+          "rootId": "xz7g9O0BD4sBoYouAzJ7XH1C",
+          "decls": [
+            "CQOTapQaCCFQEBWLavT3hs42",
+            "IheY2ZwJUSOHYNrFcGDZQ6Tv",
+            "gfAX3UGRZxqNwyamjXD45vdZ"
+          ]
+        },
+        "xFMcN0O2FBcD23nco8PqrOKl": null,
+        "xFMcN0O2FBcD23nco8PqrOKlL0": null,
+        "vP5tUGtuwQVUeCZ2KQ4fSo8b": null,
+        "xTQEkyaEK2Bd5Tqueh9iB2vK": null,
+        "Me4vk0iYrtRCRvjHwk0EbjIw": null,
+        "Me4vk0iYrtRCRvjHwk0EbjIwL0": null,
+        "ToQxHLs4FqWY5wZSvmoKw9Ni": null,
+        "vP5tUGtuwQVUeCZ2KQ4fSo8bB0": null,
+        "I76MnfPokKwOz6POSu7tVefY": null,
+        "dyj4tQFD9bIMwX2ih2h5Menr": null,
+        "lKMOdAxxJUPyl40t2VnQmdem": null
+      }
+    },
+    {
+      "seqNo": 9,
+      "time": 1355212207,
+      "scriptId": "qwor",
+      "historyId": "25204708859263364040fb3dd63-340e-4e2d-9c13-46df1a5dfc79",
+      "updateSize": 45,
+      "updates": {
+        "app": {
+          "rootId": "B4vG42bHKr7gWT1W7a2kXSSl"
+        }
+      }
+    },
+    {
+      "seqNo": 10,
+      "time": 1361527442,
+      "scriptId": null,
+      "historyId": "252040773357492296864b9b543-f970-452b-8b4d-24f6ba41e098",
+      "updateSize": 87,
+      "updates": {
+        "app": {
+          "color": "#ff9955BB",
+          "autoColor": "#9955BB",
+          "rootId": "AouxaL3RaonIqis9gp1e9cKY"
+        }
+      }
+    },
+    {
+      "seqNo": 11,
+      "time": 1361527445,
+      "scriptId": null,
+      "historyId": "252040773354742068025738f74-53cc-4206-acbd-7abafee8eecd",
+      "updateSize": 45,
+      "updates": {
+        "app": {
+          "rootId": "x8Dg1KX11iH99URmsoHwAArt"
+        }
+      }
+    },
+    {
+      "seqNo": 12,
+      "time": 1361527449,
+      "scriptId": "effw",
+      "historyId": "25204077335073407081c0c40c4-13d2-4360-b8f9-d6c96d91066c",
+      "updateSize": 45,
+      "updates": {
+        "app": {
+          "rootId": "xtLHjsQRnk7X1BUN4L3Hl1uB"
+        }
+      }
+    }
+  ]
+}

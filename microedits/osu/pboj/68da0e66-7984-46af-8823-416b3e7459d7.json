@@ -1,0 +1,222 @@
+{
+  "userid": "pboj",
+  "guid": "68da0e66-7984-46af-8823-416b3e7459d7",
+  "lastStatus": "published",
+  "items": [
+    {
+      "seqNo": 0,
+      "time": 1342466089,
+      "scriptId": "xfcs",
+      "historyId": "2520598347107037520e428b537-a549-4b1d-bade-887cbf343da0",
+      "updateSize": 3907,
+      "ast": {
+        "textVersion": "v2.2,js,ctx",
+        "jsonVersion": "v1.0,resolved,short",
+        "name": "meeting-o-meter",
+        "comment": "Count the number of hours spent in meetings since last month.",
+        "icon": "piechart",
+        "color": "#ff008080",
+        "autoIcon": "piechart",
+        "autoColor": "#008080",
+        "platform": "current",
+        "rootId": "RdPyGugiWWawQq1QQlP9EXqR",
+        "showAd": false,
+        "isLibrary": false,
+        "allowExport": false,
+        "hasUniqueIds": false,
+        "decls": [
+          {
+            "name": "main",
+            "inParameters": [],
+            "outParameters": [],
+            "isPrivate": false,
+            "isOffloaded": false,
+            "isTest": false,
+            "isAsync": false,
+            "nodeType": "action",
+            "body": [
+              {
+                "text": "Counts the number of hours in meetings since the last month...",
+                "nodeType": "comment",
+                "id": "x4sLoA1BbqhbyRFKJQPd9C5F"
+              },
+              {
+                "expr": "$Km52W5wedkzYg4DyIQdzgDvgL0 ,:= :time .now .add_months ,( ,- ,1 ,)",
+                "nodeType": "exprStmt",
+                "id": "Km52W5wedkzYg4DyIQdzgDvg",
+                "locals": [
+                  {
+                    "name": "start",
+                    "type": "DateTime",
+                    "nodeType": "localDef",
+                    "id": "Km52W5wedkzYg4DyIQdzgDvgL0"
+                  }
+                ]
+              },
+              {
+                "expr": "$sp98ThdjXqNdzhNbL13JKvThL0 ,:= :time .today",
+                "nodeType": "exprStmt",
+                "id": "sp98ThdjXqNdzhNbL13JKvTh",
+                "locals": [
+                  {
+                    "name": "end",
+                    "type": "DateTime",
+                    "nodeType": "localDef",
+                    "id": "sp98ThdjXqNdzhNbL13JKvThL0"
+                  }
+                ]
+              },
+              {
+                "expr": ",( 'Counting_meeting_hours_from_ ,∥ $Km52W5wedkzYg4DyIQdzgDvgL0 ,) .post_to_wall",
+                "nodeType": "exprStmt",
+                "id": "ljcJsJVTsSlg38ZqdAGIzBb4",
+                "locals": []
+              },
+              {
+                "expr": "$xxrfKac20kINnbD6XOay4MWgL0 ,:= :social .search_appointments ,( $Km52W5wedkzYg4DyIQdzgDvgL0 ,, $sp98ThdjXqNdzhNbL13JKvThL0 ,)",
+                "nodeType": "exprStmt",
+                "id": "xxrfKac20kINnbD6XOay4MWg",
+                "locals": [
+                  {
+                    "name": "aps",
+                    "type": "Appointment Collection",
+                    "nodeType": "localDef",
+                    "id": "xxrfKac20kINnbD6XOay4MWgL0"
+                  }
+                ]
+              },
+              {
+                "expr": "$WkRO65qRg487wKjHwEbwG2B6L0 ,:= ,0",
+                "nodeType": "exprStmt",
+                "id": "WkRO65qRg487wKjHwEbwG2B6",
+                "locals": [
+                  {
+                    "name": "hours",
+                    "type": "Number",
+                    "nodeType": "localDef",
+                    "id": "WkRO65qRg487wKjHwEbwG2B6L0"
+                  }
+                ]
+              },
+              {
+                "text": "Accumulating time, excluding all day and and private events.",
+                "nodeType": "comment",
+                "id": "aTslnZ14dJ5M00xYCMohkYUI"
+              },
+              {
+                "collection": "$xxrfKac20kINnbD6XOay4MWgL0",
+                "conditions": [
+                  {
+                    "condition": ",not $mQudxltfFuiq8A5hAgDaZiReB0 .is_private",
+                    "nodeType": "where",
+                    "id": "Qqh5B6opP6YA60SLBhUBc4Fg",
+                    "locals": []
+                  },
+                  {
+                    "condition": ",not $mQudxltfFuiq8A5hAgDaZiReB0 .is_all_day_event",
+                    "nodeType": "where",
+                    "id": "lFy0iAC2oF8d504sLOfh3xZG",
+                    "locals": []
+                  },
+                  {
+                    "condition": "$mQudxltfFuiq8A5hAgDaZiReB0 .status .equals ,( 'busy ,)",
+                    "nodeType": "where",
+                    "id": "x57joBBB1H7BqCgJIo90JmI1",
+                    "locals": []
+                  }
+                ],
+                "body": [
+                  {
+                    "expr": "$WkRO65qRg487wKjHwEbwG2B6L0 ,:= $WkRO65qRg487wKjHwEbwG2B6L0 ,+ $mQudxltfFuiq8A5hAgDaZiReB0 .end_time .subtract ,( $mQudxltfFuiq8A5hAgDaZiReB0 .start_time ,) ,/ ,3 ,6 ,0 ,0",
+                    "nodeType": "exprStmt",
+                    "id": "eRLR0pE4se2Ac7BknQ89hWFj",
+                    "locals": []
+                  }
+                ],
+                "nodeType": "foreach",
+                "id": "mQudxltfFuiq8A5hAgDaZiRe",
+                "locals": [
+                  {
+                    "name": "a",
+                    "type": "Appointment",
+                    "nodeType": "localDef",
+                    "id": "mQudxltfFuiq8A5hAgDaZiReB0"
+                  }
+                ]
+              },
+              {
+                "text": "Create a big textbox...",
+                "nodeType": "comment",
+                "id": "nzlaSxf4ml1IkqmfTKuuCLtd"
+              },
+              {
+                "expr": "$nTv2UAY6mFPxlT0AGcZIHqt4L0 ,:= 'Last_month/002c_you_spent_ ,∥ :math .round ,( $WkRO65qRg487wKjHwEbwG2B6L0 ,) ,∥ '_hours_in_meetings/0021",
+                "nodeType": "exprStmt",
+                "id": "nTv2UAY6mFPxlT0AGcZIHqt4",
+                "locals": [
+                  {
+                    "name": "msg",
+                    "type": "String",
+                    "nodeType": "localDef",
+                    "id": "nTv2UAY6mFPxlT0AGcZIHqt4L0"
+                  }
+                ]
+              },
+              {
+                "expr": ":wall .create_text_box ,( $nTv2UAY6mFPxlT0AGcZIHqt4L0 ,, ,3 ,6 ,) .post_to_wall",
+                "nodeType": "exprStmt",
+                "id": "RxH5awjIHfnxKpMcME60SkYg",
+                "locals": []
+              },
+              {
+                "nodeType": "if",
+                "condition": ":wall .ask_boolean ,( 'Do_you_want_to_save_your_score_in_the_leaderboards/003f ,, 'Your_number_of_meeting_hours_will_be_visible_to_others_in_the_leaderboard/002e ,)",
+                "thenBody": [
+                  {
+                    "expr": ":bazaar .post_leaderboard_score ,( $WkRO65qRg487wKjHwEbwG2B6L0 ,)",
+                    "nodeType": "exprStmt",
+                    "id": "FQD7T2R32ID5eA0mAWE2zGh5",
+                    "locals": []
+                  },
+                  {
+                    "expr": ":bazaar .post_leaderboard_to_wall",
+                    "nodeType": "exprStmt",
+                    "id": "v2PTS5GQ2ZJ4TSS5jkEZINnr",
+                    "locals": []
+                  }
+                ],
+                "isElseIf": false,
+                "id": "jw8FxhdQWfKWhClNwX853lhs",
+                "locals": []
+              }
+            ],
+            "id": "hFxYF2oxNwwwO4EJxQZygH3Z"
+          }
+        ],
+        "deletedDecls": [],
+        "nodeType": "app",
+        "id": "app"
+      }
+    },
+    {
+      "seqNo": 1,
+      "time": 1346281477,
+      "scriptId": "xfcs",
+      "historyId": "2520560193229298126747ce5f0-146c-43ee-bc0b-98f925c51637",
+      "updateSize": 45,
+      "updates": {
+        "app": {
+          "rootId": "Ym4Jpyqz0ZD3Sn8D3WO1uK7F"
+        }
+      }
+    },
+    {
+      "seqNo": 2,
+      "time": 1351360688,
+      "scriptId": "xfcs",
+      "historyId": "2520509401111345425d222fa57-4710-45d9-bfca-9e6bf0aca589",
+      "updateSize": 2,
+      "updates": {}
+    }
+  ]
+}

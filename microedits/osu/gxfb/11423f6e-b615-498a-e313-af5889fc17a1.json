@@ -1,0 +1,327 @@
+{
+  "userid": "gxfb",
+  "guid": "11423f6e-b615-498a-e313-af5889fc17a1",
+  "lastStatus": "deleted",
+  "items": [
+    {
+      "seqNo": 0,
+      "time": 1363380259,
+      "scriptId": "wimo",
+      "historyId": "25203892054032605475928cb0e-f640-47ab-bd69-a1180fb7b587",
+      "updateSize": 6765,
+      "ast": {
+        "textVersion": "v2.2,js,ctx",
+        "jsonVersion": "v1.0,resolved,short",
+        "name": "facebook",
+        "comment": "Allows to create requests against the Facebook Graph APIs.",
+        "icon": "AddUser",
+        "autoIcon": "AddUser",
+        "autoColor": "#A1CAF1",
+        "platform": "current",
+        "rootId": "UATgpI82Pg3MeTGBz87n242l",
+        "showAd": false,
+        "isLibrary": true,
+        "allowExport": true,
+        "hasUniqueIds": false,
+        "decls": [
+          {
+            "name": "example",
+            "inParameters": [],
+            "outParameters": [],
+            "isPrivate": true,
+            "isOffloaded": false,
+            "isTest": false,
+            "isAsync": false,
+            "nodeType": "action",
+            "body": [
+              {
+                "text": "This library provides the building blocks to do Facebook Graph API requests (http://developers.facebook.com/docs/reference/apis/).",
+                "nodeType": "comment",
+                "id": "Rph1OvpdBPEfGlLDjsUU5fyy"
+              },
+              {
+                "text": "## Authentication",
+                "nodeType": "comment",
+                "id": "Vm2urCmXxzuXSK6zwY7an9wV"
+              },
+              {
+                "text": "The first step is to authenticate the user against your Facebook App. To do so, you must go to Facebook and register your own application.",
+                "nodeType": "comment",
+                "id": "ZIa8gPKmynvUTWhyx4Ee8rxa"
+              },
+              {
+                "text": "When registering your application, it is critical that you provide the following redirect uri: https://www.touchdevelop.com/<USERID>/oauth",
+                "nodeType": "comment",
+                "id": "x4021PjTSdlQxUhHFbDMBiZt"
+              },
+              {
+                "text": "* where `<USERID>` is your TouchDevelop user id.",
+                "nodeType": "comment",
+                "id": "BXU6KzGwRGvrzlqvrkeBVgsE"
+              },
+              {
+                "expr": ":code #xsH0pWaPg3gRunrH2zQ70L6W ,( '/003cAPPLICATION_ID/003e ,)",
+                "nodeType": "exprStmt",
+                "id": "yIG4P4ZCMEsudF3NFHDvnru0",
+                "locals": []
+              },
+              {
+                "text": "## Creating requests",
+                "nodeType": "comment",
+                "id": "xZbVXxnU3gI1sEbbsQHIf9nV"
+              },
+              {
+                "text": "Call `create graph request` to create a web request against the Facebok Graph. The library will append the access token as needed; and will refresh the token if necessary.",
+                "nodeType": "comment",
+                "id": "xqnW8akTPIrUJfk4vLt3hHBP"
+              },
+              {
+                "expr": "$aXpjzt5yuVj4cwXEQ26im2nUL0 ,:= :code #n7chlDjV3xWuIOeHMTfzZDYL ,( 'me ,, ' ,)",
+                "nodeType": "exprStmt",
+                "id": "aXpjzt5yuVj4cwXEQ26im2nU",
+                "locals": [
+                  {
+                    "name": "request",
+                    "type": "Web Request",
+                    "nodeType": "localDef",
+                    "id": "aXpjzt5yuVj4cwXEQ26im2nUL0"
+                  }
+                ]
+              },
+              {
+                "text": "Once you have the request object, you can set the additional parameters and send it away!",
+                "nodeType": "comment",
+                "id": "oxP5fEuqqzmrLniRr24Ee276"
+              },
+              {
+                "expr": "$SYYxEo8TdmygI5OdtLT7PegyL0 ,:= $aXpjzt5yuVj4cwXEQ26im2nUL0 .send",
+                "nodeType": "exprStmt",
+                "id": "SYYxEo8TdmygI5OdtLT7Pegy",
+                "locals": [
+                  {
+                    "name": "response",
+                    "type": "Web Response",
+                    "nodeType": "localDef",
+                    "id": "SYYxEo8TdmygI5OdtLT7PegyL0"
+                  }
+                ]
+              },
+              {
+                "expr": "$SYYxEo8TdmygI5OdtLT7PegyL0 .post_to_wall",
+                "nodeType": "exprStmt",
+                "id": "xFvok7u59XaIcfMDcruX9446",
+                "locals": []
+              }
+            ],
+            "id": "k4BRn4GEb4Y4YKX3LcPxxaiq"
+          },
+          {
+            "name": "authenticate",
+            "inParameters": [
+              {
+                "name": "application id",
+                "type": "String",
+                "nodeType": "localDef",
+                "id": "xsH0pWaPg3gRunrH2zQ70L6WP0"
+              }
+            ],
+            "outParameters": [],
+            "isPrivate": false,
+            "isOffloaded": false,
+            "isTest": false,
+            "isAsync": false,
+            "nodeType": "action",
+            "body": [
+              {
+                "text": "Authenticates the user with the given application as needed.",
+                "nodeType": "comment",
+                "id": "xuVtJpJHTZ1o9ZfEXln7v9op"
+              },
+              {
+                "expr": "$AtMSyigIDNVAC8sDu8Cd1gJDL0 ,:= :data #TLN6ZfO2Atjb5t29O2qRCZjJ .is_invalid ,or :data #TLN6ZfO2Atjb5t29O2qRCZjJ .is_expiring ,( ,1 ,0 ,0 ,) ,or ,not :data #rSibWDaF3amBC2NBin4VZToo .equals ,( $xsH0pWaPg3gRunrH2zQ70L6WP0 ,)",
+                "nodeType": "exprStmt",
+                "id": "AtMSyigIDNVAC8sDu8Cd1gJD",
+                "locals": [
+                  {
+                    "name": "needs refresh",
+                    "type": "Boolean",
+                    "nodeType": "localDef",
+                    "id": "AtMSyigIDNVAC8sDu8Cd1gJDL0"
+                  }
+                ]
+              },
+              {
+                "nodeType": "if",
+                "condition": "$AtMSyigIDNVAC8sDu8Cd1gJDL0",
+                "thenBody": [
+                  {
+                    "expr": ":data #rSibWDaF3amBC2NBin4VZToo ,:= $xsH0pWaPg3gRunrH2zQ70L6WP0",
+                    "nodeType": "exprStmt",
+                    "id": "aiBQvbb8x7wbeWd1xDueUt8c",
+                    "locals": []
+                  },
+                  {
+                    "expr": "$AB4lHhNXh1Ca5EsVKa02Qpr4L0 ,:= 'https/003a/002f/002fwww/002efacebook/002ecom/002fdialog/002foauth/002f/003fdisplay/003dtouch/0026client/005fid/003d ,∥ :web .url_encode ,( $xsH0pWaPg3gRunrH2zQ70L6WP0 ,)",
+                    "nodeType": "exprStmt",
+                    "id": "AB4lHhNXh1Ca5EsVKa02Qpr4",
+                    "locals": [
+                      {
+                        "name": "url",
+                        "type": "String",
+                        "nodeType": "localDef",
+                        "id": "AB4lHhNXh1Ca5EsVKa02Qpr4L0"
+                      }
+                    ]
+                  },
+                  {
+                    "expr": ":data #TLN6ZfO2Atjb5t29O2qRCZjJ ,:= :web .oauth_v2 ,( $AB4lHhNXh1Ca5EsVKa02Qpr4L0 ,)",
+                    "nodeType": "exprStmt",
+                    "id": "yE4y811AnPoX3LMT8Ed7Cyvf",
+                    "locals": []
+                  }
+                ],
+                "isElseIf": false,
+                "id": "JaVWTKjGZgutsinNulljWDGe",
+                "locals": []
+              }
+            ],
+            "id": "xsH0pWaPg3gRunrH2zQ70L6W"
+          },
+          {
+            "name": "create graph request",
+            "inParameters": [
+              {
+                "name": "graph path",
+                "type": "String",
+                "nodeType": "localDef",
+                "id": "n7chlDjV3xWuIOeHMTfzZDYLP0"
+              },
+              {
+                "name": "query arguments",
+                "type": "String",
+                "nodeType": "localDef",
+                "id": "n7chlDjV3xWuIOeHMTfzZDYLP1"
+              }
+            ],
+            "outParameters": [
+              {
+                "name": "request",
+                "type": "Web Request",
+                "nodeType": "localDef",
+                "id": "n7chlDjV3xWuIOeHMTfzZDYLP2"
+              }
+            ],
+            "isPrivate": false,
+            "isOffloaded": false,
+            "isTest": false,
+            "isAsync": false,
+            "nodeType": "action",
+            "body": [
+              {
+                "text": "Creates a Facebook Graph request with the given path and additional query arguments. Authenticates the user if needed. Returns invalid if authentication failed.",
+                "nodeType": "comment",
+                "id": "nNQYz20PZBWicL4ZK4e41AV9"
+              },
+              {
+                "nodeType": "if",
+                "condition": ":data #TLN6ZfO2Atjb5t29O2qRCZjJ .is_invalid ,or :data #TLN6ZfO2Atjb5t29O2qRCZjJ .is_expiring ,( ,1 ,0 ,0 ,)",
+                "thenBody": [
+                  {
+                    "expr": ":code #xsH0pWaPg3gRunrH2zQ70L6W ,( :data #rSibWDaF3amBC2NBin4VZToo ,)",
+                    "nodeType": "exprStmt",
+                    "id": "K7NKnVPP8rUTEW1mS4rZzhsV",
+                    "locals": []
+                  }
+                ],
+                "isElseIf": false,
+                "id": "xm1ty0aYgDGewzX2LD0xeUiV",
+                "locals": []
+              },
+              {
+                "nodeType": "if",
+                "condition": ":data #TLN6ZfO2Atjb5t29O2qRCZjJ .access_token .is_invalid",
+                "thenBody": [
+                  {
+                    "expr": "$n7chlDjV3xWuIOeHMTfzZDYLP2 ,:= :invalid .web_request",
+                    "nodeType": "exprStmt",
+                    "id": "r14n5fRkxDroysuRTsqh9HgS",
+                    "locals": []
+                  }
+                ],
+                "elseBody": [
+                  {
+                    "expr": "$cIcUhLrhDKiQl5IkSCp8iuM0L0 ,:= 'https/003a/002f/002fgraph/002efacebook/002ecom/002f ,∥ $n7chlDjV3xWuIOeHMTfzZDYLP0 .trim_start ,( '/002f ,) ,∥ '/003faccess/005ftoken/003d ,∥ :data #TLN6ZfO2Atjb5t29O2qRCZjJ .access_token",
+                    "nodeType": "exprStmt",
+                    "id": "cIcUhLrhDKiQl5IkSCp8iuM0",
+                    "locals": [
+                      {
+                        "name": "url",
+                        "type": "String",
+                        "nodeType": "localDef",
+                        "id": "cIcUhLrhDKiQl5IkSCp8iuM0L0"
+                      }
+                    ]
+                  },
+                  {
+                    "nodeType": "if",
+                    "condition": ",not $n7chlDjV3xWuIOeHMTfzZDYLP1 .is_empty",
+                    "thenBody": [
+                      {
+                        "expr": "$cIcUhLrhDKiQl5IkSCp8iuM0L0 ,:= $cIcUhLrhDKiQl5IkSCp8iuM0L0 ,∥ '/0026 ,∥ $n7chlDjV3xWuIOeHMTfzZDYLP1",
+                        "nodeType": "exprStmt",
+                        "id": "c1OJAYgBhp2k76Nk0hEiUMoM",
+                        "locals": []
+                      }
+                    ],
+                    "isElseIf": false,
+                    "id": "maNaf93w7TOJ2KQVmVY4PUdp",
+                    "locals": []
+                  },
+                  {
+                    "expr": "$n7chlDjV3xWuIOeHMTfzZDYLP2 ,:= :web .create_request ,( $cIcUhLrhDKiQl5IkSCp8iuM0L0 ,)",
+                    "nodeType": "exprStmt",
+                    "id": "K0cp2k7qJuL9M4N5ip6sRnep",
+                    "locals": []
+                  }
+                ],
+                "isElseIf": false,
+                "id": "xYRZxr1d3zehOailxut6Q6hy",
+                "locals": []
+              }
+            ],
+            "id": "n7chlDjV3xWuIOeHMTfzZDYL"
+          },
+          {
+            "name": "oauth res",
+            "comment": "",
+            "type": "OAuth Response",
+            "isReadonly": false,
+            "isTransient": false,
+            "nodeType": "data",
+            "id": "TLN6ZfO2Atjb5t29O2qRCZjJ"
+          },
+          {
+            "name": "application id",
+            "comment": "",
+            "type": "String",
+            "isReadonly": false,
+            "isTransient": false,
+            "nodeType": "data",
+            "id": "rSibWDaF3amBC2NBin4VZToo"
+          }
+        ],
+        "deletedDecls": [],
+        "nodeType": "app",
+        "id": "app"
+      }
+    },
+    {
+      "seqNo": 1,
+      "time": 1363380709,
+      "scriptId": "wimo",
+      "historyId": "2520389200908927947250c767e-752b-4194-8f6b-f0df41244325",
+      "updateSize": 2,
+      "updates": {}
+    }
+  ]
+}

@@ -1,0 +1,681 @@
+{
+  "userid": "gxfb",
+  "guid": "7e35366a-0e21-4591-1d21-09eb3d1249d2",
+  "lastStatus": "deleted",
+  "items": [
+    {
+      "seqNo": 0,
+      "time": 1349740920,
+      "scriptId": "ikhu",
+      "historyId": "2520525598798922167329495e8-4892-43e6-9c23-ea4ee252365d",
+      "updateSize": 12226,
+      "ast": {
+        "textVersion": "v2.2,js,ctx",
+        "jsonVersion": "v1.0,resolved,short",
+        "name": "wordbook",
+        "comment": "modified for TD2.6",
+        "icon": "text",
+        "color": "#ff00008b",
+        "autoIcon": "text",
+        "autoColor": "#00008b",
+        "platform": "current",
+        "rootId": "xNAsoYQq34AGX3FNCsFTrPxu",
+        "showAd": false,
+        "isLibrary": false,
+        "allowExport": false,
+        "hasUniqueIds": false,
+        "decls": [
+          {
+            "name": "register new entry",
+            "inParameters": [
+              {
+                "name": "entry",
+                "type": "String",
+                "nodeType": "localDef",
+                "id": "x2BAJ4IVBT3KkaUk64ycg45HP0"
+              },
+              {
+                "name": "word",
+                "type": "String",
+                "nodeType": "localDef",
+                "id": "x2BAJ4IVBT3KkaUk64ycg45HP1"
+              }
+            ],
+            "outParameters": [],
+            "isPrivate": false,
+            "isOffloaded": false,
+            "isTest": false,
+            "isAsync": false,
+            "nodeType": "action",
+            "body": [
+              {
+                "nodeType": "if",
+                "condition": "$x2BAJ4IVBT3KkaUk64ycg45HP0 .count ,= ,0 ,or $x2BAJ4IVBT3KkaUk64ycg45HP1 .count ,= ,0",
+                "thenBody": [
+                  {
+                    "expr": "'entry_or_word_item_error/002e .post_to_wall",
+                    "nodeType": "exprStmt",
+                    "id": "dSQ8UNxVP1Dq6lAtBwpKd3zh",
+                    "locals": []
+                  }
+                ],
+                "isElseIf": false,
+                "id": "ZV0BeTdmdG5tNr1Sn6PRslVD",
+                "locals": []
+              },
+              {
+                "nodeType": "if",
+                "condition": "$x2BAJ4IVBT3KkaUk64ycg45HP0 .contains ,( '/002c ,) ,or $x2BAJ4IVBT3KkaUk64ycg45HP1 .contains ,( '/002c ,)",
+                "thenBody": [
+                  {
+                    "expr": "'/0027/002c/0027_is_not_allowed/002e .post_to_wall",
+                    "nodeType": "exprStmt",
+                    "id": "DQiMLVUwUBx04ncs6cciL3SR",
+                    "locals": []
+                  }
+                ],
+                "elseBody": [
+                  {
+                    "nodeType": "if",
+                    "condition": ":data #fkDSNJ23e2UNjXKCN7J6CTS5 .is_invalid",
+                    "thenBody": [
+                      {
+                        "expr": ":data #fkDSNJ23e2UNjXKCN7J6CTS5 ,:= ' .split ,( '/002c ,)",
+                        "nodeType": "exprStmt",
+                        "id": "rlYh1OCXECyQsBmMgrffbU05",
+                        "locals": []
+                      },
+                      {
+                        "expr": ":data #fkDSNJ23e2UNjXKCN7J6CTS5 .clear",
+                        "nodeType": "exprStmt",
+                        "id": "WhzzTPSeZagtrnjfwykBU5sn",
+                        "locals": []
+                      }
+                    ],
+                    "isElseIf": false,
+                    "id": "E34mUQy2M3N4DPm0fPx0mHBO",
+                    "locals": []
+                  },
+                  {
+                    "expr": ":data #fkDSNJ23e2UNjXKCN7J6CTS5 .add ,( $x2BAJ4IVBT3KkaUk64ycg45HP0 ,∥ '/002c ,∥ $x2BAJ4IVBT3KkaUk64ycg45HP1 ,)",
+                    "nodeType": "exprStmt",
+                    "id": "xzd2mZVQ6SlMauX20ZXx0OFe",
+                    "locals": []
+                  },
+                  {
+                    "expr": ":data #fkDSNJ23e2UNjXKCN7J6CTS5 .sort",
+                    "nodeType": "exprStmt",
+                    "id": "xa75n2t81eiOIkMDcHT5uYuS",
+                    "locals": []
+                  },
+                  {
+                    "expr": "'done/002e .post_to_wall",
+                    "nodeType": "exprStmt",
+                    "id": "LR9I4xIY35KeKwXqMCkcVFUU",
+                    "locals": []
+                  }
+                ],
+                "isElseIf": true,
+                "id": "qUNwtGa2KHRFhvA6q2eCTOs8",
+                "locals": []
+              }
+            ],
+            "id": "x2BAJ4IVBT3KkaUk64ycg45H"
+          },
+          {
+            "name": "entrylist",
+            "comment": "",
+            "type": "String Collection",
+            "isReadonly": false,
+            "isTransient": false,
+            "nodeType": "data",
+            "id": "fkDSNJ23e2UNjXKCN7J6CTS5"
+          },
+          {
+            "name": "wordlist",
+            "inParameters": [],
+            "outParameters": [],
+            "isPrivate": false,
+            "isOffloaded": false,
+            "isTest": false,
+            "isAsync": false,
+            "nodeType": "action",
+            "body": [
+              {
+                "nodeType": "if",
+                "condition": ":data #fkDSNJ23e2UNjXKCN7J6CTS5 .count ,= ,0",
+                "thenBody": [
+                  {
+                    "expr": "'no_item_found/002e .post_to_wall",
+                    "nodeType": "exprStmt",
+                    "id": "x4hKpcHTt1wlI64UPVy1ugzp",
+                    "locals": []
+                  },
+                  {
+                    "expr": ":time .stop",
+                    "nodeType": "exprStmt",
+                    "id": "xDr4ZnIHbQYj2IoAHmN4PyAg",
+                    "locals": []
+                  }
+                ],
+                "isElseIf": false,
+                "id": "K6hD9QyNaAZiQFR4Dq8kcr8v",
+                "locals": []
+              },
+              {
+                "expr": "$eMH2gsBK7JnK3IBf5pakQEneL0 ,:= ' .split ,( ' ,)",
+                "nodeType": "exprStmt",
+                "id": "eMH2gsBK7JnK3IBf5pakQEne",
+                "locals": [
+                  {
+                    "name": "entryitemlist",
+                    "type": "String Collection",
+                    "nodeType": "localDef",
+                    "id": "eMH2gsBK7JnK3IBf5pakQEneL0"
+                  }
+                ]
+              },
+              {
+                "expr": "$eMH2gsBK7JnK3IBf5pakQEneL0 .clear",
+                "nodeType": "exprStmt",
+                "id": "r5hDsdWS6NhsKxr4LfjmMaMG",
+                "locals": []
+              },
+              {
+                "expr": "$N7DzkjOalLvRuXKSS67DdnI9L0 ,:= ' .split ,( ' ,)",
+                "nodeType": "exprStmt",
+                "id": "N7DzkjOalLvRuXKSS67DdnI9",
+                "locals": [
+                  {
+                    "name": "worditemlist",
+                    "type": "String Collection",
+                    "nodeType": "localDef",
+                    "id": "N7DzkjOalLvRuXKSS67DdnI9L0"
+                  }
+                ]
+              },
+              {
+                "expr": "$N7DzkjOalLvRuXKSS67DdnI9L0 .clear",
+                "nodeType": "exprStmt",
+                "id": "Yl4a8nhiLyLp9OZcu9u0SzkC",
+                "locals": []
+              },
+              {
+                "collection": ":data #fkDSNJ23e2UNjXKCN7J6CTS5",
+                "conditions": [
+                  {
+                    "condition": "T",
+                    "nodeType": "where",
+                    "id": "hP0gtO3tNC92o5gBrvSGN4Ar",
+                    "locals": []
+                  }
+                ],
+                "body": [
+                  {
+                    "expr": "$w1rstanlRJBEmBPQqfAUAkpvL0 ,:= $xOWDecCyBJ40072fCoovNuOPB0 .split ,( '/002c ,)",
+                    "nodeType": "exprStmt",
+                    "id": "w1rstanlRJBEmBPQqfAUAkpv",
+                    "locals": [
+                      {
+                        "name": "entryandword",
+                        "type": "String Collection",
+                        "nodeType": "localDef",
+                        "id": "w1rstanlRJBEmBPQqfAUAkpvL0"
+                      }
+                    ]
+                  },
+                  {
+                    "expr": "$eMH2gsBK7JnK3IBf5pakQEneL0 .add ,( $w1rstanlRJBEmBPQqfAUAkpvL0 .at ,( ,0 ,) ,)",
+                    "nodeType": "exprStmt",
+                    "id": "x41EckIILmBJBz24n5kFIUN4",
+                    "locals": []
+                  },
+                  {
+                    "expr": "$N7DzkjOalLvRuXKSS67DdnI9L0 .add ,( $w1rstanlRJBEmBPQqfAUAkpvL0 .at ,( ,1 ,) ,)",
+                    "nodeType": "exprStmt",
+                    "id": "x2QQyv0B2nBlZUvCIoTsQOXa",
+                    "locals": []
+                  }
+                ],
+                "nodeType": "foreach",
+                "id": "xOWDecCyBJ40072fCoovNuOP",
+                "locals": [
+                  {
+                    "name": "s",
+                    "type": "String",
+                    "nodeType": "localDef",
+                    "id": "xOWDecCyBJ40072fCoovNuOPB0"
+                  }
+                ]
+              },
+              {
+                "expr": "$nEhgB4s3dzNO3BdztPZd29N2L0 ,:= T",
+                "nodeType": "exprStmt",
+                "id": "nEhgB4s3dzNO3BdztPZd29N2",
+                "locals": [
+                  {
+                    "name": "contflag",
+                    "type": "Boolean",
+                    "nodeType": "localDef",
+                    "id": "nEhgB4s3dzNO3BdztPZd29N2L0"
+                  }
+                ]
+              },
+              {
+                "expr": "$stRPZTLYNO16uYodX1hPBGLYL0 ,:= ,0",
+                "nodeType": "exprStmt",
+                "id": "stRPZTLYNO16uYodX1hPBGLY",
+                "locals": [
+                  {
+                    "name": "val",
+                    "type": "Number",
+                    "nodeType": "localDef",
+                    "id": "stRPZTLYNO16uYodX1hPBGLYL0"
+                  }
+                ]
+              },
+              {
+                "condition": "$nEhgB4s3dzNO3BdztPZd29N2L0",
+                "body": [
+                  {
+                    "expr": ":wall .clear",
+                    "nodeType": "exprStmt",
+                    "id": "ps5JqZcElOeT9WyETW0FdM6h",
+                    "locals": []
+                  },
+                  {
+                    "expr": "$stRPZTLYNO16uYodX1hPBGLYL0 ,:= :wall .pick_string ,( 'Select_entry_item/002e ,, 'word_item_will_be_copied_to_clipboard/002e ,, $eMH2gsBK7JnK3IBf5pakQEneL0 ,)",
+                    "nodeType": "exprStmt",
+                    "id": "MMYBDcINr99OKNjnye6vVw9e",
+                    "locals": []
+                  },
+                  {
+                    "expr": "$N7DzkjOalLvRuXKSS67DdnI9L0 .at ,( $stRPZTLYNO16uYodX1hPBGLYL0 ,) .copy_to_clipboard",
+                    "nodeType": "exprStmt",
+                    "id": "FxajLiHUhIwyrD2tSD14IYwt",
+                    "locals": []
+                  },
+                  {
+                    "expr": ":wall .clear",
+                    "nodeType": "exprStmt",
+                    "id": "ZG4q7JpzoY79qiQ4nHPFY54P",
+                    "locals": []
+                  },
+                  {
+                    "expr": "$ZqFMv224ALXVYlgqKZYGr3o8L0 ,:= :wall .ask_boolean ,( '/005b ,∥ $eMH2gsBK7JnK3IBf5pakQEneL0 .at ,( $stRPZTLYNO16uYodX1hPBGLYL0 ,) ,∥ '/005d_is_selected/002e ,, '/0027yes/0027_to_terminate/002c/000a/0027no/0027_to_retry/002e ,)",
+                    "nodeType": "exprStmt",
+                    "id": "ZqFMv224ALXVYlgqKZYGr3o8",
+                    "locals": [
+                      {
+                        "name": "ret",
+                        "type": "Boolean",
+                        "nodeType": "localDef",
+                        "id": "ZqFMv224ALXVYlgqKZYGr3o8L0"
+                      }
+                    ]
+                  },
+                  {
+                    "nodeType": "if",
+                    "condition": "$ZqFMv224ALXVYlgqKZYGr3o8L0",
+                    "thenBody": [
+                      {
+                        "expr": "$nEhgB4s3dzNO3BdztPZd29N2L0 ,:= F",
+                        "nodeType": "exprStmt",
+                        "id": "v2dfv7wkTbWMEXiLeMtvE2NV",
+                        "locals": []
+                      }
+                    ],
+                    "isElseIf": false,
+                    "id": "aUkqwLXvexbFUstdASpWk2XA",
+                    "locals": []
+                  }
+                ],
+                "nodeType": "while",
+                "id": "aIz1W5oeGloXPow4hN90GcTR",
+                "locals": []
+              }
+            ],
+            "id": "rRrYajs5G3kRHH2NvqAIb3vi"
+          },
+          {
+            "name": "delete entry",
+            "inParameters": [],
+            "outParameters": [],
+            "isPrivate": false,
+            "isOffloaded": false,
+            "isTest": false,
+            "isAsync": false,
+            "nodeType": "action",
+            "body": [
+              {
+                "expr": "$xl2P2I6Aekl64PHiyuqO4H26L0 ,:= ' .split ,( ' ,)",
+                "nodeType": "exprStmt",
+                "id": "xl2P2I6Aekl64PHiyuqO4H26",
+                "locals": [
+                  {
+                    "name": "entryitemlist",
+                    "type": "String Collection",
+                    "nodeType": "localDef",
+                    "id": "xl2P2I6Aekl64PHiyuqO4H26L0"
+                  }
+                ]
+              },
+              {
+                "expr": "$xl2P2I6Aekl64PHiyuqO4H26L0 .clear",
+                "nodeType": "exprStmt",
+                "id": "fDCqjhIhsKviBnobnO8q2y1d",
+                "locals": []
+              },
+              {
+                "expr": "$XQcaLmcXD4OEcvHhjAk2ikvpL0 ,:= ' .split ,( ' ,)",
+                "nodeType": "exprStmt",
+                "id": "XQcaLmcXD4OEcvHhjAk2ikvp",
+                "locals": [
+                  {
+                    "name": "worditemlist",
+                    "type": "String Collection",
+                    "nodeType": "localDef",
+                    "id": "XQcaLmcXD4OEcvHhjAk2ikvpL0"
+                  }
+                ]
+              },
+              {
+                "expr": "$XQcaLmcXD4OEcvHhjAk2ikvpL0 .clear",
+                "nodeType": "exprStmt",
+                "id": "QHC9gK2Ez4PcohckVP9wh5iG",
+                "locals": []
+              },
+              {
+                "collection": ":data #fkDSNJ23e2UNjXKCN7J6CTS5",
+                "conditions": [
+                  {
+                    "condition": "T",
+                    "nodeType": "where",
+                    "id": "qjiEAX25FCwmLniAY80WwTDd",
+                    "locals": []
+                  }
+                ],
+                "body": [
+                  {
+                    "expr": "$SsYh8quYrqRF4MGCl84inKI2L0 ,:= $PxBEHwOtwc4LJHlX41R34KZTB0 .split ,( '/002c ,)",
+                    "nodeType": "exprStmt",
+                    "id": "SsYh8quYrqRF4MGCl84inKI2",
+                    "locals": [
+                      {
+                        "name": "entryandword",
+                        "type": "String Collection",
+                        "nodeType": "localDef",
+                        "id": "SsYh8quYrqRF4MGCl84inKI2L0"
+                      }
+                    ]
+                  },
+                  {
+                    "expr": "$xl2P2I6Aekl64PHiyuqO4H26L0 .add ,( $SsYh8quYrqRF4MGCl84inKI2L0 .at ,( ,0 ,) ,)",
+                    "nodeType": "exprStmt",
+                    "id": "xhil4jbcWtdf2ya2VTh0961k",
+                    "locals": []
+                  },
+                  {
+                    "expr": "$XQcaLmcXD4OEcvHhjAk2ikvpL0 .add ,( $SsYh8quYrqRF4MGCl84inKI2L0 .at ,( ,1 ,) ,)",
+                    "nodeType": "exprStmt",
+                    "id": "VcQOFT6HxL3IXnBRRl1XJYMp",
+                    "locals": []
+                  }
+                ],
+                "nodeType": "foreach",
+                "id": "PxBEHwOtwc4LJHlX41R34KZT",
+                "locals": [
+                  {
+                    "name": "s",
+                    "type": "String",
+                    "nodeType": "localDef",
+                    "id": "PxBEHwOtwc4LJHlX41R34KZTB0"
+                  }
+                ]
+              },
+              {
+                "expr": "$svXFeMCqYWl2J64NigRAy0tdL0 ,:= ,0",
+                "nodeType": "exprStmt",
+                "id": "svXFeMCqYWl2J64NigRAy0td",
+                "locals": [
+                  {
+                    "name": "val",
+                    "type": "Number",
+                    "nodeType": "localDef",
+                    "id": "svXFeMCqYWl2J64NigRAy0tdL0"
+                  }
+                ]
+              },
+              {
+                "expr": ":wall .clear",
+                "nodeType": "exprStmt",
+                "id": "xOBv9VC5kmEoZdW2R2wl6rYw",
+                "locals": []
+              },
+              {
+                "expr": "$svXFeMCqYWl2J64NigRAy0tdL0 ,:= :wall .pick_string ,( 'Select_entry_item_to_DELETE/002e ,, ' ,, $xl2P2I6Aekl64PHiyuqO4H26L0 ,)",
+                "nodeType": "exprStmt",
+                "id": "clxeRdzArf9uboffk2G4tUtX",
+                "locals": []
+              },
+              {
+                "expr": ":wall .clear",
+                "nodeType": "exprStmt",
+                "id": "xLWpA2kPRIdIRMiN2SGryvh7",
+                "locals": []
+              },
+              {
+                "expr": "$tM7GsglKhL6mjhqY1pEz7t6vL0 ,:= :wall .ask_boolean ,( '/005b ,∥ $xl2P2I6Aekl64PHiyuqO4H26L0 .at ,( $svXFeMCqYWl2J64NigRAy0tdL0 ,) ,∥ '/005d_is_selected/002e ,, '/0027yes/0027_to_DELETE/002c/000a/0027no/0027_to_cancel/002e ,)",
+                "nodeType": "exprStmt",
+                "id": "tM7GsglKhL6mjhqY1pEz7t6v",
+                "locals": [
+                  {
+                    "name": "ret",
+                    "type": "Boolean",
+                    "nodeType": "localDef",
+                    "id": "tM7GsglKhL6mjhqY1pEz7t6vL0"
+                  }
+                ]
+              },
+              {
+                "nodeType": "if",
+                "condition": "$tM7GsglKhL6mjhqY1pEz7t6vL0",
+                "thenBody": [
+                  {
+                    "expr": ":data #fkDSNJ23e2UNjXKCN7J6CTS5 .remove_at ,( $svXFeMCqYWl2J64NigRAy0tdL0 ,)",
+                    "nodeType": "exprStmt",
+                    "id": "JkseMn9a2bTpV1LEk6r4d4Uo",
+                    "locals": []
+                  },
+                  {
+                    "expr": "'done/002e .post_to_wall",
+                    "nodeType": "exprStmt",
+                    "id": "TdcznmgSy6FPfSNVGbmJRkoj",
+                    "locals": []
+                  }
+                ],
+                "elseBody": [
+                  {
+                    "expr": "'canceled/002e .post_to_wall",
+                    "nodeType": "exprStmt",
+                    "id": "Jav2R4QiUnVh2ZdfaYRhV7w7",
+                    "locals": []
+                  }
+                ],
+                "isElseIf": false,
+                "id": "M6GMGSjC12p88Ms8nvyAay2g",
+                "locals": []
+              }
+            ],
+            "id": "Ez87iaiDQpd1zFbGI4uqpONR"
+          },
+          {
+            "name": "export wordlist",
+            "inParameters": [],
+            "outParameters": [],
+            "isPrivate": false,
+            "isOffloaded": false,
+            "isTest": false,
+            "isAsync": false,
+            "nodeType": "action",
+            "body": [
+              {
+                "text": "export wordlist to clipboard as text.",
+                "nodeType": "comment",
+                "id": "x3OiblXSRGlI2MLmHUFIHRUP"
+              },
+              {
+                "expr": ":data #fkDSNJ23e2UNjXKCN7J6CTS5 .join ,( '/003b ,) .copy_to_clipboard",
+                "nodeType": "exprStmt",
+                "id": "z92qnnXnmEkdMy9eyrXdVBEO",
+                "locals": []
+              },
+              {
+                "expr": "'Done/002e/000a .post_to_wall",
+                "nodeType": "exprStmt",
+                "id": "d426oh6hU2KW72ZfAI1yAE2p",
+                "locals": []
+              }
+            ],
+            "id": "itgWrW4R0crRMq6qpmunX2Ur"
+          },
+          {
+            "name": "import wordlist",
+            "inParameters": [],
+            "outParameters": [],
+            "isPrivate": false,
+            "isOffloaded": false,
+            "isTest": false,
+            "isAsync": false,
+            "nodeType": "action",
+            "body": [
+              {
+                "text": "import wordlist.",
+                "nodeType": "comment",
+                "id": "NWKlImgQtL1Z5U2Oea4benQR"
+              },
+              {
+                "text": "wordlist will be added.",
+                "nodeType": "comment",
+                "id": "vv8ZyyHTD2RCQPOUEfEfZT54"
+              },
+              {
+                "expr": "$rmfGngX66tXpJ4FZ3iqkK7ZrL0 ,:= :wall .ask_string ,( 'input_wordlist_backup/002e ,)",
+                "nodeType": "exprStmt",
+                "id": "rmfGngX66tXpJ4FZ3iqkK7Zr",
+                "locals": [
+                  {
+                    "name": "str",
+                    "type": "String",
+                    "nodeType": "localDef",
+                    "id": "rmfGngX66tXpJ4FZ3iqkK7ZrL0"
+                  }
+                ]
+              },
+              {
+                "expr": "$Phu4LzFXM0GaKwnbajNpcfdRL0 ,:= ,0",
+                "nodeType": "exprStmt",
+                "id": "Phu4LzFXM0GaKwnbajNpcfdR",
+                "locals": [
+                  {
+                    "name": "cnt",
+                    "type": "Number",
+                    "nodeType": "localDef",
+                    "id": "Phu4LzFXM0GaKwnbajNpcfdRL0"
+                  }
+                ]
+              },
+              {
+                "expr": "$ba4lsbM6RPhqkAjbWRJvBPUtL0 ,:= $rmfGngX66tXpJ4FZ3iqkK7ZrL0 .split ,( '/003b ,)",
+                "nodeType": "exprStmt",
+                "id": "ba4lsbM6RPhqkAjbWRJvBPUt",
+                "locals": [
+                  {
+                    "name": "strarray",
+                    "type": "String Collection",
+                    "nodeType": "localDef",
+                    "id": "ba4lsbM6RPhqkAjbWRJvBPUtL0"
+                  }
+                ]
+              },
+              {
+                "nodeType": "if",
+                "condition": ":data #fkDSNJ23e2UNjXKCN7J6CTS5 .is_invalid",
+                "thenBody": [
+                  {
+                    "expr": ":data #fkDSNJ23e2UNjXKCN7J6CTS5 ,:= ' .split ,( '/002c ,)",
+                    "nodeType": "exprStmt",
+                    "id": "xgYUveJTTOUA2KdkE4ZoVH3j",
+                    "locals": []
+                  },
+                  {
+                    "expr": ":data #fkDSNJ23e2UNjXKCN7J6CTS5 .clear",
+                    "nodeType": "exprStmt",
+                    "id": "mbg2oDEUiLQYPPaXTve4KMMR",
+                    "locals": []
+                  }
+                ],
+                "isElseIf": false,
+                "id": "xrKRyvCLbrGgdY00HBlkd5op",
+                "locals": []
+              },
+              {
+                "collection": "$ba4lsbM6RPhqkAjbWRJvBPUtL0",
+                "conditions": [
+                  {
+                    "condition": "T",
+                    "nodeType": "where",
+                    "id": "MCE8Z7J2lgjdlDCbRoFPPgg8",
+                    "locals": []
+                  }
+                ],
+                "body": [
+                  {
+                    "expr": ":data #fkDSNJ23e2UNjXKCN7J6CTS5 .add ,( $yHo4cdIiHm2EMD9yz0WS6pYjB0 ,)",
+                    "nodeType": "exprStmt",
+                    "id": "QI7sehDAFsr4SRx2TtzcyN2f",
+                    "locals": []
+                  },
+                  {
+                    "expr": "$Phu4LzFXM0GaKwnbajNpcfdRL0 ,:= $Phu4LzFXM0GaKwnbajNpcfdRL0 ,+ ,1",
+                    "nodeType": "exprStmt",
+                    "id": "Db1wE2Ak49tsCXlUwYB5luWR",
+                    "locals": []
+                  }
+                ],
+                "nodeType": "foreach",
+                "id": "yHo4cdIiHm2EMD9yz0WS6pYj",
+                "locals": [
+                  {
+                    "name": "s",
+                    "type": "String",
+                    "nodeType": "localDef",
+                    "id": "yHo4cdIiHm2EMD9yz0WS6pYjB0"
+                  }
+                ]
+              },
+              {
+                "expr": ",( $Phu4LzFXM0GaKwnbajNpcfdRL0 .to_string ,∥ '_entries_are_registered/002e ,) .post_to_wall",
+                "nodeType": "exprStmt",
+                "id": "LBaQIkYp4a4mjGxoQ4Sbo8U8",
+                "locals": []
+              }
+            ],
+            "id": "Qd8yzXCE2jCIe2JRZv5MfPXe"
+          }
+        ],
+        "deletedDecls": [],
+        "nodeType": "app",
+        "id": "app"
+      }
+    },
+    {
+      "seqNo": 1,
+      "time": 1349740942,
+      "scriptId": "ikhu",
+      "historyId": "25205255985760887846c8e5ee0-c6db-4004-8074-9ae5fcc79298",
+      "updateSize": 2,
+      "updates": {}
+    }
+  ]
+}

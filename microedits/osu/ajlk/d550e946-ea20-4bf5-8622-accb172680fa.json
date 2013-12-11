@@ -1,0 +1,276 @@
+{
+  "userid": "ajlk",
+  "guid": "d550e946-ea20-4bf5-8622-accb172680fa",
+  "lastStatus": "published",
+  "items": [
+    {
+      "seqNo": 0,
+      "time": 1350496167,
+      "scriptId": "bbdh",
+      "historyId": "25205180463255908703a31f6f5-cc72-48df-b66e-f81e1157b27a",
+      "updateSize": 5191,
+      "ast": {
+        "textVersion": "v2.2,js,ctx",
+        "jsonVersion": "v1.0,resolved,short",
+        "name": "kill-a-watt calc",
+        "comment": "Determines per day/year cost/usage from Kill-a-watt P3 data",
+        "icon": "Bolt",
+        "color": "#ffb7410e",
+        "autoIcon": "Bolt",
+        "autoColor": "#b7410e",
+        "platform": "current",
+        "rootId": "KjEBKbATHhsGZaFzy31qmjug",
+        "showAd": false,
+        "isLibrary": false,
+        "allowExport": false,
+        "hasUniqueIds": false,
+        "decls": [
+          {
+            "name": "Calculate",
+            "inParameters": [],
+            "outParameters": [],
+            "isPrivate": false,
+            "isOffloaded": false,
+            "isTest": false,
+            "isAsync": false,
+            "nodeType": "action",
+            "body": [
+              {
+                "expr": "$mT7rHn2n9WC6JGBmGOFQFGd6L0 ,:= :wall .ask_number ,( 'Total_KW_used ,)",
+                "nodeType": "exprStmt",
+                "id": "mT7rHn2n9WC6JGBmGOFQFGd6",
+                "locals": [
+                  {
+                    "name": "totalKwUsed",
+                    "type": "Number",
+                    "nodeType": "localDef",
+                    "id": "mT7rHn2n9WC6JGBmGOFQFGd6L0"
+                  }
+                ]
+              },
+              {
+                "expr": "$xZVymNjC2trqIiUEuFom8C8aL0 ,:= :wall .ask_number ,( 'Total_hours_ ,)",
+                "nodeType": "exprStmt",
+                "id": "xZVymNjC2trqIiUEuFom8C8a",
+                "locals": [
+                  {
+                    "name": "hours",
+                    "type": "Number",
+                    "nodeType": "localDef",
+                    "id": "xZVymNjC2trqIiUEuFom8C8aL0"
+                  }
+                ]
+              },
+              {
+                "expr": "$xBXrke97NLffcuu740cCALTnL0 ,:= :wall .ask_number ,( 'Total_minutes_ ,)",
+                "nodeType": "exprStmt",
+                "id": "xBXrke97NLffcuu740cCALTn",
+                "locals": [
+                  {
+                    "name": "minutes",
+                    "type": "Number",
+                    "nodeType": "localDef",
+                    "id": "xBXrke97NLffcuu740cCALTnL0"
+                  }
+                ]
+              },
+              {
+                "expr": "$xU4d42SEJ9i4weBCE2IkvF4LL0 ,:= :wall .ask_number ,( 'Cost_per_KWH ,)",
+                "nodeType": "exprStmt",
+                "id": "xU4d42SEJ9i4weBCE2IkvF4L",
+                "locals": [
+                  {
+                    "name": "costPerKwh",
+                    "type": "Number",
+                    "nodeType": "localDef",
+                    "id": "xU4d42SEJ9i4weBCE2IkvF4LL0"
+                  }
+                ]
+              },
+              {
+                "expr": "$aqQHI6nOQWu4PdQr9xcBXPy0L0 ,:= $xBXrke97NLffcuu740cCALTnL0 ,/ ,6 ,0",
+                "nodeType": "exprStmt",
+                "id": "aqQHI6nOQWu4PdQr9xcBXPy0",
+                "locals": [
+                  {
+                    "name": "minutesAsHours",
+                    "type": "Number",
+                    "nodeType": "localDef",
+                    "id": "aqQHI6nOQWu4PdQr9xcBXPy0L0"
+                  }
+                ]
+              },
+              {
+                "expr": "$ueZtvAaKWzE3gyyIZLhLqH1dL0 ,:= $aqQHI6nOQWu4PdQr9xcBXPy0L0 ,+ $xZVymNjC2trqIiUEuFom8C8aL0",
+                "nodeType": "exprStmt",
+                "id": "ueZtvAaKWzE3gyyIZLhLqH1d",
+                "locals": [
+                  {
+                    "name": "totalHours",
+                    "type": "Number",
+                    "nodeType": "localDef",
+                    "id": "ueZtvAaKWzE3gyyIZLhLqH1dL0"
+                  }
+                ]
+              },
+              {
+                "expr": "$nxui2uydRmBYFukP9Ur2vtSrL0 ,:= 'Total_hours_/003d_ ,∥ $ueZtvAaKWzE3gyyIZLhLqH1dL0",
+                "nodeType": "exprStmt",
+                "id": "nxui2uydRmBYFukP9Ur2vtSr",
+                "locals": [
+                  {
+                    "name": "s",
+                    "type": "String",
+                    "nodeType": "localDef",
+                    "id": "nxui2uydRmBYFukP9Ur2vtSrL0"
+                  }
+                ]
+              },
+              {
+                "expr": "$nxui2uydRmBYFukP9Ur2vtSrL0 .post_to_wall",
+                "nodeType": "exprStmt",
+                "id": "EbtpNneCx2ScRvqR1rsZ3OYI",
+                "locals": []
+              },
+              {
+                "expr": "$LgQwn8udtHJ0vGgF7A5ccqdvL0 ,:= $mT7rHn2n9WC6JGBmGOFQFGd6L0 ,/ $ueZtvAaKWzE3gyyIZLhLqH1dL0",
+                "nodeType": "exprStmt",
+                "id": "LgQwn8udtHJ0vGgF7A5ccqdv",
+                "locals": [
+                  {
+                    "name": "kwPerHour",
+                    "type": "Number",
+                    "nodeType": "localDef",
+                    "id": "LgQwn8udtHJ0vGgF7A5ccqdvL0"
+                  }
+                ]
+              },
+              {
+                "expr": "$nxui2uydRmBYFukP9Ur2vtSrL0 ,:= 'KW_per_hour_/003d_ ,∥ $LgQwn8udtHJ0vGgF7A5ccqdvL0 .to_string",
+                "nodeType": "exprStmt",
+                "id": "wFdo2IEpcx5spCB5WO5MVTHW",
+                "locals": []
+              },
+              {
+                "expr": "$nxui2uydRmBYFukP9Ur2vtSrL0 .post_to_wall",
+                "nodeType": "exprStmt",
+                "id": "XjnL17EJSk8OHFH9qJGGdtv4",
+                "locals": []
+              },
+              {
+                "expr": "$PzEfcAgWYFlM7L0LAEpVfAxWL0 ,:= $LgQwn8udtHJ0vGgF7A5ccqdvL0 ,* ,2 ,4",
+                "nodeType": "exprStmt",
+                "id": "PzEfcAgWYFlM7L0LAEpVfAxW",
+                "locals": [
+                  {
+                    "name": "kwhPerDay",
+                    "type": "Number",
+                    "nodeType": "localDef",
+                    "id": "PzEfcAgWYFlM7L0LAEpVfAxWL0"
+                  }
+                ]
+              },
+              {
+                "expr": "$nxui2uydRmBYFukP9Ur2vtSrL0 ,:= 'KWH_Per_day_/003d_ ,∥ $PzEfcAgWYFlM7L0LAEpVfAxWL0",
+                "nodeType": "exprStmt",
+                "id": "OCN0Jky5ISsOa3zw3DhHk2wK",
+                "locals": []
+              },
+              {
+                "expr": "$nxui2uydRmBYFukP9Ur2vtSrL0 .post_to_wall",
+                "nodeType": "exprStmt",
+                "id": "xHkGV17p2GbaqIrFUHHmRYvA",
+                "locals": []
+              },
+              {
+                "expr": "$x0LLNE4t3zUiuI50RUp3XrBkL0 ,:= $PzEfcAgWYFlM7L0LAEpVfAxWL0 ,* $xU4d42SEJ9i4weBCE2IkvF4LL0",
+                "nodeType": "exprStmt",
+                "id": "x0LLNE4t3zUiuI50RUp3XrBk",
+                "locals": [
+                  {
+                    "name": "costPerDay",
+                    "type": "Number",
+                    "nodeType": "localDef",
+                    "id": "x0LLNE4t3zUiuI50RUp3XrBkL0"
+                  }
+                ]
+              },
+              {
+                "expr": "$nxui2uydRmBYFukP9Ur2vtSrL0 ,:= 'Cost_per_day_/003d ,∥ $x0LLNE4t3zUiuI50RUp3XrBkL0",
+                "nodeType": "exprStmt",
+                "id": "VacEmmhT4tEugps440kkKrQv",
+                "locals": []
+              },
+              {
+                "expr": "$nxui2uydRmBYFukP9Ur2vtSrL0 .post_to_wall",
+                "nodeType": "exprStmt",
+                "id": "e21y2LXW06U2ZE4BnfE7h8ST",
+                "locals": []
+              },
+              {
+                "expr": "$Hn6EBAgLOGI14kBWJX261CWBL0 ,:= $x0LLNE4t3zUiuI50RUp3XrBkL0 ,* ,3 ,6 ,5",
+                "nodeType": "exprStmt",
+                "id": "Hn6EBAgLOGI14kBWJX261CWB",
+                "locals": [
+                  {
+                    "name": "costPerYear",
+                    "type": "Number",
+                    "nodeType": "localDef",
+                    "id": "Hn6EBAgLOGI14kBWJX261CWBL0"
+                  }
+                ]
+              },
+              {
+                "expr": "$nxui2uydRmBYFukP9Ur2vtSrL0 ,:= 'Cost_per_year_/003d_ ,∥ $Hn6EBAgLOGI14kBWJX261CWBL0",
+                "nodeType": "exprStmt",
+                "id": "N46eB9MDWBMdUyfCfo2h0Sik",
+                "locals": []
+              },
+              {
+                "expr": "$nxui2uydRmBYFukP9Ur2vtSrL0 .post_to_wall",
+                "nodeType": "exprStmt",
+                "id": "VXAk0KgopG0AYDeontuV1jae",
+                "locals": []
+              },
+              {
+                "expr": "$F7nLs2HNtRKHaZnGIrJEKTInL0 ,:= $PzEfcAgWYFlM7L0LAEpVfAxWL0 ,* ,3 ,6 ,5",
+                "nodeType": "exprStmt",
+                "id": "F7nLs2HNtRKHaZnGIrJEKTIn",
+                "locals": [
+                  {
+                    "name": "kwhPerYear",
+                    "type": "Number",
+                    "nodeType": "localDef",
+                    "id": "F7nLs2HNtRKHaZnGIrJEKTInL0"
+                  }
+                ]
+              },
+              {
+                "expr": "$nxui2uydRmBYFukP9Ur2vtSrL0 ,:= 'KWH_per_year_/003d_ ,∥ $F7nLs2HNtRKHaZnGIrJEKTInL0",
+                "nodeType": "exprStmt",
+                "id": "UkmXNFRBPxr9lsxQfbZle6dN",
+                "locals": []
+              },
+              {
+                "expr": "$nxui2uydRmBYFukP9Ur2vtSrL0 .post_to_wall",
+                "nodeType": "exprStmt",
+                "id": "hmnmrKeL0ZvQh68SW9tSDLz4",
+                "locals": []
+              },
+              {
+                "expr": ":wall .ask_number ,( ' ,)",
+                "nodeType": "exprStmt",
+                "id": "MIYiDJiCWNiqfwPxHgSXDqBB",
+                "locals": []
+              }
+            ],
+            "id": "i5eJpp7zo7M5pqfVEfaGPkKc"
+          }
+        ],
+        "deletedDecls": [],
+        "nodeType": "app",
+        "id": "app"
+      }
+    }
+  ]
+}

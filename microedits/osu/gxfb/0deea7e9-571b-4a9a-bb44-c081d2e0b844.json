@@ -1,0 +1,1241 @@
+{
+  "userid": "gxfb",
+  "guid": "0deea7e9-571b-4a9a-bb44-c081d2e0b844",
+  "lastStatus": "published",
+  "items": [
+    {
+      "seqNo": 0,
+      "time": 1368634563,
+      "scriptId": null,
+      "historyId": "2520336662367658821232447a6-5a9b-4a2e-ae17-7f2e800ec7d1",
+      "updateSize": 28523,
+      "ast": {
+        "textVersion": "v2.2,js,ctx",
+        "jsonVersion": "v1.0,resolved,short",
+        "name": "monster slicer",
+        "comment": "A tutorial to build a classic fruit slicer game. #docs #tutorials #games",
+        "icon": "Fire",
+        "color": "#ffDAA520",
+        "autoIcon": "Fire",
+        "autoColor": "#DAA520",
+        "platform": "current",
+        "rootId": "ebcEBYwwP9DzPW23wsnNai21",
+        "showAd": false,
+        "isLibrary": false,
+        "allowExport": false,
+        "hasUniqueIds": false,
+        "decls": [
+          {
+            "name": "main",
+            "inParameters": [],
+            "outParameters": [],
+            "isPrivate": false,
+            "isOffloaded": false,
+            "isTest": false,
+            "isAsync": false,
+            "nodeType": "action",
+            "body": [
+              {
+                "text": "{priority:1000}",
+                "nodeType": "comment",
+                "id": "xSd80Ius4wPurZKMjzCabWYd"
+              },
+              {
+                "text": "In this tutorial, we will learn how to build a simple **fruit slicing** game; for fun, we'll slice monsters instead.",
+                "nodeType": "comment",
+                "id": "PiVxE8QjmSIjcHwHRkivRWFA"
+              },
+              {
+                "text": "### rules",
+                "nodeType": "comment",
+                "id": "xgXznR8dsq20pvee2JkmM4Sz"
+              },
+              {
+                "text": "The game is easy and fun:",
+                "nodeType": "comment",
+                "id": "p2AMOjtyvM2Nj4ReXw1ugIhi"
+              },
+              {
+                "text": "* a fruit, or some other objects, flies from the bottom of the screen and falls down.",
+                "nodeType": "comment",
+                "id": "pYKDNNNPOEbAqRVLVWX4fQ09"
+              },
+              {
+                "text": "* the player needs to tap the fruit while it is on the screen to win a point.",
+                "nodeType": "comment",
+                "id": "n9DMSadfHl1YvGYddnhs0nNR"
+              },
+              {
+                "text": "* if the player misses the fruit and lets it fall down the screen, the player looses a life",
+                "nodeType": "comment",
+                "id": "H0kGJeDuyVLBQwy9pbPnnxQk"
+              },
+              {
+                "text": "* the game is over when the player is out of lives",
+                "nodeType": "comment",
+                "id": "Du5Wixog5EE4Z42Aj4JWCKNC"
+              },
+              {
+                "text": "You will learn how to turn those rules into a fully functional game.",
+                "nodeType": "comment",
+                "id": "lbnWh4HDbYkFJeJw2xp2SbdR"
+              },
+              {
+                "text": "### let's get started!",
+                "nodeType": "comment",
+                "id": "QmK2dZyyGQSO6B5JnCEzVyvC"
+              },
+              {
+                "text": "* open a browser and go to [touchdevelop.com/app](http://touchdevelop.com/app)",
+                "nodeType": "comment",
+                "id": "ScdEC3NaHv1g232IVlEk4nzn"
+              },
+              {
+                "text": "* tap on **Create Script** then select the **physics game starter** template",
+                "nodeType": "comment",
+                "id": "exBysGrUQA5UP9XCdqFH2B9Z"
+              },
+              {
+                "text": "* select a name for your game and tap **create**",
+                "nodeType": "comment",
+                "id": "ymd4VVL92WCRrFC4VDHqIQkF"
+              },
+              {
+                "text": "The editor should open in the ``main`` action. The ``main`` action is the first action that runs in the script. This is where we are going to put all the code to initialize our game.",
+                "nodeType": "comment",
+                "id": "xL2FyuZXcB2C2FKn06yFXqht"
+              },
+              {
+                "expr": ":data #slpUw2F4H4mdN0XQODRppZmJ ,:= :media .create_landscape_board ,( ,8 ,0 ,0 ,, ,4 ,8 ,0 ,)",
+                "nodeType": "exprStmt",
+                "id": "xaCnTb0JArT9cqtLEPinU0Kr",
+                "locals": []
+              },
+              {
+                "expr": ":data #slpUw2F4H4mdN0XQODRppZmJ .set_gravity ,( ,0 ,, ,4 ,0 ,0 ,)",
+                "nodeType": "exprStmt",
+                "id": "S4uiLWh4Nij4uRnikzm20WBu",
+                "locals": []
+              },
+              {
+                "expr": ":data #slpUw2F4H4mdN0XQODRppZmJ .post_to_wall",
+                "nodeType": "exprStmt",
+                "id": "ZhwWI4ImN0uEqy54HP7T1PXt",
+                "locals": []
+              },
+              {
+                "text": "* `media->create landscape board` creates a [2D game engine](/gameboard) of width 800 and height 480. It is stored into the `data->board` variable. `data->board` is called a global variable because it can be used in any action.",
+                "nodeType": "comment",
+                "id": "LgHwp2OkVtJwuiE2Pa8XqCWs"
+              },
+              {
+                "text": "* a gravity is applied to all the objects in the game engine by using `set gravity`. Since the vertical axis is inverted, a positive `y` force of 400 will actually push objects down.",
+                "nodeType": "comment",
+                "id": "xlPcGlNdIMElltzRUzwsHGWZ"
+              },
+              {
+                "text": "* the game engine is displayed on the screen by using `post to wall`. It will automatically resize to fill the entire screen.",
+                "nodeType": "comment",
+                "id": "xnT1DiKS9wnLiWssLM1ffyBZ"
+              },
+              {
+                "text": "The initial template also contains an event, `gameloop`. This event is run many times a second after main finishes. Similarly to cartoons, we move each object a little bit each time `gameloop` runs, which animates our objects.",
+                "nodeType": "comment",
+                "id": "nhyS8HkJZvtx6Zz5L7GmH3RL"
+              },
+              {
+                "text": "{decl:gameloop}",
+                "nodeType": "comment",
+                "id": "saEaHQ5DsWGPlb9STVloLhgv"
+              },
+              {
+                "text": "* `data->board->evolve` tells the game engine to apply the physics equations and move the objects",
+                "nodeType": "comment",
+                "id": "J86ENtS4zASQo9xTvTuCQFfl"
+              },
+              {
+                "text": "* `data->board->update on wall` tells the game engine to redraw so that object moves and changes are visible on the screen",
+                "nodeType": "comment",
+                "id": "OsgeHPEJVeke02hbgsql1xDC"
+              },
+              {
+                "text": "* try the game and see what happens",
+                "nodeType": "comment",
+                "id": "q126pu6KRRsEbhO0XsZFuaa2"
+              },
+              {
+                "text": "### adding a fruit",
+                "nodeType": "comment",
+                "id": "CLhiSr9lKbMzX21tgXcgksQa"
+              },
+              {
+                "text": "Nothing happens! There aren't any object in our game engine. Let's add the ``fruit`` to the game engine",
+                "nodeType": "comment",
+                "id": "xDb7H2jcnU93yDp1ppWC2H04"
+              },
+              {
+                "text": "* **go to main**",
+                "nodeType": "comment",
+                "id": "tU23qgLWty4XB6Xvr6Kiiqms"
+              },
+              {
+                "text": "* tap on the `data->board->post to wall` line, then tap on the bottom `+` button",
+                "nodeType": "comment",
+                "id": "ra2Lpc8qbzo3dM41BRdiUZ34"
+              },
+              {
+                "text": "* tap on `data-> data`",
+                "nodeType": "comment",
+                "id": "KKiZNE7oXYQojhiIupK24Nuc"
+              },
+              {
+                "text": "* tap on `data->board`",
+                "nodeType": "comment",
+                "id": "Mu5vWDj75ibhkzN0q1WFhnOg"
+              },
+              {
+                "text": "* tap on `create picture`; if you can't find it, try cycling around or simply typing ``picture``. This is what the code should look like in the editor.",
+                "nodeType": "comment",
+                "id": "NkmzSM9GJFC13sx2iHwmjcNZ"
+              },
+              {
+                "expr": ":data #slpUw2F4H4mdN0XQODRppZmJ .create_picture ,( ?Picture: ,)",
+                "nodeType": "exprStmt",
+                "id": "l2tllAh2AeizrmLbWGMTx97S",
+                "locals": []
+              },
+              {
+                "text": "Something is not quite right: the `create picture` action needs a picture to work. We will use pictures that other users have uploaded but you will be able to use your own later on.",
+                "nodeType": "comment",
+                "id": "xR4b3qwAr7r4B36FPybGc3Q2"
+              },
+              {
+                "text": "* delete ``need Picture`` and type **monster**. If you are using a keyboard, you can type directly; on a touch device, tap on the `Search code...` search box first.",
+                "nodeType": "comment",
+                "id": "w4hA0hBxveKIKoAHHwxaleJa"
+              },
+              {
+                "text": "* after a couple seconds, you should see a choice of images that match ``monster``, pick the one you like. After insertion, you should see a `art->` symbol and the name of your picture.",
+                "nodeType": "comment",
+                "id": "jnkhhYXalGsaoEzaYI9sjPJn"
+              },
+              {
+                "expr": ":data #slpUw2F4H4mdN0XQODRppZmJ .create_picture ,( :art #xb8VAAhNao5vmfDg9ZzWjO6G ,)",
+                "nodeType": "exprStmt",
+                "id": "I8zXJmPxcTuXWnqlFRa3wsWd",
+                "locals": []
+              },
+              {
+                "text": "* tap on `store in var`",
+                "nodeType": "comment",
+                "id": "xmIA6lY9StjqHEDXAa2Ym6F6"
+              },
+              {
+                "text": "* tap on `sprite` and tap on `promote to data`",
+                "nodeType": "comment",
+                "id": "xOCNYlEI3dPM2pWzSx8zNgEq"
+              },
+              {
+                "text": "* try the game and see what happens",
+                "nodeType": "comment",
+                "id": "pHM0EeHShEmGbrw9E3TSB292"
+              },
+              {
+                "text": "### bouncing of the bottom",
+                "nodeType": "comment",
+                "id": "nMvJpFE5U74jOZf07KEpNXpq"
+              },
+              {
+                "text": "The monster starts from the center of the screen and falls down, this is expected because of the gravity. However it does not come back up, it just keeps falling forever.",
+                "nodeType": "comment",
+                "id": "aCMmtqewncSnaTe9jRC5efpL"
+              },
+              {
+                "text": "* think about a strategy to make the monster bounce",
+                "nodeType": "comment",
+                "id": "Beix0o22ibtmS2B0aWW8Rmvg"
+              },
+              {
+                "text": "Here is one way to describe what needs to happen to get the bouncing:",
+                "nodeType": "comment",
+                "id": "YwcT8Hu5o5nBj4aR2aY4wrMm"
+              },
+              {
+                "text": "> _[At any time]_, _[if]_ the monster is _[off screen]_, _[throw it back up]_",
+                "nodeType": "comment",
+                "id": "WWPDVU2nze4yP4r1zavS0QsJ"
+              },
+              {
+                "text": "The trick is to be able to convert this sentence into code. Fortunately, the text contains many hints that will help us write the code. Let's take a look at each of them.",
+                "nodeType": "comment",
+                "id": "UccNnDLQkNQXTnLS4oO1vPLp"
+              },
+              {
+                "text": "* _At any time_: we constantly have to check that the monster is not out of the screen. The best place to do that is the `gameloop` which runs many times a second.",
+                "nodeType": "comment",
+                "id": "CLzacCsfIaZ63Dd0214TQcyq"
+              },
+              {
+                "text": "* _if_: we will need to apply special commands to the monster when it falls off the screen. For that, we can use a [](/if) selectively runs code based on the value passed in``if ... then`.",
+                "nodeType": "comment",
+                "id": "ZziiwX2saXfD859vjjcouv4G"
+              },
+              {
+                "nodeType": "if",
+                "condition": "",
+                "thenBody": [
+                  {
+                    "expr": "",
+                    "nodeType": "exprStmt",
+                    "id": "xCMnT8Zpgxts7sk9iloNO4GS",
+                    "locals": []
+                  }
+                ],
+                "isElseIf": false,
+                "id": "ZABqtBxmkk3bfqT9bIb4WXVY",
+                "locals": []
+              },
+              {
+                "text": "* _off screen_: detecting that the monster left the screen is like a little geometric puzzle. We need to write the equation that determines if the monster `y` position is greater than the screen ``height`` (remember the inverted vertical coordinates)",
+                "nodeType": "comment",
+                "id": "aeA6vNZFjGR1sgQZ1MSVc4mP"
+              },
+              {
+                "nodeType": "if",
+                "condition": ":data #vNPfVbjx3XjiW3mMkWOGTeLq .y ,> ,4 ,8 ,0",
+                "thenBody": [
+                  {
+                    "expr": "",
+                    "nodeType": "exprStmt",
+                    "id": "x9hMw2gFzcb3ohy7m6uZVOPK",
+                    "locals": []
+                  }
+                ],
+                "isElseIf": false,
+                "id": "NbGI6aTh8QF04Jmi2ocQV12p",
+                "locals": []
+              },
+              {
+                "text": "* _throw it back up_: what does it mean to throw the monster up? One way to do it is that you give the monster a negative vertical velocity and let the physics engine do the rest.",
+                "nodeType": "comment",
+                "id": "D7CuLpDdgwF9v78eyvTVtkRo"
+              },
+              {
+                "nodeType": "if",
+                "condition": ":data #vNPfVbjx3XjiW3mMkWOGTeLq .y ,> ,4 ,8 ,0",
+                "thenBody": [
+                  {
+                    "expr": ":data #vNPfVbjx3XjiW3mMkWOGTeLq .set_speed_y ,( ,- ,5 ,0 ,0 ,)",
+                    "nodeType": "exprStmt",
+                    "id": "tnxM48Mo3HIFh3Ksux41xsdM",
+                    "locals": []
+                  }
+                ],
+                "isElseIf": false,
+                "id": "gLwqxe1I0t5jo62F628YXEHW",
+                "locals": []
+              },
+              {
+                "text": "* try the game and see what happens",
+                "nodeType": "comment",
+                "id": "Bcbnn5efmq9YImS3Xcv5njUk"
+              },
+              {
+                "text": "### bouncing sound",
+                "nodeType": "comment",
+                "id": "orxjO2oc8qtUm2ZafwpTDZhZ"
+              },
+              {
+                "text": "Wouldn't it be fun if the monster would squik when bouncing? Let's see how to add a sound in the game.",
+                "nodeType": "comment",
+                "id": "epTCdwZJHh1NnBoNK8kxCCcn"
+              },
+              {
+                "text": "* **go to gameloop**",
+                "nodeType": "comment",
+                "id": "xFK46Jazn4UUdkYyLhjKi16v"
+              },
+              {
+                "text": "* in the [](/if) statement, add a new line",
+                "nodeType": "comment",
+                "id": "YkTZH9qVT4pFbIW1uhFYb42n"
+              },
+              {
+                "nodeType": "if",
+                "condition": ":data #vNPfVbjx3XjiW3mMkWOGTeLq .y ,> ,4 ,8 ,0",
+                "thenBody": [
+                  {
+                    "expr": ":data #vNPfVbjx3XjiW3mMkWOGTeLq .set_speed_y ,( ,- ,5 ,0 ,0 ,)",
+                    "nodeType": "exprStmt",
+                    "id": "A4jwSLdEbJx14AtMvLhh5mJd",
+                    "locals": []
+                  },
+                  {
+                    "text": "{highlight}",
+                    "nodeType": "comment",
+                    "id": "VyP7biYsngBx6UZaHJfcSQFE"
+                  },
+                  {
+                    "expr": "",
+                    "nodeType": "exprStmt",
+                    "id": "U8HMDBHMwTQZdsNSC4Fed9zo",
+                    "locals": []
+                  },
+                  {
+                    "text": "{/highlight}",
+                    "nodeType": "comment",
+                    "id": "pe7hUl4lSp6th8FenXm5mnvi"
+                  }
+                ],
+                "isElseIf": false,
+                "id": "xDRUGJFMp3l9Sf3Er7rOrViM",
+                "locals": []
+              },
+              {
+                "text": "* type ``ouch sound``, select the ``ouch`` sound, then tap `play`",
+                "nodeType": "comment",
+                "id": "xCR5Bh1gfwa6FH1aTEkQIQW4"
+              },
+              {
+                "nodeType": "if",
+                "condition": ":data #vNPfVbjx3XjiW3mMkWOGTeLq .y ,> ,4 ,8 ,0",
+                "thenBody": [
+                  {
+                    "expr": ":data #vNPfVbjx3XjiW3mMkWOGTeLq .set_speed_y ,( ,- ,5 ,0 ,0 ,)",
+                    "nodeType": "exprStmt",
+                    "id": "x2taPt4KWUVSaDxsWKqfRE4U",
+                    "locals": []
+                  },
+                  {
+                    "text": "{highlight}",
+                    "nodeType": "comment",
+                    "id": "RC6ABBigribywAqMBham2sVI"
+                  },
+                  {
+                    "expr": ":art #Wu7HDw5l2r1r08jLp5gj35ue .play",
+                    "nodeType": "exprStmt",
+                    "id": "xg3qCymhzNeCu5sPu6jRAKtg",
+                    "locals": []
+                  },
+                  {
+                    "text": "{/highlight}",
+                    "nodeType": "comment",
+                    "id": "xw5PaG5refmO4VDq3CA2PlxT"
+                  }
+                ],
+                "isElseIf": false,
+                "id": "EzU5NVXIDfApgPZ1A75rVPZQ",
+                "locals": []
+              },
+              {
+                "text": "* try the game and see what happens",
+                "nodeType": "comment",
+                "id": "xF87pcNKlYZ7NAUPqTgSsnu3"
+              },
+              {
+                "text": "### galactic background",
+                "nodeType": "comment",
+                "id": "ZaM4Sk2xc64F7Mvu6MhQDfsk"
+              },
+              {
+                "text": "The white background is starting to get annoying. Let's replace it with a background picture of space.",
+                "nodeType": "comment",
+                "id": "iThuAvDlk42V0KBSO6vXU4fx"
+              },
+              {
+                "text": "* **go to main**",
+                "nodeType": "comment",
+                "id": "CF69riJZdHoanJy3YjZ2YTcC"
+              },
+              {
+                "text": "* add an empty line",
+                "nodeType": "comment",
+                "id": "qvuc9HMr3NS2rECOo4wkoQGQ"
+              },
+              {
+                "text": "* tap on `wall` then `set background picture`. This is how the code will look like. You can see that something is not quite right because a red error message is displayed.",
+                "nodeType": "comment",
+                "id": "GB38qCtdrV2LfhKSOrkv4mhS"
+              },
+              {
+                "expr": ":wall .set_background_picture ,( ?Picture: ,)",
+                "nodeType": "exprStmt",
+                "id": "Eroy4FvlLK04V3b95fnMK4ym",
+                "locals": []
+              },
+              {
+                "text": "* delete the ``need Picture`` word,",
+                "nodeType": "comment",
+                "id": "JxGTIHZ6W4Qs1pK9ispjfF7r"
+              },
+              {
+                "text": "* type or search for ``space background``",
+                "nodeType": "comment",
+                "id": "gl6T9fdvJxK1q5MNTSeREl4e"
+              },
+              {
+                "text": "* select a picture",
+                "nodeType": "comment",
+                "id": "xvwRo7KbJqqmZovZ4xsFsD2w"
+              },
+              {
+                "expr": ":wall .set_background_picture ,( :art #rdeb9JD8w42P1wTZpM7e4184 ,)",
+                "nodeType": "exprStmt",
+                "id": "x9qrmeDo72VK1st3KmmZEYJi",
+                "locals": []
+              },
+              {
+                "text": "* try the game and see what happens",
+                "nodeType": "comment",
+                "id": "BBBLLzgnOGtqek29RF149vTe"
+              },
+              {
+                "text": "### tapping the monster",
+                "nodeType": "comment",
+                "id": "Kpa75fMqglXa4Z2J1qigr4Kp"
+              },
+              {
+                "text": "So far the game has been passive, the user can't do anything. Let's bring some user interaction by allowing to **tap** the monster.",
+                "nodeType": "comment",
+                "id": "Vgh8EbAlJ2hbT2CZaxc23qp5"
+              },
+              {
+                "text": "* under ``events``, tap on **+**",
+                "nodeType": "comment",
+                "id": "yHj74ax1ujq6DDSvS4v2grCT"
+              },
+              {
+                "text": "* find the ``tap sprite: sprite`` event in the list and select it to add it to your script",
+                "nodeType": "comment",
+                "id": "DwfUwNNH1tw7b1a27kiRUG4Q"
+              },
+              {
+                "text": "{decl:tap sprite: sprite}",
+                "nodeType": "comment",
+                "id": "hgw66PPIIQ5Ymzmd8tbRlNA9"
+              },
+              {
+                "text": "TouchDevelop will take care of running this event when the monster is tapped so we don't need an `if` like in the `gameloop`.",
+                "nodeType": "comment",
+                "id": "upqUFeyGdDn9oLanWk84XpwY"
+              },
+              {
+                "text": "We need to make it look like the _tap_ removed the monster. An easy way to do this is to simply re-position the monster under the screen and throw it back up!",
+                "nodeType": "comment",
+                "id": "XgZiB03poIBgtyYvs9vYlbFF"
+              },
+              {
+                "text": "* go to **tap sprite: sprite**",
+                "nodeType": "comment",
+                "id": "x9cuFvydgQfsadT9tmOFCLJg"
+              },
+              {
+                "text": "* re-position the monster at the center bottom of the screen",
+                "nodeType": "comment",
+                "id": "INrt1bOpk36QNKEkElfsdo05"
+              },
+              {
+                "expr": ":data #vNPfVbjx3XjiW3mMkWOGTeLq .set_pos ,( ,4 ,0 ,0 ,, ,4 ,8 ,0 ,)",
+                "nodeType": "exprStmt",
+                "id": "xGwC34Ah8g4zBXhJI4xyPJfu",
+                "locals": []
+              },
+              {
+                "text": "* throw the monster back up",
+                "nodeType": "comment",
+                "id": "fWUQw1MTvwXA84DsNtqdd7Fb"
+              },
+              {
+                "expr": ":data #vNPfVbjx3XjiW3mMkWOGTeLq .set_speed_y ,( ,- ,5 ,0 ,0 ,)",
+                "nodeType": "exprStmt",
+                "id": "ZphPh9zUWiWjDSEx6FGFtMB1",
+                "locals": []
+              },
+              {
+                "text": "* try your game and see what happens",
+                "nodeType": "comment",
+                "id": "bIe0MSYMZrsNdotF8DBKIC02"
+              },
+              {
+                "text": "Don't forget to add play a sound as well!",
+                "nodeType": "comment",
+                "id": "qEbBuNVLIKwdh5UltPyZGeWc"
+              },
+              {
+                "text": "### tweaking the animations",
+                "nodeType": "comment",
+                "id": "h5AQ3vIlkjDYp2AjzPHOTTjm"
+              },
+              {
+                "text": "The monster is bouncing and can be tapped but its movement are quite predictable... and boring. Let's make the game more interesting by adding randomness in the movements.",
+                "nodeType": "comment",
+                "id": "LXuzb3XVCOdZdNbQY9wXwHMz"
+              },
+              {
+                "text": "Instead of putting the middle, we can move anywhere at the bottom of the screen by using `math->random range`. This action returns a number within the given range.",
+                "nodeType": "comment",
+                "id": "FteJ3J6HTkVK2t2cMgWWyt5j"
+              },
+              {
+                "text": "* go to **tap sprite: sprite**",
+                "nodeType": "comment",
+                "id": "xtXxXIyJYtnpa8MWtOT4fQ23"
+              },
+              {
+                "text": "* change the code so that the `x` value in `set pos` is random.",
+                "nodeType": "comment",
+                "id": "A44BmOuaWTRMeBUGoqez2ei2"
+              },
+              {
+                "expr": "$ULYgkJ2YAXZOyHdqSeltk7liL0 ,:= :math .random_range ,( ,8 ,0 ,, ,4 ,0 ,0 ,)",
+                "nodeType": "exprStmt",
+                "id": "ULYgkJ2YAXZOyHdqSeltk7li",
+                "locals": [
+                  {
+                    "name": "x",
+                    "type": "Number",
+                    "nodeType": "localDef",
+                    "id": "ULYgkJ2YAXZOyHdqSeltk7liL0"
+                  }
+                ]
+              },
+              {
+                "expr": ":data #vNPfVbjx3XjiW3mMkWOGTeLq .set_pos ,( $ULYgkJ2YAXZOyHdqSeltk7liL0 ,, ,4 ,8 ,0 ,)",
+                "nodeType": "exprStmt",
+                "id": "kAlOH94a4VAA4DZBX4P8kjY5",
+                "locals": []
+              },
+              {
+                "text": "* try your game and see what happens",
+                "nodeType": "comment",
+                "id": "zJvbSwkTrAYE9De8gFVZObEN"
+              },
+              {
+                "text": "Another fun way to customize the movements is to add some horizontal speed. Try using `math->random range` and `set speed x` to acheive this.",
+                "nodeType": "comment",
+                "id": "xN85WKe4zEMu01ga4yPTOF0l"
+              },
+              {
+                "expr": "$M2aDcOOaPxXGn1Zt16JL6dxKL0 ,:= :math .random_range ,( ,- ,2 ,5 ,0 ,, ,2 ,5 ,0 ,)",
+                "nodeType": "exprStmt",
+                "id": "M2aDcOOaPxXGn1Zt16JL6dxK",
+                "locals": [
+                  {
+                    "name": "vx",
+                    "type": "Number",
+                    "nodeType": "localDef",
+                    "id": "M2aDcOOaPxXGn1Zt16JL6dxKL0"
+                  }
+                ]
+              },
+              {
+                "expr": ":data #vNPfVbjx3XjiW3mMkWOGTeLq .set_speed_x ,( $M2aDcOOaPxXGn1Zt16JL6dxKL0 ,)",
+                "nodeType": "exprStmt",
+                "id": "fNjgND79zr4pLPJrvwIoKRy4",
+                "locals": []
+              },
+              {
+                "text": "#### variations",
+                "nodeType": "comment",
+                "id": "ioKrQBwc2zSbPWajLtERQUJ2"
+              },
+              {
+                "text": "* add randomness when the monster bounces off the screen",
+                "nodeType": "comment",
+                "id": "w7ghcjaqtUXVwVuQ04hJbX9G"
+              },
+              {
+                "text": "### keeping score",
+                "nodeType": "comment",
+                "id": "imjDIEIu4GCTWTB3Ls449lYv"
+              },
+              {
+                "text": "Let's keep track of how many times the user tapped on the monster. This is the score of the user.",
+                "nodeType": "comment",
+                "id": "HSq81J5nNIEqbo68UsezZa14"
+              },
+              {
+                "text": "A score is implemented in 3 steps: initialize the score to 0 when starting the game; increment the score on each `tap`, display the score on screen.",
+                "nodeType": "comment",
+                "id": "x2XavOtFCZ22LjTIDc32sy62"
+              },
+              {
+                "text": "* **go to main**",
+                "nodeType": "comment",
+                "id": "gzMq3g48AQxuP0VWXpkZz9dt"
+              },
+              {
+                "text": "* tap on the `var` button",
+                "nodeType": "comment",
+                "id": "PgI9kMXKePeCVgUWBaY4uZ0J"
+              },
+              {
+                "text": "* tap the `0` button",
+                "nodeType": "comment",
+                "id": "dqx2YegtNBTAE4JUpKQPxThl"
+              },
+              {
+                "text": "* tap on the `x` to rename the variable and rename it to **score**",
+                "nodeType": "comment",
+                "id": "dSyUOIUL1bdDDxM6haCcgR5a"
+              },
+              {
+                "text": "* tap on `promote to data` to make it global",
+                "nodeType": "comment",
+                "id": "jgLVrB7OjXw0Plax5WG17Nel"
+              },
+              {
+                "expr": ":data #xVoVmdL2W0FTFafa48UYUvRA ,:= ,0",
+                "nodeType": "exprStmt",
+                "id": "DvlcxnyNH5bqJrkYtgjPAfcK",
+                "locals": []
+              },
+              {
+                "text": "* go to `tap sprite: sprite`",
+                "nodeType": "comment",
+                "id": "xlAvtaoLuMUM8W2S4S5HSWe5"
+              },
+              {
+                "text": "* add the following code that increments the value of score by 1.",
+                "nodeType": "comment",
+                "id": "XlfkkQJ2PJpU5fyaGohIcWFF"
+              },
+              {
+                "expr": ":data #xVoVmdL2W0FTFafa48UYUvRA ,:= :data #xVoVmdL2W0FTFafa48UYUvRA ,+ ,1",
+                "nodeType": "exprStmt",
+                "id": "BRTpXedRj9mFhRkfFkXN9mEP",
+                "locals": []
+              },
+              {
+                "text": "Displaying the score requires a bit more work because we need to create a text sprite, position it on the screen and update the text each time the score changes.",
+                "nodeType": "comment",
+                "id": "xtnFKACF1l2FZj2ZnlQrL6o9"
+              },
+              {
+                "text": "* **go to main**",
+                "nodeType": "comment",
+                "id": "xzRecEfiPKBqPMbC7GnUkhw3"
+              },
+              {
+                "text": "* add the following line of code. The character `||` glues the text and the number together so that it will read _score: 0_ on the screen.",
+                "nodeType": "comment",
+                "id": "gcKOXvc1Xnjv41Qv1qzjKq2V"
+              },
+              {
+                "expr": ":data #LAAkgWM9Nw1mTwUAZWq1jlWf ,:= :data #slpUw2F4H4mdN0XQODRppZmJ .create_text ,( ,1 ,0 ,0 ,, ,2 ,0 ,, ,4 ,0 ,, 'scrub0 ,∥ :data #xVoVmdL2W0FTFafa48UYUvRA ,)",
+                "nodeType": "exprStmt",
+                "id": "iNQGe8OhNC7nM4Ii1coLbaGO",
+                "locals": []
+              },
+              {
+                "text": "* **go to tap sprite: sprite** and add the following code",
+                "nodeType": "comment",
+                "id": "HT9WDfEfn5rJS38AiUzB1iRa"
+              },
+              {
+                "expr": ":data #LAAkgWM9Nw1mTwUAZWq1jlWf .set_text ,( 'scrub0 ,∥ :data #xVoVmdL2W0FTFafa48UYUvRA ,)",
+                "nodeType": "exprStmt",
+                "id": "xkEyMbtcYqfmcHfvnKqYAakb",
+                "locals": []
+              },
+              {
+                "text": "* try your game and see what happens",
+                "nodeType": "comment",
+                "id": "tKJ1nBWa52kcF27J2uSp9dpL"
+              },
+              {
+                "text": "Oops! The text is falling! Of course, it is subject to the gravity force like the monster. Let's make sure the text does not move by adding friction to it. A friction of 1 is like gluing the score sprite to the board.",
+                "nodeType": "comment",
+                "id": "pB79f3PtrxjZKKMQyNtFegjr"
+              },
+              {
+                "text": "* **go to main** and add this line of code",
+                "nodeType": "comment",
+                "id": "ldPbFsEuPv24cgxRKyk5QVeD"
+              },
+              {
+                "expr": ":data #LAAkgWM9Nw1mTwUAZWq1jlWf .set_friction ,( ,1 ,)",
+                "nodeType": "exprStmt",
+                "id": "zJc2uwN06d7FXeUKsAKFaXW7",
+                "locals": []
+              },
+              {
+                "text": "* try your game and see what happens",
+                "nodeType": "comment",
+                "id": "VAf4bAdXVoQZRI3TOROkvK7s"
+              },
+              {
+                "text": "The score is not falling anymore but it is still centered in the screen. Let's re-position it on the upper left corner.",
+                "nodeType": "comment",
+                "id": "W2SXrmZeuOkxajDRPJdy32kd"
+              },
+              {
+                "text": "* **go to main** and set the position of the `data->score sprite` to close to ``(0,0)`` which is the upper left corder",
+                "nodeType": "comment",
+                "id": "xDJW4sXCh4IyUiTXwPFOnv96"
+              },
+              {
+                "expr": ":data #LAAkgWM9Nw1mTwUAZWq1jlWf .set_pos ,( ,5 ,0 ,, ,5 ,0 ,)",
+                "nodeType": "exprStmt",
+                "id": "THXcUR6GA19Qpi2BEpRO402n",
+                "locals": []
+              },
+              {
+                "text": "* try your game and see what happens",
+                "nodeType": "comment",
+                "id": "xFK6IqHAMv4U32VRfLvoNYdU"
+              },
+              {
+                "text": "### loosing lives",
+                "nodeType": "comment",
+                "id": "g2SWDfrMxftGYnYar2q6M1Tl"
+              },
+              {
+                "text": "Similarly to the score, we need to keep track when the player misses the monster and lets it bounce of the screen. In that case, the player should loose a life and eventually the game will be over.",
+                "nodeType": "comment",
+                "id": "yepNSGAKA5M2kVro8Ow2vlvY"
+              },
+              {
+                "text": "* **go to main**",
+                "nodeType": "comment",
+                "id": "n99VvqwBoWO2seJ2X522iVU1"
+              },
+              {
+                "text": "* create the `life` and `life sprite` variables",
+                "nodeType": "comment",
+                "id": "Dw2aYL5IWhbg4IV8F3GF2yPV"
+              },
+              {
+                "expr": ":data #zxQCxYcLeBKFGSm7vgwLSn4b ,:= ,3",
+                "nodeType": "exprStmt",
+                "id": "CvKbyFs1Ua03vd8L7cqXLyLQ",
+                "locals": []
+              },
+              {
+                "expr": ":data #e0dDLYvOnig84MkRdeZv8baN ,:= :data #slpUw2F4H4mdN0XQODRppZmJ .create_text ,( ,1 ,0 ,0 ,, ,2 ,0 ,, ,4 ,0 ,, 'scrub1 ,∥ :data #zxQCxYcLeBKFGSm7vgwLSn4b ,)",
+                "nodeType": "exprStmt",
+                "id": "pldqSkT4r2wYuGsNJr7Re2RH",
+                "locals": []
+              },
+              {
+                "expr": ":data #e0dDLYvOnig84MkRdeZv8baN .set_friction ,( ,1 ,)",
+                "nodeType": "exprStmt",
+                "id": "hUnAhHA58DcLXMK4GCpeA6e1",
+                "locals": []
+              },
+              {
+                "text": "* re-position the `data->life sprite` text on the upper right corner of the screen",
+                "nodeType": "comment",
+                "id": "q5rQ63S9wzIfHTRSqNEutCvY"
+              },
+              {
+                "expr": ":data #e0dDLYvOnig84MkRdeZv8baN .set_pos ,( ,7 ,0 ,0 ,, ,5 ,0 ,)",
+                "nodeType": "exprStmt",
+                "id": "lJkSJGjHeSXlsZ1sJUIFlUpE",
+                "locals": []
+              },
+              {
+                "text": "* **go to gameloop**",
+                "nodeType": "comment",
+                "id": "SR1b0iJOLGHKKSYresJx0Wlj"
+              },
+              {
+                "text": "* under the `if` statement, we decrement the life and update the text of `data->life sprite`",
+                "nodeType": "comment",
+                "id": "xNeBTg8fXNwG4HTT72I0V7DC"
+              },
+              {
+                "nodeType": "if",
+                "condition": ":data #vNPfVbjx3XjiW3mMkWOGTeLq .y ,> ,4 ,8 ,0",
+                "thenBody": [
+                  {
+                    "text": "...",
+                    "nodeType": "comment",
+                    "id": "xgV5ZiSgG4Q2ORW6F2XRiIFM"
+                  },
+                  {
+                    "text": "{highlight}",
+                    "nodeType": "comment",
+                    "id": "xW4PSDkhxRrz5WToX42VMHl0"
+                  },
+                  {
+                    "expr": ":data #zxQCxYcLeBKFGSm7vgwLSn4b ,:= :data #zxQCxYcLeBKFGSm7vgwLSn4b ,- ,1",
+                    "nodeType": "exprStmt",
+                    "id": "V2Mzldp2nNxbSdvGtVCHU6Hn",
+                    "locals": []
+                  },
+                  {
+                    "expr": ":data #e0dDLYvOnig84MkRdeZv8baN .set_text ,( 'scrub1 ,∥ :data #zxQCxYcLeBKFGSm7vgwLSn4b ,)",
+                    "nodeType": "exprStmt",
+                    "id": "SZ0SAuVDFn6BLePNfCB87t92",
+                    "locals": []
+                  },
+                  {
+                    "text": "{/highlight}",
+                    "nodeType": "comment",
+                    "id": "zWsD704QZEgAsNMH8AqSlQAJ"
+                  }
+                ],
+                "isElseIf": false,
+                "id": "Xil526o8fPWXkwAncWkHI4Rd",
+                "locals": []
+              },
+              {
+                "text": "* try your game and see what happens",
+                "nodeType": "comment",
+                "id": "cvNN68MepU4qY1iLqmtdaccT"
+              },
+              {
+                "text": "### game over",
+                "nodeType": "comment",
+                "id": "ILLppTv1SjJSyLG1emJT1LJI"
+              },
+              {
+                "text": "When the player has lost all his lives, we should end the game.",
+                "nodeType": "comment",
+                "id": "Jqpp80CkNWpc9tfhzGEuDcTh"
+              },
+              {
+                "text": "The easiest way to do this is to check when `data->life` is zero and use `time->stop` to stop the game engine.",
+                "nodeType": "comment",
+                "id": "xE5mPYmFuWcY1nOvqGbxexOm"
+              },
+              {
+                "text": "* go to the **gameloop**",
+                "nodeType": "comment",
+                "id": "xrm7m5N9ruYurSAKleuJGO4q"
+              },
+              {
+                "text": "* add a new if statement **under** the existing `if` statement. To do so, tap on the `if` then tap on the `+` button at the bottom.",
+                "nodeType": "comment",
+                "id": "xDQPJkK3y48Q5Lgi5vtnItlw"
+              },
+              {
+                "nodeType": "if",
+                "condition": ":data #zxQCxYcLeBKFGSm7vgwLSn4b ,= ,0",
+                "thenBody": [
+                  {
+                    "expr": ":time .stop",
+                    "nodeType": "exprStmt",
+                    "id": "mr8WbGaGhgZs8LIwNQB8c4fV",
+                    "locals": []
+                  }
+                ],
+                "isElseIf": false,
+                "id": "GK11nyL1CKEfiK9QiHFQBhAe",
+                "locals": []
+              },
+              {
+                "text": "* try your game and see what happens",
+                "nodeType": "comment",
+                "id": "xaEOyMX93grmwxItWRHNErn3"
+              },
+              {
+                "text": "### online leaderboards",
+                "nodeType": "comment",
+                "id": "ANzpGvTfeC66vCbTZO254RGh"
+              },
+              {
+                "text": "TouchDevelop makes it easy to build an online leaderboard for your game. Simple call `bazaar->post leaderboard score` to upload the score and `bazaar->post leaderboard to wall` to display the player list. You want to do that right before the game end.",
+                "nodeType": "comment",
+                "id": "yvZ0aWJ3Sp8uYIrOJwyRUH2P"
+              },
+              {
+                "text": "* go to **gameloop**",
+                "nodeType": "comment",
+                "id": "UrTFcHrig02VrOL0mfBNNHRv"
+              },
+              {
+                "nodeType": "if",
+                "condition": ":data #zxQCxYcLeBKFGSm7vgwLSn4b ,= ,0",
+                "thenBody": [
+                  {
+                    "text": "{highlight}",
+                    "nodeType": "comment",
+                    "id": "VruAvshzZbYTqT1EAVh2UYLA"
+                  },
+                  {
+                    "expr": ":bazaar .post_leaderboard_score ,( :data #xVoVmdL2W0FTFafa48UYUvRA ,)",
+                    "nodeType": "exprStmt",
+                    "id": "xJFAQvzC6MQ7wTUGkcn685R7",
+                    "locals": []
+                  },
+                  {
+                    "expr": ":bazaar .post_leaderboard_to_wall",
+                    "nodeType": "exprStmt",
+                    "id": "Hyir64B6ejBpXyjmc4XUFRej",
+                    "locals": []
+                  },
+                  {
+                    "text": "{/highlight}",
+                    "nodeType": "comment",
+                    "id": "Rg7ShbY4RYQAw4Jpa343Vixb"
+                  },
+                  {
+                    "expr": ":time .stop",
+                    "nodeType": "exprStmt",
+                    "id": "xvltTtZzXt2TwS3pEvd50yWL",
+                    "locals": []
+                  }
+                ],
+                "isElseIf": false,
+                "id": "vLbNihQkjdo6bfQPfZnXMCFl",
+                "locals": []
+              },
+              {
+                "text": "* try your game and see what happens",
+                "nodeType": "comment",
+                "id": "xFE0ZF23RaYtwBrg1HQvk3gA"
+              },
+              {
+                "text": "### publishing and sharing your work",
+                "nodeType": "comment",
+                "id": "KE5kHKqTSAQgmPPynQsLDuvf"
+              },
+              {
+                "text": "You've got a game and it is time to put it into your friends hands. For that we will need to **publish** your script and export it as a Web App for example.",
+                "nodeType": "comment",
+                "id": "CGteBx9FcF12fW9w9ZpKGReM"
+              },
+              {
+                "text": "* tap on the **publish** button and select **publish**",
+                "nodeType": "comment",
+                "id": "HMsjozTZCVAOFYKR4J4DtNEn"
+              },
+              {
+                "text": "* after the script is finished publishing, tap on the **export** button",
+                "nodeType": "comment",
+                "id": "o42fyDVB3PWJwcmnO74uTkDt"
+              },
+              {
+                "text": "* then tap on the **Web App** and follow the instruction",
+                "nodeType": "comment",
+                "id": "hxfYcsonMYRG0mtLU8O2xClu"
+              },
+              {
+                "text": "That's it! You just built a mobile game! Wouhou!",
+                "nodeType": "comment",
+                "id": "evNdP55iUl1Ib09aFwyfiJ1Z"
+              }
+            ],
+            "id": "KFv94mijpqeP7oIb1sC79feD"
+          },
+          {
+            "name": "board",
+            "comment": "",
+            "type": "Board",
+            "isReadonly": false,
+            "isTransient": true,
+            "nodeType": "data",
+            "id": "slpUw2F4H4mdN0XQODRppZmJ"
+          },
+          {
+            "name": "gameloop",
+            "inParameters": [],
+            "outParameters": [],
+            "isPrivate": true,
+            "isOffloaded": false,
+            "isTest": false,
+            "isAsync": true,
+            "nodeType": "event",
+            "eventName": "gameloop",
+            "eventVariableId": null,
+            "body": [
+              {
+                "expr": ":data #slpUw2F4H4mdN0XQODRppZmJ .evolve",
+                "nodeType": "exprStmt",
+                "id": "x2IJ9t5KrUep82dtQgYncbCJ",
+                "locals": []
+              },
+              {
+                "expr": ":data #slpUw2F4H4mdN0XQODRppZmJ .update_on_wall",
+                "nodeType": "exprStmt",
+                "id": "KpPsxaMCP9svpfgbQjsUMbLG",
+                "locals": []
+              }
+            ],
+            "id": "OlcKSSPae4U3biumRdFe2FDx"
+          },
+          {
+            "name": "sprite2",
+            "comment": "",
+            "type": "Sprite",
+            "isReadonly": false,
+            "isTransient": true,
+            "nodeType": "data",
+            "id": "ikcBQFAscIskefLf0yOx19C2"
+          },
+          {
+            "name": "monster_1",
+            "comment": "",
+            "type": "Picture",
+            "isReadonly": true,
+            "isTransient": true,
+            "nodeType": "art",
+            "url": "https://az31353.vo.msecnd.net/pub/jhsuejxx",
+            "id": "xb8VAAhNao5vmfDg9ZzWjO6G"
+          },
+          {
+            "name": "sprite",
+            "comment": "",
+            "type": "Sprite",
+            "isReadonly": false,
+            "isTransient": true,
+            "nodeType": "data",
+            "id": "vNPfVbjx3XjiW3mMkWOGTeLq"
+          },
+          {
+            "name": "ouch",
+            "comment": "",
+            "type": "Sound",
+            "isReadonly": true,
+            "isTransient": true,
+            "nodeType": "art",
+            "url": "https://az31353.vo.msecnd.net/pub/nmmmybjw",
+            "id": "Wu7HDw5l2r1r08jLp5gj35ue"
+          },
+          {
+            "name": "space background",
+            "comment": "",
+            "type": "Picture",
+            "isReadonly": true,
+            "isTransient": true,
+            "nodeType": "art",
+            "url": "https://az31353.vo.msecnd.net/pub/vfqojxvj",
+            "id": "rdeb9JD8w42P1wTZpM7e4184"
+          },
+          {
+            "name": "tap sprite: sprite",
+            "inParameters": [
+              {
+                "name": "sprite",
+                "type": "Sprite",
+                "nodeType": "localDef",
+                "id": "mMN0qrcScqDkTbfB4r0hT0DhP0"
+              },
+              {
+                "name": "x",
+                "type": "Number",
+                "nodeType": "localDef",
+                "id": "mMN0qrcScqDkTbfB4r0hT0DhP1"
+              },
+              {
+                "name": "y",
+                "type": "Number",
+                "nodeType": "localDef",
+                "id": "mMN0qrcScqDkTbfB4r0hT0DhP2"
+              }
+            ],
+            "outParameters": [],
+            "isPrivate": false,
+            "isOffloaded": false,
+            "isTest": false,
+            "isAsync": true,
+            "nodeType": "event",
+            "eventName": "tap sprite: ",
+            "eventVariableId": "vNPfVbjx3XjiW3mMkWOGTeLq",
+            "body": [
+              {
+                "expr": "",
+                "nodeType": "exprStmt",
+                "id": "ix5femHviB2BfpISMxwGq47a",
+                "locals": []
+              }
+            ],
+            "id": "mMN0qrcScqDkTbfB4r0hT0Dh"
+          },
+          {
+            "name": "score",
+            "comment": "",
+            "type": "Number",
+            "isReadonly": false,
+            "isTransient": false,
+            "nodeType": "data",
+            "id": "xVoVmdL2W0FTFafa48UYUvRA"
+          },
+          {
+            "name": "score sprite",
+            "comment": "",
+            "type": "Sprite",
+            "isReadonly": false,
+            "isTransient": true,
+            "nodeType": "data",
+            "id": "LAAkgWM9Nw1mTwUAZWq1jlWf"
+          },
+          {
+            "name": "life",
+            "comment": "",
+            "type": "Number",
+            "isReadonly": false,
+            "isTransient": false,
+            "nodeType": "data",
+            "id": "zxQCxYcLeBKFGSm7vgwLSn4b"
+          },
+          {
+            "name": "life sprite",
+            "comment": "",
+            "type": "Sprite",
+            "isReadonly": false,
+            "isTransient": true,
+            "nodeType": "data",
+            "id": "e0dDLYvOnig84MkRdeZv8baN"
+          },
+          {
+            "name": "go",
+            "inParameters": [],
+            "outParameters": [],
+            "isPrivate": true,
+            "isOffloaded": false,
+            "isTest": false,
+            "isAsync": false,
+            "nodeType": "action",
+            "body": [
+              {
+                "expr": "",
+                "nodeType": "exprStmt",
+                "id": "sPTPYAgIIKmOw6jw2CtOdla6",
+                "locals": []
+              }
+            ],
+            "id": "XA464jEObQ6AJx0krDVnFDOQ"
+          }
+        ],
+        "deletedDecls": [],
+        "nodeType": "app",
+        "id": "app"
+      }
+    },
+    {
+      "seqNo": 1,
+      "time": 1368634564,
+      "scriptId": null,
+      "historyId": "2520336662358277464084e0825-d3f0-40aa-abdd-f037813a22c4",
+      "updateSize": 45,
+      "updates": {
+        "app": {
+          "rootId": "ObzLZhDm3oKsY9uJuCfldw3z"
+        }
+      }
+    },
+    {
+      "seqNo": 2,
+      "time": 1368634569,
+      "scriptId": "cbqyhblv",
+      "historyId": "2520336662305778472a600b704-af74-4425-ab68-c4b478652b21",
+      "updateSize": 45,
+      "updates": {
+        "app": {
+          "rootId": "IudFw3iHZXg2UFma18LOOSn5"
+        }
+      }
+    },
+    {
+      "seqNo": 3,
+      "time": 1374032462,
+      "scriptId": "cbqyhblv",
+      "historyId": "2520282683373029636ce4730a2-7fee-452e-96ed-cf7a54a91808",
+      "updateSize": 2,
+      "updates": {}
+    }
+  ]
+}

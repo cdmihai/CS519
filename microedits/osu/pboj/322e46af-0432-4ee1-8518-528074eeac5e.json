@@ -1,0 +1,1645 @@
+{
+  "userid": "pboj",
+  "guid": "322e46af-0432-4ee1-8518-528074eeac5e",
+  "lastStatus": "published",
+  "items": [
+    {
+      "seqNo": 0,
+      "time": 1355597381,
+      "scriptId": "hrvg",
+      "historyId": "2520467034185955435322e46af-0432-4ee1-8518-528074eeac5e",
+      "updateSize": 14974,
+      "ast": {
+        "textVersion": "v2.2,js,ctx",
+        "jsonVersion": "v1.0,resolved,short",
+        "name": "web stuff",
+        "comment": "Searching, browsing and processing pages from the web",
+        "icon": "Wifi",
+        "color": "#ffe25822",
+        "autoIcon": "Wifi",
+        "autoColor": "#e25822",
+        "platform": "current",
+        "rootId": "NUG9Avs2gOKy04YheQsgOzq6",
+        "showAd": false,
+        "isLibrary": false,
+        "allowExport": false,
+        "hasUniqueIds": false,
+        "decls": [
+          {
+            "name": "search Stackoverflow",
+            "inParameters": [],
+            "outParameters": [],
+            "isPrivate": false,
+            "isOffloaded": false,
+            "isTest": false,
+            "isAsync": false,
+            "nodeType": "action",
+            "body": [
+              {
+                "text": "Searches for tagged questions on stackoverflow...",
+                "nodeType": "comment",
+                "id": "xKSLgm2lEqoHYX3RVmnOfCOO"
+              },
+              {
+                "text": "We start by asking the user for a search term",
+                "nodeType": "comment",
+                "id": "uSNDBsE8hm4E41Wb1KC7pdsJ"
+              },
+              {
+                "expr": "$xXHp2I9zYOmew4VpG0tS42mYL0 ,:= :wall .ask_string ,( 'Search_stackoverflow/002ecom ,)",
+                "nodeType": "exprStmt",
+                "id": "xXHp2I9zYOmew4VpG0tS42mY",
+                "locals": [
+                  {
+                    "name": "terms",
+                    "type": "String",
+                    "nodeType": "localDef",
+                    "id": "xXHp2I9zYOmew4VpG0tS42mYL0"
+                  }
+                ]
+              },
+              {
+                "text": "We build the query url. note how we escape the terms using 'url encode'",
+                "nodeType": "comment",
+                "id": "MTAgHXJilTh6ZQaBhws236BK"
+              },
+              {
+                "expr": "$Ncj9zkFcg7qphk6TbEax5iCZL0 ,:= 'http/003a/002f/002fapi/002estackoverflow/002ecom/002f1/002e1/002fsearch/003ftagged/003d ,∥ :web .url_encode ,( $xXHp2I9zYOmew4VpG0tS42mYL0 ,)",
+                "nodeType": "exprStmt",
+                "id": "Ncj9zkFcg7qphk6TbEax5iCZ",
+                "locals": [
+                  {
+                    "name": "url",
+                    "type": "String",
+                    "nodeType": "localDef",
+                    "id": "Ncj9zkFcg7qphk6TbEax5iCZL0"
+                  }
+                ]
+              },
+              {
+                "text": "This line does 2 things: it downloads the result and parses it into a json data structure",
+                "nodeType": "comment",
+                "id": "o2wwsjytEQ2P9fS94qpUhLFE"
+              },
+              {
+                "expr": "$U2I1zQbB8TI3jun24CW3ucrRL0 ,:= :web .json ,( :web .download ,( $Ncj9zkFcg7qphk6TbEax5iCZL0 ,) ,)",
+                "nodeType": "exprStmt",
+                "id": "U2I1zQbB8TI3jun24CW3ucrR",
+                "locals": [
+                  {
+                    "name": "json",
+                    "type": "Json Object",
+                    "nodeType": "localDef",
+                    "id": "U2I1zQbB8TI3jun24CW3ucrRL0"
+                  }
+                ]
+              },
+              {
+                "text": "We fetch the questions field from the json object. this should be an array of results that we can enumerate in a foreach loop",
+                "nodeType": "comment",
+                "id": "O6k2xo8CpPDQcZIPExYfGAoe"
+              },
+              {
+                "expr": "$xOx5nci25G4aXY2N2cuO9WYeL0 ,:= $U2I1zQbB8TI3jun24CW3ucrRL0 .field ,( 'questions ,)",
+                "nodeType": "exprStmt",
+                "id": "xOx5nci25G4aXY2N2cuO9WYe",
+                "locals": [
+                  {
+                    "name": "qs",
+                    "type": "Json Object",
+                    "nodeType": "localDef",
+                    "id": "xOx5nci25G4aXY2N2cuO9WYeL0"
+                  }
+                ]
+              },
+              {
+                "collection": "$xOx5nci25G4aXY2N2cuO9WYeL0",
+                "conditions": [
+                  {
+                    "condition": "T",
+                    "nodeType": "where",
+                    "id": "tio8uYlmM5MOxjoBJ4BXLl1n",
+                    "locals": []
+                  }
+                ],
+                "body": [
+                  {
+                    "text": "We create a message, the basic data structure to hold messages from social services",
+                    "nodeType": "comment",
+                    "id": "xnZXkJZIU1lpCVHWIP8PzG6j"
+                  },
+                  {
+                    "expr": "$xsz9yWxNM6qD91XjwQIrt4C8L0 ,:= :social .create_message ,( $AlYW4hZ3KzJE5ScyBIfotyxLB0 .string ,( 'title ,) ,)",
+                    "nodeType": "exprStmt",
+                    "id": "xsz9yWxNM6qD91XjwQIrt4C8",
+                    "locals": [
+                      {
+                        "name": "msg",
+                        "type": "Message",
+                        "nodeType": "localDef",
+                        "id": "xsz9yWxNM6qD91XjwQIrt4C8L0"
+                      }
+                    ]
+                  },
+                  {
+                    "text": "The information about the author is stored in a nested field owner",
+                    "nodeType": "comment",
+                    "id": "uVJ1RfC7bHq9CwXnY0tHo9eA"
+                  },
+                  {
+                    "expr": "$XKT1iiP2yAGHxVEVk4dl4WOqL0 ,:= $AlYW4hZ3KzJE5ScyBIfotyxLB0 .field ,( 'owner ,)",
+                    "nodeType": "exprStmt",
+                    "id": "XKT1iiP2yAGHxVEVk4dl4WOq",
+                    "locals": [
+                      {
+                        "name": "owner",
+                        "type": "Json Object",
+                        "nodeType": "localDef",
+                        "id": "XKT1iiP2yAGHxVEVk4dl4WOqL0"
+                      }
+                    ]
+                  },
+                  {
+                    "expr": "$xsz9yWxNM6qD91XjwQIrt4C8L0 .set_from ,( $XKT1iiP2yAGHxVEVk4dl4WOqL0 .string ,( 'display/005fname ,) ,)",
+                    "nodeType": "exprStmt",
+                    "id": "rstBjslg9ki8Krzz8i4WFc6H",
+                    "locals": []
+                  },
+                  {
+                    "text": "The link to the question page can easily be recreated from the question id. we don't need to url escape the number as it has been converter to a Number by the json parser.",
+                    "nodeType": "comment",
+                    "id": "eAA2q1NfdOjWXXIDn5t2iwXj"
+                  },
+                  {
+                    "expr": "$xsz9yWxNM6qD91XjwQIrt4C8L0 .set_link ,( 'http/003a/002f/002fwww/002estackoverflow/002ecom/002fquestions/002f ,∥ $AlYW4hZ3KzJE5ScyBIfotyxLB0 .number ,( 'question/005fid ,) ,)",
+                    "nodeType": "exprStmt",
+                    "id": "xpRRBOgNHmIAR6RuavlYzVF5",
+                    "locals": []
+                  },
+                  {
+                    "text": "Gravatar is a web service that provides a unique and stable image for email addresses. it is used in many different web sites to associate a photo to a user email address. StackOverflow makes our life easier here by providing the hash of the email that can be used to get the gravatar easily.",
+                    "nodeType": "comment",
+                    "id": "xfUa1r4zM6u9CFLDmHiySClX"
+                  },
+                  {
+                    "expr": "$xsz9yWxNM6qD91XjwQIrt4C8L0 .set_picture_link ,( 'http/003a/002f/002fwww/002egravatar/002ecom/002favatar/002f ,∥ :web .url_encode ,( $XKT1iiP2yAGHxVEVk4dl4WOqL0 .string ,( 'email/005fhash ,) ,) ,∥ '/003fs/003d72 ,)",
+                    "nodeType": "exprStmt",
+                    "id": "xTU6b0T76glmbLNgDh4ESPl0",
+                    "locals": []
+                  },
+                  {
+                    "expr": "$xsz9yWxNM6qD91XjwQIrt4C8L0 .set_source ,( 'StackOverflow ,)",
+                    "nodeType": "exprStmt",
+                    "id": "xuiPMakFpOeV6G63jIyf0BfA",
+                    "locals": []
+                  },
+                  {
+                    "expr": "$xsz9yWxNM6qD91XjwQIrt4C8L0 .post_to_wall",
+                    "nodeType": "exprStmt",
+                    "id": "xxoyCHoLHRO2VItsfQXIJc2q",
+                    "locals": []
+                  }
+                ],
+                "nodeType": "foreach",
+                "id": "AlYW4hZ3KzJE5ScyBIfotyxL",
+                "locals": [
+                  {
+                    "name": "q",
+                    "type": "Json Object",
+                    "nodeType": "localDef",
+                    "id": "AlYW4hZ3KzJE5ScyBIfotyxLB0"
+                  }
+                ]
+              }
+            ],
+            "id": "kiwvq4fAhupK2mBffPfxZXTX"
+          },
+          {
+            "name": "generate qrcode",
+            "inParameters": [],
+            "outParameters": [],
+            "isPrivate": false,
+            "isOffloaded": false,
+            "isTest": false,
+            "isAsync": false,
+            "nodeType": "action",
+            "body": [
+              {
+                "text": "Uses a web service to generate and read qr codes.",
+                "nodeType": "comment",
+                "id": "WhGkUqzN2qZn5ohoP72Lw22V"
+              },
+              {
+                "expr": "$fP1ijSPZeCKWcgXV26a4YLvsL0 ,:= :wall .ask_string ,( 'Enter_the_text_to_be_translated_in_a_qr_code/002e ,)",
+                "nodeType": "exprStmt",
+                "id": "fP1ijSPZeCKWcgXV26a4YLvs",
+                "locals": [
+                  {
+                    "name": "s",
+                    "type": "String",
+                    "nodeType": "localDef",
+                    "id": "fP1ijSPZeCKWcgXV26a4YLvsL0"
+                  }
+                ]
+              },
+              {
+                "text": "s contains the text that the user wants to encode in a qr code... let's get to work!",
+                "nodeType": "comment",
+                "id": "H0RxY3mOjJZ36OzTwfAEE4CR"
+              },
+              {
+                "expr": "$fK7f0QA8oxizolfWxfZ84gBGL0 ,:= :web .download_picture ,( 'http/003a/002f/002fqrcode/002egood/002dsurvey/002ecom/002fapi/002fv2/002fgenerate/003fformat/003djpg/0026content/003d ,∥ :web .url_encode ,( $fP1ijSPZeCKWcgXV26a4YLvsL0 ,) ,)",
+                "nodeType": "exprStmt",
+                "id": "fK7f0QA8oxizolfWxfZ84gBG",
+                "locals": [
+                  {
+                    "name": "pic",
+                    "type": "Picture",
+                    "nodeType": "localDef",
+                    "id": "fK7f0QA8oxizolfWxfZ84gBGL0"
+                  }
+                ]
+              },
+              {
+                "text": "good-survey.com created a qrcode that represents s",
+                "nodeType": "comment",
+                "id": "b3JogaVbGxrI8rPXBdWZ2AL1"
+              },
+              {
+                "expr": "$fK7f0QA8oxizolfWxfZ84gBGL0 .post_to_wall",
+                "nodeType": "exprStmt",
+                "id": "xVt1cSIYKEpMrO05P9AiY7Lc",
+                "locals": []
+              },
+              {
+                "text": "that's it!",
+                "nodeType": "comment",
+                "id": "AnsDpxgIHvpfgYUXydOmBFjw"
+              },
+              {
+                "expr": "$CwnqGKA4vnPzwxFfj11PRfU6L0 ,:= :web .upload_picture ,( 'http/003a/002f/002fqrcode/002egood/002dsurvey/002ecom/002fapi/002fv2/002fdecode/003fformat/003djpg ,, $fK7f0QA8oxizolfWxfZ84gBGL0 ,)",
+                "nodeType": "exprStmt",
+                "id": "CwnqGKA4vnPzwxFfj11PRfU6",
+                "locals": [
+                  {
+                    "name": "s1",
+                    "type": "String",
+                    "nodeType": "localDef",
+                    "id": "CwnqGKA4vnPzwxFfj11PRfU6L0"
+                  }
+                ]
+              },
+              {
+                "expr": "$CwnqGKA4vnPzwxFfj11PRfU6L0 .post_to_wall",
+                "nodeType": "exprStmt",
+                "id": "l2d9siyo042Ymdyz3xTeySkl",
+                "locals": []
+              },
+              {
+                "text": "if you are looking for more tagging features, try the 'tags' singleton",
+                "nodeType": "comment",
+                "id": "A6HoZHlustGNeF94asFYxUX5"
+              }
+            ],
+            "id": "xhqVXLKegfq3xhkSyfBD2q1D"
+          },
+          {
+            "name": "links",
+            "inParameters": [],
+            "outParameters": [],
+            "isPrivate": false,
+            "isOffloaded": false,
+            "isTest": false,
+            "isAsync": false,
+            "nodeType": "action",
+            "body": [
+              {
+                "text": "Shows how to display rich content on the wall.",
+                "nodeType": "comment",
+                "id": "ryc4JKc5jDwi5tjYcQyBUYne"
+              },
+              {
+                "text": "This creates your basic internet link. click on the button launch it in the browser.",
+                "nodeType": "comment",
+                "id": "b9nem6g1SwOvvGjwaVUpYMWE"
+              },
+              {
+                "expr": ":web .link_url ,( 'This_a_link/002e ,, 'http/003a/002f/002ftouchdevelop/002ecom ,) .post_to_wall",
+                "nodeType": "exprStmt",
+                "id": "Ki61G5w2KYccdpCiBMGRDJnp",
+                "locals": []
+              },
+              {
+                "text": "This will load an image from the web",
+                "nodeType": "comment",
+                "id": "dAt7LjDCWvKXghhN3THxEV4w"
+              },
+              {
+                "expr": ":web .link_image ,( 'http/003a/002f/002fwww/002etouchdevelop/002ecom/002fImages/002ftitle1/002epng ,) .post_to_wall",
+                "nodeType": "exprStmt",
+                "id": "HYl4d1WuproEq5skTJK0KZep",
+                "locals": []
+              },
+              {
+                "text": "When you need to see large images, create a deep zoom link that will display the image in a multi-scale viewer",
+                "nodeType": "comment",
+                "id": "iwCAC2bvdU2Ts662HZWPGiKn"
+              },
+              {
+                "expr": ":web .link_deep_zoom ,( 'http/003a/002f/002fupload/002ewikimedia/002eorg/002fwikipedia/002fcommons/002f3/002f36/002fSeattleI5Skyline/002ejpg ,) .post_to_wall",
+                "nodeType": "exprStmt",
+                "id": "si35E209ZeRGrzGQuHBIWKKB",
+                "locals": []
+              },
+              {
+                "text": "You can also link to movies or sounds through the link media method",
+                "nodeType": "comment",
+                "id": "A2mcy2pMOWiyWh8nOIv5Qtxl"
+              },
+              {
+                "expr": ":web .link_media ,( 'http/003a/002f/002fmedia/002ech9/002ems/002fch9/002f06b9/002f1669dae1/002d2b5f/002d4858/002dabee/002d9ea7018806b9/002fWP7Pex4FunPeliNikolai/005fch9/002ewmv ,) .post_to_wall",
+                "nodeType": "exprStmt",
+                "id": "U4dcmkRZyeLd0rnVrkvY9LFQ",
+                "locals": []
+              },
+              {
+                "expr": ":social .link_phone_number ,( '1235789 ,) .post_to_wall",
+                "nodeType": "exprStmt",
+                "id": "SqzxVDBPs2GOvdvLgw5WlCfV",
+                "locals": []
+              },
+              {
+                "expr": ":social .link_email ,( '/003f/003f/003f/0040/003f/003f/003f/002ecom ,) .post_to_wall",
+                "nodeType": "exprStmt",
+                "id": "YfA4iqoCIBGWLljw0SQZj1QC",
+                "locals": []
+              },
+              {
+                "expr": ":radio .link_frequency ,( 'Current_radio ,, :radio .frequency ,) .post_to_wall",
+                "nodeType": "exprStmt",
+                "id": "xkqGDVBua0bz2K2mEQwjrftN",
+                "locals": []
+              }
+            ],
+            "id": "vgrJGa4K0edcADaZxWzzK24w"
+          },
+          {
+            "name": "share link",
+            "inParameters": [],
+            "outParameters": [],
+            "isPrivate": false,
+            "isOffloaded": false,
+            "isTest": false,
+            "isAsync": false,
+            "nodeType": "action",
+            "body": [
+              {
+                "text": "Shows how to share a link to facebook.",
+                "nodeType": "comment",
+                "id": "fqcuvYZNgHnQcpvKa54JEUfw"
+              },
+              {
+                "expr": "$B0k4xLsom2d0eMDMnxQsFNGKL0 ,:= :web .link_image ,( 'http/003a/002f/002fwww/002etouchdevelop/002ecom/002fImages/002ftitle1/002epng ,)",
+                "nodeType": "exprStmt",
+                "id": "B0k4xLsom2d0eMDMnxQsFNGK",
+                "locals": [
+                  {
+                    "name": "link",
+                    "type": "Link",
+                    "nodeType": "localDef",
+                    "id": "B0k4xLsom2d0eMDMnxQsFNGKL0"
+                  }
+                ]
+              },
+              {
+                "expr": "$B0k4xLsom2d0eMDMnxQsFNGKL0 .set_name ,( 'TouchDevelop_is_awesome/0021 ,)",
+                "nodeType": "exprStmt",
+                "id": "eAPjL1oSE0d5gmr2uNG8Lx2V",
+                "locals": []
+              },
+              {
+                "text": "Share is a quick and easy way to publish your link to Facebook",
+                "nodeType": "comment",
+                "id": "m4HjWfYVnixpQa72AJsU0yc9"
+              },
+              {
+                "expr": "$B0k4xLsom2d0eMDMnxQsFNGKL0 .share ,( 'facebook ,)",
+                "nodeType": "exprStmt",
+                "id": "fHuda15pirIPS8IbR2iA3qb4",
+                "locals": []
+              }
+            ],
+            "id": "jSFVlTeJyqFIJGD949271HU4"
+          },
+          {
+            "name": "channel9 rss",
+            "inParameters": [],
+            "outParameters": [],
+            "isPrivate": false,
+            "isOffloaded": false,
+            "isTest": false,
+            "isAsync": false,
+            "nodeType": "action",
+            "body": [
+              {
+                "text": "Downloads and displays the Channel9 RSS feed.",
+                "nodeType": "comment",
+                "id": "D9gOZ8WfM2s1nPh2I2ewF8Ad"
+              },
+              {
+                "expr": "$V795aZ2wSv81JErorUyVlq8YL0 ,:= :web .download ,( 'http/003a/002f/002fchannel9/002emsdn/002ecom/002ffeeds/002frss ,)",
+                "nodeType": "exprStmt",
+                "id": "V795aZ2wSv81JErorUyVlq8Y",
+                "locals": [
+                  {
+                    "name": "rss",
+                    "type": "String",
+                    "nodeType": "localDef",
+                    "id": "V795aZ2wSv81JErorUyVlq8YL0"
+                  }
+                ]
+              },
+              {
+                "text": "downloads the RSS content from the Channel9 web site. Channel9 features movies about developers at Microsoft",
+                "nodeType": "comment",
+                "id": "D7C1UUmhqwuFHgPJ3twFXbs3"
+              },
+              {
+                "expr": "$vJ4rv27lxJEuUH5Xt7YUIGEeL0 ,:= :web .rss ,( $V795aZ2wSv81JErorUyVlq8YL0 ,)",
+                "nodeType": "exprStmt",
+                "id": "vJ4rv27lxJEuUH5Xt7YUIGEe",
+                "locals": [
+                  {
+                    "name": "entries",
+                    "type": "Message Collection",
+                    "nodeType": "localDef",
+                    "id": "vJ4rv27lxJEuUH5Xt7YUIGEeL0"
+                  }
+                ]
+              },
+              {
+                "text": "transforms the RSS payload into a collection of messages",
+                "nodeType": "comment",
+                "id": "mqLpb37dxCgZN8AvbIGmZgs3"
+              },
+              {
+                "expr": "$vJ4rv27lxJEuUH5Xt7YUIGEeL0 .post_to_wall",
+                "nodeType": "exprStmt",
+                "id": "HxTyB2Z7R4DAFoBD9s2seiTA",
+                "locals": []
+              }
+            ],
+            "id": "XMapHSgCVkvHwgHi2NWLo9Wf"
+          },
+          {
+            "name": "explain tag with tagdef",
+            "inParameters": [
+              {
+                "name": "tag",
+                "type": "String",
+                "nodeType": "localDef",
+                "id": "mPou9YaO9THGwx07xyoIaJkeP0"
+              }
+            ],
+            "outParameters": [],
+            "isPrivate": false,
+            "isOffloaded": false,
+            "isTest": false,
+            "isAsync": false,
+            "nodeType": "action",
+            "body": [
+              {
+                "text": "Calls a web service to explain a tag, then processes the xml result.",
+                "nodeType": "comment",
+                "id": "YiOnhSL8Nuc4tOrtWjORLIOq"
+              },
+              {
+                "expr": "$mjXVzerGnn0rSxOK3oE1lCOZL0 ,:= :web .download ,( 'http/003a/002f/002fapi/002etagdef/002ecom/002f ,∥ :web .url_encode ,( $mPou9YaO9THGwx07xyoIaJkeP0 ,) ,)",
+                "nodeType": "exprStmt",
+                "id": "mjXVzerGnn0rSxOK3oE1lCOZ",
+                "locals": [
+                  {
+                    "name": "s",
+                    "type": "String",
+                    "nodeType": "localDef",
+                    "id": "mjXVzerGnn0rSxOK3oE1lCOZL0"
+                  }
+                ]
+              },
+              {
+                "expr": "$mjXVzerGnn0rSxOK3oE1lCOZL0 .post_to_wall",
+                "nodeType": "exprStmt",
+                "id": "xJjfYd40C1FnJnpc3B3Ej3yR",
+                "locals": []
+              },
+              {
+                "expr": "$DUI59mP1L8RT2mXXQ2FneXLJL0 ,:= :web .xml ,( $mjXVzerGnn0rSxOK3oE1lCOZL0 ,)",
+                "nodeType": "exprStmt",
+                "id": "DUI59mP1L8RT2mXXQ2FneXLJ",
+                "locals": [
+                  {
+                    "name": "xml",
+                    "type": "Xml Object",
+                    "nodeType": "localDef",
+                    "id": "DUI59mP1L8RT2mXXQ2FneXLJL0"
+                  }
+                ]
+              },
+              {
+                "collection": "$DUI59mP1L8RT2mXXQ2FneXLJL0 .children ,( 'def ,)",
+                "conditions": [
+                  {
+                    "condition": "T",
+                    "nodeType": "where",
+                    "id": "xm1jBk0JQhO4c2JEssIG5REf",
+                    "locals": []
+                  }
+                ],
+                "body": [
+                  {
+                    "expr": "$iGHzzZSXhQFvww2wSOoW62uKL0 ,:= $LlOrO98d7u3j7OmTpiSovN76B0 .child ,( 'text ,) .value",
+                    "nodeType": "exprStmt",
+                    "id": "iGHzzZSXhQFvww2wSOoW62uK",
+                    "locals": [
+                      {
+                        "name": "text",
+                        "type": "String",
+                        "nodeType": "localDef",
+                        "id": "iGHzzZSXhQFvww2wSOoW62uKL0"
+                      }
+                    ]
+                  },
+                  {
+                    "expr": "$iGHzzZSXhQFvww2wSOoW62uKL0 .post_to_wall",
+                    "nodeType": "exprStmt",
+                    "id": "sserWWjC649XfQIdLIDGeW5T",
+                    "locals": []
+                  }
+                ],
+                "nodeType": "foreach",
+                "id": "LlOrO98d7u3j7OmTpiSovN76",
+                "locals": [
+                  {
+                    "name": "def",
+                    "type": "Xml Object",
+                    "nodeType": "localDef",
+                    "id": "LlOrO98d7u3j7OmTpiSovN76B0"
+                  }
+                ]
+              }
+            ],
+            "id": "mPou9YaO9THGwx07xyoIaJke"
+          },
+          {
+            "name": "tag stuff",
+            "inParameters": [],
+            "outParameters": [],
+            "isPrivate": false,
+            "isOffloaded": false,
+            "isTest": false,
+            "isAsync": false,
+            "nodeType": "action",
+            "body": [
+              {
+                "text": "Uses the Microsoft Tag services to generate tags from text or picture urls.",
+                "nodeType": "comment",
+                "id": "ZSglsTzogK2XGFYOyGOUwsHN"
+              },
+              {
+                "expr": "$oqQEXq6gK3qgppTbXaQrYcinL0 ,:= :web .link_url ,( 'TouchDevelop ,, 'http/003a/002f/002ftouchdevelop/002ecom ,)",
+                "nodeType": "exprStmt",
+                "id": "oqQEXq6gK3qgppTbXaQrYcin",
+                "locals": [
+                  {
+                    "name": "a",
+                    "type": "Link",
+                    "nodeType": "localDef",
+                    "id": "oqQEXq6gK3qgppTbXaQrYcinL0"
+                  }
+                ]
+              },
+              {
+                "expr": "$oqQEXq6gK3qgppTbXaQrYcinL0 .post_to_wall",
+                "nodeType": "exprStmt",
+                "id": "Y2itNG848oTvBveDKhJZNtiY",
+                "locals": []
+              },
+              {
+                "text": "You can easily create a tag from an url using the 'tag url' method. you can also specify the size and whether you want back and white as well. the generated tag can be printed or shared.",
+                "nodeType": "comment",
+                "id": "UPvtXsaIyqXLmr4453MW4AR9"
+              },
+              {
+                "expr": ":tags .tag_url ,( $oqQEXq6gK3qgppTbXaQrYcinL0 .address ,, ,1 ,, F ,) .post_to_wall",
+                "nodeType": "exprStmt",
+                "id": "xvIpbMfMjidFeKIIy99mkeGK",
+                "locals": []
+              },
+              {
+                "expr": "$YYcOV5j1lI4L8a4nle6xXeY8L0 ,:= 'Hello_world/0021",
+                "nodeType": "exprStmt",
+                "id": "YYcOV5j1lI4L8a4nle6xXeY8",
+                "locals": [
+                  {
+                    "name": "s",
+                    "type": "String",
+                    "nodeType": "localDef",
+                    "id": "YYcOV5j1lI4L8a4nle6xXeY8L0"
+                  }
+                ]
+              },
+              {
+                "expr": "$YYcOV5j1lI4L8a4nle6xXeY8L0 .post_to_wall",
+                "nodeType": "exprStmt",
+                "id": "NbXPdDrpB5fbB28jtcHy9Xb7",
+                "locals": []
+              },
+              {
+                "expr": ":tags .tag_text ,( $YYcOV5j1lI4L8a4nle6xXeY8L0 ,, ,0 ,. ,7 ,5 ,, T ,) .post_to_wall",
+                "nodeType": "exprStmt",
+                "id": "xYisKeOvN3GoJ9zeJurmdzb1",
+                "locals": []
+              }
+            ],
+            "id": "xWm3YLE1YFQEGItxHIZ7l7rw"
+          }
+        ],
+        "deletedDecls": [],
+        "nodeType": "app",
+        "id": "app"
+      }
+    },
+    {
+      "seqNo": 1,
+      "time": 1355599599,
+      "scriptId": null,
+      "historyId": "25204670120063018215eadd1b1-3382-4729-9648-55f68cb4fbc7",
+      "updateSize": 6827,
+      "updates": {
+        "nl9h1njOZUNDlczN6LlP2LUZP0": {
+          "name": "text",
+          "type": "String",
+          "nodeType": "localDef"
+        },
+        "nl9h1njOZUNDlczN6LlP2LUZP1": {
+          "name": "pic",
+          "type": "Picture",
+          "nodeType": "localDef"
+        },
+        "Fz4Q8s3ZSDYMJTlakjha1ANM": {
+          "text": "Encodes the text into a QR code. Requires an internet connection.",
+          "nodeType": "comment"
+        },
+        "kK9nN04SR5S2g30ay6JtLfN0L0": {
+          "name": "url",
+          "type": "String",
+          "nodeType": "localDef"
+        },
+        "kK9nN04SR5S2g30ay6JtLfN0": {
+          "expr": "$kK9nN04SR5S2g30ay6JtLfN0L0 ,:= 'http/003a/002f/002fqrcode/002egood/002dsurvey/002ecom/002fapi/002fv2/002fgenerate/003fformat/003djpg/0026content/003d ,∥ :web .url_encode ,( $nl9h1njOZUNDlczN6LlP2LUZP0 ,)",
+          "nodeType": "exprStmt",
+          "locals": [
+            "kK9nN04SR5S2g30ay6JtLfN0L0"
+          ]
+        },
+        "DqAayb831Dg5Aia2xkVmR3U5": {
+          "expr": "$nl9h1njOZUNDlczN6LlP2LUZP1 ,:= :web .download_picture ,( $kK9nN04SR5S2g30ay6JtLfN0L0 ,)",
+          "nodeType": "exprStmt",
+          "locals": []
+        },
+        "nl9h1njOZUNDlczN6LlP2LUZ": {
+          "name": "encode",
+          "inParameters": [
+            "nl9h1njOZUNDlczN6LlP2LUZP0"
+          ],
+          "outParameters": [
+            "nl9h1njOZUNDlczN6LlP2LUZP1"
+          ],
+          "isPrivate": false,
+          "isOffloaded": false,
+          "isTest": false,
+          "isAsync": false,
+          "nodeType": "action",
+          "body": [
+            "Fz4Q8s3ZSDYMJTlakjha1ANM",
+            "kK9nN04SR5S2g30ay6JtLfN0",
+            "DqAayb831Dg5Aia2xkVmR3U5"
+          ]
+        },
+        "JuREi0bC9Fsx2A514odb9T5ZP0": {
+          "name": "pic",
+          "type": "Picture",
+          "nodeType": "localDef"
+        },
+        "JuREi0bC9Fsx2A514odb9T5ZP1": {
+          "name": "text",
+          "type": "String",
+          "nodeType": "localDef"
+        },
+        "XJUHgjhJ4WwkeJOt0NWQrk1R": {
+          "text": "Decodes the QR code and returns the text, if any. Requires an internet connection.",
+          "nodeType": "comment"
+        },
+        "ApEwoyW2Yfg7A2p2r4hx1L6G": {
+          "expr": "$JuREi0bC9Fsx2A514odb9T5ZP1 ,:= :web .upload_picture ,( 'http/003a/002f/002fqrcode/002egood/002dsurvey/002ecom/002fapi/002fv2/002fdecode/003fformat/003djpg ,, $JuREi0bC9Fsx2A514odb9T5ZP0 ,)",
+          "nodeType": "exprStmt",
+          "locals": []
+        },
+        "JuREi0bC9Fsx2A514odb9T5Z": {
+          "name": "decode",
+          "inParameters": [
+            "JuREi0bC9Fsx2A514odb9T5ZP0"
+          ],
+          "outParameters": [
+            "JuREi0bC9Fsx2A514odb9T5ZP1"
+          ],
+          "isPrivate": false,
+          "isOffloaded": false,
+          "isTest": false,
+          "isAsync": false,
+          "nodeType": "action",
+          "body": [
+            "XJUHgjhJ4WwkeJOt0NWQrk1R",
+            "ApEwoyW2Yfg7A2p2r4hx1L6G"
+          ]
+        },
+        "lV5H62l4Be9DhsFBTYQuc2NAL0": {
+          "name": "s",
+          "type": "String",
+          "nodeType": "localDef"
+        },
+        "lV5H62l4Be9DhsFBTYQuc2NA": {
+          "expr": "$lV5H62l4Be9DhsFBTYQuc2NAL0 ,:= 'scrub0",
+          "nodeType": "exprStmt",
+          "locals": [
+            "lV5H62l4Be9DhsFBTYQuc2NAL0"
+          ]
+        },
+        "r33DRoE8vl0I5lTCjWnbIZ53L0": {
+          "name": "qr",
+          "type": "Picture",
+          "nodeType": "localDef"
+        },
+        "r33DRoE8vl0I5lTCjWnbIZ53": {
+          "expr": "$r33DRoE8vl0I5lTCjWnbIZ53L0 ,:= :code #nl9h1njOZUNDlczN6LlP2LUZ ,( $lV5H62l4Be9DhsFBTYQuc2NAL0 ,)",
+          "nodeType": "exprStmt",
+          "locals": [
+            "r33DRoE8vl0I5lTCjWnbIZ53L0"
+          ]
+        },
+        "C4vbSYR2FvdzKDdVXVdMgdMv": {
+          "expr": "$r33DRoE8vl0I5lTCjWnbIZ53L0 .post_to_wall",
+          "nodeType": "exprStmt",
+          "locals": []
+        },
+        "xbN1Hm9ca6Nej4TJPP2ODVIJL0": {
+          "name": "decoded",
+          "type": "String",
+          "nodeType": "localDef"
+        },
+        "xbN1Hm9ca6Nej4TJPP2ODVIJ": {
+          "expr": "$xbN1Hm9ca6Nej4TJPP2ODVIJL0 ,:= :code #JuREi0bC9Fsx2A514odb9T5Z ,( $r33DRoE8vl0I5lTCjWnbIZ53L0 ,)",
+          "nodeType": "exprStmt",
+          "locals": [
+            "xbN1Hm9ca6Nej4TJPP2ODVIJL0"
+          ]
+        },
+        "BKoSkWh5bS3fG38kirIxqbf4": {
+          "expr": "$xbN1Hm9ca6Nej4TJPP2ODVIJL0 .post_to_wall",
+          "nodeType": "exprStmt",
+          "locals": []
+        },
+        "xoDBrtWZoKKQEjHz2LKbFSRT": {
+          "name": "example",
+          "inParameters": [],
+          "outParameters": [],
+          "isPrivate": false,
+          "isOffloaded": false,
+          "isTest": false,
+          "isAsync": false,
+          "nodeType": "action",
+          "body": [
+            "lV5H62l4Be9DhsFBTYQuc2NA",
+            "r33DRoE8vl0I5lTCjWnbIZ53",
+            "C4vbSYR2FvdzKDdVXVdMgdMv",
+            "xbN1Hm9ca6Nej4TJPP2ODVIJ",
+            "BKoSkWh5bS3fG38kirIxqbf4"
+          ]
+        },
+        "app": {
+          "name": "qr codes",
+          "comment": "Encodes and decodes QR codes using http://qrcode.good-survey.com.",
+          "color": "#ff007fff",
+          "autoColor": "#007fff",
+          "rootId": "IwMr4jL48TO4t33t5e4uKK2n",
+          "isLibrary": true,
+          "decls": [
+            "nl9h1njOZUNDlczN6LlP2LUZ",
+            "JuREi0bC9Fsx2A514odb9T5Z",
+            "xoDBrtWZoKKQEjHz2LKbFSRT"
+          ]
+        },
+        "kiwvq4fAhupK2mBffPfxZXTX": null,
+        "xKSLgm2lEqoHYX3RVmnOfCOO": null,
+        "uSNDBsE8hm4E41Wb1KC7pdsJ": null,
+        "xXHp2I9zYOmew4VpG0tS42mY": null,
+        "xXHp2I9zYOmew4VpG0tS42mYL0": null,
+        "MTAgHXJilTh6ZQaBhws236BK": null,
+        "Ncj9zkFcg7qphk6TbEax5iCZ": null,
+        "Ncj9zkFcg7qphk6TbEax5iCZL0": null,
+        "o2wwsjytEQ2P9fS94qpUhLFE": null,
+        "U2I1zQbB8TI3jun24CW3ucrR": null,
+        "U2I1zQbB8TI3jun24CW3ucrRL0": null,
+        "O6k2xo8CpPDQcZIPExYfGAoe": null,
+        "xOx5nci25G4aXY2N2cuO9WYe": null,
+        "xOx5nci25G4aXY2N2cuO9WYeL0": null,
+        "AlYW4hZ3KzJE5ScyBIfotyxL": null,
+        "tio8uYlmM5MOxjoBJ4BXLl1n": null,
+        "xnZXkJZIU1lpCVHWIP8PzG6j": null,
+        "xsz9yWxNM6qD91XjwQIrt4C8": null,
+        "xsz9yWxNM6qD91XjwQIrt4C8L0": null,
+        "uVJ1RfC7bHq9CwXnY0tHo9eA": null,
+        "XKT1iiP2yAGHxVEVk4dl4WOq": null,
+        "XKT1iiP2yAGHxVEVk4dl4WOqL0": null,
+        "rstBjslg9ki8Krzz8i4WFc6H": null,
+        "eAA2q1NfdOjWXXIDn5t2iwXj": null,
+        "xpRRBOgNHmIAR6RuavlYzVF5": null,
+        "xfUa1r4zM6u9CFLDmHiySClX": null,
+        "xTU6b0T76glmbLNgDh4ESPl0": null,
+        "xuiPMakFpOeV6G63jIyf0BfA": null,
+        "xxoyCHoLHRO2VItsfQXIJc2q": null,
+        "AlYW4hZ3KzJE5ScyBIfotyxLB0": null,
+        "xhqVXLKegfq3xhkSyfBD2q1D": null,
+        "WhGkUqzN2qZn5ohoP72Lw22V": null,
+        "fP1ijSPZeCKWcgXV26a4YLvs": null,
+        "fP1ijSPZeCKWcgXV26a4YLvsL0": null,
+        "H0RxY3mOjJZ36OzTwfAEE4CR": null,
+        "fK7f0QA8oxizolfWxfZ84gBG": null,
+        "fK7f0QA8oxizolfWxfZ84gBGL0": null,
+        "b3JogaVbGxrI8rPXBdWZ2AL1": null,
+        "xVt1cSIYKEpMrO05P9AiY7Lc": null,
+        "AnsDpxgIHvpfgYUXydOmBFjw": null,
+        "CwnqGKA4vnPzwxFfj11PRfU6": null,
+        "CwnqGKA4vnPzwxFfj11PRfU6L0": null,
+        "l2d9siyo042Ymdyz3xTeySkl": null,
+        "A6HoZHlustGNeF94asFYxUX5": null,
+        "vgrJGa4K0edcADaZxWzzK24w": null,
+        "ryc4JKc5jDwi5tjYcQyBUYne": null,
+        "b9nem6g1SwOvvGjwaVUpYMWE": null,
+        "Ki61G5w2KYccdpCiBMGRDJnp": null,
+        "dAt7LjDCWvKXghhN3THxEV4w": null,
+        "HYl4d1WuproEq5skTJK0KZep": null,
+        "iwCAC2bvdU2Ts662HZWPGiKn": null,
+        "si35E209ZeRGrzGQuHBIWKKB": null,
+        "A2mcy2pMOWiyWh8nOIv5Qtxl": null,
+        "U4dcmkRZyeLd0rnVrkvY9LFQ": null,
+        "SqzxVDBPs2GOvdvLgw5WlCfV": null,
+        "YfA4iqoCIBGWLljw0SQZj1QC": null,
+        "xkqGDVBua0bz2K2mEQwjrftN": null,
+        "jSFVlTeJyqFIJGD949271HU4": null,
+        "fqcuvYZNgHnQcpvKa54JEUfw": null,
+        "B0k4xLsom2d0eMDMnxQsFNGK": null,
+        "B0k4xLsom2d0eMDMnxQsFNGKL0": null,
+        "eAPjL1oSE0d5gmr2uNG8Lx2V": null,
+        "m4HjWfYVnixpQa72AJsU0yc9": null,
+        "fHuda15pirIPS8IbR2iA3qb4": null,
+        "XMapHSgCVkvHwgHi2NWLo9Wf": null,
+        "D9gOZ8WfM2s1nPh2I2ewF8Ad": null,
+        "V795aZ2wSv81JErorUyVlq8Y": null,
+        "V795aZ2wSv81JErorUyVlq8YL0": null,
+        "D7C1UUmhqwuFHgPJ3twFXbs3": null,
+        "vJ4rv27lxJEuUH5Xt7YUIGEe": null,
+        "vJ4rv27lxJEuUH5Xt7YUIGEeL0": null,
+        "mqLpb37dxCgZN8AvbIGmZgs3": null,
+        "HxTyB2Z7R4DAFoBD9s2seiTA": null,
+        "mPou9YaO9THGwx07xyoIaJke": null,
+        "mPou9YaO9THGwx07xyoIaJkeP0": null,
+        "YiOnhSL8Nuc4tOrtWjORLIOq": null,
+        "mjXVzerGnn0rSxOK3oE1lCOZ": null,
+        "mjXVzerGnn0rSxOK3oE1lCOZL0": null,
+        "xJjfYd40C1FnJnpc3B3Ej3yR": null,
+        "DUI59mP1L8RT2mXXQ2FneXLJ": null,
+        "DUI59mP1L8RT2mXXQ2FneXLJL0": null,
+        "LlOrO98d7u3j7OmTpiSovN76": null,
+        "xm1jBk0JQhO4c2JEssIG5REf": null,
+        "iGHzzZSXhQFvww2wSOoW62uK": null,
+        "iGHzzZSXhQFvww2wSOoW62uKL0": null,
+        "sserWWjC649XfQIdLIDGeW5T": null,
+        "LlOrO98d7u3j7OmTpiSovN76B0": null,
+        "xWm3YLE1YFQEGItxHIZ7l7rw": null,
+        "ZSglsTzogK2XGFYOyGOUwsHN": null,
+        "oqQEXq6gK3qgppTbXaQrYcin": null,
+        "oqQEXq6gK3qgppTbXaQrYcinL0": null,
+        "Y2itNG848oTvBveDKhJZNtiY": null,
+        "UPvtXsaIyqXLmr4453MW4AR9": null,
+        "xvIpbMfMjidFeKIIy99mkeGK": null,
+        "YYcOV5j1lI4L8a4nle6xXeY8": null,
+        "YYcOV5j1lI4L8a4nle6xXeY8L0": null,
+        "NbXPdDrpB5fbB28jtcHy9Xb7": null,
+        "xYisKeOvN3GoJ9zeJurmdzb1": null
+      }
+    },
+    {
+      "seqNo": 2,
+      "time": 1355600196,
+      "scriptId": null,
+      "historyId": "2520467006037862984f32f253c-0f5d-4350-8f68-a680904dd30c",
+      "updateSize": 789,
+      "updates": {
+        "qUc3KVXjpSgweFV3nl5A40mt": {
+          "text": "This library uses http://qrcode.good-survey.com. Please review the terms of use and privacy statement of good-survey.",
+          "nodeType": "comment"
+        },
+        "WGFThY1Zw4nzqJ5G3Adw4XRd": {
+          "text": "## Encoding",
+          "nodeType": "comment"
+        },
+        "mN1JfTNdErxSVx7yaTmONGnb": {
+          "text": "Pass the text to encode to the `encode` action. If successful, it returns a picture.",
+          "nodeType": "comment"
+        },
+        "xoua3zAxP2t2n5Hv7w14qhMA": {
+          "text": "## Decoding",
+          "nodeType": "comment"
+        },
+        "xoDBrtWZoKKQEjHz2LKbFSRT": {
+          "body": [
+            "qUc3KVXjpSgweFV3nl5A40mt",
+            "WGFThY1Zw4nzqJ5G3Adw4XRd",
+            "lV5H62l4Be9DhsFBTYQuc2NA",
+            "mN1JfTNdErxSVx7yaTmONGnb",
+            "r33DRoE8vl0I5lTCjWnbIZ53",
+            "C4vbSYR2FvdzKDdVXVdMgdMv",
+            "xoua3zAxP2t2n5Hv7w14qhMA",
+            "xbN1Hm9ca6Nej4TJPP2ODVIJ",
+            "BKoSkWh5bS3fG38kirIxqbf4"
+          ]
+        },
+        "app": {
+          "rootId": "TpRv73IYpOeoY5xdOEgVlvqV"
+        }
+      }
+    },
+    {
+      "seqNo": 3,
+      "time": 1355600206,
+      "scriptId": "rswd",
+      "historyId": "25204670059348929166565257f-7448-497b-b5ba-432e720fddac",
+      "updateSize": 45,
+      "updates": {
+        "app": {
+          "rootId": "Lu4P19Xx49k2CMgxYzpL2DsZ"
+        }
+      }
+    },
+    {
+      "seqNo": 4,
+      "time": 1355600758,
+      "scriptId": null,
+      "historyId": "25204670004186525023709b8d9-8cee-4242-9b49-92071742e57d",
+      "updateSize": 2276,
+      "updates": {
+        "kK9nN04SR5S2g30ay6JtLfN0": {
+          "expr": "$kK9nN04SR5S2g30ay6JtLfN0L0 ,:= 'scrub1 ,∥ :web .url_encode ,( $nl9h1njOZUNDlczN6LlP2LUZP0 ,)"
+        },
+        "ApEwoyW2Yfg7A2p2r4hx1L6G": {
+          "expr": "$JuREi0bC9Fsx2A514odb9T5ZP1 ,:= '"
+        },
+        "oI1rn4WAEMuYPshkFyrJnH8cL0": {
+          "name": "s",
+          "type": "String",
+          "nodeType": "localDef"
+        },
+        "oI1rn4WAEMuYPshkFyrJnH8c": {
+          "expr": "$oI1rn4WAEMuYPshkFyrJnH8cL0 ,:= :web .upload_picture ,( 'scrub2 ,, $JuREi0bC9Fsx2A514odb9T5ZP0 ,)",
+          "nodeType": "exprStmt",
+          "locals": [
+            "oI1rn4WAEMuYPshkFyrJnH8cL0"
+          ]
+        },
+        "tlL4Y1zeam4HuRD72lAPSndfL0": {
+          "name": "json",
+          "type": "Json Object",
+          "nodeType": "localDef"
+        },
+        "tlL4Y1zeam4HuRD72lAPSndf": {
+          "expr": "$tlL4Y1zeam4HuRD72lAPSndfL0 ,:= :web .json ,( $oI1rn4WAEMuYPshkFyrJnH8cL0 ,)",
+          "nodeType": "exprStmt",
+          "locals": [
+            "tlL4Y1zeam4HuRD72lAPSndfL0"
+          ]
+        },
+        "mQuqBnDOzG5ZJnhUz0sVLy52": {
+          "expr": "$JuREi0bC9Fsx2A514odb9T5ZP1 ,:= $tlL4Y1zeam4HuRD72lAPSndfL0 .string ,( 'scrub3 ,)",
+          "nodeType": "exprStmt",
+          "locals": []
+        },
+        "uhbwq5IKcbn9No6j1ggr72iQ": {
+          "nodeType": "if",
+          "condition": ",not $tlL4Y1zeam4HuRD72lAPSndfL0 .is_invalid",
+          "thenBody": [
+            "mQuqBnDOzG5ZJnhUz0sVLy52"
+          ],
+          "isElseIf": false,
+          "locals": []
+        },
+        "xdp2pKpb5zaSJ4AxvUWwxJuB": {
+          "nodeType": "if",
+          "condition": ",not $oI1rn4WAEMuYPshkFyrJnH8cL0 .is_invalid",
+          "thenBody": [
+            "tlL4Y1zeam4HuRD72lAPSndf",
+            "uhbwq5IKcbn9No6j1ggr72iQ"
+          ],
+          "isElseIf": false,
+          "locals": []
+        },
+        "JuREi0bC9Fsx2A514odb9T5Z": {
+          "body": [
+            "XJUHgjhJ4WwkeJOt0NWQrk1R",
+            "ApEwoyW2Yfg7A2p2r4hx1L6G",
+            "oI1rn4WAEMuYPshkFyrJnH8c",
+            "xdp2pKpb5zaSJ4AxvUWwxJuB"
+          ]
+        },
+        "qUc3KVXjpSgweFV3nl5A40mt": {
+          "text": "This library uses http://www.esponce.com/. Please review the terms of use and privacy statement of esponce."
+        },
+        "BunWz6eCOvQIhe85lO87fVZw": {
+          "text": "Pass the picture to `decode`. If successful, returns the text.",
+          "nodeType": "comment"
+        },
+        "xoDBrtWZoKKQEjHz2LKbFSRT": {
+          "body": [
+            "qUc3KVXjpSgweFV3nl5A40mt",
+            "WGFThY1Zw4nzqJ5G3Adw4XRd",
+            "lV5H62l4Be9DhsFBTYQuc2NA",
+            "mN1JfTNdErxSVx7yaTmONGnb",
+            "r33DRoE8vl0I5lTCjWnbIZ53",
+            "C4vbSYR2FvdzKDdVXVdMgdMv",
+            "xoua3zAxP2t2n5Hv7w14qhMA",
+            "BunWz6eCOvQIhe85lO87fVZw",
+            "xbN1Hm9ca6Nej4TJPP2ODVIJ",
+            "BKoSkWh5bS3fG38kirIxqbf4"
+          ]
+        },
+        "app": {
+          "comment": "Encodes and decodes QR codes using http://www.esponce.com/.",
+          "rootId": "cLZiaNf95L8nJsIfPzIgaatF"
+        }
+      }
+    },
+    {
+      "seqNo": 5,
+      "time": 1355600760,
+      "scriptId": "orcb",
+      "historyId": "2520467000395682723f095f648-c539-4356-a977-ef2e2e893db1",
+      "updateSize": 45,
+      "updates": {
+        "app": {
+          "rootId": "xkwh9fl4kWTVDPGUQOy2aZm5"
+        }
+      }
+    },
+    {
+      "seqNo": 6,
+      "time": 1364858749,
+      "scriptId": null,
+      "historyId": "25203744205017376347e766abd-2e14-4aa9-857d-14aebbe86419",
+      "updateSize": 332,
+      "updates": {
+        "w0eAkZrHsHt7ZsaTtC3g2w94": {
+          "expr": "$oI1rn4WAEMuYPshkFyrJnH8cL0 .post_to_wall",
+          "nodeType": "exprStmt",
+          "locals": []
+        },
+        "JuREi0bC9Fsx2A514odb9T5Z": {
+          "body": [
+            "XJUHgjhJ4WwkeJOt0NWQrk1R",
+            "ApEwoyW2Yfg7A2p2r4hx1L6G",
+            "oI1rn4WAEMuYPshkFyrJnH8c",
+            "w0eAkZrHsHt7ZsaTtC3g2w94",
+            "xdp2pKpb5zaSJ4AxvUWwxJuB"
+          ]
+        },
+        "app": {
+          "rootId": "Wov3VWS1JUr1O6X85JWxRJb3"
+        }
+      }
+    },
+    {
+      "seqNo": 7,
+      "time": 1364859208,
+      "scriptId": null,
+      "historyId": "25203744159151457143bc1fd60-d73f-4525-8bd4-f7ed7bc9523c",
+      "updateSize": 575,
+      "updates": {
+        "x5ZTIKdsh7Ig95gzOFTHzLrm": {
+          "expr": ":web",
+          "nodeType": "exprStmt",
+          "locals": []
+        },
+        "JuREi0bC9Fsx2A514odb9T5Z": {
+          "body": [
+            "XJUHgjhJ4WwkeJOt0NWQrk1R",
+            "x5ZTIKdsh7Ig95gzOFTHzLrm",
+            "ApEwoyW2Yfg7A2p2r4hx1L6G",
+            "oI1rn4WAEMuYPshkFyrJnH8c",
+            "w0eAkZrHsHt7ZsaTtC3g2w94",
+            "xdp2pKpb5zaSJ4AxvUWwxJuB"
+          ]
+        },
+        "xGnfdlsc2u1uU0a4krPQOxT4": {
+          "name": "pic",
+          "comment": "",
+          "type": "Picture",
+          "isReadonly": true,
+          "isTransient": true,
+          "nodeType": "art",
+          "url": ""
+        },
+        "app": {
+          "rootId": "a8fsMhyYweDqVbE2pt278EZ1",
+          "decls": [
+            "nl9h1njOZUNDlczN6LlP2LUZ",
+            "JuREi0bC9Fsx2A514odb9T5Z",
+            "xoDBrtWZoKKQEjHz2LKbFSRT",
+            "xGnfdlsc2u1uU0a4krPQOxT4"
+          ]
+        }
+      }
+    },
+    {
+      "seqNo": 8,
+      "time": 1364859219,
+      "scriptId": null,
+      "historyId": "25203744158046875694609beec-c168-4de3-8c96-735ed5e12960",
+      "updateSize": 110,
+      "updates": {
+        "xGnfdlsc2u1uU0a4krPQOxT4": {
+          "type": "String",
+          "isTransient": false
+        },
+        "app": {
+          "rootId": "HWENEN3lbbCht1doVR7zCRT7"
+        }
+      }
+    },
+    {
+      "seqNo": 9,
+      "time": 1364859236,
+      "scriptId": null,
+      "historyId": "2520374415631422954ebb0e840-f02d-4a30-8a6f-d08718ff1416",
+      "updateSize": 356,
+      "updates": {
+        "JuREi0bC9Fsx2A514odb9T5Z": {
+          "body": [
+            "XJUHgjhJ4WwkeJOt0NWQrk1R",
+            "ApEwoyW2Yfg7A2p2r4hx1L6G",
+            "oI1rn4WAEMuYPshkFyrJnH8c",
+            "w0eAkZrHsHt7ZsaTtC3g2w94",
+            "xdp2pKpb5zaSJ4AxvUWwxJuB"
+          ]
+        },
+        "xGnfdlsc2u1uU0a4krPQOxT4": {
+          "name": "api key",
+          "url": "apikey:http%3A%2F%2Fwww.esponce.com%2Fmy-profile%2F"
+        },
+        "app": {
+          "rootId": "qkInAibTVawVo1gv3Uh45har"
+        },
+        "x5ZTIKdsh7Ig95gzOFTHzLrm": null
+      }
+    },
+    {
+      "seqNo": 10,
+      "time": 1364859248,
+      "scriptId": null,
+      "historyId": "25203744155111220041242d29e-cfe6-403f-94fd-56e280e7e4b0",
+      "updateSize": 223,
+      "updates": {
+        "JuREi0bC9Fsx2A514odb9T5Z": {
+          "body": [
+            "XJUHgjhJ4WwkeJOt0NWQrk1R",
+            "ApEwoyW2Yfg7A2p2r4hx1L6G",
+            "oI1rn4WAEMuYPshkFyrJnH8c",
+            "xdp2pKpb5zaSJ4AxvUWwxJuB"
+          ]
+        },
+        "app": {
+          "rootId": "hncsPBUF24UKCM4Wz420urz5"
+        },
+        "w0eAkZrHsHt7ZsaTtC3g2w94": null
+      }
+    },
+    {
+      "seqNo": 11,
+      "time": 1364859269,
+      "scriptId": null,
+      "historyId": "2520374415302704514a282d4fe-df04-417b-83e7-649f123b3f60",
+      "updateSize": 314,
+      "updates": {
+        "oI1rn4WAEMuYPshkFyrJnH8c": {
+          "expr": "$oI1rn4WAEMuYPshkFyrJnH8cL0 ,:= :web .upload_picture ,( 'scrub4 ,∥ :web .url_encode ,( :art #xGnfdlsc2u1uU0a4krPQOxT4 ,) ,, $JuREi0bC9Fsx2A514odb9T5ZP0 ,)"
+        },
+        "app": {
+          "rootId": "xPo0PLH1F2kCt9loI2YnWKOA"
+        }
+      }
+    },
+    {
+      "seqNo": 12,
+      "time": 1364859334,
+      "scriptId": null,
+      "historyId": "2520374414658391374668c5096-1895-4c2b-af36-23a9d959cc43",
+      "updateSize": 333,
+      "updates": {
+        "oI1rn4WAEMuYPshkFyrJnH8c": {
+          "expr": "$oI1rn4WAEMuYPshkFyrJnH8cL0 ,:= :web .upload_picture ,( 'scrub5 ,∥ :web .url_encode ,( :art #xGnfdlsc2u1uU0a4krPQOxT4 ,) ,, $JuREi0bC9Fsx2A514odb9T5ZP0 ,)"
+        },
+        "app": {
+          "rootId": "cuUUl7fVLDxhmk42lOf34LRO"
+        }
+      }
+    },
+    {
+      "seqNo": 13,
+      "time": 1364859350,
+      "scriptId": null,
+      "historyId": "25203744144996566144d832fb0-cb6b-4dfe-93c0-f6b6196a5cbb",
+      "updateSize": 470,
+      "updates": {
+        "a7h9iJCcwrowtVwOkJxi5M7xL0": {
+          "name": "request",
+          "type": "Web Request",
+          "nodeType": "localDef"
+        },
+        "a7h9iJCcwrowtVwOkJxi5M7x": {
+          "expr": "$a7h9iJCcwrowtVwOkJxi5M7xL0 ,:= :web .create_request ,( ' ,)",
+          "nodeType": "exprStmt",
+          "locals": [
+            "a7h9iJCcwrowtVwOkJxi5M7xL0"
+          ]
+        },
+        "JuREi0bC9Fsx2A514odb9T5Z": {
+          "body": [
+            "XJUHgjhJ4WwkeJOt0NWQrk1R",
+            "ApEwoyW2Yfg7A2p2r4hx1L6G",
+            "a7h9iJCcwrowtVwOkJxi5M7x",
+            "oI1rn4WAEMuYPshkFyrJnH8c",
+            "xdp2pKpb5zaSJ4AxvUWwxJuB"
+          ]
+        },
+        "app": {
+          "rootId": "oSAc55PDCrO1WDrHS6G4Uqo2"
+        }
+      }
+    },
+    {
+      "seqNo": 14,
+      "time": 1364859364,
+      "scriptId": null,
+      "historyId": "2520374414359357584adea8f10-18b4-4e75-8d93-627640661eae",
+      "updateSize": 1183,
+      "updates": {
+        "oI1rn4WAEMuYPshkFyrJnH8cL0": {
+          "name": "request",
+          "type": "Web Request"
+        },
+        "oI1rn4WAEMuYPshkFyrJnH8c": {
+          "expr": "$oI1rn4WAEMuYPshkFyrJnH8cL0 ,:= :web .create_request ,( 'scrub5 ,∥ :web .url_encode ,( :art #xGnfdlsc2u1uU0a4krPQOxT4 ,) ,)"
+        },
+        "oym6VALVPUlCKuFjawcyyNeq": {
+          "expr": "",
+          "nodeType": "exprStmt",
+          "locals": []
+        },
+        "xnQtGrd0N6fhXgyTb0VAYcAWL0": {
+          "name": "s",
+          "type": "String",
+          "nodeType": "localDef"
+        },
+        "xnQtGrd0N6fhXgyTb0VAYcAW": {
+          "expr": "$xnQtGrd0N6fhXgyTb0VAYcAWL0 ,:= :web .upload_picture ,( ,, $JuREi0bC9Fsx2A514odb9T5ZP0 ,)",
+          "nodeType": "exprStmt",
+          "locals": [
+            "xnQtGrd0N6fhXgyTb0VAYcAWL0"
+          ]
+        },
+        "tlL4Y1zeam4HuRD72lAPSndf": {
+          "expr": "$tlL4Y1zeam4HuRD72lAPSndfL0 ,:= :web .json ,( $xnQtGrd0N6fhXgyTb0VAYcAWL0 ,)"
+        },
+        "xdp2pKpb5zaSJ4AxvUWwxJuB": {
+          "condition": ",not $xnQtGrd0N6fhXgyTb0VAYcAWL0 .is_invalid"
+        },
+        "JuREi0bC9Fsx2A514odb9T5Z": {
+          "body": [
+            "XJUHgjhJ4WwkeJOt0NWQrk1R",
+            "ApEwoyW2Yfg7A2p2r4hx1L6G",
+            "oI1rn4WAEMuYPshkFyrJnH8c",
+            "oym6VALVPUlCKuFjawcyyNeq",
+            "xnQtGrd0N6fhXgyTb0VAYcAW",
+            "xdp2pKpb5zaSJ4AxvUWwxJuB"
+          ]
+        },
+        "app": {
+          "rootId": "iIL1o1E3eAgnb8BMRVE97VOT"
+        },
+        "a7h9iJCcwrowtVwOkJxi5M7x": null,
+        "a7h9iJCcwrowtVwOkJxi5M7xL0": null
+      }
+    },
+    {
+      "seqNo": 15,
+      "time": 1364859379,
+      "scriptId": null,
+      "historyId": "25203744142085908091b0cb8a4-cae8-4849-a5ba-8affca0b2ba8",
+      "updateSize": 1040,
+      "updates": {
+        "xnQtGrd0N6fhXgyTb0VAYcAW": {
+          "expr": "$oI1rn4WAEMuYPshkFyrJnH8cL0 .set_content_as_picture ,( $JuREi0bC9Fsx2A514odb9T5ZP0 ,, ,0 ,. ,9 ,5 ,)",
+          "locals": []
+        },
+        "Z73pgbZflQzA1D65z5zdj4XrL0": {
+          "name": "response",
+          "type": "Web Response",
+          "nodeType": "localDef"
+        },
+        "Z73pgbZflQzA1D65z5zdj4Xr": {
+          "expr": "$Z73pgbZflQzA1D65z5zdj4XrL0 ,:= $oI1rn4WAEMuYPshkFyrJnH8cL0 .send",
+          "nodeType": "exprStmt",
+          "locals": [
+            "Z73pgbZflQzA1D65z5zdj4XrL0"
+          ]
+        },
+        "tlL4Y1zeam4HuRD72lAPSndf": {
+          "expr": "$tlL4Y1zeam4HuRD72lAPSndfL0 ,:= :web .json ,( $xdp2pKpb5zaSJ4AxvUWwxJuBL0 ,)"
+        },
+        "xdp2pKpb5zaSJ4AxvUWwxJuBL0": {
+          "name": "s",
+          "type": "Unknown",
+          "nodeType": "localDef"
+        },
+        "xdp2pKpb5zaSJ4AxvUWwxJuB": {
+          "condition": ",not $xdp2pKpb5zaSJ4AxvUWwxJuBL0 .is_invalid",
+          "locals": [
+            "xdp2pKpb5zaSJ4AxvUWwxJuBL0"
+          ]
+        },
+        "JuREi0bC9Fsx2A514odb9T5Z": {
+          "body": [
+            "XJUHgjhJ4WwkeJOt0NWQrk1R",
+            "ApEwoyW2Yfg7A2p2r4hx1L6G",
+            "oI1rn4WAEMuYPshkFyrJnH8c",
+            "xnQtGrd0N6fhXgyTb0VAYcAW",
+            "Z73pgbZflQzA1D65z5zdj4Xr",
+            "oym6VALVPUlCKuFjawcyyNeq",
+            "xdp2pKpb5zaSJ4AxvUWwxJuB"
+          ]
+        },
+        "app": {
+          "rootId": "tNw2xB3bXgWYSP7iKgRh5hHp"
+        },
+        "xnQtGrd0N6fhXgyTb0VAYcAWL0": null
+      }
+    },
+    {
+      "seqNo": 16,
+      "time": 1364859389,
+      "scriptId": null,
+      "historyId": "25203744141034446546f7333bb-41a5-494c-aeb9-9ac9d7178529",
+      "updateSize": 413,
+      "updates": {
+        "xlLsuSJXSeOFm0fNVNHvbh1J": {
+          "expr": "$Z73pgbZflQzA1D65z5zdj4XrL0 .post_to_wall",
+          "nodeType": "exprStmt",
+          "locals": []
+        },
+        "JuREi0bC9Fsx2A514odb9T5Z": {
+          "body": [
+            "XJUHgjhJ4WwkeJOt0NWQrk1R",
+            "ApEwoyW2Yfg7A2p2r4hx1L6G",
+            "oI1rn4WAEMuYPshkFyrJnH8c",
+            "xnQtGrd0N6fhXgyTb0VAYcAW",
+            "Z73pgbZflQzA1D65z5zdj4Xr",
+            "xlLsuSJXSeOFm0fNVNHvbh1J",
+            "oym6VALVPUlCKuFjawcyyNeq",
+            "xdp2pKpb5zaSJ4AxvUWwxJuB"
+          ]
+        },
+        "app": {
+          "rootId": "mFEc8nRo0CI1V4t0Pi2mGrqn"
+        }
+      }
+    },
+    {
+      "seqNo": 17,
+      "time": 1364859406,
+      "scriptId": null,
+      "historyId": "2520374413939866609c2e9af30-97ab-4397-a831-335b252eff20",
+      "updateSize": 859,
+      "updates": {
+        "oym6VALVPUlCKuFjawcyyNeqL0": {
+          "name": "js",
+          "type": "Json Object",
+          "nodeType": "localDef"
+        },
+        "oym6VALVPUlCKuFjawcyyNeq": {
+          "expr": "$oym6VALVPUlCKuFjawcyyNeqL0 ,:= $Z73pgbZflQzA1D65z5zdj4XrL0 .content_as_json",
+          "locals": [
+            "oym6VALVPUlCKuFjawcyyNeqL0"
+          ]
+        },
+        "mQuqBnDOzG5ZJnhUz0sVLy52": {
+          "expr": "$JuREi0bC9Fsx2A514odb9T5ZP1 ,:= $uhbwq5IKcbn9No6j1ggr72iQL0 .string ,( 'scrub3 ,)"
+        },
+        "uhbwq5IKcbn9No6j1ggr72iQL0": {
+          "name": "json",
+          "type": "Unknown",
+          "nodeType": "localDef"
+        },
+        "uhbwq5IKcbn9No6j1ggr72iQ": {
+          "condition": ",not $uhbwq5IKcbn9No6j1ggr72iQL0 .is_invalid",
+          "locals": [
+            "uhbwq5IKcbn9No6j1ggr72iQL0"
+          ]
+        },
+        "xdp2pKpb5zaSJ4AxvUWwxJuB": {
+          "condition": ",not $oym6VALVPUlCKuFjawcyyNeqL0 .is_invalid",
+          "thenBody": [
+            "uhbwq5IKcbn9No6j1ggr72iQ"
+          ],
+          "locals": []
+        },
+        "app": {
+          "rootId": "l5QHGFIdnM8zJ7NDbp4TcF2I"
+        },
+        "tlL4Y1zeam4HuRD72lAPSndf": null,
+        "tlL4Y1zeam4HuRD72lAPSndfL0": null,
+        "xdp2pKpb5zaSJ4AxvUWwxJuBL0": null
+      }
+    },
+    {
+      "seqNo": 18,
+      "time": 1364859420,
+      "scriptId": null,
+      "historyId": "25203744137953492343945cf85-7056-4d5f-9c4d-cbe4748952ca",
+      "updateSize": 479,
+      "updates": {
+        "qgCUI7hlXYuMsln4zL4dPCikL0": {
+          "name": "json",
+          "type": "Unknown",
+          "nodeType": "localDef"
+        },
+        "qgCUI7hlXYuMsln4zL4dPCik": {
+          "expr": "$JuREi0bC9Fsx2A514odb9T5ZP1 ,:= $qgCUI7hlXYuMsln4zL4dPCikL0 .string ,( 'scrub3 ,)",
+          "nodeType": "exprStmt",
+          "locals": [
+            "qgCUI7hlXYuMsln4zL4dPCikL0"
+          ]
+        },
+        "xdp2pKpb5zaSJ4AxvUWwxJuB": {
+          "thenBody": [
+            "qgCUI7hlXYuMsln4zL4dPCik"
+          ]
+        },
+        "app": {
+          "rootId": "c0esFpBkafEVkZxdkE4Eh5N8"
+        },
+        "uhbwq5IKcbn9No6j1ggr72iQ": null,
+        "mQuqBnDOzG5ZJnhUz0sVLy52": null,
+        "uhbwq5IKcbn9No6j1ggr72iQL0": null
+      }
+    },
+    {
+      "seqNo": 19,
+      "time": 1364859432,
+      "scriptId": null,
+      "historyId": "2520374413674892049591c1627-73b8-4b3c-b93d-c716874d20cf",
+      "updateSize": 212,
+      "updates": {
+        "qgCUI7hlXYuMsln4zL4dPCik": {
+          "expr": "$JuREi0bC9Fsx2A514odb9T5ZP1 ,:= $oym6VALVPUlCKuFjawcyyNeqL0 .string ,( 'scrub3 ,)",
+          "locals": []
+        },
+        "app": {
+          "rootId": "Y9FUDhXcjGjit5RrTAybJ2qt"
+        },
+        "qgCUI7hlXYuMsln4zL4dPCikL0": null
+      }
+    },
+    {
+      "seqNo": 20,
+      "time": 1364859456,
+      "scriptId": null,
+      "historyId": "25203744134311654493577e918-6f64-4482-b81b-79a1072d6c57",
+      "updateSize": 450,
+      "updates": {
+        "Bj3sv9ZZfpE8dDHj7MDXyt7x": {
+          "expr": "$oI1rn4WAEMuYPshkFyrJnH8cL0 .set_method ,( 'scrub6 ,)",
+          "nodeType": "exprStmt",
+          "locals": []
+        },
+        "JuREi0bC9Fsx2A514odb9T5Z": {
+          "body": [
+            "XJUHgjhJ4WwkeJOt0NWQrk1R",
+            "ApEwoyW2Yfg7A2p2r4hx1L6G",
+            "oI1rn4WAEMuYPshkFyrJnH8c",
+            "Bj3sv9ZZfpE8dDHj7MDXyt7x",
+            "xnQtGrd0N6fhXgyTb0VAYcAW",
+            "Z73pgbZflQzA1D65z5zdj4Xr",
+            "xlLsuSJXSeOFm0fNVNHvbh1J",
+            "oym6VALVPUlCKuFjawcyyNeq",
+            "xdp2pKpb5zaSJ4AxvUWwxJuB"
+          ]
+        },
+        "app": {
+          "rootId": "gjgOssS05ypGhv7FRj9MEuYH"
+        }
+      }
+    },
+    {
+      "seqNo": 21,
+      "time": 1364859517,
+      "scriptId": null,
+      "historyId": "2520374412824031080e8caf6be-8ef0-47a1-bad9-0a3209250457",
+      "updateSize": 175,
+      "updates": {
+        "xnQtGrd0N6fhXgyTb0VAYcAW": {
+          "expr": "$oI1rn4WAEMuYPshkFyrJnH8cL0 .set_content_as_picture ,( $JuREi0bC9Fsx2A514odb9T5ZP0 ,, ,1 ,)"
+        },
+        "app": {
+          "rootId": "Fv37DgUkJfA2h2sPm5GoPUpW"
+        }
+      }
+    },
+    {
+      "seqNo": 22,
+      "time": 1364859571,
+      "scriptId": null,
+      "historyId": "25203744122859567494cd9c64b-1478-4b26-bce7-bbca3386060e",
+      "updateSize": 302,
+      "updates": {
+        "oI1rn4WAEMuYPshkFyrJnH8c": {
+          "expr": "$oI1rn4WAEMuYPshkFyrJnH8cL0 ,:= :web .create_request ,( 'scrub7 ,∥ :web .url_encode ,( :art #xGnfdlsc2u1uU0a4krPQOxT4 ,) ,)"
+        },
+        "app": {
+          "rootId": "YaqjU2tL4kxktV6CC9Mo22bM"
+        }
+      }
+    },
+    {
+      "seqNo": 23,
+      "time": 1364859604,
+      "scriptId": null,
+      "historyId": "2520374411951770084b85c3958-068c-4a36-8c96-973593158794",
+      "updateSize": 84,
+      "updates": {
+        "xlLsuSJXSeOFm0fNVNHvbh1J": {
+          "expr": ""
+        },
+        "app": {
+          "rootId": "OhoxbqsXXRUhvh8UqsgbOqOd"
+        }
+      }
+    },
+    {
+      "seqNo": 24,
+      "time": 1364859628,
+      "scriptId": null,
+      "historyId": "252037441171741661755b5ee7e-8555-41cf-8425-9dc8364b924d",
+      "updateSize": 155,
+      "updates": {
+        "xlLsuSJXSeOFm0fNVNHvbh1J": {
+          "expr": ":time .log ,( 'scrub8 ,∥ $Z73pgbZflQzA1D65z5zdj4XrL0 ,)"
+        },
+        "app": {
+          "rootId": "wlcRgLd4ed8u2FuBJN9gXMgt"
+        }
+      }
+    },
+    {
+      "seqNo": 25,
+      "time": 1364859629,
+      "scriptId": null,
+      "historyId": "2520374411709617759e9fd39af-4702-4dfc-ad63-85d7b883f2a1",
+      "updateSize": 45,
+      "updates": {
+        "app": {
+          "rootId": "xTXM1Max3GjbMz0SYtmY3CfJ"
+        }
+      }
+    },
+    {
+      "seqNo": 26,
+      "time": 1364859632,
+      "scriptId": "wdfv",
+      "historyId": "2520374411675233109475314f6-03ba-4ed3-a5df-10b222460779",
+      "updateSize": 45,
+      "updates": {
+        "app": {
+          "rootId": "IkYNDwfvSYi7nlyBlcNx3WxK"
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,1327 @@
+{
+  "userid": "wonm",
+  "guid": "fbe42636-e491-449f-60ff-dd3bd8f504eb",
+  "lastStatus": "deleted",
+  "items": [
+    {
+      "seqNo": 0,
+      "time": 1365039029,
+      "scriptId": "onmna",
+      "historyId": "25203726177043979568a76053e-9101-495d-bfd3-a32767e51331",
+      "updateSize": 40462,
+      "ast": {
+        "textVersion": "v2.2,js,ctx",
+        "jsonVersion": "v1.0,resolved,short",
+        "name": "game board",
+        "comment": "A built-in 2D game engine. #docs #gameBoard #games",
+        "icon": "Controller",
+        "color": "#ff9955BB",
+        "autoIcon": "Controller",
+        "autoColor": "#9955BB",
+        "platform": "current",
+        "rootId": "XQFA9x52HEVSLFXUd8hclx4X",
+        "showAd": false,
+        "isLibrary": false,
+        "allowExport": false,
+        "hasUniqueIds": false,
+        "decls": [
+          {
+            "name": "main",
+            "inParameters": [],
+            "outParameters": [],
+            "isPrivate": false,
+            "isOffloaded": false,
+            "isTest": false,
+            "isAsync": false,
+            "nodeType": "action",
+            "body": [
+              {
+                "text": "{priority:50}",
+                "nodeType": "comment",
+                "id": "oSyIg8al922BzesEwAJKCDZ2"
+              },
+              {
+                "text": "The **game board** is a 2D game engine to create simple sprite-based games. The API includes a primitive physics engine to move objects according gravity and friction. Game board elements can be orchestrated using events based on touch and regular timing intervals.",
+                "nodeType": "comment",
+                "id": "HvwU0GW6N856zxezvsm00bUw"
+              },
+              {
+                "text": "###\twhat is a [](/Sprite)?",
+                "nodeType": "comment",
+                "id": "xdBNgo4Y4FRdIBEyLaDRypg5"
+              },
+              {
+                "text": "Sprites are 2D bitmaps that are drawn directly to the screen. Sprites are commonly used to display information such as health bars, number of lives, or text such as scores. Some games, especially older games, are composed entirely of sprites. The game board allows creation and use of several types of sprite, such as ellipse, rectangle, text and [](/picture).",
+                "nodeType": "comment",
+                "id": "zCrMn2AIc1N8ZiCbPMHPjIsx"
+              },
+              {
+                "text": "###\tcoordinates and units",
+                "nodeType": "comment",
+                "id": "TwHtPQmhaAlkNj4YSxkTslfi"
+              },
+              {
+                "text": "Positions in the game board API are based on pixels. The origin of the grid is the top left corner when holding the phone upright, the x-axis is horizontal, the y-axis vertical. Sprite positions refer to the center of the sprite, i.e., the halfway point of its width and height before any rotation is applied. The reasoning behind this choice is so that sprites can rotate around their center. Future versions of TouchDevelop may provide more control for offsetting sprites from their position. Speed and acceleration are measured in `pixels/second` and `pixels/second^2`.",
+                "nodeType": "comment",
+                "id": "vPDfW5p444uxGoesIb6M72OC"
+              },
+              {
+                "text": "###\tprogram structure",
+                "nodeType": "comment",
+                "id": "wbfcRt0sc754oMQ4bnwIBxNf"
+              },
+              {
+                "text": "The code for a typical game has an underlying structure like the following.",
+                "nodeType": "comment",
+                "id": "xcTRQNQ6AUhiMrn02Pky98ci"
+              },
+              {
+                "text": "{decl:board}",
+                "nodeType": "comment",
+                "id": "uZJHOQqllejJRi7j9o4IWyQF"
+              },
+              {
+                "text": "{decl:main initial}",
+                "nodeType": "comment",
+                "id": "U0KYAYMKBqDxdhGWNcHDUFX3"
+              },
+              {
+                "text": "{decl:gameloop}",
+                "nodeType": "comment",
+                "id": "xPbawWbkrm220WN45MMjPth4"
+              },
+              {
+                "text": "The gameloop event is triggered approximately every 50 milliseconds, i.e. about 20 times per second.",
+                "nodeType": "comment",
+                "id": "YRrGGPgZVK4beGDtqOyI5Klh"
+              },
+              {
+                "text": "## the [](/Board) datatype",
+                "nodeType": "comment",
+                "id": "xWnb2gPY4KG2t1HfYZ0EUOi7"
+              },
+              {
+                "text": "### creating and displaying",
+                "nodeType": "comment",
+                "id": "pnDKU4SAbm22D4weDDNTeqSS"
+              },
+              {
+                "text": "When creating a `board`, you need to decide whether your game will be played landscape or portait. You also decide the wigth and hight in pixels; the board will be scaled based on the user screen.",
+                "nodeType": "comment",
+                "id": "xg6F8chcaFWr6McpVUid7tvk"
+              },
+              {
+                "text": "* creating a landscape board",
+                "nodeType": "comment",
+                "id": "phdPBjWxnjHRj44BDHTpgJGu"
+              },
+              {
+                "expr": ":data #f2XvSkHqOzzzK52Uag96i6RF ,:= :media .create_landscape_board ,( ,8 ,0 ,0 ,, ,4 ,8 ,0 ,)",
+                "nodeType": "exprStmt",
+                "id": "xS6z95XdsmAPND5DW42HIL4I",
+                "locals": []
+              },
+              {
+                "text": "* creating a portrait board with a thinner form factor",
+                "nodeType": "comment",
+                "id": "dVo0y1KKTpKWeOVOFB3JKEFF"
+              },
+              {
+                "expr": ":data #f2XvSkHqOzzzK52Uag96i6RF ,:= :media .create_portrait_board ,( ,7 ,6 ,8 ,, ,1 ,3 ,6 ,0 ,)",
+                "nodeType": "exprStmt",
+                "id": "kvNZckT7oI4vsAY5xfslpR2E",
+                "locals": []
+              },
+              {
+                "text": "A board remains invisible until it is posted to the wall. Once posted, it goes full screen.",
+                "nodeType": "comment",
+                "id": "G38cFsIw9KqIVXmRCxwMwjLg"
+              },
+              {
+                "expr": ":data #f2XvSkHqOzzzK52Uag96i6RF .post_to_wall",
+                "nodeType": "exprStmt",
+                "id": "xi82fCAv9VxQbf2hbqHL39hW",
+                "locals": []
+              },
+              {
+                "text": "Once posted, updates to the board state and the sprites on the board become visible only when calling `board→update` on wall from the `gameloop` typically.",
+                "nodeType": "comment",
+                "id": "Qqh444llYFc1CP7ZaPP5Pook"
+              },
+              {
+                "expr": ":data #f2XvSkHqOzzzK52Uag96i6RF .update_on_wall",
+                "nodeType": "exprStmt",
+                "id": "eEK34iJCjK6D5KsEsOpMxHYa",
+                "locals": []
+              },
+              {
+                "text": "### board appearance",
+                "nodeType": "comment",
+                "id": "L7tAJgyAwqhNgm4Kqc4nlcKZ"
+              },
+              {
+                "text": "The board has a `background color` and a `background picture` that can be set separately. The default background color is transparent, and no background picture is provided by default. Only one of these background possibilities can be active at a time.",
+                "nodeType": "comment",
+                "id": "WiI339u1OCg24kYlBYsGfnSd"
+              },
+              {
+                "text": "* setting a random background color",
+                "nodeType": "comment",
+                "id": "xjDDCqhqInonAaBya7gRvY4B"
+              },
+              {
+                "expr": ":data #f2XvSkHqOzzzK52Uag96i6RF .set_background ,( :colors .random ,)",
+                "nodeType": "exprStmt",
+                "id": "xLrExdfF3HIuazgJy1L7YNeW",
+                "locals": []
+              },
+              {
+                "text": "* setting a background picture",
+                "nodeType": "comment",
+                "id": "L7gKS8p456ArXEA8UNBHXORf"
+              },
+              {
+                "expr": ":data #f2XvSkHqOzzzK52Uag96i6RF .set_background_picture ,( :art #N8YVPjuTETFcWcSmpl9qQJih ,)",
+                "nodeType": "exprStmt",
+                "id": "vYC6HEoOZp1GeUFVg8tkRnwU",
+                "locals": []
+              },
+              {
+                "text": "* getting the `width` and `height` of the board",
+                "nodeType": "comment",
+                "id": "xYqO7j2t29t4WW4aCdVW2Ek7"
+              },
+              {
+                "expr": "$Lx44W3FmltZZQT7e1D9x0urjL0 ,:= :data #f2XvSkHqOzzzK52Uag96i6RF .width",
+                "nodeType": "exprStmt",
+                "id": "Lx44W3FmltZZQT7e1D9x0urj",
+                "locals": [
+                  {
+                    "name": "width",
+                    "type": "Number",
+                    "nodeType": "localDef",
+                    "id": "Lx44W3FmltZZQT7e1D9x0urjL0"
+                  }
+                ]
+              },
+              {
+                "expr": "$fXUwyPx6SjKelewIrOShOePLL0 ,:= :data #f2XvSkHqOzzzK52Uag96i6RF .height",
+                "nodeType": "exprStmt",
+                "id": "fXUwyPx6SjKelewIrOShOePL",
+                "locals": [
+                  {
+                    "name": "height",
+                    "type": "Number",
+                    "nodeType": "localDef",
+                    "id": "fXUwyPx6SjKelewIrOShOePLL0"
+                  }
+                ]
+              },
+              {
+                "text": "### creating sprites",
+                "nodeType": "comment",
+                "id": "xw54TD5OYYRD6DhW2bV4N2EZ"
+              },
+              {
+                "text": "There are four kinds of sprite that display different kinds of visual content: `ellipse`, `rectangle`, `text` and `picture`. They can have the shapes of ellipses or rectangles. They can be drawn as solid figures, or they can take the form of a piece of updatable text, or be created from a picture. There is a fifth kind of sprite known as an anchor sprite. It is invisible and has a special purpose, which is explained below under the heading *springs and anchors*. Sprites are associated with particular game boards and are created by methods of the Board type.",
+                "nodeType": "comment",
+                "id": "pWgL328Q87fIaAqXcSoXQlFm"
+              },
+              {
+                "text": "* create an ellipse with 20 pixels wide and 40 pixels high.",
+                "nodeType": "comment",
+                "id": "F8z930ddc9Wv3qAcxGaT9WPF"
+              },
+              {
+                "expr": "$QfOKMA7DYp4ydVC8TnxQUCokL0 ,:= :data #f2XvSkHqOzzzK52Uag96i6RF .create_ellipse ,( ,2 ,0 ,, ,4 ,0 ,)",
+                "nodeType": "exprStmt",
+                "id": "QfOKMA7DYp4ydVC8TnxQUCok",
+                "locals": [
+                  {
+                    "name": "sprite",
+                    "type": "Sprite",
+                    "nodeType": "localDef",
+                    "id": "QfOKMA7DYp4ydVC8TnxQUCokL0"
+                  }
+                ]
+              },
+              {
+                "text": "* create a rectangle with 20 pixels wide and 40 pixels high.",
+                "nodeType": "comment",
+                "id": "w2Ndw4We8NomN5U1oskcys5P"
+              },
+              {
+                "expr": "$QfOKMA7DYp4ydVC8TnxQUCokL0 ,:= :data #f2XvSkHqOzzzK52Uag96i6RF .create_rectangle ,( ,2 ,0 ,, ,4 ,0 ,)",
+                "nodeType": "exprStmt",
+                "id": "Nx4QtUdR7GMO8ckHblC4MR5t",
+                "locals": []
+              },
+              {
+                "text": "* create a text with 100 pixels width, 20 pixels height and font size 40. The width and height are used for the bounding box but the text might over spill this dimension.",
+                "nodeType": "comment",
+                "id": "x2LEFCCIeblGC24jsvpZ1wCU"
+              },
+              {
+                "expr": "$QfOKMA7DYp4ydVC8TnxQUCokL0 ,:= :data #f2XvSkHqOzzzK52Uag96i6RF .create_text ,( ,1 ,0 ,0 ,, ,2 ,0 ,, ,4 ,0 ,, 'boom ,)",
+                "nodeType": "exprStmt",
+                "id": "gQekqo1Ge2GUsQuw0zt4IG5R",
+                "locals": []
+              },
+              {
+                "text": "Sprites have initial positions centered on the board and no speed or angular rotation. These properties can be set for each sprite using the methods of the Sprite datatype.",
+                "nodeType": "comment",
+                "id": "wox2f5HFozPP2j04g3uEfmHc"
+              },
+              {
+                "text": "* re-positioning the sprite to `(10, 20)`",
+                "nodeType": "comment",
+                "id": "oLsjxWL98i1dX6vKnNzEKNZg"
+              },
+              {
+                "expr": "$QfOKMA7DYp4ydVC8TnxQUCokL0 .set_pos ,( ,1 ,0 ,, ,2 ,0 ,)",
+                "nodeType": "exprStmt",
+                "id": "xq1s8H8Q3GnAAvr4NC2rX1TT",
+                "locals": []
+              },
+              {
+                "text": "* set the sprite moving right",
+                "nodeType": "comment",
+                "id": "lvh42b4TpBnaejv2er4VIQ5b"
+              },
+              {
+                "expr": "$QfOKMA7DYp4ydVC8TnxQUCokL0 .set_speed_x ,( ,1 ,0 ,0 ,)",
+                "nodeType": "exprStmt",
+                "id": "DjjS3U1ESnXm2XHHqcqb25J2",
+                "locals": []
+              },
+              {
+                "text": "* give a little rotation rate of `15` degrees per second.",
+                "nodeType": "comment",
+                "id": "xasUttQV7223WCnpv5Db5guK"
+              },
+              {
+                "expr": "$QfOKMA7DYp4ydVC8TnxQUCokL0 .set_angular_speed ,( ,1 ,5 ,)",
+                "nodeType": "exprStmt",
+                "id": "GIWNFBlLzYNuuus0bT0yIbXx",
+                "locals": []
+              },
+              {
+                "text": "### enumerating sprites",
+                "nodeType": "comment",
+                "id": "sXFV2XMAfvtDYyirCLWBLiZH"
+              },
+              {
+                "text": "The board acts as a collection of sprites.",
+                "nodeType": "comment",
+                "id": "dhqfYZuuieQRyvfnI4MrDIvz"
+              },
+              {
+                "text": "* get the number of sprites",
+                "nodeType": "comment",
+                "id": "z3IVmC1VBZFtXVBm7iSOiyih"
+              },
+              {
+                "expr": "$V9TqqMJOCTqKrlBzWZ15ZiBiL0 ,:= :data #f2XvSkHqOzzzK52Uag96i6RF .count",
+                "nodeType": "exprStmt",
+                "id": "V9TqqMJOCTqKrlBzWZ15ZiBi",
+                "locals": [
+                  {
+                    "name": "sprite count",
+                    "type": "Number",
+                    "nodeType": "localDef",
+                    "id": "V9TqqMJOCTqKrlBzWZ15ZiBiL0"
+                  }
+                ]
+              },
+              {
+                "text": "* get the sprite at a particular index",
+                "nodeType": "comment",
+                "id": "eQBapPzh34443Ljfc7hJ5YoX"
+              },
+              {
+                "expr": "$QfOKMA7DYp4ydVC8TnxQUCokL0 ,:= :data #f2XvSkHqOzzzK52Uag96i6RF .at ,( ,1 ,)",
+                "nodeType": "exprStmt",
+                "id": "j8AbwDIe2gthRSgWjOjhKeP5",
+                "locals": []
+              },
+              {
+                "text": "* enumerate all sprites using a [for each](/foreach) loop",
+                "nodeType": "comment",
+                "id": "eqiLGcjA9Vj4XwL6gmUwjq4T"
+              },
+              {
+                "collection": ":data #f2XvSkHqOzzzK52Uag96i6RF",
+                "conditions": [
+                  {
+                    "condition": "T",
+                    "nodeType": "where",
+                    "id": "xHYX1kciXw2C9RGX4pzXIb1b",
+                    "locals": []
+                  }
+                ],
+                "body": [
+                  {
+                    "text": "access the sprite",
+                    "nodeType": "comment",
+                    "id": "QP10S7KQEi4fEF7GkeEkCg3U"
+                  }
+                ],
+                "nodeType": "foreach",
+                "id": "PJaDX08sS43vDWdTbBTgQoO7",
+                "locals": [
+                  {
+                    "name": "sp",
+                    "type": "Sprite",
+                    "nodeType": "localDef",
+                    "id": "PJaDX08sS43vDWdTbBTgQoO7B0"
+                  }
+                ]
+              },
+              {
+                "text": "### [sprite sets](/SpriteSet)",
+                "nodeType": "comment",
+                "id": "xLttAuVTIgud2AVkfsTkhJKy"
+              },
+              {
+                "text": "During games it is very useful to have several collections of sprites. For example, one collection contains spacecraft, another holds asteroids, and so on. A sprite collection can be created as an instance of the [Sprite Set](/SpriteSet) datatype. The method `create sprite set` creates a new set which can hold sprites associated with the board.",
+                "nodeType": "comment",
+                "id": "flGJEAiZn6yIyyf2QLmnHe6M"
+              },
+              {
+                "text": "* creating a sprite set",
+                "nodeType": "comment",
+                "id": "xJ75hCFJhesn4LlqfCWmunl0"
+              },
+              {
+                "expr": "$xnKmJN504BhnSLAJ3Z6AJbc2L0 ,:= :data #f2XvSkHqOzzzK52Uag96i6RF .create_sprite_set",
+                "nodeType": "exprStmt",
+                "id": "xnKmJN504BhnSLAJ3Z6AJbc2",
+                "locals": [
+                  {
+                    "name": "sprites",
+                    "type": "Sprite Set",
+                    "nodeType": "localDef",
+                    "id": "xnKmJN504BhnSLAJ3Z6AJbc2L0"
+                  }
+                ]
+              },
+              {
+                "text": "* adding a sprite to a sprite set. Returns `true` if `sprite` was not previously in the set.",
+                "nodeType": "comment",
+                "id": "KdWMYfmLpcEsNYkvbwxovMax"
+              },
+              {
+                "expr": "$xBhQN2cddZA2cQL8gbClgzKLL0 ,:= $xnKmJN504BhnSLAJ3Z6AJbc2L0 .add ,( $QfOKMA7DYp4ydVC8TnxQUCokL0 ,)",
+                "nodeType": "exprStmt",
+                "id": "xBhQN2cddZA2cQL8gbClgzKL",
+                "locals": [
+                  {
+                    "name": "added",
+                    "type": "Boolean",
+                    "nodeType": "localDef",
+                    "id": "xBhQN2cddZA2cQL8gbClgzKLL0"
+                  }
+                ]
+              },
+              {
+                "text": "* removing a sprite from a sprite set. Returns `true` if `sprite` was found and removed.",
+                "nodeType": "comment",
+                "id": "VxEAJv26RiZgXq05p8pcrqz9"
+              },
+              {
+                "expr": "$Dkbob64NpvaJoD9nc7oqYwEHL0 ,:= $xnKmJN504BhnSLAJ3Z6AJbc2L0 .remove ,( $QfOKMA7DYp4ydVC8TnxQUCokL0 ,)",
+                "nodeType": "exprStmt",
+                "id": "Dkbob64NpvaJoD9nc7oqYwEH",
+                "locals": [
+                  {
+                    "name": "removed",
+                    "type": "Boolean",
+                    "nodeType": "localDef",
+                    "id": "Dkbob64NpvaJoD9nc7oqYwEHL0"
+                  }
+                ]
+              },
+              {
+                "text": "###\tobstacles",
+                "nodeType": "comment",
+                "id": "foesoEmgAhGXxewR8bNBO74U"
+              },
+              {
+                "text": "Obstacles are walls that can be added to the board. Walls cannot be moved once created. Moving sprites which encounter an obstacle will bounce back with a speed determined by the product of the obstacle’s elasticity and the sprite’s elasticity. Elasticities of `1` for both the obstacle and the sprite means the sprite will maintain its full speed, albeit in a different direction. If one or both elasticities are `0`, there will be full absorption of the impulse; the sprite will stick to the wall. By default, all elasticities are `1`.",
+                "nodeType": "comment",
+                "id": "xsCsZObMwoQ1hK9jGcGeH0nZ"
+              },
+              {
+                "text": "{hide}",
+                "nodeType": "comment",
+                "id": "RI2pW2H2OHnKe9UOROajAZfR"
+              },
+              {
+                "expr": "$mx9LiYl9Mex54A1uewHsDxZCL0 ,:= ,0",
+                "nodeType": "exprStmt",
+                "id": "mx9LiYl9Mex54A1uewHsDxZC",
+                "locals": [
+                  {
+                    "name": "x",
+                    "type": "Number",
+                    "nodeType": "localDef",
+                    "id": "mx9LiYl9Mex54A1uewHsDxZCL0"
+                  }
+                ]
+              },
+              {
+                "expr": "$mqU2EYsl202gbc2Cer4oLa31L0 ,:= ,0",
+                "nodeType": "exprStmt",
+                "id": "mqU2EYsl202gbc2Cer4oLa31",
+                "locals": [
+                  {
+                    "name": "y",
+                    "type": "Number",
+                    "nodeType": "localDef",
+                    "id": "mqU2EYsl202gbc2Cer4oLa31L0"
+                  }
+                ]
+              },
+              {
+                "expr": "$OmQxqO2E2Y48OhUrFGq7CaBXL0 ,:= ,0",
+                "nodeType": "exprStmt",
+                "id": "OmQxqO2E2Y48OhUrFGq7CaBX",
+                "locals": [
+                  {
+                    "name": "dx",
+                    "type": "Number",
+                    "nodeType": "localDef",
+                    "id": "OmQxqO2E2Y48OhUrFGq7CaBXL0"
+                  }
+                ]
+              },
+              {
+                "expr": "$AvdvRWKRZ8YtBAcBWJVWIzzbL0 ,:= ,0",
+                "nodeType": "exprStmt",
+                "id": "AvdvRWKRZ8YtBAcBWJVWIzzb",
+                "locals": [
+                  {
+                    "name": "dy",
+                    "type": "Number",
+                    "nodeType": "localDef",
+                    "id": "AvdvRWKRZ8YtBAcBWJVWIzzbL0"
+                  }
+                ]
+              },
+              {
+                "text": "{/hide}",
+                "nodeType": "comment",
+                "id": "cBibWbApV2fsEXQBWflA2IPg"
+              },
+              {
+                "expr": ":data #f2XvSkHqOzzzK52Uag96i6RF .create_obstacle ,( $mx9LiYl9Mex54A1uewHsDxZCL0 ,, $mqU2EYsl202gbc2Cer4oLa31L0 ,, $OmQxqO2E2Y48OhUrFGq7CaBXL0 ,, $AvdvRWKRZ8YtBAcBWJVWIzzbL0 ,, ,1 ,)",
+                "nodeType": "exprStmt",
+                "id": "xbqMrUkCWQJOu48NSawUrtT4",
+                "locals": []
+              },
+              {
+                "text": "### boundaries",
+                "nodeType": "comment",
+                "id": "Bzm4UPc84SdTu2gwMHEjjqDx"
+              },
+              {
+                "text": "By default, the board is open, meaning it has no boundary. Sprites moving off the visual part of the board will simply continue moving away. Since it is common to need reflecting walls around the board, the create boundary(distance) method can be used to create a reflective set of walls around the board at the given distance from the board’s edges. The elasticity of these reflective walls is `1`, i.e. the sprite’s speed is not reduced. If the distance of the boundary from the board’s edge is larger than the sprite’s size, a sprite can disappear off the screen before bouncing back and re-appearing. If the distance is set as a negative number, the boundaries are located inside the board area.",
+                "nodeType": "comment",
+                "id": "xEHXcRwMtZYRkduFtQsALq9G"
+              },
+              {
+                "expr": ":data #f2XvSkHqOzzzK52Uag96i6RF .create_boundary ,( ,0 ,)",
+                "nodeType": "exprStmt",
+                "id": "ZiFXKGXc6INx1jSK0MvST0Cm",
+                "locals": []
+              },
+              {
+                "text": "### gravity",
+                "nodeType": "comment",
+                "id": "MM7igsEUpmlttilAOAq1iiJg"
+              },
+              {
+                "text": "A uniform force can be applied to all sprites on the board. For instance, there could be a force which pulls all objects towards the bottom of the screen, mimicking the force of gravity. However this gravitational force need not remain constant. The script can repeatedly use the phone’s orientation or its accelerometer readings to vary the force and direction of gravity that is experienced by objects in the game.",
+                "nodeType": "comment",
+                "id": "xncLCxfMzUNxenC5sZFZktgr"
+              },
+              {
+                "text": "* using the accelerometer to apply forces on the board. We scale the acceleration to make the sprite move faster.",
+                "nodeType": "comment",
+                "id": "H6S4PvNh4rGz720GvU8fGvWT"
+              },
+              {
+                "expr": "$mNPZTyTtofXNjrqLbKFREAScL0 ,:= :senses .acceleration_quick",
+                "nodeType": "exprStmt",
+                "id": "mNPZTyTtofXNjrqLbKFREASc",
+                "locals": [
+                  {
+                    "name": "p",
+                    "type": "Vector3",
+                    "nodeType": "localDef",
+                    "id": "mNPZTyTtofXNjrqLbKFREAScL0"
+                  }
+                ]
+              },
+              {
+                "expr": "$mNPZTyTtofXNjrqLbKFREAScL0 ,:= $mNPZTyTtofXNjrqLbKFREAScL0 .scale ,( ,6 ,0 ,0 ,)",
+                "nodeType": "exprStmt",
+                "id": "x9U944Y2N1oLyI0SnzkJtNhd",
+                "locals": []
+              },
+              {
+                "expr": ":data #f2XvSkHqOzzzK52Uag96i6RF .set_gravity ,( $mNPZTyTtofXNjrqLbKFREAScL0 .x ,, $mNPZTyTtofXNjrqLbKFREAScL0 .y ,)",
+                "nodeType": "exprStmt",
+                "id": "xzdh7EVOuUv0zWShr1US3TgA",
+                "locals": []
+              },
+              {
+                "text": "Once sprites are given speeds or if gravity has been made non-zero, the board engine can update a sprite's position. To update all sprite positions for one time step, the `board→evolve` method should be invoked. The duration of the time step is simply the time since the last call to `board→evolve` or since the creation of the board.",
+                "nodeType": "comment",
+                "id": "KsAcQFccasU3oJqX8p78ptBc"
+              },
+              {
+                "text": "### friction",
+                "nodeType": "comment",
+                "id": "xC0hXVaBdikD1JPZUgPvyy8d"
+              },
+              {
+                "text": "By default, a sprite keeps on moving without slowing down. It can lose speed only if it moves in an opposite direction to gravity or if it loses energy in a collision with an obstacle whose elasticity is less than `1`. If it is desirable to make sprites slow down by themselves, a friction can be provided for each sprite individually.",
+                "nodeType": "comment",
+                "id": "ve8AavGpZ8crJR4f1DsSa8zU"
+              },
+              {
+                "text": "A **friction** is defined as the fraction of the forward speed that is experienced as a backwards force. A friction of `0` corresponds to no friction, and a friction of `1` means the sprite will not move at all.",
+                "nodeType": "comment",
+                "id": "v58pcUm6b3jIAM0nJe45DKwR"
+              },
+              {
+                "text": "* adding enough friction so that the sprite eventually stops without forces",
+                "nodeType": "comment",
+                "id": "zQKno4dv6uKijziR4V8kifo6"
+              },
+              {
+                "expr": "$QfOKMA7DYp4ydVC8TnxQUCokL0 .set_friction ,( ,0 ,. ,0 ,1 ,)",
+                "nodeType": "exprStmt",
+                "id": "oZZcjCVCb6ZTjna65TpGFAnP",
+                "locals": []
+              },
+              {
+                "text": "Each sprite can have its own friction setting but, if not set, each sprite experiences the default friction from the board.",
+                "nodeType": "comment",
+                "id": "xQnn9GEk4syj5pLh4m4PMyIG"
+              },
+              {
+                "expr": ":data #f2XvSkHqOzzzK52Uag96i6RF .set_friction ,( ,0 ,. ,0 ,0 ,1 ,)",
+                "nodeType": "exprStmt",
+                "id": "OXO2C2j7RmDwxCcEip1tiVuZ",
+                "locals": []
+              },
+              {
+                "text": "### springs and anchors",
+                "nodeType": "comment",
+                "id": "BcJmXQEurfEthLj3dQfV1mnJ"
+              },
+              {
+                "text": "An **anchor** is a invisible sprite that does not move, even with forces applied to it. You can also fix any other sprite by setting their `friction` to `1`.",
+                "nodeType": "comment",
+                "id": "ZJztlc24cT9in28XYcGhcyLg"
+              },
+              {
+                "expr": "$orRdvZFZkHkshvFVXKYrPS4KL0 ,:= :data #f2XvSkHqOzzzK52Uag96i6RF .create_anchor ,( ,2 ,0 ,, ,2 ,0 ,)",
+                "nodeType": "exprStmt",
+                "id": "orRdvZFZkHkshvFVXKYrPS4K",
+                "locals": [
+                  {
+                    "name": "anchor",
+                    "type": "Sprite",
+                    "nodeType": "localDef",
+                    "id": "orRdvZFZkHkshvFVXKYrPS4KL0"
+                  }
+                ]
+              },
+              {
+                "text": "A **spring** can be added between two sprites to make them accelerate towards each other.",
+                "nodeType": "comment",
+                "id": "XIF8J3jgk7ktrzIrMsIU46YK"
+              },
+              {
+                "expr": ":data #f2XvSkHqOzzzK52Uag96i6RF .create_spring ,( $QfOKMA7DYp4ydVC8TnxQUCokL0 ,, $orRdvZFZkHkshvFVXKYrPS4KL0 ,, ,1 ,0 ,0 ,)",
+                "nodeType": "exprStmt",
+                "id": "yKzLgQeDzeehsl5YpZU3iU6E",
+                "locals": []
+              },
+              {
+                "text": "The force of the spring is proportional to the distance between the two sprites. The further they are apart, the stronger the force. The constant of proportionality is determined by the stiffness parameter of create spring. The larger its value, the stronger the attractive force.",
+                "nodeType": "comment",
+                "id": "foQPdLh3yekMVrIb8a8cA1Qz"
+              },
+              {
+                "text": "Without friction to dissipate energy over time, sprites linked by a spring will oscillate indefinitely. With friction, they will eventually converge on the same point. A common scenario is to fix one of the two spring-linked sprites on the board (make it unmovable).",
+                "nodeType": "comment",
+                "id": "sxpfy8T2XTsojEMzi59zUTie"
+              },
+              {
+                "text": "If a sprite linked to an anchor via a spring therefore oscillates around the anchor. Giving the sprite an initial velocity vector perpendicular to the direction of the spring causes the sprite to circle around the anchor. With multiple anchors and springs, some interesting oscillation paths can be produced.",
+                "nodeType": "comment",
+                "id": "etf7fmM3Xr25s0mIF4x2OD8u"
+              },
+              {
+                "text": "## [](/Sprite) datatype",
+                "nodeType": "comment",
+                "id": "lrc25AqVX3PEGdVCP6lkJsMm"
+              },
+              {
+                "text": "Sprites are movable objects that are used to visually represent parts of a game, such as a space ship and an asteroid, etc. New sprites are created by using methods of the Board datatype. Once a sprite has been created, its attributes such as position, speed, mass, color, etc., can be set by using methods of the Sprite datatype.",
+                "nodeType": "comment",
+                "id": "XGopGu87mgakrERw1yiLV8Ei"
+              },
+              {
+                "text": "### visual attributes",
+                "nodeType": "comment",
+                "id": "OPywg2OmfKnNNk3kJQLqtfFk"
+              },
+              {
+                "text": "The appearance of a sprite can be modified in many ways.",
+                "nodeType": "comment",
+                "id": "Hacj2wlNF7qa2SxNAIWiy0sh"
+              },
+              {
+                "text": "* get or set the color",
+                "nodeType": "comment",
+                "id": "x0nLi1Y8g53DcPuY9iWj08mb"
+              },
+              {
+                "expr": "$sk340pB4UBtt22y8p1ABQLx7L0 ,:= $QfOKMA7DYp4ydVC8TnxQUCokL0 .color",
+                "nodeType": "exprStmt",
+                "id": "sk340pB4UBtt22y8p1ABQLx7",
+                "locals": [
+                  {
+                    "name": "c",
+                    "type": "Color",
+                    "nodeType": "localDef",
+                    "id": "sk340pB4UBtt22y8p1ABQLx7L0"
+                  }
+                ]
+              },
+              {
+                "expr": "$QfOKMA7DYp4ydVC8TnxQUCokL0 .set_color ,( $sk340pB4UBtt22y8p1ABQLx7L0 ,)",
+                "nodeType": "exprStmt",
+                "id": "oxyvvuzgZU2J7U2oRPrwzvVC",
+                "locals": []
+              },
+              {
+                "text": "* hide or show",
+                "nodeType": "comment",
+                "id": "n53W6GiB1kxtM6JHglai3Y85"
+              },
+              {
+                "expr": "$QfOKMA7DYp4ydVC8TnxQUCokL0 .hide",
+                "nodeType": "exprStmt",
+                "id": "DnXoJEa2bzrYvQqWH0ZA5W47",
+                "locals": []
+              },
+              {
+                "expr": "$QfOKMA7DYp4ydVC8TnxQUCokL0 .show",
+                "nodeType": "exprStmt",
+                "id": "HLh2j6xUCTZ9GmxnzdkE44QE",
+                "locals": []
+              },
+              {
+                "text": "* make transparent using the `opacity`",
+                "nodeType": "comment",
+                "id": "P3J8Wu4zJgvcaPu2PMf3EbOa"
+              },
+              {
+                "expr": "$QfOKMA7DYp4ydVC8TnxQUCokL0 .set_opacity ,( ,0 ,. ,5 ,)",
+                "nodeType": "exprStmt",
+                "id": "TNskfhgb9XomHxw4WubMUYk1",
+                "locals": []
+              },
+              {
+                "text": "* change the [](/picture) for Picture Sprite",
+                "nodeType": "comment",
+                "id": "GgvyKpeLWaN2jxUOjt9v73Tn"
+              },
+              {
+                "expr": "$QfOKMA7DYp4ydVC8TnxQUCokL0 .set_picture ,( :art #xYFAqGC6xHRiK9byycBa0YOZ ,)",
+                "nodeType": "exprStmt",
+                "id": "x4sO9GEKw12s0R9EavJ8Of7E",
+                "locals": []
+              },
+              {
+                "text": "* change the `z-index` which controls the order in which sprites are rendered on the screen. The sprites are rendered in order of their z-indexes, from smallest to largest.",
+                "nodeType": "comment",
+                "id": "g29ZeTfKmFfzpo4LJQw5TO5O"
+              },
+              {
+                "expr": "$QfOKMA7DYp4ydVC8TnxQUCokL0 .set_z_index ,( ,5 ,)",
+                "nodeType": "exprStmt",
+                "id": "AEG4mwXvjuFGzLD1OsvVjNkz",
+                "locals": []
+              },
+              {
+                "text": "### position and motion",
+                "nodeType": "comment",
+                "id": "y874xml8Ha9TkAQzECvvv8Xz"
+              },
+              {
+                "text": "A sprite has a current position and a current angular orientation. Both of these change at rates determined by the sprite’s speed and its angular velocity.",
+                "nodeType": "comment",
+                "id": "Dky9nkITTL2LqxvQbFi8GpiZ"
+              },
+              {
+                "text": "### accelerations, forces and bounces",
+                "nodeType": "comment",
+                "id": "xp8gRyA5hxuiB3q1M3K3IPUl"
+              },
+              {
+                "text": "In the absence of gravity, springs and friction, a sprite will keep moving across the board at a constant velocity until it hits a barrier of some kind. However, in the presence of these effects, the sprite’s velocity does change.",
+                "nodeType": "comment",
+                "id": "HOMjDsa6roZjwdgWnWVwgyv4"
+              },
+              {
+                "text": "Springs are created using the create spring method of the board. They have been covered already. The acceleration induced on a sprite by a spring’s force is inversely proportional to the sprite’s mass. The heavier the sprite, the longer it will take for a spring to have its full effect. Each sprite has a default mass which is simply the product of the sprite’s width and height. However, that default can be overridden by the sprite’s set mass method. A mass cannot be made zero or negative.",
+                "nodeType": "comment",
+                "id": "YFuPJjH9A8fMZnBRlYGcWNFR"
+              },
+              {
+                "text": "A gravitational force can be specified for the board and this applies a force to every sprite, excluding any anchor sprites. The size of the force is proportional to the sprite’s mass. However, the effect of the force on a sprite’s speed is inversely proportional to the mass, so the acceleration induced by gravity is independent of the sprite’s mass.",
+                "nodeType": "comment",
+                "id": "osrXtEhaY1juk62mPd8csQ2j"
+              },
+              {
+                "text": "An additional force which works to slow down a moving sprite is friction. A friction value can be specified for the board using its set friction method. This becomes the default friction value for all sprites on the board. However, friction can also be set for individual sprites using the set friction method of the Sprite instance.",
+                "nodeType": "comment",
+                "id": "YCEgShWKCv4RZxctOGxklR1f"
+              },
+              {
+                "text": "All these forces listed above combine to produce the net force on a sprite and cause a sprite to move. If the combined forces do not produce the desired effect, there is one more adjustment which can be made. This adjustment is produced by the set acceleration method, covered in the next subsection of this chapter.",
+                "nodeType": "comment",
+                "id": "DVvARw282dvYHTTrC4QT224M"
+              },
+              {
+                "text": "When a sprite hits an obstacle, the sprite rebounds with a new velocity in a new direction. The magnitude of that new velocity is determined by the product of the elasticities of the sprite and the obstacle. If both elasticities are 1, it is a perfect bounce which loses no energy. The sprite loses no speed. If the product is 0, the sprite loses all its speed and stays stuck to the obstacle.",
+                "nodeType": "comment",
+                "id": "tzUu0Nml2u45QLkRBsIUl39B"
+              },
+              {
+                "text": "The current implementation of the game board in TouchDevelop does not detect collisions between sprites. This would require too much computation, especially if there are many sprites. One sprite will simply appear to pass through another sprite.",
+                "nodeType": "comment",
+                "id": "LZeX704Al8w4iTIo2Py3gksL"
+              },
+              {
+                "text": "### managing sprites",
+                "nodeType": "comment",
+                "id": "xOqzGy2M72YgN24t2UTMNeF3"
+              },
+              {
+                "text": "Implementing a game will usually require some extra programming which is not provided by the features of boards and sprites covered so far.",
+                "nodeType": "comment",
+                "id": "D1KfZzRbYNNX4Odv08pgy7fM"
+              },
+              {
+                "text": "For collision detection, the `overlap with` and `overlaps with` methods should help. Provided that the sprites are not moving so fast or the sprites are not so small that one sprite completely passes through another sprite during one time step, the colliding sprites will overlap when drawn on the board. The two methods allow such the collision to be detected, and then the directions of motion of the two sprites can be overridden to simulate the two sprites bouncing off each other.",
+                "nodeType": "comment",
+                "id": "E31GDF8rGtszBvWm8fD3C6Qn"
+              },
+              {
+                "text": "If, for example, the sprites represent planets revolving around a star, a spring force between a planet and the star is a long way from being a proper implementation of gravitational attraction. In this situation, a good approach would be to avoid using springs altogether and to calculate the force induced on a planet by gravitational attraction. Combining that force with the planet’s current velocity and its mass allows the acceleration induced by gravitational attraction to be calculated. And that acceleration can be explicitly given to the planet by  the `set acceleration` method. When an acceleration is specified, the effect of the acceleration is in addition to any accelerations induced by springs and gravity. The acceleration value remains in effect until changed by a new call to `set acceleration`.",
+                "nodeType": "comment",
+                "id": "R4oIJ8hefiAZe9SbMKUiKEcL"
+              },
+              {
+                "text": "Another possibility is that a sprite needs to be destroyed and removed from the board. In this case, the delete method should be invoked. The sprite instance is automatically removed from the board and from all sprite collections. Any references to the instance become invalid.",
+                "nodeType": "comment",
+                "id": "W69f59t0sIS6CNtyR3neyrwD"
+              },
+              {
+                "text": "### [Sprite Set](/SpriteSet) Datatype",
+                "nodeType": "comment",
+                "id": "Wj52DkHARx90RTba4FKzpRN0"
+              },
+              {
+                "text": "When writing simple games with multiple objects of the same kind (e.g. multiple shots, missiles, etc.), it quickly becomes necessary to group related sprites into collections. The Board datatype provides the method board→create sprite set which creates a new empty collection of sprites.",
+                "nodeType": "comment",
+                "id": "kigOcECj2N9HOOdjfvBdQdTi"
+              },
+              {
+                "text": "Sprite Set provides most of the methods common to the mutable collection types. These are the methods add, add many, at, count, is invalid, and post to wall. However, there is a major difference. All the other collection types are lists of values. It implies that the same value can appear in the list several times. A Sprite Set is, in contrast, an ordered set. A value can appear at most once in the set. The elements of the set are ordered by their index positions.",
+                "nodeType": "comment",
+                "id": "gAhzJzN3g2MqtWVGrDYg8Eoe"
+              },
+              {
+                "text": "{hide}",
+                "nodeType": "comment",
+                "id": "saxTKUMS7vi2EO4XcfTJZbM1"
+              },
+              {
+                "text": "## touch and board events",
+                "nodeType": "comment",
+                "id": "xYv8ZFVdUjzk0YuLG7GXWXO9"
+              },
+              {
+                "text": "The board has six specific kinds of events which are covered in the subsections below. All but one of these events are triggered when the user touches the screen and taps, swipes or drags a finger across the board.",
+                "nodeType": "comment",
+                "id": "uwsjMxkYMijJzK6ahNAn6T8h"
+              },
+              {
+                "text": "###\ttouching actions",
+                "nodeType": "comment",
+                "id": "KjyDB1y0BHgDxJMvq5JeFXN4"
+              },
+              {
+                "text": "In addition to events, the Board datatype provides five methods which can be used to gather information about how the screen has been touched. These methods are listed in Table 9-11. However the tap, swipe and drag events explained later in this section are easier to program and their use is recommended.",
+                "nodeType": "comment",
+                "id": "qDi9ALYJngabfUfsISBEDRvH"
+              },
+              {
+                "text": "Table 9-11: Touch Methods of the Board Datatype",
+                "nodeType": "comment",
+                "id": "xEeCyemU2qfqwsh822INgeLs"
+              },
+              {
+                "text": "Sprite Method\tDescription",
+                "nodeType": "comment",
+                "id": "CnnKm1VUXtMFbL7f5n8fQByA"
+              },
+              {
+                "text": "touch current : Vector3\tReturns the coordinates of the current touch point on the board; the z component is 0.",
+                "nodeType": "comment",
+                "id": "XNnP3cu9qY47p2cCvQPffhYI"
+              },
+              {
+                "text": "touch end : Vector3\tReturns the coordinates of the last touch point on the  board; the z component is 0",
+                "nodeType": "comment",
+                "id": "lCwIAmZqRMDgd4JELPFsB7Io"
+              },
+              {
+                "text": "touch start : Vector3\tReturns the coordinates of the latest start point for a touch gesture on the  board; the z component is 0",
+                "nodeType": "comment",
+                "id": "QY2PvP7nG7sFYJ4cP2T0AC9q"
+              },
+              {
+                "text": "touch velocity : Vector3\tReturns the final swiping velocity after a touch has gesture; the z component is 0",
+                "nodeType": "comment",
+                "id": "JIPU4FHNVrpUKUrzXMF7ul4X"
+              },
+              {
+                "text": "touched : Boolean\tReturns true if the board has been touched",
+                "nodeType": "comment",
+                "id": "xEYvSmo4owYZZ6iY2d9RyHqx"
+              },
+              {
+                "text": "",
+                "nodeType": "comment",
+                "id": "Fq7jGzCD4e27RKmWWFdP00sQ"
+              },
+              {
+                "text": "9.5.2\tgameloop Event",
+                "nodeType": "comment",
+                "id": "UuaygeZTlisEC3PDLqPpFSPS"
+              },
+              {
+                "text": "The gameloop event contains code that needs to be run regularly and frequently. The event is triggered about every 50ms. It is a natural location to contain collision detection code, or to monitor the passage of time.",
+                "nodeType": "comment",
+                "id": "eSztB3Qk4nf2MWftVV48vkOH"
+              },
+              {
+                "text": "The gameloop event code should be efficient. If it takes too long to execute, the display may stutter and collisions may go undetected.",
+                "nodeType": "comment",
+                "id": "RPZKb2nlhP7mfRFj4gMG9FdY"
+              },
+              {
+                "text": "9.5.3\ttap board Event",
+                "nodeType": "comment",
+                "id": "NW8H6GOo3zkVR1treMHFqhd8"
+              },
+              {
+                "text": "The tap board event fires if there is tap anywhere on the board except on a position where a sprite is located. Tapping means that one’s finger leaves the screen at approximately the same position as where it first touched. Otherwise, the phone’s software will report a swipe event instead. The event fires once the finger is lifted.",
+                "nodeType": "comment",
+                "id": "u9b6SuHAWK1gRTM2vcEwSj7i"
+              },
+              {
+                "text": "As an example, the code below creates a new ball wherever there is a tap",
+                "nodeType": "comment",
+                "id": "xdAOI64Lr9SEtk5ScJv1YkDY"
+              },
+              {
+                "text": "the board.",
+                "nodeType": "comment",
+                "id": "TxQ79UckM22scT6p63LkRS8C"
+              },
+              {
+                "text": "event tap board: board(x,y)",
+                "nodeType": "comment",
+                "id": "yr2PAxEPDaTJaR24kkYGCAue"
+              },
+              {
+                "text": "var sprite := ◳board → create ellipse(10,10)",
+                "nodeType": "comment",
+                "id": "ziGfGh6olNwVvazbBHBAa4tB"
+              },
+              {
+                "text": "sprite → set pos(x,y)",
+                "nodeType": "comment",
+                "id": "hZHjK2aqfjKChzDlKDTijPKB"
+              },
+              {
+                "text": "",
+                "nodeType": "comment",
+                "id": "sJl7NaR8CH3JwqKloITJEo7y"
+              },
+              {
+                "text": "The tap board event has two parameters x and y which give the position where the tap occurred.",
+                "nodeType": "comment",
+                "id": "KMAtFFZ9mHEUelNZTDntn0zI"
+              },
+              {
+                "text": "9.5.4\tswipe board Event",
+                "nodeType": "comment",
+                "id": "xh4QdU4V5uOiMSXD3ZtoB15g"
+              },
+              {
+                "text": "The swipe board event is similar, except that the event code is passed four parameters. The first two show where the swipe started and the second two show the extent of the swipe in the x and y dimensions.",
+                "nodeType": "comment",
+                "id": "xrCpqrAm7lLvP5kIn5mAQ4s3"
+              },
+              {
+                "text": "As an example, the code below creates a new sprite and gives it an initial speed which corresponds to the extent of the swipe.",
+                "nodeType": "comment",
+                "id": "FKguuw8AH7DyIAYxbhK6fEHK"
+              },
+              {
+                "text": "event swipe board: board(x, y, delta x, delta y)",
+                "nodeType": "comment",
+                "id": "wKPe7YpoLarbCdDiv93k2egN"
+              },
+              {
+                "text": "var sprite := ◳board → create ellipse(10,10)",
+                "nodeType": "comment",
+                "id": "xyOv6x3cA8iOpobSY5VPol4W"
+              },
+              {
+                "text": "sprite → set pos(x,y)",
+                "nodeType": "comment",
+                "id": "DT2P7uM9NhstFRvNPQgqa8be"
+              },
+              {
+                "text": "sprite → set speed(delta x, delta y)",
+                "nodeType": "comment",
+                "id": "XApb5NsQnejL4in4TTRxnEIG"
+              },
+              {
+                "text": "",
+                "nodeType": "comment",
+                "id": "nomNxiBN6UtflYalp2OU2TuW"
+              },
+              {
+                "text": "9.5.5\ttap sprite in XXX Event",
+                "nodeType": "comment",
+                "id": "oqhQ1zvxVjEaMLbaCGVn2bSg"
+              },
+              {
+                "text": "Tap events can be provided for sprites held in different sprite collections. This makes it easier to program one kind of action for a spaceship, say, and a different kind of action when tapping an asteroid, say.",
+                "nodeType": "comment",
+                "id": "sLYx2Xess3VlgD9cmJukBMpR"
+              },
+              {
+                "text": "If, for example, there is a global data variable named spaceships with the type Sprite Set, then an event named tap sprite in asteroids can be provided. The event is passed four parameters. These are the sprite which was tapped, the index of the sprite in the sprite set, and the coordinates of the sprite on the board.",
+                "nodeType": "comment",
+                "id": "IKadM4JnZHAJWJM0u6RTHReO"
+              },
+              {
+                "text": "",
+                "nodeType": "comment",
+                "id": "x5ptlowavZXtz4h22jQfOuU2"
+              },
+              {
+                "text": "A sample of code which uses the event is as follows:",
+                "nodeType": "comment",
+                "id": "p6OQkb1xlpB0mRUA8szxMUWw"
+              },
+              {
+                "text": "action main( )",
+                "nodeType": "comment",
+                "id": "DvMtAWnEqTdfmWq63CCBkDN8"
+              },
+              {
+                "text": "…",
+                "nodeType": "comment",
+                "id": "Sz6T5qgI0o732Qd7CISxv4pq"
+              },
+              {
+                "text": "◳asteroids := ◳board → create sprite set",
+                "nodeType": "comment",
+                "id": "PEAQ5yKLBl4NPdwsR9misfEM"
+              },
+              {
+                "text": "// populate the board with spaceships and asteroids",
+                "nodeType": "comment",
+                "id": "v4AkAEmWNCrl06RJ2d923v8h"
+              },
+              {
+                "text": "…",
+                "nodeType": "comment",
+                "id": "xQOjKPim3Yv8orKCpEJX9yyE"
+              },
+              {
+                "text": "",
+                "nodeType": "comment",
+                "id": "QIdVWX9keX1I4i98qhJzmnYI"
+              },
+              {
+                "text": "event tap sprite in asteroids(sprite, index, x, y)",
+                "nodeType": "comment",
+                "id": "xAaEIZlAwYOMKZVOZcahW9Fs"
+              },
+              {
+                "text": "// change the asteroid’s color",
+                "nodeType": "comment",
+                "id": "weH1NOWvoY0g2BJldV7q2cxQ"
+              },
+              {
+                "text": "sprite → set color(colors → red)",
+                "nodeType": "comment",
+                "id": "ZcSRP0bolREZVD3ihpcnpO3E"
+              },
+              {
+                "text": "",
+                "nodeType": "comment",
+                "id": "D23aW9iGCThPyTmIyUgWSOpW"
+              },
+              {
+                "text": "9.5.6\t swipe sprite in XXX Event",
+                "nodeType": "comment",
+                "id": "Ij4RlZ9QepkxxETLIkqMrRk4"
+              },
+              {
+                "text": "The swipe sprite event is similar to the tap sprite event, except that one’s finger is swiped across the screen and the extent of the swipe is passed as two additional parameters.",
+                "nodeType": "comment",
+                "id": "t4NYIS3FV5rs4sPLJWPhKqKl"
+              },
+              {
+                "text": "For example, the following code will cause the sprite which is swiped to start moving in the direction of the swipe.",
+                "nodeType": "comment",
+                "id": "fiy62D18p9PHVymQRARQcfDZ"
+              },
+              {
+                "text": "event swipe sprite in asteroids(sprite, index, x, y, delta x, delta y)",
+                "nodeType": "comment",
+                "id": "JbqH499u4Bc4JkOJnnUCMEhN"
+              },
+              {
+                "text": "sprite → set speed(delta x, delta y)",
+                "nodeType": "comment",
+                "id": "xMTB5HDKsKutZBRCEwh08M3Q"
+              },
+              {
+                "text": "",
+                "nodeType": "comment",
+                "id": "FsjDktQjAfwZyu41TKMSj1k3"
+              },
+              {
+                "text": "9.5.7\tdrag sprite in XXX Event",
+                "nodeType": "comment",
+                "id": "QPnPWug2npdtKLBbLJ2REvvk"
+              },
+              {
+                "text": "A drag event does not wait for the finger to be lifted from the screen, as with the tap and swipe events. It fires while one’s finger is still on the screen. It will repeatedly fire while the finger is in motion across the screen. The event is passed very similar parameters to the swipe sprite event, except that the last two parameters provide the extent of the dragging motion (so far).",
+                "nodeType": "comment",
+                "id": "omnGOcpY2SvGyGK2xD6LiM3N"
+              },
+              {
+                "text": "The event can be used to temporarily set the speed of a dragged sprite to 0 and to display it at the current drag position. In this way, it will appear that the sprite is being held at the finger’s position.",
+                "nodeType": "comment",
+                "id": "qXAYeYvH6U2zh2nrHK0Wfxgi"
+              },
+              {
+                "text": "",
+                "nodeType": "comment",
+                "id": "XzBbCqVTcyxVl3YZ2T1oK5po"
+              },
+              {
+                "text": "Here is example coding with the asteroids:",
+                "nodeType": "comment",
+                "id": "HnpjoxV9Y8NMeglADPwPlHVV"
+              },
+              {
+                "text": "event drag sprite in asteroids(sprite, index, x, y, delta x, delta y)",
+                "nodeType": "comment",
+                "id": "zjQpoOhoipfc4k3Mt3THzfal"
+              },
+              {
+                "text": "sprite → set speed(0, 0)",
+                "nodeType": "comment",
+                "id": "tSDQuUy9J4cjPSdWFrH347BS"
+              },
+              {
+                "text": "sprite → set pos(x, y)",
+                "nodeType": "comment",
+                "id": "xQGrDFTzShdE7DWsX2q3NT8n"
+              },
+              {
+                "text": "",
+                "nodeType": "comment",
+                "id": "SC8fZUtas0xuduefcQwocng5"
+              },
+              {
+                "text": "When the finger is lifted at the end of the motion, a swipe sprite event is triggered (if event code for that action has been provided).",
+                "nodeType": "comment",
+                "id": "x82RuGIIGUBkdL66E6EBnTzZ"
+              },
+              {
+                "text": "9.5.8 tap sprite SSS, swipe sprite SSS, drag sprite SSS",
+                "nodeType": "comment",
+                "id": "Px0y34CWhXsoFdHpopS8Qqef"
+              },
+              {
+                "text": "Instead of having events associated with sprite sets, it is possible to have events associated with an individual sprite. To do this, the sprite must be promoted to be a global data variable (in the data section of a script).",
+                "nodeType": "comment",
+                "id": "hItzEBv62fB2BFhICiAjliU7"
+              },
+              {
+                "text": "If the data variable is named SSS, then the corresponding event names are tap sprite SSS, swipe sprite SSS and drag sprite SSS.",
+                "nodeType": "comment",
+                "id": "xW5QddR5Pdc1HJisbxGD8bTK"
+              },
+              {
+                "text": "9.6\tDebugging Games",
+                "nodeType": "comment",
+                "id": "mylVLJ0qHIQz1uLzXqVfmEYq"
+              },
+              {
+                "text": "To make it a bit simpler to debug sprite position and speed related problems in scripts, the debug mode for the board can be enabled.",
+                "nodeType": "comment",
+                "id": "OkixwVDKxd163EgXMMHBThzr"
+              },
+              {
+                "text": "◳board→set debug mode(true)",
+                "nodeType": "comment",
+                "id": "tTXJxH2IHotGt4TKOSZX32Aq"
+              },
+              {
+                "text": "",
+                "nodeType": "comment",
+                "id": "sLY0ZGVmjREy1ZT48xMvLPgS"
+              },
+              {
+                "text": "If debug mode is on, the board will display the position and speed of a sprite next to the sprite content. Additionally, the width and height is displayed as a box around the sprite. Also, in debug mode, even invisible sprites are displayed. This can be useful for finding forgotten sprites or where anchors are placed.",
+                "nodeType": "comment",
+                "id": "iNnPImkhZq3hLc2LH4g5FMp2"
+              }
+            ],
+            "id": "kef8H13144P7oem3cjuZ0Kiu"
+          },
+          {
+            "name": "main initial",
+            "inParameters": [],
+            "outParameters": [],
+            "isPrivate": false,
+            "isOffloaded": false,
+            "isTest": false,
+            "isAsync": false,
+            "nodeType": "action",
+            "body": [
+              {
+                "expr": ":data #f2XvSkHqOzzzK52Uag96i6RF ,:= :media .create_landscape_board ,( ,8 ,0 ,0 ,, ,4 ,8 ,0 ,)",
+                "nodeType": "exprStmt",
+                "id": "yJta5j0008wVNqhaiOSWQeip",
+                "locals": []
+              },
+              {
+                "text": "… create sprites, add color and features to the board",
+                "nodeType": "comment",
+                "id": "zQ2x2opyu03Jh7tcJJKfx0ui"
+              },
+              {
+                "expr": ":data #f2XvSkHqOzzzK52Uag96i6RF .post_to_wall",
+                "nodeType": "exprStmt",
+                "id": "WDJHx4abp86DYNt4V002Wu2r",
+                "locals": []
+              }
+            ],
+            "id": "xI9EgMNKbt0jPxXDzHsWkwem"
+          },
+          {
+            "name": "gameloop",
+            "inParameters": [],
+            "outParameters": [],
+            "isPrivate": false,
+            "isOffloaded": false,
+            "isTest": false,
+            "isAsync": true,
+            "nodeType": "event",
+            "eventName": "gameloop",
+            "eventVariableId": null,
+            "body": [
+              {
+                "text": "apply physics",
+                "nodeType": "comment",
+                "id": "xAFzqY2TJMKMbME78VtkxBD6"
+              },
+              {
+                "expr": ":data #f2XvSkHqOzzzK52Uag96i6RF .evolve",
+                "nodeType": "exprStmt",
+                "id": "svorQgq9TYQA2W6mKtMutikw",
+                "locals": []
+              },
+              {
+                "text": "refresh display",
+                "nodeType": "comment",
+                "id": "rx2ovHZ34Ph9JrsiNqU6XnXd"
+              },
+              {
+                "expr": ":data #f2XvSkHqOzzzK52Uag96i6RF .update_on_wall",
+                "nodeType": "exprStmt",
+                "id": "B4VrbfyrLpdBdFcJgBfl1LcR",
+                "locals": []
+              }
+            ],
+            "id": "xkDLLDNt4wP0A6LTr6Qa2WU4"
+          },
+          {
+            "name": "board",
+            "comment": "",
+            "type": "Board",
+            "isReadonly": false,
+            "isTransient": true,
+            "nodeType": "data",
+            "id": "f2XvSkHqOzzzK52Uag96i6RF"
+          },
+          {
+            "name": "pic",
+            "comment": "",
+            "type": "Picture",
+            "isReadonly": true,
+            "isTransient": true,
+            "nodeType": "art",
+            "url": "https://az31353.vo.msecnd.net/pub/ymggwtmn",
+            "id": "N8YVPjuTETFcWcSmpl9qQJih"
+          },
+          {
+            "name": "another pic",
+            "comment": "",
+            "type": "Picture",
+            "isReadonly": true,
+            "isTransient": true,
+            "nodeType": "art",
+            "url": "https://az31353.vo.msecnd.net/pub/ymggwtmn",
+            "id": "xYFAqGC6xHRiK9byycBa0YOZ"
+          }
+        ],
+        "deletedDecls": [],
+        "nodeType": "app",
+        "id": "app"
+      }
+    },
+    {
+      "seqNo": 1,
+      "time": 1365039076,
+      "scriptId": "onmna",
+      "historyId": "252037261723482540871b47cf6-d1a1-4e04-b7b9-c347663e1eb8",
+      "updateSize": 2,
+      "updates": {}
+    }
+  ]
+}

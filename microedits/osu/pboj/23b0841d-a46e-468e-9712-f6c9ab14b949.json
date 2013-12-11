@@ -1,0 +1,266 @@
+{
+  "userid": "pboj",
+  "guid": "23b0841d-a46e-468e-9712-f6c9ab14b949",
+  "lastStatus": "published",
+  "items": [
+    {
+      "seqNo": 0,
+      "time": 1342466090,
+      "scriptId": "wfps",
+      "historyId": "2520598347091570255d9bb8dc9-015b-4bc0-b970-9d15ddded809",
+      "updateSize": 5386,
+      "ast": {
+        "textVersion": "v2.2,js,ctx",
+        "jsonVersion": "v1.0,resolved,short",
+        "name": "phone call",
+        "comment": "Helps make internal card phone calls",
+        "icon": "MobilePhone",
+        "color": "#ff008080",
+        "autoIcon": "MobilePhone",
+        "autoColor": "#008080",
+        "platform": "current",
+        "rootId": "Y7tFRkXhmYBq3O5MAZXa3QoA",
+        "showAd": false,
+        "isLibrary": false,
+        "allowExport": false,
+        "hasUniqueIds": false,
+        "decls": [
+          {
+            "name": "card call",
+            "inParameters": [],
+            "outParameters": [],
+            "isPrivate": false,
+            "isOffloaded": false,
+            "isTest": false,
+            "isAsync": false,
+            "nodeType": "action",
+            "body": [
+              {
+                "text": "Calls a contact using an international calling card number.",
+                "nodeType": "comment",
+                "id": "tpKoi4mr7oXNVGvjHh8N6GGe"
+              },
+              {
+                "nodeType": "if",
+                "condition": ":data #sqR1OxolZi0opNQMfJjmlSm9 .count ,= ,0",
+                "thenBody": [
+                  {
+                    "text": "if the prefix is empty, it means that the user has not entered the calling card number yet so we start by doing that",
+                    "nodeType": "comment",
+                    "id": "AdFs8t17OO7vQ28j2983wGit"
+                  },
+                  {
+                    "expr": ":code #hEySaPpbEqMu2eiX9SGbOjkg ,( ,)",
+                    "nodeType": "exprStmt",
+                    "id": "pheY2427MEp1W1NsrgR52JVu",
+                    "locals": []
+                  }
+                ],
+                "isElseIf": false,
+                "id": "xt6fVs4HD28V2gzeExBblvMV",
+                "locals": []
+              },
+              {
+                "expr": "$iPSHDl6228m9W4LFavPgueYNL0 ,:= :phone .choose_phone_number",
+                "nodeType": "exprStmt",
+                "id": "iPSHDl6228m9W4LFavPgueYN",
+                "locals": [
+                  {
+                    "name": "link",
+                    "type": "Link",
+                    "nodeType": "localDef",
+                    "id": "iPSHDl6228m9W4LFavPgueYNL0"
+                  }
+                ]
+              },
+              {
+                "text": "allows the user to pick a contact",
+                "nodeType": "comment",
+                "id": "op8bmBsuGaTRsuVfoHRAFwC2"
+              },
+              {
+                "expr": "$iuUjxv4TJ4aC8Qu44k9113hRL0 ,:= $iPSHDl6228m9W4LFavPgueYNL0 .address",
+                "nodeType": "exprStmt",
+                "id": "iuUjxv4TJ4aC8Qu44k9113hR",
+                "locals": [
+                  {
+                    "name": "tel",
+                    "type": "String",
+                    "nodeType": "localDef",
+                    "id": "iuUjxv4TJ4aC8Qu44k9113hRL0"
+                  }
+                ]
+              },
+              {
+                "text": "The phone number might contain a number of unnecessary characters which we need to remove. this method finds occurences of + and replaces it with an empty string",
+                "nodeType": "comment",
+                "id": "xNcZqLTaDDPgKDhfH4RXF0Vh"
+              },
+              {
+                "expr": "$iuUjxv4TJ4aC8Qu44k9113hRL0 ,:= $iuUjxv4TJ4aC8Qu44k9113hRL0 .replace ,( '/002b ,, ' ,)",
+                "nodeType": "exprStmt",
+                "id": "tInNJe8lECddA8QrP9Ite4gr",
+                "locals": []
+              },
+              {
+                "expr": "$iuUjxv4TJ4aC8Qu44k9113hRL0 ,:= $iuUjxv4TJ4aC8Qu44k9113hRL0 .replace ,( '/002d ,, ' ,)",
+                "nodeType": "exprStmt",
+                "id": "MT14NI3HWautu2IMWJsRbN55",
+                "locals": []
+              },
+              {
+                "expr": "$iuUjxv4TJ4aC8Qu44k9113hRL0 ,:= $iuUjxv4TJ4aC8Qu44k9113hRL0 .replace ,( '/0029 ,, ' ,)",
+                "nodeType": "exprStmt",
+                "id": "bOVKrIp4NbjYqQlg8c2oI8dJ",
+                "locals": []
+              },
+              {
+                "expr": "$iuUjxv4TJ4aC8Qu44k9113hRL0 ,:= $iuUjxv4TJ4aC8Qu44k9113hRL0 .replace ,( '/0028 ,, ' ,)",
+                "nodeType": "exprStmt",
+                "id": "Du7i5s4AzwcYw9KwvHsKx6yN",
+                "locals": []
+              },
+              {
+                "text": "The following method of replacement is a bit more involved and uses regular expression, a powerful way to match strings. we remove phone extensions typically displayed as X1234",
+                "nodeType": "comment",
+                "id": "xu45qJ2x4oa5B18v5qEpTlEG"
+              },
+              {
+                "expr": "$iuUjxv4TJ4aC8Qu44k9113hRL0 ,:= $iuUjxv4TJ4aC8Qu44k9113hRL0 .replace_regex ,( 'X/005cd/002a ,, ' ,)",
+                "nodeType": "exprStmt",
+                "id": "Chqsy3NWEtA6hEsay9hTVOWo",
+                "locals": []
+              },
+              {
+                "text": "'trim' removes the space characeter at the beginning and the end of tel",
+                "nodeType": "comment",
+                "id": "GsqNdYZLEle9RSAs0FjtMvwZ"
+              },
+              {
+                "expr": "$iuUjxv4TJ4aC8Qu44k9113hRL0 ,:= $iuUjxv4TJ4aC8Qu44k9113hRL0 .trim ,( ' ,)",
+                "nodeType": "exprStmt",
+                "id": "fjPyVxXBOv0tA8hFwkvywK8i",
+                "locals": []
+              },
+              {
+                "text": "Now that the phone number is cleaned up, concatenate it with the calling card number",
+                "nodeType": "comment",
+                "id": "xxLKfmPCEG6uFnXpxL1fAyPv"
+              },
+              {
+                "expr": "$iuUjxv4TJ4aC8Qu44k9113hRL0 ,:= :data #sqR1OxolZi0opNQMfJjmlSm9 ,∥ $iuUjxv4TJ4aC8Qu44k9113hRL0",
+                "nodeType": "exprStmt",
+                "id": "XCPtgoqe2oA4TW2kuQFoAGup",
+                "locals": []
+              },
+              {
+                "text": "Give the user the opportunity to see the resulting number before calling",
+                "nodeType": "comment",
+                "id": "CkCvM8rirmo5VCGkB9Vy2qqs"
+              },
+              {
+                "expr": "$iuUjxv4TJ4aC8Qu44k9113hRL0 .post_to_wall",
+                "nodeType": "exprStmt",
+                "id": "sQVnIukYNomFKlsiSAOLmo3V",
+                "locals": []
+              },
+              {
+                "expr": ":phone .dial_phone_number ,( $iuUjxv4TJ4aC8Qu44k9113hRL0 ,)",
+                "nodeType": "exprStmt",
+                "id": "SSrlw8yX5zIW6HQWnzM5LjGt",
+                "locals": []
+              }
+            ],
+            "id": "HZNurl8IcBOJIo9fChFZdwBj"
+          },
+          {
+            "name": "prefix",
+            "comment": "",
+            "type": "String",
+            "isReadonly": false,
+            "isTransient": false,
+            "nodeType": "data",
+            "id": "sqR1OxolZi0opNQMfJjmlSm9"
+          },
+          {
+            "name": "reset calling card number",
+            "inParameters": [],
+            "outParameters": [],
+            "isPrivate": false,
+            "isOffloaded": false,
+            "isTest": false,
+            "isAsync": false,
+            "nodeType": "action",
+            "body": [
+              {
+                "text": "Asks the user for the calling card number",
+                "nodeType": "comment",
+                "id": "qX03YCSkIbDuGmF24qQLjqQ9"
+              },
+              {
+                "expr": ":data #sqR1OxolZi0opNQMfJjmlSm9 ,:= :wall .ask_string ,( 'Please_enter_the_calling_card_number/002c_including_international_prefix/002c_and_ending_with_pauses/002e/000aThe_number_can_be_cleared_with_the_reset_action/002e_ ,)",
+                "nodeType": "exprStmt",
+                "id": "MqZon24gEUTde7uXITJ9ccKj",
+                "locals": []
+              },
+              {
+                "text": "The number might not have the international + character, so we make sure to add it",
+                "nodeType": "comment",
+                "id": "NV95xVvfWBGbIiBhdSpLJr89"
+              },
+              {
+                "nodeType": "if",
+                "condition": ",not :data #sqR1OxolZi0opNQMfJjmlSm9 .starts_with ,( '/002b ,)",
+                "thenBody": [
+                  {
+                    "expr": ":data #sqR1OxolZi0opNQMfJjmlSm9 ,:= '/002b ,∥ :data #sqR1OxolZi0opNQMfJjmlSm9",
+                    "nodeType": "exprStmt",
+                    "id": "niMX2Oe9SU8m9dt3D04ic4Ny",
+                    "locals": []
+                  }
+                ],
+                "isElseIf": false,
+                "id": "x2moMlUPY0AZzORRLXQHTA28",
+                "locals": []
+              },
+              {
+                "expr": ",( 'Number/003a_ ,∥ :data #sqR1OxolZi0opNQMfJjmlSm9 ,) .post_to_wall",
+                "nodeType": "exprStmt",
+                "id": "JMXlXbad2oC7g13S4JIJgliA",
+                "locals": []
+              }
+            ],
+            "id": "hEySaPpbEqMu2eiX9SGbOjkg"
+          }
+        ],
+        "deletedDecls": [],
+        "nodeType": "app",
+        "id": "app"
+      }
+    },
+    {
+      "seqNo": 1,
+      "time": 1346281482,
+      "scriptId": "wfps",
+      "historyId": "2520560193179778563d5689a0b-71c0-469e-87ed-1e7663c989dc",
+      "updateSize": 45,
+      "updates": {
+        "app": {
+          "rootId": "oGxB4xcZ4j6IbEO2JL67PEqm"
+        }
+      }
+    },
+    {
+      "seqNo": 2,
+      "time": 1351360688,
+      "scriptId": "wfps",
+      "historyId": "2520509401110094689b62d6292-47e3-4e90-ba34-f827b0ebca4e",
+      "updateSize": 45,
+      "updates": {
+        "app": {
+          "rootId": "Y7tFRkXhmYBq3O5MAZXa3QoA"
+        }
+      }
+    }
+  ]
+}

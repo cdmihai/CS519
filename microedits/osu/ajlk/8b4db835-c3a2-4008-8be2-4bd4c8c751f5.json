@@ -1,0 +1,296 @@
+{
+  "userid": "ajlk",
+  "guid": "8b4db835-c3a2-4008-8be2-4bd4c8c751f5",
+  "lastStatus": "published",
+  "items": [
+    {
+      "seqNo": 0,
+      "time": 1350496158,
+      "scriptId": "iyei",
+      "historyId": "25205180464192912635b002f51-14fb-4647-8f26-306d21ea6e5e",
+      "updateSize": 5780,
+      "ast": {
+        "textVersion": "v2.2,js,ctx",
+        "jsonVersion": "v1.0,resolved,short",
+        "name": "beat board",
+        "comment": "Little game that moves a picture of a friend in the screen.",
+        "icon": "joystick",
+        "color": "#ff66ff00",
+        "autoIcon": "joystick",
+        "autoColor": "#66ff00",
+        "platform": "current",
+        "rootId": "RxhGaf1jHrDblmEjMoSpUBdQ",
+        "showAd": false,
+        "isLibrary": false,
+        "allowExport": false,
+        "hasUniqueIds": false,
+        "decls": [
+          {
+            "name": "main",
+            "inParameters": [],
+            "outParameters": [],
+            "isPrivate": false,
+            "isOffloaded": false,
+            "isTest": false,
+            "isAsync": false,
+            "nodeType": "action",
+            "body": [
+              {
+                "text": "Sets up the board and sound.",
+                "nodeType": "comment",
+                "id": "Q6hAgjVWg1lhzVBd6m954ff6"
+              },
+              {
+                "expr": ":data #sqyt41iRI0pnGn2Cy18pPC4l ,:= :senses .record_microphone",
+                "nodeType": "exprStmt",
+                "id": "McKkSyCQCzMzTAYbBSIGm4YG",
+                "locals": []
+              },
+              {
+                "expr": ":data #sqyt41iRI0pnGn2Cy18pPC4l .set_pitch ,( ,1 ,)",
+                "nodeType": "exprStmt",
+                "id": "IZDwgHOn9N1ifpUbj0hKPuSt",
+                "locals": []
+              },
+              {
+                "expr": ":wall .clear",
+                "nodeType": "exprStmt",
+                "id": "pOVlmgwSciI9t47Nf40C2DjP",
+                "locals": []
+              },
+              {
+                "expr": ":data #JIPAWjdykikPtLEKlHwcDtC0 ,:= :media .create_full_board",
+                "nodeType": "exprStmt",
+                "id": "S0nz5SZweqau9bB1idJzP0Cn",
+                "locals": []
+              },
+              {
+                "expr": ":data #JIPAWjdykikPtLEKlHwcDtC0 .set_background_camera ,( :senses .camera ,)",
+                "nodeType": "exprStmt",
+                "id": "FTT43NoOIgFTxKUav9sxQVTB",
+                "locals": []
+              },
+              {
+                "expr": ":data #JIPAWjdykikPtLEKlHwcDtC0 .create_boundary ,( ,0 ,)",
+                "nodeType": "exprStmt",
+                "id": "gO16pL2SQmzWU8t7VQxioJ7F",
+                "locals": []
+              },
+              {
+                "text": "Let the user pick a contact and user the picture as thumbnail",
+                "nodeType": "comment",
+                "id": "QLH2wbWXCY4NU4KglrJPEFAR"
+              },
+              {
+                "expr": "$nxErrNqwtPUYsQJyy6gV6ciML0 ,:= :social .choose_contact .picture",
+                "nodeType": "exprStmt",
+                "id": "nxErrNqwtPUYsQJyy6gV6ciM",
+                "locals": [
+                  {
+                    "name": "pic",
+                    "type": "Picture",
+                    "nodeType": "localDef",
+                    "id": "nxErrNqwtPUYsQJyy6gV6ciML0"
+                  }
+                ]
+              },
+              {
+                "nodeType": "if",
+                "condition": "$nxErrNqwtPUYsQJyy6gV6ciML0 .is_invalid",
+                "thenBody": [
+                  {
+                    "expr": ":wall .prompt ,( 'Please_pick_a_contact_with_a_picture ,)",
+                    "nodeType": "exprStmt",
+                    "id": "PFvCGRDVqBGX3w845KkhHU4I",
+                    "locals": []
+                  },
+                  {
+                    "expr": ":time .stop",
+                    "nodeType": "exprStmt",
+                    "id": "Mwmb3yP2EVJFSCPrIBHQQELz",
+                    "locals": []
+                  }
+                ],
+                "isElseIf": false,
+                "id": "AqUktmCiHaxUgnP7rQcnbfzz",
+                "locals": []
+              },
+              {
+                "expr": ":data #ChufeL6FcR2t4Hmer5VLwos4 ,:= :data #JIPAWjdykikPtLEKlHwcDtC0 .create_picture ,( $nxErrNqwtPUYsQJyy6gV6ciML0 ,)",
+                "nodeType": "exprStmt",
+                "id": "Z3rrkRUKs5tgR14IbdnhDJCd",
+                "locals": []
+              },
+              {
+                "expr": ":data #ChufeL6FcR2t4Hmer5VLwos4 .set_friction ,( :math .rand_norm ,* ,0 ,. ,0 ,2 ,+ ,0 ,. ,0 ,0 ,1 ,)",
+                "nodeType": "exprStmt",
+                "id": "OmQAIAnVk3sUsrdGCuvN4bD1",
+                "locals": []
+              },
+              {
+                "expr": ":data #ChufeL6FcR2t4Hmer5VLwos4 .set_angular_speed ,( ,6 ,0 ,)",
+                "nodeType": "exprStmt",
+                "id": "AxEi6YMlLyzJDkqlN4jai3Bd",
+                "locals": []
+              },
+              {
+                "expr": ":data #ChufeL6FcR2t4Hmer5VLwos4 .set_elasticity ,( ,0 ,. ,9 ,)",
+                "nodeType": "exprStmt",
+                "id": "xqT2b31NDwEdwG7nHn5x20cf",
+                "locals": []
+              },
+              {
+                "expr": ":data #JIPAWjdykikPtLEKlHwcDtC0 .post_to_wall",
+                "nodeType": "exprStmt",
+                "id": "v8hZNjqWylLbVigQTY9T4L5r",
+                "locals": []
+              }
+            ],
+            "id": "M0NLVfYY2B3lguJNCHhgkno2"
+          },
+          {
+            "name": "sound",
+            "comment": "",
+            "type": "Sound",
+            "isReadonly": false,
+            "isTransient": true,
+            "nodeType": "data",
+            "id": "sqyt41iRI0pnGn2Cy18pPC4l"
+          },
+          {
+            "name": "board",
+            "comment": "",
+            "type": "Board",
+            "isReadonly": false,
+            "isTransient": true,
+            "nodeType": "data",
+            "id": "JIPAWjdykikPtLEKlHwcDtC0"
+          },
+          {
+            "name": "sprite",
+            "comment": "",
+            "type": "Sprite",
+            "isReadonly": false,
+            "isTransient": true,
+            "nodeType": "data",
+            "id": "ChufeL6FcR2t4Hmer5VLwos4"
+          },
+          {
+            "name": "gameloop",
+            "inParameters": [],
+            "outParameters": [],
+            "isPrivate": true,
+            "isOffloaded": false,
+            "isTest": false,
+            "isAsync": true,
+            "nodeType": "event",
+            "eventName": "gameloop",
+            "eventVariableId": null,
+            "body": [
+              {
+                "text": "Plays a sound when the sprit is near the edge.",
+                "nodeType": "comment",
+                "id": "OJVj1stLongYKZzKPT74xer7"
+              },
+              {
+                "expr": "$xYyIPWENOG3R3d85b1Qh90DCL0 ,:= :data #ChufeL6FcR2t4Hmer5VLwos4",
+                "nodeType": "exprStmt",
+                "id": "xYyIPWENOG3R3d85b1Qh90DC",
+                "locals": [
+                  {
+                    "name": "sprite",
+                    "type": "Sprite",
+                    "nodeType": "localDef",
+                    "id": "xYyIPWENOG3R3d85b1Qh90DCL0"
+                  }
+                ]
+              },
+              {
+                "expr": "$Wox4jfYLMbvp4jWXVZU4baiVL0 ,:= :data #JIPAWjdykikPtLEKlHwcDtC0",
+                "nodeType": "exprStmt",
+                "id": "Wox4jfYLMbvp4jWXVZU4baiV",
+                "locals": [
+                  {
+                    "name": "board",
+                    "type": "Board",
+                    "nodeType": "localDef",
+                    "id": "Wox4jfYLMbvp4jWXVZU4baiVL0"
+                  }
+                ]
+              },
+              {
+                "expr": "$d6mmbDRg1Rf2pRLwLJQhfcKrL0 ,:= :senses .acceleration_quick .scale ,( ,1 ,5 ,0 ,0 ,)",
+                "nodeType": "exprStmt",
+                "id": "d6mmbDRg1Rf2pRLwLJQhfcKr",
+                "locals": [
+                  {
+                    "name": "p",
+                    "type": "Vector3",
+                    "nodeType": "localDef",
+                    "id": "d6mmbDRg1Rf2pRLwLJQhfcKrL0"
+                  }
+                ]
+              },
+              {
+                "expr": "$Wox4jfYLMbvp4jWXVZU4baiVL0 .set_gravity ,( $d6mmbDRg1Rf2pRLwLJQhfcKrL0 .x ,, $d6mmbDRg1Rf2pRLwLJQhfcKrL0 .y ,- ,0 ,. ,5 ,)",
+                "nodeType": "exprStmt",
+                "id": "LMFG7BEoOxn4K4UTqgsqMaax",
+                "locals": []
+              },
+              {
+                "expr": "$Wox4jfYLMbvp4jWXVZU4baiVL0 .evolve",
+                "nodeType": "exprStmt",
+                "id": "a734tI4g24IYVJGnWRQnOIxT",
+                "locals": []
+              },
+              {
+                "expr": "$X4fqAlbsdEAsnvrJA5UT4HlRL0 ,:= $xYyIPWENOG3R3d85b1Qh90DCL0 .width ,+ ,3",
+                "nodeType": "exprStmt",
+                "id": "X4fqAlbsdEAsnvrJA5UT4HlR",
+                "locals": [
+                  {
+                    "name": "c",
+                    "type": "Number",
+                    "nodeType": "localDef",
+                    "id": "X4fqAlbsdEAsnvrJA5UT4HlRL0"
+                  }
+                ]
+              },
+              {
+                "nodeType": "if",
+                "condition": "$xYyIPWENOG3R3d85b1Qh90DCL0 .x ,< $X4fqAlbsdEAsnvrJA5UT4HlRL0 ,or $xYyIPWENOG3R3d85b1Qh90DCL0 .x ,> $Wox4jfYLMbvp4jWXVZU4baiVL0 .width ,- $X4fqAlbsdEAsnvrJA5UT4HlRL0 ,or $xYyIPWENOG3R3d85b1Qh90DCL0 .y ,< $X4fqAlbsdEAsnvrJA5UT4HlRL0 ,or $xYyIPWENOG3R3d85b1Qh90DCL0 .y ,> $Wox4jfYLMbvp4jWXVZU4baiVL0 .height ,- $X4fqAlbsdEAsnvrJA5UT4HlRL0",
+                "thenBody": [
+                  {
+                    "expr": ":data #sqyt41iRI0pnGn2Cy18pPC4l .play",
+                    "nodeType": "exprStmt",
+                    "id": "AZzdpu6HFTKVvfSWf5N8P50h",
+                    "locals": []
+                  },
+                  {
+                    "expr": ":phone .vibrate ,( ,0 ,. ,0 ,2 ,)",
+                    "nodeType": "exprStmt",
+                    "id": "fzMh6S9w3s8IpiioNnMXsdo6",
+                    "locals": []
+                  }
+                ],
+                "isElseIf": false,
+                "id": "MHexmDzlRO9P4WupSL48YA0k",
+                "locals": []
+              },
+              {
+                "expr": ":data #JIPAWjdykikPtLEKlHwcDtC0 .update_on_wall",
+                "nodeType": "exprStmt",
+                "id": "x5eASev0l4O2XYOzRlEziZ6r",
+                "locals": []
+              }
+            ],
+            "id": "VDXB1fbxPYcQjyF49USGpSMR"
+          }
+        ],
+        "deletedDecls": [],
+        "nodeType": "app",
+        "id": "app"
+      }
+    }
+  ]
+}

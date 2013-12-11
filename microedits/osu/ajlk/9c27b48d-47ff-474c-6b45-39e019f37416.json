@@ -1,0 +1,2073 @@
+{
+  "userid": "ajlk",
+  "guid": "9c27b48d-47ff-474c-6b45-39e019f37416",
+  "lastStatus": "deleted",
+  "items": [
+    {
+      "seqNo": 0,
+      "time": 1364926620,
+      "scriptId": "nbqfa",
+      "historyId": "25203737417964921820dd10fd4-2df2-4141-b384-42f0f755ab87",
+      "updateSize": 16548,
+      "ast": {
+        "textVersion": "v2.2,js,ctx",
+        "jsonVersion": "v1.0,resolved,short",
+        "name": "live",
+        "comment": "Allows to create requests against the Microsoft Live Connect APIs.",
+        "icon": "AddUser",
+        "color": "#ff9955BB",
+        "autoIcon": "AddUser",
+        "autoColor": "#9955BB",
+        "platform": "current",
+        "rootId": "zI722pbf5yRjiPp2499qLKbq",
+        "showAd": false,
+        "isLibrary": true,
+        "allowExport": true,
+        "hasUniqueIds": false,
+        "decls": [
+          {
+            "name": "example",
+            "inParameters": [],
+            "outParameters": [],
+            "isPrivate": true,
+            "isOffloaded": false,
+            "isTest": false,
+            "isAsync": false,
+            "nodeType": "action",
+            "body": [
+              {
+                "text": "This library provides the building blocks to do Live API requests (http://msdn.microsoft.com/en-us/library/live/ ).",
+                "nodeType": "comment",
+                "id": "aUL5eqZjVj4CaNwgIhX1ONBd"
+              },
+              {
+                "text": "## Registering a Live app",
+                "nodeType": "comment",
+                "id": "DH6lVt3g2k6UzDe24asgEYxs"
+              },
+              {
+                "text": "Before you get started, you will need to create a Live app (if you have not done so). Start from here:",
+                "nodeType": "comment",
+                "id": "Vo42ms22feVr2h7bIhoxhFQ4"
+              },
+              {
+                "text": "* https://manage.dev.live.com/?mkt=en-us",
+                "nodeType": "comment",
+                "id": "qmLccTRe14Y2a8Vea6GqKJMy"
+              },
+              {
+                "text": "Once you've created your Live app, go to `API Settings` tab and enter the following as the `Redirect domain`:",
+                "nodeType": "comment",
+                "id": "SMqbpwMsxmx3j3ZkJKb4GO6j"
+              },
+              {
+                "text": "* https://[appid]-{var:userid}-users.touchdevelop.com/{var:userid}/oath",
+                "nodeType": "comment",
+                "id": "xM02inDgq8L2KnMz8Z2mRrl6"
+              },
+              {
+                "text": "where `[appid]` should be replaced with a unique identifier for this particular app. Live enforces one domain per application.",
+                "nodeType": "comment",
+                "id": "nYLiU4nLyahssT3xtNAonQDt"
+              },
+              {
+                "text": "While you're at it, make sure `Mobile client app` in this tab is set to *No*.",
+                "nodeType": "comment",
+                "id": "bAFNvdk2QJ50dbfihq2ramPw"
+              },
+              {
+                "text": "## Authentication",
+                "nodeType": "comment",
+                "id": "eztqPwR8Y4eNBWiiDoOQRQHO"
+              },
+              {
+                "text": "Grab your Client ID and pass it to the `authenticate` action. Do not worry about leaking this id; it is designed to be public. The second argument to `authenticate` is the list of scopes (permissions), see http://msdn.microsoft.com/en-us/library/live/hh243646.aspx",
+                "nodeType": "comment",
+                "id": "VwnyMxgCTNhPgbAWSiXiOrEg"
+              },
+              {
+                "expr": ":code #MLzRO32L2P23VPAcbBRbz2rz ,( '/003cclient_id/003e ,, 'wl/002ebasic ,)",
+                "nodeType": "exprStmt",
+                "id": "lyIedcpS7HNLEZNdvdHqaX9s",
+                "locals": []
+              },
+              {
+                "text": "## Creating requests",
+                "nodeType": "comment",
+                "id": "xNQ4QkU2iDDFOO1DxKwsriq5"
+              },
+              {
+                "text": "You can use the `create request` action to craft more specialized requests against the Live API. See http://msdn.microsoft.com/en-us/library/live/hh243648.aspx",
+                "nodeType": "comment",
+                "id": "scJKna1gwlqLbQ4MQIofvoJT"
+              },
+              {
+                "text": "The library will append the access token as needed; and will refresh the token if necessary.",
+                "nodeType": "comment",
+                "id": "rvVgCgxSg2yyRcef1BF4bpnl"
+              },
+              {
+                "expr": "$sL21cc4X4i6tBuVihlF29DYyL0 ,:= :code #DCZpiFuiUFP1cFu0frmF23jI ,( 'me ,, ' ,)",
+                "nodeType": "exprStmt",
+                "id": "sL21cc4X4i6tBuVihlF29DYy",
+                "locals": [
+                  {
+                    "name": "request",
+                    "type": "Web Request",
+                    "nodeType": "localDef",
+                    "id": "sL21cc4X4i6tBuVihlF29DYyL0"
+                  }
+                ]
+              },
+              {
+                "text": "Once you have the request object, you can set the additional parameters and send it away!",
+                "nodeType": "comment",
+                "id": "VrCyFvCSgIdJ4tag41eGKv8d"
+              },
+              {
+                "expr": "$z5HF0FHM3uItDZ1N2IWGWM4LL0 ,:= $sL21cc4X4i6tBuVihlF29DYyL0 .send",
+                "nodeType": "exprStmt",
+                "id": "z5HF0FHM3uItDZ1N2IWGWM4L",
+                "locals": [
+                  {
+                    "name": "response",
+                    "type": "Web Response",
+                    "nodeType": "localDef",
+                    "id": "z5HF0FHM3uItDZ1N2IWGWM4LL0"
+                  }
+                ]
+              },
+              {
+                "expr": "$z5HF0FHM3uItDZ1N2IWGWM4LL0 .post_to_wall",
+                "nodeType": "exprStmt",
+                "id": "xXrkSuFae20I66dtuHusvvno",
+                "locals": []
+              }
+            ],
+            "id": "pfXdcSC2Fn7kvH7lGepju3D9"
+          },
+          {
+            "name": "authenticate",
+            "inParameters": [
+              {
+                "name": "client id",
+                "type": "String",
+                "nodeType": "localDef",
+                "id": "MLzRO32L2P23VPAcbBRbz2rzP0"
+              },
+              {
+                "name": "scopes",
+                "type": "String",
+                "nodeType": "localDef",
+                "id": "MLzRO32L2P23VPAcbBRbz2rzP1"
+              }
+            ],
+            "outParameters": [],
+            "isPrivate": false,
+            "isOffloaded": false,
+            "isTest": false,
+            "isAsync": false,
+            "nodeType": "action",
+            "body": [
+              {
+                "text": "Authenticates the user with the given application and scopes (comma-separated)",
+                "nodeType": "comment",
+                "id": "i4JKjuOaVWro9s7g23zipead"
+              },
+              {
+                "nodeType": "if",
+                "condition": "$MLzRO32L2P23VPAcbBRbz2rzP0 .is_invalid",
+                "thenBody": [
+                  {
+                    "expr": "$MLzRO32L2P23VPAcbBRbz2rzP0 ,:= '",
+                    "nodeType": "exprStmt",
+                    "id": "bjofIz6HBOTcVy1dJcleIv7J",
+                    "locals": []
+                  }
+                ],
+                "isElseIf": false,
+                "id": "yBXTXSWGfoboS0cNltZLlxR0",
+                "locals": []
+              },
+              {
+                "expr": "$QMGNudUVMDGAlLSFDozD5jsGL0 ,:= :data #lsTdJOVnoaDCAHE4Dm9SeLzz .is_invalid ,or :data #lsTdJOVnoaDCAHE4Dm9SeLzz .access_token .is_invalid ,or :data #x4q9zfLYwMd0TdKy57yq4F8f .is_invalid ,or ,not :data #x4q9zfLYwMd0TdKy57yq4F8f .equals ,( $MLzRO32L2P23VPAcbBRbz2rzP0 ,)",
+                "nodeType": "exprStmt",
+                "id": "QMGNudUVMDGAlLSFDozD5jsG",
+                "locals": [
+                  {
+                    "name": "needs refresh",
+                    "type": "Boolean",
+                    "nodeType": "localDef",
+                    "id": "QMGNudUVMDGAlLSFDozD5jsGL0"
+                  }
+                ]
+              },
+              {
+                "nodeType": "if",
+                "condition": "$QMGNudUVMDGAlLSFDozD5jsGL0",
+                "thenBody": [
+                  {
+                    "expr": ":data #x4q9zfLYwMd0TdKy57yq4F8f ,:= $MLzRO32L2P23VPAcbBRbz2rzP0",
+                    "nodeType": "exprStmt",
+                    "id": "zJ7ZsCo5bwVcK9BaELNtDDA8",
+                    "locals": []
+                  },
+                  {
+                    "expr": ":data #hXAoN7D82Kgy2JDV4rkk851w ,:= $MLzRO32L2P23VPAcbBRbz2rzP1",
+                    "nodeType": "exprStmt",
+                    "id": "URRhUanH6lHbWcGvENW2IcLX",
+                    "locals": []
+                  },
+                  {
+                    "nodeType": "if",
+                    "condition": "$MLzRO32L2P23VPAcbBRbz2rzP0 .is_empty",
+                    "thenBody": [
+                      {
+                        "expr": ":data #lsTdJOVnoaDCAHE4Dm9SeLzz ,:= :invalid .oauth_response",
+                        "nodeType": "exprStmt",
+                        "id": "lpL8yK4ugbsGlKb05kAf3UWq",
+                        "locals": []
+                      }
+                    ],
+                    "elseBody": [
+                      {
+                        "expr": "$x48avURoDTMroNL3BMXjXNi2L0 ,:= 'https/003a/002f/002flogin/002elive/002ecom/002foauth20/005fauthorize/002esrf/003fclient/005fid/003d ,∥ :web .url_encode ,( :data #x4q9zfLYwMd0TdKy57yq4F8f ,) ,∥ '/0026scope/003d ,∥ :web .url_encode ,( $MLzRO32L2P23VPAcbBRbz2rzP1 ,)",
+                        "nodeType": "exprStmt",
+                        "id": "x48avURoDTMroNL3BMXjXNi2",
+                        "locals": [
+                          {
+                            "name": "url",
+                            "type": "String",
+                            "nodeType": "localDef",
+                            "id": "x48avURoDTMroNL3BMXjXNi2L0"
+                          }
+                        ]
+                      },
+                      {
+                        "expr": ":data #lsTdJOVnoaDCAHE4Dm9SeLzz ,:= :web .oauth_v2 ,( $x48avURoDTMroNL3BMXjXNi2L0 ,)",
+                        "nodeType": "exprStmt",
+                        "id": "P24J68xFWrMVRrnsEXdR8yOc",
+                        "locals": []
+                      }
+                    ],
+                    "isElseIf": false,
+                    "id": "uJYAPUkWtVA62KVOruOaQtAO",
+                    "locals": []
+                  }
+                ],
+                "isElseIf": false,
+                "id": "CBOPo02YK2yA82yEKjce2BGJ",
+                "locals": []
+              }
+            ],
+            "id": "MLzRO32L2P23VPAcbBRbz2rz"
+          },
+          {
+            "name": "create request",
+            "inParameters": [
+              {
+                "name": "object path",
+                "type": "String",
+                "nodeType": "localDef",
+                "id": "DCZpiFuiUFP1cFu0frmF23jIP0"
+              },
+              {
+                "name": "query arguments",
+                "type": "String",
+                "nodeType": "localDef",
+                "id": "DCZpiFuiUFP1cFu0frmF23jIP1"
+              }
+            ],
+            "outParameters": [
+              {
+                "name": "request",
+                "type": "Web Request",
+                "nodeType": "localDef",
+                "id": "DCZpiFuiUFP1cFu0frmF23jIP2"
+              }
+            ],
+            "isPrivate": false,
+            "isOffloaded": false,
+            "isTest": false,
+            "isAsync": false,
+            "nodeType": "action",
+            "body": [
+              {
+                "text": "Creates a Live SDK request with the given object path and additional query arguments. Authenticates the user if needed. Returns invalid if authentication failed.",
+                "nodeType": "comment",
+                "id": "rgD58Tiz8f8wMI4DhSMWR7Dk"
+              },
+              {
+                "expr": ":code #MLzRO32L2P23VPAcbBRbz2rz ,( :data #x4q9zfLYwMd0TdKy57yq4F8f ,, :data #hXAoN7D82Kgy2JDV4rkk851w ,)",
+                "nodeType": "exprStmt",
+                "id": "SNbqOV2gyFLRJ0X4vgCsQSXx",
+                "locals": []
+              },
+              {
+                "nodeType": "if",
+                "condition": ":data #lsTdJOVnoaDCAHE4Dm9SeLzz .access_token .is_invalid",
+                "thenBody": [
+                  {
+                    "expr": "$DCZpiFuiUFP1cFu0frmF23jIP2 ,:= :invalid .web_request",
+                    "nodeType": "exprStmt",
+                    "id": "noWaUABYbSpNq3cATu2wzplF",
+                    "locals": []
+                  }
+                ],
+                "elseBody": [
+                  {
+                    "expr": "$buQIVaeYxgwdQLCEZjoXyoatL0 ,:= 'https/003a/002f/002fapis/002elive/002enet/002fv5/002e0/002f ,∥ $DCZpiFuiUFP1cFu0frmF23jIP0 .trim_start ,( '/002f ,) ,∥ '/003faccess/005ftoken/003d ,∥ :data #lsTdJOVnoaDCAHE4Dm9SeLzz .access_token",
+                    "nodeType": "exprStmt",
+                    "id": "buQIVaeYxgwdQLCEZjoXyoat",
+                    "locals": [
+                      {
+                        "name": "url",
+                        "type": "String",
+                        "nodeType": "localDef",
+                        "id": "buQIVaeYxgwdQLCEZjoXyoatL0"
+                      }
+                    ]
+                  },
+                  {
+                    "nodeType": "if",
+                    "condition": ",not $DCZpiFuiUFP1cFu0frmF23jIP1 .is_empty",
+                    "thenBody": [
+                      {
+                        "expr": "$buQIVaeYxgwdQLCEZjoXyoatL0 ,:= $buQIVaeYxgwdQLCEZjoXyoatL0 ,∥ '/0026 ,∥ $DCZpiFuiUFP1cFu0frmF23jIP1",
+                        "nodeType": "exprStmt",
+                        "id": "kpXXZWNJk45gUpWeMkCLGdiP",
+                        "locals": []
+                      }
+                    ],
+                    "isElseIf": false,
+                    "id": "viaySAqj2bYPFKUpUtoXMPJX",
+                    "locals": []
+                  },
+                  {
+                    "expr": "$DCZpiFuiUFP1cFu0frmF23jIP2 ,:= :web .create_request ,( $buQIVaeYxgwdQLCEZjoXyoatL0 ,)",
+                    "nodeType": "exprStmt",
+                    "id": "TNduT9yezm2ryb23Wh2bxeJm",
+                    "locals": []
+                  }
+                ],
+                "isElseIf": false,
+                "id": "fYYqbMEq26Ek45Fvaq4YDXqe",
+                "locals": []
+              }
+            ],
+            "id": "DCZpiFuiUFP1cFu0frmF23jI"
+          },
+          {
+            "name": "oauth res",
+            "comment": "",
+            "type": "OAuth Response",
+            "isReadonly": false,
+            "isTransient": false,
+            "nodeType": "data",
+            "id": "lsTdJOVnoaDCAHE4Dm9SeLzz"
+          },
+          {
+            "name": "client id",
+            "comment": "",
+            "type": "String",
+            "isReadonly": false,
+            "isTransient": false,
+            "nodeType": "data",
+            "id": "x4q9zfLYwMd0TdKy57yq4F8f"
+          },
+          {
+            "name": "send request",
+            "inParameters": [
+              {
+                "name": "request",
+                "type": "Web Request",
+                "nodeType": "localDef",
+                "id": "xtjVYVnlcN3fhqxfD92829fqP0"
+              }
+            ],
+            "outParameters": [],
+            "isPrivate": false,
+            "isOffloaded": false,
+            "isTest": false,
+            "isAsync": false,
+            "nodeType": "action",
+            "body": [
+              {
+                "text": "Sends the Live SDK request and tries to handle gracefully errors.",
+                "nodeType": "comment",
+                "id": "EM4FZk3YO6WkSxReOrX1wyrq"
+              },
+              {
+                "expr": "$xApt6sGo2nBAmkNH7ghxCL8EL0 ,:= $xtjVYVnlcN3fhqxfD92829fqP0 .send",
+                "nodeType": "exprStmt",
+                "id": "xApt6sGo2nBAmkNH7ghxCL8E",
+                "locals": [
+                  {
+                    "name": "response",
+                    "type": "Web Response",
+                    "nodeType": "localDef",
+                    "id": "xApt6sGo2nBAmkNH7ghxCL8EL0"
+                  }
+                ]
+              }
+            ],
+            "id": "xtjVYVnlcN3fhqxfD92829fq"
+          },
+          {
+            "name": "add query value",
+            "inParameters": [
+              {
+                "name": "strings",
+                "type": "String Collection",
+                "nodeType": "localDef",
+                "id": "z68y4QYd2REpLKUa36y4NVmsP0"
+              },
+              {
+                "name": "value",
+                "type": "String",
+                "nodeType": "localDef",
+                "id": "z68y4QYd2REpLKUa36y4NVmsP1"
+              },
+              {
+                "name": "name",
+                "type": "String",
+                "nodeType": "localDef",
+                "id": "z68y4QYd2REpLKUa36y4NVmsP2"
+              }
+            ],
+            "outParameters": [],
+            "isPrivate": true,
+            "isOffloaded": false,
+            "isTest": false,
+            "isAsync": false,
+            "nodeType": "action",
+            "body": [
+              {
+                "nodeType": "if",
+                "condition": ",not $z68y4QYd2REpLKUa36y4NVmsP1 .is_invalid ,and ,not $z68y4QYd2REpLKUa36y4NVmsP1 .is_empty",
+                "thenBody": [
+                  {
+                    "expr": "$z68y4QYd2REpLKUa36y4NVmsP0 .add ,( $z68y4QYd2REpLKUa36y4NVmsP2 ,∥ '/003d ,∥ :web .url_encode ,( $z68y4QYd2REpLKUa36y4NVmsP1 ,) ,)",
+                    "nodeType": "exprStmt",
+                    "id": "aveCKHLOvxSuaeWItf27eIvR",
+                    "locals": []
+                  }
+                ],
+                "isElseIf": false,
+                "id": "x5tRN5iRFqRntKJquXHMFDkF",
+                "locals": []
+              }
+            ],
+            "id": "z68y4QYd2REpLKUa36y4NVms"
+          },
+          {
+            "name": "scopes",
+            "comment": "",
+            "type": "String",
+            "isReadonly": false,
+            "isTransient": false,
+            "nodeType": "data",
+            "id": "hXAoN7D82Kgy2JDV4rkk851w"
+          },
+          {
+            "name": "post message",
+            "inParameters": [
+              {
+                "name": "msg",
+                "type": "Message",
+                "nodeType": "localDef",
+                "id": "xq1ku4D8Gqwcv4SolhYy2P90P0"
+              }
+            ],
+            "outParameters": [],
+            "isPrivate": false,
+            "isOffloaded": false,
+            "isTest": false,
+            "isAsync": false,
+            "nodeType": "action",
+            "body": [
+              {
+                "text": "Shares the message on the current user. Requires `wl.share` scope.",
+                "nodeType": "comment",
+                "id": "CMKFulNNlz1APt2ECLkWWY3G"
+              },
+              {
+                "expr": "$wRBR6XHj2gi6ti8cdXJvFN9FL0 ,:= :collections .create_string_collection",
+                "nodeType": "exprStmt",
+                "id": "wRBR6XHj2gi6ti8cdXJvFN9F",
+                "locals": [
+                  {
+                    "name": "strings",
+                    "type": "String Collection",
+                    "nodeType": "localDef",
+                    "id": "wRBR6XHj2gi6ti8cdXJvFN9FL0"
+                  }
+                ]
+              },
+              {
+                "expr": ":code #z68y4QYd2REpLKUa36y4NVms ,( $wRBR6XHj2gi6ti8cdXJvFN9FL0 ,, 'message ,, $xq1ku4D8Gqwcv4SolhYy2P90P0 .message ,)",
+                "nodeType": "exprStmt",
+                "id": "xarWjhgQN0kPkFM8vZbz5jB2",
+                "locals": []
+              },
+              {
+                "expr": ":code #z68y4QYd2REpLKUa36y4NVms ,( $wRBR6XHj2gi6ti8cdXJvFN9FL0 ,, 'name ,, $xq1ku4D8Gqwcv4SolhYy2P90P0 .title ,)",
+                "nodeType": "exprStmt",
+                "id": "FSUV7q91J883x6v7T2PbllrS",
+                "locals": []
+              },
+              {
+                "expr": ":code #z68y4QYd2REpLKUa36y4NVms ,( $wRBR6XHj2gi6ti8cdXJvFN9FL0 ,, 'picture ,, $xq1ku4D8Gqwcv4SolhYy2P90P0 .picture_link ,)",
+                "nodeType": "exprStmt",
+                "id": "CQ1s3t3Yks6V1oIZIMQVnIla",
+                "locals": []
+              },
+              {
+                "expr": ":code #z68y4QYd2REpLKUa36y4NVms ,( $wRBR6XHj2gi6ti8cdXJvFN9FL0 ,, 'link ,, $xq1ku4D8Gqwcv4SolhYy2P90P0 .link ,)",
+                "nodeType": "exprStmt",
+                "id": "rseEY3PJqp4zcllDxH77HnrX",
+                "locals": []
+              },
+              {
+                "expr": ":code #z68y4QYd2REpLKUa36y4NVms ,( $wRBR6XHj2gi6ti8cdXJvFN9FL0 ,, 'source ,, $xq1ku4D8Gqwcv4SolhYy2P90P0 .media_link ,)",
+                "nodeType": "exprStmt",
+                "id": "naatPP8TEeO9ZcdrE4Fy0WsG",
+                "locals": []
+              },
+              {
+                "expr": "$GnmRpHLENcyzzNnPpTOz78YYL0 ,:= :code #DCZpiFuiUFP1cFu0frmF23jI ,( 'me/002fshare ,, $wRBR6XHj2gi6ti8cdXJvFN9FL0 .join ,( '/0026 ,) ,)",
+                "nodeType": "exprStmt",
+                "id": "GnmRpHLENcyzzNnPpTOz78YY",
+                "locals": [
+                  {
+                    "name": "request",
+                    "type": "Web Request",
+                    "nodeType": "localDef",
+                    "id": "GnmRpHLENcyzzNnPpTOz78YYL0"
+                  }
+                ]
+              },
+              {
+                "nodeType": "if",
+                "condition": ",not $GnmRpHLENcyzzNnPpTOz78YYL0 .is_invalid",
+                "thenBody": [
+                  {
+                    "expr": "$GnmRpHLENcyzzNnPpTOz78YYL0 .set_method ,( 'post ,)",
+                    "nodeType": "exprStmt",
+                    "id": "Ig4Z4dkVcwFVDCiTDSebGO7n",
+                    "locals": []
+                  },
+                  {
+                    "expr": ":code #xtjVYVnlcN3fhqxfD92829fq ,( $GnmRpHLENcyzzNnPpTOz78YYL0 ,)",
+                    "nodeType": "exprStmt",
+                    "id": "Vpbmhp6u2tELBcwqJUsvvphF",
+                    "locals": []
+                  }
+                ],
+                "isElseIf": false,
+                "id": "PtqGlTN2HJB8kT2Ni28nHEp2",
+                "locals": []
+              }
+            ],
+            "id": "xq1ku4D8Gqwcv4SolhYy2P90"
+          },
+          {
+            "name": "post text",
+            "inParameters": [
+              {
+                "name": "text",
+                "type": "String",
+                "nodeType": "localDef",
+                "id": "il3GZG1ugZf9rE16D1TjnepFP0"
+              }
+            ],
+            "outParameters": [],
+            "isPrivate": false,
+            "isOffloaded": false,
+            "isTest": false,
+            "isAsync": false,
+            "nodeType": "action",
+            "body": [
+              {
+                "text": "Shares the text on the current user. Requires `wl.share` scope.",
+                "nodeType": "comment",
+                "id": "zSkbdQRl4d6uNJEkz4eCbgVn"
+              },
+              {
+                "expr": "$Px9fbR41ZQIaRiufIloJbwdtL0 ,:= :collections .create_string_collection",
+                "nodeType": "exprStmt",
+                "id": "Px9fbR41ZQIaRiufIloJbwdt",
+                "locals": [
+                  {
+                    "name": "strings",
+                    "type": "String Collection",
+                    "nodeType": "localDef",
+                    "id": "Px9fbR41ZQIaRiufIloJbwdtL0"
+                  }
+                ]
+              },
+              {
+                "expr": ":code #z68y4QYd2REpLKUa36y4NVms ,( $Px9fbR41ZQIaRiufIloJbwdtL0 ,, 'message ,, $il3GZG1ugZf9rE16D1TjnepFP0 ,)",
+                "nodeType": "exprStmt",
+                "id": "hlRs2VUoiqR0DRdbm2mzZ2QH",
+                "locals": []
+              },
+              {
+                "expr": "$xm5fCx0PwhxnaCbUUdUwLd0lL0 ,:= :code #DCZpiFuiUFP1cFu0frmF23jI ,( 'me/002fshare ,, $Px9fbR41ZQIaRiufIloJbwdtL0 .join ,( '/0026 ,) ,)",
+                "nodeType": "exprStmt",
+                "id": "xm5fCx0PwhxnaCbUUdUwLd0l",
+                "locals": [
+                  {
+                    "name": "request",
+                    "type": "Web Request",
+                    "nodeType": "localDef",
+                    "id": "xm5fCx0PwhxnaCbUUdUwLd0lL0"
+                  }
+                ]
+              },
+              {
+                "nodeType": "if",
+                "condition": ",not $xm5fCx0PwhxnaCbUUdUwLd0lL0 .is_invalid",
+                "thenBody": [
+                  {
+                    "expr": "$xm5fCx0PwhxnaCbUUdUwLd0lL0 .set_method ,( 'post ,)",
+                    "nodeType": "exprStmt",
+                    "id": "xUnBCWfhCvdfih7820tNb2rV",
+                    "locals": []
+                  },
+                  {
+                    "expr": ":code #xtjVYVnlcN3fhqxfD92829fq ,( $xm5fCx0PwhxnaCbUUdUwLd0lL0 ,)",
+                    "nodeType": "exprStmt",
+                    "id": "pWt9qMt26aoS304MOpx1XL8D",
+                    "locals": []
+                  }
+                ],
+                "isElseIf": false,
+                "id": "SJw4iNCZS5Z8rooPmHwhZKrj",
+                "locals": []
+              }
+            ],
+            "id": "il3GZG1ugZf9rE16D1TjnepF"
+          },
+          {
+            "name": "post link",
+            "inParameters": [
+              {
+                "name": "link",
+                "type": "Link",
+                "nodeType": "localDef",
+                "id": "BOg6qoZ0Q7UnAYXwDm8R0NJsP0"
+              }
+            ],
+            "outParameters": [],
+            "isPrivate": false,
+            "isOffloaded": false,
+            "isTest": false,
+            "isAsync": false,
+            "nodeType": "action",
+            "body": [
+              {
+                "text": "Shares the link on the current user. Requires `wl.share` scope.",
+                "nodeType": "comment",
+                "id": "xfINV28e9nY3Qih2LSY2Zibb"
+              },
+              {
+                "expr": "$PYb4HmRd4t2WVpUy6T4CVL4RL0 ,:= :collections .create_string_collection",
+                "nodeType": "exprStmt",
+                "id": "PYb4HmRd4t2WVpUy6T4CVL4R",
+                "locals": [
+                  {
+                    "name": "strings",
+                    "type": "String Collection",
+                    "nodeType": "localDef",
+                    "id": "PYb4HmRd4t2WVpUy6T4CVL4RL0"
+                  }
+                ]
+              },
+              {
+                "expr": ":code #z68y4QYd2REpLKUa36y4NVms ,( $PYb4HmRd4t2WVpUy6T4CVL4RL0 ,, 'name ,, $BOg6qoZ0Q7UnAYXwDm8R0NJsP0 .name ,)",
+                "nodeType": "exprStmt",
+                "id": "ZozIXvTGMevt4ogOISctLQzw",
+                "locals": []
+              },
+              {
+                "nodeType": "if",
+                "condition": "$BOg6qoZ0Q7UnAYXwDm8R0NJsP0 .kind .equals ,( 'image ,)",
+                "thenBody": [
+                  {
+                    "expr": ":code #z68y4QYd2REpLKUa36y4NVms ,( $PYb4HmRd4t2WVpUy6T4CVL4RL0 ,, 'picture ,, $BOg6qoZ0Q7UnAYXwDm8R0NJsP0 .address ,)",
+                    "nodeType": "exprStmt",
+                    "id": "a8v10ILJGBLb2I4MyUm2rHX8",
+                    "locals": []
+                  }
+                ],
+                "isElseIf": false,
+                "id": "xXEjBYffIdEQvv4neBpEcKck",
+                "locals": []
+              },
+              {
+                "nodeType": "if",
+                "condition": "$BOg6qoZ0Q7UnAYXwDm8R0NJsP0 .kind .equals ,( 'media ,)",
+                "thenBody": [
+                  {
+                    "expr": ":code #z68y4QYd2REpLKUa36y4NVms ,( $PYb4HmRd4t2WVpUy6T4CVL4RL0 ,, 'source ,, $BOg6qoZ0Q7UnAYXwDm8R0NJsP0 .address ,)",
+                    "nodeType": "exprStmt",
+                    "id": "XoR8MdkXkXxBlgoJu5fBDWCH",
+                    "locals": []
+                  }
+                ],
+                "elseBody": [
+                  {
+                    "expr": ":code #z68y4QYd2REpLKUa36y4NVms ,( $PYb4HmRd4t2WVpUy6T4CVL4RL0 ,, 'link ,, $BOg6qoZ0Q7UnAYXwDm8R0NJsP0 .address ,)",
+                    "nodeType": "exprStmt",
+                    "id": "eTIEs5q4egcEwcmXOSGXpCbS",
+                    "locals": []
+                  }
+                ],
+                "isElseIf": true,
+                "id": "eXsNVi0jjFwLe5nzRxgVDkeZ",
+                "locals": []
+              },
+              {
+                "expr": "$RrMV35oZ2xorm54jDEu9qefSL0 ,:= :code #DCZpiFuiUFP1cFu0frmF23jI ,( 'me/002fshare ,, $PYb4HmRd4t2WVpUy6T4CVL4RL0 .join ,( '/0026 ,) ,)",
+                "nodeType": "exprStmt",
+                "id": "RrMV35oZ2xorm54jDEu9qefS",
+                "locals": [
+                  {
+                    "name": "request",
+                    "type": "Web Request",
+                    "nodeType": "localDef",
+                    "id": "RrMV35oZ2xorm54jDEu9qefSL0"
+                  }
+                ]
+              },
+              {
+                "nodeType": "if",
+                "condition": ",not $RrMV35oZ2xorm54jDEu9qefSL0 .is_invalid",
+                "thenBody": [
+                  {
+                    "expr": "$RrMV35oZ2xorm54jDEu9qefSL0 .set_method ,( 'post ,)",
+                    "nodeType": "exprStmt",
+                    "id": "LmQbVoQuJFXb9lMj51IJBWO5",
+                    "locals": []
+                  },
+                  {
+                    "expr": ":code #xtjVYVnlcN3fhqxfD92829fq ,( $RrMV35oZ2xorm54jDEu9qefSL0 ,)",
+                    "nodeType": "exprStmt",
+                    "id": "IfLxHSnQ74pMLyll5yqjzNeJ",
+                    "locals": []
+                  }
+                ],
+                "isElseIf": false,
+                "id": "xtNVDdPW76W83X1SWvyAHe3Y",
+                "locals": []
+              }
+            ],
+            "id": "BOg6qoZ0Q7UnAYXwDm8R0NJs"
+          }
+        ],
+        "deletedDecls": [],
+        "nodeType": "app",
+        "id": "app"
+      }
+    },
+    {
+      "seqNo": 1,
+      "time": 1364926795,
+      "scriptId": "nbqfa",
+      "historyId": "2520373740043749669ab7cfb7a-4eae-4be6-8dbb-dd081e47b890",
+      "updateSize": 2,
+      "updates": {}
+    },
+    {
+      "seqNo": 2,
+      "time": 1366072787,
+      "scriptId": "pfoo",
+      "historyId": "25203622801265188403c32164b-8829-49fe-bddf-287ef2246c67",
+      "updateSize": 21379,
+      "updates": {
+        "DH6lVt3g2k6UzDe24asgEYxs": {
+          "text": "### registering a Live app"
+        },
+        "eztqPwR8Y4eNBWiiDoOQRQHO": {
+          "text": "* https://[redirectdomainid]-{var:userid}.users.touchdevelop.com/oath"
+        },
+        "xNQ4QkU2iDDFOO1DxKwsriq5": {
+          "text": "where `[redirectdomainid]` should be replaced with a unique identifier for this particular app (must have between 1 and 64 lower case alpha-numeric characters). Live enforces one domain per application so make sure to use a unique domain per application."
+        },
+        "nYLiU4nLyahssT3xtNAonQDt": {
+          "text": "### initialization"
+        },
+        "VwnyMxgCTNhPgbAWSiXiOrEg": {
+          "text": "Pass your `Client ID` (NOT the secret) and the `redirect domain id` to the `authenticate` action. Do not worry about leaking this client id; it is designed to be public. The third argument to `authenticate` is the list of scopes (permissions), see http://msdn.microsoft.com/en-us/library/live/hh243646.aspx"
+        },
+        "lyIedcpS7HNLEZNdvdHqaX9s": {
+          "expr": ":code #wr49MkcjRY23yBFvR5IP31de ,( '/003cclient_id/003e ,, '/003credirect_domain_id/003e ,, 'wl/002ebasic/002cwl/002eshare ,)"
+        },
+        "xM02inDgq8L2KnMz8Z2mRrl6": {
+          "text": "### posting text, links and messages"
+        },
+        "HPGc1o868wSHTgvqRzXyVbud": {
+          "text": "You can post text or pictures through the `post text` action. This operation requires the `wl.share` permissions.",
+          "nodeType": "comment"
+        },
+        "Xrg8c09cOoBpyxn4n6rI9vzi": {
+          "text": "* post text",
+          "nodeType": "comment"
+        },
+        "TPv0A6x6zSh1ZYMBvJBBvDGCL0": {
+          "name": "success",
+          "type": "Boolean",
+          "nodeType": "localDef"
+        },
+        "TPv0A6x6zSh1ZYMBvJBBvDGC": {
+          "expr": "$TPv0A6x6zSh1ZYMBvJBBvDGCL0 ,:= :code #il3GZG1ugZf9rE16D1TjnepF ,( 'hello_from_TouchDevelop/0021 ,)",
+          "nodeType": "exprStmt",
+          "locals": [
+            "TPv0A6x6zSh1ZYMBvJBBvDGCL0"
+          ]
+        },
+        "b0KH6ymICAboslThbDkCXBYi": {
+          "expr": ",( 'post_text_success/003a_ ,∥ $TPv0A6x6zSh1ZYMBvJBBvDGCL0 ,) .post_to_wall",
+          "nodeType": "exprStmt",
+          "locals": []
+        },
+        "febqMZtzKwHbmTTaa436m6E7": {
+          "text": "* posting [links](/Link)",
+          "nodeType": "comment"
+        },
+        "x1kgMjgPKC63EAKNg2F1EmLF": {
+          "expr": "$TPv0A6x6zSh1ZYMBvJBBvDGCL0 ,:= :code #BOg6qoZ0Q7UnAYXwDm8R0NJs ,( :web .link_url ,( 'touchdevelop ,, 'https/003a/002f/002fwww/002etouchdevelop/002ecom ,) ,)",
+          "nodeType": "exprStmt",
+          "locals": []
+        },
+        "b4BZu68pE4vtuGACOaj9yqJ7": {
+          "text": "* posting [messages](/Message),",
+          "nodeType": "comment"
+        },
+        "mKT41A4EhGgqR0RZaXSJEgXbL0": {
+          "name": "msg",
+          "type": "Message",
+          "nodeType": "localDef"
+        },
+        "mKT41A4EhGgqR0RZaXSJEgXb": {
+          "expr": "$mKT41A4EhGgqR0RZaXSJEgXbL0 ,:= :social .create_message ,( 'touchdevelop ,)",
+          "nodeType": "exprStmt",
+          "locals": [
+            "mKT41A4EhGgqR0RZaXSJEgXbL0"
+          ]
+        },
+        "XNkF17PA3RuJsku4xoQ9puN0": {
+          "expr": "$mKT41A4EhGgqR0RZaXSJEgXbL0 .set_link ,( 'https/003a/002f/002fwww/002etouchdevelop/002ecom ,)",
+          "nodeType": "exprStmt",
+          "locals": []
+        },
+        "qIX2k2fO4604eOuSFh9fWH60L0": {
+          "name": "success2",
+          "type": "Boolean",
+          "nodeType": "localDef"
+        },
+        "qIX2k2fO4604eOuSFh9fWH60": {
+          "expr": "$qIX2k2fO4604eOuSFh9fWH60L0 ,:= :code #xq1ku4D8Gqwcv4SolhYy2P90 ,( $mKT41A4EhGgqR0RZaXSJEgXbL0 ,)",
+          "nodeType": "exprStmt",
+          "locals": [
+            "qIX2k2fO4604eOuSFh9fWH60L0"
+          ]
+        },
+        "bg2l2phqbgR9pyEIYt6k9au9": {
+          "text": "### authentication",
+          "nodeType": "comment"
+        },
+        "KckmF2f5dA8gB82DzkX9NIKb": {
+          "text": "Authentication happens automatically on demand. You can explicitly authenticate the user using `authenticate`.",
+          "nodeType": "comment"
+        },
+        "SsspMKndrLl1cWs5Pkqly2NE": {
+          "expr": ":code #MLzRO32L2P23VPAcbBRbz2rz",
+          "nodeType": "exprStmt",
+          "locals": []
+        },
+        "xcII2ACbFZY8ykJm2e9DAO21": {
+          "text": "### creating requests",
+          "nodeType": "comment"
+        },
+        "sL21cc4X4i6tBuVihlF29DYy": {
+          "expr": "$sL21cc4X4i6tBuVihlF29DYyL0 ,:= :code #DCZpiFuiUFP1cFu0frmF23jI ,( 'me ,)"
+        },
+        "pfXdcSC2Fn7kvH7lGepju3D9": {
+          "body": [
+            "aUL5eqZjVj4CaNwgIhX1ONBd",
+            "DH6lVt3g2k6UzDe24asgEYxs",
+            "Vo42ms22feVr2h7bIhoxhFQ4",
+            "qmLccTRe14Y2a8Vea6GqKJMy",
+            "SMqbpwMsxmx3j3ZkJKb4GO6j",
+            "eztqPwR8Y4eNBWiiDoOQRQHO",
+            "xNQ4QkU2iDDFOO1DxKwsriq5",
+            "bAFNvdk2QJ50dbfihq2ramPw",
+            "nYLiU4nLyahssT3xtNAonQDt",
+            "VwnyMxgCTNhPgbAWSiXiOrEg",
+            "lyIedcpS7HNLEZNdvdHqaX9s",
+            "xM02inDgq8L2KnMz8Z2mRrl6",
+            "HPGc1o868wSHTgvqRzXyVbud",
+            "Xrg8c09cOoBpyxn4n6rI9vzi",
+            "TPv0A6x6zSh1ZYMBvJBBvDGC",
+            "b0KH6ymICAboslThbDkCXBYi",
+            "febqMZtzKwHbmTTaa436m6E7",
+            "x1kgMjgPKC63EAKNg2F1EmLF",
+            "b4BZu68pE4vtuGACOaj9yqJ7",
+            "mKT41A4EhGgqR0RZaXSJEgXb",
+            "XNkF17PA3RuJsku4xoQ9puN0",
+            "qIX2k2fO4604eOuSFh9fWH60",
+            "bg2l2phqbgR9pyEIYt6k9au9",
+            "KckmF2f5dA8gB82DzkX9NIKb",
+            "SsspMKndrLl1cWs5Pkqly2NE",
+            "xcII2ACbFZY8ykJm2e9DAO21",
+            "scJKna1gwlqLbQ4MQIofvoJT",
+            "rvVgCgxSg2yyRcef1BF4bpnl",
+            "sL21cc4X4i6tBuVihlF29DYy",
+            "VrCyFvCSgIdJ4tag41eGKv8d",
+            "z5HF0FHM3uItDZ1N2IWGWM4L",
+            "xXrkSuFae20I66dtuHusvvno"
+          ]
+        },
+        "ERkRIPltBkw3t3Rko4CBy484": {
+          "text": "Authenticates the user.",
+          "nodeType": "comment"
+        },
+        "ZGfkYcn5zc38u4YyBfH4gM4U": {
+          "expr": ":contract .requires ,( ,not :data #x4q9zfLYwMd0TdKy57yq4F8f .is_empty ,, 'Please_call_/0060initialize/0060_to_setup_the_Live_application/002e ,)",
+          "nodeType": "exprStmt",
+          "locals": []
+        },
+        "QRgVUbo29ZQJpE9JuGGTOEWoL0": {
+          "name": "needs refresh",
+          "type": "Boolean",
+          "nodeType": "localDef"
+        },
+        "QRgVUbo29ZQJpE9JuGGTOEWo": {
+          "expr": "$QRgVUbo29ZQJpE9JuGGTOEWoL0 ,:= :data #lsTdJOVnoaDCAHE4Dm9SeLzz .is_invalid ,or :data #lsTdJOVnoaDCAHE4Dm9SeLzz .is_expiring ,( ,1 ,0 ,0 ,)",
+          "nodeType": "exprStmt",
+          "locals": [
+            "QRgVUbo29ZQJpE9JuGGTOEWoL0"
+          ]
+        },
+        "QvYvU2O0CGbVyTPeAZxEs3sfL0": {
+          "name": "url",
+          "type": "String",
+          "nodeType": "localDef"
+        },
+        "QvYvU2O0CGbVyTPeAZxEs3sf": {
+          "expr": "$QvYvU2O0CGbVyTPeAZxEs3sfL0 ,:= 'https/003a/002f/002flogin/002elive/002ecom/002foauth20/005fauthorize/002esrf/003fclient/005fid/003d ,∥ :web .url_encode ,( :data #x4q9zfLYwMd0TdKy57yq4F8f ,) ,∥ '/0026scope/003d ,∥ :web .url_encode ,( :data #hXAoN7D82Kgy2JDV4rkk851w ,)",
+          "nodeType": "exprStmt",
+          "locals": [
+            "QvYvU2O0CGbVyTPeAZxEs3sfL0"
+          ]
+        },
+        "L7gru25m70EQ40iPwIQeRcR7": {
+          "expr": "$QvYvU2O0CGbVyTPeAZxEs3sfL0 ,:= $QvYvU2O0CGbVyTPeAZxEs3sfL0 ,∥ '/0026tdredirectdomainid/003d ,∥ :web .url_encode ,( :data #Aia6ZbhtQwheJf9ffcrd6yOh ,)",
+          "nodeType": "exprStmt",
+          "locals": []
+        },
+        "xxtHVMzn1JscHTiylTDemz2t": {
+          "expr": ":data #lsTdJOVnoaDCAHE4Dm9SeLzz ,:= :web .oauth_v2 ,( $QvYvU2O0CGbVyTPeAZxEs3sfL0 ,)",
+          "nodeType": "exprStmt",
+          "locals": []
+        },
+        "CBOPo02YK2yA82yEKjce2BGJ": {
+          "condition": "$QRgVUbo29ZQJpE9JuGGTOEWoL0",
+          "thenBody": [
+            "QvYvU2O0CGbVyTPeAZxEs3sf",
+            "L7gru25m70EQ40iPwIQeRcR7",
+            "xxtHVMzn1JscHTiylTDemz2t"
+          ]
+        },
+        "MLzRO32L2P23VPAcbBRbz2rz": {
+          "inParameters": [],
+          "body": [
+            "ERkRIPltBkw3t3Rko4CBy484",
+            "ZGfkYcn5zc38u4YyBfH4gM4U",
+            "QRgVUbo29ZQJpE9JuGGTOEWo",
+            "CBOPo02YK2yA82yEKjce2BGJ"
+          ]
+        },
+        "DCZpiFuiUFP1cFu0frmF23jIP1": {
+          "name": "request",
+          "type": "Web Request"
+        },
+        "SNbqOV2gyFLRJ0X4vgCsQSXx": {
+          "expr": ":code #MLzRO32L2P23VPAcbBRbz2rz ,( ,)"
+        },
+        "noWaUABYbSpNq3cATu2wzplF": {
+          "expr": "$DCZpiFuiUFP1cFu0frmF23jIP1 ,:= :invalid .web_request"
+        },
+        "TNduT9yezm2ryb23Wh2bxeJm": {
+          "expr": "$DCZpiFuiUFP1cFu0frmF23jIP1 ,:= :web .create_request ,( $buQIVaeYxgwdQLCEZjoXyoatL0 ,)"
+        },
+        "fYYqbMEq26Ek45Fvaq4YDXqe": {
+          "elseBody": [
+            "buQIVaeYxgwdQLCEZjoXyoat",
+            "TNduT9yezm2ryb23Wh2bxeJm"
+          ]
+        },
+        "DCZpiFuiUFP1cFu0frmF23jI": {
+          "inParameters": [
+            "DCZpiFuiUFP1cFu0frmF23jIP0"
+          ],
+          "outParameters": [
+            "DCZpiFuiUFP1cFu0frmF23jIP1"
+          ]
+        },
+        "xtjVYVnlcN3fhqxfD92829fqP1": {
+          "name": "response",
+          "type": "Web Response",
+          "nodeType": "localDef"
+        },
+        "xApt6sGo2nBAmkNH7ghxCL8E": {
+          "expr": "$xtjVYVnlcN3fhqxfD92829fqP1 ,:= $xtjVYVnlcN3fhqxfD92829fqP0 .send",
+          "locals": []
+        },
+        "xtjVYVnlcN3fhqxfD92829fq": {
+          "outParameters": [
+            "xtjVYVnlcN3fhqxfD92829fqP1"
+          ]
+        },
+        "ASnCS1Rt2bI85MzEQmNUJyZYP0": {
+          "name": "jsb",
+          "type": "Json Builder",
+          "nodeType": "localDef"
+        },
+        "ASnCS1Rt2bI85MzEQmNUJyZYP1": {
+          "name": "name",
+          "type": "String",
+          "nodeType": "localDef"
+        },
+        "ASnCS1Rt2bI85MzEQmNUJyZYP2": {
+          "name": "value",
+          "type": "String",
+          "nodeType": "localDef"
+        },
+        "Bqm49ZS4SyyQh8NUwOaOP104": {
+          "expr": ":contract .requires ,( ,not $ASnCS1Rt2bI85MzEQmNUJyZYP1 .is_empty ,, 'trying_to_add_a_field_with_empty_name ,)",
+          "nodeType": "exprStmt",
+          "locals": []
+        },
+        "osoEud4ao40lhCi6umJLVK4K": {
+          "expr": "$ASnCS1Rt2bI85MzEQmNUJyZYP0 .set_string ,( 'name ,, $ASnCS1Rt2bI85MzEQmNUJyZYP2 ,)",
+          "nodeType": "exprStmt",
+          "locals": []
+        },
+        "xao2K9pXc6ki8eu6473ArQWR": {
+          "nodeType": "if",
+          "condition": ",not $ASnCS1Rt2bI85MzEQmNUJyZYP2 .is_invalid ,and ,not $ASnCS1Rt2bI85MzEQmNUJyZYP2 .is_empty",
+          "thenBody": [
+            "osoEud4ao40lhCi6umJLVK4K"
+          ],
+          "isElseIf": false,
+          "locals": []
+        },
+        "ASnCS1Rt2bI85MzEQmNUJyZY": {
+          "name": "add json value",
+          "inParameters": [
+            "ASnCS1Rt2bI85MzEQmNUJyZYP0",
+            "ASnCS1Rt2bI85MzEQmNUJyZYP1",
+            "ASnCS1Rt2bI85MzEQmNUJyZYP2"
+          ],
+          "outParameters": [],
+          "isPrivate": true,
+          "isOffloaded": false,
+          "isTest": false,
+          "isAsync": false,
+          "nodeType": "action",
+          "body": [
+            "Bqm49ZS4SyyQh8NUwOaOP104",
+            "xao2K9pXc6ki8eu6473ArQWR"
+          ]
+        },
+        "hXAoN7D82Kgy2JDV4rkk851w": {
+          "name": "scope"
+        },
+        "xq1ku4D8Gqwcv4SolhYy2P90P1": {
+          "name": "success2",
+          "type": "Boolean",
+          "nodeType": "localDef"
+        },
+        "wRBR6XHj2gi6ti8cdXJvFN9FL0": {
+          "name": "jsb",
+          "type": "Json Builder"
+        },
+        "wRBR6XHj2gi6ti8cdXJvFN9F": {
+          "expr": "$wRBR6XHj2gi6ti8cdXJvFN9FL0 ,:= :web .create_json_builder"
+        },
+        "xarWjhgQN0kPkFM8vZbz5jB2": {
+          "expr": ":code #ASnCS1Rt2bI85MzEQmNUJyZY ,( $wRBR6XHj2gi6ti8cdXJvFN9FL0 ,, 'message ,, $xq1ku4D8Gqwcv4SolhYy2P90P0 .message ,)"
+        },
+        "FSUV7q91J883x6v7T2PbllrS": {
+          "expr": ":code #ASnCS1Rt2bI85MzEQmNUJyZY ,( $wRBR6XHj2gi6ti8cdXJvFN9FL0 ,, 'name ,, $xq1ku4D8Gqwcv4SolhYy2P90P0 .title ,)"
+        },
+        "CQ1s3t3Yks6V1oIZIMQVnIla": {
+          "expr": ":code #ASnCS1Rt2bI85MzEQmNUJyZY ,( $wRBR6XHj2gi6ti8cdXJvFN9FL0 ,, 'picture ,, $xq1ku4D8Gqwcv4SolhYy2P90P0 .picture_link ,)"
+        },
+        "rseEY3PJqp4zcllDxH77HnrX": {
+          "expr": ":code #ASnCS1Rt2bI85MzEQmNUJyZY ,( $wRBR6XHj2gi6ti8cdXJvFN9FL0 ,, 'link ,, $xq1ku4D8Gqwcv4SolhYy2P90P0 .link ,)"
+        },
+        "naatPP8TEeO9ZcdrE4Fy0WsG": {
+          "expr": ":code #ASnCS1Rt2bI85MzEQmNUJyZY ,( $wRBR6XHj2gi6ti8cdXJvFN9FL0 ,, 'source ,, $xq1ku4D8Gqwcv4SolhYy2P90P0 .media_link ,)"
+        },
+        "GnmRpHLENcyzzNnPpTOz78YYL0": {
+          "name": "path",
+          "type": "String"
+        },
+        "GnmRpHLENcyzzNnPpTOz78YY": {
+          "expr": "$GnmRpHLENcyzzNnPpTOz78YYL0 ,:= 'me/002fshare"
+        },
+        "ainq4Ox9uLzQOXAmv5YnJOaVL0": {
+          "name": "status code",
+          "type": "Number",
+          "nodeType": "localDef"
+        },
+        "ainq4Ox9uLzQOXAmv5YnJOaV": {
+          "expr": "$ainq4Ox9uLzQOXAmv5YnJOaVL0 ,:= :code #xT23CckmEVnpeOxQ4qyn2sSM ,( $GnmRpHLENcyzzNnPpTOz78YYL0 ,, $wRBR6XHj2gi6ti8cdXJvFN9FL0 ,)",
+          "nodeType": "exprStmt",
+          "locals": [
+            "ainq4Ox9uLzQOXAmv5YnJOaVL0"
+          ]
+        },
+        "xUGyVbcr04z425N3dxahp9z3": {
+          "expr": "$xq1ku4D8Gqwcv4SolhYy2P90P1 ,:= ,2 ,0 ,1 ,= $ainq4Ox9uLzQOXAmv5YnJOaVL0",
+          "nodeType": "exprStmt",
+          "locals": []
+        },
+        "xq1ku4D8Gqwcv4SolhYy2P90": {
+          "outParameters": [
+            "xq1ku4D8Gqwcv4SolhYy2P90P1"
+          ],
+          "body": [
+            "CMKFulNNlz1APt2ECLkWWY3G",
+            "wRBR6XHj2gi6ti8cdXJvFN9F",
+            "xarWjhgQN0kPkFM8vZbz5jB2",
+            "FSUV7q91J883x6v7T2PbllrS",
+            "CQ1s3t3Yks6V1oIZIMQVnIla",
+            "rseEY3PJqp4zcllDxH77HnrX",
+            "naatPP8TEeO9ZcdrE4Fy0WsG",
+            "GnmRpHLENcyzzNnPpTOz78YY",
+            "ainq4Ox9uLzQOXAmv5YnJOaV",
+            "xUGyVbcr04z425N3dxahp9z3"
+          ]
+        },
+        "il3GZG1ugZf9rE16D1TjnepFP1": {
+          "name": "success",
+          "type": "Boolean",
+          "nodeType": "localDef"
+        },
+        "Px9fbR41ZQIaRiufIloJbwdtL0": {
+          "name": "jsb",
+          "type": "Json Builder"
+        },
+        "Px9fbR41ZQIaRiufIloJbwdt": {
+          "expr": "$Px9fbR41ZQIaRiufIloJbwdtL0 ,:= :web .create_json_builder"
+        },
+        "hlRs2VUoiqR0DRdbm2mzZ2QH": {
+          "expr": "$Px9fbR41ZQIaRiufIloJbwdtL0 .set_string ,( 'message ,, $il3GZG1ugZf9rE16D1TjnepFP0 ,)"
+        },
+        "xm5fCx0PwhxnaCbUUdUwLd0lL0": {
+          "name": "path",
+          "type": "String"
+        },
+        "xm5fCx0PwhxnaCbUUdUwLd0l": {
+          "expr": "$xm5fCx0PwhxnaCbUUdUwLd0lL0 ,:= 'me/002fshare"
+        },
+        "jCMHlNuxse7246EeM6nFZnCpL0": {
+          "name": "status code",
+          "type": "Number",
+          "nodeType": "localDef"
+        },
+        "jCMHlNuxse7246EeM6nFZnCp": {
+          "expr": "$jCMHlNuxse7246EeM6nFZnCpL0 ,:= :code #xT23CckmEVnpeOxQ4qyn2sSM ,( $xm5fCx0PwhxnaCbUUdUwLd0lL0 ,, $Px9fbR41ZQIaRiufIloJbwdtL0 ,)",
+          "nodeType": "exprStmt",
+          "locals": [
+            "jCMHlNuxse7246EeM6nFZnCpL0"
+          ]
+        },
+        "x2fbGHq0H0RegsGEkHv7WCVN": {
+          "expr": "$il3GZG1ugZf9rE16D1TjnepFP1 ,:= ,2 ,0 ,1 ,= $jCMHlNuxse7246EeM6nFZnCpL0",
+          "nodeType": "exprStmt",
+          "locals": []
+        },
+        "il3GZG1ugZf9rE16D1TjnepF": {
+          "outParameters": [
+            "il3GZG1ugZf9rE16D1TjnepFP1"
+          ],
+          "body": [
+            "zSkbdQRl4d6uNJEkz4eCbgVn",
+            "Px9fbR41ZQIaRiufIloJbwdt",
+            "hlRs2VUoiqR0DRdbm2mzZ2QH",
+            "xm5fCx0PwhxnaCbUUdUwLd0l",
+            "jCMHlNuxse7246EeM6nFZnCp",
+            "x2fbGHq0H0RegsGEkHv7WCVN"
+          ]
+        },
+        "BOg6qoZ0Q7UnAYXwDm8R0NJsP1": {
+          "name": "success",
+          "type": "Boolean",
+          "nodeType": "localDef"
+        },
+        "PYb4HmRd4t2WVpUy6T4CVL4RL0": {
+          "name": "jsb",
+          "type": "Json Builder"
+        },
+        "PYb4HmRd4t2WVpUy6T4CVL4R": {
+          "expr": "$PYb4HmRd4t2WVpUy6T4CVL4RL0 ,:= :web .create_json_builder"
+        },
+        "ZozIXvTGMevt4ogOISctLQzw": {
+          "expr": ":code #ASnCS1Rt2bI85MzEQmNUJyZY ,( $PYb4HmRd4t2WVpUy6T4CVL4RL0 ,, 'name ,, $BOg6qoZ0Q7UnAYXwDm8R0NJsP0 .name ,)"
+        },
+        "a8v10ILJGBLb2I4MyUm2rHX8": {
+          "expr": "$PYb4HmRd4t2WVpUy6T4CVL4RL0 .set_string ,( 'picture ,, $BOg6qoZ0Q7UnAYXwDm8R0NJsP0 .address ,)"
+        },
+        "XoR8MdkXkXxBlgoJu5fBDWCH": {
+          "expr": "$PYb4HmRd4t2WVpUy6T4CVL4RL0 .set_string ,( 'source ,, $BOg6qoZ0Q7UnAYXwDm8R0NJsP0 .address ,)"
+        },
+        "eTIEs5q4egcEwcmXOSGXpCbS": {
+          "expr": "$PYb4HmRd4t2WVpUy6T4CVL4RL0 .set_string ,( 'link ,, $BOg6qoZ0Q7UnAYXwDm8R0NJsP0 .address ,)"
+        },
+        "RrMV35oZ2xorm54jDEu9qefSL0": {
+          "name": "path",
+          "type": "String"
+        },
+        "RrMV35oZ2xorm54jDEu9qefS": {
+          "expr": "$RrMV35oZ2xorm54jDEu9qefSL0 ,:= 'me/002fshare"
+        },
+        "Y2FubHT04tBPYqxOsRUGgOggL0": {
+          "name": "status code",
+          "type": "Number",
+          "nodeType": "localDef"
+        },
+        "Y2FubHT04tBPYqxOsRUGgOgg": {
+          "expr": "$Y2FubHT04tBPYqxOsRUGgOggL0 ,:= :code #xT23CckmEVnpeOxQ4qyn2sSM ,( $RrMV35oZ2xorm54jDEu9qefSL0 ,, $PYb4HmRd4t2WVpUy6T4CVL4RL0 ,)",
+          "nodeType": "exprStmt",
+          "locals": [
+            "Y2FubHT04tBPYqxOsRUGgOggL0"
+          ]
+        },
+        "jeIfui9VauYntWNPEtR8yBh7": {
+          "expr": "$BOg6qoZ0Q7UnAYXwDm8R0NJsP1 ,:= ,2 ,0 ,1 ,= $Y2FubHT04tBPYqxOsRUGgOggL0",
+          "nodeType": "exprStmt",
+          "locals": []
+        },
+        "BOg6qoZ0Q7UnAYXwDm8R0NJs": {
+          "outParameters": [
+            "BOg6qoZ0Q7UnAYXwDm8R0NJsP1"
+          ],
+          "body": [
+            "xfINV28e9nY3Qih2LSY2Zibb",
+            "PYb4HmRd4t2WVpUy6T4CVL4R",
+            "ZozIXvTGMevt4ogOISctLQzw",
+            "xXEjBYffIdEQvv4neBpEcKck",
+            "eXsNVi0jjFwLe5nzRxgVDkeZ",
+            "RrMV35oZ2xorm54jDEu9qefS",
+            "Y2FubHT04tBPYqxOsRUGgOgg",
+            "jeIfui9VauYntWNPEtR8yBh7"
+          ]
+        },
+        "Aia6ZbhtQwheJf9ffcrd6yOh": {
+          "name": "redirect domain id",
+          "comment": "",
+          "type": "String",
+          "isReadonly": false,
+          "isTransient": false,
+          "nodeType": "data"
+        },
+        "zpBhI7RL2yGjsLHLZGsMWrfQ": {
+          "expr": ":code #wr49MkcjRY23yBFvR5IP31de ,( '00000000400EE0CB ,, 'livel ,, 'wl/002eshare ,)",
+          "nodeType": "exprStmt",
+          "locals": []
+        },
+        "CJkDK9Eb86MQf6dKL5eFfvO4": {
+          "expr": ":code #il3GZG1ugZf9rE16D1TjnepF ,( 'hello_live ,)",
+          "nodeType": "exprStmt",
+          "locals": []
+        },
+        "OK0AOyCoStzetmbJ3Pid1fyi": {
+          "name": "test post text",
+          "inParameters": [],
+          "outParameters": [],
+          "isPrivate": true,
+          "isOffloaded": false,
+          "isTest": true,
+          "isAsync": false,
+          "nodeType": "action",
+          "body": [
+            "zpBhI7RL2yGjsLHLZGsMWrfQ",
+            "CJkDK9Eb86MQf6dKL5eFfvO4"
+          ]
+        },
+        "xqnQbhALyijMFFHNAffmF4U7P0": {
+          "name": "token",
+          "type": "String",
+          "nodeType": "localDef"
+        },
+        "x9kLDA3VqF8TIJP92koJjvur": {
+          "text": "Gets the access token.",
+          "nodeType": "comment"
+        },
+        "xjRHvFNtFj0bYrp222gvAUzw": {
+          "expr": ":code #MLzRO32L2P23VPAcbBRbz2rz ,( ,)",
+          "nodeType": "exprStmt",
+          "locals": []
+        },
+        "RDg2rLmilSz39TXNiKIWM4lj": {
+          "expr": "$xqnQbhALyijMFFHNAffmF4U7P0 ,:= :data #lsTdJOVnoaDCAHE4Dm9SeLzz .access_token",
+          "nodeType": "exprStmt",
+          "locals": []
+        },
+        "yxsg9pyr4lSK0IS4tVj8ijDQ": {
+          "expr": "$xqnQbhALyijMFFHNAffmF4U7P0 ,:= '",
+          "nodeType": "exprStmt",
+          "locals": []
+        },
+        "AaRcKcUUrI8p6DhyCXFBVe2t": {
+          "nodeType": "if",
+          "condition": ",not :data #lsTdJOVnoaDCAHE4Dm9SeLzz .is_invalid ,and ,not :data #lsTdJOVnoaDCAHE4Dm9SeLzz .is_expiring ,( ,1 ,0 ,0 ,)",
+          "thenBody": [
+            "RDg2rLmilSz39TXNiKIWM4lj"
+          ],
+          "elseBody": [
+            "yxsg9pyr4lSK0IS4tVj8ijDQ"
+          ],
+          "isElseIf": false,
+          "locals": []
+        },
+        "xqnQbhALyijMFFHNAffmF4U7": {
+          "name": "access token",
+          "inParameters": [],
+          "outParameters": [
+            "xqnQbhALyijMFFHNAffmF4U7P0"
+          ],
+          "isPrivate": false,
+          "isOffloaded": false,
+          "isTest": false,
+          "isAsync": false,
+          "nodeType": "action",
+          "body": [
+            "x9kLDA3VqF8TIJP92koJjvur",
+            "xjRHvFNtFj0bYrp222gvAUzw",
+            "AaRcKcUUrI8p6DhyCXFBVe2t"
+          ]
+        },
+        "wr49MkcjRY23yBFvR5IP31deP0": {
+          "name": "client id",
+          "type": "String",
+          "nodeType": "localDef"
+        },
+        "wr49MkcjRY23yBFvR5IP31deP1": {
+          "name": "redirect domain id",
+          "type": "String",
+          "nodeType": "localDef"
+        },
+        "wr49MkcjRY23yBFvR5IP31deP2": {
+          "name": "scope",
+          "type": "String",
+          "nodeType": "localDef"
+        },
+        "WnIm8gWeM30ueVZmRebfCG3U": {
+          "text": "Initializes the application information. `scope` is a comma-separated list of permissions used by this application.",
+          "nodeType": "comment"
+        },
+        "Oe7PsIgZ20V0rWxxYpsqFYyV": {
+          "expr": ":contract .requires ,( ,not $wr49MkcjRY23yBFvR5IP31deP0 .is_empty ,, '/0027client_id/0027_must_be_a_valid_Facebook_app_id/002e ,)",
+          "nodeType": "exprStmt",
+          "locals": []
+        },
+        "DI7O1g8hb4yL8qRkficcleoh": {
+          "expr": ":contract .requires ,( $wr49MkcjRY23yBFvR5IP31deP1 .is_match_regex ,( '/005e/005ba/002dzA/002dZ/005d/005ba/002dzA/002dZ0/002d9/005d/007b3/002c15/007d/0024 ,) ,, 'must_have_between_4_and_16_alpha/002dnumeric_characters/002c_starting_with_a_letter ,)",
+          "nodeType": "exprStmt",
+          "locals": []
+        },
+        "x2bbYsDtmZzZBo91kDiMYgJ1": {
+          "expr": ":contract .requires ,( ,not $wr49MkcjRY23yBFvR5IP31deP2 .is_empty ,, '/0027scope/0027_must_be_a_comma/002dseparated_list_of_permissions/002e ,)",
+          "nodeType": "exprStmt",
+          "locals": []
+        },
+        "m2KpF4Sw4uTmi9gbEPOaDPVKL0": {
+          "name": "needs refresh",
+          "type": "Boolean",
+          "nodeType": "localDef"
+        },
+        "m2KpF4Sw4uTmi9gbEPOaDPVK": {
+          "expr": "$m2KpF4Sw4uTmi9gbEPOaDPVKL0 ,:= ,not :data #x4q9zfLYwMd0TdKy57yq4F8f .equals ,( $wr49MkcjRY23yBFvR5IP31deP0 ,) ,or ,not :data #Aia6ZbhtQwheJf9ffcrd6yOh .equals ,( $wr49MkcjRY23yBFvR5IP31deP1 ,) ,or ,not :data #hXAoN7D82Kgy2JDV4rkk851w .contains ,( $wr49MkcjRY23yBFvR5IP31deP2 ,)",
+          "nodeType": "exprStmt",
+          "locals": [
+            "m2KpF4Sw4uTmi9gbEPOaDPVKL0"
+          ]
+        },
+        "G93qIIUC1r4NfMyemtbTE7kb": {
+          "expr": ":data #x4q9zfLYwMd0TdKy57yq4F8f ,:= $wr49MkcjRY23yBFvR5IP31deP0",
+          "nodeType": "exprStmt",
+          "locals": []
+        },
+        "x67l6S1K28gT4iAOMS5bIgRO": {
+          "expr": ":data #Aia6ZbhtQwheJf9ffcrd6yOh ,:= $wr49MkcjRY23yBFvR5IP31deP1",
+          "nodeType": "exprStmt",
+          "locals": []
+        },
+        "UI6QlnNIRZmajty8kVp6wVDH": {
+          "expr": ":data #hXAoN7D82Kgy2JDV4rkk851w ,:= $wr49MkcjRY23yBFvR5IP31deP2",
+          "nodeType": "exprStmt",
+          "locals": []
+        },
+        "GEWnOe9eUpQlGtVmilWIVDUG": {
+          "expr": ":data #lsTdJOVnoaDCAHE4Dm9SeLzz ,:= :invalid .oauth_response",
+          "nodeType": "exprStmt",
+          "locals": []
+        },
+        "ZVv0f2JenHoNt5UPUs8a502F": {
+          "nodeType": "if",
+          "condition": "$m2KpF4Sw4uTmi9gbEPOaDPVKL0",
+          "thenBody": [
+            "G93qIIUC1r4NfMyemtbTE7kb",
+            "x67l6S1K28gT4iAOMS5bIgRO",
+            "UI6QlnNIRZmajty8kVp6wVDH",
+            "GEWnOe9eUpQlGtVmilWIVDUG"
+          ],
+          "isElseIf": false,
+          "locals": []
+        },
+        "wr49MkcjRY23yBFvR5IP31de": {
+          "name": "initialize",
+          "inParameters": [
+            "wr49MkcjRY23yBFvR5IP31deP0",
+            "wr49MkcjRY23yBFvR5IP31deP1",
+            "wr49MkcjRY23yBFvR5IP31deP2"
+          ],
+          "outParameters": [],
+          "isPrivate": false,
+          "isOffloaded": false,
+          "isTest": false,
+          "isAsync": false,
+          "nodeType": "action",
+          "body": [
+            "WnIm8gWeM30ueVZmRebfCG3U",
+            "Oe7PsIgZ20V0rWxxYpsqFYyV",
+            "DI7O1g8hb4yL8qRkficcleoh",
+            "x2bbYsDtmZzZBo91kDiMYgJ1",
+            "m2KpF4Sw4uTmi9gbEPOaDPVK",
+            "ZVv0f2JenHoNt5UPUs8a502F"
+          ]
+        },
+        "xT23CckmEVnpeOxQ4qyn2sSMP0": {
+          "name": "path",
+          "type": "String",
+          "nodeType": "localDef"
+        },
+        "xT23CckmEVnpeOxQ4qyn2sSMP1": {
+          "name": "jsb",
+          "type": "Json Builder",
+          "nodeType": "localDef"
+        },
+        "xT23CckmEVnpeOxQ4qyn2sSMP2": {
+          "name": "status code",
+          "type": "Number",
+          "nodeType": "localDef"
+        },
+        "XhecRaFnmAvQMXiWqX0v0W9NL0": {
+          "name": "request",
+          "type": "Web Request",
+          "nodeType": "localDef"
+        },
+        "XhecRaFnmAvQMXiWqX0v0W9N": {
+          "expr": "$XhecRaFnmAvQMXiWqX0v0W9NL0 ,:= :code #DCZpiFuiUFP1cFu0frmF23jI ,( $xT23CckmEVnpeOxQ4qyn2sSMP0 ,)",
+          "nodeType": "exprStmt",
+          "locals": [
+            "XhecRaFnmAvQMXiWqX0v0W9NL0"
+          ]
+        },
+        "m8vKB5ObLt9SlaFX2l0E8AiC": {
+          "expr": "$xT23CckmEVnpeOxQ4qyn2sSMP2 ,:= ,2 ,0 ,1",
+          "nodeType": "exprStmt",
+          "locals": []
+        },
+        "f4fHluU5QisdNTNq47MaAUJs": {
+          "expr": "$XhecRaFnmAvQMXiWqX0v0W9NL0 .set_method ,( 'post ,)",
+          "nodeType": "exprStmt",
+          "locals": []
+        },
+        "ZtxTejuVytrQ126t325fOm2T": {
+          "expr": "$XhecRaFnmAvQMXiWqX0v0W9NL0 .set_content_as_json ,( $xT23CckmEVnpeOxQ4qyn2sSMP1 .to_json ,)",
+          "nodeType": "exprStmt",
+          "locals": []
+        },
+        "hK9uKHv02soGklNJWlC85p50L0": {
+          "name": "response",
+          "type": "Web Response",
+          "nodeType": "localDef"
+        },
+        "hK9uKHv02soGklNJWlC85p50": {
+          "expr": "$hK9uKHv02soGklNJWlC85p50L0 ,:= :code #xtjVYVnlcN3fhqxfD92829fq ,( $XhecRaFnmAvQMXiWqX0v0W9NL0 ,)",
+          "nodeType": "exprStmt",
+          "locals": [
+            "hK9uKHv02soGklNJWlC85p50L0"
+          ]
+        },
+        "g2bOZUYryRgdfX7f2CfKM8Xh": {
+          "expr": "$xT23CckmEVnpeOxQ4qyn2sSMP2 ,:= $hK9uKHv02soGklNJWlC85p50L0 .status_code",
+          "nodeType": "exprStmt",
+          "locals": []
+        },
+        "s3bgm58PG1OyycLmqdVxAwgb": {
+          "nodeType": "if",
+          "condition": ",not $XhecRaFnmAvQMXiWqX0v0W9NL0 .is_invalid",
+          "thenBody": [
+            "f4fHluU5QisdNTNq47MaAUJs",
+            "ZtxTejuVytrQ126t325fOm2T",
+            "hK9uKHv02soGklNJWlC85p50",
+            "g2bOZUYryRgdfX7f2CfKM8Xh"
+          ],
+          "isElseIf": false,
+          "locals": []
+        },
+        "xT23CckmEVnpeOxQ4qyn2sSM": {
+          "name": "post json",
+          "inParameters": [
+            "xT23CckmEVnpeOxQ4qyn2sSMP0",
+            "xT23CckmEVnpeOxQ4qyn2sSMP1"
+          ],
+          "outParameters": [
+            "xT23CckmEVnpeOxQ4qyn2sSMP2"
+          ],
+          "isPrivate": true,
+          "isOffloaded": false,
+          "isTest": false,
+          "isAsync": false,
+          "nodeType": "action",
+          "body": [
+            "XhecRaFnmAvQMXiWqX0v0W9N",
+            "m8vKB5ObLt9SlaFX2l0E8AiC",
+            "s3bgm58PG1OyycLmqdVxAwgb"
+          ]
+        },
+        "app": {
+          "comment": "Allows to build Microsoft Live Connect apps. #docs #live #OAuthv2",
+          "rootId": "xcuTUIxwbfLmt4rvbiXcIZyU",
+          "decls": [
+            "pfXdcSC2Fn7kvH7lGepju3D9",
+            "MLzRO32L2P23VPAcbBRbz2rz",
+            "DCZpiFuiUFP1cFu0frmF23jI",
+            "lsTdJOVnoaDCAHE4Dm9SeLzz",
+            "x4q9zfLYwMd0TdKy57yq4F8f",
+            "xtjVYVnlcN3fhqxfD92829fq",
+            "ASnCS1Rt2bI85MzEQmNUJyZY",
+            "hXAoN7D82Kgy2JDV4rkk851w",
+            "xq1ku4D8Gqwcv4SolhYy2P90",
+            "il3GZG1ugZf9rE16D1TjnepF",
+            "BOg6qoZ0Q7UnAYXwDm8R0NJs",
+            "Aia6ZbhtQwheJf9ffcrd6yOh",
+            "OK0AOyCoStzetmbJ3Pid1fyi",
+            "xqnQbhALyijMFFHNAffmF4U7",
+            "wr49MkcjRY23yBFvR5IP31de",
+            "xT23CckmEVnpeOxQ4qyn2sSM"
+          ]
+        },
+        "MLzRO32L2P23VPAcbBRbz2rzP0": null,
+        "MLzRO32L2P23VPAcbBRbz2rzP1": null,
+        "i4JKjuOaVWro9s7g23zipead": null,
+        "yBXTXSWGfoboS0cNltZLlxR0": null,
+        "bjofIz6HBOTcVy1dJcleIv7J": null,
+        "QMGNudUVMDGAlLSFDozD5jsG": null,
+        "QMGNudUVMDGAlLSFDozD5jsGL0": null,
+        "zJ7ZsCo5bwVcK9BaELNtDDA8": null,
+        "URRhUanH6lHbWcGvENW2IcLX": null,
+        "uJYAPUkWtVA62KVOruOaQtAO": null,
+        "lpL8yK4ugbsGlKb05kAf3UWq": null,
+        "x48avURoDTMroNL3BMXjXNi2": null,
+        "x48avURoDTMroNL3BMXjXNi2L0": null,
+        "P24J68xFWrMVRrnsEXdR8yOc": null,
+        "DCZpiFuiUFP1cFu0frmF23jIP2": null,
+        "viaySAqj2bYPFKUpUtoXMPJX": null,
+        "kpXXZWNJk45gUpWeMkCLGdiP": null,
+        "xApt6sGo2nBAmkNH7ghxCL8EL0": null,
+        "z68y4QYd2REpLKUa36y4NVms": null,
+        "z68y4QYd2REpLKUa36y4NVmsP0": null,
+        "z68y4QYd2REpLKUa36y4NVmsP1": null,
+        "z68y4QYd2REpLKUa36y4NVmsP2": null,
+        "x5tRN5iRFqRntKJquXHMFDkF": null,
+        "aveCKHLOvxSuaeWItf27eIvR": null,
+        "PtqGlTN2HJB8kT2Ni28nHEp2": null,
+        "Ig4Z4dkVcwFVDCiTDSebGO7n": null,
+        "Vpbmhp6u2tELBcwqJUsvvphF": null,
+        "SJw4iNCZS5Z8rooPmHwhZKrj": null,
+        "xUnBCWfhCvdfih7820tNb2rV": null,
+        "pWt9qMt26aoS304MOpx1XL8D": null,
+        "xtNVDdPW76W83X1SWvyAHe3Y": null,
+        "LmQbVoQuJFXb9lMj51IJBWO5": null,
+        "IfLxHSnQ74pMLyll5yqjzNeJ": null
+      }
+    },
+    {
+      "seqNo": 3,
+      "time": 1366072799,
+      "scriptId": "pfoo",
+      "historyId": "2520362280007561391c4192905-e0ef-4bd1-8d2b-2abeffb49f09",
+      "updateSize": 2,
+      "updates": {}
+    },
+    {
+      "seqNo": 4,
+      "time": 1367610438,
+      "scriptId": "utmkb",
+      "historyId": "25203469036191073207da3d09f-5578-4e8a-9dbd-2beca0786735",
+      "updateSize": 117,
+      "updates": {
+        "app": {
+          "comment": "Allows to build Microsoft Live Connect apps. #live #OAuthv2",
+          "rootId": "Q4C3BrblNs11Y0ddNjRZYnOx"
+        }
+      }
+    },
+    {
+      "seqNo": 5,
+      "time": 1367611823,
+      "scriptId": "utmkb",
+      "historyId": "25203468897675286600b6d9129-8b56-4fa7-901b-aaadaf79a2dd",
+      "updateSize": 2,
+      "updates": {}
+    },
+    {
+      "seqNo": 6,
+      "time": 1369911865,
+      "scriptId": "hcxh",
+      "historyId": "25203238893438818120ef168a3-c568-4587-a59f-23af5dabbcd4",
+      "updateSize": 8524,
+      "updates": {
+        "LjqaEvieeQA3jjRNS5DgNCxn": {
+          "text": "### user information",
+          "nodeType": "comment"
+        },
+        "JNOglx1FxiRvVY151ABnT2sT": {
+          "text": "You can retreive the current or any other user information using `code->user`.",
+          "nodeType": "comment"
+        },
+        "iKuqn0lWU94c5H0223yF5ZOiL0": {
+          "name": "me",
+          "type": "Contact",
+          "nodeType": "localDef"
+        },
+        "iKuqn0lWU94c5H0223yF5ZOi": {
+          "expr": "$iKuqn0lWU94c5H0223yF5ZOiL0 ,:= :code #xSj64FYhpPMtCL14mJpcyxAA ,( ' ,)",
+          "nodeType": "exprStmt",
+          "locals": [
+            "iKuqn0lWU94c5H0223yF5ZOiL0"
+          ]
+        },
+        "TrF5vLCOG9NWRd6z3RxV1VaW": {
+          "expr": "$iKuqn0lWU94c5H0223yF5ZOiL0 .post_to_wall",
+          "nodeType": "exprStmt",
+          "locals": []
+        },
+        "pfXdcSC2Fn7kvH7lGepju3D9": {
+          "body": [
+            "aUL5eqZjVj4CaNwgIhX1ONBd",
+            "DH6lVt3g2k6UzDe24asgEYxs",
+            "Vo42ms22feVr2h7bIhoxhFQ4",
+            "qmLccTRe14Y2a8Vea6GqKJMy",
+            "SMqbpwMsxmx3j3ZkJKb4GO6j",
+            "eztqPwR8Y4eNBWiiDoOQRQHO",
+            "xNQ4QkU2iDDFOO1DxKwsriq5",
+            "bAFNvdk2QJ50dbfihq2ramPw",
+            "nYLiU4nLyahssT3xtNAonQDt",
+            "VwnyMxgCTNhPgbAWSiXiOrEg",
+            "lyIedcpS7HNLEZNdvdHqaX9s",
+            "xM02inDgq8L2KnMz8Z2mRrl6",
+            "HPGc1o868wSHTgvqRzXyVbud",
+            "Xrg8c09cOoBpyxn4n6rI9vzi",
+            "TPv0A6x6zSh1ZYMBvJBBvDGC",
+            "b0KH6ymICAboslThbDkCXBYi",
+            "febqMZtzKwHbmTTaa436m6E7",
+            "x1kgMjgPKC63EAKNg2F1EmLF",
+            "b4BZu68pE4vtuGACOaj9yqJ7",
+            "mKT41A4EhGgqR0RZaXSJEgXb",
+            "XNkF17PA3RuJsku4xoQ9puN0",
+            "qIX2k2fO4604eOuSFh9fWH60",
+            "LjqaEvieeQA3jjRNS5DgNCxn",
+            "JNOglx1FxiRvVY151ABnT2sT",
+            "iKuqn0lWU94c5H0223yF5ZOi",
+            "TrF5vLCOG9NWRd6z3RxV1VaW",
+            "bg2l2phqbgR9pyEIYt6k9au9",
+            "KckmF2f5dA8gB82DzkX9NIKb",
+            "SsspMKndrLl1cWs5Pkqly2NE",
+            "xcII2ACbFZY8ykJm2e9DAO21",
+            "scJKna1gwlqLbQ4MQIofvoJT",
+            "rvVgCgxSg2yyRcef1BF4bpnl",
+            "sL21cc4X4i6tBuVihlF29DYy",
+            "VrCyFvCSgIdJ4tag41eGKv8d",
+            "z5HF0FHM3uItDZ1N2IWGWM4L",
+            "xXrkSuFae20I66dtuHusvvno"
+          ]
+        },
+        "xSj64FYhpPMtCL14mJpcyxAAP0": {
+          "name": "id",
+          "type": "String",
+          "nodeType": "localDef"
+        },
+        "xSj64FYhpPMtCL14mJpcyxAAP1": {
+          "name": "contact",
+          "type": "Contact",
+          "nodeType": "localDef"
+        },
+        "NeRySsFh7b4VDzIeqsq2Cdy7": {
+          "text": "Queries the information about a user. Leave blank to get the current user.",
+          "nodeType": "comment"
+        },
+        "xmYXREKRNEGkyY7T27aI0GKi": {
+          "expr": "$xSj64FYhpPMtCL14mJpcyxAAP1 ,:= :invalid .contact",
+          "nodeType": "exprStmt",
+          "locals": []
+        },
+        "CbV0VpV2mGL4OHzh1a4zTYosL0": {
+          "name": "request",
+          "type": "Web Request",
+          "nodeType": "localDef"
+        },
+        "CbV0VpV2mGL4OHzh1a4zTYos": {
+          "expr": "$CbV0VpV2mGL4OHzh1a4zTYosL0 ,:= :code #DCZpiFuiUFP1cFu0frmF23jI ,( :code #M2uwdnNo5VD2kZd4wPfJAAxi ,( $xSj64FYhpPMtCL14mJpcyxAAP0 ,) ,)",
+          "nodeType": "exprStmt",
+          "locals": [
+            "CbV0VpV2mGL4OHzh1a4zTYosL0"
+          ]
+        },
+        "cE3o72VQNxOJ4lVhBeuekuYfL0": {
+          "name": "response",
+          "type": "Web Response",
+          "nodeType": "localDef"
+        },
+        "cE3o72VQNxOJ4lVhBeuekuYf": {
+          "expr": "$cE3o72VQNxOJ4lVhBeuekuYfL0 ,:= :code #xtjVYVnlcN3fhqxfD92829fq ,( $CbV0VpV2mGL4OHzh1a4zTYosL0 ,)",
+          "nodeType": "exprStmt",
+          "locals": [
+            "cE3o72VQNxOJ4lVhBeuekuYfL0"
+          ]
+        },
+        "iGe5m4qZWdu6XPTkA84WS0TyL0": {
+          "name": "js",
+          "type": "Json Object",
+          "nodeType": "localDef"
+        },
+        "iGe5m4qZWdu6XPTkA84WS0Ty": {
+          "expr": "$iGe5m4qZWdu6XPTkA84WS0TyL0 ,:= $cE3o72VQNxOJ4lVhBeuekuYfL0 .content_as_json",
+          "nodeType": "exprStmt",
+          "locals": [
+            "iGe5m4qZWdu6XPTkA84WS0TyL0"
+          ]
+        },
+        "a921XvpmKXUIjbZlW0n1GByj": {
+          "expr": "$xSj64FYhpPMtCL14mJpcyxAAP1 ,:= :code #zHyMLbQMwwAZqPXQgH0Zvczy ,( $iGe5m4qZWdu6XPTkA84WS0TyL0 ,)",
+          "nodeType": "exprStmt",
+          "locals": []
+        },
+        "B4zwHjclGUe570mU6d9NWvDQ": {
+          "nodeType": "if",
+          "condition": "$cE3o72VQNxOJ4lVhBeuekuYfL0 .status_code ,= ,2 ,0 ,0 ,and ,not $iGe5m4qZWdu6XPTkA84WS0TyL0 .is_invalid",
+          "thenBody": [
+            "a921XvpmKXUIjbZlW0n1GByj"
+          ],
+          "isElseIf": false,
+          "locals": []
+        },
+        "qs0XCB2PCsOIsWi3V0sa50Qh": {
+          "nodeType": "if",
+          "condition": ",not $CbV0VpV2mGL4OHzh1a4zTYosL0 .is_invalid",
+          "thenBody": [
+            "cE3o72VQNxOJ4lVhBeuekuYf",
+            "iGe5m4qZWdu6XPTkA84WS0Ty",
+            "B4zwHjclGUe570mU6d9NWvDQ"
+          ],
+          "isElseIf": false,
+          "locals": []
+        },
+        "xSj64FYhpPMtCL14mJpcyxAA": {
+          "name": "user",
+          "inParameters": [
+            "xSj64FYhpPMtCL14mJpcyxAAP0"
+          ],
+          "outParameters": [
+            "xSj64FYhpPMtCL14mJpcyxAAP1"
+          ],
+          "isPrivate": false,
+          "isOffloaded": false,
+          "isTest": false,
+          "isAsync": false,
+          "nodeType": "action",
+          "body": [
+            "NeRySsFh7b4VDzIeqsq2Cdy7",
+            "xmYXREKRNEGkyY7T27aI0GKi",
+            "CbV0VpV2mGL4OHzh1a4zTYos",
+            "qs0XCB2PCsOIsWi3V0sa50Qh"
+          ]
+        },
+        "M2uwdnNo5VD2kZd4wPfJAAxiP0": {
+          "name": "user id",
+          "type": "String",
+          "nodeType": "localDef"
+        },
+        "M2uwdnNo5VD2kZd4wPfJAAxiP1": {
+          "name": "uid",
+          "type": "String",
+          "nodeType": "localDef"
+        },
+        "RfghHqoURqvH1WXiBkI7eQgS": {
+          "expr": "$M2uwdnNo5VD2kZd4wPfJAAxiP0 ,:= 'me",
+          "nodeType": "exprStmt",
+          "locals": []
+        },
+        "wmMhqp2YEL13VkID1nBJbEDh": {
+          "nodeType": "if",
+          "condition": "$M2uwdnNo5VD2kZd4wPfJAAxiP0 .is_invalid ,or $M2uwdnNo5VD2kZd4wPfJAAxiP0 .is_empty",
+          "thenBody": [
+            "RfghHqoURqvH1WXiBkI7eQgS"
+          ],
+          "isElseIf": false,
+          "locals": []
+        },
+        "xKcPE9y4lteKefXL1iS4q4iI": {
+          "expr": "$M2uwdnNo5VD2kZd4wPfJAAxiP1 ,:= $M2uwdnNo5VD2kZd4wPfJAAxiP0",
+          "nodeType": "exprStmt",
+          "locals": []
+        },
+        "M2uwdnNo5VD2kZd4wPfJAAxi": {
+          "name": "to user id",
+          "inParameters": [
+            "M2uwdnNo5VD2kZd4wPfJAAxiP0"
+          ],
+          "outParameters": [
+            "M2uwdnNo5VD2kZd4wPfJAAxiP1"
+          ],
+          "isPrivate": true,
+          "isOffloaded": false,
+          "isTest": false,
+          "isAsync": false,
+          "nodeType": "action",
+          "body": [
+            "wmMhqp2YEL13VkID1nBJbEDh",
+            "xKcPE9y4lteKefXL1iS4q4iI"
+          ]
+        },
+        "zHyMLbQMwwAZqPXQgH0ZvczyP0": {
+          "name": "js",
+          "type": "Json Object",
+          "nodeType": "localDef"
+        },
+        "zHyMLbQMwwAZqPXQgH0ZvczyP1": {
+          "name": "contact",
+          "type": "Contact",
+          "nodeType": "localDef"
+        },
+        "lZ30vrGCJ2BfV6khiECsT0XK": {
+          "text": "http://developers.facebook.com/docs/reference/api/user/",
+          "nodeType": "comment"
+        },
+        "NwsEcJjV7rZsL8LxP21Q23cH": {
+          "expr": "$zHyMLbQMwwAZqPXQgH0ZvczyP1 ,:= :social .create_contact ,( $zHyMLbQMwwAZqPXQgH0ZvczyP0 .string ,( 'name ,) ,)",
+          "nodeType": "exprStmt",
+          "locals": []
+        },
+        "rgLIsqjkDQTM8krCC1EqiJwp": {
+          "expr": "$zHyMLbQMwwAZqPXQgH0ZvczyP1 .set_source ,( 'Facebook ,)",
+          "nodeType": "exprStmt",
+          "locals": []
+        },
+        "x35RvAzm8jy2riFPI0e2tnmvL0": {
+          "name": "id",
+          "type": "String",
+          "nodeType": "localDef"
+        },
+        "x35RvAzm8jy2riFPI0e2tnmv": {
+          "expr": "$x35RvAzm8jy2riFPI0e2tnmvL0 ,:= $zHyMLbQMwwAZqPXQgH0ZvczyP0 .string ,( 'id ,)",
+          "nodeType": "exprStmt",
+          "locals": [
+            "x35RvAzm8jy2riFPI0e2tnmvL0"
+          ]
+        },
+        "bogcYM6m3r3KlWwWFmGiEK2vL0": {
+          "name": "first name",
+          "type": "String",
+          "nodeType": "localDef"
+        },
+        "bogcYM6m3r3KlWwWFmGiEK2v": {
+          "expr": "$bogcYM6m3r3KlWwWFmGiEK2vL0 ,:= $zHyMLbQMwwAZqPXQgH0ZvczyP0 .string ,( 'first/005fname ,)",
+          "nodeType": "exprStmt",
+          "locals": [
+            "bogcYM6m3r3KlWwWFmGiEK2vL0"
+          ]
+        },
+        "IhB7KqVHoUkFLnmd2OaTwrdR": {
+          "expr": "$zHyMLbQMwwAZqPXQgH0ZvczyP1 .set_first_name ,( $bogcYM6m3r3KlWwWFmGiEK2vL0 ,)",
+          "nodeType": "exprStmt",
+          "locals": []
+        },
+        "FsuS42SdVLAiFkZR87bQnYxp": {
+          "nodeType": "if",
+          "condition": ",not $bogcYM6m3r3KlWwWFmGiEK2vL0 .is_invalid",
+          "thenBody": [
+            "IhB7KqVHoUkFLnmd2OaTwrdR"
+          ],
+          "isElseIf": false,
+          "locals": []
+        },
+        "hHM2WHjehPjUCifqqLyARRCdL0": {
+          "name": "middle name",
+          "type": "String",
+          "nodeType": "localDef"
+        },
+        "hHM2WHjehPjUCifqqLyARRCd": {
+          "expr": "$hHM2WHjehPjUCifqqLyARRCdL0 ,:= $zHyMLbQMwwAZqPXQgH0ZvczyP0 .string ,( 'middle/005fname ,)",
+          "nodeType": "exprStmt",
+          "locals": [
+            "hHM2WHjehPjUCifqqLyARRCdL0"
+          ]
+        },
+        "dpBNG2H3VhM8vnB6asA44e2Q": {
+          "expr": "$zHyMLbQMwwAZqPXQgH0ZvczyP1 .set_middle_name ,( $hHM2WHjehPjUCifqqLyARRCdL0 ,)",
+          "nodeType": "exprStmt",
+          "locals": []
+        },
+        "DQghDTwEUszSN04JY0pa2Stp": {
+          "nodeType": "if",
+          "condition": ",not $hHM2WHjehPjUCifqqLyARRCdL0 .is_invalid",
+          "thenBody": [
+            "dpBNG2H3VhM8vnB6asA44e2Q"
+          ],
+          "isElseIf": false,
+          "locals": []
+        },
+        "zhbnRhMo358TV3ztYexILH7BL0": {
+          "name": "last name",
+          "type": "String",
+          "nodeType": "localDef"
+        },
+        "zhbnRhMo358TV3ztYexILH7B": {
+          "expr": "$zhbnRhMo358TV3ztYexILH7BL0 ,:= $zHyMLbQMwwAZqPXQgH0ZvczyP0 .string ,( 'last/005fname ,)",
+          "nodeType": "exprStmt",
+          "locals": [
+            "zhbnRhMo358TV3ztYexILH7BL0"
+          ]
+        },
+        "YAoozytieIkr0UYuCHbnQIQY": {
+          "expr": "$zHyMLbQMwwAZqPXQgH0ZvczyP1 .set_last_name ,( $zhbnRhMo358TV3ztYexILH7BL0 ,)",
+          "nodeType": "exprStmt",
+          "locals": []
+        },
+        "ATzxRrDOu8G6ysrpILNhKwrd": {
+          "nodeType": "if",
+          "condition": ",not $zhbnRhMo358TV3ztYexILH7BL0 .is_invalid",
+          "thenBody": [
+            "YAoozytieIkr0UYuCHbnQIQY"
+          ],
+          "isElseIf": false,
+          "locals": []
+        },
+        "zHyMLbQMwwAZqPXQgH0Zvczy": {
+          "name": "read contact",
+          "inParameters": [
+            "zHyMLbQMwwAZqPXQgH0ZvczyP0"
+          ],
+          "outParameters": [
+            "zHyMLbQMwwAZqPXQgH0ZvczyP1"
+          ],
+          "isPrivate": true,
+          "isOffloaded": false,
+          "isTest": false,
+          "isAsync": false,
+          "nodeType": "action",
+          "body": [
+            "lZ30vrGCJ2BfV6khiECsT0XK",
+            "NwsEcJjV7rZsL8LxP21Q23cH",
+            "rgLIsqjkDQTM8krCC1EqiJwp",
+            "x35RvAzm8jy2riFPI0e2tnmv",
+            "bogcYM6m3r3KlWwWFmGiEK2v",
+            "FsuS42SdVLAiFkZR87bQnYxp",
+            "hHM2WHjehPjUCifqqLyARRCd",
+            "DQghDTwEUszSN04JY0pa2Stp",
+            "zhbnRhMo358TV3ztYexILH7B",
+            "ATzxRrDOu8G6ysrpILNhKwrd"
+          ]
+        },
+        "app": {
+          "rootId": "xzJpLD8HuO4zLRaC4XFVd5xc",
+          "decls": [
+            "pfXdcSC2Fn7kvH7lGepju3D9",
+            "MLzRO32L2P23VPAcbBRbz2rz",
+            "DCZpiFuiUFP1cFu0frmF23jI",
+            "lsTdJOVnoaDCAHE4Dm9SeLzz",
+            "x4q9zfLYwMd0TdKy57yq4F8f",
+            "xtjVYVnlcN3fhqxfD92829fq",
+            "ASnCS1Rt2bI85MzEQmNUJyZY",
+            "hXAoN7D82Kgy2JDV4rkk851w",
+            "xq1ku4D8Gqwcv4SolhYy2P90",
+            "il3GZG1ugZf9rE16D1TjnepF",
+            "BOg6qoZ0Q7UnAYXwDm8R0NJs",
+            "Aia6ZbhtQwheJf9ffcrd6yOh",
+            "OK0AOyCoStzetmbJ3Pid1fyi",
+            "xqnQbhALyijMFFHNAffmF4U7",
+            "wr49MkcjRY23yBFvR5IP31de",
+            "xT23CckmEVnpeOxQ4qyn2sSM",
+            "xSj64FYhpPMtCL14mJpcyxAA",
+            "M2uwdnNo5VD2kZd4wPfJAAxi",
+            "zHyMLbQMwwAZqPXQgH0Zvczy"
+          ]
+        }
+      }
+    },
+    {
+      "seqNo": 7,
+      "time": 1369911917,
+      "scriptId": "hcxh",
+      "historyId": "2520323888820645124bb597e9c-7dd9-4f79-ab36-2220edd96a1f",
+      "updateSize": 2,
+      "updates": {}
+    },
+    {
+      "seqNo": 8,
+      "time": 1370995120,
+      "scriptId": null,
+      "historyId": "2520313056799027537ff7edd12-02d2-4e29-a0a0-a46c0ef18f72",
+      "updateSize": 195,
+      "updates": {
+        "lsTdJOVnoaDCAHE4Dm9SeLzz": {
+          "isTransient": true
+        },
+        "CJkDK9Eb86MQf6dKL5eFfvO4": {
+          "expr": ":code #il3GZG1ugZf9rE16D1TjnepF ,( 'hello_live ,) .post_to_wall"
+        },
+        "app": {
+          "rootId": "KK6cUKxU9UUGQ8qSw9PBOsTb"
+        }
+      }
+    },
+    {
+      "seqNo": 9,
+      "time": 1370995139,
+      "scriptId": null,
+      "historyId": "252031305660420146741c9c79c-d906-43d4-a350-9fa2a446207f",
+      "updateSize": 133,
+      "updates": {
+        "CJkDK9Eb86MQf6dKL5eFfvO4": {
+          "expr": ":code #il3GZG1ugZf9rE16D1TjnepF ,( 'hello_live ,)"
+        },
+        "app": {
+          "rootId": "yB5elMC34HGpWVN5MFx0w0tK"
+        }
+      }
+    },
+    {
+      "seqNo": 10,
+      "time": 1370995147,
+      "scriptId": null,
+      "historyId": "2520313056528115022ae0eb680-819f-4cff-ac9e-168aac9b20bd",
+      "updateSize": 45,
+      "updates": {
+        "app": {
+          "rootId": "W4ZLi3tAM1vHeA8DmNwlpMc5"
+        }
+      }
+    }
+  ]
+}

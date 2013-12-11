@@ -1,0 +1,569 @@
+{
+  "userid": "gxfb",
+  "guid": "5b4f41d1-1df9-4462-ac4d-495c87ad07a9",
+  "lastStatus": "deleted",
+  "items": [
+    {
+      "seqNo": 0,
+      "time": 1358987975,
+      "scriptId": "lvtja",
+      "historyId": "25204331282435457035b4f41d1-1df9-4462-ac4d-495c87ad07a9",
+      "updateSize": 11119,
+      "ast": {
+        "textVersion": "v2.2,js,ctx",
+        "jsonVersion": "v1.0,resolved,short",
+        "name": "life indicator",
+        "comment": "Attaches a small life indicator to sprites",
+        "color": "#ff9955bb",
+        "autoIcon": "Controller",
+        "autoColor": "#9955bb",
+        "platform": "current",
+        "rootId": "opz4smooeG82EMyQbqQrO03I",
+        "showAd": false,
+        "isLibrary": true,
+        "allowExport": false,
+        "hasUniqueIds": false,
+        "decls": [
+          {
+            "name": "example",
+            "inParameters": [],
+            "outParameters": [],
+            "isPrivate": false,
+            "isOffloaded": false,
+            "isTest": false,
+            "isAsync": false,
+            "nodeType": "action",
+            "body": [
+              {
+                "text": "This library attaches a little rectangle denoting the life of a sprite. On each gameloop, call `evolve` to update the position of the life meter.",
+                "nodeType": "comment",
+                "id": "bLnCuwZIF08Mr13KpbzLdDAD"
+              },
+              {
+                "text": "## Initialization",
+                "nodeType": "comment",
+                "id": "yz4B1kfO7adPcOTovLMIVDiW"
+              },
+              {
+                "text": "The library works on a board so we will create one for this example.",
+                "nodeType": "comment",
+                "id": "xzRcq9SRfjo2aY9RFWbOSXHC"
+              },
+              {
+                "expr": "$AGr6EgidzaHulVhZNxMRvw0aL0 ,:= :media .create_portrait_board ,( ,4 ,8 ,0 ,, ,8 ,0 ,0 ,)",
+                "nodeType": "exprStmt",
+                "id": "AGr6EgidzaHulVhZNxMRvw0a",
+                "locals": [
+                  {
+                    "name": "board",
+                    "type": "Board",
+                    "nodeType": "localDef",
+                    "id": "AGr6EgidzaHulVhZNxMRvw0aL0"
+                  }
+                ]
+              },
+              {
+                "expr": "$AGr6EgidzaHulVhZNxMRvw0aL0 .post_to_wall",
+                "nodeType": "exprStmt",
+                "id": "xB9cLETk6aa76RRQ3voKaUde",
+                "locals": []
+              },
+              {
+                "expr": "$AGr6EgidzaHulVhZNxMRvw0aL0 .create_boundary ,( ,0 ,)",
+                "nodeType": "exprStmt",
+                "id": "phGdMLwUpqDpO6GrrACBZ0V4",
+                "locals": []
+              },
+              {
+                "text": "Before using the library, you must call the `initialize` action with your game board. This should be done once per game usually in the `main` action.",
+                "nodeType": "comment",
+                "id": "M0mDpuOmMZfU2VnJLEbEM9tq"
+              },
+              {
+                "expr": ":code #GpX00bR2JPixqjjv2xnjTETX ,( $AGr6EgidzaHulVhZNxMRvw0aL0 ,)",
+                "nodeType": "exprStmt",
+                "id": "xi2BWidI2lOcd4JRBxeb56mY",
+                "locals": []
+              },
+              {
+                "text": "## Attaching life meters",
+                "nodeType": "comment",
+                "id": "xl4img9hXB5j9JhG4UmxlT6y"
+              },
+              {
+                "text": "Simply call `show life` with the sprite to display a life meter for and the current life. The current life should be between 0 and 1. If the life is less or equal to 0, the life meter is hidden.",
+                "nodeType": "comment",
+                "id": "ramPDmHWPiT4eNcHwdpPjcbj"
+              },
+              {
+                "text": "Let's create a sprite to see how it works.",
+                "nodeType": "comment",
+                "id": "SYWBgWKHKG5M7NJzdGpZvxj3"
+              },
+              {
+                "expr": "$xyKhMHCsQOglpKZmve3GRS14L0 ,:= $AGr6EgidzaHulVhZNxMRvw0aL0 .create_ellipse ,( ,1 ,0 ,0 ,, ,1 ,0 ,0 ,)",
+                "nodeType": "exprStmt",
+                "id": "xyKhMHCsQOglpKZmve3GRS14",
+                "locals": [
+                  {
+                    "name": "sprite",
+                    "type": "Sprite",
+                    "nodeType": "localDef",
+                    "id": "xyKhMHCsQOglpKZmve3GRS14L0"
+                  }
+                ]
+              },
+              {
+                "expr": "$xyKhMHCsQOglpKZmve3GRS14L0 .set_speed ,( ,1 ,0 ,0 ,, ,1 ,0 ,0 ,)",
+                "nodeType": "exprStmt",
+                "id": "SefaYFzYlIV4KJgkPRDchWUO",
+                "locals": []
+              },
+              {
+                "expr": ":code #saxwrrM142X4LPl37gjiTC2t ,( $xyKhMHCsQOglpKZmve3GRS14L0 ,, ,0 ,. ,6 ,)",
+                "nodeType": "exprStmt",
+                "id": "xWBQ5iWKNmZfvAEGWR4gr31R",
+                "locals": []
+              },
+              {
+                "text": "## Gameloop",
+                "nodeType": "comment",
+                "id": "dIkvS5lF1r7HlrKctb2Em29s"
+              },
+              {
+                "text": "You need to call the `evolve` action after game board `evolve` call.",
+                "nodeType": "comment",
+                "id": "MnYKoOc27xtyczpfVuxSJd9p"
+              },
+              {
+                "condition": "T",
+                "body": [
+                  {
+                    "expr": "$AGr6EgidzaHulVhZNxMRvw0aL0 .evolve",
+                    "nodeType": "exprStmt",
+                    "id": "xNQy79XxCcrB4mpb2Km3r8Dc",
+                    "locals": []
+                  },
+                  {
+                    "text": "Make sure to call `evolve` after calling `evolve` on the game board.",
+                    "nodeType": "comment",
+                    "id": "XGsuVS4guGQo3pwhSDbE7ZWO"
+                  },
+                  {
+                    "expr": ":code #s5C17ow7JPClw8dge7K3dOLP",
+                    "nodeType": "exprStmt",
+                    "id": "nGmRzuD2SPzCR02CrXbyKi4M",
+                    "locals": []
+                  },
+                  {
+                    "expr": "$AGr6EgidzaHulVhZNxMRvw0aL0 .update_on_wall",
+                    "nodeType": "exprStmt",
+                    "id": "xfQmdH35ClLzLioDpbsgoDZ9",
+                    "locals": []
+                  },
+                  {
+                    "text": "Let's change the life to show how the meter changes color with the life.",
+                    "nodeType": "comment",
+                    "id": "xL4nqdEKIo6P5tSyD5eD2uyn"
+                  },
+                  {
+                    "expr": ":code #saxwrrM142X4LPl37gjiTC2t ,( $xyKhMHCsQOglpKZmve3GRS14L0 ,, $xyKhMHCsQOglpKZmve3GRS14L0 .y ,/ $AGr6EgidzaHulVhZNxMRvw0aL0 .height ,)",
+                    "nodeType": "exprStmt",
+                    "id": "vIvXkrxN3HNQlWCk57Xt2GBE",
+                    "locals": []
+                  }
+                ],
+                "nodeType": "while",
+                "id": "wj8eSuAwOtkA5b34uca8kZbg",
+                "locals": []
+              }
+            ],
+            "id": "wl7W4aYPoBfwYid2ioi3HTPV"
+          },
+          {
+            "name": "initialize",
+            "inParameters": [
+              {
+                "name": "board",
+                "type": "Board",
+                "nodeType": "localDef",
+                "id": "GpX00bR2JPixqjjv2xnjTETXP0"
+              }
+            ],
+            "outParameters": [],
+            "isPrivate": false,
+            "isOffloaded": false,
+            "isTest": false,
+            "isAsync": false,
+            "nodeType": "action",
+            "body": [
+              {
+                "text": "Initializes the library",
+                "nodeType": "comment",
+                "id": "i2JY82OEftNHcyWALODZW4cg"
+              },
+              {
+                "expr": ":data #no3mKHNQ9lW7moCHxuXd5d1N ,:= $GpX00bR2JPixqjjv2xnjTETXP0",
+                "nodeType": "exprStmt",
+                "id": "sTWshKNn9iUx93gxbIwRNYlf",
+                "locals": []
+              },
+              {
+                "expr": ":data #myOHNCJfa0WhAl0Dxmd4KEfh ,:= :data #no3mKHNQ9lW7moCHxuXd5d1N .create_sprite_set",
+                "nodeType": "exprStmt",
+                "id": "XcklqJPvAQDICZ60jh0ei3HQ",
+                "locals": []
+              }
+            ],
+            "id": "GpX00bR2JPixqjjv2xnjTETX"
+          },
+          {
+            "name": "board",
+            "comment": "",
+            "type": "Board",
+            "isReadonly": false,
+            "isTransient": true,
+            "nodeType": "data",
+            "id": "no3mKHNQ9lW7moCHxuXd5d1N"
+          },
+          {
+            "name": "evolve",
+            "inParameters": [],
+            "outParameters": [],
+            "isPrivate": false,
+            "isOffloaded": false,
+            "isTest": false,
+            "isAsync": false,
+            "nodeType": "action",
+            "body": [
+              {
+                "text": "Moves the life indicators",
+                "nodeType": "comment",
+                "id": "l0xJEk75DKJB37JrEfz8IgZX"
+              },
+              {
+                "collection": ":data #myOHNCJfa0WhAl0Dxmd4KEfh",
+                "conditions": [
+                  {
+                    "condition": "T",
+                    "nodeType": "where",
+                    "id": "xYNA4HZwOmLFroAGDWA0K49e",
+                    "locals": []
+                  }
+                ],
+                "body": [
+                  {
+                    "nodeType": "if",
+                    "condition": "$u6GvqlhIEokvIAL1X5F5LdZ4B0 .is_visible",
+                    "thenBody": [
+                      {
+                        "expr": "$i6Z8qzHrp90oyYNmr8boxCKvL0 ,:= :records #hyoKSpzblfJdfDcDIqHnq4nk .at ,( $u6GvqlhIEokvIAL1X5F5LdZ4B0 ,) .hud .get",
+                        "nodeType": "exprStmt",
+                        "id": "i6Z8qzHrp90oyYNmr8boxCKv",
+                        "locals": [
+                          {
+                            "name": "h",
+                            "type": "Sprite",
+                            "nodeType": "localDef",
+                            "id": "i6Z8qzHrp90oyYNmr8boxCKvL0"
+                          }
+                        ]
+                      },
+                      {
+                        "expr": ":code #T41cD7Agqv9Su7HXTxTHBqhY ,( $i6Z8qzHrp90oyYNmr8boxCKvL0 ,, $u6GvqlhIEokvIAL1X5F5LdZ4B0 ,)",
+                        "nodeType": "exprStmt",
+                        "id": "xL5LbIJ82U75NnzLADeH08yM",
+                        "locals": []
+                      }
+                    ],
+                    "elseBody": [
+                      {
+                        "expr": ":code #z60dbZdoCLc0G2gLNtcPnADt ,( $u6GvqlhIEokvIAL1X5F5LdZ4B0 ,)",
+                        "nodeType": "exprStmt",
+                        "id": "scempkJy2N6uWBdg7QN3DxCX",
+                        "locals": []
+                      }
+                    ],
+                    "isElseIf": false,
+                    "id": "x53fGkdU3eKbK2WZVQURs522",
+                    "locals": []
+                  }
+                ],
+                "nodeType": "foreach",
+                "id": "u6GvqlhIEokvIAL1X5F5LdZ4",
+                "locals": [
+                  {
+                    "name": "sprite",
+                    "type": "Sprite",
+                    "nodeType": "localDef",
+                    "id": "u6GvqlhIEokvIAL1X5F5LdZ4B0"
+                  }
+                ]
+              }
+            ],
+            "id": "s5C17ow7JPClw8dge7K3dOLP"
+          },
+          {
+            "name": "show life",
+            "inParameters": [
+              {
+                "name": "sprite",
+                "type": "Sprite",
+                "nodeType": "localDef",
+                "id": "saxwrrM142X4LPl37gjiTC2tP0"
+              },
+              {
+                "name": "life",
+                "type": "Number",
+                "nodeType": "localDef",
+                "id": "saxwrrM142X4LPl37gjiTC2tP1"
+              }
+            ],
+            "outParameters": [],
+            "isPrivate": false,
+            "isOffloaded": false,
+            "isTest": false,
+            "isAsync": false,
+            "nodeType": "action",
+            "body": [
+              {
+                "text": "Adds or update indicator to sprite",
+                "nodeType": "comment",
+                "id": "zJQ9zluPg6GLdPm4tq3W9si1"
+              },
+              {
+                "nodeType": "if",
+                "condition": "$saxwrrM142X4LPl37gjiTC2tP1 ,≤ ,0",
+                "thenBody": [
+                  {
+                    "expr": ":code #z60dbZdoCLc0G2gLNtcPnADt ,( $saxwrrM142X4LPl37gjiTC2tP0 ,)",
+                    "nodeType": "exprStmt",
+                    "id": "ID4sd1pdZpwnDTwi0LNwfn4s",
+                    "locals": []
+                  }
+                ],
+                "elseBody": [
+                  {
+                    "expr": "$xId9Cl6tpElwtsjPG1ti0flBL0 ,:= :records #hyoKSpzblfJdfDcDIqHnq4nk .at ,( $saxwrrM142X4LPl37gjiTC2tP0 ,) .hud .get",
+                    "nodeType": "exprStmt",
+                    "id": "xId9Cl6tpElwtsjPG1ti0flB",
+                    "locals": [
+                      {
+                        "name": "h",
+                        "type": "Sprite",
+                        "nodeType": "localDef",
+                        "id": "xId9Cl6tpElwtsjPG1ti0flBL0"
+                      }
+                    ]
+                  },
+                  {
+                    "nodeType": "if",
+                    "condition": "$xId9Cl6tpElwtsjPG1ti0flBL0 .is_invalid",
+                    "thenBody": [
+                      {
+                        "expr": "$xId9Cl6tpElwtsjPG1ti0flBL0 ,:= :data #no3mKHNQ9lW7moCHxuXd5d1N .create_rectangle ,( ,5 ,0 ,, ,5 ,)",
+                        "nodeType": "exprStmt",
+                        "id": "APsnkbV24Csov97j5kcsAmxj",
+                        "locals": []
+                      },
+                      {
+                        "expr": ":records #hyoKSpzblfJdfDcDIqHnq4nk .at ,( $saxwrrM142X4LPl37gjiTC2tP0 ,) .hud .set ,( $xId9Cl6tpElwtsjPG1ti0flBL0 ,)",
+                        "nodeType": "exprStmt",
+                        "id": "s6Feix3Ko2BZSlHVhs2r5vVm",
+                        "locals": []
+                      },
+                      {
+                        "expr": ":data #myOHNCJfa0WhAl0Dxmd4KEfh .add ,( $saxwrrM142X4LPl37gjiTC2tP0 ,)",
+                        "nodeType": "exprStmt",
+                        "id": "P9HgQ2yR5RHZJsnvXC41Q2CM",
+                        "locals": []
+                      }
+                    ],
+                    "isElseIf": false,
+                    "id": "kjkyndztSuIoLe8M8bYwN1Zn",
+                    "locals": []
+                  },
+                  {
+                    "expr": "$xId9Cl6tpElwtsjPG1ti0flBL0 .set_width ,( $saxwrrM142X4LPl37gjiTC2tP1 ,* ,5 ,0 ,)",
+                    "nodeType": "exprStmt",
+                    "id": "pi67rXvxKix94P3ScPra2Z33",
+                    "locals": []
+                  }
+                ],
+                "isElseIf": false,
+                "id": "J4yQBiMpNMlhLTVzO2lkYges",
+                "locals": []
+              }
+            ],
+            "id": "saxwrrM142X4LPl37gjiTC2t"
+          },
+          {
+            "name": "hide life",
+            "inParameters": [
+              {
+                "name": "sprite",
+                "type": "Sprite",
+                "nodeType": "localDef",
+                "id": "z60dbZdoCLc0G2gLNtcPnADtP0"
+              }
+            ],
+            "outParameters": [],
+            "isPrivate": false,
+            "isOffloaded": false,
+            "isTest": false,
+            "isAsync": false,
+            "nodeType": "action",
+            "body": [
+              {
+                "text": "Removes indicator for sprite",
+                "nodeType": "comment",
+                "id": "x480PMeyyW0GzVX2Y8w0sFoU"
+              },
+              {
+                "expr": "$xFVkhxTJw6fwr1x1A94VGo6LL0 ,:= :records #hyoKSpzblfJdfDcDIqHnq4nk .at ,( $z60dbZdoCLc0G2gLNtcPnADtP0 ,) .hud .get",
+                "nodeType": "exprStmt",
+                "id": "xFVkhxTJw6fwr1x1A94VGo6L",
+                "locals": [
+                  {
+                    "name": "h",
+                    "type": "Sprite",
+                    "nodeType": "localDef",
+                    "id": "xFVkhxTJw6fwr1x1A94VGo6LL0"
+                  }
+                ]
+              },
+              {
+                "nodeType": "if",
+                "condition": ",not $xFVkhxTJw6fwr1x1A94VGo6LL0 .is_invalid",
+                "thenBody": [
+                  {
+                    "expr": "$xFVkhxTJw6fwr1x1A94VGo6LL0 .hide",
+                    "nodeType": "exprStmt",
+                    "id": "b0h433pcQ06AF01Xkk1YAN6N",
+                    "locals": []
+                  },
+                  {
+                    "expr": "$xFVkhxTJw6fwr1x1A94VGo6LL0 .delete",
+                    "nodeType": "exprStmt",
+                    "id": "nUojZiUBiJ2e1MsSNDz4Frth",
+                    "locals": []
+                  }
+                ],
+                "isElseIf": false,
+                "id": "WTcGJHX4e96L50X07A3jFqWV",
+                "locals": []
+              },
+              {
+                "expr": ":records #hyoKSpzblfJdfDcDIqHnq4nk .at ,( $z60dbZdoCLc0G2gLNtcPnADtP0 ,) .clear_fields",
+                "nodeType": "exprStmt",
+                "id": "RPy42RcqElT2s6gHhxUll7GP",
+                "locals": []
+              },
+              {
+                "expr": ":data #myOHNCJfa0WhAl0Dxmd4KEfh .remove ,( $z60dbZdoCLc0G2gLNtcPnADtP0 ,)",
+                "nodeType": "exprStmt",
+                "id": "sQhTSzIyCM6hbN7py7fHdyTS",
+                "locals": []
+              }
+            ],
+            "id": "z60dbZdoCLc0G2gLNtcPnADt"
+          },
+          {
+            "nodeType": "record",
+            "name": "thing",
+            "sourceName": "Sprite decorator",
+            "comment": "",
+            "category": "decorator",
+            "isCloudEnabled": false,
+            "keys": [
+              {
+                "nodeType": "recordKey",
+                "name": "target",
+                "type": "Sprite",
+                "id": "DmrIEfY3VatuKGdcb40xXuIz"
+              }
+            ],
+            "fields": [
+              {
+                "nodeType": "recordField",
+                "name": "hud",
+                "type": "Sprite",
+                "id": "inX8mFwTcYwvUhRfrS1r7woi"
+              }
+            ],
+            "id": "hyoKSpzblfJdfDcDIqHnq4nk"
+          },
+          {
+            "name": "huds",
+            "comment": "",
+            "type": "Sprite Set",
+            "isReadonly": false,
+            "isTransient": true,
+            "nodeType": "data",
+            "id": "myOHNCJfa0WhAl0Dxmd4KEfh"
+          },
+          {
+            "name": "update indicator",
+            "inParameters": [
+              {
+                "name": "h",
+                "type": "Sprite",
+                "nodeType": "localDef",
+                "id": "T41cD7Agqv9Su7HXTxTHBqhYP0"
+              },
+              {
+                "name": "sprite",
+                "type": "Sprite",
+                "nodeType": "localDef",
+                "id": "T41cD7Agqv9Su7HXTxTHBqhYP1"
+              }
+            ],
+            "outParameters": [],
+            "isPrivate": true,
+            "isOffloaded": false,
+            "isTest": false,
+            "isAsync": false,
+            "nodeType": "action",
+            "body": [
+              {
+                "expr": "$T41cD7Agqv9Su7HXTxTHBqhYP0 .set_z_index ,( $T41cD7Agqv9Su7HXTxTHBqhYP1 .z_index ,+ ,1 ,)",
+                "nodeType": "exprStmt",
+                "id": "yQsjVG99Zzn00Ykm1rDknh4K",
+                "locals": []
+              },
+              {
+                "expr": "$T41cD7Agqv9Su7HXTxTHBqhYP0 .set_pos ,( $T41cD7Agqv9Su7HXTxTHBqhYP1 .x ,+ $T41cD7Agqv9Su7HXTxTHBqhYP1 .width ,/ ,2 ,- ,2 ,5 ,, $T41cD7Agqv9Su7HXTxTHBqhYP1 .y ,- $T41cD7Agqv9Su7HXTxTHBqhYP1 .height ,/ ,2 ,- ,8 ,)",
+                "nodeType": "exprStmt",
+                "id": "yGWXXtPrwhmLGPWysGaknFkn",
+                "locals": []
+              },
+              {
+                "expr": "$CfiMrppnhKrYnoNRNBb9WU12L0 ,:= :colors .linear_gradient ,( :colors .green ,, :colors .red ,, $T41cD7Agqv9Su7HXTxTHBqhYP0 .width ,/ ,5 ,0 ,)",
+                "nodeType": "exprStmt",
+                "id": "CfiMrppnhKrYnoNRNBb9WU12",
+                "locals": [
+                  {
+                    "name": "c",
+                    "type": "Color",
+                    "nodeType": "localDef",
+                    "id": "CfiMrppnhKrYnoNRNBb9WU12L0"
+                  }
+                ]
+              },
+              {
+                "expr": "$T41cD7Agqv9Su7HXTxTHBqhYP0 .set_color ,( $CfiMrppnhKrYnoNRNBb9WU12L0 ,)",
+                "nodeType": "exprStmt",
+                "id": "IV1YI7pu2Wqq02WwtsVvCsiD",
+                "locals": []
+              }
+            ],
+            "id": "T41cD7Agqv9Su7HXTxTHBqhY"
+          }
+        ],
+        "deletedDecls": [],
+        "nodeType": "app",
+        "id": "app"
+      }
+    }
+  ]
+}

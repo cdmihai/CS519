@@ -1,0 +1,515 @@
+{
+  "userid": "wonm",
+  "guid": "e34881ab-6379-491f-d451-7add2b4d0451",
+  "lastStatus": "deleted",
+  "items": [
+    {
+      "seqNo": 0,
+      "time": 1373043435,
+      "scriptId": null,
+      "historyId": "2520292573645238994adea1ca2-0803-459e-85d6-8ca044345d8c",
+      "updateSize": 10694,
+      "ast": {
+        "textVersion": "v2.2,js,ctx",
+        "jsonVersion": "v1.0,resolved,short",
+        "name": "async actions",
+        "comment": "Asynchronous actions and await keyword\n#docs #langauge",
+        "icon": "Alram",
+        "color": "#ffFF0038",
+        "autoIcon": "Alram",
+        "autoColor": "#FF0038",
+        "platform": "current",
+        "rootId": "aqk0Ll0cOOaZmXNEoxrXl8cy",
+        "showAd": false,
+        "isLibrary": false,
+        "allowExport": false,
+        "hasUniqueIds": false,
+        "decls": [
+          {
+            "name": "main",
+            "inParameters": [],
+            "outParameters": [],
+            "isPrivate": false,
+            "isOffloaded": false,
+            "isTest": false,
+            "isAsync": true,
+            "nodeType": "action",
+            "body": [
+              {
+                "text": "`async` and `await` keywords let you create more responsive scripts.",
+                "nodeType": "comment",
+                "id": "cj1fUr8KaGb4f8MaJVRfyPfl"
+              },
+              {
+                "text": "Imagine you want to download some web resource. Normally, you would do it like this:",
+                "nodeType": "comment",
+                "id": "xP2Zy5J6Wo3lW8BnYWcTD8V0"
+              },
+              {
+                "expr": "$YoOgyqM0avaVvwgPNu3KqPW9L0 ,:= :web .download ,( 'scrub0 ,)",
+                "nodeType": "exprStmt",
+                "id": "YoOgyqM0avaVvwgPNu3KqPW9",
+                "locals": [
+                  {
+                    "name": "s",
+                    "type": "String",
+                    "nodeType": "localDef",
+                    "id": "YoOgyqM0avaVvwgPNu3KqPW9L0"
+                  }
+                ]
+              },
+              {
+                "expr": "$YoOgyqM0avaVvwgPNu3KqPW9L0 .post_to_wall",
+                "nodeType": "exprStmt",
+                "id": "M9wI4RZJuRKxAZRxSEHyfXQV",
+                "locals": []
+              },
+              {
+                "text": "While the resource is downloading, your script will not respond to events (for example `shake` event, or the user tapping on some [box](/boxes)). To fix this you can mark the action as `async` by tapping on the action name and checking the box `['async' action]`. Then, we can add `await` keyword in front of `web->download`. Just place the cursor there, and an `[await]` button will appear. The code then looks like this:",
+                "nodeType": "comment",
+                "id": "Xsb0BI64arhr1cC04Zsu5vUU"
+              },
+              {
+                "expr": "$xh4W7qMkexmUKfHim6k0xxFiL0 ,:= ,await :web .download ,( 'scrub0 ,)",
+                "nodeType": "exprStmt",
+                "id": "xh4W7qMkexmUKfHim6k0xxFi",
+                "locals": [
+                  {
+                    "name": "s ",
+                    "type": "String",
+                    "nodeType": "localDef",
+                    "id": "xh4W7qMkexmUKfHim6k0xxFiL0"
+                  }
+                ]
+              },
+              {
+                "expr": "$YoOgyqM0avaVvwgPNu3KqPW9L0 .post_to_wall",
+                "nodeType": "exprStmt",
+                "id": "MgHzMJT1jBdvr5r3srOJoQs9",
+                "locals": []
+              },
+              {
+                "text": "Now, while the resource is downloading, your script will happily respond to other events. Most long-running APIs can be treated with such an `await` keyword.",
+                "nodeType": "comment",
+                "id": "rz2AJcq6oxesgUIRe4i2V0Mx"
+              },
+              {
+                "text": "## watch for changing globals!",
+                "nodeType": "comment",
+                "id": "cZ4METRnJ6uFAq6vgqgqRqf2"
+              },
+              {
+                "text": "There is however a catch. Let's take a look at the following:",
+                "nodeType": "comment",
+                "id": "xbI8g2d4iAQ8Yd8miHxNM5zH"
+              },
+              {
+                "expr": ":data #nwgJ75zGy3yuzY9yKNsPiiu1 ,:= ,0",
+                "nodeType": "exprStmt",
+                "id": "g6JvzR0Qg9dl92nOHMrRp7QE",
+                "locals": []
+              },
+              {
+                "expr": ",await :time .sleep ,( ,5 ,)",
+                "nodeType": "exprStmt",
+                "id": "aopxbdSPYyNKYjNO4bNBtUyO",
+                "locals": []
+              },
+              {
+                "expr": ":data #nwgJ75zGy3yuzY9yKNsPiiu1 .post_to_wall",
+                "nodeType": "exprStmt",
+                "id": "WoSmbfCANm2sxsFaKQATgprq",
+                "locals": []
+              },
+              {
+                "text": "{decl:shake}",
+                "nodeType": "comment",
+                "id": "xb5JQW0FwpkPAHTNQdnwXIp8"
+              },
+              {
+                "text": "If you happen to shake your phone while the main script is sleeping, then the final `post to wall` will display a number greater than zero. This is true in general - while you're awaiting something your other code can run and change the values of global variables. However, the values of local variables cannot be changed by such code. For example the following will always display ``0``:",
+                "nodeType": "comment",
+                "id": "xftyJZyLf2W4nxKXrs2rV44i"
+              },
+              {
+                "expr": "$xXd8ElWY3W7NBO3pQIoTh2kzL0 ,:= ,0",
+                "nodeType": "exprStmt",
+                "id": "xXd8ElWY3W7NBO3pQIoTh2kz",
+                "locals": [
+                  {
+                    "name": "local",
+                    "type": "Number",
+                    "nodeType": "localDef",
+                    "id": "xXd8ElWY3W7NBO3pQIoTh2kzL0"
+                  }
+                ]
+              },
+              {
+                "expr": ",await :time .sleep ,( ,5 ,)",
+                "nodeType": "exprStmt",
+                "id": "BT1dCKSCwHPCl1Sxvg174WrW",
+                "locals": []
+              },
+              {
+                "expr": "$xXd8ElWY3W7NBO3pQIoTh2kzL0 .post_to_wall",
+                "nodeType": "exprStmt",
+                "id": "lXnR4P2cjqp2j7FipTuRhz6W",
+                "locals": []
+              },
+              {
+                "text": "Also, other code can run **only** when you're awaiting something. For example the following will also always display ``0``:",
+                "nodeType": "comment",
+                "id": "pApREq3Lz51H1zfwPECsLZcc"
+              },
+              {
+                "expr": ":data #nwgJ75zGy3yuzY9yKNsPiiu1 ,:= ,0",
+                "nodeType": "exprStmt",
+                "id": "z8MWtccIXz8VlAt03sAXMt0f",
+                "locals": []
+              },
+              {
+                "expr": ":data #nwgJ75zGy3yuzY9yKNsPiiu1 .post_to_wall",
+                "nodeType": "exprStmt",
+                "id": "r2NjWUACXmg32ajyYNAnLE9W",
+                "locals": []
+              },
+              {
+                "text": "## 'async' keyword",
+                "nodeType": "comment",
+                "id": "KpM8E2WJrAywpASUp4elteA1"
+              },
+              {
+                "text": "So far we've been using the `await` keyword, which blocks execution of the current action until the operation completes. You can also start multiple operations in parallel and wait for them later. This is done with `async` keyword. For example:",
+                "nodeType": "comment",
+                "id": "Wbdt955pwR7PDzKaRUD60ab0"
+              },
+              {
+                "expr": "$Z8Nfso54Ur4AbBEHiChsH2aBL0 ,:= ,async :time .sleep ,( ,1 ,)",
+                "nodeType": "exprStmt",
+                "id": "Z8Nfso54Ur4AbBEHiChsH2aB",
+                "locals": [
+                  {
+                    "name": "task0",
+                    "type": "{\"g\":\"Task\",\"a\":[\"Nothing\"]}",
+                    "nodeType": "localDef",
+                    "id": "Z8Nfso54Ur4AbBEHiChsH2aBL0"
+                  }
+                ]
+              },
+              {
+                "expr": "$t2AetawtbpBS4z8E9jp4yKlmL0 ,:= ,async :time .sleep ,( ,1 ,)",
+                "nodeType": "exprStmt",
+                "id": "t2AetawtbpBS4z8E9jp4yKlm",
+                "locals": [
+                  {
+                    "name": "task1",
+                    "type": "{\"g\":\"Task\",\"a\":[\"Nothing\"]}",
+                    "nodeType": "localDef",
+                    "id": "t2AetawtbpBS4z8E9jp4yKlmL0"
+                  }
+                ]
+              },
+              {
+                "expr": ",await $Z8Nfso54Ur4AbBEHiChsH2aBL0",
+                "nodeType": "exprStmt",
+                "id": "DrL04RZ83aykvUMkGlfRSgVH",
+                "locals": []
+              },
+              {
+                "expr": ",await $t2AetawtbpBS4z8E9jp4yKlmL0",
+                "nodeType": "exprStmt",
+                "id": "Yz2QpPI8aReIZxnE1MObY3bZ",
+                "locals": []
+              },
+              {
+                "text": "This code will sleep for about 1 second. The two sleep operations will be started in parallel, and by the time you're done waiting for `task0`, the `task1` will be also finished, so there will be no waiting time.",
+                "nodeType": "comment",
+                "id": "qLLzHGkrxSTzLLaiQsQWUFg5"
+              },
+              {
+                "text": "When you place your cursor behind `async` or `await` keyword, you always get a chance to switch between them.",
+                "nodeType": "comment",
+                "id": "v2aQ1epJs9menCqhylTV9ghk"
+              },
+              {
+                "text": "`async` returns an object called `Task`. In case of `time->sleep` it's `Task of Nothing` because `time->sleep` has no useful return value. But for example for `async web->download(...)` returns a `Task of String`. All `Task` objects have `->completed` property, which lets you check if `await` on such a task would block or not. For example:",
+                "nodeType": "comment",
+                "id": "wa414bzy7qhMTq21Bb54kJWf"
+              },
+              {
+                "expr": "$BELNEdaA1lHMz5CGB74NheGiL0 ,:= ,async :time .sleep ,( ,5 ,)",
+                "nodeType": "exprStmt",
+                "id": "BELNEdaA1lHMz5CGB74NheGi",
+                "locals": [
+                  {
+                    "name": "timer",
+                    "type": "{\"g\":\"Task\",\"a\":[\"Nothing\"]}",
+                    "nodeType": "localDef",
+                    "id": "BELNEdaA1lHMz5CGB74NheGiL0"
+                  }
+                ]
+              },
+              {
+                "expr": "$Ylpz8mQnSLERutpcauGM1y8ML0 ,:= ,async :web .download ,( 'scrub0 ,)",
+                "nodeType": "exprStmt",
+                "id": "Ylpz8mQnSLERutpcauGM1y8M",
+                "locals": [
+                  {
+                    "name": "dl task",
+                    "type": "{\"g\":\"Task\",\"a\":[\"String\"]}",
+                    "nodeType": "localDef",
+                    "id": "Ylpz8mQnSLERutpcauGM1y8ML0"
+                  }
+                ]
+              },
+              {
+                "expr": ",await $BELNEdaA1lHMz5CGB74NheGiL0",
+                "nodeType": "exprStmt",
+                "id": "B3gWIywQ1OVkAYazuPEmUDrW",
+                "locals": []
+              },
+              {
+                "nodeType": "if",
+                "condition": "$Ylpz8mQnSLERutpcauGM1y8ML0 .completed",
+                "thenBody": [
+                  {
+                    "expr": "$T6TqlYk2Gvsf1hOI3n0iT1bAL0 ,:= ,await $Ylpz8mQnSLERutpcauGM1y8ML0",
+                    "nodeType": "exprStmt",
+                    "id": "T6TqlYk2Gvsf1hOI3n0iT1bA",
+                    "locals": [
+                      {
+                        "name": "downloaded string",
+                        "type": "String",
+                        "nodeType": "localDef",
+                        "id": "T6TqlYk2Gvsf1hOI3n0iT1bAL0"
+                      }
+                    ]
+                  },
+                  {
+                    "expr": "$T6TqlYk2Gvsf1hOI3n0iT1bAL0 .post_to_wall",
+                    "nodeType": "exprStmt",
+                    "id": "rlhWlBm4Cr2PFgUeSTygvhsy",
+                    "locals": []
+                  }
+                ],
+                "elseBody": [
+                  {
+                    "expr": "'scrub1 .post_to_wall",
+                    "nodeType": "exprStmt",
+                    "id": "PE2TPpPS2g71Zn2V2pb2gMqI",
+                    "locals": []
+                  }
+                ],
+                "isElseIf": false,
+                "id": "WdAWJRvTItO39bBn1kWc7Ed3",
+                "locals": []
+              },
+              {
+                "text": "This code will be downloading from example.com for exactly 5 seconds , and display \"timeout\" if the download doesn't finish in this time. Note, that even if the download takes only 1 second, the code will still display results only after 5.",
+                "nodeType": "comment",
+                "id": "JrnWqvG144776JRNTbgOOfXv"
+              },
+              {
+                "text": "We can fix that using a separate async action:",
+                "nodeType": "comment",
+                "id": "LUtRFeo2Q1xdlAvvMS8qMqxg"
+              },
+              {
+                "expr": "$QNmXE3bpef2bOZiaW49SLvI7L0 ,:= ,async :time .sleep ,( ,5 ,)",
+                "nodeType": "exprStmt",
+                "id": "QNmXE3bpef2bOZiaW49SLvI7",
+                "locals": [
+                  {
+                    "name": "timer ",
+                    "type": "{\"g\":\"Task\",\"a\":[\"Nothing\"]}",
+                    "nodeType": "localDef",
+                    "id": "QNmXE3bpef2bOZiaW49SLvI7L0"
+                  }
+                ]
+              },
+              {
+                "expr": "$AnuggCgEJ4V4i4an9a2vdEhTL0 ,:= ,async :code #XaGXGE2OOpzYC3u8jOGYrl62 ,( 'scrub0 ,)",
+                "nodeType": "exprStmt",
+                "id": "AnuggCgEJ4V4i4an9a2vdEhT",
+                "locals": [
+                  {
+                    "name": "dl task ",
+                    "type": "{\"g\":\"Task\",\"a\":[\"Nothing\"]}",
+                    "nodeType": "localDef",
+                    "id": "AnuggCgEJ4V4i4an9a2vdEhTL0"
+                  }
+                ]
+              },
+              {
+                "expr": ",await $QNmXE3bpef2bOZiaW49SLvI7L0",
+                "nodeType": "exprStmt",
+                "id": "gEO2lT9btVxPubk9ys2wid4e",
+                "locals": []
+              },
+              {
+                "nodeType": "if",
+                "condition": ",not $AnuggCgEJ4V4i4an9a2vdEhTL0 .completed",
+                "thenBody": [
+                  {
+                    "expr": ":data #xyUMjz4oCmtDcV2iFupBgZjq ,:= T",
+                    "nodeType": "exprStmt",
+                    "id": "M4UcNHB9BV74nPCYQGS3fPKD",
+                    "locals": []
+                  },
+                  {
+                    "expr": "'scrub1 .post_to_wall",
+                    "nodeType": "exprStmt",
+                    "id": "PzBXMUkzquTd89Zn42UlVxSC",
+                    "locals": []
+                  }
+                ],
+                "isElseIf": false,
+                "id": "xCP337TOT3GJtfV8B32n9oXL",
+                "locals": []
+              },
+              {
+                "text": "{decl:download and show}",
+                "nodeType": "comment",
+                "id": "Jj82anVJ4MWgOIRavkUfxZ2P"
+              }
+            ],
+            "id": "E5leoNyeIFUiIRabOxYku0hy"
+          },
+          {
+            "name": "shake count",
+            "comment": "",
+            "type": "Number",
+            "isReadonly": false,
+            "isTransient": true,
+            "nodeType": "data",
+            "id": "nwgJ75zGy3yuzY9yKNsPiiu1"
+          },
+          {
+            "name": "shake",
+            "inParameters": [],
+            "outParameters": [],
+            "isPrivate": false,
+            "isOffloaded": false,
+            "isTest": false,
+            "isAsync": true,
+            "nodeType": "event",
+            "eventName": "shake",
+            "eventVariableId": null,
+            "body": [
+              {
+                "expr": ":data #nwgJ75zGy3yuzY9yKNsPiiu1 ,:= :data #nwgJ75zGy3yuzY9yKNsPiiu1 ,+ ,1",
+                "nodeType": "exprStmt",
+                "id": "T89uORIrVTo9wHPa7FAEBtRZ",
+                "locals": []
+              }
+            ],
+            "id": "UBjBKHuGEBMB3f25Aea5RsFk"
+          },
+          {
+            "name": "download and show",
+            "inParameters": [
+              {
+                "name": "url",
+                "type": "String",
+                "nodeType": "localDef",
+                "id": "XaGXGE2OOpzYC3u8jOGYrl62P0"
+              }
+            ],
+            "outParameters": [],
+            "isPrivate": true,
+            "isOffloaded": false,
+            "isTest": false,
+            "isAsync": true,
+            "nodeType": "action",
+            "body": [
+              {
+                "expr": ":data #xyUMjz4oCmtDcV2iFupBgZjq ,:= F",
+                "nodeType": "exprStmt",
+                "id": "XfgQA9eRmYepNFH6af6hvXRK",
+                "locals": []
+              },
+              {
+                "expr": "$s0nW6kTJziNrOVmmzVv7q5aaL0 ,:= ,await :web .download ,( $XaGXGE2OOpzYC3u8jOGYrl62P0 ,)",
+                "nodeType": "exprStmt",
+                "id": "s0nW6kTJziNrOVmmzVv7q5aa",
+                "locals": [
+                  {
+                    "name": "s",
+                    "type": "String",
+                    "nodeType": "localDef",
+                    "id": "s0nW6kTJziNrOVmmzVv7q5aaL0"
+                  }
+                ]
+              },
+              {
+                "nodeType": "if",
+                "condition": ",not :data #xyUMjz4oCmtDcV2iFupBgZjq",
+                "thenBody": [
+                  {
+                    "expr": "$s0nW6kTJziNrOVmmzVv7q5aaL0 .post_to_wall",
+                    "nodeType": "exprStmt",
+                    "id": "euYBTZC37vCKjKrpPIwubKYk",
+                    "locals": []
+                  }
+                ],
+                "isElseIf": false,
+                "id": "VagOzgl7R6dq28kt1rebP4k4",
+                "locals": []
+              }
+            ],
+            "id": "XaGXGE2OOpzYC3u8jOGYrl62"
+          },
+          {
+            "name": "download cancelled",
+            "comment": "",
+            "type": "Boolean",
+            "isReadonly": false,
+            "isTransient": true,
+            "nodeType": "data",
+            "id": "xyUMjz4oCmtDcV2iFupBgZjq"
+          }
+        ],
+        "deletedDecls": [],
+        "nodeType": "app",
+        "id": "app"
+      }
+    },
+    {
+      "seqNo": 1,
+      "time": 1373404190,
+      "scriptId": null,
+      "historyId": "25202889660989592904838b8c2-b9fb-4c9e-9334-f56a27fce2e1",
+      "updateSize": 45,
+      "updates": {
+        "app": {
+          "rootId": "w8DrDhFslSUwmgd9WUYSE8Z6"
+        }
+      }
+    },
+    {
+      "seqNo": 2,
+      "time": 1373488510,
+      "scriptId": null,
+      "historyId": "252028812289790707820b878a3-0f49-470d-ae66-d4971ef914df",
+      "updateSize": 112,
+      "updates": {
+        "app": {
+          "comment": "Asynchronous actions and await keyword #docs #langauge",
+          "rootId": "xzWWerSu2GifRwoYaLHUCGOR"
+        }
+      }
+    },
+    {
+      "seqNo": 3,
+      "time": 1373488519,
+      "scriptId": null,
+      "historyId": "25202881228085383701d372b0a-66d5-49dd-9f73-e1a55cb414ff",
+      "updateSize": 45,
+      "updates": {
+        "app": {
+          "rootId": "PB4r94XwWaNBjV9fprm61TKl"
+        }
+      }
+    }
+  ]
+}

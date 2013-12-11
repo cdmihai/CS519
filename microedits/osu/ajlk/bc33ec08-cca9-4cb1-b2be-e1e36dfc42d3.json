@@ -1,0 +1,400 @@
+{
+  "userid": "ajlk",
+  "guid": "bc33ec08-cca9-4cb1-b2be-e1e36dfc42d3",
+  "lastStatus": "deleted",
+  "items": [
+    {
+      "seqNo": 0,
+      "time": 1350496162,
+      "scriptId": null,
+      "historyId": "2520518046376948326afa81d5b-a309-4dc3-adfe-38dbab553389",
+      "updateSize": 7599,
+      "ast": {
+        "textVersion": "v2.2,js,ctx",
+        "jsonVersion": "v1.0,resolved,short",
+        "name": "social stuff",
+        "comment": "Demonstrates interaction with social networks",
+        "icon": "AddUser",
+        "color": "#ff00008b",
+        "autoIcon": "AddUser",
+        "autoColor": "#00008b",
+        "platform": "current",
+        "rootId": "xH4rmOYIUPPRs233IVH7j1nZ",
+        "showAd": false,
+        "isLibrary": false,
+        "allowExport": false,
+        "hasUniqueIds": false,
+        "decls": [
+          {
+            "name": "search facebook friends",
+            "inParameters": [
+              {
+                "name": "term",
+                "type": "String",
+                "nodeType": "localDef",
+                "id": "FCHlhandMeSCTX18hE1AFXUdP0"
+              }
+            ],
+            "outParameters": [],
+            "isPrivate": false,
+            "isOffloaded": false,
+            "isTest": false,
+            "isAsync": false,
+            "nodeType": "action",
+            "body": [
+              {
+                "text": "Searches your facebook friends",
+                "nodeType": "comment",
+                "id": "KpTK4pTmkjp8m1EenqdlK7ue"
+              },
+              {
+                "expr": "$FCHlhandMeSCTX18hE1AFXUdP0 ,:= $FCHlhandMeSCTX18hE1AFXUdP0 .to_lower_case",
+                "nodeType": "exprStmt",
+                "id": "xXvEaDIqA7JvCy1I8WV0GvVu",
+                "locals": []
+              },
+              {
+                "expr": "$A4WCFEfUBAbcvh1fh9FUZ0rkL0 ,:= :social .contacts ,( 'scrub0 ,)",
+                "nodeType": "exprStmt",
+                "id": "A4WCFEfUBAbcvh1fh9FUZ0rk",
+                "locals": [
+                  {
+                    "name": "contacts",
+                    "type": "Contact Collection",
+                    "nodeType": "localDef",
+                    "id": "A4WCFEfUBAbcvh1fh9FUZ0rkL0"
+                  }
+                ]
+              },
+              {
+                "collection": "$A4WCFEfUBAbcvh1fh9FUZ0rkL0",
+                "conditions": [
+                  {
+                    "condition": "T",
+                    "nodeType": "where",
+                    "id": "teDZR1cBpTsJnOLHq6Un9FH2",
+                    "locals": []
+                  }
+                ],
+                "body": [
+                  {
+                    "nodeType": "if",
+                    "condition": "$X2uR6jwPvXo2zoQVrLZ3M7G9B0 .name .to_lower_case .contains ,( $FCHlhandMeSCTX18hE1AFXUdP0 ,)",
+                    "thenBody": [
+                      {
+                        "expr": "$X2uR6jwPvXo2zoQVrLZ3M7G9B0 .post_to_wall",
+                        "nodeType": "exprStmt",
+                        "id": "apZSQUJOINk6r6Gh4zpRBl73",
+                        "locals": []
+                      }
+                    ],
+                    "isElseIf": false,
+                    "id": "H2DrajiiCVyMEdnCmBovA4SU",
+                    "locals": []
+                  }
+                ],
+                "nodeType": "foreach",
+                "id": "X2uR6jwPvXo2zoQVrLZ3M7G9",
+                "locals": [
+                  {
+                    "name": "contact",
+                    "type": "Contact",
+                    "nodeType": "localDef",
+                    "id": "X2uR6jwPvXo2zoQVrLZ3M7G9B0"
+                  }
+                ]
+              }
+            ],
+            "id": "FCHlhandMeSCTX18hE1AFXUd"
+          },
+          {
+            "name": "search social networks",
+            "inParameters": [
+              {
+                "name": "search terms",
+                "type": "String",
+                "nodeType": "localDef",
+                "id": "xn3OK2BBbUm2b6AE25WSIStRP0"
+              }
+            ],
+            "outParameters": [],
+            "isPrivate": false,
+            "isOffloaded": false,
+            "isTest": false,
+            "isAsync": false,
+            "nodeType": "action",
+            "body": [
+              {
+                "text": "Searches for tweets and facebook posts.",
+                "nodeType": "comment",
+                "id": "FnMUoH1T4WzZ1IO5Dr2MbTQR"
+              },
+              {
+                "expr": "$HENcGOFeKl2Drn7dtFN63cVVL0 ,:= :social .search ,( 'scrub1 ,, $xn3OK2BBbUm2b6AE25WSIStRP0 ,)",
+                "nodeType": "exprStmt",
+                "id": "HENcGOFeKl2Drn7dtFN63cVV",
+                "locals": [
+                  {
+                    "name": "messages",
+                    "type": "Message Collection",
+                    "nodeType": "localDef",
+                    "id": "HENcGOFeKl2Drn7dtFN63cVVL0"
+                  }
+                ]
+              },
+              {
+                "text": "messages contains a list of 'social' message. a message could represent a Twitter tweet, Facebook post, rss entry, etc...",
+                "nodeType": "comment",
+                "id": "g6TEY1YdGQ4xKJIG0ZvFnafe"
+              },
+              {
+                "expr": "$HENcGOFeKl2Drn7dtFN63cVVL0 .add_many ,( :social .search ,( 'scrub0 ,, $xn3OK2BBbUm2b6AE25WSIStRP0 ,) ,)",
+                "nodeType": "exprStmt",
+                "id": "M8L7RDZ4zch7Edw9FihcP1Yo",
+                "locals": []
+              },
+              {
+                "expr": "$HENcGOFeKl2Drn7dtFN63cVVL0 .sort_by_date",
+                "nodeType": "exprStmt",
+                "id": "zeeNcXe0gOwuST44c01dUFzr",
+                "locals": []
+              },
+              {
+                "text": "messages sorted by time so that the newest messages show up on top of the wall",
+                "nodeType": "comment",
+                "id": "xXxLRmDvq42DSLwKBsWMigVu"
+              },
+              {
+                "expr": "$HENcGOFeKl2Drn7dtFN63cVVL0 .post_to_wall",
+                "nodeType": "exprStmt",
+                "id": "a1HjJ2n2pshTT4Nu8tUnmF2c",
+                "locals": []
+              }
+            ],
+            "id": "xn3OK2BBbUm2b6AE25WSIStR"
+          },
+          {
+            "name": "search TouchDevelop",
+            "inParameters": [],
+            "outParameters": [],
+            "isPrivate": false,
+            "isOffloaded": false,
+            "isTest": false,
+            "isAsync": false,
+            "nodeType": "action",
+            "body": [
+              {
+                "text": "Search tweets and facebook posts about TouchDevelop.",
+                "nodeType": "comment",
+                "id": "LQ2jILsXiJA0yv2zlT4jXIxs"
+              },
+              {
+                "expr": ":code #xn3OK2BBbUm2b6AE25WSIStR ,( 'scrub2 ,)",
+                "nodeType": "exprStmt",
+                "id": "xhi92pS0wc4R2d5vwgLfoXfj",
+                "locals": []
+              },
+              {
+                "expr": ":wall .set_search ,( T ,)",
+                "nodeType": "exprStmt",
+                "id": "Amiec9329bxHGi8yKdvpaNtJ",
+                "locals": []
+              }
+            ],
+            "id": "Dvmu2R5qB9HCHvqg4PoBbXzz"
+          },
+          {
+            "name": "search places",
+            "inParameters": [],
+            "outParameters": [],
+            "isPrivate": false,
+            "isOffloaded": false,
+            "isTest": false,
+            "isAsync": false,
+            "nodeType": "action",
+            "body": [
+              {
+                "text": "Searches for nearby Facebook places",
+                "nodeType": "comment",
+                "id": "ll6xFKjKJxzypnl4nm2S44bC"
+              },
+              {
+                "expr": "$tu482zQlPCfWj1MrTaAKvImlL0 ,:= :senses .current_location",
+                "nodeType": "exprStmt",
+                "id": "tu482zQlPCfWj1MrTaAKvIml",
+                "locals": [
+                  {
+                    "name": "loc",
+                    "type": "Location",
+                    "nodeType": "localDef",
+                    "id": "tu482zQlPCfWj1MrTaAKvImlL0"
+                  }
+                ]
+              },
+              {
+                "text": "loc contains our current location",
+                "nodeType": "comment",
+                "id": "eyYVxzZBnhRmzBU6YQm8x94v"
+              },
+              {
+                "expr": "$xP7ew06wSKclZoDos443elV6L0 ,:= :social .search_places_nearby ,( 'scrub0 ,, ' ,, $tu482zQlPCfWj1MrTaAKvImlL0 ,, ,1 ,0 ,0 ,0 ,. ,0 ,)",
+                "nodeType": "exprStmt",
+                "id": "xP7ew06wSKclZoDos443elV6",
+                "locals": [
+                  {
+                    "name": "places",
+                    "type": "Place Collection",
+                    "nodeType": "localDef",
+                    "id": "xP7ew06wSKclZoDos443elV6L0"
+                  }
+                ]
+              },
+              {
+                "text": "places contains all the Facebook places within a kilometer radius",
+                "nodeType": "comment",
+                "id": "pNiaxXk1fV5LSAlYxvisbQdi"
+              },
+              {
+                "expr": "$xP7ew06wSKclZoDos443elV6L0 .post_to_wall",
+                "nodeType": "exprStmt",
+                "id": "OwUlVgRIlYAHUOkrpu9d5oyn",
+                "locals": []
+              }
+            ],
+            "id": "SbenVJjc4q4v7tXzApqxTLTr"
+          },
+          {
+            "name": "quick share",
+            "inParameters": [],
+            "outParameters": [],
+            "isPrivate": false,
+            "isOffloaded": false,
+            "isTest": false,
+            "isAsync": false,
+            "nodeType": "action",
+            "body": [
+              {
+                "text": "Quick and easy way to share messages on social networks",
+                "nodeType": "comment",
+                "id": "v7WCPJ4e07ZkmhDlQc24aq1R"
+              },
+              {
+                "expr": "'scrub3 .share ,( ' ,)",
+                "nodeType": "exprStmt",
+                "id": "sqWV9tgesB2GHBfQ213JapkV",
+                "locals": []
+              },
+              {
+                "text": "since we did not provide the name of a particular social network, TouchDevelop will display a list",
+                "nodeType": "comment",
+                "id": "x64whfZybhO901s2cKk4W1u5"
+              }
+            ],
+            "id": "q1gqp7fuz4PsowjTCV4lnZOU"
+          },
+          {
+            "name": "snap to facebook",
+            "inParameters": [],
+            "outParameters": [],
+            "isPrivate": false,
+            "isOffloaded": false,
+            "isTest": false,
+            "isAsync": false,
+            "nodeType": "action",
+            "body": [
+              {
+                "text": "Takes a picture and posts it to Facebook.",
+                "nodeType": "comment",
+                "id": "qnqUmQW2Zh7IuEDkfWEnGU9e"
+              },
+              {
+                "expr": "$x8TPoaNiuoKmtufXSbuwAEBzL0 ,:= :senses .take_camera_picture",
+                "nodeType": "exprStmt",
+                "id": "x8TPoaNiuoKmtufXSbuwAEBz",
+                "locals": [
+                  {
+                    "name": "pic",
+                    "type": "Picture",
+                    "nodeType": "localDef",
+                    "id": "x8TPoaNiuoKmtufXSbuwAEBzL0"
+                  }
+                ]
+              },
+              {
+                "nodeType": "if",
+                "condition": "$x8TPoaNiuoKmtufXSbuwAEBzL0 .is_invalid",
+                "thenBody": [
+                  {
+                    "text": "the user might have canceled the camera capture, so it is always good to check if pic is valid",
+                    "nodeType": "comment",
+                    "id": "TyZsOlNNJlLdzJVVcCXFI4B0"
+                  },
+                  {
+                    "expr": ":time .stop",
+                    "nodeType": "exprStmt",
+                    "id": "IIyGVw8RkdsW37kWQmiFZcaB",
+                    "locals": []
+                  },
+                  {
+                    "text": "we stopped executing since there was no picture",
+                    "nodeType": "comment",
+                    "id": "aFkx5cEDl4dDPApG4E3XnWkI"
+                  }
+                ],
+                "isElseIf": false,
+                "id": "UGyBXLFhl0nJK6xgqriGQ5iu",
+                "locals": []
+              },
+              {
+                "expr": "$R4E0FF4KxfxzSehv7kO9huujL0 ,:= :senses .current_location",
+                "nodeType": "exprStmt",
+                "id": "R4E0FF4KxfxzSehv7kO9huuj",
+                "locals": [
+                  {
+                    "name": "loc",
+                    "type": "Location",
+                    "nodeType": "localDef",
+                    "id": "R4E0FF4KxfxzSehv7kO9huujL0"
+                  }
+                ]
+              },
+              {
+                "expr": "$vh89zqTcmrlSBQlH8FjXVVRVL0 ,:= :locations .describe_location ,( $R4E0FF4KxfxzSehv7kO9huujL0 ,)",
+                "nodeType": "exprStmt",
+                "id": "vh89zqTcmrlSBQlH8FjXVVRV",
+                "locals": [
+                  {
+                    "name": "address",
+                    "type": "String",
+                    "nodeType": "localDef",
+                    "id": "vh89zqTcmrlSBQlH8FjXVVRVL0"
+                  }
+                ]
+              },
+              {
+                "text": "address contains the civic address at the current location. this is commonly called 'reverse geocoding'.",
+                "nodeType": "comment",
+                "id": "PfF1GGRZSegnRq7CDxbYrMpk"
+              },
+              {
+                "expr": "$x8TPoaNiuoKmtufXSbuwAEBzL0 .share ,( 'scrub0 ,, 'scrub4 ,∥ $vh89zqTcmrlSBQlH8FjXVVRVL0 ,)",
+                "nodeType": "exprStmt",
+                "id": "xKdP25Bre7JqTLCU9rI7ncRl",
+                "locals": []
+              },
+              {
+                "text": "the funny || character glues the two string together. You've just posted a picture on Facebook, congratulations!",
+                "nodeType": "comment",
+                "id": "bwyKnw7HNdNtWpw2P5IOMghG"
+              }
+            ],
+            "id": "gNdCfc2y34A2Z5D1wUsrCr5i"
+          }
+        ],
+        "deletedDecls": [],
+        "nodeType": "app",
+        "id": "app"
+      }
+    }
+  ]
+}

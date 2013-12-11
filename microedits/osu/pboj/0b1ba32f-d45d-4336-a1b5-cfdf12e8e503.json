@@ -1,0 +1,2304 @@
+{
+  "userid": "pboj",
+  "guid": "0b1ba32f-d45d-4336-a1b5-cfdf12e8e503",
+  "lastStatus": "deleted",
+  "items": [
+    {
+      "seqNo": 0,
+      "time": 1366687126,
+      "scriptId": "vrsr",
+      "historyId": "2520356136734494731add12be9-b989-450b-a288-0447671f3b67",
+      "updateSize": 48423,
+      "ast": {
+        "textVersion": "v2.2,js,ctx",
+        "jsonVersion": "v1.0,resolved,short",
+        "name": "Japanese Study",
+        "comment": "Japanese Study Project\n\nSummary:\nThis project is an attempt to create a learning tool that can be used by people who are interested or are currently studying the japanese language. It is intended to cover Hiragana, Katakana and the first 80 Kanji (first grade).\n\nAs well as providing study information, the app will also allow users to test their knowledge by identifying the japanese character that matches with the english translation.\n\nFunctional Expectations:\n- Display menu system for users to navigate between study and testing\n- Display all Hiragana Characters with english translation\n- Display all Katakana Characters with english translation\n- Display first 80 Kanji with their english translation\n- When user clicks on Kanji in study mode, the program will switch to a more detailed view telling the user the specific details about the Kanji\n- Each study mode will contain a quick 'test' button that will link to the study mode for the contents of that study scene only\n- When using the test modes the program will select randomly from the study set and retrieve a value to display along with 4 different options for answers\n- During the tests your score will be retained so you can determine how many you got right and wrong during the test\n\nTasks to be completed in future version:\n- Test Modes for Hiragana(pg1, pg2), Katakana(pg1, pg2), Kanji\n- Finish the menu navigation to link to test modes\n- Create the Katakana Study sheet and link navigation\n- Populate the rest of the Kanji list\n- Create and link the rest of Large Kanji Details\n- Create scoring system for test modes\n\nOutsourced Content:\n[Background Watermark]: http://www.asianartjewelry.org/wp-content/uploads/2013/03/Asian-Art-Jewelry-91.jpg\n\nNavigation Logic\n[Reference for the method LoadScene(Number) which works as a navigation controller for the UI in this program. You pass in the number corresponding to the scene you want to load, and it loads the rest. The following is the structure of the menu]\n\n1. Main Menu\n2. Study Menu\n2.1 Hiragana Page 1(Study)\n2.2 Hiragana Page 2(Study)\n2.3 Katakana Page1 (Study)\n2.4 Katakana Page2 (Study)\n2.5 Kanji (Study)\n2.5.1-2.5.80 Large Kanji Info Page\n3. Test Menu\n3.1 Test All Hiragana\n3.1.1 Test Hiragana from Page1\n3.1.2 Test Hiragana from Page2\n3.2 Test All Katakana\n3.2.1 Test Katakana from Page1\n3.2.2 Test Katakana from Page2\n3.3 Test All Kanji",
+        "icon": "Heart",
+        "color": "#ffF4BBFF",
+        "autoIcon": "Heart",
+        "autoColor": "#F4BBFF",
+        "platform": "current",
+        "rootId": "KEsPABxKuHzeozFUfHj1Vs6z",
+        "showAd": false,
+        "isLibrary": false,
+        "allowExport": false,
+        "hasUniqueIds": false,
+        "decls": [
+          {
+            "name": "main",
+            "inParameters": [],
+            "outParameters": [],
+            "isPrivate": false,
+            "isOffloaded": false,
+            "isTest": false,
+            "isAsync": false,
+            "nodeType": "action",
+            "body": [
+              {
+                "text": "Calls Load Scene and redirects to the main menu",
+                "nodeType": "comment",
+                "id": "xoNSrg9I9nspqFntfe8Acrm8"
+              },
+              {
+                "expr": ":code #Eqlu2HJmzfCQJ1PPW7ho2RpL ,( '1 ,)",
+                "nodeType": "exprStmt",
+                "id": "HyETlCxHFfhgjI253gOc9Uju",
+                "locals": []
+              }
+            ],
+            "id": "X2dqB2jwJrBJppTwl5TrGMxs"
+          },
+          {
+            "name": "HiraganaSheet_1",
+            "comment": "",
+            "type": "Picture",
+            "isReadonly": true,
+            "isTransient": true,
+            "nodeType": "art",
+            "url": "https://az31353.vo.msecnd.net/pub/ozguvyqs",
+            "id": "PI4EK8XtTDiAt6KcwxieGhU0"
+          },
+          {
+            "name": "AppBoard",
+            "comment": "",
+            "type": "Board",
+            "isReadonly": false,
+            "isTransient": true,
+            "nodeType": "data",
+            "id": "iLTjmK1NRZka0tm1BEmUuxLs"
+          },
+          {
+            "name": "LoadScene",
+            "inParameters": [
+              {
+                "name": "SceneName",
+                "type": "String",
+                "nodeType": "localDef",
+                "id": "Eqlu2HJmzfCQJ1PPW7ho2RpLP0"
+              }
+            ],
+            "outParameters": [],
+            "isPrivate": true,
+            "isOffloaded": false,
+            "isTest": false,
+            "isAsync": false,
+            "nodeType": "action",
+            "body": [
+              {
+                "text": "Central Point of navigation operations, takes the index of the scene needed, decodes the information and loads the relevant scene",
+                "nodeType": "comment",
+                "id": "sSkhY75CyPySond2mF1RfReI"
+              },
+              {
+                "expr": ":wall .clear",
+                "nodeType": "exprStmt",
+                "id": "jzQwMKga8F6MNEBi7JbUFkq6",
+                "locals": []
+              },
+              {
+                "expr": ":data #iLTjmK1NRZka0tm1BEmUuxLs ,:= :media .create_portrait_board ,( ,4 ,8 ,0 ,, ,8 ,0 ,0 ,)",
+                "nodeType": "exprStmt",
+                "id": "xGzaYBmGSxPGS9tR76aJ6hHf",
+                "locals": []
+              },
+              {
+                "expr": ":data #xwTc6Atl8VU4Ei4V97AuY9bu ,:= :data #iLTjmK1NRZka0tm1BEmUuxLs .create_picture ,( :art #l93XCK7yPxP6ywOg5aTYa282 ,)",
+                "nodeType": "exprStmt",
+                "id": "ZFJ2HpJv0n09e42sh2Htgufz",
+                "locals": []
+              },
+              {
+                "expr": ":data #HiLresMFab0Qokx2O3lIAf4x ,:= $Eqlu2HJmzfCQJ1PPW7ho2RpLP0",
+                "nodeType": "exprStmt",
+                "id": "Uj1RXE4qqSHjYHV2dFu45C12",
+                "locals": []
+              },
+              {
+                "nodeType": "if",
+                "condition": "$Eqlu2HJmzfCQJ1PPW7ho2RpLP0 .equals ,( '2/002e1 ,)",
+                "thenBody": [
+                  {
+                    "expr": ":code #Dm438bguYrlUfU1gXBYMThUL ,( T ,, :art #PI4EK8XtTDiAt6KcwxieGhU0 ,, T ,, F ,)",
+                    "nodeType": "exprStmt",
+                    "id": "xNhbqEkeCyVtpc8Ddx4GsxbT",
+                    "locals": []
+                  }
+                ],
+                "isElseIf": false,
+                "id": "NW7PNin1qdUaSFCy6vq1VWhC",
+                "locals": []
+              },
+              {
+                "nodeType": "if",
+                "condition": "$Eqlu2HJmzfCQJ1PPW7ho2RpLP0 .equals ,( '2/002e2 ,)",
+                "thenBody": [
+                  {
+                    "expr": ":code #Dm438bguYrlUfU1gXBYMThUL ,( F ,, :art #EpoYd2lmkbh21aQkRuf4z2nb ,, F ,, T ,)",
+                    "nodeType": "exprStmt",
+                    "id": "ES5D5u2UXLLB4ygR8mBTe2xR",
+                    "locals": []
+                  }
+                ],
+                "isElseIf": true,
+                "id": "PQK4Cnzfc7WWMneY12J2EMRN",
+                "locals": []
+              },
+              {
+                "nodeType": "if",
+                "condition": "$Eqlu2HJmzfCQJ1PPW7ho2RpLP0 .equals ,( '1 ,) ,or $Eqlu2HJmzfCQJ1PPW7ho2RpLP0 .equals ,( '2 ,) ,or $Eqlu2HJmzfCQJ1PPW7ho2RpLP0 .equals ,( '3 ,)",
+                "thenBody": [
+                  {
+                    "expr": ":code #S4qyO7tzVmO2J4bULKlQN82N",
+                    "nodeType": "exprStmt",
+                    "id": "VApZeItNEjWGB5q2AEXpVVmX",
+                    "locals": []
+                  }
+                ],
+                "isElseIf": true,
+                "id": "Ns0oposD2YWlMPxNcbh26ybO",
+                "locals": []
+              },
+              {
+                "nodeType": "if",
+                "condition": "$Eqlu2HJmzfCQJ1PPW7ho2RpLP0 .equals ,( '2/002e5 ,)",
+                "thenBody": [
+                  {
+                    "expr": ":code #Dm438bguYrlUfU1gXBYMThUL ,( F ,, :art #IGwH0y24Fz7KzFeOZzKJk7vl ,, T ,, F ,)",
+                    "nodeType": "exprStmt",
+                    "id": "JaSfkviOAorDf4m46G44SMhq",
+                    "locals": []
+                  }
+                ],
+                "isElseIf": true,
+                "id": "xVIVxXoatcF4ZPc681Bwd0t1",
+                "locals": []
+              },
+              {
+                "nodeType": "if",
+                "condition": "$Eqlu2HJmzfCQJ1PPW7ho2RpLP0 .contains ,( '2/002e5/002e ,)",
+                "thenBody": [
+                  {
+                    "expr": ":code #BEgK00sLcppr2RJ2MxtQMAGf ,( $Eqlu2HJmzfCQJ1PPW7ho2RpLP0 .replace_regex ,( '2/002e5/002e ,, ' ,) .to_number ,)",
+                    "nodeType": "exprStmt",
+                    "id": "UtyyLP38Wp99ZuKfXypAMgTs",
+                    "locals": []
+                  }
+                ],
+                "isElseIf": true,
+                "id": "xOXQFyjyjkIs80CceWMUISn7",
+                "locals": []
+              },
+              {
+                "expr": ":data #iLTjmK1NRZka0tm1BEmUuxLs .post_to_wall",
+                "nodeType": "exprStmt",
+                "id": "MvyGykBepL8ggIxEI71UcFKI",
+                "locals": []
+              }
+            ],
+            "id": "Eqlu2HJmzfCQJ1PPW7ho2RpL"
+          },
+          {
+            "name": "backgroundArt_texture",
+            "comment": "Art sourced from:\nhttp://www.asianartjewelry.org/wp-content/uploads/2013/03/Asian-Art-Jewelry-91.jpg\n",
+            "type": "Picture",
+            "isReadonly": true,
+            "isTransient": true,
+            "nodeType": "art",
+            "url": "https://az31353.vo.msecnd.net/pub/mopbqhum",
+            "id": "l93XCK7yPxP6ywOg5aTYa282"
+          },
+          {
+            "name": "Background",
+            "comment": "",
+            "type": "Sprite",
+            "isReadonly": false,
+            "isTransient": true,
+            "nodeType": "data",
+            "id": "xwTc6Atl8VU4Ei4V97AuY9bu"
+          },
+          {
+            "name": "currentPage",
+            "comment": "",
+            "type": "String",
+            "isReadonly": false,
+            "isTransient": false,
+            "nodeType": "data",
+            "id": "HiLresMFab0Qokx2O3lIAf4x"
+          },
+          {
+            "name": "HomeBtn",
+            "comment": "",
+            "type": "Sprite",
+            "isReadonly": false,
+            "isTransient": true,
+            "nodeType": "data",
+            "id": "xjoFxrbe2pf3x4PhC7y3We40"
+          },
+          {
+            "name": "HomeBtn_Texture",
+            "comment": "",
+            "type": "Picture",
+            "isReadonly": true,
+            "isTransient": true,
+            "nodeType": "art",
+            "url": "https://az31353.vo.msecnd.net/pub/jimxuvgz",
+            "id": "HkSxGQEJGsMLTKXrD7mKbXqj"
+          },
+          {
+            "name": "TestBtn_Texture",
+            "comment": "",
+            "type": "Picture",
+            "isReadonly": true,
+            "isTransient": true,
+            "nodeType": "art",
+            "url": "https://az31353.vo.msecnd.net/pub/adrqairu",
+            "id": "xqKlrJxJ2i722cKFNVapCgPi"
+          },
+          {
+            "name": "NextPageBtn_Texture",
+            "comment": "",
+            "type": "Picture",
+            "isReadonly": true,
+            "isTransient": true,
+            "nodeType": "art",
+            "url": "https://az31353.vo.msecnd.net/pub/aeykmvgj",
+            "id": "DFeihqz5uDXyi3mFqgDw4E7C"
+          },
+          {
+            "name": "TestBtn",
+            "comment": "",
+            "type": "Sprite",
+            "isReadonly": false,
+            "isTransient": true,
+            "nodeType": "data",
+            "id": "mtjSkIVnVOlEDFjU6QY2rgGL"
+          },
+          {
+            "name": "NextPageBtn",
+            "comment": "",
+            "type": "Sprite",
+            "isReadonly": false,
+            "isTransient": true,
+            "nodeType": "data",
+            "id": "EMt11d2kJH6N5IorsCXxLrPb"
+          },
+          {
+            "name": "AddHomeBtn",
+            "inParameters": [],
+            "outParameters": [],
+            "isPrivate": true,
+            "isOffloaded": false,
+            "isTest": false,
+            "isAsync": false,
+            "nodeType": "action",
+            "body": [
+              {
+                "text": "Add Home Button to current Scene",
+                "nodeType": "comment",
+                "id": "Dd0kImi2BYF1HSF3VsHan4Yi"
+              },
+              {
+                "expr": ":data #xjoFxrbe2pf3x4PhC7y3We40 ,:= :data #iLTjmK1NRZka0tm1BEmUuxLs .create_picture ,( :art #HkSxGQEJGsMLTKXrD7mKbXqj ,)",
+                "nodeType": "exprStmt",
+                "id": "CzM3BlRZInL3lL3WLoxngAOf",
+                "locals": []
+              },
+              {
+                "expr": ":data #xjoFxrbe2pf3x4PhC7y3We40 .set_pos ,( ,8 ,0 ,. ,5 ,, ,7 ,3 ,4 ,)",
+                "nodeType": "exprStmt",
+                "id": "x3RQ87NVTvDJp6fXhPonTn4R",
+                "locals": []
+              }
+            ],
+            "id": "GLAyFRCdYPVxJutjxASOlujP"
+          },
+          {
+            "name": "AddTestBtn",
+            "inParameters": [],
+            "outParameters": [],
+            "isPrivate": true,
+            "isOffloaded": false,
+            "isTest": false,
+            "isAsync": false,
+            "nodeType": "action",
+            "body": [
+              {
+                "text": "Adds Run Test Btn to current Scene",
+                "nodeType": "comment",
+                "id": "xnSKsqZfFMOFyLOnWQKjs2Fv"
+              },
+              {
+                "expr": ":data #mtjSkIVnVOlEDFjU6QY2rgGL ,:= :data #iLTjmK1NRZka0tm1BEmUuxLs .create_picture ,( :art #xqKlrJxJ2i722cKFNVapCgPi ,)",
+                "nodeType": "exprStmt",
+                "id": "TaranqOp35kl6oxkqrXMTanj",
+                "locals": []
+              },
+              {
+                "expr": ":data #mtjSkIVnVOlEDFjU6QY2rgGL .set_pos ,( ,1 ,6 ,9 ,+ ,7 ,1 ,. ,5 ,, ,7 ,3 ,4 ,)",
+                "nodeType": "exprStmt",
+                "id": "eY2tO9VFcUtMLmFw7g0446MQ",
+                "locals": []
+              }
+            ],
+            "id": "z29EDE2AbVqO4O224QhAO3OC"
+          },
+          {
+            "name": "AddNextPageBtn",
+            "inParameters": [],
+            "outParameters": [],
+            "isPrivate": true,
+            "isOffloaded": false,
+            "isTest": false,
+            "isAsync": false,
+            "nodeType": "action",
+            "body": [
+              {
+                "text": "Adds Next Page Button to current Scene",
+                "nodeType": "comment",
+                "id": "KkRmMDjOdeKR08oJ0UdbGBne"
+              },
+              {
+                "expr": ":data #EMt11d2kJH6N5IorsCXxLrPb ,:= :data #iLTjmK1NRZka0tm1BEmUuxLs .create_picture ,( :art #DFeihqz5uDXyi3mFqgDw4E7C ,)",
+                "nodeType": "exprStmt",
+                "id": "yThqtp1HD4BQNXrwV66apusI",
+                "locals": []
+              },
+              {
+                "expr": ":data #EMt11d2kJH6N5IorsCXxLrPb .set_pos ,( ,7 ,1 ,. ,5 ,+ ,3 ,2 ,9 ,, ,7 ,3 ,4 ,)",
+                "nodeType": "exprStmt",
+                "id": "KY5iND4wADdiPvLxLJrzyqrL",
+                "locals": []
+              }
+            ],
+            "id": "nzXsku4iKl2QVGBa5zU82js9"
+          },
+          {
+            "name": "tap sprite: NextPageBtn",
+            "inParameters": [
+              {
+                "name": "sprite",
+                "type": "Sprite",
+                "nodeType": "localDef",
+                "id": "lWmrdldNq4ooNJOAA8o45PSLP0"
+              },
+              {
+                "name": "x",
+                "type": "Number",
+                "nodeType": "localDef",
+                "id": "lWmrdldNq4ooNJOAA8o45PSLP1"
+              },
+              {
+                "name": "y",
+                "type": "Number",
+                "nodeType": "localDef",
+                "id": "lWmrdldNq4ooNJOAA8o45PSLP2"
+              }
+            ],
+            "outParameters": [],
+            "isPrivate": false,
+            "isOffloaded": false,
+            "isTest": false,
+            "isAsync": true,
+            "nodeType": "event",
+            "eventName": "tap sprite: ",
+            "eventVariableId": "EMt11d2kJH6N5IorsCXxLrPb",
+            "body": [
+              {
+                "nodeType": "if",
+                "condition": ":data #HiLresMFab0Qokx2O3lIAf4x .equals ,( '2/002e1 ,)",
+                "thenBody": [
+                  {
+                    "expr": ":code #Eqlu2HJmzfCQJ1PPW7ho2RpL ,( '2/002e2 ,)",
+                    "nodeType": "exprStmt",
+                    "id": "QrsVhOZzUfjcIgL7r55osN1n",
+                    "locals": []
+                  }
+                ],
+                "isElseIf": false,
+                "id": "xBWVozF8MRHt0C0qy6d5Dr5N",
+                "locals": []
+              }
+            ],
+            "id": "lWmrdldNq4ooNJOAA8o45PSL"
+          },
+          {
+            "name": "HiraganaSheet_2",
+            "comment": "",
+            "type": "Picture",
+            "isReadonly": true,
+            "isTransient": true,
+            "nodeType": "art",
+            "url": "https://az31353.vo.msecnd.net/pub/kcofnumj",
+            "id": "EpoYd2lmkbh21aQkRuf4z2nb"
+          },
+          {
+            "name": "LoadStudyPage",
+            "inParameters": [
+              {
+                "name": "isNext",
+                "type": "Boolean",
+                "nodeType": "localDef",
+                "id": "Dm438bguYrlUfU1gXBYMThULP0"
+              },
+              {
+                "name": "PageSheet_Texture",
+                "type": "Picture",
+                "nodeType": "localDef",
+                "id": "Dm438bguYrlUfU1gXBYMThULP1"
+              },
+              {
+                "name": "isTestable",
+                "type": "Boolean",
+                "nodeType": "localDef",
+                "id": "Dm438bguYrlUfU1gXBYMThULP2"
+              },
+              {
+                "name": "isBack",
+                "type": "Boolean",
+                "nodeType": "localDef",
+                "id": "Dm438bguYrlUfU1gXBYMThULP3"
+              }
+            ],
+            "outParameters": [],
+            "isPrivate": true,
+            "isOffloaded": false,
+            "isTest": false,
+            "isAsync": false,
+            "nodeType": "action",
+            "body": [
+              {
+                "text": "Handles the population of the study sheets and their button layouts",
+                "nodeType": "comment",
+                "id": "RlFgjqTEYgPOxCEKRB6TocAt"
+              },
+              {
+                "expr": ":data #HLwbUQxlrXJJ8YAwHt2yUFOW ,:= :data #iLTjmK1NRZka0tm1BEmUuxLs .create_picture ,( $Dm438bguYrlUfU1gXBYMThULP1 ,)",
+                "nodeType": "exprStmt",
+                "id": "Z4ROeqCpHZyeH1cUAVNt36Wd",
+                "locals": []
+              },
+              {
+                "nodeType": "if",
+                "condition": "$Dm438bguYrlUfU1gXBYMThULP0",
+                "thenBody": [
+                  {
+                    "expr": ":code #nzXsku4iKl2QVGBa5zU82js9",
+                    "nodeType": "exprStmt",
+                    "id": "NEcxnBlCRR8LI2PW636X5tgq",
+                    "locals": []
+                  }
+                ],
+                "isElseIf": false,
+                "id": "m82WWMxmPIOHV7ZIk4JrQYDJ",
+                "locals": []
+              },
+              {
+                "nodeType": "if",
+                "condition": "$Dm438bguYrlUfU1gXBYMThULP3",
+                "thenBody": [
+                  {
+                    "expr": ":code #SwSzj5UQM81kx2hO58s4cUJh",
+                    "nodeType": "exprStmt",
+                    "id": "rfvY3Hw4dm1IeIa0gQuVcQsC",
+                    "locals": []
+                  }
+                ],
+                "isElseIf": true,
+                "id": "XpiAs72JRq4t2OKXedadhFn4",
+                "locals": []
+              },
+              {
+                "nodeType": "if",
+                "condition": "$Dm438bguYrlUfU1gXBYMThULP2",
+                "thenBody": [
+                  {
+                    "expr": ":code #z29EDE2AbVqO4O224QhAO3OC",
+                    "nodeType": "exprStmt",
+                    "id": "VHg5tw208BoTWc8yYv7r1fnP",
+                    "locals": []
+                  }
+                ],
+                "isElseIf": false,
+                "id": "HPPXWINatyTAM12C1STRoKrr",
+                "locals": []
+              },
+              {
+                "expr": ":code #GLAyFRCdYPVxJutjxASOlujP",
+                "nodeType": "exprStmt",
+                "id": "xIl9tCxWTP2Y8gwgbLM58LMP",
+                "locals": []
+              },
+              {
+                "nodeType": "if",
+                "condition": ":data #HiLresMFab0Qokx2O3lIAf4x .equals ,( '2/002e5 ,)",
+                "thenBody": [
+                  {
+                    "expr": ":code #DQuUqrGNhxbj0uc4Q0KFq78a",
+                    "nodeType": "exprStmt",
+                    "id": "su16fxhAnRC58pOD1nfE3ptJ",
+                    "locals": []
+                  }
+                ],
+                "isElseIf": false,
+                "id": "xxEOkffDKr9rbe4sgmLq5aVP",
+                "locals": []
+              }
+            ],
+            "id": "Dm438bguYrlUfU1gXBYMThUL"
+          },
+          {
+            "name": "StudySheet",
+            "comment": "",
+            "type": "Sprite",
+            "isReadonly": false,
+            "isTransient": true,
+            "nodeType": "data",
+            "id": "HLwbUQxlrXJJ8YAwHt2yUFOW"
+          },
+          {
+            "name": "BackBtn_Texture",
+            "comment": "",
+            "type": "Picture",
+            "isReadonly": true,
+            "isTransient": true,
+            "nodeType": "art",
+            "url": "https://az31353.vo.msecnd.net/pub/eudvjvbz",
+            "id": "qwBphuvlGHZ9F7Ez3rrFFfVk"
+          },
+          {
+            "name": "BackPageBtn",
+            "comment": "",
+            "type": "Sprite",
+            "isReadonly": false,
+            "isTransient": true,
+            "nodeType": "data",
+            "id": "ifqzZ028PeEwPwmecwkjhUiP"
+          },
+          {
+            "name": "AddBackBtn",
+            "inParameters": [],
+            "outParameters": [],
+            "isPrivate": true,
+            "isOffloaded": false,
+            "isTest": false,
+            "isAsync": false,
+            "nodeType": "action",
+            "body": [
+              {
+                "text": "Add Back Btn to current Scene",
+                "nodeType": "comment",
+                "id": "iUmuDaHfASzAPwlTB2VMWGYc"
+              },
+              {
+                "expr": ":data #ifqzZ028PeEwPwmecwkjhUiP ,:= :data #iLTjmK1NRZka0tm1BEmUuxLs .create_picture ,( :art #qwBphuvlGHZ9F7Ez3rrFFfVk ,)",
+                "nodeType": "exprStmt",
+                "id": "uM4WH4bcM2h5IaSTUlimic3Y",
+                "locals": []
+              },
+              {
+                "expr": ":data #ifqzZ028PeEwPwmecwkjhUiP .set_pos ,( ,7 ,1 ,. ,5 ,+ ,3 ,2 ,9 ,, ,7 ,3 ,4 ,)",
+                "nodeType": "exprStmt",
+                "id": "hxMY4OxChINnKUWavPcoIntr",
+                "locals": []
+              }
+            ],
+            "id": "SwSzj5UQM81kx2hO58s4cUJh"
+          },
+          {
+            "name": "tap sprite: BackPageBtn",
+            "inParameters": [
+              {
+                "name": "sprite",
+                "type": "Sprite",
+                "nodeType": "localDef",
+                "id": "Dc5uH7AlpEiYA4vwtTwuNT3TP0"
+              },
+              {
+                "name": "x",
+                "type": "Number",
+                "nodeType": "localDef",
+                "id": "Dc5uH7AlpEiYA4vwtTwuNT3TP1"
+              },
+              {
+                "name": "y",
+                "type": "Number",
+                "nodeType": "localDef",
+                "id": "Dc5uH7AlpEiYA4vwtTwuNT3TP2"
+              }
+            ],
+            "outParameters": [],
+            "isPrivate": false,
+            "isOffloaded": false,
+            "isTest": false,
+            "isAsync": true,
+            "nodeType": "event",
+            "eventName": "tap sprite: ",
+            "eventVariableId": "ifqzZ028PeEwPwmecwkjhUiP",
+            "body": [
+              {
+                "nodeType": "if",
+                "condition": ":data #HiLresMFab0Qokx2O3lIAf4x .equals ,( '2/002e2 ,)",
+                "thenBody": [
+                  {
+                    "expr": ":code #Eqlu2HJmzfCQJ1PPW7ho2RpL ,( '2/002e1 ,)",
+                    "nodeType": "exprStmt",
+                    "id": "x0DezKAtYtI4rtZs4IUevE2R",
+                    "locals": []
+                  }
+                ],
+                "isElseIf": false,
+                "id": "b9DB2GfX0A44GeGWzHESFWqw",
+                "locals": []
+              },
+              {
+                "nodeType": "if",
+                "condition": ":data #HiLresMFab0Qokx2O3lIAf4x .contains ,( '2/002e5/002e ,)",
+                "thenBody": [
+                  {
+                    "expr": ":code #Eqlu2HJmzfCQJ1PPW7ho2RpL ,( '2/002e5 ,)",
+                    "nodeType": "exprStmt",
+                    "id": "a2vnwzkgNei2bG2D2cJngtNk",
+                    "locals": []
+                  }
+                ],
+                "isElseIf": true,
+                "id": "AwibiUedAEB3k4MJ442hASJv",
+                "locals": []
+              }
+            ],
+            "id": "Dc5uH7AlpEiYA4vwtTwuNT3T"
+          },
+          {
+            "name": "MainMenu_Texture",
+            "comment": "",
+            "type": "Picture",
+            "isReadonly": true,
+            "isTransient": true,
+            "nodeType": "art",
+            "url": "https://az31353.vo.msecnd.net/pub/ejrgkllp",
+            "id": "WXD0mPa5PSCIXrU7n544PnG3"
+          },
+          {
+            "name": "LoadMenuPage",
+            "inParameters": [],
+            "outParameters": [],
+            "isPrivate": true,
+            "isOffloaded": false,
+            "isTest": false,
+            "isAsync": false,
+            "nodeType": "action",
+            "body": [
+              {
+                "text": "Loads and formats the pages that are menus",
+                "nodeType": "comment",
+                "id": "nVo6e56uVngXnffaldFZ7tzH"
+              },
+              {
+                "nodeType": "if",
+                "condition": ":data #HiLresMFab0Qokx2O3lIAf4x .equals ,( '1 ,)",
+                "thenBody": [
+                  {
+                    "expr": ":data #iLTjmK1NRZka0tm1BEmUuxLs .create_picture ,( :art #WXD0mPa5PSCIXrU7n544PnG3 ,)",
+                    "nodeType": "exprStmt",
+                    "id": "UDWsQaVt4oAkraPY1qoqRX6J",
+                    "locals": []
+                  },
+                  {
+                    "expr": ":data #oc9oXvEKGQ1X43EHY4JIBYCk ,:= :data #iLTjmK1NRZka0tm1BEmUuxLs .create_picture ,( :art #x0Z9I0aFWq4VmXnc1akY47KU ,)",
+                    "nodeType": "exprStmt",
+                    "id": "Zyj9YTtePgLIw2E0E6IMROQe",
+                    "locals": []
+                  },
+                  {
+                    "expr": ":data #oc9oXvEKGQ1X43EHY4JIBYCk .set_pos ,( ,1 ,5 ,0 ,+ ,9 ,1 ,, ,5 ,5 ,6 ,)",
+                    "nodeType": "exprStmt",
+                    "id": "DjejVHlgImtyerPEoYhVuF3D",
+                    "locals": []
+                  },
+                  {
+                    "expr": ":data #ngcaHRo2pSnviMyxSZTVfe8h ,:= :data #iLTjmK1NRZka0tm1BEmUuxLs .create_picture ,( :art #XB99j1ckpPrq7AN5cRqO82KF ,)",
+                    "nodeType": "exprStmt",
+                    "id": "xt7xk0qLC7Fi3IQKbTS54d5n",
+                    "locals": []
+                  },
+                  {
+                    "expr": ":data #ngcaHRo2pSnviMyxSZTVfe8h .set_pos ,( ,1 ,5 ,0 ,+ ,9 ,1 ,, ,6 ,4 ,6 ,)",
+                    "nodeType": "exprStmt",
+                    "id": "JYSTbRoIXhnjHQsRtSvymg8P",
+                    "locals": []
+                  }
+                ],
+                "isElseIf": false,
+                "id": "v6TEDX3ykK22rAsHSUYLm8OV",
+                "locals": []
+              },
+              {
+                "nodeType": "if",
+                "condition": ":data #HiLresMFab0Qokx2O3lIAf4x .equals ,( '2 ,) ,or :data #HiLresMFab0Qokx2O3lIAf4x .equals ,( '3 ,)",
+                "thenBody": [
+                  {
+                    "nodeType": "if",
+                    "condition": ":data #HiLresMFab0Qokx2O3lIAf4x .equals ,( '2 ,)",
+                    "thenBody": [
+                      {
+                        "expr": ":data #iLTjmK1NRZka0tm1BEmUuxLs .create_picture ,( :art #GigYV2jZmY38we0XSR3MMaZ2 ,)",
+                        "nodeType": "exprStmt",
+                        "id": "inBmUYqNRBCPd0G9ovkFTZhG",
+                        "locals": []
+                      }
+                    ],
+                    "elseBody": [
+                      {
+                        "expr": ":data #iLTjmK1NRZka0tm1BEmUuxLs .create_picture ,( :art #V3z51IZCZ8dXmYWOdFcP3PTE ,)",
+                        "nodeType": "exprStmt",
+                        "id": "gMGNp6lKjTmXuzwPjJvlUUFN",
+                        "locals": []
+                      }
+                    ],
+                    "isElseIf": false,
+                    "id": "xnZRu4FHOPW0SyuIBC4hezwT",
+                    "locals": []
+                  },
+                  {
+                    "expr": ":data #xP9TbTjFHOSRkASlw4fLZdcA ,:= :data #iLTjmK1NRZka0tm1BEmUuxLs .create_picture ,( :art #fOAgKN9CNU4f6APkFC4cPsN2 ,)",
+                    "nodeType": "exprStmt",
+                    "id": "HeIUQoPkU4UENasO4663hiIE",
+                    "locals": []
+                  },
+                  {
+                    "expr": ":data #xP9TbTjFHOSRkASlw4fLZdcA .set_pos ,( ,1 ,5 ,0 ,+ ,9 ,1 ,, ,4 ,6 ,6 ,)",
+                    "nodeType": "exprStmt",
+                    "id": "xkTvfOYey8T1tkqOKo1W10rC",
+                    "locals": []
+                  },
+                  {
+                    "expr": ":data #x1QJQyBfjyRFNJ4gCLcqkGW3 ,:= :data #iLTjmK1NRZka0tm1BEmUuxLs .create_picture ,( :art #hW4SJp1loS8YBOGlLGiddvv3 ,)",
+                    "nodeType": "exprStmt",
+                    "id": "b1o3ttobCtk1FqkeVi6ysaf7",
+                    "locals": []
+                  },
+                  {
+                    "expr": ":data #x1QJQyBfjyRFNJ4gCLcqkGW3 .set_pos ,( ,1 ,5 ,0 ,+ ,9 ,1 ,, ,5 ,5 ,6 ,)",
+                    "nodeType": "exprStmt",
+                    "id": "VNFxtZHo197XPEgd5hK2saHV",
+                    "locals": []
+                  },
+                  {
+                    "expr": ":data #xRZq83bq4ekhmEefj8aHIG4E ,:= :data #iLTjmK1NRZka0tm1BEmUuxLs .create_picture ,( :art #ZPzfua6AxEmqPmZjB0z9ROSY ,)",
+                    "nodeType": "exprStmt",
+                    "id": "xeBGnbrpC91CzZ2dRVAAvk3a",
+                    "locals": []
+                  },
+                  {
+                    "expr": ":data #xRZq83bq4ekhmEefj8aHIG4E .set_pos ,( ,1 ,5 ,0 ,+ ,9 ,1 ,, ,6 ,4 ,6 ,)",
+                    "nodeType": "exprStmt",
+                    "id": "C407otItv0kjvMzIHgMKReRF",
+                    "locals": []
+                  },
+                  {
+                    "expr": ":code #GLAyFRCdYPVxJutjxASOlujP",
+                    "nodeType": "exprStmt",
+                    "id": "Logkxtc6Y2CR1VLarpvkFsrI",
+                    "locals": []
+                  }
+                ],
+                "isElseIf": true,
+                "id": "ON03J72J5l4ijtHpPZ5C4jEp",
+                "locals": []
+              }
+            ],
+            "id": "S4qyO7tzVmO2J4bULKlQN82N"
+          },
+          {
+            "name": "menuBtnStudy_texture",
+            "comment": "",
+            "type": "Picture",
+            "isReadonly": true,
+            "isTransient": true,
+            "nodeType": "art",
+            "url": "https://az31353.vo.msecnd.net/pub/wcexvbqd",
+            "id": "x0Z9I0aFWq4VmXnc1akY47KU"
+          },
+          {
+            "name": "menuBtnTest_texture",
+            "comment": "",
+            "type": "Picture",
+            "isReadonly": true,
+            "isTransient": true,
+            "nodeType": "art",
+            "url": "https://az31353.vo.msecnd.net/pub/ztoeyhfx",
+            "id": "XB99j1ckpPrq7AN5cRqO82KF"
+          },
+          {
+            "name": "menuBtnHiragana_texture",
+            "comment": "",
+            "type": "Picture",
+            "isReadonly": true,
+            "isTransient": true,
+            "nodeType": "art",
+            "url": "https://az31353.vo.msecnd.net/pub/auyzjacc",
+            "id": "fOAgKN9CNU4f6APkFC4cPsN2"
+          },
+          {
+            "name": "menuBtnKatakana_texture",
+            "comment": "",
+            "type": "Picture",
+            "isReadonly": true,
+            "isTransient": true,
+            "nodeType": "art",
+            "url": "https://az31353.vo.msecnd.net/pub/tukjeyyl",
+            "id": "hW4SJp1loS8YBOGlLGiddvv3"
+          },
+          {
+            "name": "menuBtnKanji_texture",
+            "comment": "",
+            "type": "Picture",
+            "isReadonly": true,
+            "isTransient": true,
+            "nodeType": "art",
+            "url": "https://az31353.vo.msecnd.net/pub/aahzrybg",
+            "id": "ZPzfua6AxEmqPmZjB0z9ROSY"
+          },
+          {
+            "name": "menuBtnStudy",
+            "comment": "",
+            "type": "Sprite",
+            "isReadonly": false,
+            "isTransient": true,
+            "nodeType": "data",
+            "id": "oc9oXvEKGQ1X43EHY4JIBYCk"
+          },
+          {
+            "name": "menuBtnTest",
+            "comment": "",
+            "type": "Sprite",
+            "isReadonly": false,
+            "isTransient": true,
+            "nodeType": "data",
+            "id": "ngcaHRo2pSnviMyxSZTVfe8h"
+          },
+          {
+            "name": "menuBtnHiragana",
+            "comment": "",
+            "type": "Sprite",
+            "isReadonly": false,
+            "isTransient": true,
+            "nodeType": "data",
+            "id": "xP9TbTjFHOSRkASlw4fLZdcA"
+          },
+          {
+            "name": "menuBtnKatakana",
+            "comment": "",
+            "type": "Sprite",
+            "isReadonly": false,
+            "isTransient": true,
+            "nodeType": "data",
+            "id": "x1QJQyBfjyRFNJ4gCLcqkGW3"
+          },
+          {
+            "name": "menuBtnKanji",
+            "comment": "",
+            "type": "Sprite",
+            "isReadonly": false,
+            "isTransient": true,
+            "nodeType": "data",
+            "id": "xRZq83bq4ekhmEefj8aHIG4E"
+          },
+          {
+            "name": "tap sprite: menuBtnStudy",
+            "inParameters": [
+              {
+                "name": "sprite",
+                "type": "Sprite",
+                "nodeType": "localDef",
+                "id": "HR41ypkIw6tiGsuUV2ZdkOCZP0"
+              },
+              {
+                "name": "x",
+                "type": "Number",
+                "nodeType": "localDef",
+                "id": "HR41ypkIw6tiGsuUV2ZdkOCZP1"
+              },
+              {
+                "name": "y",
+                "type": "Number",
+                "nodeType": "localDef",
+                "id": "HR41ypkIw6tiGsuUV2ZdkOCZP2"
+              }
+            ],
+            "outParameters": [],
+            "isPrivate": false,
+            "isOffloaded": false,
+            "isTest": false,
+            "isAsync": true,
+            "nodeType": "event",
+            "eventName": "tap sprite: ",
+            "eventVariableId": "oc9oXvEKGQ1X43EHY4JIBYCk",
+            "body": [
+              {
+                "expr": ":code #Eqlu2HJmzfCQJ1PPW7ho2RpL ,( '2 ,)",
+                "nodeType": "exprStmt",
+                "id": "KYI89eA2g6oMb0Wxks4GJlDL",
+                "locals": []
+              }
+            ],
+            "id": "HR41ypkIw6tiGsuUV2ZdkOCZ"
+          },
+          {
+            "name": "tap sprite: menuBtnTest",
+            "inParameters": [
+              {
+                "name": "sprite",
+                "type": "Sprite",
+                "nodeType": "localDef",
+                "id": "NFRP9Y4B9tKVz55lSE1SX6xbP0"
+              },
+              {
+                "name": "x",
+                "type": "Number",
+                "nodeType": "localDef",
+                "id": "NFRP9Y4B9tKVz55lSE1SX6xbP1"
+              },
+              {
+                "name": "y",
+                "type": "Number",
+                "nodeType": "localDef",
+                "id": "NFRP9Y4B9tKVz55lSE1SX6xbP2"
+              }
+            ],
+            "outParameters": [],
+            "isPrivate": false,
+            "isOffloaded": false,
+            "isTest": false,
+            "isAsync": true,
+            "nodeType": "event",
+            "eventName": "tap sprite: ",
+            "eventVariableId": "ngcaHRo2pSnviMyxSZTVfe8h",
+            "body": [
+              {
+                "expr": ":code #Eqlu2HJmzfCQJ1PPW7ho2RpL ,( '3 ,)",
+                "nodeType": "exprStmt",
+                "id": "EalOpdjwzLTZfS9i0hW2Wfrc",
+                "locals": []
+              }
+            ],
+            "id": "NFRP9Y4B9tKVz55lSE1SX6xb"
+          },
+          {
+            "name": "tap sprite: HomeBtn",
+            "inParameters": [
+              {
+                "name": "sprite",
+                "type": "Sprite",
+                "nodeType": "localDef",
+                "id": "xTLPKCIPag41THrTMi3IqJqZP0"
+              },
+              {
+                "name": "x",
+                "type": "Number",
+                "nodeType": "localDef",
+                "id": "xTLPKCIPag41THrTMi3IqJqZP1"
+              },
+              {
+                "name": "y",
+                "type": "Number",
+                "nodeType": "localDef",
+                "id": "xTLPKCIPag41THrTMi3IqJqZP2"
+              }
+            ],
+            "outParameters": [],
+            "isPrivate": false,
+            "isOffloaded": false,
+            "isTest": false,
+            "isAsync": true,
+            "nodeType": "event",
+            "eventName": "tap sprite: ",
+            "eventVariableId": "xjoFxrbe2pf3x4PhC7y3We40",
+            "body": [
+              {
+                "expr": ":code #Eqlu2HJmzfCQJ1PPW7ho2RpL ,( '1 ,)",
+                "nodeType": "exprStmt",
+                "id": "smWJPShVdGxw820ZU7gPhh87",
+                "locals": []
+              }
+            ],
+            "id": "xTLPKCIPag41THrTMi3IqJqZ"
+          },
+          {
+            "name": "studyMenuBG",
+            "comment": "",
+            "type": "Picture",
+            "isReadonly": true,
+            "isTransient": true,
+            "nodeType": "art",
+            "url": "https://az31353.vo.msecnd.net/pub/xohvoncn",
+            "id": "GigYV2jZmY38we0XSR3MMaZ2"
+          },
+          {
+            "name": "testMenuBG",
+            "comment": "",
+            "type": "Picture",
+            "isReadonly": true,
+            "isTransient": true,
+            "nodeType": "art",
+            "url": "https://az31353.vo.msecnd.net/pub/xfdkojtf",
+            "id": "V3z51IZCZ8dXmYWOdFcP3PTE"
+          },
+          {
+            "name": "tap sprite: menuBtnHiragana",
+            "inParameters": [
+              {
+                "name": "sprite",
+                "type": "Sprite",
+                "nodeType": "localDef",
+                "id": "r5aYdxFpSwl2PvhwswSwBQ3yP0"
+              },
+              {
+                "name": "x",
+                "type": "Number",
+                "nodeType": "localDef",
+                "id": "r5aYdxFpSwl2PvhwswSwBQ3yP1"
+              },
+              {
+                "name": "y",
+                "type": "Number",
+                "nodeType": "localDef",
+                "id": "r5aYdxFpSwl2PvhwswSwBQ3yP2"
+              }
+            ],
+            "outParameters": [],
+            "isPrivate": false,
+            "isOffloaded": false,
+            "isTest": false,
+            "isAsync": true,
+            "nodeType": "event",
+            "eventName": "tap sprite: ",
+            "eventVariableId": "xP9TbTjFHOSRkASlw4fLZdcA",
+            "body": [
+              {
+                "nodeType": "if",
+                "condition": ":data #HiLresMFab0Qokx2O3lIAf4x .equals ,( '2 ,)",
+                "thenBody": [
+                  {
+                    "expr": ":code #Eqlu2HJmzfCQJ1PPW7ho2RpL ,( '2/002e1 ,)",
+                    "nodeType": "exprStmt",
+                    "id": "J7jl8xFe5Dkwfo3rdy5XVxVR",
+                    "locals": []
+                  }
+                ],
+                "isElseIf": false,
+                "id": "MIexynShpzqgTGPt6bVd8WhK",
+                "locals": []
+              },
+              {
+                "nodeType": "if",
+                "condition": ":data #HiLresMFab0Qokx2O3lIAf4x .equals ,( '3 ,)",
+                "thenBody": [
+                  {
+                    "expr": "",
+                    "nodeType": "exprStmt",
+                    "id": "xHquoCBCaocgZsBfZOmJ5fDG",
+                    "locals": []
+                  }
+                ],
+                "isElseIf": true,
+                "id": "Q4t93fbkMnbRWoPwNY0gd41k",
+                "locals": []
+              }
+            ],
+            "id": "r5aYdxFpSwl2PvhwswSwBQ3y"
+          },
+          {
+            "name": "K1",
+            "comment": "",
+            "type": "Picture",
+            "isReadonly": true,
+            "isTransient": true,
+            "nodeType": "art",
+            "url": "https://az31353.vo.msecnd.net/pub/upnftcvk",
+            "id": "U9W26duyiKIU9K9ZMCeATmvx"
+          },
+          {
+            "name": "KanjiSet",
+            "comment": "",
+            "type": "Sprite Set",
+            "isReadonly": false,
+            "isTransient": true,
+            "nodeType": "data",
+            "id": "iXV6h90z1sMgl2SdcfRv2QLr"
+          },
+          {
+            "name": "LoadKanjiStudy",
+            "inParameters": [],
+            "outParameters": [],
+            "isPrivate": true,
+            "isOffloaded": false,
+            "isTest": false,
+            "isAsync": false,
+            "nodeType": "action",
+            "body": [
+              {
+                "text": "Loads in all the small Kanji boxes in the study mode and calculates their location",
+                "nodeType": "comment",
+                "id": "PblHZrx7Q42KTZfbMVXZtezH"
+              },
+              {
+                "expr": ":data #iXV6h90z1sMgl2SdcfRv2QLr ,:= :data #iLTjmK1NRZka0tm1BEmUuxLs .create_sprite_set",
+                "nodeType": "exprStmt",
+                "id": "xQTNVj0l9Qkne2EtAV70a92E",
+                "locals": []
+              },
+              {
+                "expr": ":data #iXV6h90z1sMgl2SdcfRv2QLr .add ,( :data #iLTjmK1NRZka0tm1BEmUuxLs .create_picture ,( :art #U9W26duyiKIU9K9ZMCeATmvx ,) ,)",
+                "nodeType": "exprStmt",
+                "id": "Hwiyx2z4lr8W4SmzUfrLx2OK",
+                "locals": []
+              },
+              {
+                "expr": ":data #iXV6h90z1sMgl2SdcfRv2QLr .add ,( :data #iLTjmK1NRZka0tm1BEmUuxLs .create_picture ,( :art #lTHmgIrtiSRP11YUVlly3Qnp ,) ,)",
+                "nodeType": "exprStmt",
+                "id": "Fz414ikLY19yPQabGm7wu2gc",
+                "locals": []
+              },
+              {
+                "expr": ":data #iXV6h90z1sMgl2SdcfRv2QLr .add ,( :data #iLTjmK1NRZka0tm1BEmUuxLs .create_picture ,( :art #P4uOEzX47SCb4Bn2W5qBsUFw ,) ,)",
+                "nodeType": "exprStmt",
+                "id": "qycJX4ZLggt0ll94blngQ40B",
+                "locals": []
+              },
+              {
+                "expr": ":data #iXV6h90z1sMgl2SdcfRv2QLr .add ,( :data #iLTjmK1NRZka0tm1BEmUuxLs .create_picture ,( :art #EiekmeZYjJJmWpbUzKhnUCH2 ,) ,)",
+                "nodeType": "exprStmt",
+                "id": "YtKZvSXty1upGlxVCziaGwHG",
+                "locals": []
+              },
+              {
+                "expr": ":data #iXV6h90z1sMgl2SdcfRv2QLr .add ,( :data #iLTjmK1NRZka0tm1BEmUuxLs .create_picture ,( :art #EAsLYy6SeRFupolZT5w2FD4C ,) ,)",
+                "nodeType": "exprStmt",
+                "id": "x4NMImvGpEJpEHUaZ4TOF40V",
+                "locals": []
+              },
+              {
+                "expr": ":data #iXV6h90z1sMgl2SdcfRv2QLr .add ,( :data #iLTjmK1NRZka0tm1BEmUuxLs .create_picture ,( :art #yCxZhueApIkejmrUDGKW4O1B ,) ,)",
+                "nodeType": "exprStmt",
+                "id": "gPhdFn3ulvGpEwpGJoAgW3c6",
+                "locals": []
+              },
+              {
+                "expr": ":data #iXV6h90z1sMgl2SdcfRv2QLr .add ,( :data #iLTjmK1NRZka0tm1BEmUuxLs .create_picture ,( :art #UGmWHBcOb8U2cBw5C0w26vVj ,) ,)",
+                "nodeType": "exprStmt",
+                "id": "gdPiFNvPr51U4aCZsXxigjit",
+                "locals": []
+              },
+              {
+                "expr": ":data #iXV6h90z1sMgl2SdcfRv2QLr .add ,( :data #iLTjmK1NRZka0tm1BEmUuxLs .create_picture ,( :art #LgyRoguMUVPVC07eI7MIc2k1 ,) ,)",
+                "nodeType": "exprStmt",
+                "id": "h2jq5spC4jbYkzHM2KrgtGkD",
+                "locals": []
+              },
+              {
+                "expr": ":data #iXV6h90z1sMgl2SdcfRv2QLr .add ,( :data #iLTjmK1NRZka0tm1BEmUuxLs .create_picture ,( :art #IwEKdwng0p71AG9EIFPFzS3A ,) ,)",
+                "nodeType": "exprStmt",
+                "id": "ZaA2jZgoR01Hyv7yCz2QwkzD",
+                "locals": []
+              },
+              {
+                "expr": ":data #iXV6h90z1sMgl2SdcfRv2QLr .add ,( :data #iLTjmK1NRZka0tm1BEmUuxLs .create_picture ,( :art #xGoX4Nq9uOVrL7I1KIOc2bYU ,) ,)",
+                "nodeType": "exprStmt",
+                "id": "J6IWd4A9Ly5qzPip4mXTH2Jt",
+                "locals": []
+              },
+              {
+                "expr": ":data #iXV6h90z1sMgl2SdcfRv2QLr .add ,( :data #iLTjmK1NRZka0tm1BEmUuxLs .create_picture ,( :art #xyDwqTN87Kab7EOGfO4IrBIw ,) ,)",
+                "nodeType": "exprStmt",
+                "id": "fYTkNbhvaSRG6OqNKNqnBSgb",
+                "locals": []
+              },
+              {
+                "expr": ":data #iXV6h90z1sMgl2SdcfRv2QLr .add ,( :data #iLTjmK1NRZka0tm1BEmUuxLs .create_picture ,( :art #ga13a5QefiAUqPjyd9bywVfk ,) ,)",
+                "nodeType": "exprStmt",
+                "id": "JQDv4ZaUBzf5rgB6yABz0YXv",
+                "locals": []
+              },
+              {
+                "expr": ":data #iXV6h90z1sMgl2SdcfRv2QLr .add ,( :data #iLTjmK1NRZka0tm1BEmUuxLs .create_picture ,( :art #ULlnQ5WFRbZp2us5iAsjErjw ,) ,)",
+                "nodeType": "exprStmt",
+                "id": "hAWupr2SbM2GXUjaImmGGQh3",
+                "locals": []
+              },
+              {
+                "expr": ":data #iXV6h90z1sMgl2SdcfRv2QLr .add ,( :data #iLTjmK1NRZka0tm1BEmUuxLs .create_picture ,( :art #SQTXsRL998y4p8mMU0eBwHdR ,) ,)",
+                "nodeType": "exprStmt",
+                "id": "xG0e8elCbdNwXincrIzou7Ci",
+                "locals": []
+              },
+              {
+                "expr": ":data #iXV6h90z1sMgl2SdcfRv2QLr .add ,( :data #iLTjmK1NRZka0tm1BEmUuxLs .create_picture ,( :art #xM2HqckGk1fu3yftqnjs32zO ,) ,)",
+                "nodeType": "exprStmt",
+                "id": "xaHMzH1LaUCfH4GrI4sRbKMC",
+                "locals": []
+              },
+              {
+                "expr": ":data #iXV6h90z1sMgl2SdcfRv2QLr .add ,( :data #iLTjmK1NRZka0tm1BEmUuxLs .create_picture ,( :art #Ls3b2UUocOGsrD3zL2jbVUt1 ,) ,)",
+                "nodeType": "exprStmt",
+                "id": "x275O1ACRZ3PvL0mM27XVRDE",
+                "locals": []
+              },
+              {
+                "expr": ":data #iXV6h90z1sMgl2SdcfRv2QLr .add ,( :data #iLTjmK1NRZka0tm1BEmUuxLs .create_picture ,( :art #TIEta6Zi6RCY0UoNAJ3pOK14 ,) ,)",
+                "nodeType": "exprStmt",
+                "id": "zmtySnrxfGXwFnXFgPywaGbN",
+                "locals": []
+              },
+              {
+                "expr": ":data #iXV6h90z1sMgl2SdcfRv2QLr .add ,( :data #iLTjmK1NRZka0tm1BEmUuxLs .create_picture ,( :art #BjIWAl5vHNEf6Hwz0QCyx2JM ,) ,)",
+                "nodeType": "exprStmt",
+                "id": "ZBv83BJGO1DyOt8axID8qV6V",
+                "locals": []
+              },
+              {
+                "expr": ":data #iXV6h90z1sMgl2SdcfRv2QLr .add ,( :data #iLTjmK1NRZka0tm1BEmUuxLs .create_picture ,( :art #qO134ng8krRTs462B2mTjHz5 ,) ,)",
+                "nodeType": "exprStmt",
+                "id": "dXshay9zWniagbK2we4dbI2q",
+                "locals": []
+              },
+              {
+                "expr": ":data #iXV6h90z1sMgl2SdcfRv2QLr .add ,( :data #iLTjmK1NRZka0tm1BEmUuxLs .create_picture ,( :art #UtatGsSPCQAgSvyL3yH3iPTj ,) ,)",
+                "nodeType": "exprStmt",
+                "id": "xo8ArSzRCSfi2il6sNSpAw1N",
+                "locals": []
+              },
+              {
+                "expr": ":data #iXV6h90z1sMgl2SdcfRv2QLr .add ,( :data #iLTjmK1NRZka0tm1BEmUuxLs .create_picture ,( :art #pMkxa2LfSKneLwMtqLZA6Ty4 ,) ,)",
+                "nodeType": "exprStmt",
+                "id": "i2RnwWHx9v2xccS8W01jkEjd",
+                "locals": []
+              },
+              {
+                "expr": ":data #iXV6h90z1sMgl2SdcfRv2QLr .add ,( :data #iLTjmK1NRZka0tm1BEmUuxLs .create_picture ,( :art #x7ylZxg7EiAmdyg0WBOyxX2I ,) ,)",
+                "nodeType": "exprStmt",
+                "id": "LpNOet4EvLOADMNX5uYlx4o4",
+                "locals": []
+              },
+              {
+                "expr": ":data #iXV6h90z1sMgl2SdcfRv2QLr .add ,( :data #iLTjmK1NRZka0tm1BEmUuxLs .create_picture ,( :art #VHHAQZDSDfsSOSZjBcO2WRTT ,) ,)",
+                "nodeType": "exprStmt",
+                "id": "x2n8R1i2S9AOEu8I1jGv2osR",
+                "locals": []
+              },
+              {
+                "expr": ":data #iXV6h90z1sMgl2SdcfRv2QLr .add ,( :data #iLTjmK1NRZka0tm1BEmUuxLs .create_picture ,( :art #gnV7zRB3JnRx3YXLbLdILRuN ,) ,)",
+                "nodeType": "exprStmt",
+                "id": "YIKN8k21LmAYuccrs49V2KdU",
+                "locals": []
+              },
+              {
+                "expr": ":data #iXV6h90z1sMgl2SdcfRv2QLr .add ,( :data #iLTjmK1NRZka0tm1BEmUuxLs .create_picture ,( :art #u3zURzMVjlD3gaS6sS46O3xO ,) ,)",
+                "nodeType": "exprStmt",
+                "id": "R11sUg5rcjsGG8Ujqaei1e2O",
+                "locals": []
+              },
+              {
+                "expr": ":data #iXV6h90z1sMgl2SdcfRv2QLr .add ,( :data #iLTjmK1NRZka0tm1BEmUuxLs .create_picture ,( :art #xR53UfJ96EuVSa26lYCcDWDf ,) ,)",
+                "nodeType": "exprStmt",
+                "id": "IkEiPgB31qf1L2uBezJXQFxv",
+                "locals": []
+              },
+              {
+                "expr": ":data #iXV6h90z1sMgl2SdcfRv2QLr .add ,( :data #iLTjmK1NRZka0tm1BEmUuxLs .create_picture ,( :art #S6end5qGwxjIBtuUWMUc7LDE ,) ,)",
+                "nodeType": "exprStmt",
+                "id": "IO3NhZFAqFl2fvJQB02MDs9n",
+                "locals": []
+              },
+              {
+                "expr": ":data #iXV6h90z1sMgl2SdcfRv2QLr .add ,( :data #iLTjmK1NRZka0tm1BEmUuxLs .create_picture ,( :art #KUYUCVxARZsVY1wLzAMqFkS0 ,) ,)",
+                "nodeType": "exprStmt",
+                "id": "LFPYpGvyI6YOjNIJWD9I12k3",
+                "locals": []
+              },
+              {
+                "expr": ":data #iXV6h90z1sMgl2SdcfRv2QLr .add ,( :data #iLTjmK1NRZka0tm1BEmUuxLs .create_picture ,( :art #Jbx5FmuAc8SWcrJ4Dnl42Frq ,) ,)",
+                "nodeType": "exprStmt",
+                "id": "GotZint4Wc84xFZ1Ur5WqJFN",
+                "locals": []
+              },
+              {
+                "expr": ":data #iXV6h90z1sMgl2SdcfRv2QLr .add ,( :data #iLTjmK1NRZka0tm1BEmUuxLs .create_picture ,( :art #J2Ca1GXaFZLHjWTOU0R9WmQo ,) ,)",
+                "nodeType": "exprStmt",
+                "id": "bTsBPtvU3Ga1dSzN3cixuTo3",
+                "locals": []
+              },
+              {
+                "expr": ":data #iXV6h90z1sMgl2SdcfRv2QLr .add ,( :data #iLTjmK1NRZka0tm1BEmUuxLs .create_picture ,( :art #xK5Ne9IJQnjAk4xNJdvfTn2T ,) ,)",
+                "nodeType": "exprStmt",
+                "id": "oX4Z0WHK6RT5h8afhWStx3gQ",
+                "locals": []
+              },
+              {
+                "expr": ":data #iXV6h90z1sMgl2SdcfRv2QLr .add ,( :data #iLTjmK1NRZka0tm1BEmUuxLs .create_picture ,( :art #o4Yr5XOh9ftQwKz6ttb4ik0z ,) ,)",
+                "nodeType": "exprStmt",
+                "id": "OaKqfsekkyVcb1tltPUDAX4p",
+                "locals": []
+              },
+              {
+                "bound": ",4",
+                "body": [
+                  {
+                    "bound": ",8",
+                    "body": [
+                      {
+                        "expr": ":data #iXV6h90z1sMgl2SdcfRv2QLr .at ,( ,( $hr4NqVLLY6bmnvwLLrMLDIkDB0 ,* ,8 ,+ $zX0PGEwdpfAqH7T2g5TE2ZqyB0 ,) ,) .set_pos ,( ,2 ,9 ,. ,5 ,+ $zX0PGEwdpfAqH7T2g5TE2ZqyB0 ,* ,6 ,0 ,, ,9 ,5 ,+ $hr4NqVLLY6bmnvwLLrMLDIkDB0 ,* ,6 ,0 ,)",
+                        "nodeType": "exprStmt",
+                        "id": "o2bmj4KTnrMb73E6UyJELhjo",
+                        "locals": []
+                      }
+                    ],
+                    "nodeType": "for",
+                    "id": "zX0PGEwdpfAqH7T2g5TE2Zqy",
+                    "locals": [
+                      {
+                        "name": "j",
+                        "type": "Number",
+                        "nodeType": "localDef",
+                        "id": "zX0PGEwdpfAqH7T2g5TE2ZqyB0"
+                      }
+                    ]
+                  }
+                ],
+                "nodeType": "for",
+                "id": "hr4NqVLLY6bmnvwLLrMLDIkD",
+                "locals": [
+                  {
+                    "name": "i",
+                    "type": "Number",
+                    "nodeType": "localDef",
+                    "id": "hr4NqVLLY6bmnvwLLrMLDIkDB0"
+                  }
+                ]
+              }
+            ],
+            "id": "DQuUqrGNhxbj0uc4Q0KFq78a"
+          },
+          {
+            "name": "KanjiSheet",
+            "comment": "",
+            "type": "Picture",
+            "isReadonly": true,
+            "isTransient": true,
+            "nodeType": "art",
+            "url": "https://az31353.vo.msecnd.net/pub/wdegpjjw",
+            "id": "IGwH0y24Fz7KzFeOZzKJk7vl"
+          },
+          {
+            "name": "tap sprite: menuBtnKanji",
+            "inParameters": [
+              {
+                "name": "sprite",
+                "type": "Sprite",
+                "nodeType": "localDef",
+                "id": "xQCtuOs4mS2oWkdR96ms55dlP0"
+              },
+              {
+                "name": "x",
+                "type": "Number",
+                "nodeType": "localDef",
+                "id": "xQCtuOs4mS2oWkdR96ms55dlP1"
+              },
+              {
+                "name": "y",
+                "type": "Number",
+                "nodeType": "localDef",
+                "id": "xQCtuOs4mS2oWkdR96ms55dlP2"
+              }
+            ],
+            "outParameters": [],
+            "isPrivate": false,
+            "isOffloaded": false,
+            "isTest": false,
+            "isAsync": true,
+            "nodeType": "event",
+            "eventName": "tap sprite: ",
+            "eventVariableId": "xRZq83bq4ekhmEefj8aHIG4E",
+            "body": [
+              {
+                "nodeType": "if",
+                "condition": ":data #HiLresMFab0Qokx2O3lIAf4x .equals ,( '2 ,)",
+                "thenBody": [
+                  {
+                    "expr": ":code #Eqlu2HJmzfCQJ1PPW7ho2RpL ,( '2/002e5 ,)",
+                    "nodeType": "exprStmt",
+                    "id": "kMeNkAkrO5zwpDQ0RLphd2ZG",
+                    "locals": []
+                  }
+                ],
+                "isElseIf": false,
+                "id": "uVuTKrfFVwx27kJ8m8gJNls7",
+                "locals": []
+              }
+            ],
+            "id": "xQCtuOs4mS2oWkdR96ms55dl"
+          },
+          {
+            "name": "K2",
+            "comment": "",
+            "type": "Picture",
+            "isReadonly": true,
+            "isTransient": true,
+            "nodeType": "art",
+            "url": "https://az31353.vo.msecnd.net/pub/ljtsttoq",
+            "id": "lTHmgIrtiSRP11YUVlly3Qnp"
+          },
+          {
+            "name": "K3",
+            "comment": "",
+            "type": "Picture",
+            "isReadonly": true,
+            "isTransient": true,
+            "nodeType": "art",
+            "url": "https://az31353.vo.msecnd.net/pub/tjlszwig",
+            "id": "P4uOEzX47SCb4Bn2W5qBsUFw"
+          },
+          {
+            "name": "K4",
+            "comment": "",
+            "type": "Picture",
+            "isReadonly": true,
+            "isTransient": true,
+            "nodeType": "art",
+            "url": "https://az31353.vo.msecnd.net/pub/xdagttcv",
+            "id": "EiekmeZYjJJmWpbUzKhnUCH2"
+          },
+          {
+            "name": "K5",
+            "comment": "",
+            "type": "Picture",
+            "isReadonly": true,
+            "isTransient": true,
+            "nodeType": "art",
+            "url": "https://az31353.vo.msecnd.net/pub/kmyqmxks",
+            "id": "EAsLYy6SeRFupolZT5w2FD4C"
+          },
+          {
+            "name": "K6",
+            "comment": "",
+            "type": "Picture",
+            "isReadonly": true,
+            "isTransient": true,
+            "nodeType": "art",
+            "url": "https://az31353.vo.msecnd.net/pub/afizzeyl",
+            "id": "yCxZhueApIkejmrUDGKW4O1B"
+          },
+          {
+            "name": "K7",
+            "comment": "",
+            "type": "Picture",
+            "isReadonly": true,
+            "isTransient": true,
+            "nodeType": "art",
+            "url": "https://az31353.vo.msecnd.net/pub/ntbzabfh",
+            "id": "UGmWHBcOb8U2cBw5C0w26vVj"
+          },
+          {
+            "name": "K9",
+            "comment": "",
+            "type": "Picture",
+            "isReadonly": true,
+            "isTransient": true,
+            "nodeType": "art",
+            "url": "https://az31353.vo.msecnd.net/pub/kpenabjs",
+            "id": "IwEKdwng0p71AG9EIFPFzS3A"
+          },
+          {
+            "name": "K8",
+            "comment": "",
+            "type": "Picture",
+            "isReadonly": true,
+            "isTransient": true,
+            "nodeType": "art",
+            "url": "https://az31353.vo.msecnd.net/pub/tewtnccr",
+            "id": "LgyRoguMUVPVC07eI7MIc2k1"
+          },
+          {
+            "name": "K13",
+            "comment": "",
+            "type": "Picture",
+            "isReadonly": true,
+            "isTransient": true,
+            "nodeType": "art",
+            "url": "https://az31353.vo.msecnd.net/pub/ajmqwlfr",
+            "id": "ULlnQ5WFRbZp2us5iAsjErjw"
+          },
+          {
+            "name": "K10",
+            "comment": "",
+            "type": "Picture",
+            "isReadonly": true,
+            "isTransient": true,
+            "nodeType": "art",
+            "url": "https://az31353.vo.msecnd.net/pub/xohezmpe",
+            "id": "xGoX4Nq9uOVrL7I1KIOc2bYU"
+          },
+          {
+            "name": "K11",
+            "comment": "",
+            "type": "Picture",
+            "isReadonly": true,
+            "isTransient": true,
+            "nodeType": "art",
+            "url": "https://az31353.vo.msecnd.net/pub/xueoqchz",
+            "id": "xyDwqTN87Kab7EOGfO4IrBIw"
+          },
+          {
+            "name": "K12",
+            "comment": "",
+            "type": "Picture",
+            "isReadonly": true,
+            "isTransient": true,
+            "nodeType": "art",
+            "url": "https://az31353.vo.msecnd.net/pub/hzruobms",
+            "id": "ga13a5QefiAUqPjyd9bywVfk"
+          },
+          {
+            "name": "K14",
+            "comment": "",
+            "type": "Picture",
+            "isReadonly": true,
+            "isTransient": true,
+            "nodeType": "art",
+            "url": "https://az31353.vo.msecnd.net/pub/bxnmdyly",
+            "id": "SQTXsRL998y4p8mMU0eBwHdR"
+          },
+          {
+            "name": "K15",
+            "comment": "",
+            "type": "Picture",
+            "isReadonly": true,
+            "isTransient": true,
+            "nodeType": "art",
+            "url": "https://az31353.vo.msecnd.net/pub/jkqfcbom",
+            "id": "xM2HqckGk1fu3yftqnjs32zO"
+          },
+          {
+            "name": "K16",
+            "comment": "",
+            "type": "Picture",
+            "isReadonly": true,
+            "isTransient": true,
+            "nodeType": "art",
+            "url": "https://az31353.vo.msecnd.net/pub/liyzkmwg",
+            "id": "Ls3b2UUocOGsrD3zL2jbVUt1"
+          },
+          {
+            "name": "KL1",
+            "comment": "",
+            "type": "Picture",
+            "isReadonly": true,
+            "isTransient": true,
+            "nodeType": "art",
+            "url": "https://az31353.vo.msecnd.net/pub/qxzlpmjj",
+            "id": "qiG3qughrAwm4YM2y00io4Ux"
+          },
+          {
+            "name": "tap sprite in KanjiSet",
+            "inParameters": [
+              {
+                "name": "sprite",
+                "type": "Sprite",
+                "nodeType": "localDef",
+                "id": "Wvdj6unwad404G1Lo1JpD1njP0"
+              },
+              {
+                "name": "index in set",
+                "type": "Number",
+                "nodeType": "localDef",
+                "id": "Wvdj6unwad404G1Lo1JpD1njP1"
+              },
+              {
+                "name": "x",
+                "type": "Number",
+                "nodeType": "localDef",
+                "id": "Wvdj6unwad404G1Lo1JpD1njP2"
+              },
+              {
+                "name": "y",
+                "type": "Number",
+                "nodeType": "localDef",
+                "id": "Wvdj6unwad404G1Lo1JpD1njP3"
+              }
+            ],
+            "outParameters": [],
+            "isPrivate": false,
+            "isOffloaded": false,
+            "isTest": false,
+            "isAsync": true,
+            "nodeType": "event",
+            "eventName": "tap sprite in ",
+            "eventVariableId": "iXV6h90z1sMgl2SdcfRv2QLr",
+            "body": [
+              {
+                "expr": ":code #Eqlu2HJmzfCQJ1PPW7ho2RpL ,( '2/002e5/002e ,∥ $Wvdj6unwad404G1Lo1JpD1njP1 ,)",
+                "nodeType": "exprStmt",
+                "id": "YI4qNBlA2u6le33sos5CUXHV",
+                "locals": []
+              }
+            ],
+            "id": "Wvdj6unwad404G1Lo1JpD1nj"
+          },
+          {
+            "name": "LoadKanjiLarge",
+            "inParameters": [
+              {
+                "name": "KanjiIndex",
+                "type": "Number",
+                "nodeType": "localDef",
+                "id": "BEgK00sLcppr2RJ2MxtQMAGfP0"
+              }
+            ],
+            "outParameters": [],
+            "isPrivate": true,
+            "isOffloaded": false,
+            "isTest": false,
+            "isAsync": false,
+            "nodeType": "action",
+            "body": [
+              {
+                "text": "Loads the screens for the large details of the 80 Kanji",
+                "nodeType": "comment",
+                "id": "x4aPzu2w52nl7Cr4PLeVSK4D"
+              },
+              {
+                "nodeType": "if",
+                "condition": "$BEgK00sLcppr2RJ2MxtQMAGfP0 ,= ,0",
+                "thenBody": [
+                  {
+                    "expr": ":data #iLTjmK1NRZka0tm1BEmUuxLs .create_picture ,( :art #qiG3qughrAwm4YM2y00io4Ux ,)",
+                    "nodeType": "exprStmt",
+                    "id": "xqSvGO39aN4IWzWveh4BJXpQ",
+                    "locals": []
+                  }
+                ],
+                "isElseIf": false,
+                "id": "PbMYkCcuUgGgGocaaOPb1PnA",
+                "locals": []
+              },
+              {
+                "nodeType": "if",
+                "condition": "$BEgK00sLcppr2RJ2MxtQMAGfP0 ,= ,1",
+                "thenBody": [
+                  {
+                    "expr": ":data #iLTjmK1NRZka0tm1BEmUuxLs .create_picture ,( :art #x9fh4rYleH0Qjj4n06DlByM8 ,)",
+                    "nodeType": "exprStmt",
+                    "id": "oJKetn17JsAtKqH46ykVn4fY",
+                    "locals": []
+                  }
+                ],
+                "isElseIf": true,
+                "id": "BsKZkZOR2CzRRFsRC8vJ4E2E",
+                "locals": []
+              },
+              {
+                "nodeType": "if",
+                "condition": "$BEgK00sLcppr2RJ2MxtQMAGfP0 ,= ,2",
+                "thenBody": [
+                  {
+                    "expr": ":data #iLTjmK1NRZka0tm1BEmUuxLs .create_picture ,( :art #te2Iaibpv3Lyq2Blp1FiVWhF ,)",
+                    "nodeType": "exprStmt",
+                    "id": "Jz8wWLRsYvsPUY9w17zDHCIg",
+                    "locals": []
+                  }
+                ],
+                "isElseIf": true,
+                "id": "zGogdlLENcfoZLndUI1jDh1N",
+                "locals": []
+              },
+              {
+                "nodeType": "if",
+                "condition": "$BEgK00sLcppr2RJ2MxtQMAGfP0 ,= ,3",
+                "thenBody": [
+                  {
+                    "expr": ":data #iLTjmK1NRZka0tm1BEmUuxLs .create_picture ,( :art #NJYH4Z0Q4bGfLK47RoWw736L ,)",
+                    "nodeType": "exprStmt",
+                    "id": "v1U9TahDQ5ZSHUvy7228swe2",
+                    "locals": []
+                  }
+                ],
+                "isElseIf": true,
+                "id": "sjVR6vXa69xp5h37ih2jCPOu",
+                "locals": []
+              },
+              {
+                "nodeType": "if",
+                "condition": "$BEgK00sLcppr2RJ2MxtQMAGfP0 ,= ,4",
+                "thenBody": [
+                  {
+                    "expr": ":data #iLTjmK1NRZka0tm1BEmUuxLs .create_picture ,( :art #s2vj8ee0YWCcGKvaQdCP1p65 ,)",
+                    "nodeType": "exprStmt",
+                    "id": "WvbJ3rIrbkQ33E2ktFThXK45",
+                    "locals": []
+                  }
+                ],
+                "isElseIf": true,
+                "id": "B0kOkABEz0BxfsFAHc79HTBb",
+                "locals": []
+              },
+              {
+                "nodeType": "if",
+                "condition": "$BEgK00sLcppr2RJ2MxtQMAGfP0 ,= ,5",
+                "thenBody": [
+                  {
+                    "expr": ":data #iLTjmK1NRZka0tm1BEmUuxLs .create_picture ,( :art #EZzlEPhNuiwNk8A5hRAlW7lp ,)",
+                    "nodeType": "exprStmt",
+                    "id": "xJG2Q2YHRtgrV44fKHDH0zy4",
+                    "locals": []
+                  }
+                ],
+                "isElseIf": true,
+                "id": "xEPIZNvA4vyUm7Bc8QyfL2Nq",
+                "locals": []
+              },
+              {
+                "nodeType": "if",
+                "condition": "$BEgK00sLcppr2RJ2MxtQMAGfP0 ,= ,6",
+                "thenBody": [
+                  {
+                    "expr": ":data #iLTjmK1NRZka0tm1BEmUuxLs .create_picture ,( :art #qrHHdSiyu8b5nCsPJHkuMDii ,)",
+                    "nodeType": "exprStmt",
+                    "id": "uNgc5rWN5pyylx2rwIwGwIjH",
+                    "locals": []
+                  }
+                ],
+                "isElseIf": true,
+                "id": "UkhptVPGQhE616IAN2tT4jje",
+                "locals": []
+              },
+              {
+                "nodeType": "if",
+                "condition": "$BEgK00sLcppr2RJ2MxtQMAGfP0 ,= ,7",
+                "thenBody": [
+                  {
+                    "expr": ":data #iLTjmK1NRZka0tm1BEmUuxLs .create_picture ,( :art #xwP1rpjnTE4umVvg2tfbhq2U ,)",
+                    "nodeType": "exprStmt",
+                    "id": "zyZhiX2bM857j1wcqdgmuZ5j",
+                    "locals": []
+                  }
+                ],
+                "isElseIf": true,
+                "id": "VcI9G7yXs1g6w41GyqOwmHWy",
+                "locals": []
+              },
+              {
+                "nodeType": "if",
+                "condition": "$BEgK00sLcppr2RJ2MxtQMAGfP0 ,= ,8",
+                "thenBody": [
+                  {
+                    "expr": ":data #iLTjmK1NRZka0tm1BEmUuxLs .create_picture ,( :art #lvZpN734pzXFMEaNzwqg6dTJ ,)",
+                    "nodeType": "exprStmt",
+                    "id": "JOEPERT4fNzoVowxYhWM9pW1",
+                    "locals": []
+                  }
+                ],
+                "isElseIf": true,
+                "id": "sfipifnH2aL9KjNi6qh72Lga",
+                "locals": []
+              },
+              {
+                "nodeType": "if",
+                "condition": "$BEgK00sLcppr2RJ2MxtQMAGfP0 ,= ,9",
+                "thenBody": [
+                  {
+                    "expr": ":data #iLTjmK1NRZka0tm1BEmUuxLs .create_picture ,( :art #LG38ZOF4RD8c8JQ5VCF2B4B9 ,)",
+                    "nodeType": "exprStmt",
+                    "id": "yA7MloB4y0AvdIARa83Nf0yK",
+                    "locals": []
+                  }
+                ],
+                "isElseIf": true,
+                "id": "OHRW6sH1ojKQUtIiKuaw9o1y",
+                "locals": []
+              },
+              {
+                "nodeType": "if",
+                "condition": "$BEgK00sLcppr2RJ2MxtQMAGfP0 ,= ,1 ,0",
+                "thenBody": [
+                  {
+                    "expr": ":data #iLTjmK1NRZka0tm1BEmUuxLs .create_picture ,( :art #kvccvj54LSS3a4Xei1fZLaEj ,)",
+                    "nodeType": "exprStmt",
+                    "id": "cxVEFc17PaOFq2VyTYR13T7l",
+                    "locals": []
+                  }
+                ],
+                "isElseIf": true,
+                "id": "zm3t3R9WS4bb7gbqtSwhr6a1",
+                "locals": []
+              },
+              {
+                "nodeType": "if",
+                "condition": "$BEgK00sLcppr2RJ2MxtQMAGfP0 ,= ,1 ,1",
+                "thenBody": [
+                  {
+                    "expr": ":data #iLTjmK1NRZka0tm1BEmUuxLs .create_picture ,( :art #F4UOhmjr4v2ko04y6dVGC4z3 ,)",
+                    "nodeType": "exprStmt",
+                    "id": "GVXxBED223UtHZq98cdTld2B",
+                    "locals": []
+                  }
+                ],
+                "isElseIf": true,
+                "id": "qOMNzYt8St4BonqWcHgCAISj",
+                "locals": []
+              },
+              {
+                "nodeType": "if",
+                "condition": "$BEgK00sLcppr2RJ2MxtQMAGfP0 ,= ,1 ,2",
+                "thenBody": [
+                  {
+                    "expr": ":data #iLTjmK1NRZka0tm1BEmUuxLs .create_picture ,( :art #dtIbYfsDyROyFd2wW8CQVzit ,)",
+                    "nodeType": "exprStmt",
+                    "id": "dAwirlECq4rMJ1Zn2Xndn2Ak",
+                    "locals": []
+                  }
+                ],
+                "isElseIf": true,
+                "id": "x6FqAzKaMTErHFC2VYAhj72X",
+                "locals": []
+              },
+              {
+                "nodeType": "if",
+                "condition": "$BEgK00sLcppr2RJ2MxtQMAGfP0 ,= ,1 ,3",
+                "thenBody": [
+                  {
+                    "expr": ":data #iLTjmK1NRZka0tm1BEmUuxLs .create_picture ,( :art #mbfL1ZY6TwdaqS2JPrJlGPh9 ,)",
+                    "nodeType": "exprStmt",
+                    "id": "HiiKQWN2YzSbYSQfd5zzMvMu",
+                    "locals": []
+                  }
+                ],
+                "isElseIf": true,
+                "id": "Ktt1RN9Bi0jFboe503zUGLUW",
+                "locals": []
+              },
+              {
+                "nodeType": "if",
+                "condition": "$BEgK00sLcppr2RJ2MxtQMAGfP0 ,= ,1 ,4",
+                "thenBody": [
+                  {
+                    "expr": ":data #iLTjmK1NRZka0tm1BEmUuxLs .create_picture ,( :art #yaKITDs4sRX3fBnSUGszndkB ,)",
+                    "nodeType": "exprStmt",
+                    "id": "mcxmNVLltCikjLvSifHPCqEI",
+                    "locals": []
+                  }
+                ],
+                "isElseIf": true,
+                "id": "RsUWDltq19NtR4Lk04HviEWA",
+                "locals": []
+              },
+              {
+                "nodeType": "if",
+                "condition": "$BEgK00sLcppr2RJ2MxtQMAGfP0 ,= ,1 ,5",
+                "thenBody": [
+                  {
+                    "expr": ":data #iLTjmK1NRZka0tm1BEmUuxLs .create_picture ,( :art #xNnE1tEOx8M9hJGRUUbFeF66 ,)",
+                    "nodeType": "exprStmt",
+                    "id": "HUuiXWAKEokwDLV42ziRLrKt",
+                    "locals": []
+                  }
+                ],
+                "isElseIf": true,
+                "id": "o3raVZ2n0xcI6DjKQFOQNdbJ",
+                "locals": []
+              },
+              {
+                "expr": ":code #SwSzj5UQM81kx2hO58s4cUJh",
+                "nodeType": "exprStmt",
+                "id": "xHj0wG8Z0l4kmEswNbTQs5IV",
+                "locals": []
+              }
+            ],
+            "id": "BEgK00sLcppr2RJ2MxtQMAGf"
+          },
+          {
+            "name": "KL2",
+            "comment": "",
+            "type": "Picture",
+            "isReadonly": true,
+            "isTransient": true,
+            "nodeType": "art",
+            "url": "https://az31353.vo.msecnd.net/pub/ozkybxpe",
+            "id": "x9fh4rYleH0Qjj4n06DlByM8"
+          },
+          {
+            "name": "KL3",
+            "comment": "",
+            "type": "Picture",
+            "isReadonly": true,
+            "isTransient": true,
+            "nodeType": "art",
+            "url": "https://az31353.vo.msecnd.net/pub/uraneqzn",
+            "id": "te2Iaibpv3Lyq2Blp1FiVWhF"
+          },
+          {
+            "name": "KL4",
+            "comment": "",
+            "type": "Picture",
+            "isReadonly": true,
+            "isTransient": true,
+            "nodeType": "art",
+            "url": "https://az31353.vo.msecnd.net/pub/ksfhdcsr",
+            "id": "NJYH4Z0Q4bGfLK47RoWw736L"
+          },
+          {
+            "name": "KL5",
+            "comment": "",
+            "type": "Picture",
+            "isReadonly": true,
+            "isTransient": true,
+            "nodeType": "art",
+            "url": "https://az31353.vo.msecnd.net/pub/jqkdcbqr",
+            "id": "s2vj8ee0YWCcGKvaQdCP1p65"
+          },
+          {
+            "name": "LoadTest",
+            "inParameters": [
+              {
+                "name": "TestType",
+                "type": "Number",
+                "nodeType": "localDef",
+                "id": "kYCTU3Wzlqnd34KHl4bvOldKP0"
+              }
+            ],
+            "outParameters": [],
+            "isPrivate": true,
+            "isOffloaded": false,
+            "isTest": false,
+            "isAsync": false,
+            "nodeType": "action",
+            "body": [
+              {
+                "text": "This Action will load the individual test screens, populate the test data and create the answer buttons. After the test is complete it will send the user to the CompleteTest Scene",
+                "nodeType": "comment",
+                "id": "ZanmCxbL1Qb3HZzycBc21gP2"
+              }
+            ],
+            "id": "kYCTU3Wzlqnd34KHl4bvOldK"
+          },
+          {
+            "name": "CompeteTest",
+            "inParameters": [
+              {
+                "name": "RightAnswers",
+                "type": "Number",
+                "nodeType": "localDef",
+                "id": "VmWJC4OMXbfuKegbksq9n1VUP0"
+              },
+              {
+                "name": "TotalQuestions",
+                "type": "Number",
+                "nodeType": "localDef",
+                "id": "VmWJC4OMXbfuKegbksq9n1VUP1"
+              }
+            ],
+            "outParameters": [],
+            "isPrivate": true,
+            "isOffloaded": false,
+            "isTest": false,
+            "isAsync": false,
+            "nodeType": "action",
+            "body": [
+              {
+                "text": "This will display the number of correct answers that the user got during their test, then when they are finished it will take them back to the main menu",
+                "nodeType": "comment",
+                "id": "xDHXC6WJWTbq2OwZs208gsQo"
+              }
+            ],
+            "id": "VmWJC4OMXbfuKegbksq9n1VU"
+          },
+          {
+            "name": "KL6",
+            "comment": "",
+            "type": "Picture",
+            "isReadonly": true,
+            "isTransient": true,
+            "nodeType": "art",
+            "url": "https://az31353.vo.msecnd.net/pub/pzmlwokw",
+            "id": "EZzlEPhNuiwNk8A5hRAlW7lp"
+          },
+          {
+            "name": "KL7",
+            "comment": "",
+            "type": "Picture",
+            "isReadonly": true,
+            "isTransient": true,
+            "nodeType": "art",
+            "url": "https://az31353.vo.msecnd.net/pub/zidnzjnj",
+            "id": "qrHHdSiyu8b5nCsPJHkuMDii"
+          },
+          {
+            "name": "KL8",
+            "comment": "",
+            "type": "Picture",
+            "isReadonly": true,
+            "isTransient": true,
+            "nodeType": "art",
+            "url": "https://az31353.vo.msecnd.net/pub/fbirexsd",
+            "id": "xwP1rpjnTE4umVvg2tfbhq2U"
+          },
+          {
+            "name": "KL9",
+            "comment": "",
+            "type": "Picture",
+            "isReadonly": true,
+            "isTransient": true,
+            "nodeType": "art",
+            "url": "https://az31353.vo.msecnd.net/pub/mkyszduu",
+            "id": "lvZpN734pzXFMEaNzwqg6dTJ"
+          },
+          {
+            "name": "KL10",
+            "comment": "",
+            "type": "Picture",
+            "isReadonly": true,
+            "isTransient": true,
+            "nodeType": "art",
+            "url": "https://az31353.vo.msecnd.net/pub/geimaxds",
+            "id": "LG38ZOF4RD8c8JQ5VCF2B4B9"
+          },
+          {
+            "name": "KL11",
+            "comment": "",
+            "type": "Picture",
+            "isReadonly": true,
+            "isTransient": true,
+            "nodeType": "art",
+            "url": "https://az31353.vo.msecnd.net/pub/ptxjceon",
+            "id": "kvccvj54LSS3a4Xei1fZLaEj"
+          },
+          {
+            "name": "KL12",
+            "comment": "",
+            "type": "Picture",
+            "isReadonly": true,
+            "isTransient": true,
+            "nodeType": "art",
+            "url": "https://az31353.vo.msecnd.net/pub/ymzvrfws",
+            "id": "F4UOhmjr4v2ko04y6dVGC4z3"
+          },
+          {
+            "name": "KL13",
+            "comment": "",
+            "type": "Picture",
+            "isReadonly": true,
+            "isTransient": true,
+            "nodeType": "art",
+            "url": "https://az31353.vo.msecnd.net/pub/uyerioxp",
+            "id": "dtIbYfsDyROyFd2wW8CQVzit"
+          },
+          {
+            "name": "KL14",
+            "comment": "",
+            "type": "Picture",
+            "isReadonly": true,
+            "isTransient": true,
+            "nodeType": "art",
+            "url": "https://az31353.vo.msecnd.net/pub/nqdwmvzc",
+            "id": "mbfL1ZY6TwdaqS2JPrJlGPh9"
+          },
+          {
+            "name": "KL15",
+            "comment": "",
+            "type": "Picture",
+            "isReadonly": true,
+            "isTransient": true,
+            "nodeType": "art",
+            "url": "https://az31353.vo.msecnd.net/pub/tqcqodjn",
+            "id": "yaKITDs4sRX3fBnSUGszndkB"
+          },
+          {
+            "name": "KL16",
+            "comment": "",
+            "type": "Picture",
+            "isReadonly": true,
+            "isTransient": true,
+            "nodeType": "art",
+            "url": "https://az31353.vo.msecnd.net/pub/cmqeaukq",
+            "id": "xNnE1tEOx8M9hJGRUUbFeF66"
+          },
+          {
+            "name": "K17",
+            "comment": "",
+            "type": "Picture",
+            "isReadonly": true,
+            "isTransient": true,
+            "nodeType": "art",
+            "url": "https://az31353.vo.msecnd.net/pub/hqtoppxe",
+            "id": "TIEta6Zi6RCY0UoNAJ3pOK14"
+          },
+          {
+            "name": "K18",
+            "comment": "",
+            "type": "Picture",
+            "isReadonly": true,
+            "isTransient": true,
+            "nodeType": "art",
+            "url": "https://az31353.vo.msecnd.net/pub/tbgjguft",
+            "id": "BjIWAl5vHNEf6Hwz0QCyx2JM"
+          },
+          {
+            "name": "K19",
+            "comment": "",
+            "type": "Picture",
+            "isReadonly": true,
+            "isTransient": true,
+            "nodeType": "art",
+            "url": "https://az31353.vo.msecnd.net/pub/wrhyiveh",
+            "id": "qO134ng8krRTs462B2mTjHz5"
+          },
+          {
+            "name": "K20",
+            "comment": "",
+            "type": "Picture",
+            "isReadonly": true,
+            "isTransient": true,
+            "nodeType": "art",
+            "url": "https://az31353.vo.msecnd.net/pub/hdhnfkmv",
+            "id": "UtatGsSPCQAgSvyL3yH3iPTj"
+          },
+          {
+            "name": "K21",
+            "comment": "",
+            "type": "Picture",
+            "isReadonly": true,
+            "isTransient": true,
+            "nodeType": "art",
+            "url": "https://az31353.vo.msecnd.net/pub/csjcvjri",
+            "id": "pMkxa2LfSKneLwMtqLZA6Ty4"
+          },
+          {
+            "name": "K22",
+            "comment": "",
+            "type": "Picture",
+            "isReadonly": true,
+            "isTransient": true,
+            "nodeType": "art",
+            "url": "https://az31353.vo.msecnd.net/pub/fmbzgggb",
+            "id": "x7ylZxg7EiAmdyg0WBOyxX2I"
+          },
+          {
+            "name": "K23",
+            "comment": "",
+            "type": "Picture",
+            "isReadonly": true,
+            "isTransient": true,
+            "nodeType": "art",
+            "url": "https://az31353.vo.msecnd.net/pub/dwnhhfgh",
+            "id": "VHHAQZDSDfsSOSZjBcO2WRTT"
+          },
+          {
+            "name": "K24",
+            "comment": "",
+            "type": "Picture",
+            "isReadonly": true,
+            "isTransient": true,
+            "nodeType": "art",
+            "url": "https://az31353.vo.msecnd.net/pub/rszztqws",
+            "id": "gnV7zRB3JnRx3YXLbLdILRuN"
+          },
+          {
+            "name": "K25",
+            "comment": "",
+            "type": "Picture",
+            "isReadonly": true,
+            "isTransient": true,
+            "nodeType": "art",
+            "url": "https://az31353.vo.msecnd.net/pub/dxumpflk",
+            "id": "u3zURzMVjlD3gaS6sS46O3xO"
+          },
+          {
+            "name": "K26",
+            "comment": "",
+            "type": "Picture",
+            "isReadonly": true,
+            "isTransient": true,
+            "nodeType": "art",
+            "url": "https://az31353.vo.msecnd.net/pub/rvhjxevg",
+            "id": "xR53UfJ96EuVSa26lYCcDWDf"
+          },
+          {
+            "name": "K27",
+            "comment": "",
+            "type": "Picture",
+            "isReadonly": true,
+            "isTransient": true,
+            "nodeType": "art",
+            "url": "https://az31353.vo.msecnd.net/pub/jyalkfhu",
+            "id": "S6end5qGwxjIBtuUWMUc7LDE"
+          },
+          {
+            "name": "K28",
+            "comment": "",
+            "type": "Picture",
+            "isReadonly": true,
+            "isTransient": true,
+            "nodeType": "art",
+            "url": "https://az31353.vo.msecnd.net/pub/mbjbhxlt",
+            "id": "KUYUCVxARZsVY1wLzAMqFkS0"
+          },
+          {
+            "name": "K29",
+            "comment": "",
+            "type": "Picture",
+            "isReadonly": true,
+            "isTransient": true,
+            "nodeType": "art",
+            "url": "https://az31353.vo.msecnd.net/pub/rffvklxc",
+            "id": "Jbx5FmuAc8SWcrJ4Dnl42Frq"
+          },
+          {
+            "name": "K30",
+            "comment": "",
+            "type": "Picture",
+            "isReadonly": true,
+            "isTransient": true,
+            "nodeType": "art",
+            "url": "https://az31353.vo.msecnd.net/pub/rdjsktzc",
+            "id": "J2Ca1GXaFZLHjWTOU0R9WmQo"
+          },
+          {
+            "name": "K31",
+            "comment": "",
+            "type": "Picture",
+            "isReadonly": true,
+            "isTransient": true,
+            "nodeType": "art",
+            "url": "https://az31353.vo.msecnd.net/pub/khefsquv",
+            "id": "xK5Ne9IJQnjAk4xNJdvfTn2T"
+          },
+          {
+            "name": "K32",
+            "comment": "",
+            "type": "Picture",
+            "isReadonly": true,
+            "isTransient": true,
+            "nodeType": "art",
+            "url": "https://az31353.vo.msecnd.net/pub/inlyjysb",
+            "id": "o4Yr5XOh9ftQwKz6ttb4ik0z"
+          }
+        ],
+        "deletedDecls": [],
+        "nodeType": "app",
+        "id": "app"
+      }
+    },
+    {
+      "seqNo": 1,
+      "time": 1366687135,
+      "scriptId": "vrsr",
+      "historyId": "2520356136641689359704c1f18-4e50-48f8-8cdf-c668f5d5e437",
+      "updateSize": 45,
+      "updates": {
+        "app": {
+          "rootId": "xtNWj5Ip4hjSWuWpbrpkWwbj"
+        }
+      }
+    }
+  ]
+}

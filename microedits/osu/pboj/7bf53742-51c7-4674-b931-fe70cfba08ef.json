@@ -1,0 +1,1384 @@
+{
+  "userid": "pboj",
+  "guid": "7bf53742-51c7-4674-b931-fe70cfba08ef",
+  "lastStatus": "deleted",
+  "items": [
+    {
+      "seqNo": 0,
+      "time": 1356067726,
+      "scriptId": "hlzq",
+      "historyId": "25204623307308128257bf53742-51c7-4674-b931-fe70cfba08ef",
+      "updateSize": 27846,
+      "ast": {
+        "textVersion": "v2.2,js,ctx",
+        "jsonVersion": "v1.0,resolved,short",
+        "name": "TD-Quest",
+        "comment": "A work in progress attempt to bring an X-Quest clone to Touchdevelop.\n\nImplemented features:\n\n• bullets (tap to fire)\n• movement controls closer to X-Quest\n\n• game loop skeleton\n• walls\n• hero movement",
+        "icon": "space",
+        "color": "#ff004b49",
+        "autoIcon": "space",
+        "autoColor": "#004b49",
+        "platform": "current",
+        "rootId": "xxa7RacNcyzxIYIC7Ca02y43",
+        "showAd": false,
+        "isLibrary": false,
+        "allowExport": false,
+        "hasUniqueIds": false,
+        "decls": [
+          {
+            "name": "main",
+            "inParameters": [],
+            "outParameters": [],
+            "isPrivate": false,
+            "isOffloaded": false,
+            "isTest": false,
+            "isAsync": false,
+            "nodeType": "action",
+            "body": [
+              {
+                "text": "A small cleanup",
+                "nodeType": "comment",
+                "id": "xN0u9YHpEKILQEyoJI3D6j02"
+              },
+              {
+                "expr": ":records #wfLknUIbNgdIhct2gQtY7i3Z .clear",
+                "nodeType": "exprStmt",
+                "id": "T1I02z4hkWTa0fFymERZ5etU",
+                "locals": []
+              },
+              {
+                "expr": ":code #egbfsTcc17jHz5PrHQu98Tac",
+                "nodeType": "exprStmt",
+                "id": "xUcQhIbdz9pJ6bThT6lk4f0F",
+                "locals": []
+              },
+              {
+                "expr": ":data #fmOI2Vx2QfXT6Mlqe3XYsIeh .post_to_wall",
+                "nodeType": "exprStmt",
+                "id": "razAH6IojvMw2HnpM8224G0V",
+                "locals": []
+              },
+              {
+                "expr": ":data #xvfyUNjAQEZiJxobaGq8NZeu ,:= :time .now",
+                "nodeType": "exprStmt",
+                "id": "Tw2muzamqvpmH1MKT8I7EB1v",
+                "locals": []
+              },
+              {
+                "expr": ":data #AAUifv4u2FAVAw2Hs2nY691z ,:= T",
+                "nodeType": "exprStmt",
+                "id": "CQsp3EqfP6AauYDQYnkeNfpW",
+                "locals": []
+              }
+            ],
+            "id": "zuxx47NdIcA7MHBg9ax14H23"
+          },
+          {
+            "name": "board",
+            "comment": "",
+            "type": "Board",
+            "isReadonly": false,
+            "isTransient": true,
+            "nodeType": "data",
+            "id": "fmOI2Vx2QfXT6Mlqe3XYsIeh"
+          },
+          {
+            "nodeType": "record",
+            "name": "thing",
+            "sourceName": "Sprite decorator",
+            "comment": "",
+            "category": "decorator",
+            "isCloudEnabled": false,
+            "keys": [
+              {
+                "nodeType": "recordKey",
+                "name": "target",
+                "type": "Sprite",
+                "id": "hmRAy9t4gTXHqwsk6KVjdxuU"
+              }
+            ],
+            "fields": [
+              {
+                "nodeType": "recordField",
+                "name": "kind",
+                "type": "String",
+                "id": "IHPqzqDLIp42cFIES6ygdzPW"
+              },
+              {
+                "nodeType": "recordField",
+                "name": "hero",
+                "type": "{\"o\":\"Hero\"}",
+                "id": "GpwchyPrdudqmWjhQpCtfwZ3"
+              },
+              {
+                "nodeType": "recordField",
+                "name": "bullet",
+                "type": "{\"o\":\"Bullet\"}",
+                "id": "MniytenopgmMN6sBHAUKdVZS"
+              }
+            ],
+            "id": "wfLknUIbNgdIhct2gQtY7i3Z"
+          },
+          {
+            "nodeType": "record",
+            "name": "Bullet",
+            "sourceName": "Bullet",
+            "comment": "",
+            "category": "object",
+            "isCloudEnabled": false,
+            "keys": [],
+            "fields": [
+              {
+                "nodeType": "recordField",
+                "name": "born",
+                "type": "DateTime",
+                "id": "s4Va4VXc2DZZROvPZiqA194F"
+              },
+              {
+                "nodeType": "recordField",
+                "name": "owner",
+                "type": "Sprite",
+                "id": "iY8Aq5IY3RKSZQD5qfXp72Yg"
+              },
+              {
+                "nodeType": "recordField",
+                "name": "velocity",
+                "type": "Number",
+                "id": "x3uiYXyueP0PPq5TchcxaVH8"
+              },
+              {
+                "nodeType": "recordField",
+                "name": "ttl",
+                "type": "Number",
+                "id": "yagL4qc47wIInCrLndkHR4E4"
+              }
+            ],
+            "id": "xeVZ3jrpBSEgoybpgdV6VwBU"
+          },
+          {
+            "nodeType": "record",
+            "name": "Hero",
+            "sourceName": "Hero",
+            "comment": "",
+            "category": "object",
+            "isCloudEnabled": false,
+            "keys": [],
+            "fields": [
+              {
+                "nodeType": "recordField",
+                "name": "score",
+                "type": "Number",
+                "id": "gy34bz4uukFlOTN6oONqmM8U"
+              },
+              {
+                "nodeType": "recordField",
+                "name": "lives",
+                "type": "Number",
+                "id": "sE8GvRdM1qeatPxHaxj2LSfm"
+              },
+              {
+                "nodeType": "recordField",
+                "name": "gunner",
+                "type": "{\"o\":\"Gunner\"}",
+                "id": "zJbjBYSzfBwnBwVS4kWw5JCA"
+              }
+            ],
+            "id": "P97Z2NJLQEWOpCQ79IIdnfYP"
+          },
+          {
+            "name": "create walls",
+            "inParameters": [],
+            "outParameters": [],
+            "isPrivate": true,
+            "isOffloaded": false,
+            "isTest": false,
+            "isAsync": false,
+            "nodeType": "action",
+            "body": [
+              {
+                "expr": "$Qn8YmfEZdNmj0IQZBESNxJS2L0 ,:= :data #fmOI2Vx2QfXT6Mlqe3XYsIeh .create_rectangle ,( :data #fmOI2Vx2QfXT6Mlqe3XYsIeh .width ,, ,6 ,)",
+                "nodeType": "exprStmt",
+                "id": "Qn8YmfEZdNmj0IQZBESNxJS2",
+                "locals": [
+                  {
+                    "name": "sprite",
+                    "type": "Sprite",
+                    "nodeType": "localDef",
+                    "id": "Qn8YmfEZdNmj0IQZBESNxJS2L0"
+                  }
+                ]
+              },
+              {
+                "expr": "$Qn8YmfEZdNmj0IQZBESNxJS2L0 .set_pos ,( :data #fmOI2Vx2QfXT6Mlqe3XYsIeh .width ,/ ,2 ,, ,0 ,)",
+                "nodeType": "exprStmt",
+                "id": "ZbAhxYe2MUlGiNWNUrVvJX5p",
+                "locals": []
+              },
+              {
+                "expr": ":records #wfLknUIbNgdIhct2gQtY7i3Z .at ,( $Qn8YmfEZdNmj0IQZBESNxJS2L0 ,) .kind .set ,( 'wall ,)",
+                "nodeType": "exprStmt",
+                "id": "sDyKHA4Jn27KGhbqEjToz26U",
+                "locals": []
+              },
+              {
+                "expr": ":data #x6rQdsZGiAbkFfVk3VBjWHxu .add ,( $Qn8YmfEZdNmj0IQZBESNxJS2L0 ,)",
+                "nodeType": "exprStmt",
+                "id": "la0shrRMAv5nIxiFj0jMr2Xd",
+                "locals": []
+              },
+              {
+                "expr": "$Qn8YmfEZdNmj0IQZBESNxJS2L0 ,:= :data #fmOI2Vx2QfXT6Mlqe3XYsIeh .create_rectangle ,( :data #fmOI2Vx2QfXT6Mlqe3XYsIeh .width ,, ,6 ,)",
+                "nodeType": "exprStmt",
+                "id": "RwtCbl8RsFjyQdGdK7m9O5oR",
+                "locals": []
+              },
+              {
+                "expr": "$Qn8YmfEZdNmj0IQZBESNxJS2L0 .set_pos ,( :data #fmOI2Vx2QfXT6Mlqe3XYsIeh .width ,/ ,2 ,, :data #fmOI2Vx2QfXT6Mlqe3XYsIeh .height ,)",
+                "nodeType": "exprStmt",
+                "id": "cmhG3r1Q9gqjy2EhOgeX2mDQ",
+                "locals": []
+              },
+              {
+                "expr": ":records #wfLknUIbNgdIhct2gQtY7i3Z .at ,( $Qn8YmfEZdNmj0IQZBESNxJS2L0 ,) .kind .set ,( 'wall ,)",
+                "nodeType": "exprStmt",
+                "id": "JL6SKuWdwI4lhlJd77g3oDNQ",
+                "locals": []
+              },
+              {
+                "expr": ":data #x6rQdsZGiAbkFfVk3VBjWHxu .add ,( $Qn8YmfEZdNmj0IQZBESNxJS2L0 ,)",
+                "nodeType": "exprStmt",
+                "id": "N17ZyhCBigt329J4E2Pl10tn",
+                "locals": []
+              },
+              {
+                "expr": "$Qn8YmfEZdNmj0IQZBESNxJS2L0 ,:= :data #fmOI2Vx2QfXT6Mlqe3XYsIeh .create_rectangle ,( ,6 ,, :data #fmOI2Vx2QfXT6Mlqe3XYsIeh .height ,)",
+                "nodeType": "exprStmt",
+                "id": "HW1EI2IqLb2tGCdk8ugrZIPy",
+                "locals": []
+              },
+              {
+                "expr": "$Qn8YmfEZdNmj0IQZBESNxJS2L0 .set_pos ,( ,0 ,, :data #fmOI2Vx2QfXT6Mlqe3XYsIeh .height ,/ ,2 ,)",
+                "nodeType": "exprStmt",
+                "id": "dVPiCvM2wJ4MUInJSj54hZmV",
+                "locals": []
+              },
+              {
+                "expr": ":records #wfLknUIbNgdIhct2gQtY7i3Z .at ,( $Qn8YmfEZdNmj0IQZBESNxJS2L0 ,) .kind .set ,( 'wall ,)",
+                "nodeType": "exprStmt",
+                "id": "GSsugUWCN9GW04frmAvqLcuO",
+                "locals": []
+              },
+              {
+                "expr": ":data #x6rQdsZGiAbkFfVk3VBjWHxu .add ,( $Qn8YmfEZdNmj0IQZBESNxJS2L0 ,)",
+                "nodeType": "exprStmt",
+                "id": "fhrP61vKbmPXQHnxhNhJpRTD",
+                "locals": []
+              },
+              {
+                "expr": "$Qn8YmfEZdNmj0IQZBESNxJS2L0 ,:= :data #fmOI2Vx2QfXT6Mlqe3XYsIeh .create_rectangle ,( ,6 ,, :data #fmOI2Vx2QfXT6Mlqe3XYsIeh .height ,)",
+                "nodeType": "exprStmt",
+                "id": "EBHXs5tVRT9fRKdWEI2fHZuK",
+                "locals": []
+              },
+              {
+                "expr": "$Qn8YmfEZdNmj0IQZBESNxJS2L0 .set_pos ,( :data #fmOI2Vx2QfXT6Mlqe3XYsIeh .width ,, :data #fmOI2Vx2QfXT6Mlqe3XYsIeh .height ,/ ,2 ,)",
+                "nodeType": "exprStmt",
+                "id": "YGRqIgAfTolcLtZyD3B41HJY",
+                "locals": []
+              },
+              {
+                "expr": ":records #wfLknUIbNgdIhct2gQtY7i3Z .at ,( $Qn8YmfEZdNmj0IQZBESNxJS2L0 ,) .kind .set ,( 'wall ,)",
+                "nodeType": "exprStmt",
+                "id": "yByTeg72bL6hJtHup22nRMCP",
+                "locals": []
+              },
+              {
+                "expr": ":data #x6rQdsZGiAbkFfVk3VBjWHxu .add ,( $Qn8YmfEZdNmj0IQZBESNxJS2L0 ,)",
+                "nodeType": "exprStmt",
+                "id": "L0dq4qIH2oSzVL6iOwdUKTxt",
+                "locals": []
+              }
+            ],
+            "id": "XVStLDUyj4jhGCP2RbsM4x4j"
+          },
+          {
+            "name": "create board",
+            "inParameters": [],
+            "outParameters": [],
+            "isPrivate": true,
+            "isOffloaded": false,
+            "isTest": false,
+            "isAsync": false,
+            "nodeType": "action",
+            "body": [
+              {
+                "expr": ":data #fmOI2Vx2QfXT6Mlqe3XYsIeh ,:= :media .create_landscape_board ,( ,8 ,0 ,0 ,, ,4 ,8 ,0 ,)",
+                "nodeType": "exprStmt",
+                "id": "zxosDMfsESO4M2vrxYs1yiCI",
+                "locals": []
+              },
+              {
+                "expr": ":data #x6rQdsZGiAbkFfVk3VBjWHxu ,:= :data #fmOI2Vx2QfXT6Mlqe3XYsIeh .create_sprite_set",
+                "nodeType": "exprStmt",
+                "id": "BYWGe60Rz61QNLKZUFPaLw8N",
+                "locals": []
+              },
+              {
+                "expr": ":data #lGGeyYs2iZIywiFExYduANzu ,:= :data #fmOI2Vx2QfXT6Mlqe3XYsIeh .create_sprite_set",
+                "nodeType": "exprStmt",
+                "id": "JCC2mT4ojLapX4dTcZoBBeFq",
+                "locals": []
+              },
+              {
+                "expr": ":code #XVStLDUyj4jhGCP2RbsM4x4j",
+                "nodeType": "exprStmt",
+                "id": "N44ruDmNDOg5F5QudC6AP6F4",
+                "locals": []
+              },
+              {
+                "expr": "$vEQjNgR3fK0LrN0oCKfJd0KGL0 ,:= :code #GbYmz4ox4it1j9lxva2e4rIn",
+                "nodeType": "exprStmt",
+                "id": "vEQjNgR3fK0LrN0oCKfJd0KG",
+                "locals": [
+                  {
+                    "name": "h",
+                    "type": "{\"o\":\"Hero\"}",
+                    "nodeType": "localDef",
+                    "id": "vEQjNgR3fK0LrN0oCKfJd0KGL0"
+                  }
+                ]
+              },
+              {
+                "expr": ":records #wfLknUIbNgdIhct2gQtY7i3Z .at ,( :data #qyK19grF549xvF52fC2dhxvq ,) .hero .set ,( $vEQjNgR3fK0LrN0oCKfJd0KGL0 ,)",
+                "nodeType": "exprStmt",
+                "id": "x7D6JBv45Q0zoHQull8TQ2am",
+                "locals": []
+              }
+            ],
+            "id": "egbfsTcc17jHz5PrHQu98Tac"
+          },
+          {
+            "name": "gameloop",
+            "inParameters": [],
+            "outParameters": [],
+            "isPrivate": true,
+            "isOffloaded": false,
+            "isTest": false,
+            "isAsync": true,
+            "nodeType": "event",
+            "eventName": "gameloop",
+            "eventVariableId": null,
+            "body": [
+              {
+                "expr": "$ULcrJdI7Wnd8m14117E9PKdiL0 ,:= :records #wfLknUIbNgdIhct2gQtY7i3Z .at ,( :data #qyK19grF549xvF52fC2dhxvq ,) .hero .get",
+                "nodeType": "exprStmt",
+                "id": "ULcrJdI7Wnd8m14117E9PKdi",
+                "locals": [
+                  {
+                    "name": "h",
+                    "type": "{\"o\":\"Hero\"}",
+                    "nodeType": "localDef",
+                    "id": "ULcrJdI7Wnd8m14117E9PKdiL0"
+                  }
+                ]
+              },
+              {
+                "nodeType": "if",
+                "condition": ":data #AAUifv4u2FAVAw2Hs2nY691z",
+                "thenBody": [
+                  {
+                    "expr": ":code #MHQ4WSlDVmg1UeZx45spZ2Ol",
+                    "nodeType": "exprStmt",
+                    "id": "by6wCSZQFSf5s7eaIIjYQ93O",
+                    "locals": []
+                  }
+                ],
+                "isElseIf": false,
+                "id": "CfuY8lHAcZBdLpWWYzwECLOY",
+                "locals": []
+              },
+              {
+                "nodeType": "if",
+                "condition": ":data #AAUifv4u2FAVAw2Hs2nY691z",
+                "thenBody": [
+                  {
+                    "expr": ":code #x2Y4vEMK7luU4jYr3b6NwMgG",
+                    "nodeType": "exprStmt",
+                    "id": "xMoRgjMRTiHHKtOcd5IonSJp",
+                    "locals": []
+                  },
+                  {
+                    "expr": ":code #TdPN24f49CosEK31JCyfOXEt",
+                    "nodeType": "exprStmt",
+                    "id": "aullCux6ayMYgYu35fzaM1ZN",
+                    "locals": []
+                  },
+                  {
+                    "expr": "$LLABPtuiv5AYxlUso51R4OAxL0 ,:= :math .create_vector3 ,( :data #qyK19grF549xvF52fC2dhxvq .x ,, :data #qyK19grF549xvF52fC2dhxvq .y ,, ,0 ,)",
+                    "nodeType": "exprStmt",
+                    "id": "LLABPtuiv5AYxlUso51R4OAx",
+                    "locals": [
+                      {
+                        "name": "p",
+                        "type": "Vector3",
+                        "nodeType": "localDef",
+                        "id": "LLABPtuiv5AYxlUso51R4OAxL0"
+                      }
+                    ]
+                  },
+                  {
+                    "expr": ":code #Ng3xt3R4X1qPTheqlNRku0Gz",
+                    "nodeType": "exprStmt",
+                    "id": "y1KKk2JyMGTaRsQf2Z2qF46v",
+                    "locals": []
+                  },
+                  {
+                    "expr": ":data #fmOI2Vx2QfXT6Mlqe3XYsIeh .evolve",
+                    "nodeType": "exprStmt",
+                    "id": "xh2xiy9fpNLKKidxmRnVMUrl",
+                    "locals": []
+                  },
+                  {
+                    "expr": "$ULcrJdI7Wnd8m14117E9PKdiL0 .score .add ,( $LLABPtuiv5AYxlUso51R4OAxL0 .distance ,( :math .create_vector3 ,( :data #qyK19grF549xvF52fC2dhxvq .x ,, :data #qyK19grF549xvF52fC2dhxvq .y ,, ,0 ,) ,) ,)",
+                    "nodeType": "exprStmt",
+                    "id": "qSLP2RFFoO5Fbmeau0SGysha",
+                    "locals": []
+                  },
+                  {
+                    "expr": ":data #fmOI2Vx2QfXT6Mlqe3XYsIeh .update_on_wall",
+                    "nodeType": "exprStmt",
+                    "id": "WKLKdNgobpphr8eqJ4Xar2mq",
+                    "locals": []
+                  }
+                ],
+                "isElseIf": false,
+                "id": "mLF15K1gy057XbiJRc2QdEof",
+                "locals": []
+              }
+            ],
+            "id": "HPdEhHqgDkkZxAUlsDReN532"
+          },
+          {
+            "name": "move hero",
+            "inParameters": [],
+            "outParameters": [],
+            "isPrivate": true,
+            "isOffloaded": false,
+            "isTest": false,
+            "isAsync": false,
+            "nodeType": "action",
+            "body": [
+              {
+                "expr": "$ElMsU24ZfG4WYtq85eYYMCEnL0 ,:= :senses .acceleration_quick",
+                "nodeType": "exprStmt",
+                "id": "ElMsU24ZfG4WYtq85eYYMCEn",
+                "locals": [
+                  {
+                    "name": "p",
+                    "type": "Vector3",
+                    "nodeType": "localDef",
+                    "id": "ElMsU24ZfG4WYtq85eYYMCEnL0"
+                  }
+                ]
+              },
+              {
+                "expr": ":data #qyK19grF549xvF52fC2dhxvq .set_speed ,( $ElMsU24ZfG4WYtq85eYYMCEnL0 .y ,* ,7 ,5 ,0 ,, ,- $ElMsU24ZfG4WYtq85eYYMCEnL0 .x ,* ,7 ,5 ,0 ,)",
+                "nodeType": "exprStmt",
+                "id": "xW4zA884fWCz0DI0JtrEZh4K",
+                "locals": []
+              }
+            ],
+            "id": "Ng3xt3R4X1qPTheqlNRku0Gz"
+          },
+          {
+            "name": "hero",
+            "comment": "",
+            "type": "Sprite",
+            "isReadonly": false,
+            "isTransient": true,
+            "nodeType": "data",
+            "id": "qyK19grF549xvF52fC2dhxvq"
+          },
+          {
+            "name": "game start",
+            "comment": "",
+            "type": "DateTime",
+            "isReadonly": false,
+            "isTransient": false,
+            "nodeType": "data",
+            "id": "xvfyUNjAQEZiJxobaGq8NZeu"
+          },
+          {
+            "name": "game on",
+            "comment": "",
+            "type": "Boolean",
+            "isReadonly": false,
+            "isTransient": false,
+            "nodeType": "data",
+            "id": "AAUifv4u2FAVAw2Hs2nY691z"
+          },
+          {
+            "name": "collide",
+            "inParameters": [],
+            "outParameters": [],
+            "isPrivate": true,
+            "isOffloaded": false,
+            "isTest": false,
+            "isAsync": false,
+            "nodeType": "action",
+            "body": [
+              {
+                "expr": "$ERqvpGeiB9bm22JKaqYPwx4eL0 ,:= :data #qyK19grF549xvF52fC2dhxvq .overlap_with ,( :data #x6rQdsZGiAbkFfVk3VBjWHxu ,)",
+                "nodeType": "exprStmt",
+                "id": "ERqvpGeiB9bm22JKaqYPwx4e",
+                "locals": [
+                  {
+                    "name": "sprite set",
+                    "type": "Sprite Set",
+                    "nodeType": "localDef",
+                    "id": "ERqvpGeiB9bm22JKaqYPwx4eL0"
+                  }
+                ]
+              },
+              {
+                "collection": "$ERqvpGeiB9bm22JKaqYPwx4eL0",
+                "conditions": [
+                  {
+                    "condition": ":data #AAUifv4u2FAVAw2Hs2nY691z",
+                    "nodeType": "where",
+                    "id": "UibGWNU4zcmdUNgH9a5Ab8LK",
+                    "locals": []
+                  }
+                ],
+                "body": [
+                  {
+                    "text": "Here we will check for our own bullets, powerups, etc",
+                    "nodeType": "comment",
+                    "id": "x1MYTGsv71LgwcyJozsrsJXu"
+                  },
+                  {
+                    "expr": ":data #AAUifv4u2FAVAw2Hs2nY691z ,:= F",
+                    "nodeType": "exprStmt",
+                    "id": "lyE2HTSWh5zJfoNR5uzjvSav",
+                    "locals": []
+                  },
+                  {
+                    "expr": ":phone .vibrate ,( ,0 ,. ,1 ,)",
+                    "nodeType": "exprStmt",
+                    "id": "f5hDh2eC70iEOTNfNjohrxP2",
+                    "locals": []
+                  }
+                ],
+                "nodeType": "foreach",
+                "id": "ZELod2K57IW6qR3F2GrV1SnK",
+                "locals": [
+                  {
+                    "name": "sprite",
+                    "type": "Sprite",
+                    "nodeType": "localDef",
+                    "id": "ZELod2K57IW6qR3F2GrV1SnKB0"
+                  }
+                ]
+              }
+            ],
+            "id": "MHQ4WSlDVmg1UeZx45spZ2Ol"
+          },
+          {
+            "name": "world",
+            "comment": "",
+            "type": "Sprite Set",
+            "isReadonly": false,
+            "isTransient": true,
+            "nodeType": "data",
+            "id": "x6rQdsZGiAbkFfVk3VBjWHxu"
+          },
+          {
+            "name": "bullets",
+            "comment": "",
+            "type": "Sprite Set",
+            "isReadonly": false,
+            "isTransient": true,
+            "nodeType": "data",
+            "id": "lGGeyYs2iZIywiFExYduANzu"
+          },
+          {
+            "name": "update bullets",
+            "inParameters": [],
+            "outParameters": [],
+            "isPrivate": true,
+            "isOffloaded": false,
+            "isTest": false,
+            "isAsync": false,
+            "nodeType": "action",
+            "body": [
+              {
+                "expr": "$lDRZtvFtsf4b53OaQc3N6L58L0 ,:= :time .now",
+                "nodeType": "exprStmt",
+                "id": "lDRZtvFtsf4b53OaQc3N6L58",
+                "locals": [
+                  {
+                    "name": "dt",
+                    "type": "DateTime",
+                    "nodeType": "localDef",
+                    "id": "lDRZtvFtsf4b53OaQc3N6L58L0"
+                  }
+                ]
+              },
+              {
+                "collection": ":data #lGGeyYs2iZIywiFExYduANzu",
+                "conditions": [
+                  {
+                    "condition": "T",
+                    "nodeType": "where",
+                    "id": "xO6ZBOGUtWPZHC7gktIWJQPp",
+                    "locals": []
+                  }
+                ],
+                "body": [
+                  {
+                    "expr": "$iYSHWbnSnDFHTK2yvj15yTg7L0 ,:= :records #wfLknUIbNgdIhct2gQtY7i3Z .at ,( $aWPj8CqqTnSutC1Q54uoh0g4B0 ,)",
+                    "nodeType": "exprStmt",
+                    "id": "iYSHWbnSnDFHTK2yvj15yTg7",
+                    "locals": [
+                      {
+                        "name": "t",
+                        "type": "{\"o\":\"thing\"}",
+                        "nodeType": "localDef",
+                        "id": "iYSHWbnSnDFHTK2yvj15yTg7L0"
+                      }
+                    ]
+                  },
+                  {
+                    "expr": "$WYmlsO4Gs48XwA8z6LIC1gS7L0 ,:= $iYSHWbnSnDFHTK2yvj15yTg7L0 .bullet .get",
+                    "nodeType": "exprStmt",
+                    "id": "WYmlsO4Gs48XwA8z6LIC1gS7",
+                    "locals": [
+                      {
+                        "name": "b",
+                        "type": "{\"o\":\"Bullet\"}",
+                        "nodeType": "localDef",
+                        "id": "WYmlsO4Gs48XwA8z6LIC1gS7L0"
+                      }
+                    ]
+                  },
+                  {
+                    "nodeType": "if",
+                    "condition": "$lDRZtvFtsf4b53OaQc3N6L58L0 .subtract ,( $WYmlsO4Gs48XwA8z6LIC1gS7L0 .born .get ,) ,> $WYmlsO4Gs48XwA8z6LIC1gS7L0 .ttl .get",
+                    "thenBody": [
+                      {
+                        "expr": ":records #wfLknUIbNgdIhct2gQtY7i3Z .at ,( $aWPj8CqqTnSutC1Q54uoh0g4B0 ,) .clear_fields",
+                        "nodeType": "exprStmt",
+                        "id": "m5uYeZYW013NvCmQEuoWKj9q",
+                        "locals": []
+                      },
+                      {
+                        "expr": ":data #lGGeyYs2iZIywiFExYduANzu .remove ,( $aWPj8CqqTnSutC1Q54uoh0g4B0 ,)",
+                        "nodeType": "exprStmt",
+                        "id": "xhHuilGyjPNDHl2vAoSmPuQ1",
+                        "locals": []
+                      },
+                      {
+                        "expr": "$aWPj8CqqTnSutC1Q54uoh0g4B0 .delete",
+                        "nodeType": "exprStmt",
+                        "id": "u5KrqEP6S840poF4I2JslMGW",
+                        "locals": []
+                      }
+                    ],
+                    "isElseIf": false,
+                    "id": "T8BaOkBVlv49bdiAyYBq4PDI",
+                    "locals": []
+                  }
+                ],
+                "nodeType": "foreach",
+                "id": "aWPj8CqqTnSutC1Q54uoh0g4",
+                "locals": [
+                  {
+                    "name": "sprite",
+                    "type": "Sprite",
+                    "nodeType": "localDef",
+                    "id": "aWPj8CqqTnSutC1Q54uoh0g4B0"
+                  }
+                ]
+              }
+            ],
+            "id": "TdPN24f49CosEK31JCyfOXEt"
+          },
+          {
+            "name": "fire bullet",
+            "inParameters": [
+              {
+                "name": "g",
+                "type": "{\"o\":\"Gunner\"}",
+                "nodeType": "localDef",
+                "id": "BWepCpmQzf3J3Cxw4tGAhZHfP0"
+              }
+            ],
+            "outParameters": [],
+            "isPrivate": true,
+            "isOffloaded": false,
+            "isTest": false,
+            "isAsync": false,
+            "nodeType": "action",
+            "body": [
+              {
+                "expr": "$iQzpqWzqgbtZRzLM2iQb49A1L0 ,:= $BWepCpmQzf3J3Cxw4tGAhZHfP0 .aim_x .get",
+                "nodeType": "exprStmt",
+                "id": "iQzpqWzqgbtZRzLM2iQb49A1",
+                "locals": [
+                  {
+                    "name": "x",
+                    "type": "Number",
+                    "nodeType": "localDef",
+                    "id": "iQzpqWzqgbtZRzLM2iQb49A1L0"
+                  }
+                ]
+              },
+              {
+                "expr": "$knVd0EHO68nJwEty2dPAe4CUL0 ,:= $BWepCpmQzf3J3Cxw4tGAhZHfP0 .aim_y .get",
+                "nodeType": "exprStmt",
+                "id": "knVd0EHO68nJwEty2dPAe4CU",
+                "locals": [
+                  {
+                    "name": "y",
+                    "type": "Number",
+                    "nodeType": "localDef",
+                    "id": "knVd0EHO68nJwEty2dPAe4CUL0"
+                  }
+                ]
+              },
+              {
+                "expr": "$Q8uocC9aspiI4oQ2csJOPWeSL0 ,:= $BWepCpmQzf3J3Cxw4tGAhZHfP0 .turret .get",
+                "nodeType": "exprStmt",
+                "id": "Q8uocC9aspiI4oQ2csJOPWeS",
+                "locals": [
+                  {
+                    "name": "sprite",
+                    "type": "Sprite",
+                    "nodeType": "localDef",
+                    "id": "Q8uocC9aspiI4oQ2csJOPWeSL0"
+                  }
+                ]
+              },
+              {
+                "expr": "$UsyFIr85468Vidp2KHknVLpvL0 ,:= :records #xeVZ3jrpBSEgoybpgdV6VwBU .create",
+                "nodeType": "exprStmt",
+                "id": "UsyFIr85468Vidp2KHknVLpv",
+                "locals": [
+                  {
+                    "name": "b",
+                    "type": "{\"o\":\"Bullet\"}",
+                    "nodeType": "localDef",
+                    "id": "UsyFIr85468Vidp2KHknVLpvL0"
+                  }
+                ]
+              },
+              {
+                "expr": "$UsyFIr85468Vidp2KHknVLpvL0 .born .set ,( $BWepCpmQzf3J3Cxw4tGAhZHfP0 .last_fired_at .get ,)",
+                "nodeType": "exprStmt",
+                "id": "ERvpxlR19QmGLBDRNcmvkzPO",
+                "locals": []
+              },
+              {
+                "expr": "$UsyFIr85468Vidp2KHknVLpvL0 .velocity .set ,( $BWepCpmQzf3J3Cxw4tGAhZHfP0 .bullet_velocity .get ,)",
+                "nodeType": "exprStmt",
+                "id": "xm4UQBJRGYxkoONQm5SC6QT9",
+                "locals": []
+              },
+              {
+                "expr": "$UsyFIr85468Vidp2KHknVLpvL0 .ttl .set ,( $BWepCpmQzf3J3Cxw4tGAhZHfP0 .bullet_ttl .get ,)",
+                "nodeType": "exprStmt",
+                "id": "mk0R6Yjjok6Ja6FYl4Pt54jP",
+                "locals": []
+              },
+              {
+                "expr": "$xk3bxUeYCYvTGwnTFU2krMhQL0 ,:= :data #fmOI2Vx2QfXT6Mlqe3XYsIeh .create_ellipse ,( ,9 ,, ,9 ,)",
+                "nodeType": "exprStmt",
+                "id": "xk3bxUeYCYvTGwnTFU2krMhQ",
+                "locals": [
+                  {
+                    "name": "bullet",
+                    "type": "Sprite",
+                    "nodeType": "localDef",
+                    "id": "xk3bxUeYCYvTGwnTFU2krMhQL0"
+                  }
+                ]
+              },
+              {
+                "expr": "$xk3bxUeYCYvTGwnTFU2krMhQL0 .set_pos ,( $Q8uocC9aspiI4oQ2csJOPWeSL0 .x ,, $Q8uocC9aspiI4oQ2csJOPWeSL0 .y ,)",
+                "nodeType": "exprStmt",
+                "id": "E4wVRz0lycSaN3zS50RWppgD",
+                "locals": []
+              },
+              {
+                "expr": "$x07sZYzuk6E02Gu4ZKtsPpwsL0 ,:= :records #wfLknUIbNgdIhct2gQtY7i3Z .at ,( $xk3bxUeYCYvTGwnTFU2krMhQL0 ,)",
+                "nodeType": "exprStmt",
+                "id": "x07sZYzuk6E02Gu4ZKtsPpws",
+                "locals": [
+                  {
+                    "name": "t",
+                    "type": "{\"o\":\"thing\"}",
+                    "nodeType": "localDef",
+                    "id": "x07sZYzuk6E02Gu4ZKtsPpwsL0"
+                  }
+                ]
+              },
+              {
+                "expr": "$x07sZYzuk6E02Gu4ZKtsPpwsL0 .kind .set ,( 'bullet ,)",
+                "nodeType": "exprStmt",
+                "id": "Edr5eJZqJ73H579FVPgXJrD4",
+                "locals": []
+              },
+              {
+                "expr": "$x07sZYzuk6E02Gu4ZKtsPpwsL0 .bullet .set ,( $UsyFIr85468Vidp2KHknVLpvL0 ,)",
+                "nodeType": "exprStmt",
+                "id": "AsJMoPwMPGKLgKQX3Voj2yhY",
+                "locals": []
+              },
+              {
+                "expr": "$xk3bxUeYCYvTGwnTFU2krMhQL0 .set_z_index ,( $Q8uocC9aspiI4oQ2csJOPWeSL0 .z_index ,- ,1 ,0 ,0 ,)",
+                "nodeType": "exprStmt",
+                "id": "xmaU1cjzjycnDXmSiDtbbKse",
+                "locals": []
+              },
+              {
+                "expr": "$xk3bxUeYCYvTGwnTFU2krMhQL0 .set_speed_y ,( ,0 ,)",
+                "nodeType": "exprStmt",
+                "id": "q4lNYF8KQACa2Rixpt2Red9q",
+                "locals": []
+              },
+              {
+                "expr": "$KDpYJivlSrNFd84eAk4Rhf0SL0 ,:= $knVd0EHO68nJwEty2dPAe4CUL0 ,- $xk3bxUeYCYvTGwnTFU2krMhQL0 .y",
+                "nodeType": "exprStmt",
+                "id": "KDpYJivlSrNFd84eAk4Rhf0S",
+                "locals": [
+                  {
+                    "name": "dy",
+                    "type": "Number",
+                    "nodeType": "localDef",
+                    "id": "KDpYJivlSrNFd84eAk4Rhf0SL0"
+                  }
+                ]
+              },
+              {
+                "expr": "$RjDILN0Y4I7hNwZ5wQaoq4NKL0 ,:= $iQzpqWzqgbtZRzLM2iQb49A1L0 ,- $xk3bxUeYCYvTGwnTFU2krMhQL0 .x",
+                "nodeType": "exprStmt",
+                "id": "RjDILN0Y4I7hNwZ5wQaoq4NK",
+                "locals": [
+                  {
+                    "name": "dx",
+                    "type": "Number",
+                    "nodeType": "localDef",
+                    "id": "RjDILN0Y4I7hNwZ5wQaoq4NKL0"
+                  }
+                ]
+              },
+              {
+                "expr": "$KDpYJivlSrNFd84eAk4Rhf0SL0 ,:= $KDpYJivlSrNFd84eAk4Rhf0SL0 ,- ,1 ,+ ,2 ,* ,( $KDpYJivlSrNFd84eAk4Rhf0SL0 ,> ,0 ,) .to_number",
+                "nodeType": "exprStmt",
+                "id": "Yxui21gOGvBsUxN9Q9Pi02yv",
+                "locals": []
+              },
+              {
+                "expr": "$RjDILN0Y4I7hNwZ5wQaoq4NKL0 ,:= $RjDILN0Y4I7hNwZ5wQaoq4NKL0 ,- ,1 ,+ ,2 ,* ,( $RjDILN0Y4I7hNwZ5wQaoq4NKL0 ,> ,0 ,) .to_number",
+                "nodeType": "exprStmt",
+                "id": "buqcy6qlspIbizVRw1AGk32L",
+                "locals": []
+              },
+              {
+                "expr": "$g9ctDPdID0DiTeRMRICs4ZovL0 ,:= :math .sqrt ,( $RjDILN0Y4I7hNwZ5wQaoq4NKL0 ,* $RjDILN0Y4I7hNwZ5wQaoq4NKL0 ,+ $KDpYJivlSrNFd84eAk4Rhf0SL0 ,* $KDpYJivlSrNFd84eAk4Rhf0SL0 ,)",
+                "nodeType": "exprStmt",
+                "id": "g9ctDPdID0DiTeRMRICs4Zov",
+                "locals": [
+                  {
+                    "name": "l",
+                    "type": "Number",
+                    "nodeType": "localDef",
+                    "id": "g9ctDPdID0DiTeRMRICs4ZovL0"
+                  }
+                ]
+              },
+              {
+                "expr": "$xk3bxUeYCYvTGwnTFU2krMhQL0 .set_speed_x ,( $Q8uocC9aspiI4oQ2csJOPWeSL0 .speed_x ,+ $UsyFIr85468Vidp2KHknVLpvL0 .velocity .get ,* $RjDILN0Y4I7hNwZ5wQaoq4NKL0 ,/ $g9ctDPdID0DiTeRMRICs4ZovL0 ,)",
+                "nodeType": "exprStmt",
+                "id": "xHH6sKhwMxYcbcXrxtsM288F",
+                "locals": []
+              },
+              {
+                "expr": "$xk3bxUeYCYvTGwnTFU2krMhQL0 .set_speed_y ,( $Q8uocC9aspiI4oQ2csJOPWeSL0 .speed_y ,+ $UsyFIr85468Vidp2KHknVLpvL0 .velocity .get ,* $KDpYJivlSrNFd84eAk4Rhf0SL0 ,/ $g9ctDPdID0DiTeRMRICs4ZovL0 ,)",
+                "nodeType": "exprStmt",
+                "id": "hyVHDzGOPo4eCpZK9B4OAyHH",
+                "locals": []
+              },
+              {
+                "expr": ":data #lGGeyYs2iZIywiFExYduANzu .add ,( $xk3bxUeYCYvTGwnTFU2krMhQL0 ,)",
+                "nodeType": "exprStmt",
+                "id": "xUrYjtcGCn2JRsqveU4lpoce",
+                "locals": []
+              }
+            ],
+            "id": "BWepCpmQzf3J3Cxw4tGAhZHf"
+          },
+          {
+            "name": "create hero",
+            "inParameters": [],
+            "outParameters": [
+              {
+                "name": "h",
+                "type": "{\"o\":\"Hero\"}",
+                "nodeType": "localDef",
+                "id": "GbYmz4ox4it1j9lxva2e4rInP0"
+              }
+            ],
+            "isPrivate": true,
+            "isOffloaded": false,
+            "isTest": false,
+            "isAsync": false,
+            "nodeType": "action",
+            "body": [
+              {
+                "expr": ":data #qyK19grF549xvF52fC2dhxvq ,:= :data #fmOI2Vx2QfXT6Mlqe3XYsIeh .create_ellipse ,( ,4 ,0 ,, ,4 ,0 ,)",
+                "nodeType": "exprStmt",
+                "id": "iT7xwwielgHM8Bq5S2OOEJV9",
+                "locals": []
+              },
+              {
+                "expr": ":data #qyK19grF549xvF52fC2dhxvq .set_color ,( :colors .accent ,)",
+                "nodeType": "exprStmt",
+                "id": "Q2ip9NhSyTtL1dKh2SYgIpZ0",
+                "locals": []
+              },
+              {
+                "expr": ":data #qyK19grF549xvF52fC2dhxvq .set_pos ,( :data #fmOI2Vx2QfXT6Mlqe3XYsIeh .width ,/ ,2 ,, :data #fmOI2Vx2QfXT6Mlqe3XYsIeh .height ,/ ,2 ,)",
+                "nodeType": "exprStmt",
+                "id": "wHDGLsBY0IYKglGJyGdCkmHr",
+                "locals": []
+              },
+              {
+                "expr": ":data #qyK19grF549xvF52fC2dhxvq .set_z_index ,( ,1 ,0 ,0 ,)",
+                "nodeType": "exprStmt",
+                "id": "A2q0vKbwdSgFWi94lWhJGLsB",
+                "locals": []
+              },
+              {
+                "expr": "$xNqCazBzW4K7hl8TlMtuogc9L0 ,:= :records #J2EE9pSfnGULS5RGqs0A4ZPe .create",
+                "nodeType": "exprStmt",
+                "id": "xNqCazBzW4K7hl8TlMtuogc9",
+                "locals": [
+                  {
+                    "name": "g",
+                    "type": "{\"o\":\"Gunner\"}",
+                    "nodeType": "localDef",
+                    "id": "xNqCazBzW4K7hl8TlMtuogc9L0"
+                  }
+                ]
+              },
+              {
+                "expr": "$xNqCazBzW4K7hl8TlMtuogc9L0 .firing_rate .set ,( ,1 ,. ,1 ,)",
+                "nodeType": "exprStmt",
+                "id": "dDSweW1UOaeyNefacGzo0c8A",
+                "locals": []
+              },
+              {
+                "expr": "$xNqCazBzW4K7hl8TlMtuogc9L0 .turret .set ,( :data #qyK19grF549xvF52fC2dhxvq ,)",
+                "nodeType": "exprStmt",
+                "id": "EKA0wvhsdYQ2SqAabDAzDcQh",
+                "locals": []
+              },
+              {
+                "expr": "$xNqCazBzW4K7hl8TlMtuogc9L0 .bullet_ttl .set ,( ,3 ,)",
+                "nodeType": "exprStmt",
+                "id": "EmTQ4n5Qs8iI7K2rq0czJUmd",
+                "locals": []
+              },
+              {
+                "expr": "$xNqCazBzW4K7hl8TlMtuogc9L0 .bullet_velocity .set ,( ,2 ,0 ,0 ,)",
+                "nodeType": "exprStmt",
+                "id": "zT0cgNCwJfSM2K7ozPfKCnDp",
+                "locals": []
+              },
+              {
+                "expr": "$GbYmz4ox4it1j9lxva2e4rInP0 ,:= :records #P97Z2NJLQEWOpCQ79IIdnfYP .create",
+                "nodeType": "exprStmt",
+                "id": "VJaYQiVUIgqLOY48bav2LGIW",
+                "locals": []
+              },
+              {
+                "expr": "$GbYmz4ox4it1j9lxva2e4rInP0 .score .set ,( ,0 ,)",
+                "nodeType": "exprStmt",
+                "id": "NWcME8YsO9uogV7sstkqnvo7",
+                "locals": []
+              },
+              {
+                "expr": "$GbYmz4ox4it1j9lxva2e4rInP0 .gunner .set ,( $xNqCazBzW4K7hl8TlMtuogc9L0 ,)",
+                "nodeType": "exprStmt",
+                "id": "x3I4oLy3A5kvvAbaf4OLAppF",
+                "locals": []
+              },
+              {
+                "expr": "$GbYmz4ox4it1j9lxva2e4rInP0 .lives .set ,( ,1 ,)",
+                "nodeType": "exprStmt",
+                "id": "Djnx33AAy4sXeXcPl5rLPfGx",
+                "locals": []
+              },
+              {
+                "expr": ":records #wfLknUIbNgdIhct2gQtY7i3Z .at ,( :data #qyK19grF549xvF52fC2dhxvq ,) .kind .set ,( 'hero ,)",
+                "nodeType": "exprStmt",
+                "id": "xq8OBa5oag9z6b0sxpZnnvQH",
+                "locals": []
+              },
+              {
+                "expr": ":data #x3mgD4C444vvWAUN63pERCux ,:= :records #J2EE9pSfnGULS5RGqs0A4ZPe .create_collection",
+                "nodeType": "exprStmt",
+                "id": "mqxrOZBliNlSfbOEMc2O4U2M",
+                "locals": []
+              },
+              {
+                "expr": ":data #x3mgD4C444vvWAUN63pERCux .add ,( $xNqCazBzW4K7hl8TlMtuogc9L0 ,)",
+                "nodeType": "exprStmt",
+                "id": "vYPSIZ6y3IYo5slgcLaHhjhR",
+                "locals": []
+              }
+            ],
+            "id": "GbYmz4ox4it1j9lxva2e4rIn"
+          },
+          {
+            "name": "start firing",
+            "inParameters": [
+              {
+                "name": "g",
+                "type": "{\"o\":\"Gunner\"}",
+                "nodeType": "localDef",
+                "id": "uzMjt4DpNt2YaYJV1NpKwmdZP0"
+              },
+              {
+                "name": "aim x",
+                "type": "Number",
+                "nodeType": "localDef",
+                "id": "uzMjt4DpNt2YaYJV1NpKwmdZP1"
+              },
+              {
+                "name": "aim y",
+                "type": "Number",
+                "nodeType": "localDef",
+                "id": "uzMjt4DpNt2YaYJV1NpKwmdZP2"
+              }
+            ],
+            "outParameters": [],
+            "isPrivate": true,
+            "isOffloaded": false,
+            "isTest": false,
+            "isAsync": false,
+            "nodeType": "action",
+            "body": [
+              {
+                "nodeType": "if",
+                "condition": ",not $uzMjt4DpNt2YaYJV1NpKwmdZP0 .firing .get",
+                "thenBody": [
+                  {
+                    "expr": "$e2RHlceX4fhEPVT297rQ4xXTL0 ,:= :time .now",
+                    "nodeType": "exprStmt",
+                    "id": "e2RHlceX4fhEPVT297rQ4xXT",
+                    "locals": [
+                      {
+                        "name": "dt",
+                        "type": "DateTime",
+                        "nodeType": "localDef",
+                        "id": "e2RHlceX4fhEPVT297rQ4xXTL0"
+                      }
+                    ]
+                  },
+                  {
+                    "expr": "$uzMjt4DpNt2YaYJV1NpKwmdZP0 .aim_x .set ,( $uzMjt4DpNt2YaYJV1NpKwmdZP1 ,)",
+                    "nodeType": "exprStmt",
+                    "id": "xWzeK2SwzzJDjxFQvVOrI5AN",
+                    "locals": []
+                  },
+                  {
+                    "expr": "$uzMjt4DpNt2YaYJV1NpKwmdZP0 .aim_y .set ,( $uzMjt4DpNt2YaYJV1NpKwmdZP2 ,)",
+                    "nodeType": "exprStmt",
+                    "id": "RW12VGVWEwRTIunCuLE8CZRN",
+                    "locals": []
+                  },
+                  {
+                    "expr": "$uzMjt4DpNt2YaYJV1NpKwmdZP0 .last_fired_at .set ,( $e2RHlceX4fhEPVT297rQ4xXTL0 .add_seconds ,( ,- $uzMjt4DpNt2YaYJV1NpKwmdZP0 .firing_rate .get ,) ,)",
+                    "nodeType": "exprStmt",
+                    "id": "c2bQmvC7pTski8TeAUgHthlr",
+                    "locals": []
+                  },
+                  {
+                    "expr": "$uzMjt4DpNt2YaYJV1NpKwmdZP0 .started_firing_at .set ,( $e2RHlceX4fhEPVT297rQ4xXTL0 ,)",
+                    "nodeType": "exprStmt",
+                    "id": "TKvtbZgzbSaZZjwq0bjSi4lP",
+                    "locals": []
+                  },
+                  {
+                    "expr": "$uzMjt4DpNt2YaYJV1NpKwmdZP0 .firing .set ,( T ,)",
+                    "nodeType": "exprStmt",
+                    "id": "JYVCUkzVV9UGlGl9302eOKOB",
+                    "locals": []
+                  }
+                ],
+                "isElseIf": false,
+                "id": "zLXKQOHiWnqeQaHb6HTwqoRD",
+                "locals": []
+              }
+            ],
+            "id": "uzMjt4DpNt2YaYJV1NpKwmdZ"
+          },
+          {
+            "name": "keep firing",
+            "inParameters": [],
+            "outParameters": [],
+            "isPrivate": true,
+            "isOffloaded": false,
+            "isTest": false,
+            "isAsync": false,
+            "nodeType": "action",
+            "body": [
+              {
+                "expr": "$fxEZmsD419EqegC1FcaM5nHRL0 ,:= :time .now",
+                "nodeType": "exprStmt",
+                "id": "fxEZmsD419EqegC1FcaM5nHR",
+                "locals": [
+                  {
+                    "name": "dt",
+                    "type": "DateTime",
+                    "nodeType": "localDef",
+                    "id": "fxEZmsD419EqegC1FcaM5nHRL0"
+                  }
+                ]
+              },
+              {
+                "collection": ":data #x3mgD4C444vvWAUN63pERCux",
+                "conditions": [
+                  {
+                    "condition": "$m771mmBl5ClzSEafFgL2k2nTB0 .firing .get",
+                    "nodeType": "where",
+                    "id": "L0yyLfk12tNMUVBn7hhISVCI",
+                    "locals": []
+                  }
+                ],
+                "body": [
+                  {
+                    "nodeType": "if",
+                    "condition": "$fxEZmsD419EqegC1FcaM5nHRL0 .subtract ,( $m771mmBl5ClzSEafFgL2k2nTB0 .last_fired_at .get ,) ,≥ $m771mmBl5ClzSEafFgL2k2nTB0 .firing_rate .get",
+                    "thenBody": [
+                      {
+                        "expr": "$m771mmBl5ClzSEafFgL2k2nTB0 .last_fired_at .set ,( $fxEZmsD419EqegC1FcaM5nHRL0 ,)",
+                        "nodeType": "exprStmt",
+                        "id": "ngykKKMKVPtIOn43mm8N0E8L",
+                        "locals": []
+                      },
+                      {
+                        "expr": ":code #BWepCpmQzf3J3Cxw4tGAhZHf ,( $m771mmBl5ClzSEafFgL2k2nTB0 ,)",
+                        "nodeType": "exprStmt",
+                        "id": "Is1L2G4DrSHm3qMkn0xJ4bn3",
+                        "locals": []
+                      }
+                    ],
+                    "isElseIf": false,
+                    "id": "xdZZM37ubztcQPwbtsu69IIO",
+                    "locals": []
+                  },
+                  {
+                    "nodeType": "if",
+                    "condition": "$fxEZmsD419EqegC1FcaM5nHRL0 .subtract ,( $m771mmBl5ClzSEafFgL2k2nTB0 .started_firing_at .get ,) ,≥ ,1",
+                    "thenBody": [
+                      {
+                        "expr": "$m771mmBl5ClzSEafFgL2k2nTB0 .firing .set ,( F ,)",
+                        "nodeType": "exprStmt",
+                        "id": "DpdPrYNBjCTcrvJwMy1CLt6I",
+                        "locals": []
+                      }
+                    ],
+                    "isElseIf": false,
+                    "id": "t8m20pUl0VhgtpT8OOx5gl5N",
+                    "locals": []
+                  }
+                ],
+                "nodeType": "foreach",
+                "id": "m771mmBl5ClzSEafFgL2k2nT",
+                "locals": [
+                  {
+                    "name": "g",
+                    "type": "{\"o\":\"Gunner\"}",
+                    "nodeType": "localDef",
+                    "id": "m771mmBl5ClzSEafFgL2k2nTB0"
+                  }
+                ]
+              }
+            ],
+            "id": "x2Y4vEMK7luU4jYr3b6NwMgG"
+          },
+          {
+            "nodeType": "record",
+            "name": "Gunner",
+            "sourceName": "Gunner",
+            "comment": "",
+            "category": "object",
+            "isCloudEnabled": false,
+            "keys": [],
+            "fields": [
+              {
+                "nodeType": "recordField",
+                "name": "started firing at",
+                "type": "DateTime",
+                "id": "FBd2tXFWZfnjlTURbcE4Bg4e"
+              },
+              {
+                "nodeType": "recordField",
+                "name": "aim x",
+                "type": "Number",
+                "id": "yMAp8r3JvoX67WHPL4cTzuwm"
+              },
+              {
+                "nodeType": "recordField",
+                "name": "aim y",
+                "type": "Number",
+                "id": "Gn64fJ4817xnf6hsOdE8bRQ1"
+              },
+              {
+                "nodeType": "recordField",
+                "name": "firing rate",
+                "type": "Number",
+                "id": "xAfIZ0P6hvRFLoWWeibGN2vo"
+              },
+              {
+                "nodeType": "recordField",
+                "name": "last fired at",
+                "type": "DateTime",
+                "id": "E2NeiG96cSkJGmBzskIfZPPm"
+              },
+              {
+                "nodeType": "recordField",
+                "name": "firing",
+                "type": "Boolean",
+                "id": "nCHGEYHj2i7CyvJ7o0IZMdJM"
+              },
+              {
+                "nodeType": "recordField",
+                "name": "turret",
+                "type": "Sprite",
+                "id": "SBfzA762dvyPVSXWP8R4j1T8"
+              },
+              {
+                "nodeType": "recordField",
+                "name": "bullet velocity",
+                "type": "Number",
+                "id": "xwVbC32E5tmSjDJbMW8MfGYx"
+              },
+              {
+                "nodeType": "recordField",
+                "name": "bullet ttl",
+                "type": "Number",
+                "id": "ycY89nz412e4rsg29G7p2ziT"
+              }
+            ],
+            "id": "J2EE9pSfnGULS5RGqs0A4ZPe"
+          },
+          {
+            "name": "gunners",
+            "comment": "",
+            "type": "{\"g\":\"Collection\",\"a\":[{\"o\":\"Gunner\"}]}",
+            "isReadonly": false,
+            "isTransient": false,
+            "nodeType": "data",
+            "id": "x3mgD4C444vvWAUN63pERCux"
+          },
+          {
+            "name": "was tapped",
+            "comment": "",
+            "type": "Boolean",
+            "isReadonly": false,
+            "isTransient": false,
+            "nodeType": "data",
+            "id": "USdBkUjZ3noAo17gfkNjgeXW"
+          },
+          {
+            "name": "tap board: board",
+            "inParameters": [
+              {
+                "name": "x",
+                "type": "Number",
+                "nodeType": "localDef",
+                "id": "ld4p7kHCMw2bSrGiFNMKW10uP0"
+              },
+              {
+                "name": "y",
+                "type": "Number",
+                "nodeType": "localDef",
+                "id": "ld4p7kHCMw2bSrGiFNMKW10uP1"
+              }
+            ],
+            "outParameters": [],
+            "isPrivate": true,
+            "isOffloaded": false,
+            "isTest": false,
+            "isAsync": true,
+            "nodeType": "event",
+            "eventName": "tap board: ",
+            "eventVariableId": "fmOI2Vx2QfXT6Mlqe3XYsIeh",
+            "body": [
+              {
+                "expr": ":code #uzMjt4DpNt2YaYJV1NpKwmdZ ,( :records #wfLknUIbNgdIhct2gQtY7i3Z .at ,( :data #qyK19grF549xvF52fC2dhxvq ,) .hero .get .gunner .get ,, ,0 ,, ,0 ,)",
+                "nodeType": "exprStmt",
+                "id": "pgqqVrTnw9eYz1LzKgt42HPr",
+                "locals": []
+              }
+            ],
+            "id": "ld4p7kHCMw2bSrGiFNMKW10u"
+          },
+          {
+            "name": "tap sprite in world",
+            "inParameters": [
+              {
+                "name": "sprite",
+                "type": "Sprite",
+                "nodeType": "localDef",
+                "id": "xPAE5VPRv1TQ5esbVM4PY87FP0"
+              },
+              {
+                "name": "index in set",
+                "type": "Number",
+                "nodeType": "localDef",
+                "id": "xPAE5VPRv1TQ5esbVM4PY87FP1"
+              },
+              {
+                "name": "x",
+                "type": "Number",
+                "nodeType": "localDef",
+                "id": "xPAE5VPRv1TQ5esbVM4PY87FP2"
+              },
+              {
+                "name": "y",
+                "type": "Number",
+                "nodeType": "localDef",
+                "id": "xPAE5VPRv1TQ5esbVM4PY87FP3"
+              }
+            ],
+            "outParameters": [],
+            "isPrivate": true,
+            "isOffloaded": false,
+            "isTest": false,
+            "isAsync": true,
+            "nodeType": "event",
+            "eventName": "tap sprite in ",
+            "eventVariableId": "x6rQdsZGiAbkFfVk3VBjWHxu",
+            "body": [
+              {
+                "expr": ":code #uzMjt4DpNt2YaYJV1NpKwmdZ ,( :records #wfLknUIbNgdIhct2gQtY7i3Z .at ,( :data #qyK19grF549xvF52fC2dhxvq ,) .hero .get .gunner .get ,, ,0 ,, ,0 ,)",
+                "nodeType": "exprStmt",
+                "id": "MLAa2CihDQpJ987cbVPXMDKU",
+                "locals": []
+              }
+            ],
+            "id": "xPAE5VPRv1TQ5esbVM4PY87F"
+          }
+        ],
+        "deletedDecls": [],
+        "nodeType": "app",
+        "id": "app"
+      }
+    }
+  ]
+}

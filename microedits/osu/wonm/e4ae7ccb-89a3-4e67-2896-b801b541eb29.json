@@ -1,0 +1,1563 @@
+{
+  "userid": "wonm",
+  "guid": "e4ae7ccb-89a3-4e67-2896-b801b541eb29",
+  "lastStatus": "deleted",
+  "items": [
+    {
+      "seqNo": 0,
+      "time": 1378839776,
+      "scriptId": "wiui",
+      "historyId": "2520234610236115489eb14c950-5e54-43c5-af5b-6f0099777032",
+      "updateSize": 28832,
+      "ast": {
+        "textVersion": "v2.2,js,ctx",
+        "jsonVersion": "v1.0,resolved,short",
+        "name": "sphero control",
+        "comment": "Control a Sphero via Bluetooth. Requires the TouchDevelop app v3.1 for Windows Phone, or another Bluetooth-enabled TouchDevelop platform, and a paired Sphero.",
+        "icon": "ArrowCircleRounded",
+        "color": "#ff007FFF",
+        "autoIcon": "ArrowCircleRounded",
+        "autoColor": "#007FFF",
+        "platform": "accelerometer,bluetooth,calendar,camera,compass,contacts,editoronly,gyroscope,hawaii,home,location,maps,media,microphone,motion,musicandsounds,network,orientation,phone,radio,search,translation,webonly",
+        "rootId": "NN4428nleyw2jfFFiqqvekiW",
+        "showAd": false,
+        "isLibrary": false,
+        "allowExport": false,
+        "hasUniqueIds": false,
+        "decls": [
+          {
+            "name": "init",
+            "inParameters": [],
+            "outParameters": [],
+            "isPrivate": false,
+            "isOffloaded": false,
+            "isTest": false,
+            "isAsync": true,
+            "nodeType": "action",
+            "body": [
+              {
+                "expr": ":code #SMM54O04kfW9gfBxX2gAvbHF ,( 'Finding_paired_bluetooth_devices/002e/002e/002e ,)",
+                "nodeType": "exprStmt",
+                "id": "EzpwleAGUvUAFzMQhLMMmQdY",
+                "locals": []
+              },
+              {
+                "expr": "$x4044uyEYx3TnOPYFYSaML5BL0 ,:= ,await :senses .bluetooth_devices",
+                "nodeType": "exprStmt",
+                "id": "x4044uyEYx3TnOPYFYSaML5B",
+                "locals": [
+                  {
+                    "name": "coll",
+                    "type": "{\"g\":\"Collection\",\"a\":[\"Bluetooth Device\"]}",
+                    "nodeType": "localDef",
+                    "id": "x4044uyEYx3TnOPYFYSaML5BL0"
+                  }
+                ]
+              },
+              {
+                "nodeType": "if",
+                "condition": "$x4044uyEYx3TnOPYFYSaML5BL0 .is_invalid",
+                "thenBody": [
+                  {
+                    "expr": "'bluetooth_not_available/002e_good_bye/002e .post_to_wall",
+                    "nodeType": "exprStmt",
+                    "id": "xofk61XEDEVmBf0Pti2EdyLP",
+                    "locals": []
+                  },
+                  {
+                    "expr": ":time .stop",
+                    "nodeType": "exprStmt",
+                    "id": "mIScYrpko56jWpHW4sZZ4Qyg",
+                    "locals": []
+                  }
+                ],
+                "elseBody": [
+                  {
+                    "collection": "$x4044uyEYx3TnOPYFYSaML5BL0",
+                    "conditions": [
+                      {
+                        "condition": "T",
+                        "nodeType": "where",
+                        "id": "hFwXMUzeOwUnYAMo69sDzb7G",
+                        "locals": []
+                      }
+                    ],
+                    "body": [
+                      {
+                        "nodeType": "if",
+                        "condition": ":data #HY6A3UQ8f6V9fo0mxiosPneX .is_invalid ,and $fqIF7y6vVImpjS7tJHRKMjAtB0 .name .contains ,( 'Sphero ,)",
+                        "thenBody": [
+                          {
+                            "expr": ":code #SMM54O04kfW9gfBxX2gAvbHF ,( 'connecting_to_ ,∥ $fqIF7y6vVImpjS7tJHRKMjAtB0 ,)",
+                            "nodeType": "exprStmt",
+                            "id": "H9BS0kTKhWMLtu6PwgoriWRO",
+                            "locals": []
+                          },
+                          {
+                            "expr": ",await $fqIF7y6vVImpjS7tJHRKMjAtB0 .connect",
+                            "nodeType": "exprStmt",
+                            "id": "OUKCkGt8LEXy2PkWuCgbAHqr",
+                            "locals": []
+                          },
+                          {
+                            "nodeType": "if",
+                            "condition": "$fqIF7y6vVImpjS7tJHRKMjAtB0 .connected",
+                            "thenBody": [
+                              {
+                                "expr": ":code #SMM54O04kfW9gfBxX2gAvbHF ,( 'connected ,)",
+                                "nodeType": "exprStmt",
+                                "id": "xa935yuDjCQ2icn2zJ2A4BZI",
+                                "locals": []
+                              },
+                              {
+                                "expr": ":data #HY6A3UQ8f6V9fo0mxiosPneX ,:= $fqIF7y6vVImpjS7tJHRKMjAtB0",
+                                "nodeType": "exprStmt",
+                                "id": "JgbE8KzDsjQwRPnxAAKv1la2",
+                                "locals": []
+                              },
+                              {
+                                "expr": ":data #kqBcszMRcK7Wm1HpwGxLZjd6 ,:= :time .now .add_days ,( ,- ,1 ,)",
+                                "nodeType": "exprStmt",
+                                "id": "yapZGA2aw9n0dYiRnlyW0FNU",
+                                "locals": []
+                              }
+                            ],
+                            "isElseIf": false,
+                            "id": "MDPqkzP1roRcYzKeFEOQvfBA",
+                            "locals": []
+                          }
+                        ],
+                        "isElseIf": false,
+                        "id": "RRMtbMw6qs1CY441BrFtN2NR",
+                        "locals": []
+                      }
+                    ],
+                    "nodeType": "foreach",
+                    "id": "fqIF7y6vVImpjS7tJHRKMjAt",
+                    "locals": [
+                      {
+                        "name": "widget",
+                        "type": "Bluetooth Device",
+                        "nodeType": "localDef",
+                        "id": "fqIF7y6vVImpjS7tJHRKMjAtB0"
+                      }
+                    ]
+                  }
+                ],
+                "isElseIf": false,
+                "id": "ZCqvZjuEfwL9pnhs7gX8GWBu",
+                "locals": []
+              }
+            ],
+            "id": "xhabLUzVyUuvZSqyd1KUpcwD"
+          },
+          {
+            "name": "send sphero command",
+            "inParameters": [
+              {
+                "name": "did",
+                "type": "Number",
+                "nodeType": "localDef",
+                "id": "ET2khlxWXbF5TuE0IsRoVVpmP0"
+              },
+              {
+                "name": "cid",
+                "type": "Number",
+                "nodeType": "localDef",
+                "id": "ET2khlxWXbF5TuE0IsRoVVpmP1"
+              },
+              {
+                "name": "data2",
+                "type": "Buffer",
+                "nodeType": "localDef",
+                "id": "ET2khlxWXbF5TuE0IsRoVVpmP2"
+              }
+            ],
+            "outParameters": [
+              {
+                "name": "response",
+                "type": "Buffer",
+                "nodeType": "localDef",
+                "id": "ET2khlxWXbF5TuE0IsRoVVpmP3"
+              }
+            ],
+            "isPrivate": true,
+            "isOffloaded": false,
+            "isTest": false,
+            "isAsync": true,
+            "nodeType": "action",
+            "body": [
+              {
+                "expr": "$vYDdugvOzXfTsr68r788XQMqL0 ,:= :bits .create_buffer ,( ,7 ,+ $ET2khlxWXbF5TuE0IsRoVVpmP2 .count ,)",
+                "nodeType": "exprStmt",
+                "id": "vYDdugvOzXfTsr68r788XQMq",
+                "locals": [
+                  {
+                    "name": "buf2",
+                    "type": "Buffer",
+                    "nodeType": "localDef",
+                    "id": "vYDdugvOzXfTsr68r788XQMqL0"
+                  }
+                ]
+              },
+              {
+                "expr": "$vYDdugvOzXfTsr68r788XQMqL0 .set ,( ,0 ,, ,2 ,5 ,5 ,)",
+                "nodeType": "exprStmt",
+                "id": "dSyWVeikTBY1ZPR5foH6e2wv",
+                "locals": []
+              },
+              {
+                "expr": "$vYDdugvOzXfTsr68r788XQMqL0 .set ,( ,1 ,, ,2 ,5 ,5 ,)",
+                "nodeType": "exprStmt",
+                "id": "AnIq98o4ad76XOE7qgJJY7DG",
+                "locals": []
+              },
+              {
+                "expr": "$vYDdugvOzXfTsr68r788XQMqL0 .set ,( ,2 ,, $ET2khlxWXbF5TuE0IsRoVVpmP0 ,)",
+                "nodeType": "exprStmt",
+                "id": "OMrFlh7B29FycWhGNYE4oNTx",
+                "locals": []
+              },
+              {
+                "expr": "$vYDdugvOzXfTsr68r788XQMqL0 .set ,( ,3 ,, $ET2khlxWXbF5TuE0IsRoVVpmP1 ,)",
+                "nodeType": "exprStmt",
+                "id": "vSXuCZrXw95aOWr4UpxtHuS6",
+                "locals": []
+              },
+              {
+                "expr": ":data #yDg4rgZWcbyD6DNnMzHCA524 ,:= :data #yDg4rgZWcbyD6DNnMzHCA524 ,+ ,1",
+                "nodeType": "exprStmt",
+                "id": "eV2xgMQWqByPLR2B6ZsRmj1k",
+                "locals": []
+              },
+              {
+                "expr": "$vYDdugvOzXfTsr68r788XQMqL0 .set ,( ,4 ,, :bits .and_uint32 ,( :data #yDg4rgZWcbyD6DNnMzHCA524 ,, ,2 ,5 ,5 ,) ,)",
+                "nodeType": "exprStmt",
+                "id": "xNHetlX2eHu4i5SlD7CEYZMD",
+                "locals": []
+              },
+              {
+                "expr": "$vYDdugvOzXfTsr68r788XQMqL0 .set ,( ,5 ,, $ET2khlxWXbF5TuE0IsRoVVpmP2 .count ,+ ,1 ,)",
+                "nodeType": "exprStmt",
+                "id": "tx4oDyc6K2f9jp4n4qSWHcQb",
+                "locals": []
+              },
+              {
+                "expr": "$vYDdugvOzXfTsr68r788XQMqL0 .copy_from ,( ,6 ,, $ET2khlxWXbF5TuE0IsRoVVpmP2 ,)",
+                "nodeType": "exprStmt",
+                "id": "X68BHBrrkfYHDBIuKd6T2EoA",
+                "locals": []
+              },
+              {
+                "expr": "$mn5TpQDylK0TqBGpTpgdFH2QL0 ,:= ,0",
+                "nodeType": "exprStmt",
+                "id": "mn5TpQDylK0TqBGpTpgdFH2Q",
+                "locals": [
+                  {
+                    "name": "sum",
+                    "type": "Number",
+                    "nodeType": "localDef",
+                    "id": "mn5TpQDylK0TqBGpTpgdFH2QL0"
+                  }
+                ]
+              },
+              {
+                "bound": "$ET2khlxWXbF5TuE0IsRoVVpmP2 .count ,+ ,4",
+                "body": [
+                  {
+                    "expr": "$mn5TpQDylK0TqBGpTpgdFH2QL0 ,:= $mn5TpQDylK0TqBGpTpgdFH2QL0 ,+ $vYDdugvOzXfTsr68r788XQMqL0 .at ,( $yRsp08ac779jEqjq2iAbZTdEB0 ,+ ,2 ,)",
+                    "nodeType": "exprStmt",
+                    "id": "oLMTyIihJCpuJNXeEoH4lk91",
+                    "locals": []
+                  }
+                ],
+                "nodeType": "for",
+                "id": "yRsp08ac779jEqjq2iAbZTdE",
+                "locals": [
+                  {
+                    "name": "i",
+                    "type": "Number",
+                    "nodeType": "localDef",
+                    "id": "yRsp08ac779jEqjq2iAbZTdEB0"
+                  }
+                ]
+              },
+              {
+                "expr": "$mn5TpQDylK0TqBGpTpgdFH2QL0 ,:= :bits .and_uint32 ,( :bits .not_uint32 ,( $mn5TpQDylK0TqBGpTpgdFH2QL0 ,) ,, ,2 ,5 ,5 ,)",
+                "nodeType": "exprStmt",
+                "id": "uOGXWznJ5LzYWcomYrUETeGn",
+                "locals": []
+              },
+              {
+                "expr": "$vYDdugvOzXfTsr68r788XQMqL0 .set ,( $vYDdugvOzXfTsr68r788XQMqL0 .count ,- ,1 ,, $mn5TpQDylK0TqBGpTpgdFH2QL0 ,)",
+                "nodeType": "exprStmt",
+                "id": "hNxIl2tess49DHN9qNkTAF9v",
+                "locals": []
+              },
+              {
+                "expr": ",await :data #HY6A3UQ8f6V9fo0mxiosPneX .write_buffer ,( $vYDdugvOzXfTsr68r788XQMqL0 ,)",
+                "nodeType": "exprStmt",
+                "id": "yvyNif5iYXuMisptbrSnoOxX",
+                "locals": []
+              },
+              {
+                "expr": "$ET2khlxWXbF5TuE0IsRoVVpmP3 ,:= ,await :code #E8HnJ7exRmgVkTIEcebsTXun",
+                "nodeType": "exprStmt",
+                "id": "wwlXB0yDcL70cGP4ew6Bya9o",
+                "locals": []
+              }
+            ],
+            "id": "ET2khlxWXbF5TuE0IsRoVVpm"
+          },
+          {
+            "name": "sequence number",
+            "comment": "",
+            "type": "Number",
+            "isReadonly": false,
+            "isTransient": true,
+            "nodeType": "data",
+            "id": "yDg4rgZWcbyD6DNnMzHCA524"
+          },
+          {
+            "name": "ping",
+            "inParameters": [],
+            "outParameters": [],
+            "isPrivate": true,
+            "isOffloaded": false,
+            "isTest": false,
+            "isAsync": true,
+            "nodeType": "action",
+            "body": [
+              {
+                "expr": "$UWwBfca92RVh0q2b86XfxPJyL0 ,:= ,await :code #ET2khlxWXbF5TuE0IsRoVVpm ,( ,0 ,, ,1 ,, :bits .create_buffer ,( ,0 ,) ,)",
+                "nodeType": "exprStmt",
+                "id": "UWwBfca92RVh0q2b86XfxPJy",
+                "locals": [
+                  {
+                    "name": "buf2",
+                    "type": "Buffer",
+                    "nodeType": "localDef",
+                    "id": "UWwBfca92RVh0q2b86XfxPJyL0"
+                  }
+                ]
+              },
+              {
+                "expr": ":code #SMM54O04kfW9gfBxX2gAvbHF ,( 'pong/003a_ ,∥ $UWwBfca92RVh0q2b86XfxPJyL0 .to_string ,( 'hex ,) ,)",
+                "nodeType": "exprStmt",
+                "id": "nVp3DP4Ijtzzj9HFWs3GkV2Y",
+                "locals": []
+              }
+            ],
+            "id": "kjhV3K0gXz6edhY9VW4ulCyx"
+          },
+          {
+            "name": "device",
+            "comment": "",
+            "type": "Bluetooth Device",
+            "isReadonly": false,
+            "isTransient": true,
+            "nodeType": "data",
+            "id": "HY6A3UQ8f6V9fo0mxiosPneX"
+          },
+          {
+            "name": "log",
+            "inParameters": [
+              {
+                "name": "s",
+                "type": "String",
+                "nodeType": "localDef",
+                "id": "SMM54O04kfW9gfBxX2gAvbHFP0"
+              }
+            ],
+            "outParameters": [],
+            "isPrivate": true,
+            "isOffloaded": false,
+            "isTest": false,
+            "isAsync": false,
+            "nodeType": "action",
+            "body": [
+              {
+                "expr": ",( 'SPHERO/003a_ ,∥ $SMM54O04kfW9gfBxX2gAvbHFP0 ,) .post_to_wall",
+                "nodeType": "exprStmt",
+                "id": "QyixgoGsGs2m5SpmmZGcQQgS",
+                "locals": []
+              }
+            ],
+            "id": "SMM54O04kfW9gfBxX2gAvbHF"
+          },
+          {
+            "name": "main",
+            "inParameters": [],
+            "outParameters": [],
+            "isPrivate": false,
+            "isOffloaded": false,
+            "isTest": false,
+            "isAsync": true,
+            "nodeType": "action",
+            "body": [
+              {
+                "expr": "'This_script_will_try_to_control_a_Sphero_that_has_been_paired_via_Bluetooth/002e .post_to_wall",
+                "nodeType": "exprStmt",
+                "id": "OaN44SHrLqItDcTrCHF22jBs",
+                "locals": []
+              },
+              {
+                "expr": ":web .link_url ,( 'Learn_more_about_Sphero/002e/002e/002e ,, 'http/003a/002f/002fwww/002egosphero/002ecom/002f ,) .post_to_wall",
+                "nodeType": "exprStmt",
+                "id": "pLHb6vpSlcup09bW20nkV52m",
+                "locals": []
+              },
+              {
+                "expr": ",await :code #xhabLUzVyUuvZSqyd1KUpcwD",
+                "nodeType": "exprStmt",
+                "id": "YMi4uBv2Yvit2oxDWOnUqy27",
+                "locals": []
+              },
+              {
+                "expr": ",await :code #kjhV3K0gXz6edhY9VW4ulCyx",
+                "nodeType": "exprStmt",
+                "id": "vGLn2vlX4gVu0e5h31iHG5xb",
+                "locals": []
+              },
+              {
+                "expr": ",await :code #yJDULHQ0Elux4HgtDjHMsNDq ,( ,0 ,, ,0 ,)",
+                "nodeType": "exprStmt",
+                "id": "Jbu73HoGZVOmc2UKaCrBYqRV",
+                "locals": []
+              },
+              {
+                "expr": ",await :time .sleep ,( ,1 ,)",
+                "nodeType": "exprStmt",
+                "id": "SpBhNGZVHmecIt9GSweB67XF",
+                "locals": []
+              },
+              {
+                "expr": ",await :code #OK4aZpWEisN3ooUCoiSG7nGe",
+                "nodeType": "exprStmt",
+                "id": "HnUIbWG1ZoqXQrUZ4hG1zsWG",
+                "locals": []
+              },
+              {
+                "expr": "$tcqR4KRrYnv3nnOnE2BRP01VL0 ,:= ,1 ,0",
+                "nodeType": "exprStmt",
+                "id": "tcqR4KRrYnv3nnOnE2BRP01V",
+                "locals": [
+                  {
+                    "name": "x2",
+                    "type": "Number",
+                    "nodeType": "localDef",
+                    "id": "tcqR4KRrYnv3nnOnE2BRP01VL0"
+                  }
+                ]
+              },
+              {
+                "bound": "$tcqR4KRrYnv3nnOnE2BRP01VL0",
+                "body": [
+                  {
+                    "expr": "$xOO11AkQ4ByoaCSIK2ftaF79L0 ,:= $jtUVr3aBgkAEORpo1eB50L2LB0 ,* ,2 ,* :math ./03c0 ,/ $tcqR4KRrYnv3nnOnE2BRP01VL0",
+                    "nodeType": "exprStmt",
+                    "id": "xOO11AkQ4ByoaCSIK2ftaF79",
+                    "locals": [
+                      {
+                        "name": "x3",
+                        "type": "Number",
+                        "nodeType": "localDef",
+                        "id": "xOO11AkQ4ByoaCSIK2ftaF79L0"
+                      }
+                    ]
+                  },
+                  {
+                    "expr": "$OS3cCY4m2zNh5FsGhYNJv2dwL0 ,:= :math .create_vector3 ,( :math .sin ,( $xOO11AkQ4ByoaCSIK2ftaF79L0 ,) ,, :math .cos ,( $xOO11AkQ4ByoaCSIK2ftaF79L0 ,) ,, ,0 ,)",
+                    "nodeType": "exprStmt",
+                    "id": "OS3cCY4m2zNh5FsGhYNJv2dw",
+                    "locals": [
+                      {
+                        "name": "p",
+                        "type": "Vector3",
+                        "nodeType": "localDef",
+                        "id": "OS3cCY4m2zNh5FsGhYNJv2dwL0"
+                      }
+                    ]
+                  },
+                  {
+                    "expr": ",await :code #jdS72rkaEeSAJImcNSCsdLkn ,( $OS3cCY4m2zNh5FsGhYNJv2dwL0 .scale ,( ,5 ,0 ,) ,)",
+                    "nodeType": "exprStmt",
+                    "id": "e8y63L8uWAYClj1VaiKQkf5t",
+                    "locals": []
+                  }
+                ],
+                "nodeType": "for",
+                "id": "jtUVr3aBgkAEORpo1eB50L2L",
+                "locals": [
+                  {
+                    "name": "j",
+                    "type": "Number",
+                    "nodeType": "localDef",
+                    "id": "jtUVr3aBgkAEORpo1eB50L2LB0"
+                  }
+                ]
+              },
+              {
+                "expr": ",await :code #jdS72rkaEeSAJImcNSCsdLkn ,( :math .create_vector3 ,( ,5 ,0 ,, ,0 ,, ,0 ,) ,)",
+                "nodeType": "exprStmt",
+                "id": "lyVHyGeTEdo1fnMTy6qpUxqV",
+                "locals": []
+              },
+              {
+                "expr": ",await :code #jdS72rkaEeSAJImcNSCsdLkn ,( :math .create_vector3 ,( ,5 ,0 ,, ,5 ,0 ,, ,0 ,) ,)",
+                "nodeType": "exprStmt",
+                "id": "CPj7v0J2jc8kLrjpOnJM2hDX",
+                "locals": []
+              },
+              {
+                "expr": ",await :code #jdS72rkaEeSAJImcNSCsdLkn ,( :math .create_vector3 ,( ,0 ,, ,5 ,0 ,, ,0 ,) ,)",
+                "nodeType": "exprStmt",
+                "id": "xuHksCALs2GIrx2u4Nth3a9g",
+                "locals": []
+              },
+              {
+                "expr": ",await :code #jdS72rkaEeSAJImcNSCsdLkn ,( :math .create_vector3 ,( ,0 ,, ,0 ,, ,0 ,) ,)",
+                "nodeType": "exprStmt",
+                "id": "P9aV7nJtQcNNvR0ZtvhGVZ6Y",
+                "locals": []
+              },
+              {
+                "expr": ":time .stop",
+                "nodeType": "exprStmt",
+                "id": "ipO11ar71JGz4nLkXI9KHtiQ",
+                "locals": []
+              },
+              {
+                "expr": "$z634qdQuluraV72U4wHMtUWcL0 ,:= ,1 ,0 ,0",
+                "nodeType": "exprStmt",
+                "id": "z634qdQuluraV72U4wHMtUWc",
+                "locals": [
+                  {
+                    "name": "x",
+                    "type": "Number",
+                    "nodeType": "localDef",
+                    "id": "z634qdQuluraV72U4wHMtUWcL0"
+                  }
+                ]
+              },
+              {
+                "bound": "$z634qdQuluraV72U4wHMtUWcL0",
+                "body": [
+                  {
+                    "expr": ",await :code #yJDULHQ0Elux4HgtDjHMsNDq ,( ,1 ,0 ,5 ,+ $u39U2EnKG3d8ziaTr44PPn4YB0 ,* ,2 ,, $u39U2EnKG3d8ziaTr44PPn4YB0 ,* ,3 ,6 ,0 ,* ,5 ,/ $z634qdQuluraV72U4wHMtUWcL0 ,)",
+                    "nodeType": "exprStmt",
+                    "id": "nN9fAjFx2kcJJxo342DzV4Qa",
+                    "locals": []
+                  },
+                  {
+                    "condition": ":senses .acceleration_quick .y ,< ,- ,0 ,. ,5",
+                    "body": [
+                      {
+                        "expr": ",await :code #yJDULHQ0Elux4HgtDjHMsNDq ,( ,0 ,, ,0 ,)",
+                        "nodeType": "exprStmt",
+                        "id": "TP3Ip0X4XJ1pqJ7E1Lf2UkAq",
+                        "locals": []
+                      }
+                    ],
+                    "nodeType": "while",
+                    "id": "kUy52jJJ7oePk3mIx8ngQszP",
+                    "locals": []
+                  },
+                  {
+                    "expr": ",await :time .sleep ,( ,. ,1 ,)",
+                    "nodeType": "exprStmt",
+                    "id": "x0K7OjMSzraRjumOhN4IqBaf",
+                    "locals": []
+                  }
+                ],
+                "nodeType": "for",
+                "id": "u39U2EnKG3d8ziaTr44PPn4Y",
+                "locals": [
+                  {
+                    "name": "i",
+                    "type": "Number",
+                    "nodeType": "localDef",
+                    "id": "u39U2EnKG3d8ziaTr44PPn4YB0"
+                  }
+                ]
+              },
+              {
+                "expr": ",await :code #yJDULHQ0Elux4HgtDjHMsNDq ,( ,0 ,, ,0 ,)",
+                "nodeType": "exprStmt",
+                "id": "HTvBD6ANSC5l2zdSzQJRbM4s",
+                "locals": []
+              }
+            ],
+            "id": "xtgPTQ0jcRl9bnYhVG3zpJ4K"
+          },
+          {
+            "name": "read response",
+            "inParameters": [],
+            "outParameters": [
+              {
+                "name": "res",
+                "type": "Buffer",
+                "nodeType": "localDef",
+                "id": "E8HnJ7exRmgVkTIEcebsTXunP0"
+              }
+            ],
+            "isPrivate": true,
+            "isOffloaded": false,
+            "isTest": false,
+            "isAsync": true,
+            "nodeType": "action",
+            "body": [
+              {
+                "expr": "$ukFzYqUpkhtxJs2XSkm01vmzL0 ,:= ,await :data #HY6A3UQ8f6V9fo0mxiosPneX .read_buffer ,( ,6 ,)",
+                "nodeType": "exprStmt",
+                "id": "ukFzYqUpkhtxJs2XSkm01vmz",
+                "locals": [
+                  {
+                    "name": "header",
+                    "type": "Buffer",
+                    "nodeType": "localDef",
+                    "id": "ukFzYqUpkhtxJs2XSkm01vmzL0"
+                  }
+                ]
+              },
+              {
+                "expr": ":contract .assert ,( $ukFzYqUpkhtxJs2XSkm01vmzL0 .at ,( ,0 ,) ,= ,2 ,5 ,5 ,, 'wrong_response_format ,)",
+                "nodeType": "exprStmt",
+                "id": "V5m66K5lgr7ToUhfa6fzgXWq",
+                "locals": []
+              },
+              {
+                "expr": "$xCDfcWHFmyxy89k2aapJZqZKL0 ,:= $ukFzYqUpkhtxJs2XSkm01vmzL0 .at ,( ,4 ,)",
+                "nodeType": "exprStmt",
+                "id": "xCDfcWHFmyxy89k2aapJZqZK",
+                "locals": [
+                  {
+                    "name": "dlen",
+                    "type": "Number",
+                    "nodeType": "localDef",
+                    "id": "xCDfcWHFmyxy89k2aapJZqZKL0"
+                  }
+                ]
+              },
+              {
+                "nodeType": "if",
+                "condition": "$xCDfcWHFmyxy89k2aapJZqZKL0 ,> ,1",
+                "thenBody": [
+                  {
+                    "expr": "$E8HnJ7exRmgVkTIEcebsTXunP0 ,:= :bits .create_buffer ,( ,5 ,+ $xCDfcWHFmyxy89k2aapJZqZKL0 ,)",
+                    "nodeType": "exprStmt",
+                    "id": "hfPElQjFBvm3c4jfUCnEkVc4",
+                    "locals": []
+                  },
+                  {
+                    "expr": "$E8HnJ7exRmgVkTIEcebsTXunP0 .copy_from ,( ,0 ,, $ukFzYqUpkhtxJs2XSkm01vmzL0 ,)",
+                    "nodeType": "exprStmt",
+                    "id": "xH8eNXRvNym2n3G4OJdFd4jX",
+                    "locals": []
+                  },
+                  {
+                    "expr": "$sT8Gg96KnxdZq14FpwLrqoZ4L0 ,:= ,await :data #HY6A3UQ8f6V9fo0mxiosPneX .read_buffer ,( $xCDfcWHFmyxy89k2aapJZqZKL0 ,- ,1 ,)",
+                    "nodeType": "exprStmt",
+                    "id": "sT8Gg96KnxdZq14FpwLrqoZ4",
+                    "locals": [
+                      {
+                        "name": "data2",
+                        "type": "Buffer",
+                        "nodeType": "localDef",
+                        "id": "sT8Gg96KnxdZq14FpwLrqoZ4L0"
+                      }
+                    ]
+                  },
+                  {
+                    "expr": "$E8HnJ7exRmgVkTIEcebsTXunP0 .copy_from ,( ,6 ,, $sT8Gg96KnxdZq14FpwLrqoZ4L0 ,)",
+                    "nodeType": "exprStmt",
+                    "id": "KQ28n4U6O8G9g5jLxrR3TRLl",
+                    "locals": []
+                  }
+                ],
+                "elseBody": [
+                  {
+                    "expr": "$E8HnJ7exRmgVkTIEcebsTXunP0 ,:= $ukFzYqUpkhtxJs2XSkm01vmzL0",
+                    "nodeType": "exprStmt",
+                    "id": "xEcTUi85uo2PPDJj4jQJpuVG",
+                    "locals": []
+                  }
+                ],
+                "isElseIf": false,
+                "id": "xA013Z0CSpaLZnMxUpe4bMkt",
+                "locals": []
+              },
+              {
+                "nodeType": "if",
+                "condition": "$E8HnJ7exRmgVkTIEcebsTXunP0 .at ,( ,1 ,) ,= ,2 ,5 ,4",
+                "thenBody": [
+                  {
+                    "expr": ":code #GvOzuZIAuIlUaOA5qrLoPMCl ,( $E8HnJ7exRmgVkTIEcebsTXunP0 ,)",
+                    "nodeType": "exprStmt",
+                    "id": "a0dheapPQR6E2a4X4doBcFmj",
+                    "locals": []
+                  },
+                  {
+                    "expr": "$E8HnJ7exRmgVkTIEcebsTXunP0 ,:= ,await :code #E8HnJ7exRmgVkTIEcebsTXun",
+                    "nodeType": "exprStmt",
+                    "id": "Z35vktnsgZsfOfr290340CvH",
+                    "locals": []
+                  }
+                ],
+                "isElseIf": false,
+                "id": "j4AcDFDtvG2VeycHfhSHBZhc",
+                "locals": []
+              }
+            ],
+            "id": "E8HnJ7exRmgVkTIEcebsTXun"
+          },
+          {
+            "name": "roll",
+            "inParameters": [
+              {
+                "name": "speed",
+                "type": "Number",
+                "nodeType": "localDef",
+                "id": "yJDULHQ0Elux4HgtDjHMsNDqP0"
+              },
+              {
+                "name": "heading",
+                "type": "Number",
+                "nodeType": "localDef",
+                "id": "yJDULHQ0Elux4HgtDjHMsNDqP1"
+              }
+            ],
+            "outParameters": [],
+            "isPrivate": false,
+            "isOffloaded": false,
+            "isTest": false,
+            "isAsync": true,
+            "nodeType": "action",
+            "body": [
+              {
+                "expr": "$UwHBYL7IN2nLz0ZcwT2pgZpDL0 ,:= :bits .create_buffer ,( ,4 ,)",
+                "nodeType": "exprStmt",
+                "id": "UwHBYL7IN2nLz0ZcwT2pgZpD",
+                "locals": [
+                  {
+                    "name": "buf",
+                    "type": "Buffer",
+                    "nodeType": "localDef",
+                    "id": "UwHBYL7IN2nLz0ZcwT2pgZpDL0"
+                  }
+                ]
+              },
+              {
+                "expr": "$UwHBYL7IN2nLz0ZcwT2pgZpDL0 .set ,( ,0 ,, $yJDULHQ0Elux4HgtDjHMsNDqP0 ,)",
+                "nodeType": "exprStmt",
+                "id": "PvYeFi6IRF4JWQJTEUKq772n",
+                "locals": []
+              },
+              {
+                "expr": "$xkOA2kh9XrFIlC5tDRpbi2wLL0 ,:= $yJDULHQ0Elux4HgtDjHMsNDqP1",
+                "nodeType": "exprStmt",
+                "id": "xkOA2kh9XrFIlC5tDRpbi2wL",
+                "locals": [
+                  {
+                    "name": "x",
+                    "type": "Number",
+                    "nodeType": "localDef",
+                    "id": "xkOA2kh9XrFIlC5tDRpbi2wLL0"
+                  }
+                ]
+              },
+              {
+                "nodeType": "if",
+                "condition": "$yJDULHQ0Elux4HgtDjHMsNDqP1 ,< ,0",
+                "thenBody": [
+                  {
+                    "expr": "$yJDULHQ0Elux4HgtDjHMsNDqP1 ,:= ,3 ,6 ,0 ,- :math .mod ,( ,- $yJDULHQ0Elux4HgtDjHMsNDqP1 ,, ,3 ,6 ,0 ,)",
+                    "nodeType": "exprStmt",
+                    "id": "xpWHLEQYrl0L2zzxQV8uTdyR",
+                    "locals": []
+                  }
+                ],
+                "isElseIf": false,
+                "id": "rfTMcKIgKSxe1K3iqbBjFmig",
+                "locals": []
+              },
+              {
+                "expr": "$yJDULHQ0Elux4HgtDjHMsNDqP1 ,:= :math .mod ,( :math .round ,( $yJDULHQ0Elux4HgtDjHMsNDqP1 ,) ,, ,3 ,6 ,0 ,)",
+                "nodeType": "exprStmt",
+                "id": "TnTdEvzZcFGOCwNVZEWPaCjN",
+                "locals": []
+              },
+              {
+                "expr": ":code #LIi8hAP3wvi55Zk644UhacVn ,( $UwHBYL7IN2nLz0ZcwT2pgZpDL0 ,, ,1 ,, $yJDULHQ0Elux4HgtDjHMsNDqP1 ,)",
+                "nodeType": "exprStmt",
+                "id": "Uuumm5CzMuZ3P5YwzXobQKxS",
+                "locals": []
+              },
+              {
+                "nodeType": "if",
+                "condition": "$yJDULHQ0Elux4HgtDjHMsNDqP0 ,= ,0",
+                "thenBody": [
+                  {
+                    "expr": "$UwHBYL7IN2nLz0ZcwT2pgZpDL0 .set ,( ,3 ,, ,0 ,)",
+                    "nodeType": "exprStmt",
+                    "id": "xnnOAFNYLQIibXD7wyf1QbJg",
+                    "locals": []
+                  }
+                ],
+                "elseBody": [
+                  {
+                    "expr": "$UwHBYL7IN2nLz0ZcwT2pgZpDL0 .set ,( ,3 ,, ,1 ,)",
+                    "nodeType": "exprStmt",
+                    "id": "KN8FF4rLUuCQ5QJUvCPsjuuU",
+                    "locals": []
+                  }
+                ],
+                "isElseIf": false,
+                "id": "XGng6xKhb8rBrHMgq9oPn460",
+                "locals": []
+              },
+              {
+                "expr": "$ziX8SRZD0SBQ8FZkv4NIwPjqL0 ,:= ,await :code #ET2khlxWXbF5TuE0IsRoVVpm ,( ,2 ,, ,4 ,8 ,, $UwHBYL7IN2nLz0ZcwT2pgZpDL0 ,)",
+                "nodeType": "exprStmt",
+                "id": "ziX8SRZD0SBQ8FZkv4NIwPjq",
+                "locals": [
+                  {
+                    "name": "resp",
+                    "type": "Buffer",
+                    "nodeType": "localDef",
+                    "id": "ziX8SRZD0SBQ8FZkv4NIwPjqL0"
+                  }
+                ]
+              },
+              {
+                "expr": ":code #SMM54O04kfW9gfBxX2gAvbHF ,( 'Roll_ ,∥ $yJDULHQ0Elux4HgtDjHMsNDqP0 ,∥ '_at_ ,∥ $yJDULHQ0Elux4HgtDjHMsNDqP1 ,∥ '_/002d/003e_ ,∥ $xkOA2kh9XrFIlC5tDRpbi2wLL0 ,)",
+                "nodeType": "exprStmt",
+                "id": "n1JzUlTOihsuBa8OK1Q72Sb7",
+                "locals": []
+              }
+            ],
+            "id": "yJDULHQ0Elux4HgtDjHMsNDq"
+          },
+          {
+            "name": "set u16",
+            "inParameters": [
+              {
+                "name": "buf",
+                "type": "Buffer",
+                "nodeType": "localDef",
+                "id": "LIi8hAP3wvi55Zk644UhacVnP0"
+              },
+              {
+                "name": "idx",
+                "type": "Number",
+                "nodeType": "localDef",
+                "id": "LIi8hAP3wvi55Zk644UhacVnP1"
+              },
+              {
+                "name": "v",
+                "type": "Number",
+                "nodeType": "localDef",
+                "id": "LIi8hAP3wvi55Zk644UhacVnP2"
+              }
+            ],
+            "outParameters": [],
+            "isPrivate": true,
+            "isOffloaded": false,
+            "isTest": false,
+            "isAsync": false,
+            "nodeType": "action",
+            "body": [
+              {
+                "expr": "$LIi8hAP3wvi55Zk644UhacVnP0 .set ,( $LIi8hAP3wvi55Zk644UhacVnP1 ,, :bits .and_uint32 ,( :bits .shift_right_uint32 ,( $LIi8hAP3wvi55Zk644UhacVnP2 ,, ,8 ,) ,, ,2 ,5 ,5 ,) ,)",
+                "nodeType": "exprStmt",
+                "id": "lk03hDbw6bIyIFAogI2JpoM8",
+                "locals": []
+              },
+              {
+                "expr": "$LIi8hAP3wvi55Zk644UhacVnP0 .set ,( $LIi8hAP3wvi55Zk644UhacVnP1 ,+ ,1 ,, :bits .and_uint32 ,( $LIi8hAP3wvi55Zk644UhacVnP2 ,, ,2 ,5 ,5 ,) ,)",
+                "nodeType": "exprStmt",
+                "id": "x3duw9pDJlmeAQY4BeGuwfwq",
+                "locals": []
+              }
+            ],
+            "id": "LIi8hAP3wvi55Zk644UhacVn"
+          },
+          {
+            "name": "handle async response",
+            "inParameters": [
+              {
+                "name": "res",
+                "type": "Buffer",
+                "nodeType": "localDef",
+                "id": "GvOzuZIAuIlUaOA5qrLoPMClP0"
+              }
+            ],
+            "outParameters": [],
+            "isPrivate": true,
+            "isOffloaded": false,
+            "isTest": false,
+            "isAsync": false,
+            "nodeType": "action",
+            "body": [
+              {
+                "expr": ":code #SMM54O04kfW9gfBxX2gAvbHF ,( 'got_async_response/003a_ ,∥ $GvOzuZIAuIlUaOA5qrLoPMClP0 .to_string ,( 'hex ,) ,)",
+                "nodeType": "exprStmt",
+                "id": "mBpMcDBFGizPuVtB7eG4vYdZ",
+                "locals": []
+              }
+            ],
+            "id": "GvOzuZIAuIlUaOA5qrLoPMCl"
+          },
+          {
+            "name": "sleep sphero",
+            "inParameters": [
+              {
+                "name": "seconds",
+                "type": "Number",
+                "nodeType": "localDef",
+                "id": "xCgPjia6jNy2bVNPHB2HJwXAP0"
+              }
+            ],
+            "outParameters": [],
+            "isPrivate": false,
+            "isOffloaded": false,
+            "isTest": false,
+            "isAsync": true,
+            "nodeType": "action",
+            "body": [
+              {
+                "expr": "$eI41INuKC2NEiJwJTpRpJ2JwL0 ,:= :bits .create_buffer ,( ,5 ,)",
+                "nodeType": "exprStmt",
+                "id": "eI41INuKC2NEiJwJTpRpJ2Jw",
+                "locals": [
+                  {
+                    "name": "buf",
+                    "type": "Buffer",
+                    "nodeType": "localDef",
+                    "id": "eI41INuKC2NEiJwJTpRpJ2JwL0"
+                  }
+                ]
+              },
+              {
+                "expr": ":code #LIi8hAP3wvi55Zk644UhacVn ,( $eI41INuKC2NEiJwJTpRpJ2JwL0 ,, ,0 ,, $xCgPjia6jNy2bVNPHB2HJwXAP0 ,)",
+                "nodeType": "exprStmt",
+                "id": "nvQWlJtTj3vg3caXVAvg7tkb",
+                "locals": []
+              },
+              {
+                "expr": "$IKGvCOcLz9MgcT4HIbH8sBBvL0 ,:= ,await :code #ET2khlxWXbF5TuE0IsRoVVpm ,( ,0 ,, ,3 ,4 ,, $eI41INuKC2NEiJwJTpRpJ2JwL0 ,)",
+                "nodeType": "exprStmt",
+                "id": "IKGvCOcLz9MgcT4HIbH8sBBv",
+                "locals": [
+                  {
+                    "name": "buf2",
+                    "type": "Buffer",
+                    "nodeType": "localDef",
+                    "id": "IKGvCOcLz9MgcT4HIbH8sBBvL0"
+                  }
+                ]
+              }
+            ],
+            "id": "xCgPjia6jNy2bVNPHB2HJwXA"
+          },
+          {
+            "name": "refresh locator",
+            "inParameters": [],
+            "outParameters": [],
+            "isPrivate": true,
+            "isOffloaded": false,
+            "isTest": false,
+            "isAsync": true,
+            "nodeType": "action",
+            "body": [
+              {
+                "nodeType": "if",
+                "condition": ":time .now .subtract ,( :data #kqBcszMRcK7Wm1HpwGxLZjd6 ,) ,> ,0 ,. ,1",
+                "thenBody": [
+                  {
+                    "expr": "$pabguGuuynGCpJvEY464hp17L0 ,:= ,await :code #ET2khlxWXbF5TuE0IsRoVVpm ,( ,2 ,, ,2 ,1 ,, :bits .create_buffer ,( ,0 ,) ,)",
+                    "nodeType": "exprStmt",
+                    "id": "pabguGuuynGCpJvEY464hp17",
+                    "locals": [
+                      {
+                        "name": "buf",
+                        "type": "Buffer",
+                        "nodeType": "localDef",
+                        "id": "pabguGuuynGCpJvEY464hp17L0"
+                      }
+                    ]
+                  },
+                  {
+                    "expr": ":data #kqBcszMRcK7Wm1HpwGxLZjd6 ,:= :time .now",
+                    "nodeType": "exprStmt",
+                    "id": "dnTn2fIz4ARLsCc7TBrDGeFF",
+                    "locals": []
+                  },
+                  {
+                    "expr": ":data #S4PUc0VDV9mwERxM53othrZp ,:= :math .create_vector3 ,( :code #So6xYjiLt0rwEc1pCZ4KpyYj ,( $pabguGuuynGCpJvEY464hp17L0 ,, ,5 ,) ,, :code #So6xYjiLt0rwEc1pCZ4KpyYj ,( $pabguGuuynGCpJvEY464hp17L0 ,, ,7 ,) ,, ,0 ,)",
+                    "nodeType": "exprStmt",
+                    "id": "xBTpegsVTo8JcFXeuXHY3Wru",
+                    "locals": []
+                  },
+                  {
+                    "expr": ":data #PbI2fYciRxiQ3fLFaAI2tpHh ,:= :math .create_vector3 ,( :code #So6xYjiLt0rwEc1pCZ4KpyYj ,( $pabguGuuynGCpJvEY464hp17L0 ,, ,9 ,) ,, :code #So6xYjiLt0rwEc1pCZ4KpyYj ,( $pabguGuuynGCpJvEY464hp17L0 ,, ,1 ,1 ,) ,, ,0 ,)",
+                    "nodeType": "exprStmt",
+                    "id": "YcVhm98PZ5tnGheqh9tyYMg2",
+                    "locals": []
+                  },
+                  {
+                    "expr": ":data #WKyQr7aek6srFNPDhw9WCmLc ,:= :code #jZWMFSOJVecKywNdd4z2LFRH ,( $pabguGuuynGCpJvEY464hp17L0 ,, ,1 ,3 ,)",
+                    "nodeType": "exprStmt",
+                    "id": "kliYR3utizZZCvET2jl405Eh",
+                    "locals": []
+                  }
+                ],
+                "isElseIf": false,
+                "id": "Ca9jsQ96aMebcoimQXB2tYig",
+                "locals": []
+              }
+            ],
+            "id": "Ys4Bak2y1ArDMThONQ2x5Y3K"
+          },
+          {
+            "name": "get u16",
+            "inParameters": [
+              {
+                "name": "buf",
+                "type": "Buffer",
+                "nodeType": "localDef",
+                "id": "jZWMFSOJVecKywNdd4z2LFRHP0"
+              },
+              {
+                "name": "idx",
+                "type": "Number",
+                "nodeType": "localDef",
+                "id": "jZWMFSOJVecKywNdd4z2LFRHP1"
+              }
+            ],
+            "outParameters": [
+              {
+                "name": "r",
+                "type": "Number",
+                "nodeType": "localDef",
+                "id": "jZWMFSOJVecKywNdd4z2LFRHP2"
+              }
+            ],
+            "isPrivate": true,
+            "isOffloaded": false,
+            "isTest": false,
+            "isAsync": false,
+            "nodeType": "action",
+            "body": [
+              {
+                "expr": "$jZWMFSOJVecKywNdd4z2LFRHP2 ,:= $jZWMFSOJVecKywNdd4z2LFRHP0 .at ,( $jZWMFSOJVecKywNdd4z2LFRHP1 ,) ,* ,2 ,5 ,6 ,+ $jZWMFSOJVecKywNdd4z2LFRHP0 .at ,( $jZWMFSOJVecKywNdd4z2LFRHP1 ,+ ,1 ,)",
+                "nodeType": "exprStmt",
+                "id": "Y7mzMrq0ftkVhPsZxQ2FYeoq",
+                "locals": []
+              }
+            ],
+            "id": "jZWMFSOJVecKywNdd4z2LFRH"
+          },
+          {
+            "name": "get i16",
+            "inParameters": [
+              {
+                "name": "buf",
+                "type": "Buffer",
+                "nodeType": "localDef",
+                "id": "So6xYjiLt0rwEc1pCZ4KpyYjP0"
+              },
+              {
+                "name": "idx",
+                "type": "Number",
+                "nodeType": "localDef",
+                "id": "So6xYjiLt0rwEc1pCZ4KpyYjP1"
+              }
+            ],
+            "outParameters": [
+              {
+                "name": "r",
+                "type": "Number",
+                "nodeType": "localDef",
+                "id": "So6xYjiLt0rwEc1pCZ4KpyYjP2"
+              }
+            ],
+            "isPrivate": true,
+            "isOffloaded": false,
+            "isTest": false,
+            "isAsync": false,
+            "nodeType": "action",
+            "body": [
+              {
+                "expr": "$So6xYjiLt0rwEc1pCZ4KpyYjP2 ,:= :code #jZWMFSOJVecKywNdd4z2LFRH ,( $So6xYjiLt0rwEc1pCZ4KpyYjP0 ,, $So6xYjiLt0rwEc1pCZ4KpyYjP1 ,)",
+                "nodeType": "exprStmt",
+                "id": "jU69oB8dhee4sNVjArxPQnUG",
+                "locals": []
+              },
+              {
+                "nodeType": "if",
+                "condition": "$So6xYjiLt0rwEc1pCZ4KpyYjP2 ,≥ ,3 ,2 ,7 ,6 ,8",
+                "thenBody": [
+                  {
+                    "expr": "$So6xYjiLt0rwEc1pCZ4KpyYjP2 ,:= $So6xYjiLt0rwEc1pCZ4KpyYjP2 ,- ,6 ,5 ,5 ,3 ,6",
+                    "nodeType": "exprStmt",
+                    "id": "JmX4Jp820yBPQmAV1lcgUo2q",
+                    "locals": []
+                  }
+                ],
+                "isElseIf": false,
+                "id": "qErq9WgKqIZhX48O2sYyG91a",
+                "locals": []
+              }
+            ],
+            "id": "So6xYjiLt0rwEc1pCZ4KpyYj"
+          },
+          {
+            "name": "last location",
+            "comment": "",
+            "type": "Vector3",
+            "isReadonly": false,
+            "isTransient": true,
+            "nodeType": "data",
+            "id": "S4PUc0VDV9mwERxM53othrZp"
+          },
+          {
+            "name": "last speed",
+            "comment": "",
+            "type": "Vector3",
+            "isReadonly": false,
+            "isTransient": true,
+            "nodeType": "data",
+            "id": "PbI2fYciRxiQ3fLFaAI2tpHh"
+          },
+          {
+            "name": "sog",
+            "comment": "",
+            "type": "Number",
+            "isReadonly": false,
+            "isTransient": true,
+            "nodeType": "data",
+            "id": "WKyQr7aek6srFNPDhw9WCmLc"
+          },
+          {
+            "name": "last location reading",
+            "comment": "",
+            "type": "DateTime",
+            "isReadonly": false,
+            "isTransient": true,
+            "nodeType": "data",
+            "id": "kqBcszMRcK7Wm1HpwGxLZjd6"
+          },
+          {
+            "name": "get location",
+            "inParameters": [],
+            "outParameters": [
+              {
+                "name": "pos",
+                "type": "Vector3",
+                "nodeType": "localDef",
+                "id": "Tx2N9Ei8TrjKKiwCUphClI6dP0"
+              }
+            ],
+            "isPrivate": false,
+            "isOffloaded": false,
+            "isTest": false,
+            "isAsync": true,
+            "nodeType": "action",
+            "body": [
+              {
+                "expr": ",await :code #Ys4Bak2y1ArDMThONQ2x5Y3K",
+                "nodeType": "exprStmt",
+                "id": "LyjEO5D0KwbMLbWOhu29zP09",
+                "locals": []
+              },
+              {
+                "expr": "$Tx2N9Ei8TrjKKiwCUphClI6dP0 ,:= :data #S4PUc0VDV9mwERxM53othrZp",
+                "nodeType": "exprStmt",
+                "id": "xpwca6YylAzfcHgaopMdu2Co",
+                "locals": []
+              }
+            ],
+            "id": "Tx2N9Ei8TrjKKiwCUphClI6d"
+          },
+          {
+            "name": "get speed",
+            "inParameters": [],
+            "outParameters": [
+              {
+                "name": "speed",
+                "type": "Vector3",
+                "nodeType": "localDef",
+                "id": "DTzvXrXxJLXAELmAgFixhFwIP0"
+              }
+            ],
+            "isPrivate": false,
+            "isOffloaded": false,
+            "isTest": false,
+            "isAsync": true,
+            "nodeType": "action",
+            "body": [
+              {
+                "expr": ",await :code #Ys4Bak2y1ArDMThONQ2x5Y3K",
+                "nodeType": "exprStmt",
+                "id": "xhsyIGXPq0leCskYK7monlxN",
+                "locals": []
+              },
+              {
+                "expr": "$DTzvXrXxJLXAELmAgFixhFwIP0 ,:= :data #PbI2fYciRxiQ3fLFaAI2tpHh",
+                "nodeType": "exprStmt",
+                "id": "SfjWuasBoGTUh435IY4MeIXM",
+                "locals": []
+              }
+            ],
+            "id": "DTzvXrXxJLXAELmAgFixhFwI"
+          },
+          {
+            "name": "set led color",
+            "inParameters": [
+              {
+                "name": "c",
+                "type": "Color",
+                "nodeType": "localDef",
+                "id": "CLzMsX82lMSv8rQyrD1TKmA0P0"
+              }
+            ],
+            "outParameters": [],
+            "isPrivate": false,
+            "isOffloaded": false,
+            "isTest": false,
+            "isAsync": true,
+            "nodeType": "action",
+            "body": [
+              {
+                "expr": "$s4QDD1EzPOIpcIyA81MjFvOpL0 ,:= :bits .create_buffer ,( ,4 ,)",
+                "nodeType": "exprStmt",
+                "id": "s4QDD1EzPOIpcIyA81MjFvOp",
+                "locals": [
+                  {
+                    "name": "buf",
+                    "type": "Buffer",
+                    "nodeType": "localDef",
+                    "id": "s4QDD1EzPOIpcIyA81MjFvOpL0"
+                  }
+                ]
+              },
+              {
+                "expr": "$s4QDD1EzPOIpcIyA81MjFvOpL0 .set ,( ,0 ,, $CLzMsX82lMSv8rQyrD1TKmA0P0 .R ,* ,2 ,5 ,5 ,)",
+                "nodeType": "exprStmt",
+                "id": "zYdg0aiknzjzTe7FU9bvh16C",
+                "locals": []
+              },
+              {
+                "expr": "$s4QDD1EzPOIpcIyA81MjFvOpL0 .set ,( ,1 ,, $CLzMsX82lMSv8rQyrD1TKmA0P0 .G ,* ,2 ,5 ,5 ,)",
+                "nodeType": "exprStmt",
+                "id": "Nnd7XAQmMZrz7dpxCkRCw4o4",
+                "locals": []
+              },
+              {
+                "expr": "$s4QDD1EzPOIpcIyA81MjFvOpL0 .set ,( ,2 ,, $CLzMsX82lMSv8rQyrD1TKmA0P0 .B ,* ,2 ,5 ,5 ,)",
+                "nodeType": "exprStmt",
+                "id": "FnHHoYbcYaZYWuNrzZV29dyM",
+                "locals": []
+              },
+              {
+                "expr": "$Xcmg2JRewDFgHXz920X2uHCFL0 ,:= ,await :code #ET2khlxWXbF5TuE0IsRoVVpm ,( ,2 ,, ,3 ,2 ,, $s4QDD1EzPOIpcIyA81MjFvOpL0 ,)",
+                "nodeType": "exprStmt",
+                "id": "Xcmg2JRewDFgHXz920X2uHCF",
+                "locals": [
+                  {
+                    "name": "buf2",
+                    "type": "Buffer",
+                    "nodeType": "localDef",
+                    "id": "Xcmg2JRewDFgHXz920X2uHCFL0"
+                  }
+                ]
+              }
+            ],
+            "id": "CLzMsX82lMSv8rQyrD1TKmA0"
+          },
+          {
+            "name": "roll to",
+            "inParameters": [
+              {
+                "name": "dest",
+                "type": "Vector3",
+                "nodeType": "localDef",
+                "id": "jdS72rkaEeSAJImcNSCsdLknP0"
+              }
+            ],
+            "outParameters": [],
+            "isPrivate": false,
+            "isOffloaded": false,
+            "isTest": false,
+            "isAsync": true,
+            "nodeType": "action",
+            "body": [
+              {
+                "expr": "$x9OoGONGPvfsZlkZhLqaD97OL0 ,:= T",
+                "nodeType": "exprStmt",
+                "id": "x9OoGONGPvfsZlkZhLqaD97O",
+                "locals": [
+                  {
+                    "name": "keep going",
+                    "type": "Boolean",
+                    "nodeType": "localDef",
+                    "id": "x9OoGONGPvfsZlkZhLqaD97OL0"
+                  }
+                ]
+              },
+              {
+                "condition": "$x9OoGONGPvfsZlkZhLqaD97OL0",
+                "body": [
+                  {
+                    "expr": "$xOv50o3Zdait1npugb4zadwGL0 ,:= ,await :code #Tx2N9Ei8TrjKKiwCUphClI6d",
+                    "nodeType": "exprStmt",
+                    "id": "xOv50o3Zdait1npugb4zadwG",
+                    "locals": [
+                      {
+                        "name": "pos",
+                        "type": "Vector3",
+                        "nodeType": "localDef",
+                        "id": "xOv50o3Zdait1npugb4zadwGL0"
+                      }
+                    ]
+                  },
+                  {
+                    "expr": ":code #SMM54O04kfW9gfBxX2gAvbHF ,( 'pos/003a_ ,∥ $xOv50o3Zdait1npugb4zadwGL0 ,)",
+                    "nodeType": "exprStmt",
+                    "id": "xhbkfkCNuNyBENrCdM3QtT5D",
+                    "locals": []
+                  },
+                  {
+                    "nodeType": "if",
+                    "condition": "$jdS72rkaEeSAJImcNSCsdLknP0 .distance ,( $xOv50o3Zdait1npugb4zadwGL0 ,) ,< ,1 ,5",
+                    "thenBody": [
+                      {
+                        "expr": "$x9OoGONGPvfsZlkZhLqaD97OL0 ,:= F",
+                        "nodeType": "exprStmt",
+                        "id": "KUdBhIHtwhoa8zITZXoz2bno",
+                        "locals": []
+                      },
+                      {
+                        "expr": ",await :code #yJDULHQ0Elux4HgtDjHMsNDq ,( ,0 ,, ,0 ,)",
+                        "nodeType": "exprStmt",
+                        "id": "M2nSNTT2qXfwgbv5KpPoyQlf",
+                        "locals": []
+                      }
+                    ],
+                    "elseBody": [
+                      {
+                        "expr": "$HKqTy7YcFtuGdKJq8C4rJOY2L0 ,:= $jdS72rkaEeSAJImcNSCsdLknP0 .subtract ,( $xOv50o3Zdait1npugb4zadwGL0 ,)",
+                        "nodeType": "exprStmt",
+                        "id": "HKqTy7YcFtuGdKJq8C4rJOY2",
+                        "locals": [
+                          {
+                            "name": "diff",
+                            "type": "Vector3",
+                            "nodeType": "localDef",
+                            "id": "HKqTy7YcFtuGdKJq8C4rJOY2L0"
+                          }
+                        ]
+                      },
+                      {
+                        "expr": "$OmkN2BHVa20n4HhBB388HiH5L0 ,:= :math .atan2 ,( $HKqTy7YcFtuGdKJq8C4rJOY2L0 .x ,, $HKqTy7YcFtuGdKJq8C4rJOY2L0 .y ,) ,* ,1 ,8 ,0 ,/ :math ./03c0",
+                        "nodeType": "exprStmt",
+                        "id": "OmkN2BHVa20n4HhBB388HiH5",
+                        "locals": [
+                          {
+                            "name": "heading",
+                            "type": "Number",
+                            "nodeType": "localDef",
+                            "id": "OmkN2BHVa20n4HhBB388HiH5L0"
+                          }
+                        ]
+                      },
+                      {
+                        "expr": "$zPZSnL4cghdVXiwXcaVEmLM4L0 ,:= $HKqTy7YcFtuGdKJq8C4rJOY2L0 .length ,* ,1",
+                        "nodeType": "exprStmt",
+                        "id": "zPZSnL4cghdVXiwXcaVEmLM4",
+                        "locals": [
+                          {
+                            "name": "speed",
+                            "type": "Number",
+                            "nodeType": "localDef",
+                            "id": "zPZSnL4cghdVXiwXcaVEmLM4L0"
+                          }
+                        ]
+                      },
+                      {
+                        "expr": ",await :code #yJDULHQ0Elux4HgtDjHMsNDq ,( :math .min ,( :math .max ,( ,9 ,0 ,, $zPZSnL4cghdVXiwXcaVEmLM4L0 ,) ,, ,2 ,5 ,0 ,) ,, $OmkN2BHVa20n4HhBB388HiH5L0 ,)",
+                        "nodeType": "exprStmt",
+                        "id": "PLci4fPG6fJlcP4Z2dtcY9ab",
+                        "locals": []
+                      },
+                      {
+                        "expr": ",await :time .sleep ,( ,0 ,. ,5 ,)",
+                        "nodeType": "exprStmt",
+                        "id": "xvt1XhUVLWqoLlpiT2rOeUmZ",
+                        "locals": []
+                      }
+                    ],
+                    "isElseIf": false,
+                    "id": "VINlfYPkXpG2zpGY8jWYc4AS",
+                    "locals": []
+                  }
+                ],
+                "nodeType": "while",
+                "id": "u6F2N6jxBR5qgNfjEHedfj0O",
+                "locals": []
+              }
+            ],
+            "id": "jdS72rkaEeSAJImcNSCsdLkn"
+          },
+          {
+            "name": "reset locator",
+            "inParameters": [],
+            "outParameters": [],
+            "isPrivate": false,
+            "isOffloaded": false,
+            "isTest": false,
+            "isAsync": true,
+            "nodeType": "action",
+            "body": [
+              {
+                "expr": "$gVRWN5wzJ8AaoDqzUyS8PpyBL0 ,:= :bits .create_buffer ,( ,7 ,)",
+                "nodeType": "exprStmt",
+                "id": "gVRWN5wzJ8AaoDqzUyS8PpyB",
+                "locals": [
+                  {
+                    "name": "buf",
+                    "type": "Buffer",
+                    "nodeType": "localDef",
+                    "id": "gVRWN5wzJ8AaoDqzUyS8PpyBL0"
+                  }
+                ]
+              },
+              {
+                "expr": "$NfndoEL3pZTVzebqxM2UaaFWL0 ,:= ,await :code #ET2khlxWXbF5TuE0IsRoVVpm ,( ,2 ,, ,1 ,9 ,, $gVRWN5wzJ8AaoDqzUyS8PpyBL0 ,)",
+                "nodeType": "exprStmt",
+                "id": "NfndoEL3pZTVzebqxM2UaaFW",
+                "locals": [
+                  {
+                    "name": "buf2",
+                    "type": "Buffer",
+                    "nodeType": "localDef",
+                    "id": "NfndoEL3pZTVzebqxM2UaaFWL0"
+                  }
+                ]
+              }
+            ],
+            "id": "OK4aZpWEisN3ooUCoiSG7nGe"
+          }
+        ],
+        "deletedDecls": [],
+        "nodeType": "app",
+        "id": "app"
+      }
+    },
+    {
+      "seqNo": 1,
+      "time": 1378841209,
+      "scriptId": "wiui",
+      "historyId": "25202345959087261424a2a2917-5183-4573-88de-657180064efa",
+      "updateSize": 2,
+      "updates": {}
+    },
+    {
+      "seqNo": 2,
+      "time": 1378850987,
+      "scriptId": null,
+      "historyId": "2520234498121121666bd95d5ca-0126-423f-8f6e-8c1d319c9a16",
+      "updateSize": 603,
+      "updates": {
+        "la9jncbSBUQHhSIGgvd7LT11": {
+          "expr": ":wall",
+          "nodeType": "exprStmt",
+          "locals": []
+        },
+        "xtgPTQ0jcRl9bnYhVG3zpJ4K": {
+          "body": [
+            "OaN44SHrLqItDcTrCHF22jBs",
+            "pLHb6vpSlcup09bW20nkV52m",
+            "YMi4uBv2Yvit2oxDWOnUqy27",
+            "vGLn2vlX4gVu0e5h31iHG5xb",
+            "Jbu73HoGZVOmc2UKaCrBYqRV",
+            "SpBhNGZVHmecIt9GSweB67XF",
+            "HnUIbWG1ZoqXQrUZ4hG1zsWG",
+            "tcqR4KRrYnv3nnOnE2BRP01V",
+            "jtUVr3aBgkAEORpo1eB50L2L",
+            "lyVHyGeTEdo1fnMTy6qpUxqV",
+            "CPj7v0J2jc8kLrjpOnJM2hDX",
+            "la9jncbSBUQHhSIGgvd7LT11",
+            "xuHksCALs2GIrx2u4Nth3a9g",
+            "P9aV7nJtQcNNvR0ZtvhGVZ6Y",
+            "ipO11ar71JGz4nLkXI9KHtiQ",
+            "z634qdQuluraV72U4wHMtUWc",
+            "u39U2EnKG3d8ziaTr44PPn4Y",
+            "HTvBD6ANSC5l2zdSzQJRbM4s"
+          ]
+        }
+      }
+    },
+    {
+      "seqNo": 3,
+      "time": 1378851007,
+      "scriptId": null,
+      "historyId": "2520234497920829678637a14dc-53d5-4b5f-a76b-efbcb69cdcdb",
+      "updateSize": 2,
+      "updates": {}
+    },
+    {
+      "seqNo": 4,
+      "time": 1378860402,
+      "scriptId": null,
+      "historyId": "2520234403978528425e80b003e-84ee-4e80-8bc7-33a192f60471",
+      "updateSize": 155,
+      "updates": {
+        "xOO11AkQ4ByoaCSIK2ftaF79": {
+          "expr": "$xOO11AkQ4ByoaCSIK2ftaF79L0 ,:= $jtUVr3aBgkAEORpo1eB50L2LB0 ,* ,2 ,* :math ./03c0 ,/ $tcqR4KRrYnv3nnOnE2BRP01VL0 ,-"
+        }
+      }
+    },
+    {
+      "seqNo": 5,
+      "time": 1378860848,
+      "scriptId": null,
+      "historyId": "2520234399516557903f3386a0a-6381-489f-8d63-15a7e14bd8e5",
+      "updateSize": 2,
+      "updates": {}
+    },
+    {
+      "seqNo": 6,
+      "time": 1378860884,
+      "scriptId": null,
+      "historyId": "2520234399151275886fb2b707d-ddee-4ba9-a832-113986324085",
+      "updateSize": 71,
+      "updates": {
+        "SpBhNGZVHmecIt9GSweB67XF": {
+          "expr": ",await :time .sleep ,( ,1 ,0 ,)"
+        }
+      }
+    },
+    {
+      "seqNo": 7,
+      "time": 1378860922,
+      "scriptId": null,
+      "historyId": "2520234398772557398da313995-bc06-41e0-8acb-b0645890d36c",
+      "updateSize": 152,
+      "updates": {
+        "xOO11AkQ4ByoaCSIK2ftaF79": {
+          "expr": "$xOO11AkQ4ByoaCSIK2ftaF79L0 ,:= $jtUVr3aBgkAEORpo1eB50L2LB0 ,* ,2 ,* :math ./03c0 ,/ $tcqR4KRrYnv3nnOnE2BRP01VL0"
+        }
+      }
+    },
+    {
+      "seqNo": 8,
+      "time": 1378860952,
+      "scriptId": null,
+      "historyId": "252023439847133246271b9416a-a324-4b51-aa7a-7c1a9a5b79a9",
+      "updateSize": 2,
+      "updates": {}
+    }
+  ]
+}

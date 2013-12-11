@@ -1,0 +1,1372 @@
+{
+  "userid": "wonm",
+  "guid": "ad6da080-dd2d-4fab-3f64-c9b8c8662222",
+  "lastStatus": "deleted",
+  "items": [
+    {
+      "seqNo": 0,
+      "time": 1368123746,
+      "scriptId": null,
+      "historyId": "2520341770538904721eac5774d-13be-4713-90d0-2ccd9656d355",
+      "updateSize": 40162,
+      "ast": {
+        "textVersion": "v2.2,js,ctx",
+        "jsonVersion": "v1.0,resolved,short",
+        "name": "pages",
+        "comment": "A user interface made of boxes. #docs #pages #language",
+        "icon": "Presentation",
+        "autoIcon": "Presentation",
+        "autoColor": "#00CC99",
+        "platform": "current",
+        "rootId": "BaCRA0BUF22m4jNlcmuDr44I",
+        "showAd": false,
+        "isLibrary": false,
+        "allowExport": false,
+        "hasUniqueIds": false,
+        "decls": [
+          {
+            "name": "main",
+            "inParameters": [],
+            "outParameters": [],
+            "isPrivate": false,
+            "isOffloaded": false,
+            "isTest": false,
+            "isAsync": false,
+            "nodeType": "action",
+            "body": [
+              {
+                "text": "A page allows to build a user interface out of [boxes](/boxed).",
+                "nodeType": "comment",
+                "id": "AJRdjhWLTURYtmcIbKtM707t"
+              },
+              {
+                "text": "{priority:50}",
+                "nodeType": "comment",
+                "id": "mK7hdk3a8mgMXQEirrmf6lQ2"
+              },
+              {
+                "text": "{webonly}",
+                "nodeType": "comment",
+                "id": "iqhObtLReytAk3pp5AXEk5E6"
+              },
+              {
+                "text": "A well-designed user interface that takes full advantage of the screen is essential for giving a professional look and feel to a program. The **page** and **boxed** constructs provide a powerful means of laying out information on the screen. A unique feature to assist script developers is that a running script can be suspended while the format of information currently displayed on the screen is changed, and then the script’s execution can be resumed.",
+                "nodeType": "comment",
+                "id": "a7sg298ew9U1N7z3p4x0J45H"
+              },
+              {
+                "text": "### page overview",
+                "nodeType": "comment",
+                "id": "V04ChO1MVsIcWDiEnrljdLAr"
+              },
+              {
+                "text": "A [](/page) is invoked in a similar manner to an action. However, when it is invoked, it takes over the whole screen. Everything displayed on the screen is created by the code belonging to that screen (or by actions invoked by the page).",
+                "nodeType": "comment",
+                "id": "Znz4V4bxwg87FdDcmKJjfKpO"
+              },
+              {
+                "text": "Pages are managed in a stack-like manner. When the code in page A causes page B to be displayed, B takes over the screen. However, when B is finished or when the user taps the back button, the screen reverts to show what had been displayed by A just before B. Similarly, page B could have caused page C to be displayed, and when C is finished, the screen returns to show page B again.",
+                "nodeType": "comment",
+                "id": "YJ4WQzGI3PO5jH6x6n46aL4f"
+              },
+              {
+                "text": "The code for a page is divided into two main parts: an `initialize` section and a `display` section.",
+                "nodeType": "comment",
+                "id": "AWP3kqJjB5vVZlDg5poFQHi0"
+              },
+              {
+                "text": "{decl:show empty}",
+                "nodeType": "comment",
+                "id": "GMdlnq2asIM4iYrmMyMu5wuP"
+              },
+              {
+                "text": "When the page is invoked, the screen is cleared to be blank and then the code in the ``initialize`` section is executed. This code can execute all kinds of statements in the scripting language except that _it cannot display anything on the screen_. If it attempts to change anything on this blank screen, the script stops execution with an error report. The purpose of the ``initialize`` section is to initialize [](/data) variables, especially data variables which will be used in the display section of the page.",
+                "nodeType": "comment",
+                "id": "KPNMoY4405Kw4ETA44HxMrRz"
+              },
+              {
+                "text": "The `display` section of a page is responsible for rendering the images and text on the screen. The [](/box) construct, explained below, is used to manage the placement of information on the screen. There is a major restriction on what the code in the `display` section is allowed to do. _The display section cannot make assignments to any data variables, tables or indexes_. If the code in the display section attempts to execute such an assignment, or calls an action which attempts such an assignment, the script stops execution with an error report.",
+                "nodeType": "comment",
+                "id": "xvXwcInXV1HMLSCJ85OiWaBy"
+              },
+              {
+                "text": "The restrictions on the contents of the initialize section and display section impose a certain style of programming on the script developer. However these restrictions also provide a significant benefit. They permit the script’s developer to modify the layout and contents of the screen while the script execution is suspended and then resume execution with the new screen layout in effect. A developer can therefore correct and/or improve the script’s user interface without having to stop and restart the script from the beginning.",
+                "nodeType": "comment",
+                "id": "jK5jmEQvsXPuEhBusTwjNWGg"
+              },
+              {
+                "text": "### box overview",
+                "nodeType": "comment",
+                "id": "tk5My6ANC9YXnJiNySVIZuJ9"
+              },
+              {
+                "text": "The display section of a page is responsible for rendering visual elements on the screen. Within that screen area, any value which can be displayed on the wall can be displayed here too.",
+                "nodeType": "comment",
+                "id": "myLo9RxAvM4oE4MuFtrdpwAv"
+              },
+              {
+                "text": "There is, however, a special feature available for use only within the display section of a page. The new feature is called a box, and it is introduced in a script with the keyword [](/boxed). Any collection of graphical elements can be boxed, which means that the collection can be treated as a single unit known as a box. That box becomes a graphical element in its own right.",
+                "nodeType": "comment",
+                "id": "pNWabPIxSNQi4EOmgjQtpf2y"
+              },
+              {
+                "text": "A box represents a rectangular region of the screen. The size of the rectangle will normally default to whatever is needed to enclose its contents. Alternatively, either or both dimensions can be specified or constrained to be within desired ranges. Scroll bars can be added to a box if desired.",
+                "nodeType": "comment",
+                "id": "A4mcSfQ2zu1eVcw2JsOKhwZ4"
+              },
+              {
+                "text": "An important part of a graphical user interface is the ability to input information. Code can be attached to a box which is executed when the box is tapped (or clicked with a mouse). A box containing text can be marked as editable, and code can be attached to that box which is executed whenever the text contents are changed. The attached code must take the form of a _change handler_. For a tap event, the change handler is a parameter-less action. For the action of changing text, it is an action which takes a single [](/String) parameter; that string is a copy of the new text.",
+                "nodeType": "comment",
+                "id": "MnY8n6rA4I1L08S85weGWt38"
+              },
+              {
+                "text": "###\texamples of boxes and pages",
+                "nodeType": "comment",
+                "id": "eSDzydmn82cU4tWSixk8YJvU"
+              },
+              {
+                "text": "A page can be displayed either by making it into the first action executed when the script is started, or by using a push statement. The first of these choices is automatic if you select the script template named **pages** when starting to create the script.  The first example discussed here was created in this way.",
+                "nodeType": "comment",
+                "id": "Y6eroJLzrsnuPfrSFBx9quNw"
+              },
+              {
+                "text": "#### example 1",
+                "nodeType": "comment",
+                "id": "xb6gsbt2oKf5cgcQ47b3HNaM"
+              },
+              {
+                "text": "The page below is very similar to the scripts template. However some changes have been made to illustrate a couple of important points.",
+                "nodeType": "comment",
+                "id": "dqMGdgOfsezKAYf25E4P5LeQ"
+              },
+              {
+                "text": "{decl:example 1}",
+                "nodeType": "comment",
+                "id": "HTaPgTa6JAKLD9XKhdiLf60u"
+              },
+              {
+                "text": "The boxed keyword creates a new box. It is a container box, because it is intended to hold graphical elements drawn on the screen.",
+                "nodeType": "comment",
+                "id": "odnHaUskcaDWfVecDpdstzy5"
+              },
+              {
+                "body": [
+                  {
+                    "text": "...",
+                    "nodeType": "comment",
+                    "id": "y2aSVFC9MaBkTcaotzUnTgYp"
+                  }
+                ],
+                "nodeType": "boxed",
+                "id": "uabWiCufvYrmdvvtxS5H3RsI"
+              },
+              {
+                "text": "The contents and the formatting of that box are specified by the indented code underneath.",
+                "nodeType": "comment",
+                "id": "PP9eG3pYH4o9G1DFzZcuikEj"
+              },
+              {
+                "expr": ":box .set_font_size ,( ,1 ,)",
+                "nodeType": "exprStmt",
+                "id": "iAEUwlbi8JjdfFE54YfyZEI9",
+                "locals": []
+              },
+              {
+                "expr": ":box .set_foreground ,( :colors .red ,)",
+                "nodeType": "exprStmt",
+                "id": "cMp39fD5JbWie8Khb43wXFsX",
+                "locals": []
+              },
+              {
+                "expr": ":box .set_background ,( :colors .yellow ,)",
+                "nodeType": "exprStmt",
+                "id": "FbS64p0ayQeMBWYNlop0DpkH",
+                "locals": []
+              },
+              {
+                "expr": ":box .set_margins ,( ,2 ,, ,2 ,, ,2 ,, ,2 ,)",
+                "nodeType": "exprStmt",
+                "id": "y1nDWNTvYMMXVA134Sau6kmP",
+                "locals": []
+              },
+              {
+                "text": "In this example, two lines of text are written to the wall, which means that they are written as the contents of the box.",
+                "nodeType": "comment",
+                "id": "jjhomvDjZti99YornjlksUOC"
+              },
+              {
+                "expr": "'Hello_world/0021 .post_to_wall",
+                "nodeType": "exprStmt",
+                "id": "ppJhuW0ribj1eIgfpsRAI37l",
+                "locals": []
+              },
+              {
+                "text": "While the script is running, the screen shows up like this.",
+                "nodeType": "comment",
+                "id": "xsAq4ZlDoKgbzDXXhUD6dxWc"
+              },
+              {
+                "text": "{pic:figure 1:20x10}",
+                "nodeType": "comment",
+                "id": "DttzMa4yhl1Lz6rJEpvJ6aU4"
+              },
+              {
+                "text": "The lines of text are written one below the other and are left-justified within the box. A vertical layout of graphical elements with left justification is the default. Both of these defaults can be overridden.",
+                "nodeType": "comment",
+                "id": "xRas1cyctJaY4Ww50gDrz9AJ"
+              },
+              {
+                "text": "The surprise of the example is that the sizes and colors of the two lines of text are exactly the same. The reason is that the graphical elements defined inside the box, which are the two textual strings in this example, are not rendered until all the statements inside the box have been executed. It is only the last change to the foreground color and the last change to the font size which has any effect.",
+                "nodeType": "comment",
+                "id": "JTwpJiQ4PMRFly4voC2q0nUk"
+              },
+              {
+                "text": "The two lines of text are themselves boxes, but they are known as _leaf boxes_ because they do not contain any boxes at a lower level. It is possible to see the extents of all the boxes on the screen by tapping the pause button in the top right-hand corner of the screen. This figure shows the browser window after pausing the script.",
+                "nodeType": "comment",
+                "id": "ZGg6Ij2XwAyAvCydGrkvTK7m"
+              },
+              {
+                "text": "{pic:figure 2:20x10}",
+                "nodeType": "comment",
+                "id": "t3EmrkVbBBpSa78Y47pFVfZs"
+              },
+              {
+                "text": "Thin blue lines surround the two lines of text separately. The two leaf boxes taken together comprise the entire contents of the container box, and correspond to the code inside the boxed construct. That is why the background color of box boxes is yellow.  The pink region surrounding the container box corresponds to the entire page – it is the frame within which the boxes have been drawn. The statement `box ->set margins(2, 2, 2, 2)` affects the placement of the container box inside that enclosing frame.",
+                "nodeType": "comment",
+                "id": "ZVA423mF7u2QyEGbQvijJVsF"
+              },
+              {
+                "text": "As the code of Page Example 1 shows, it is possible to specify some kinds of formatting for the frame by using the box variable immediately inside the display section of the code.",
+                "nodeType": "comment",
+                "id": "AD22RhAedr6R42AlW0iSixLP"
+              },
+              {
+                "text": "Leaf boxes are created in various ways which include posting text on the wall, or posting images from the art section of the script onto the wall. The formatting of text in a leaf box is inherited from its enclosing container box.",
+                "nodeType": "comment",
+                "id": "r3ckJMRPO2LDkX8cq5bZsHiS"
+              },
+              {
+                "text": "#### example 2",
+                "nodeType": "comment",
+                "id": "x9AuqdjVE74JwoAmSw2KrM09"
+              },
+              {
+                "text": "The second example introduces events which are executed when a box is clicked and demonstrates the need for the initialize section in a page.",
+                "nodeType": "comment",
+                "id": "BpMQINpkBRL1a5Z27o4U4zeL"
+              },
+              {
+                "text": "{decl:example 2}",
+                "nodeType": "comment",
+                "id": "nqo4U1NghwXf4wvEhLdCH0D3"
+              },
+              {
+                "text": "The display section of the page defines three boxes. Because the display section makes the method call `box ->use horizontal layout`, the three boxes are drawn from left to right across the screen. Furthermore, the boxes are vertically aligned so that their middle points are in a straight line.",
+                "nodeType": "comment",
+                "id": "K1t6a1QjVm0NPucQb4cfbG9E"
+              },
+              {
+                "text": "The first box contains text copied from the global variable s, and draws it with a font whose size is specified by the data variable, ``size``.",
+                "nodeType": "comment",
+                "id": "FRqSYZCylpeLpoDehAzZ6QnY"
+              },
+              {
+                "expr": ":box .set_font_size ,( :data #xmIEOUCyLnsmb3I22PZxCwLu ,)",
+                "nodeType": "exprStmt",
+                "id": "n58b9MiHDbruZ64folT18uye",
+                "locals": []
+              },
+              {
+                "text": "The code also sets attributes of the box so that the text will wrap onto multiple lines if it does not fit,",
+                "nodeType": "comment",
+                "id": "PTtlqCO4KEcl5DSaof4tA42C"
+              },
+              {
+                "expr": ":box .set_text_wrapping ,( T ,, ,1 ,5 ,)",
+                "nodeType": "exprStmt",
+                "id": "qL21WYcTnfdpU72Watj3B1N2",
+                "locals": []
+              },
+              {
+                "text": "and solid lines are drawn around the box.",
+                "nodeType": "comment",
+                "id": "xuF1yHVOLaUlzUOFPWPVK6dy"
+              },
+              {
+                "expr": ":box .set_border ,( :colors .black ,, ,0 ,. ,1 ,)",
+                "nodeType": "exprStmt",
+                "id": "pTHruLybQPAOFfW4jhVbX4Vy",
+                "locals": []
+              },
+              {
+                "text": "The second and third boxes are both intended to be clickable. They are drawn to have the same size and use the same colors. Therefore, rather than duplicating the code for the two boxes, the code to set each box’s attributes has been defined inside the action named `create button`.",
+                "nodeType": "comment",
+                "id": "ibYkq6z7SztmFfjMLL2ELKG2"
+              },
+              {
+                "text": "{decl:create button}",
+                "nodeType": "comment",
+                "id": "mMTkbfjqjLwXyK0Y4mmaClf4"
+              },
+              {
+                "text": "Whenever the identifier box is used inside that action, it refers to the current box which is being defined.",
+                "nodeType": "comment",
+                "id": "GF5IG0xuWDVNawhzF0d4vOIT"
+              },
+              {
+                "text": "After calling the ``create button`` action for each box, the on tapped method is invoked to attach a change handler to the box.  For a tapping action, the change handler takes the form of an action with no parameters, and that action has to be defined at this point in the script using a where clause.",
+                "nodeType": "comment",
+                "id": "xeuad15f5lNwayRiANLJNYf9"
+              },
+              {
+                "text": "The code inside a change handler can do anything except assign values to local variables, change any attributes of the current box or directly change what is being displayed.  _If the action of tapping the box is to have any effect on the current page, the change handler must communicate the changes via global variables._",
+                "nodeType": "comment",
+                "id": "xASg4vdUwj5SPPIr4P9wKAl9"
+              },
+              {
+                "text": "The change handler for the box which displays the text “Tap Here” increments a global variable named `cnt` and then uses the new value of `cnt` to construct a string value stored in the data variable `s`. It should be noted that s was used to provide the contents displayed inside the first box drawn on the page.",
+                "nodeType": "comment",
+                "id": "E7r3YX2Mp3lctOrhuJ0DY4H2"
+              },
+              {
+                "text": "Along similar lines, the change handler for the box which displays the text “Make Larger” increments a global variable which specifies the font size used for text displayed in the first box on the page.",
+                "nodeType": "comment",
+                "id": "mhP8tIkEbYWsRZTltp0PV51V"
+              },
+              {
+                "text": "When the script is run, the first box is initially empty. However, when the “Click Here” box is tapped, the first box changes to display the string “It was clicked 1 times”. Each subsequent tapping action changes that 1 to 2, then to 3 and so on. The change to the box contents on the screen occurs because the entire page is redrawn any time something happens which may affect the page. The reasons for redrawing the page include:",
+                "nodeType": "comment",
+                "id": "qjjmGp3zs4ET42sYc31wywX4"
+              },
+              {
+                "text": "* executing a change handler on the page,",
+                "nodeType": "comment",
+                "id": "gJfib8u6kMgRvY3chteIruGm"
+              },
+              {
+                "text": "* clicking the suspend button at the top right of the screen and then resuming the script,",
+                "nodeType": "comment",
+                "id": "n14VXgLHfhuJ4bCwvEc1mlYn"
+              },
+              {
+                "text": "* displaying another page and then returning to this page,",
+                "nodeType": "comment",
+                "id": "nnEvz17McMbO3wSRTXakEPxA"
+              },
+              {
+                "text": "* any global variables or records have been modified.",
+                "nodeType": "comment",
+                "id": "xIkVyh22RT4vdbD0SQc4FGy3"
+              },
+              {
+                "text": "The screen after tapping the “Click Here” and “Make Larger” buttons a few times each looks like this.",
+                "nodeType": "comment",
+                "id": "xkgflPTSpM9uQ3p6zORSJI2Y"
+              },
+              {
+                "text": "{pic:figure 3:30x10}",
+                "nodeType": "comment",
+                "id": "iZ0IglcWFr5ATFNpWO7wQ6sK"
+              },
+              {
+                "text": "Note that the text wrapping attribute of the first box was set, and when the font size was increased, the string wrapped onto two lines of text. No height was specified for the box, so it simply grows taller to accommodate the two lines of text.",
+                "nodeType": "comment",
+                "id": "vIUUwn4CgA0HL1z6CoQdpCSe"
+              },
+              {
+                "text": "#### example 3",
+                "nodeType": "comment",
+                "id": "EE5nCMiJhQP005fkqsFOT954"
+              },
+              {
+                "text": "The third example script shows the use of a change handler to process editable text and the nesting of boxes to achieve a desired layout for the graphical elements.",
+                "nodeType": "comment",
+                "id": "MbYa2HfNm1WCrfJYO4NgLMzH"
+              },
+              {
+                "text": "{decl:example 3}",
+                "nodeType": "comment",
+                "id": "SK40ZjNYF2coj1t6KLtrAlTY"
+              },
+              {
+                "text": "The `example 3` page allows the user to enter English language text into the left-hand box. Every time the user pauses, the `change handler` is invoked. Its input parameter is a copy of the current version of the text. That input parameter is normally assigned, unchanged, to the global variable associated with this box. (The editor ensures that there is always such a variable and it will have the `String` type.) However additional actions can be added to the change handler. In this example, that additional action is to invoke the Bing language translation service and translate the English language input into French, The French version of the text is displayed in the right-hand box.",
+                "nodeType": "comment",
+                "id": "Eg6TD9mOGnk1BTbSW0Zwbz7B"
+              },
+              {
+                "text": "A snapshot of the screen after the script has been used to translate one sentence is shown below.",
+                "nodeType": "comment",
+                "id": "EbpxubDwDA6xBJeLB5e3BLC7"
+              },
+              {
+                "text": "{pic:figure 4:30x10}",
+                "nodeType": "comment",
+                "id": "xbCNKrPax2XEvDeJDv5JSbn2"
+              },
+              {
+                "text": "A production version of this script might allow the user to select both the source language and the destination language for the translation. This nicer version of the script would presumably use the full names of the languages rather than two letter abbreviations. It would likely also perform the translation only when the user clicks on the arrow between the two boxes. It can be disconcerting to have partial translations popping up and changing as one is typing text into the left-hand box. Also, an internet connection is made every time the text is translated and this can be undesirable for a tablet device communicating via a cellphone connection. These enhancements are left as an exercise for the reader.",
+                "nodeType": "comment",
+                "id": "I1JsQ6LU2JRzaWr2Ta8udnxH"
+              },
+              {
+                "text": "{decl:create text box}",
+                "nodeType": "comment",
+                "id": "xB4xIe3MFQHPa0ZiK6KgS0fg"
+              },
+              {
+                "text": "### working with pages",
+                "nodeType": "comment",
+                "id": "j2S2mBzbKUatSF9qWBcBYSKd"
+              },
+              {
+                "text": "The display section of a page works with the entire window of the browser running the script. This window is effectively the current box for any code executed immediately inside the display section; that is, code which is not nested inside a boxed construct.",
+                "nodeType": "comment",
+                "id": "QwaN0hjJzghzzFgVM8YGoMS2"
+              },
+              {
+                "text": "#### entering and leaving a page",
+                "nodeType": "comment",
+                "id": "Kr4XBzXq5IhvEQe7tneaM0eB"
+              },
+              {
+                "text": "A page is simply a special kind of action. It can be invoked as an entry point of the script if it is public and does not have any parameters. It can also be invoked as though it were an action. If, for example, the script defines a page named `show` then the page can be displayed by executing the call `▷ show`. When code for the script is displayed on the screen, the call statement appears as `push ▷ show` to indicate that the runtime is maintaining a stack of pages.",
+                "nodeType": "comment",
+                "id": "vjDzMCgLoUnqlrc2bcBzMKAC"
+              },
+              {
+                "expr": ":code #xxsTWINVwPNfd104cf5AIYuw",
+                "nodeType": "exprStmt",
+                "id": "y9dwZ84xobwoDNuHs4i2ctcd",
+                "locals": []
+              },
+              {
+                "text": "A page which is not used as the entry point of a script can accept input parameters. It cannot have any output parameters.",
+                "nodeType": "comment",
+                "id": "kIn74FHtypzxUxNF3n7yLmAV"
+              },
+              {
+                "text": "A page can be exited (terminated) by clicking the back arrow which appears in the top left corner of the webpage. On a Windows phone, the back button achieves the same effect. The page can also be exited by executing the statement `wall->pop page`. This statement would normally be used inside a change handler. An example appears below.",
+                "nodeType": "comment",
+                "id": "xV5cQ4gvQMCooXbU2CH4PRCI"
+              },
+              {
+                "body": [
+                  {
+                    "expr": "'scrub0 .post_to_wall",
+                    "nodeType": "exprStmt",
+                    "id": "xMkpCXUbh1fSG44hErJSMVs2",
+                    "locals": []
+                  },
+                  {
+                    "expr": ":box .on_tapped ,( $J2qpzTwBeJqQG2reQtUB4x2wB0 ,)",
+                    "actions": [
+                      {
+                        "inParameters": [],
+                        "outParameters": [],
+                        "body": [
+                          {
+                            "expr": ":wall .pop_page",
+                            "nodeType": "exprStmt",
+                            "id": "EH0zjEJekwieYVYvxhFToRxK",
+                            "locals": []
+                          }
+                        ],
+                        "nodeType": "inlineAction",
+                        "id": "J2qpzTwBeJqQG2reQtUB4x2w",
+                        "locals": [
+                          {
+                            "name": "handler",
+                            "type": "Action",
+                            "nodeType": "localDef",
+                            "id": "J2qpzTwBeJqQG2reQtUB4x2wB0"
+                          }
+                        ]
+                      }
+                    ],
+                    "nodeType": "inlineActions",
+                    "id": "ExKDgW1RWhJxSwEuNqK1u4hu",
+                    "locals": []
+                  }
+                ],
+                "nodeType": "boxed",
+                "id": "Y3ZoXgGjqndf9TI0ZeOkk4En"
+              },
+              {
+                "text": "#### coding restrictions",
+                "nodeType": "comment",
+                "id": "WE23WeqkHh7gtgAB0BjpiVMc"
+              },
+              {
+                "text": "The `initialize` section of a page cannot draw any items on the page. It can declare and use local variables but these variables are not accessible from inside the display section of the page. (They are out of scope.) Normally, the initialization section is used to initialize global variables used in the display section.",
+                "nodeType": "comment",
+                "id": "x6ftE229mLXplixyJughC4Us"
+              },
+              {
+                "text": "The `display` section of a page can use but not assign to `data` variables. (Even though change handlers are defined within the display section, they are not considered to be part of the display section.) The display section can use local variables as normal. It can use normal control structures such as loops and if-statements. Its main purpose is to render graphical elements on the current page.",
+                "nodeType": "comment",
+                "id": "aGdDQhuAr75mxEs2JMXWZfr8"
+              },
+              {
+                "text": "Change handlers attached to boxes on the current page can use and assign to global variables. They can use but they cannot assign to local variables in the display section of the page, provided that they are visible. (Normal scope rules apply.) They cannot draw any items on the screen nor can they set any attributes of the current box.",
+                "nodeType": "comment",
+                "id": "i4N5981cehsXBF2Xrv4RV9yT"
+              },
+              {
+                "text": "All the statements in the display section of the page are re-executed and the entire page is re-drawn after control returns from a change handler or when the page becomes the current page again after another page exits or when a global variable or record is changed. In contrast, the code in the initialization section is only executed when a new instance of the page is created and pushed onto the stack of pages.",
+                "nodeType": "comment",
+                "id": "fgzM294tHuMro44xn1Yc9Ba0"
+              },
+              {
+                "text": "The identifier `box` refers to the current box and can be used in any context where there is an active current box. If box is referenced inside an action, then there may or may not be a current box depending on how control reached that action. A run-time error occurs if there is no current box. There is always a current box if control is inside the display section of a page or inside an action called from a page or inside a change handler attached to a box. There is no current box when the initialization section of a page is being executed.",
+                "nodeType": "comment",
+                "id": "S8rsPiKtvmQFuKuvxvS2Bcfd"
+              },
+              {
+                "text": "Even though there may be a current box, access may be limited to read only (such as obtaining the current value of `box->pixels per em`). Invoking a method which sets attributes of the current box is permitted only within the display section of a page or within an action invoked from the display section.",
+                "nodeType": "comment",
+                "id": "Jx7rzIF3Z5p8Z9x6PmAKUfux"
+              },
+              {
+                "text": "### live editing of the user Iinterface",
+                "nodeType": "comment",
+                "id": "m4qlt1kn7XKALBU0SlkSN3qs"
+              },
+              {
+                "text": "Pages are easy to debug and modify while a script is executing. There is no need to stop the script and re-start it from the beginning each time that the script develop makes a small change. When the script is running in a browser, a pause button is displayed in the top right corner of the browser’s window. The pause button is shown in here.",
+                "nodeType": "comment",
+                "id": "L0SWWZ3DRMp9NDRfzCxWUvXl"
+              },
+              {
+                "text": "{pic:figure 5:30x7}",
+                "nodeType": "comment",
+                "id": "WuFORfOncGBIqLQLEl4A3Uh5"
+              },
+              {
+                "text": "Tapping that button causes a very thin blue line to be drawn around each box which is currently displayed on the screen, and the pause button is replaced with a resume button.",
+                "nodeType": "comment",
+                "id": "xem0iVO4D32Zx0Q5VaTJQqog"
+              },
+              {
+                "text": "The script is no longer running at this point. Clicking inside one of the rectangles composed of thin blue lines causes the rectangle to be augmented with a thicker dotted red rectangle, and causes a button labelled as ‘edit’ to appear on the screen. That dotted red rectangle indicates which box has been selected. Double clicking causes an outer enclosing box to be selected instead. Triple clicking, etc., works similarly when the boxed constructs are nested sufficiently deeply.",
+                "nodeType": "comment",
+                "id": "x4XkGed7XEn4TFJ05wPHMWon"
+              },
+              {
+                "text": "Clicking the edit button causes the script editor to be invoked on exactly the code for the selected box. On a display monitor which is wide enough, the browser’s window is split so that the left-hand side contains the currently displayed page and the right-hand side shows the code for the selected box. (If the view of the page takes up too much screen real estate, it can be removed by clicking the dismiss button in its top left corner.)",
+                "nodeType": "comment",
+                "id": "xqcyjYRNq5vGtJcSABR0ziIS"
+              },
+              {
+                "text": "The code for the script can now be edited. Changes can be small or they can be major. There is no restriction on which code in the entire script can be changed. When the changes are complete and it is time to see if they had the desired effect, the view of the current page should be dismissed (if that has not been done already) and the resume button, which is now on the left-hand side of the screen, can be tapped.",
+                "nodeType": "comment",
+                "id": "NsGJu6FX12iv2blSShLtJjar"
+              },
+              {
+                "text": "Resuming the script causes the display section of the current page to be re-executed and the page is re-drawn, reflecting any changes made to the code. The run-suspend-edit-resume cycle can be repeated as many times as desired until the user interface is perfect.",
+                "nodeType": "comment",
+                "id": "F51dvga8xAuFIVFbV2jXcHSN"
+              },
+              {
+                "text": "It should be noted that if major changes to the code are made, such as changes to actions called from other places in the script, then the script may need to be restarted from the beginning to see their full effect.",
+                "nodeType": "comment",
+                "id": "wV7QdaCDNTKFGeZuOTpin9ME"
+              },
+              {
+                "text": "###\tAPI support for boxes and pages",
+                "nodeType": "comment",
+                "id": "xoSCn2UAOGjVQDKqvt8cnNBh"
+              },
+              {
+                "text": "The `box` identifier names a resource which has the [](/Box) datatype. There is only one instance of this type, it is a singleton.",
+                "nodeType": "comment",
+                "id": "A7Ec7p2aelSkxSylg9zgAuJt"
+              },
+              {
+                "text": "* general methods of the `box`",
+                "nodeType": "comment",
+                "id": "x0cqBr26MnNaizgRc3iRyqyx"
+              },
+              {
+                "text": "{api:Box:set background,set foreground,set height,set height range,set width,set width range,set border,set horizontal stretch,set padding,on tapped}",
+                "nodeType": "comment",
+                "id": "FA52jMlcswa2vQD2ERcrTlTP"
+              },
+              {
+                "text": "* text handling of `box`",
+                "nodeType": "comment",
+                "id": "ATtWX5OOfLLo26iEHOqsB2VT"
+              },
+              {
+                "text": "{api:Box:edit,set font size,set text wrapping,set horizontal align,pixels per em}",
+                "nodeType": "comment",
+                "id": "EVMDo401bkOr2WGhoxA1a5G8"
+              },
+              {
+                "text": "* layout methods of `box`",
+                "nodeType": "comment",
+                "id": "LqJN2E9jg3RFuGfxzZphAaYj"
+              },
+              {
+                "text": "{api:Box:use horizontal layout,use vertical layout,use overlay layout,set horizontal align,set vertical align}",
+                "nodeType": "comment",
+                "id": "JCtcDa8GU9TbAnUDvNbT2YPH"
+              }
+            ],
+            "id": "C2OcBNW4b74RxIDvqGgGDHuu"
+          },
+          {
+            "name": "show empty",
+            "inParameters": [],
+            "outParameters": [],
+            "isPrivate": false,
+            "isOffloaded": false,
+            "isTest": false,
+            "isAsync": false,
+            "nodeType": "page",
+            "initBody": [
+              {
+                "expr": "",
+                "nodeType": "exprStmt",
+                "id": "AoAeqUze253dmoDAHPO52CO0",
+                "locals": []
+              }
+            ],
+            "displayBody": [
+              {
+                "expr": "",
+                "nodeType": "exprStmt",
+                "id": "zRzBJ3RtvXVOnWoap4nyvvcI",
+                "locals": []
+              }
+            ],
+            "id": "xMBcMX6xHydeGPoR9Xhgjwtq"
+          },
+          {
+            "name": "example 1",
+            "inParameters": [],
+            "outParameters": [],
+            "isPrivate": false,
+            "isOffloaded": false,
+            "isTest": false,
+            "isAsync": false,
+            "nodeType": "page",
+            "initBody": [
+              {
+                "expr": "",
+                "nodeType": "exprStmt",
+                "id": "uDCX3pq2VU297ru4EZ5mi9qv",
+                "locals": []
+              }
+            ],
+            "displayBody": [
+              {
+                "expr": ":box .set_background ,( :colors .from_rgb ,( ,1 ,, ,0 ,. ,7 ,5 ,, ,0 ,. ,7 ,5 ,) ,)",
+                "nodeType": "exprStmt",
+                "id": "HOfDVKolxOn2nLBNTd6UpgWm",
+                "locals": []
+              },
+              {
+                "body": [
+                  {
+                    "expr": ":box .set_font_size ,( ,1 ,)",
+                    "nodeType": "exprStmt",
+                    "id": "ym2ivcW4SK0sl6AmUHKR4JCH",
+                    "locals": []
+                  },
+                  {
+                    "expr": ":box .set_foreground ,( :colors .red ,)",
+                    "nodeType": "exprStmt",
+                    "id": "fcyzhovukbHMXr7N8ly3emmZ",
+                    "locals": []
+                  },
+                  {
+                    "expr": ":box .set_background ,( :colors .yellow ,)",
+                    "nodeType": "exprStmt",
+                    "id": "U1QGEZ67jDgf90b8HOSnCbel",
+                    "locals": []
+                  },
+                  {
+                    "expr": ":box .set_margins ,( ,2 ,, ,2 ,, ,2 ,, ,2 ,)",
+                    "nodeType": "exprStmt",
+                    "id": "CqYu4rPJIJXecyZ5c79IxOJA",
+                    "locals": []
+                  },
+                  {
+                    "expr": "'Hello_world/0021 .post_to_wall",
+                    "nodeType": "exprStmt",
+                    "id": "YY9lA4MkGRUql08OWUB8qeJg",
+                    "locals": []
+                  },
+                  {
+                    "expr": ":box .set_font_size ,( ,3 ,)",
+                    "nodeType": "exprStmt",
+                    "id": "lAJwhWauJOfShyAdJvmI1IC6",
+                    "locals": []
+                  },
+                  {
+                    "expr": ":box .set_foreground ,( :colors .green ,)",
+                    "nodeType": "exprStmt",
+                    "id": "K4af1VNz7TaDxuWFSEci4pD4",
+                    "locals": []
+                  },
+                  {
+                    "expr": "'scrub1 .post_to_wall",
+                    "nodeType": "exprStmt",
+                    "id": "BFbWhKEFxD3W0NusA36ktEYO",
+                    "locals": []
+                  },
+                  {
+                    "expr": ":box .set_foreground ,( :colors .blue ,)",
+                    "nodeType": "exprStmt",
+                    "id": "foVIzNzOxlGTStSlbeaR6LFO",
+                    "locals": []
+                  }
+                ],
+                "nodeType": "boxed",
+                "id": "xqw63wvwZrl2kM90EXPKIlfQ"
+              }
+            ],
+            "id": "LtS6yuGYxqKHIOBC2Zttbr18"
+          },
+          {
+            "name": "figure 1",
+            "comment": "",
+            "type": "Picture",
+            "isReadonly": true,
+            "isTransient": true,
+            "nodeType": "art",
+            "url": "https://az31353.vo.msecnd.net/pub/tjrvyyrv",
+            "id": "OJlSwQjTr1ZB36LDqM2PdKbO"
+          },
+          {
+            "name": "figure 2",
+            "comment": "",
+            "type": "Picture",
+            "isReadonly": true,
+            "isTransient": true,
+            "nodeType": "art",
+            "url": "https://az31353.vo.msecnd.net/pub/oykogksz",
+            "id": "IluWzbmlebSBnUc2AwyOvoXr"
+          },
+          {
+            "name": "example 2",
+            "inParameters": [],
+            "outParameters": [],
+            "isPrivate": false,
+            "isOffloaded": false,
+            "isTest": false,
+            "isAsync": false,
+            "nodeType": "page",
+            "initBody": [
+              {
+                "expr": ":data #HXMn7L3C8nrWkoi6vSiXfDMw ,:= '_",
+                "nodeType": "exprStmt",
+                "id": "Ob3hvUxJ1ePhPYPA5YB0LwhV",
+                "locals": []
+              },
+              {
+                "expr": ":data #PP2HQJUkRELkN4dqd5AZiJft ,:= ,0",
+                "nodeType": "exprStmt",
+                "id": "it1Fd4K8L72ISb4xEFpcXz5B",
+                "locals": []
+              },
+              {
+                "expr": ":data #xmIEOUCyLnsmb3I22PZxCwLu ,:= ,1",
+                "nodeType": "exprStmt",
+                "id": "b1nGzF4WeiwDJEgxGucye2Uk",
+                "locals": []
+              }
+            ],
+            "displayBody": [
+              {
+                "expr": ":box .use_horizontal_layout",
+                "nodeType": "exprStmt",
+                "id": "aRoJ7OqCSrw1oQIUA7aiwQlo",
+                "locals": []
+              },
+              {
+                "expr": ":box .set_vertical_align ,( 'scrub2 ,)",
+                "nodeType": "exprStmt",
+                "id": "XmSKjVeB0avff2T5SJ9aSwtm",
+                "locals": []
+              },
+              {
+                "body": [
+                  {
+                    "expr": ":box .set_width ,( ,3 ,0 ,)",
+                    "nodeType": "exprStmt",
+                    "id": "riitn3R8s81YJyTMyDad0UTl",
+                    "locals": []
+                  },
+                  {
+                    "expr": ":box .set_font_size ,( :data #xmIEOUCyLnsmb3I22PZxCwLu ,)",
+                    "nodeType": "exprStmt",
+                    "id": "KvcauiKE8RTK7wNXsAPg2Nz1",
+                    "locals": []
+                  },
+                  {
+                    "expr": ":box .set_text_wrapping ,( T ,, ,1 ,5 ,)",
+                    "nodeType": "exprStmt",
+                    "id": "of0jCfvAK1fCp4Mo6pTHuyPZ",
+                    "locals": []
+                  },
+                  {
+                    "expr": ":box .set_margins ,( ,1 ,, ,2 ,, ,1 ,, ,2 ,)",
+                    "nodeType": "exprStmt",
+                    "id": "jSVyMSqd4oJ4yDVWz64Vy54D",
+                    "locals": []
+                  },
+                  {
+                    "expr": ":box .set_border ,( :colors .black ,, ,0 ,. ,1 ,)",
+                    "nodeType": "exprStmt",
+                    "id": "UPLwVYG3XmQ7Dum5nFvwMUda",
+                    "locals": []
+                  },
+                  {
+                    "expr": ":data #HXMn7L3C8nrWkoi6vSiXfDMw .post_to_wall",
+                    "nodeType": "exprStmt",
+                    "id": "xJWD4hVmAWngIiqvcdE5UTu0",
+                    "locals": []
+                  }
+                ],
+                "nodeType": "boxed",
+                "id": "UiPdiJB2pnM6tpRQLQbRttMb"
+              },
+              {
+                "body": [
+                  {
+                    "expr": ":code #Nu2GRNgpG6729DCARjKx2Bq5 ,( 'scrub3 ,)",
+                    "nodeType": "exprStmt",
+                    "id": "MMyJiWXaU3xX29r0XoQ6Hg67",
+                    "locals": []
+                  },
+                  {
+                    "expr": ":box .on_tapped ,( $Co9in4yUYyyodpLp76RCSLqQB0 ,)",
+                    "actions": [
+                      {
+                        "inParameters": [],
+                        "outParameters": [],
+                        "body": [
+                          {
+                            "expr": ":data #PP2HQJUkRELkN4dqd5AZiJft ,:= :data #PP2HQJUkRELkN4dqd5AZiJft ,+ ,1",
+                            "nodeType": "exprStmt",
+                            "id": "lAL3w35T9cm2bDLDa4SsslGn",
+                            "locals": []
+                          },
+                          {
+                            "expr": ":data #HXMn7L3C8nrWkoi6vSiXfDMw ,:= 'scrub4 ,∥ :data #PP2HQJUkRELkN4dqd5AZiJft ,∥ 'scrub5",
+                            "nodeType": "exprStmt",
+                            "id": "dB16ZxPq711SwFhDdrqrqAj9",
+                            "locals": []
+                          }
+                        ],
+                        "nodeType": "inlineAction",
+                        "id": "Co9in4yUYyyodpLp76RCSLqQ",
+                        "locals": [
+                          {
+                            "name": "handler",
+                            "type": "Action",
+                            "nodeType": "localDef",
+                            "id": "Co9in4yUYyyodpLp76RCSLqQB0"
+                          }
+                        ]
+                      }
+                    ],
+                    "nodeType": "inlineActions",
+                    "id": "ej6dP2JB6x40q027fOXmo825",
+                    "locals": []
+                  }
+                ],
+                "nodeType": "boxed",
+                "id": "NH7X69UzxX8NUgVgQppT3tyz"
+              },
+              {
+                "body": [
+                  {
+                    "expr": ":code #Nu2GRNgpG6729DCARjKx2Bq5 ,( 'scrub6 ,)",
+                    "nodeType": "exprStmt",
+                    "id": "xFKF5LRigtl5LCvo4qkbXf5v",
+                    "locals": []
+                  },
+                  {
+                    "expr": ":box .on_tapped ,( $RAD02jV80ECZdJl41IuToLJkB0 ,)",
+                    "actions": [
+                      {
+                        "inParameters": [],
+                        "outParameters": [],
+                        "body": [
+                          {
+                            "expr": ":data #xmIEOUCyLnsmb3I22PZxCwLu ,:= :data #xmIEOUCyLnsmb3I22PZxCwLu ,+ ,1",
+                            "nodeType": "exprStmt",
+                            "id": "fjc3gbQm3bGONObiuxVhh0uj",
+                            "locals": []
+                          }
+                        ],
+                        "nodeType": "inlineAction",
+                        "id": "RAD02jV80ECZdJl41IuToLJk",
+                        "locals": [
+                          {
+                            "name": "handler",
+                            "type": "Action",
+                            "nodeType": "localDef",
+                            "id": "RAD02jV80ECZdJl41IuToLJkB0"
+                          }
+                        ]
+                      }
+                    ],
+                    "nodeType": "inlineActions",
+                    "id": "eWC6CazRFN8V5FMr45zoDKww",
+                    "locals": []
+                  }
+                ],
+                "nodeType": "boxed",
+                "id": "I8B1VCcCb3YDB3IZeiie9ZVd"
+              }
+            ],
+            "id": "XXDSbbeSALSuYSBIX5xKelW2"
+          },
+          {
+            "name": "s",
+            "comment": "",
+            "type": "String",
+            "isReadonly": false,
+            "isTransient": false,
+            "nodeType": "data",
+            "id": "HXMn7L3C8nrWkoi6vSiXfDMw"
+          },
+          {
+            "name": "cnt",
+            "comment": "",
+            "type": "Number",
+            "isReadonly": false,
+            "isTransient": false,
+            "nodeType": "data",
+            "id": "PP2HQJUkRELkN4dqd5AZiJft"
+          },
+          {
+            "name": "size",
+            "comment": "",
+            "type": "Number",
+            "isReadonly": false,
+            "isTransient": false,
+            "nodeType": "data",
+            "id": "xmIEOUCyLnsmb3I22PZxCwLu"
+          },
+          {
+            "name": "create button",
+            "inParameters": [
+              {
+                "name": "text",
+                "type": "String",
+                "nodeType": "localDef",
+                "id": "Nu2GRNgpG6729DCARjKx2Bq5P0"
+              }
+            ],
+            "outParameters": [],
+            "isPrivate": true,
+            "isOffloaded": false,
+            "isTest": false,
+            "isAsync": false,
+            "nodeType": "action",
+            "body": [
+              {
+                "expr": ":box .set_background ,( :colors .yellow ,)",
+                "nodeType": "exprStmt",
+                "id": "fHO2HSI2l08qTHOcVTklbkWJ",
+                "locals": []
+              },
+              {
+                "expr": ":box .set_width_range ,( ,5 ,, ,1 ,5 ,)",
+                "nodeType": "exprStmt",
+                "id": "vfTI1o2Lq7a22XzfF6BIByIL",
+                "locals": []
+              },
+              {
+                "expr": ":box .set_height_range ,( ,0 ,, ,5 ,)",
+                "nodeType": "exprStmt",
+                "id": "BMq0zqmx33eWixQUshmaHtaq",
+                "locals": []
+              },
+              {
+                "expr": ":box .set_border ,( :colors .black ,, ,0 ,. ,1 ,)",
+                "nodeType": "exprStmt",
+                "id": "Y9gpGgjRAsAwENXhjVrkFcss",
+                "locals": []
+              },
+              {
+                "expr": ":box .set_vertical_align ,( 'scrub2 ,)",
+                "nodeType": "exprStmt",
+                "id": "oNyzbp1ApEEMx7Ak4W4slJ8X",
+                "locals": []
+              },
+              {
+                "expr": ":box .set_horizontal_align ,( 'scrub2 ,)",
+                "nodeType": "exprStmt",
+                "id": "m6FipybQCO90UDfjf14sIz8H",
+                "locals": []
+              },
+              {
+                "expr": ":box .set_margins ,( ,1 ,, ,1 ,, ,1 ,, ,1 ,)",
+                "nodeType": "exprStmt",
+                "id": "JL2ZXkFL82s0AQqSy8JgScLa",
+                "locals": []
+              },
+              {
+                "expr": ":box .set_padding ,( ,1 ,, ,1 ,, ,1 ,, ,1 ,)",
+                "nodeType": "exprStmt",
+                "id": "iNx7231tctecBy0GWsD4EegE",
+                "locals": []
+              },
+              {
+                "expr": "$Nu2GRNgpG6729DCARjKx2Bq5P0 .post_to_wall",
+                "nodeType": "exprStmt",
+                "id": "IBzFX2z0CZMRPu4mHxQaH4sD",
+                "locals": []
+              }
+            ],
+            "id": "Nu2GRNgpG6729DCARjKx2Bq5"
+          },
+          {
+            "name": "figure 3",
+            "comment": "",
+            "type": "Picture",
+            "isReadonly": true,
+            "isTransient": true,
+            "nodeType": "art",
+            "url": "https://az31353.vo.msecnd.net/pub/lgvypspn",
+            "id": "tmYNkqAnK3J1EfEdF3TknG1q"
+          },
+          {
+            "name": "create text box",
+            "inParameters": [],
+            "outParameters": [],
+            "isPrivate": true,
+            "isOffloaded": false,
+            "isTest": false,
+            "isAsync": false,
+            "nodeType": "action",
+            "body": [
+              {
+                "expr": ":box .use_horizontal_layout",
+                "nodeType": "exprStmt",
+                "id": "xpvDprnptxFNlzhBJx2Jpoew",
+                "locals": []
+              },
+              {
+                "expr": ":box .set_width ,( ,2 ,0 ,)",
+                "nodeType": "exprStmt",
+                "id": "dCJbghGWMMBLDL27JT4rqWWF",
+                "locals": []
+              },
+              {
+                "expr": ":box .set_height ,( ,1 ,5 ,)",
+                "nodeType": "exprStmt",
+                "id": "wyiGq4wu3SPFTskWAoYa0JIV",
+                "locals": []
+              },
+              {
+                "expr": ":box .set_font_size ,( ,1 ,. ,5 ,)",
+                "nodeType": "exprStmt",
+                "id": "x42jhMwoHN0dkLVd5cc4KGlz",
+                "locals": []
+              },
+              {
+                "expr": ":box .set_text_wrapping ,( T ,, ,5 ,)",
+                "nodeType": "exprStmt",
+                "id": "xdJ0yZEneNAsEnr5SLAI2DyD",
+                "locals": []
+              },
+              {
+                "expr": ":box .set_border ,( :colors .black ,, ,0 ,. ,1 ,)",
+                "nodeType": "exprStmt",
+                "id": "osD7vNn7N2ngDjTrdNWRsyCR",
+                "locals": []
+              },
+              {
+                "expr": ":box .set_padding ,( ,5 ,, ,2 ,, ,2 ,, ,2 ,)",
+                "nodeType": "exprStmt",
+                "id": "xxZ8oGkxTlPXmj3kSm0w1DmZ",
+                "locals": []
+              }
+            ],
+            "id": "YX7S46xqq7Bbf0xnk0o05DEk"
+          },
+          {
+            "name": "example 3",
+            "inParameters": [],
+            "outParameters": [],
+            "isPrivate": false,
+            "isOffloaded": false,
+            "isTest": false,
+            "isAsync": false,
+            "nodeType": "page",
+            "initBody": [
+              {
+                "expr": ":data #n0IGPy1PwoQGsTvKegpsUSHo ,:= 'en",
+                "nodeType": "exprStmt",
+                "id": "k8qJ232GJPczGgZz4lFP7pJM",
+                "locals": []
+              },
+              {
+                "expr": ":data #O7WKjsYxZHDoByQ2VLAYXZ8o ,:= 'fr",
+                "nodeType": "exprStmt",
+                "id": "PG2n3g6GHH759rXlXq0fKotD",
+                "locals": []
+              },
+              {
+                "expr": ":data #x2YLl9oWPQcmQ2EtxFsVuAGK ,:= '_",
+                "nodeType": "exprStmt",
+                "id": "Tk4RedepChNO8WhWFVmSNzoN",
+                "locals": []
+              },
+              {
+                "expr": ":data #x4lqiSIoRSCRj0GGHSETNrHX ,:= '_",
+                "nodeType": "exprStmt",
+                "id": "DvoPqY449bctRVkSKPpJ4yG0",
+                "locals": []
+              }
+            ],
+            "displayBody": [
+              {
+                "expr": ":box .set_horizontal_align ,( 'scrub2 ,)",
+                "nodeType": "exprStmt",
+                "id": "ordIUZDHftEOFZnWZ7f9ltUx",
+                "locals": []
+              },
+              {
+                "body": [
+                  {
+                    "expr": ":box .set_font_size ,( ,2 ,)",
+                    "nodeType": "exprStmt",
+                    "id": "Uon448jWtWCKkXP2VohdJ5XE",
+                    "locals": []
+                  },
+                  {
+                    "expr": ":box .set_foreground ,( :colors .red ,)",
+                    "nodeType": "exprStmt",
+                    "id": "I8gh98pETWpG8QBVujYzCFVp",
+                    "locals": []
+                  },
+                  {
+                    "expr": ",( 'scrub7 ,∥ :data #n0IGPy1PwoQGsTvKegpsUSHo ,∥ 'scrub8 ,∥ :data #O7WKjsYxZHDoByQ2VLAYXZ8o ,) .post_to_wall",
+                    "nodeType": "exprStmt",
+                    "id": "LZF9V2NbOYBbrVmyMewVSKg2",
+                    "locals": []
+                  }
+                ],
+                "nodeType": "boxed",
+                "id": "Aa4Cj4pL2OKt4S1P4JVok5Rr"
+              },
+              {
+                "body": [
+                  {
+                    "expr": ":box .use_horizontal_layout",
+                    "nodeType": "exprStmt",
+                    "id": "eajrT9koq0Kgp3K4BFmZwaeF",
+                    "locals": []
+                  },
+                  {
+                    "expr": ":box .set_vertical_align ,( 'scrub2 ,)",
+                    "nodeType": "exprStmt",
+                    "id": "L1FWd4tAaIY1VjtlAZcfPV4H",
+                    "locals": []
+                  },
+                  {
+                    "body": [
+                      {
+                        "expr": ":code #YX7S46xqq7Bbf0xnk0o05DEk",
+                        "nodeType": "exprStmt",
+                        "id": "KK8KLHk5Bwzv4K2Lp4VI8PC0",
+                        "locals": []
+                      },
+                      {
+                        "expr": ":box .edit ,( 'scrub9 ,, :data #x2YLl9oWPQcmQ2EtxFsVuAGK ,, $VpAOeGhKG2hRsbMNuav6wDGJB0 ,)",
+                        "actions": [
+                          {
+                            "inParameters": [
+                              {
+                                "name": "text",
+                                "type": "String",
+                                "nodeType": "localDef",
+                                "id": "VpAOeGhKG2hRsbMNuav6wDGJP0"
+                              }
+                            ],
+                            "outParameters": [],
+                            "body": [
+                              {
+                                "expr": ":data #x2YLl9oWPQcmQ2EtxFsVuAGK ,:= $VpAOeGhKG2hRsbMNuav6wDGJP0",
+                                "nodeType": "exprStmt",
+                                "id": "gOkGrmwQXrYeFxY4Iv1gKd9m",
+                                "locals": []
+                              },
+                              {
+                                "expr": ":data #x4lqiSIoRSCRj0GGHSETNrHX ,:= :languages .translate ,( :data #n0IGPy1PwoQGsTvKegpsUSHo ,, :data #O7WKjsYxZHDoByQ2VLAYXZ8o ,, :data #x2YLl9oWPQcmQ2EtxFsVuAGK ,)",
+                                "nodeType": "exprStmt",
+                                "id": "lwT6OPxqhnHyHBaGPGjyjLGw",
+                                "locals": []
+                              }
+                            ],
+                            "nodeType": "inlineAction",
+                            "id": "VpAOeGhKG2hRsbMNuav6wDGJ",
+                            "locals": [
+                              {
+                                "name": "changehandler",
+                                "type": "Text Action",
+                                "nodeType": "localDef",
+                                "id": "VpAOeGhKG2hRsbMNuav6wDGJB0"
+                              }
+                            ]
+                          }
+                        ],
+                        "nodeType": "inlineActions",
+                        "id": "U2ecUQaE2OSDKIYmO0f9dlIC",
+                        "locals": []
+                      }
+                    ],
+                    "nodeType": "boxed",
+                    "id": "H20x4K1laCTsJxFZsWDh0etU"
+                  },
+                  {
+                    "expr": ":art #EMOtocyFGdHeavzyxxjZ5NWc .post_to_wall",
+                    "nodeType": "exprStmt",
+                    "id": "WggOMne31e8Lj4b3qk8cew9Y",
+                    "locals": []
+                  },
+                  {
+                    "body": [
+                      {
+                        "expr": ":code #YX7S46xqq7Bbf0xnk0o05DEk",
+                        "nodeType": "exprStmt",
+                        "id": "l9QTgTMCoAySW4VeGy5lmOLj",
+                        "locals": []
+                      },
+                      {
+                        "expr": ":data #x4lqiSIoRSCRj0GGHSETNrHX .post_to_wall",
+                        "nodeType": "exprStmt",
+                        "id": "uHusbHuNNlYZKG9AnvrG79KN",
+                        "locals": []
+                      }
+                    ],
+                    "nodeType": "boxed",
+                    "id": "XhO28SDiNl5pS5ryzY1CCpap"
+                  }
+                ],
+                "nodeType": "boxed",
+                "id": "AiymZA28STo32FKHoOhss4Hz"
+              }
+            ],
+            "id": "csAKFUoYKviTXhnmbDHve2s9"
+          },
+          {
+            "name": "src lang",
+            "comment": "",
+            "type": "String",
+            "isReadonly": false,
+            "isTransient": false,
+            "nodeType": "data",
+            "id": "n0IGPy1PwoQGsTvKegpsUSHo"
+          },
+          {
+            "name": "dest lang",
+            "comment": "",
+            "type": "String",
+            "isReadonly": false,
+            "isTransient": false,
+            "nodeType": "data",
+            "id": "O7WKjsYxZHDoByQ2VLAYXZ8o"
+          },
+          {
+            "name": "src text",
+            "comment": "",
+            "type": "String",
+            "isReadonly": false,
+            "isTransient": false,
+            "nodeType": "data",
+            "id": "x2YLl9oWPQcmQ2EtxFsVuAGK"
+          },
+          {
+            "name": "dest text",
+            "comment": "",
+            "type": "String",
+            "isReadonly": false,
+            "isTransient": false,
+            "nodeType": "data",
+            "id": "x4lqiSIoRSCRj0GGHSETNrHX"
+          },
+          {
+            "name": "Right Arrow",
+            "comment": "",
+            "type": "Picture",
+            "isReadonly": true,
+            "isTransient": true,
+            "nodeType": "art",
+            "url": "https://az31353.vo.msecnd.net/pub/twibazkg",
+            "id": "EMOtocyFGdHeavzyxxjZ5NWc"
+          },
+          {
+            "name": "figure 4",
+            "comment": "",
+            "type": "Picture",
+            "isReadonly": true,
+            "isTransient": true,
+            "nodeType": "art",
+            "url": "https://az31353.vo.msecnd.net/pub/aafglavg",
+            "id": "iZ4gJ8ET2IKH7HznBN5sSkWU"
+          },
+          {
+            "name": "show",
+            "inParameters": [],
+            "outParameters": [],
+            "isPrivate": false,
+            "isOffloaded": false,
+            "isTest": false,
+            "isAsync": false,
+            "nodeType": "page",
+            "initBody": [
+              {
+                "expr": "",
+                "nodeType": "exprStmt",
+                "id": "FV43OEe8oddA01SC8nXVEvgR",
+                "locals": []
+              }
+            ],
+            "displayBody": [
+              {
+                "expr": "",
+                "nodeType": "exprStmt",
+                "id": "KAqHLmrl890FdOfR2sl0so4F",
+                "locals": []
+              }
+            ],
+            "id": "xxsTWINVwPNfd104cf5AIYuw"
+          },
+          {
+            "name": "figure 5",
+            "comment": "",
+            "type": "Picture",
+            "isReadonly": true,
+            "isTransient": true,
+            "nodeType": "art",
+            "url": "https://az31353.vo.msecnd.net/pub/yvmttmlt",
+            "id": "PNcas4hZzNUCg72ewAvTNvvR"
+          }
+        ],
+        "deletedDecls": [],
+        "nodeType": "app",
+        "id": "app"
+      }
+    },
+    {
+      "seqNo": 1,
+      "time": 1368123780,
+      "scriptId": null,
+      "historyId": "252034177019942345047de1f38-2a35-495a-a81e-a7a2b94e2148",
+      "updateSize": 45,
+      "updates": {
+        "app": {
+          "rootId": "NG9PvWSJkFuSrSK3jbm1lYwY"
+        }
+      }
+    }
+  ]
+}

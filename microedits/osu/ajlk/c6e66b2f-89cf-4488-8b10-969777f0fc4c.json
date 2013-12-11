@@ -1,0 +1,289 @@
+{
+  "userid": "ajlk",
+  "guid": "c6e66b2f-89cf-4488-8b10-969777f0fc4c",
+  "lastStatus": "published",
+  "items": [
+    {
+      "seqNo": 0,
+      "time": 1350496161,
+      "scriptId": "nuek",
+      "historyId": "252051804638355962041878440-0bd9-4f5d-9559-f7abb982c944",
+      "updateSize": 4511,
+      "ast": {
+        "textVersion": "v2.2,js,ctx",
+        "jsonVersion": "v1.0,resolved,short",
+        "name": "advanced song search",
+        "comment": "Different ways to search your song library",
+        "icon": "Music",
+        "color": "#ffff00ff",
+        "autoIcon": "Music",
+        "autoColor": "#ff00ff",
+        "platform": "current",
+        "rootId": "xtjPJeXsBMMPo2x2IOlluRud",
+        "showAd": false,
+        "isLibrary": false,
+        "allowExport": false,
+        "hasUniqueIds": false,
+        "decls": [
+          {
+            "name": "search albums",
+            "inParameters": [
+              {
+                "name": "term",
+                "type": "String",
+                "nodeType": "localDef",
+                "id": "xZkpwyFqVv06BuRTBLzxFVvEP0"
+              }
+            ],
+            "outParameters": [],
+            "isPrivate": false,
+            "isOffloaded": false,
+            "isTest": false,
+            "isAsync": false,
+            "nodeType": "action",
+            "body": [
+              {
+                "text": "Searches by the album name",
+                "nodeType": "comment",
+                "id": "fMnHiDC0b09MS7WXTTkUplIa"
+              },
+              {
+                "expr": "$xZkpwyFqVv06BuRTBLzxFVvEP0 ,:= $xZkpwyFqVv06BuRTBLzxFVvEP0 .to_lower_case",
+                "nodeType": "exprStmt",
+                "id": "Ito2ehYEtr0b25Pr2gi7aKOH",
+                "locals": []
+              },
+              {
+                "collection": ":media .song_albums",
+                "conditions": [
+                  {
+                    "condition": "T",
+                    "nodeType": "where",
+                    "id": "BfNeCny31uPy7Q2NiwvOFWNo",
+                    "locals": []
+                  }
+                ],
+                "body": [
+                  {
+                    "nodeType": "if",
+                    "condition": "$VWUBaJndFka7NrSKj5V3ytZVB0 .name .to_lower_case .contains ,( $xZkpwyFqVv06BuRTBLzxFVvEP0 ,)",
+                    "thenBody": [
+                      {
+                        "expr": "$VWUBaJndFka7NrSKj5V3ytZVB0 .post_to_wall",
+                        "nodeType": "exprStmt",
+                        "id": "ylt1WoUpb9AxLPjakyHv4xAr",
+                        "locals": []
+                      }
+                    ],
+                    "isElseIf": false,
+                    "id": "VAFO79OVBR983aLXsbs6QDUd",
+                    "locals": []
+                  }
+                ],
+                "nodeType": "foreach",
+                "id": "VWUBaJndFka7NrSKj5V3ytZV",
+                "locals": [
+                  {
+                    "name": "songsalbum",
+                    "type": "Song Album",
+                    "nodeType": "localDef",
+                    "id": "VWUBaJndFka7NrSKj5V3ytZVB0"
+                  }
+                ]
+              }
+            ],
+            "id": "xZkpwyFqVv06BuRTBLzxFVvE"
+          },
+          {
+            "name": "super song search",
+            "inParameters": [
+              {
+                "name": "name",
+                "type": "String",
+                "nodeType": "localDef",
+                "id": "QdsODIrIOopl1QLMU2F4h5eOP0"
+              },
+              {
+                "name": "artist",
+                "type": "String",
+                "nodeType": "localDef",
+                "id": "QdsODIrIOopl1QLMU2F4h5eOP1"
+              },
+              {
+                "name": "album",
+                "type": "String",
+                "nodeType": "localDef",
+                "id": "QdsODIrIOopl1QLMU2F4h5eOP2"
+              },
+              {
+                "name": "genre",
+                "type": "String",
+                "nodeType": "localDef",
+                "id": "QdsODIrIOopl1QLMU2F4h5eOP3"
+              },
+              {
+                "name": "min duration",
+                "type": "Number",
+                "nodeType": "localDef",
+                "id": "QdsODIrIOopl1QLMU2F4h5eOP4"
+              },
+              {
+                "name": "max duration",
+                "type": "Number",
+                "nodeType": "localDef",
+                "id": "QdsODIrIOopl1QLMU2F4h5eOP5"
+              },
+              {
+                "name": "min rating",
+                "type": "Number",
+                "nodeType": "localDef",
+                "id": "QdsODIrIOopl1QLMU2F4h5eOP6"
+              }
+            ],
+            "outParameters": [],
+            "isPrivate": false,
+            "isOffloaded": false,
+            "isTest": false,
+            "isAsync": false,
+            "nodeType": "action",
+            "body": [
+              {
+                "text": "Searching songs with many different filters.",
+                "nodeType": "comment",
+                "id": "Sgugz6bJUkPlmRT8uoM40LFN"
+              },
+              {
+                "text": "Each action argument can be used as a filter if specified. We need to take into account that the filter might not be set by the user when filtering.",
+                "nodeType": "comment",
+                "id": "EHI1hi2Dx5WSRby4Sg09002X"
+              },
+              {
+                "collection": ":media .songs",
+                "conditions": [
+                  {
+                    "condition": "$QdsODIrIOopl1QLMU2F4h5eOP0 .is_empty ,or $gPV8nJihqUMP1HCSRHbeXBnLB0 .name .to_upper_case .contains ,( $QdsODIrIOopl1QLMU2F4h5eOP0 .to_upper_case ,)",
+                    "nodeType": "where",
+                    "id": "DwTI2s0tXHt4OIqJyYgHEfgB",
+                    "locals": []
+                  },
+                  {
+                    "condition": "$QdsODIrIOopl1QLMU2F4h5eOP2 .is_empty ,or $gPV8nJihqUMP1HCSRHbeXBnLB0 .album .name .to_upper_case .contains ,( $QdsODIrIOopl1QLMU2F4h5eOP2 .to_upper_case ,)",
+                    "nodeType": "where",
+                    "id": "cjGf4IOdptopUWE9x74cp0YQ",
+                    "locals": []
+                  },
+                  {
+                    "condition": "$QdsODIrIOopl1QLMU2F4h5eOP1 .is_empty ,or $gPV8nJihqUMP1HCSRHbeXBnLB0 .artist .to_upper_case .contains ,( $QdsODIrIOopl1QLMU2F4h5eOP1 .to_upper_case ,)",
+                    "nodeType": "where",
+                    "id": "Ou6bJJ5FNJh62QseIpog4K6L",
+                    "locals": []
+                  },
+                  {
+                    "condition": "$QdsODIrIOopl1QLMU2F4h5eOP3 .is_empty ,or $gPV8nJihqUMP1HCSRHbeXBnLB0 .genre .to_upper_case .contains ,( $QdsODIrIOopl1QLMU2F4h5eOP3 .to_upper_case ,)",
+                    "nodeType": "where",
+                    "id": "xM2N3K4O8WjBxOU2BCLIxp0d",
+                    "locals": []
+                  },
+                  {
+                    "condition": "$QdsODIrIOopl1QLMU2F4h5eOP4 ,≤ $gPV8nJihqUMP1HCSRHbeXBnLB0 .duration",
+                    "nodeType": "where",
+                    "id": "xaeGl2KbeiNtzoTiajhWxOGR",
+                    "locals": []
+                  },
+                  {
+                    "condition": "$QdsODIrIOopl1QLMU2F4h5eOP5 ,≤ $QdsODIrIOopl1QLMU2F4h5eOP4 ,or $gPV8nJihqUMP1HCSRHbeXBnLB0 .duration ,≤ $QdsODIrIOopl1QLMU2F4h5eOP5",
+                    "nodeType": "where",
+                    "id": "bVQdXGRY478xmLK0gTLvCjbs",
+                    "locals": []
+                  },
+                  {
+                    "condition": "$QdsODIrIOopl1QLMU2F4h5eOP6 ,≤ ,0 ,or $gPV8nJihqUMP1HCSRHbeXBnLB0 .duration ,≥ $QdsODIrIOopl1QLMU2F4h5eOP6",
+                    "nodeType": "where",
+                    "id": "uaO2bGOOBDvHW5BllVqK2G2F",
+                    "locals": []
+                  }
+                ],
+                "body": [
+                  {
+                    "expr": "$gPV8nJihqUMP1HCSRHbeXBnLB0 .post_to_wall",
+                    "nodeType": "exprStmt",
+                    "id": "CgxFm2Ol7zXYQWJC22xRvlRD",
+                    "locals": []
+                  }
+                ],
+                "nodeType": "foreach",
+                "id": "gPV8nJihqUMP1HCSRHbeXBnL",
+                "locals": [
+                  {
+                    "name": "song",
+                    "type": "Song",
+                    "nodeType": "localDef",
+                    "id": "gPV8nJihqUMP1HCSRHbeXBnLB0"
+                  }
+                ]
+              }
+            ],
+            "id": "QdsODIrIOopl1QLMU2F4h5eO"
+          }
+        ],
+        "deletedDecls": [],
+        "nodeType": "app",
+        "id": "app"
+      }
+    },
+    {
+      "seqNo": 1,
+      "time": 1351473324,
+      "scriptId": "wchm",
+      "historyId": "2520508274756650746bc1e8355-6f05-43c8-b4b3-7f568e5e4d82",
+      "updateSize": 943,
+      "updates": {
+        "ISAmy5DQcQMplvZqu8dSlb2fL0": {
+          "name": "albums",
+          "type": "Song Albums",
+          "nodeType": "localDef"
+        },
+        "ISAmy5DQcQMplvZqu8dSlb2f": {
+          "expr": "$ISAmy5DQcQMplvZqu8dSlb2fL0 ,:= :media .song_albums",
+          "nodeType": "exprStmt",
+          "locals": [
+            "ISAmy5DQcQMplvZqu8dSlb2fL0"
+          ]
+        },
+        "BfNeCny31uPy7Q2NiwvOFWNo": {
+          "condition": "$VWUBaJndFka7NrSKj5V3ytZVB0 .name .to_lower_case .contains ,( $xZkpwyFqVv06BuRTBLzxFVvEP0 ,)"
+        },
+        "xdaStmJTg8iat2Cgvlgr22kR": {
+          "expr": "$VWUBaJndFka7NrSKj5V3ytZVB0 .post_to_wall",
+          "nodeType": "exprStmt",
+          "locals": []
+        },
+        "VWUBaJndFka7NrSKj5V3ytZVB0": {
+          "name": "album"
+        },
+        "VWUBaJndFka7NrSKj5V3ytZV": {
+          "collection": "$ISAmy5DQcQMplvZqu8dSlb2fL0",
+          "body": [
+            "xdaStmJTg8iat2Cgvlgr22kR"
+          ]
+        },
+        "xZkpwyFqVv06BuRTBLzxFVvE": {
+          "body": [
+            "fMnHiDC0b09MS7WXTTkUplIa",
+            "Ito2ehYEtr0b25Pr2gi7aKOH",
+            "ISAmy5DQcQMplvZqu8dSlb2f",
+            "VWUBaJndFka7NrSKj5V3ytZV"
+          ]
+        },
+        "QdsODIrIOopl1QLMU2F4h5eOP2": {
+          "name": "a"
+        },
+        "app": {
+          "rootId": "RjnjVEbEt2PuQlr1tCYoQnMo"
+        },
+        "VAFO79OVBR983aLXsbs6QDUd": null,
+        "ylt1WoUpb9AxLPjakyHv4xAr": null
+      }
+    }
+  ]
+}

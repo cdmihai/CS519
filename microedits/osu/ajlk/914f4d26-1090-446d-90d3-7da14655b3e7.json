@@ -1,0 +1,203 @@
+{
+  "userid": "ajlk",
+  "guid": "914f4d26-1090-446d-90d3-7da14655b3e7",
+  "lastStatus": "deleted",
+  "items": [
+    {
+      "seqNo": 0,
+      "time": 1350496158,
+      "scriptId": null,
+      "historyId": "2520518046412778370a9c34876-6a64-4bd9-aec1-bddb26382eaf",
+      "updateSize": 3492,
+      "ast": {
+        "textVersion": "v2.2,js,ctx",
+        "jsonVersion": "v1.0,resolved,short",
+        "name": "hawaii vision",
+        "comment": "Live text recognition using camera previews and Hawaii services.",
+        "icon": "eye",
+        "color": "#ff007fff",
+        "autoIcon": "eye",
+        "autoColor": "#007fff",
+        "platform": "current",
+        "rootId": "x9LmNrcnvbpoTf3VMP8ao57Q",
+        "showAd": false,
+        "isLibrary": false,
+        "allowExport": false,
+        "hasUniqueIds": false,
+        "decls": [
+          {
+            "name": "main",
+            "inParameters": [],
+            "outParameters": [],
+            "isPrivate": false,
+            "isOffloaded": false,
+            "isTest": false,
+            "isAsync": false,
+            "nodeType": "action",
+            "body": [
+              {
+                "text": "Creates a camera and a textbox.",
+                "nodeType": "comment",
+                "id": "yFivB9XoAi2p09U7V3LhOFbL"
+              },
+              {
+                "expr": ":data #b4HJt26QWoxdAxPV75oAmrfi ,:= :senses .camera",
+                "nodeType": "exprStmt",
+                "id": "RZC9YJYghpuy31p57B1ZgkqT",
+                "locals": []
+              },
+              {
+                "expr": ":data #REptuqNhOtDiwnQf9lFUVS4a ,:= :wall .create_text_box ,( 'scrub0 ,, ,1 ,8 ,)",
+                "nodeType": "exprStmt",
+                "id": "JjjRJD5x0I8NWfjYLlbKgXor",
+                "locals": []
+              },
+              {
+                "expr": ":data #REptuqNhOtDiwnQf9lFUVS4a .post_to_wall",
+                "nodeType": "exprStmt",
+                "id": "o7EndZ1O45M0g7qU2RymoGh3",
+                "locals": []
+              },
+              {
+                "expr": ":data #b4HJt26QWoxdAxPV75oAmrfi .post_to_wall",
+                "nodeType": "exprStmt",
+                "id": "lMP8C1oZDwo0v344aTvB4dje",
+                "locals": []
+              }
+            ],
+            "id": "jZB65HsbVKXsYSgW722gxDoF"
+          },
+          {
+            "name": "camera",
+            "comment": "",
+            "type": "Camera",
+            "isReadonly": false,
+            "isTransient": true,
+            "nodeType": "data",
+            "id": "b4HJt26QWoxdAxPV75oAmrfi"
+          },
+          {
+            "name": "board",
+            "comment": "",
+            "type": "Board",
+            "isReadonly": false,
+            "isTransient": true,
+            "nodeType": "data",
+            "id": "jB2NvamDuiTbSLqMOsHayZVV"
+          },
+          {
+            "name": "gameloop",
+            "inParameters": [],
+            "outParameters": [],
+            "isPrivate": true,
+            "isOffloaded": false,
+            "isTest": false,
+            "isAsync": true,
+            "nodeType": "event",
+            "eventName": "gameloop",
+            "eventVariableId": null,
+            "body": [
+              {
+                "text": "Scans camera preview for text. If found displays it and copies it to the clipboard.",
+                "nodeType": "comment",
+                "id": "ns4z6bSmUSW3KsUMPN843A5a"
+              },
+              {
+                "expr": "$HBRNWaMnYdI0zHbHYgN5fhX7L0 ,:= :data #b4HJt26QWoxdAxPV75oAmrfi .preview",
+                "nodeType": "exprStmt",
+                "id": "HBRNWaMnYdI0zHbHYgN5fhX7",
+                "locals": [
+                  {
+                    "name": "pic",
+                    "type": "Picture",
+                    "nodeType": "localDef",
+                    "id": "HBRNWaMnYdI0zHbHYgN5fhX7L0"
+                  }
+                ]
+              },
+              {
+                "expr": "$HBRNWaMnYdI0zHbHYgN5fhX7L0 .desaturate",
+                "nodeType": "exprStmt",
+                "id": "FFU712c2WSRkIFQ7IsNrwBN7",
+                "locals": []
+              },
+              {
+                "expr": "$O4FP20eFIIhpFtjDGTypY4nhL0 ,:= :languages .picture_to_text ,( 'en ,, $HBRNWaMnYdI0zHbHYgN5fhX7L0 ,)",
+                "nodeType": "exprStmt",
+                "id": "O4FP20eFIIhpFtjDGTypY4nh",
+                "locals": [
+                  {
+                    "name": "s",
+                    "type": "String",
+                    "nodeType": "localDef",
+                    "id": "O4FP20eFIIhpFtjDGTypY4nhL0"
+                  }
+                ]
+              },
+              {
+                "nodeType": "if",
+                "condition": ",not $O4FP20eFIIhpFtjDGTypY4nhL0 .is_empty",
+                "thenBody": [
+                  {
+                    "expr": ":data #REptuqNhOtDiwnQf9lFUVS4a .set_text ,( $O4FP20eFIIhpFtjDGTypY4nhL0 ,)",
+                    "nodeType": "exprStmt",
+                    "id": "n0mNKOl7xFNCobH9nA2oprZ9",
+                    "locals": []
+                  },
+                  {
+                    "expr": ":phone .vibrate ,( ,0 ,. ,1 ,)",
+                    "nodeType": "exprStmt",
+                    "id": "A0Ne2Z6cPRCOnNfW44m6D82C",
+                    "locals": []
+                  },
+                  {
+                    "expr": "",
+                    "nodeType": "exprStmt",
+                    "id": "z44dLui2WtDitutMWHH182qi",
+                    "locals": []
+                  }
+                ],
+                "isElseIf": false,
+                "id": "Blr1bRbBGjpBwY9pzx2QcUsC",
+                "locals": []
+              }
+            ],
+            "id": "xEYMT6sAawb3h9BUCH2HXojP"
+          },
+          {
+            "name": "camera button pressed",
+            "inParameters": [],
+            "outParameters": [],
+            "isPrivate": true,
+            "isOffloaded": false,
+            "isTest": false,
+            "isAsync": true,
+            "nodeType": "event",
+            "eventName": "camera button pressed",
+            "eventVariableId": null,
+            "body": [
+              {
+                "text": "Focuses the camera.",
+                "nodeType": "comment",
+                "id": "Wq2zHXblOvPkY9DLA4d57BSU"
+              }
+            ],
+            "id": "WaD3VsA3FPq6oVRWOl1ZHGrp"
+          },
+          {
+            "name": "tb",
+            "comment": "",
+            "type": "TextBox",
+            "isReadonly": false,
+            "isTransient": true,
+            "nodeType": "data",
+            "id": "REptuqNhOtDiwnQf9lFUVS4a"
+          }
+        ],
+        "deletedDecls": [],
+        "nodeType": "app",
+        "id": "app"
+      }
+    }
+  ]
+}

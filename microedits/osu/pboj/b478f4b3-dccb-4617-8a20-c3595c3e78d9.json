@@ -1,0 +1,515 @@
+{
+  "userid": "pboj",
+  "guid": "b478f4b3-dccb-4617-8a20-c3595c3e78d9",
+  "lastStatus": "published",
+  "items": [
+    {
+      "seqNo": 0,
+      "time": 1342466090,
+      "scriptId": "nuek",
+      "historyId": "25205983470937575458c9d8e22-dbdc-4ec8-9727-4c7b538f11b8",
+      "updateSize": 4511,
+      "ast": {
+        "textVersion": "v2.2,js,ctx",
+        "jsonVersion": "v1.0,resolved,short",
+        "name": "advanced song search",
+        "comment": "Different ways to search your song library",
+        "icon": "Music",
+        "color": "#ffff00ff",
+        "autoIcon": "Music",
+        "autoColor": "#ff00ff",
+        "platform": "current",
+        "rootId": "NVB4Gqpa6S1LazFmGa4aqR4z",
+        "showAd": false,
+        "isLibrary": false,
+        "allowExport": false,
+        "hasUniqueIds": false,
+        "decls": [
+          {
+            "name": "search albums",
+            "inParameters": [
+              {
+                "name": "term",
+                "type": "String",
+                "nodeType": "localDef",
+                "id": "dDLTH1Y7kU7VvBzntH2cl2kTP0"
+              }
+            ],
+            "outParameters": [],
+            "isPrivate": false,
+            "isOffloaded": false,
+            "isTest": false,
+            "isAsync": false,
+            "nodeType": "action",
+            "body": [
+              {
+                "text": "Searches by the album name",
+                "nodeType": "comment",
+                "id": "VIa7DqyErMm2ohq1vbSQbYCI"
+              },
+              {
+                "expr": "$dDLTH1Y7kU7VvBzntH2cl2kTP0 ,:= $dDLTH1Y7kU7VvBzntH2cl2kTP0 .to_lower_case",
+                "nodeType": "exprStmt",
+                "id": "rsyMG22175toZjm5r6MQKcFw",
+                "locals": []
+              },
+              {
+                "collection": ":media .song_albums",
+                "conditions": [
+                  {
+                    "condition": "T",
+                    "nodeType": "where",
+                    "id": "KdwYcmhHbTQ4TTbTtBspS2hq",
+                    "locals": []
+                  }
+                ],
+                "body": [
+                  {
+                    "nodeType": "if",
+                    "condition": "$FdtO8s8ihwFrhyPKrRywanHPB0 .name .to_lower_case .contains ,( $dDLTH1Y7kU7VvBzntH2cl2kTP0 ,)",
+                    "thenBody": [
+                      {
+                        "expr": "$FdtO8s8ihwFrhyPKrRywanHPB0 .post_to_wall",
+                        "nodeType": "exprStmt",
+                        "id": "i2Nj6I9KPPuZwv6g43CbT47D",
+                        "locals": []
+                      }
+                    ],
+                    "isElseIf": false,
+                    "id": "xlsmv0aIEl9Ssj2wOmXZ2qnH",
+                    "locals": []
+                  }
+                ],
+                "nodeType": "foreach",
+                "id": "FdtO8s8ihwFrhyPKrRywanHP",
+                "locals": [
+                  {
+                    "name": "songsalbum",
+                    "type": "Song Album",
+                    "nodeType": "localDef",
+                    "id": "FdtO8s8ihwFrhyPKrRywanHPB0"
+                  }
+                ]
+              }
+            ],
+            "id": "dDLTH1Y7kU7VvBzntH2cl2kT"
+          },
+          {
+            "name": "super song search",
+            "inParameters": [
+              {
+                "name": "name",
+                "type": "String",
+                "nodeType": "localDef",
+                "id": "ndGh7cTwBIVUFACNPykJ1o2DP0"
+              },
+              {
+                "name": "artist",
+                "type": "String",
+                "nodeType": "localDef",
+                "id": "ndGh7cTwBIVUFACNPykJ1o2DP1"
+              },
+              {
+                "name": "album",
+                "type": "String",
+                "nodeType": "localDef",
+                "id": "ndGh7cTwBIVUFACNPykJ1o2DP2"
+              },
+              {
+                "name": "genre",
+                "type": "String",
+                "nodeType": "localDef",
+                "id": "ndGh7cTwBIVUFACNPykJ1o2DP3"
+              },
+              {
+                "name": "min duration",
+                "type": "Number",
+                "nodeType": "localDef",
+                "id": "ndGh7cTwBIVUFACNPykJ1o2DP4"
+              },
+              {
+                "name": "max duration",
+                "type": "Number",
+                "nodeType": "localDef",
+                "id": "ndGh7cTwBIVUFACNPykJ1o2DP5"
+              },
+              {
+                "name": "min rating",
+                "type": "Number",
+                "nodeType": "localDef",
+                "id": "ndGh7cTwBIVUFACNPykJ1o2DP6"
+              }
+            ],
+            "outParameters": [],
+            "isPrivate": false,
+            "isOffloaded": false,
+            "isTest": false,
+            "isAsync": false,
+            "nodeType": "action",
+            "body": [
+              {
+                "text": "Searching songs with many different filters.",
+                "nodeType": "comment",
+                "id": "xwMi00AGdJHaSkxg3sXbAkKh"
+              },
+              {
+                "text": "Each action argument can be used as a filter if specified. We need to take into account that the filter might not be set by the user when filtering.",
+                "nodeType": "comment",
+                "id": "hCE2THSrVNyQlM6VEtLrdcut"
+              },
+              {
+                "collection": ":media .songs",
+                "conditions": [
+                  {
+                    "condition": "$ndGh7cTwBIVUFACNPykJ1o2DP0 .is_empty ,or $b8W5H7lA1CAV2214wNUpVRGyB0 .name .to_upper_case .contains ,( $ndGh7cTwBIVUFACNPykJ1o2DP0 .to_upper_case ,)",
+                    "nodeType": "where",
+                    "id": "zoTcL4giwGw4uYdt473YT4lp",
+                    "locals": []
+                  },
+                  {
+                    "condition": "$ndGh7cTwBIVUFACNPykJ1o2DP2 .is_empty ,or $b8W5H7lA1CAV2214wNUpVRGyB0 .album .name .to_upper_case .contains ,( $ndGh7cTwBIVUFACNPykJ1o2DP2 .to_upper_case ,)",
+                    "nodeType": "where",
+                    "id": "xJcGecxYJ49k4q5QoHDaYlET",
+                    "locals": []
+                  },
+                  {
+                    "condition": "$ndGh7cTwBIVUFACNPykJ1o2DP1 .is_empty ,or $b8W5H7lA1CAV2214wNUpVRGyB0 .artist .to_upper_case .contains ,( $ndGh7cTwBIVUFACNPykJ1o2DP1 .to_upper_case ,)",
+                    "nodeType": "where",
+                    "id": "MApMvSuNknHXOBnVXOCgj2QL",
+                    "locals": []
+                  },
+                  {
+                    "condition": "$ndGh7cTwBIVUFACNPykJ1o2DP3 .is_empty ,or $b8W5H7lA1CAV2214wNUpVRGyB0 .genre .to_upper_case .contains ,( $ndGh7cTwBIVUFACNPykJ1o2DP3 .to_upper_case ,)",
+                    "nodeType": "where",
+                    "id": "xZ9xNvmG6N87sb49g2ZOuhIg",
+                    "locals": []
+                  },
+                  {
+                    "condition": "$ndGh7cTwBIVUFACNPykJ1o2DP4 ,≤ $b8W5H7lA1CAV2214wNUpVRGyB0 .duration",
+                    "nodeType": "where",
+                    "id": "ZWJMaYutlNocmaUHx57ETKMa",
+                    "locals": []
+                  },
+                  {
+                    "condition": "$ndGh7cTwBIVUFACNPykJ1o2DP5 ,≤ $ndGh7cTwBIVUFACNPykJ1o2DP4 ,or $b8W5H7lA1CAV2214wNUpVRGyB0 .duration ,≤ $ndGh7cTwBIVUFACNPykJ1o2DP5",
+                    "nodeType": "where",
+                    "id": "yrC1EzvNcSowa28DOn5GJht6",
+                    "locals": []
+                  },
+                  {
+                    "condition": "$ndGh7cTwBIVUFACNPykJ1o2DP6 ,≤ ,0 ,or $b8W5H7lA1CAV2214wNUpVRGyB0 .duration ,≥ $ndGh7cTwBIVUFACNPykJ1o2DP6",
+                    "nodeType": "where",
+                    "id": "Jy7IQxCYtEK5LDNEe5FNp0U5",
+                    "locals": []
+                  }
+                ],
+                "body": [
+                  {
+                    "expr": "$b8W5H7lA1CAV2214wNUpVRGyB0 .post_to_wall",
+                    "nodeType": "exprStmt",
+                    "id": "xk9x7zpvFbvIieQLqBcKVVTX",
+                    "locals": []
+                  }
+                ],
+                "nodeType": "foreach",
+                "id": "b8W5H7lA1CAV2214wNUpVRGy",
+                "locals": [
+                  {
+                    "name": "song",
+                    "type": "Song",
+                    "nodeType": "localDef",
+                    "id": "b8W5H7lA1CAV2214wNUpVRGyB0"
+                  }
+                ]
+              }
+            ],
+            "id": "ndGh7cTwBIVUFACNPykJ1o2D"
+          }
+        ],
+        "deletedDecls": [],
+        "nodeType": "app",
+        "id": "app"
+      }
+    },
+    {
+      "seqNo": 1,
+      "time": 1343408233,
+      "scriptId": "wchm",
+      "historyId": "2520588925666024304f886526c-2b8e-41f0-a489-8ae9cd82b836",
+      "updateSize": 943,
+      "updates": {
+        "tc9qG4H23AWDG0SRbDPzuPw0L0": {
+          "name": "albums",
+          "type": "Song Albums",
+          "nodeType": "localDef"
+        },
+        "tc9qG4H23AWDG0SRbDPzuPw0": {
+          "expr": "$tc9qG4H23AWDG0SRbDPzuPw0L0 ,:= :media .song_albums",
+          "nodeType": "exprStmt",
+          "locals": [
+            "tc9qG4H23AWDG0SRbDPzuPw0L0"
+          ]
+        },
+        "KdwYcmhHbTQ4TTbTtBspS2hq": {
+          "condition": "$FdtO8s8ihwFrhyPKrRywanHPB0 .name .to_lower_case .contains ,( $dDLTH1Y7kU7VvBzntH2cl2kTP0 ,)"
+        },
+        "O4KFq2vAsE2H8qVZcKxzM8Xw": {
+          "expr": "$FdtO8s8ihwFrhyPKrRywanHPB0 .post_to_wall",
+          "nodeType": "exprStmt",
+          "locals": []
+        },
+        "FdtO8s8ihwFrhyPKrRywanHPB0": {
+          "name": "album"
+        },
+        "FdtO8s8ihwFrhyPKrRywanHP": {
+          "collection": "$tc9qG4H23AWDG0SRbDPzuPw0L0",
+          "body": [
+            "O4KFq2vAsE2H8qVZcKxzM8Xw"
+          ]
+        },
+        "dDLTH1Y7kU7VvBzntH2cl2kT": {
+          "body": [
+            "VIa7DqyErMm2ohq1vbSQbYCI",
+            "rsyMG22175toZjm5r6MQKcFw",
+            "tc9qG4H23AWDG0SRbDPzuPw0",
+            "FdtO8s8ihwFrhyPKrRywanHP"
+          ]
+        },
+        "ndGh7cTwBIVUFACNPykJ1o2DP2": {
+          "name": "a"
+        },
+        "app": {
+          "rootId": "GZjjPWczuKkGZ12WhM43teQ7"
+        },
+        "xlsmv0aIEl9Ssj2wOmXZ2qnH": null,
+        "i2Nj6I9KPPuZwv6g43CbT47D": null
+      }
+    },
+    {
+      "seqNo": 2,
+      "time": 1343498447,
+      "scriptId": "nuek",
+      "historyId": "25205880235250849459f3cc7d3-cb4b-4cc3-a253-f9fb6b59f51b",
+      "updateSize": 839,
+      "updates": {
+        "KdwYcmhHbTQ4TTbTtBspS2hq": {
+          "condition": "T"
+        },
+        "plfa9B9ZHpr1DjJh9oRuKYSs": {
+          "expr": "$FdtO8s8ihwFrhyPKrRywanHPB0 .post_to_wall",
+          "nodeType": "exprStmt",
+          "locals": []
+        },
+        "A0nylici4SvX4tJDFEYLHJ6m": {
+          "nodeType": "if",
+          "condition": "$FdtO8s8ihwFrhyPKrRywanHPB0 .name .to_lower_case .contains ,( $dDLTH1Y7kU7VvBzntH2cl2kTP0 ,)",
+          "thenBody": [
+            "plfa9B9ZHpr1DjJh9oRuKYSs"
+          ],
+          "isElseIf": false,
+          "locals": []
+        },
+        "FdtO8s8ihwFrhyPKrRywanHPB0": {
+          "name": "songsalbum"
+        },
+        "FdtO8s8ihwFrhyPKrRywanHP": {
+          "collection": ":media .song_albums",
+          "body": [
+            "A0nylici4SvX4tJDFEYLHJ6m"
+          ]
+        },
+        "dDLTH1Y7kU7VvBzntH2cl2kT": {
+          "body": [
+            "VIa7DqyErMm2ohq1vbSQbYCI",
+            "rsyMG22175toZjm5r6MQKcFw",
+            "FdtO8s8ihwFrhyPKrRywanHP"
+          ]
+        },
+        "ndGh7cTwBIVUFACNPykJ1o2DP2": {
+          "name": "album"
+        },
+        "app": {
+          "rootId": "NVB4Gqpa6S1LazFmGa4aqR4z"
+        },
+        "tc9qG4H23AWDG0SRbDPzuPw0": null,
+        "tc9qG4H23AWDG0SRbDPzuPw0L0": null,
+        "O4KFq2vAsE2H8qVZcKxzM8Xw": null
+      }
+    },
+    {
+      "seqNo": 3,
+      "time": 1343741877,
+      "scriptId": "wchm",
+      "historyId": "25205855892203305597563a05d-0f73-4708-a016-10d8988711c8",
+      "updateSize": 943,
+      "updates": {
+        "tG22uxeWeUnc2G6e8t1J1I1zL0": {
+          "name": "albums",
+          "type": "Song Albums",
+          "nodeType": "localDef"
+        },
+        "tG22uxeWeUnc2G6e8t1J1I1z": {
+          "expr": "$tG22uxeWeUnc2G6e8t1J1I1zL0 ,:= :media .song_albums",
+          "nodeType": "exprStmt",
+          "locals": [
+            "tG22uxeWeUnc2G6e8t1J1I1zL0"
+          ]
+        },
+        "KdwYcmhHbTQ4TTbTtBspS2hq": {
+          "condition": "$FdtO8s8ihwFrhyPKrRywanHPB0 .name .to_lower_case .contains ,( $dDLTH1Y7kU7VvBzntH2cl2kTP0 ,)"
+        },
+        "OBQN5uophUYesg2QqPScwRGN": {
+          "expr": "$FdtO8s8ihwFrhyPKrRywanHPB0 .post_to_wall",
+          "nodeType": "exprStmt",
+          "locals": []
+        },
+        "FdtO8s8ihwFrhyPKrRywanHPB0": {
+          "name": "album"
+        },
+        "FdtO8s8ihwFrhyPKrRywanHP": {
+          "collection": "$tG22uxeWeUnc2G6e8t1J1I1zL0",
+          "body": [
+            "OBQN5uophUYesg2QqPScwRGN"
+          ]
+        },
+        "dDLTH1Y7kU7VvBzntH2cl2kT": {
+          "body": [
+            "VIa7DqyErMm2ohq1vbSQbYCI",
+            "rsyMG22175toZjm5r6MQKcFw",
+            "tG22uxeWeUnc2G6e8t1J1I1z",
+            "FdtO8s8ihwFrhyPKrRywanHP"
+          ]
+        },
+        "ndGh7cTwBIVUFACNPykJ1o2DP2": {
+          "name": "a"
+        },
+        "app": {
+          "rootId": "GZjjPWczuKkGZ12WhM43teQ7"
+        },
+        "A0nylici4SvX4tJDFEYLHJ6m": null,
+        "plfa9B9ZHpr1DjJh9oRuKYSs": null
+      }
+    },
+    {
+      "seqNo": 4,
+      "time": 1343756085,
+      "scriptId": "nuek",
+      "historyId": "2520585447149783389d5b4d2c6-cdca-483e-95ca-497c9fede34d",
+      "updateSize": 839,
+      "updates": {
+        "KdwYcmhHbTQ4TTbTtBspS2hq": {
+          "condition": "T"
+        },
+        "Q2aaaQ9uHuDvhgXLhoKv7rzf": {
+          "expr": "$FdtO8s8ihwFrhyPKrRywanHPB0 .post_to_wall",
+          "nodeType": "exprStmt",
+          "locals": []
+        },
+        "VaPQZloSpO9rwyVkJq2cwANx": {
+          "nodeType": "if",
+          "condition": "$FdtO8s8ihwFrhyPKrRywanHPB0 .name .to_lower_case .contains ,( $dDLTH1Y7kU7VvBzntH2cl2kTP0 ,)",
+          "thenBody": [
+            "Q2aaaQ9uHuDvhgXLhoKv7rzf"
+          ],
+          "isElseIf": false,
+          "locals": []
+        },
+        "FdtO8s8ihwFrhyPKrRywanHPB0": {
+          "name": "songsalbum"
+        },
+        "FdtO8s8ihwFrhyPKrRywanHP": {
+          "collection": ":media .song_albums",
+          "body": [
+            "VaPQZloSpO9rwyVkJq2cwANx"
+          ]
+        },
+        "dDLTH1Y7kU7VvBzntH2cl2kT": {
+          "body": [
+            "VIa7DqyErMm2ohq1vbSQbYCI",
+            "rsyMG22175toZjm5r6MQKcFw",
+            "FdtO8s8ihwFrhyPKrRywanHP"
+          ]
+        },
+        "ndGh7cTwBIVUFACNPykJ1o2DP2": {
+          "name": "album"
+        },
+        "app": {
+          "rootId": "NVB4Gqpa6S1LazFmGa4aqR4z"
+        },
+        "tG22uxeWeUnc2G6e8t1J1I1z": null,
+        "tG22uxeWeUnc2G6e8t1J1I1zL0": null,
+        "OBQN5uophUYesg2QqPScwRGN": null
+      }
+    },
+    {
+      "seqNo": 5,
+      "time": 1343832894,
+      "scriptId": "wchm",
+      "historyId": "25205846790519305249f913c29-66fe-432e-b024-625f4eb0abac",
+      "updateSize": 943,
+      "updates": {
+        "cayle9pxNwDQryTn84dcTBk1L0": {
+          "name": "albums",
+          "type": "Song Albums",
+          "nodeType": "localDef"
+        },
+        "cayle9pxNwDQryTn84dcTBk1": {
+          "expr": "$cayle9pxNwDQryTn84dcTBk1L0 ,:= :media .song_albums",
+          "nodeType": "exprStmt",
+          "locals": [
+            "cayle9pxNwDQryTn84dcTBk1L0"
+          ]
+        },
+        "KdwYcmhHbTQ4TTbTtBspS2hq": {
+          "condition": "$FdtO8s8ihwFrhyPKrRywanHPB0 .name .to_lower_case .contains ,( $dDLTH1Y7kU7VvBzntH2cl2kTP0 ,)"
+        },
+        "tEspazQuNUoYMA4q1s6A8wjk": {
+          "expr": "$FdtO8s8ihwFrhyPKrRywanHPB0 .post_to_wall",
+          "nodeType": "exprStmt",
+          "locals": []
+        },
+        "FdtO8s8ihwFrhyPKrRywanHPB0": {
+          "name": "album"
+        },
+        "FdtO8s8ihwFrhyPKrRywanHP": {
+          "collection": "$cayle9pxNwDQryTn84dcTBk1L0",
+          "body": [
+            "tEspazQuNUoYMA4q1s6A8wjk"
+          ]
+        },
+        "dDLTH1Y7kU7VvBzntH2cl2kT": {
+          "body": [
+            "VIa7DqyErMm2ohq1vbSQbYCI",
+            "rsyMG22175toZjm5r6MQKcFw",
+            "cayle9pxNwDQryTn84dcTBk1",
+            "FdtO8s8ihwFrhyPKrRywanHP"
+          ]
+        },
+        "ndGh7cTwBIVUFACNPykJ1o2DP2": {
+          "name": "a"
+        },
+        "app": {
+          "rootId": "GZjjPWczuKkGZ12WhM43teQ7"
+        },
+        "VaPQZloSpO9rwyVkJq2cwANx": null,
+        "Q2aaaQ9uHuDvhgXLhoKv7rzf": null
+      }
+    },
+    {
+      "seqNo": 6,
+      "time": 1346281481,
+      "scriptId": "wchm",
+      "historyId": "252056019318415319978c2541d-0baa-4b38-bc29-c1b937b210b0",
+      "updateSize": 2,
+      "updates": {}
+    },
+    {
+      "seqNo": 7,
+      "time": 1351360690,
+      "scriptId": "wchm",
+      "historyId": "252050940109790001394e47e2f-261a-45fa-a3fe-6b30d8a18fb3",
+      "updateSize": 2,
+      "updates": {}
+    }
+  ]
+}

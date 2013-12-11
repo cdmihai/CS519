@@ -1,0 +1,402 @@
+{
+  "userid": "gxfb",
+  "guid": "cebe913c-5fad-4766-5128-2c6b7d5c9ab6",
+  "lastStatus": "deleted",
+  "items": [
+    {
+      "seqNo": 0,
+      "time": 1349985399,
+      "scriptId": "zzyy",
+      "historyId": "252052315400180520939acc41a-6472-465e-81d6-e229472b4a8d",
+      "updateSize": 7649,
+      "ast": {
+        "textVersion": "v2.2,js,ctx",
+        "jsonVersion": "v1.0,resolved,short",
+        "name": "About coordinates",
+        "comment": "Get your current coordinates and convert them from the DMS to the DD annotation. With two actions wrapped into this script you can do that.",
+        "icon": "globe",
+        "color": "#ffa52a2a",
+        "autoIcon": "globe",
+        "autoColor": "#a52a2a",
+        "platform": "current",
+        "rootId": "NQCEf1JsyI4M1sLu2lj0Xw00",
+        "showAd": false,
+        "isLibrary": false,
+        "allowExport": false,
+        "hasUniqueIds": false,
+        "decls": [
+          {
+            "name": "get your location",
+            "inParameters": [],
+            "outParameters": [],
+            "isPrivate": false,
+            "isOffloaded": false,
+            "isTest": false,
+            "isAsync": false,
+            "nodeType": "action",
+            "body": [
+              {
+                "text": "Get the coordinates of your current location in the useful DMS annotation.",
+                "nodeType": "comment",
+                "id": "xjUS5J4O04Ad2GZMuB0n1Ivx"
+              },
+              {
+                "text": "First we let Windows Phone Software search for the most accurate position.",
+                "nodeType": "comment",
+                "id": "qBfe69JqKYLPcMkjl3g95Pr6"
+              },
+              {
+                "expr": "$qM0bfhsU0s83951e8DLIst92L0 ,:= :senses .current_location_accurate",
+                "nodeType": "exprStmt",
+                "id": "qM0bfhsU0s83951e8DLIst92",
+                "locals": [
+                  {
+                    "name": "location",
+                    "type": "Location",
+                    "nodeType": "localDef",
+                    "id": "qM0bfhsU0s83951e8DLIst92L0"
+                  }
+                ]
+              },
+              {
+                "text": "The Altitude can be presented directly to the user without any additional calculation.",
+                "nodeType": "comment",
+                "id": "p0Jk5mUwZuDhHpuNN5v4EGeO"
+              },
+              {
+                "expr": "$uCHUHsIYr51UZGeG6yxXfU62L0 ,:= 'Altitude/003a_ ,∥ :math .round_with_precision ,( $qM0bfhsU0s83951e8DLIst92L0 .altitude ,, ,1 ,) .to_string ,∥ '_m",
+                "nodeType": "exprStmt",
+                "id": "uCHUHsIYr51UZGeG6yxXfU62",
+                "locals": [
+                  {
+                    "name": "text",
+                    "type": "String",
+                    "nodeType": "localDef",
+                    "id": "uCHUHsIYr51UZGeG6yxXfU62L0"
+                  }
+                ]
+              },
+              {
+                "expr": "$uCHUHsIYr51UZGeG6yxXfU62L0 .post_to_wall",
+                "nodeType": "exprStmt",
+                "id": "FK2kI2J5aBTt4VydjI65iyI8",
+                "locals": []
+              },
+              {
+                "text": "The latitude and longitude coordinates are given in the DD annotation. So we have to convert them to the more useful DMS annotation, which is done in following.",
+                "nodeType": "comment",
+                "id": "YSh89THHI8wUpDp9YgF0rtjv"
+              },
+              {
+                "expr": "$GwPKOe7iH6b0U4sOADwEbiJZL0 ,:= $qM0bfhsU0s83951e8DLIst92L0 .longitude",
+                "nodeType": "exprStmt",
+                "id": "GwPKOe7iH6b0U4sOADwEbiJZ",
+                "locals": [
+                  {
+                    "name": "S",
+                    "type": "Number",
+                    "nodeType": "localDef",
+                    "id": "GwPKOe7iH6b0U4sOADwEbiJZL0"
+                  }
+                ]
+              },
+              {
+                "expr": "$x3gM6pUa4UOCh8Hibq4jNkYJL0 ,:= :math .floor ,( $GwPKOe7iH6b0U4sOADwEbiJZL0 ,)",
+                "nodeType": "exprStmt",
+                "id": "x3gM6pUa4UOCh8Hibq4jNkYJ",
+                "locals": [
+                  {
+                    "name": "D",
+                    "type": "Number",
+                    "nodeType": "localDef",
+                    "id": "x3gM6pUa4UOCh8Hibq4jNkYJL0"
+                  }
+                ]
+              },
+              {
+                "expr": "$GwPKOe7iH6b0U4sOADwEbiJZL0 ,:= ,( $GwPKOe7iH6b0U4sOADwEbiJZL0 ,- $x3gM6pUa4UOCh8Hibq4jNkYJL0 ,) ,* ,6 ,0",
+                "nodeType": "exprStmt",
+                "id": "ncLeEZhvGTZby4VmUrnZZJdf",
+                "locals": []
+              },
+              {
+                "expr": "$wmp2CABiGimOgWneDTqXkeuCL0 ,:= :math .floor ,( $GwPKOe7iH6b0U4sOADwEbiJZL0 ,)",
+                "nodeType": "exprStmt",
+                "id": "wmp2CABiGimOgWneDTqXkeuC",
+                "locals": [
+                  {
+                    "name": "M",
+                    "type": "Number",
+                    "nodeType": "localDef",
+                    "id": "wmp2CABiGimOgWneDTqXkeuCL0"
+                  }
+                ]
+              },
+              {
+                "expr": "$GwPKOe7iH6b0U4sOADwEbiJZL0 ,:= ,( $GwPKOe7iH6b0U4sOADwEbiJZL0 ,- $wmp2CABiGimOgWneDTqXkeuCL0 ,) ,* ,6 ,0",
+                "nodeType": "exprStmt",
+                "id": "i40IIhwhuIbdWAxtmMmnJFjK",
+                "locals": []
+              },
+              {
+                "expr": "$GwPKOe7iH6b0U4sOADwEbiJZL0 ,:= :math .round_with_precision ,( $GwPKOe7iH6b0U4sOADwEbiJZL0 ,, ,2 ,)",
+                "nodeType": "exprStmt",
+                "id": "sS0bxPlCQ6FOLKNcPUUG1LP5",
+                "locals": []
+              },
+              {
+                "expr": "$uCHUHsIYr51UZGeG6yxXfU62L0 ,:= 'Longitude/003a_ ,∥ $x3gM6pUa4UOCh8Hibq4jNkYJL0 .to_string ,∥ '/002a ,∥ $wmp2CABiGimOgWneDTqXkeuCL0 .to_string ,∥ '/0027 ,∥ $GwPKOe7iH6b0U4sOADwEbiJZL0 .to_string ,∥ '/0022_E",
+                "nodeType": "exprStmt",
+                "id": "kvCHgF1gQeZCaxTfFDlnPEm7",
+                "locals": []
+              },
+              {
+                "expr": "$uCHUHsIYr51UZGeG6yxXfU62L0 .post_to_wall",
+                "nodeType": "exprStmt",
+                "id": "R9p6URHyoftYMO9a5l4f8iqp",
+                "locals": []
+              },
+              {
+                "expr": "$GwPKOe7iH6b0U4sOADwEbiJZL0 ,:= $qM0bfhsU0s83951e8DLIst92L0 .latitude",
+                "nodeType": "exprStmt",
+                "id": "RRi21dqpteqZS27R8xlQk4OT",
+                "locals": []
+              },
+              {
+                "expr": "$x3gM6pUa4UOCh8Hibq4jNkYJL0 ,:= :math .floor ,( $GwPKOe7iH6b0U4sOADwEbiJZL0 ,)",
+                "nodeType": "exprStmt",
+                "id": "EEUj4TAqwowGVBkUv7zOvLsv",
+                "locals": []
+              },
+              {
+                "expr": "$GwPKOe7iH6b0U4sOADwEbiJZL0 ,:= ,( $GwPKOe7iH6b0U4sOADwEbiJZL0 ,- $x3gM6pUa4UOCh8Hibq4jNkYJL0 ,) ,* ,6 ,0",
+                "nodeType": "exprStmt",
+                "id": "guVneflrIJdN9oZQ5ulAU44A",
+                "locals": []
+              },
+              {
+                "expr": "$wmp2CABiGimOgWneDTqXkeuCL0 ,:= :math .floor ,( $GwPKOe7iH6b0U4sOADwEbiJZL0 ,)",
+                "nodeType": "exprStmt",
+                "id": "x4HujLCoZn22IR4j51ZfM5z6",
+                "locals": []
+              },
+              {
+                "expr": "$GwPKOe7iH6b0U4sOADwEbiJZL0 ,:= ,( $GwPKOe7iH6b0U4sOADwEbiJZL0 ,- $wmp2CABiGimOgWneDTqXkeuCL0 ,) ,* ,6 ,0",
+                "nodeType": "exprStmt",
+                "id": "wGRHvvODzvoozuaVuDst6efM",
+                "locals": []
+              },
+              {
+                "expr": "$GwPKOe7iH6b0U4sOADwEbiJZL0 ,:= :math .round_with_precision ,( $GwPKOe7iH6b0U4sOADwEbiJZL0 ,, ,2 ,)",
+                "nodeType": "exprStmt",
+                "id": "Vtt1KtCT6k0czpXwETBEqr2Z",
+                "locals": []
+              },
+              {
+                "text": "After converting from DD to DMS annotation, we present the result to the user.",
+                "nodeType": "comment",
+                "id": "eNx5jDKamKVQtjoNZw7GMbZ6"
+              },
+              {
+                "expr": "$uCHUHsIYr51UZGeG6yxXfU62L0 ,:= 'Latitude/003a_ ,∥ $x3gM6pUa4UOCh8Hibq4jNkYJL0 .to_string ,∥ '/002a ,∥ $wmp2CABiGimOgWneDTqXkeuCL0 .to_string ,∥ '/0027 ,∥ $GwPKOe7iH6b0U4sOADwEbiJZL0 .to_string ,∥ '/0022_N",
+                "nodeType": "exprStmt",
+                "id": "UkMZKVuSnQG9K74VizzIud1e",
+                "locals": []
+              },
+              {
+                "expr": "$uCHUHsIYr51UZGeG6yxXfU62L0 .post_to_wall",
+                "nodeType": "exprStmt",
+                "id": "YvecpuZWBbr70CvKuq09BieY",
+                "locals": []
+              }
+            ],
+            "id": "HIg4lyGYNEqBOagSMSFC2zSf"
+          },
+          {
+            "name": "convert from DMS to DD",
+            "inParameters": [],
+            "outParameters": [],
+            "isPrivate": false,
+            "isOffloaded": false,
+            "isTest": false,
+            "isAsync": false,
+            "nodeType": "action",
+            "body": [
+              {
+                "text": "Convert coordinates from the DMS annotation to the DD annotation.",
+                "nodeType": "comment",
+                "id": "wYb2Lb19kufYdSr0YauVWPh7"
+              },
+              {
+                "text": "First we ask the user to enter the DMS coordinates step by step.",
+                "nodeType": "comment",
+                "id": "OLFHGmkjgJnKRnmVTyudYNfB"
+              },
+              {
+                "expr": "$X4Ur1BcVzb5anuaE4Kor9q1CL0 ,:= :wall .ask_number ,( 'Degrees/003a ,)",
+                "nodeType": "exprStmt",
+                "id": "X4Ur1BcVzb5anuaE4Kor9q1C",
+                "locals": [
+                  {
+                    "name": "degrees",
+                    "type": "Number",
+                    "nodeType": "localDef",
+                    "id": "X4Ur1BcVzb5anuaE4Kor9q1CL0"
+                  }
+                ]
+              },
+              {
+                "expr": "$PKkWNcrwaBOAz2etllxQ4HZHL0 ,:= :wall .ask_number ,( 'Minutes/003a ,)",
+                "nodeType": "exprStmt",
+                "id": "PKkWNcrwaBOAz2etllxQ4HZH",
+                "locals": [
+                  {
+                    "name": "minutes",
+                    "type": "Number",
+                    "nodeType": "localDef",
+                    "id": "PKkWNcrwaBOAz2etllxQ4HZHL0"
+                  }
+                ]
+              },
+              {
+                "expr": "$FBZ42y8gibEoadQwnEdkmYJiL0 ,:= :wall .ask_number ,( 'Seconds/003a ,)",
+                "nodeType": "exprStmt",
+                "id": "FBZ42y8gibEoadQwnEdkmYJi",
+                "locals": [
+                  {
+                    "name": "seconds",
+                    "type": "Number",
+                    "nodeType": "localDef",
+                    "id": "FBZ42y8gibEoadQwnEdkmYJiL0"
+                  }
+                ]
+              },
+              {
+                "text": "After user input we calculate from DMS to DD annotation.",
+                "nodeType": "comment",
+                "id": "Uk4KAI7lWB7JkS7FUkOU3L3k"
+              },
+              {
+                "expr": "$j074jKgcMjDfKqrWHtATdTnhL0 ,:= $X4Ur1BcVzb5anuaE4Kor9q1CL0 ,+ $PKkWNcrwaBOAz2etllxQ4HZHL0 ,/ ,6 ,0 ,+ $FBZ42y8gibEoadQwnEdkmYJiL0 ,/ ,3 ,6 ,0 ,0",
+                "nodeType": "exprStmt",
+                "id": "j074jKgcMjDfKqrWHtATdTnh",
+                "locals": [
+                  {
+                    "name": "DD",
+                    "type": "Number",
+                    "nodeType": "localDef",
+                    "id": "j074jKgcMjDfKqrWHtATdTnhL0"
+                  }
+                ]
+              },
+              {
+                "text": "We round the result with a precision of six decimal numbers for a more useful result.",
+                "nodeType": "comment",
+                "id": "U67QZy7wYSSzAMiEKhkaZiTn"
+              },
+              {
+                "expr": "$j074jKgcMjDfKqrWHtATdTnhL0 ,:= :math .round_with_precision ,( $j074jKgcMjDfKqrWHtATdTnhL0 ,, ,6 ,)",
+                "nodeType": "exprStmt",
+                "id": "wvftvP5KE85R52JtktMN3ZDw",
+                "locals": []
+              },
+              {
+                "text": "At last we present this result to the user.",
+                "nodeType": "comment",
+                "id": "xGFvhZvunBcbhfN0gfb5GTZ3"
+              },
+              {
+                "expr": "$xCoTRtPlTQF1D6mRzS24uCDlL0 ,:= 'The_DD_Coordinate_is/003a_ ,∥ $j074jKgcMjDfKqrWHtATdTnhL0 .to_string",
+                "nodeType": "exprStmt",
+                "id": "xCoTRtPlTQF1D6mRzS24uCDl",
+                "locals": [
+                  {
+                    "name": "text",
+                    "type": "String",
+                    "nodeType": "localDef",
+                    "id": "xCoTRtPlTQF1D6mRzS24uCDlL0"
+                  }
+                ]
+              },
+              {
+                "expr": "$xCoTRtPlTQF1D6mRzS24uCDlL0 .post_to_wall",
+                "nodeType": "exprStmt",
+                "id": "uGx2rPPVRrhi37OGOWomo9DC",
+                "locals": []
+              }
+            ],
+            "id": "xKEJLSZALfhFanKYy2DuTgKO"
+          }
+        ],
+        "deletedDecls": [],
+        "nodeType": "app",
+        "id": "app"
+      }
+    },
+    {
+      "seqNo": 1,
+      "time": 1349985472,
+      "scriptId": "zzyy",
+      "historyId": "25205231532719702635f6f9526-7223-4b35-a30e-97cb8f2c0884",
+      "updateSize": 2,
+      "updates": {}
+    },
+    {
+      "seqNo": 2,
+      "time": 1351272851,
+      "scriptId": "zzyy",
+      "historyId": "252051027948734612372c258e2-f2c1-4a26-b23f-bfe7f7fe91f0",
+      "updateSize": 2,
+      "updates": {}
+    },
+    {
+      "seqNo": 3,
+      "time": 1352698529,
+      "scriptId": "zzyy",
+      "historyId": "2520496022702953510bca4b2df-5273-4ca1-9e36-8b47ce24c0fe",
+      "updateSize": 2,
+      "updates": {}
+    },
+    {
+      "seqNo": 4,
+      "time": 1354902933,
+      "scriptId": "zzyy",
+      "historyId": "252047397866718675879a7d671-9f23-4a5b-8825-6e4881afe401",
+      "updateSize": 45,
+      "updates": {
+        "app": {
+          "rootId": "PG2D4ekLD7VYgQm2F8cmwo8x"
+        }
+      }
+    },
+    {
+      "seqNo": 5,
+      "time": 1358458487,
+      "scriptId": "zzyy",
+      "historyId": "2520438423126922762fcba1412-a449-4789-8572-85d08c4656fa",
+      "updateSize": 2,
+      "updates": {}
+    },
+    {
+      "seqNo": 6,
+      "time": 1366140206,
+      "scriptId": "vmwt",
+      "historyId": "2520361605937452705fe0161d9-4445-4e80-b3d4-a70694317a12",
+      "updateSize": 67,
+      "updates": {
+        "app": {
+          "platform": "location",
+          "rootId": "o0YDYOiZ5kzAIw24g30Aly9s"
+        }
+      }
+    },
+    {
+      "seqNo": 7,
+      "time": 1366154929,
+      "scriptId": "vmwt",
+      "historyId": "25203614587035001995eb3278e-2996-4dee-af89-900519710d43",
+      "updateSize": 2,
+      "updates": {}
+    }
+  ]
+}

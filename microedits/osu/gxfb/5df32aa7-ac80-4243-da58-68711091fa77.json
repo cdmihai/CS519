@@ -1,0 +1,239 @@
+{
+  "userid": "gxfb",
+  "guid": "5df32aa7-ac80-4243-da58-68711091fa77",
+  "lastStatus": "deleted",
+  "items": [
+    {
+      "seqNo": 0,
+      "time": 1349916872,
+      "scriptId": "xxjj",
+      "historyId": "2520523839278503150f31601ba-8190-4784-bb02-3ca396c42c00",
+      "updateSize": 3440,
+      "ast": {
+        "textVersion": "v2.2,js,ctx",
+        "jsonVersion": "v1.0,resolved,short",
+        "name": "accelero colors",
+        "comment": "Maps the accelerometer to colors",
+        "icon": "lab",
+        "color": "#ffff00ff",
+        "autoIcon": "lab",
+        "autoColor": "#ff00ff",
+        "platform": "current",
+        "rootId": "KDuF1oE0D5S8Y1w2CGzP12n0",
+        "showAd": false,
+        "isLibrary": false,
+        "allowExport": false,
+        "hasUniqueIds": false,
+        "decls": [
+          {
+            "name": "main",
+            "inParameters": [],
+            "outParameters": [],
+            "isPrivate": false,
+            "isOffloaded": false,
+            "isTest": false,
+            "isAsync": false,
+            "nodeType": "action",
+            "body": [
+              {
+                "text": "Starts the script",
+                "nodeType": "comment",
+                "id": "xbWkLidbzfdNRyYMNVh8gtAa"
+              },
+              {
+                "expr": ":data #xNE8CnI4cVyU1OCurtdf1QxM ,:= :media .create_full_board",
+                "nodeType": "exprStmt",
+                "id": "VdfF4llQU6oHxCyL1gQLmfVZ",
+                "locals": []
+              },
+              {
+                "expr": ":data #xNE8CnI4cVyU1OCurtdf1QxM .post_to_wall",
+                "nodeType": "exprStmt",
+                "id": "AmJ1urVdTpxwAxyHVMK9SXG5",
+                "locals": []
+              },
+              {
+                "text": "The work happens in the game loop. Swipe left or right to see it.",
+                "nodeType": "comment",
+                "id": "FZDluURbpU2VblO2feWNWrJb"
+              }
+            ],
+            "id": "bZRRvzbBCje3GhAEjA8s4NDo"
+          },
+          {
+            "name": "board",
+            "comment": "",
+            "type": "Board",
+            "isReadonly": false,
+            "isTransient": true,
+            "nodeType": "data",
+            "id": "xNE8CnI4cVyU1OCurtdf1QxM"
+          },
+          {
+            "name": "gameloop",
+            "inParameters": [],
+            "outParameters": [],
+            "isPrivate": true,
+            "isOffloaded": false,
+            "isTest": false,
+            "isAsync": true,
+            "nodeType": "event",
+            "eventName": "gameloop",
+            "eventVariableId": null,
+            "body": [
+              {
+                "text": "On each iteration, map the accelerometer to hue, saturation and brightness.",
+                "nodeType": "comment",
+                "id": "D9gNJKgSzSCYt1xuaPXA1B2F"
+              },
+              {
+                "expr": "$v0PTpIOIBE81nugbc8M2IBM3L0 ,:= :senses .acceleration_smooth",
+                "nodeType": "exprStmt",
+                "id": "v0PTpIOIBE81nugbc8M2IBM3",
+                "locals": [
+                  {
+                    "name": "p",
+                    "type": "Vector3",
+                    "nodeType": "localDef",
+                    "id": "v0PTpIOIBE81nugbc8M2IBM3L0"
+                  }
+                ]
+              },
+              {
+                "text": "The accelerometer can return negative values so we take the absolute value of each component.",
+                "nodeType": "comment",
+                "id": "lXPEIGyeQTsm7K9vsYRe4mR2"
+              },
+              {
+                "expr": "$xeOY2sJw6HFS63iSYqrG0r0TL0 ,:= :math .abs ,( $v0PTpIOIBE81nugbc8M2IBM3L0 .x ,)",
+                "nodeType": "exprStmt",
+                "id": "xeOY2sJw6HFS63iSYqrG0r0T",
+                "locals": [
+                  {
+                    "name": "hue",
+                    "type": "Number",
+                    "nodeType": "localDef",
+                    "id": "xeOY2sJw6HFS63iSYqrG0r0TL0"
+                  }
+                ]
+              },
+              {
+                "expr": "$XEgM567j8lqG3TolfTq9OsJ4L0 ,:= :math .abs ,( $v0PTpIOIBE81nugbc8M2IBM3L0 .y ,)",
+                "nodeType": "exprStmt",
+                "id": "XEgM567j8lqG3TolfTq9OsJ4",
+                "locals": [
+                  {
+                    "name": "saturation",
+                    "type": "Number",
+                    "nodeType": "localDef",
+                    "id": "XEgM567j8lqG3TolfTq9OsJ4L0"
+                  }
+                ]
+              },
+              {
+                "expr": "$DgFpKvqo2H8Teh4VWbbYr4RwL0 ,:= :math .abs ,( $v0PTpIOIBE81nugbc8M2IBM3L0 .z ,)",
+                "nodeType": "exprStmt",
+                "id": "DgFpKvqo2H8Teh4VWbbYr4Rw",
+                "locals": [
+                  {
+                    "name": "brithness",
+                    "type": "Number",
+                    "nodeType": "localDef",
+                    "id": "DgFpKvqo2H8Teh4VWbbYr4RwL0"
+                  }
+                ]
+              },
+              {
+                "text": "We create a new color",
+                "nodeType": "comment",
+                "id": "v5ByZfCYyzQ0BJzngpTTCO9k"
+              },
+              {
+                "expr": "$UQPSdlNEtQdrk7r58mDbmcyRL0 ,:= :colors .from_hsb ,( $xeOY2sJw6HFS63iSYqrG0r0TL0 ,, $XEgM567j8lqG3TolfTq9OsJ4L0 ,, $DgFpKvqo2H8Teh4VWbbYr4RwL0 ,)",
+                "nodeType": "exprStmt",
+                "id": "UQPSdlNEtQdrk7r58mDbmcyR",
+                "locals": [
+                  {
+                    "name": "c",
+                    "type": "Color",
+                    "nodeType": "localDef",
+                    "id": "UQPSdlNEtQdrk7r58mDbmcyRL0"
+                  }
+                ]
+              },
+              {
+                "expr": ":data #xNE8CnI4cVyU1OCurtdf1QxM .set_background ,( $UQPSdlNEtQdrk7r58mDbmcyRL0 ,)",
+                "nodeType": "exprStmt",
+                "id": "xsKhRYYI3bfy89V2NDuMd8fn",
+                "locals": []
+              },
+              {
+                "text": "And update the display",
+                "nodeType": "comment",
+                "id": "HGXRqqEeX4LRSyjv2G8Mf6xP"
+              },
+              {
+                "expr": ":data #xNE8CnI4cVyU1OCurtdf1QxM .update_on_wall",
+                "nodeType": "exprStmt",
+                "id": "ReyRjXG7UFv3TXzagEL8OuWw",
+                "locals": []
+              }
+            ],
+            "id": "xiGd54QB2KEktBh61PppW2GP"
+          }
+        ],
+        "deletedDecls": [],
+        "nodeType": "app",
+        "id": "app"
+      }
+    },
+    {
+      "seqNo": 1,
+      "time": 1349917026,
+      "scriptId": "xxjj",
+      "historyId": "2520523837735771902f3719cf6-9292-426d-af2d-903d06dca517",
+      "updateSize": 45,
+      "updates": {
+        "app": {
+          "rootId": "gIR8b71mdkwx0rfJjJpfhiK1"
+        }
+      }
+    },
+    {
+      "seqNo": 2,
+      "time": 1351272837,
+      "scriptId": "xxjj",
+      "historyId": "25205102796254475998d8621e5-94fd-4c9a-9d37-72af9e408bb7",
+      "updateSize": 45,
+      "updates": {
+        "app": {
+          "rootId": "KDuF1oE0D5S8Y1w2CGzP12n0"
+        }
+      }
+    },
+    {
+      "seqNo": 3,
+      "time": 1352698529,
+      "scriptId": "xxjj",
+      "historyId": "25204960227087349822650e325-135d-46d8-98ea-8a2a2307fa8d",
+      "updateSize": 45,
+      "updates": {
+        "app": {
+          "rootId": "gIR8b71mdkwx0rfJjJpfhiK1"
+        }
+      }
+    },
+    {
+      "seqNo": 4,
+      "time": 1354902940,
+      "scriptId": "xxjj",
+      "historyId": "252047397859739657796d298a4-9b1a-4c28-84b0-8469d41d7d3a",
+      "updateSize": 45,
+      "updates": {
+        "app": {
+          "rootId": "KDuF1oE0D5S8Y1w2CGzP12n0"
+        }
+      }
+    }
+  ]
+}

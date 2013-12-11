@@ -1,0 +1,437 @@
+{
+  "userid": "gxfb",
+  "guid": "397032f0-2a1c-4691-436f-0958ce415579",
+  "lastStatus": "deleted",
+  "items": [
+    {
+      "seqNo": 0,
+      "time": 1366143878,
+      "scriptId": "thyo",
+      "historyId": "2520361569214302147eebbd870-ec93-4b5e-abfe-4dd52bf180d8",
+      "updateSize": 14140,
+      "ast": {
+        "textVersion": "v2.2,js,ctx",
+        "jsonVersion": "v1.0,resolved,short",
+        "name": "records",
+        "comment": "Tables, indexes, objects and decorators. #docs #records #language",
+        "icon": "Files",
+        "color": "#ff9955BB",
+        "autoIcon": "Files",
+        "autoColor": "#9955BB",
+        "platform": "current",
+        "rootId": "xPakmPw2hZwUXg2ufxNE9GYp",
+        "showAd": false,
+        "isLibrary": false,
+        "allowExport": false,
+        "hasUniqueIds": false,
+        "decls": [
+          {
+            "name": "main",
+            "inParameters": [],
+            "outParameters": [],
+            "isPrivate": false,
+            "isOffloaded": false,
+            "isTest": false,
+            "isAsync": false,
+            "nodeType": "action",
+            "body": [
+              {
+                "text": "A `record` stores a collection of named values called **fields**, e.g., a Person record could store the person’s last name, and the person’s phone number in two fields named `lastname` and `phone`. Operations let you access the fields and update them in various ways. To make it easy to choose how you want to structure, store and retrieve your data, we provide four kinds of records that differ in how individual records are created, accessed, and disposed.",
+                "nodeType": "comment",
+                "id": "mTT20Bf2YOYuZiJtKJ6I6mDp"
+              },
+              {
+                "text": "* **Tables** are similar to what you may have encountered using databases or Excel spreadsheets. A record in a table corresponds to a row in the table, the field names being the column headers. A table record is stored permanently (until deleted) and you can enumerate all records in a table.",
+                "nodeType": "comment",
+                "id": "f2WMmfzwYRzawIGnDDBs3lU1"
+              },
+              {
+                "text": "* **Indexes** are similar to tables, but records in an index are accessed based on one or more keys. This provides efficient lookup of individual records based on keys. Also, records in indices need not be created or deleted explicitly. They can just be accessed via a set of keys. Tables and indexes are the main ‘work horse’ for storing your application data.",
+                "nodeType": "comment",
+                "id": "PeKka5UJgAxVoAC4g8L2YuqT"
+              },
+              {
+                "text": "* **Objects** are similar to what you may have encountered in other programming languages like C# or Java. Objects store data in fields, just like table rows store data in columns. Unlike table rows, however, objects are automatically deleted (“garbage collected”) if you don’t store them somewhere. Objects are useful if you want to roll your own data structures in memory (for example, to construct recursive trees).",
+                "nodeType": "comment",
+                "id": "Uy9XIZJjd4NbKd6WSLSO4nLI"
+              },
+              {
+                "text": "* **Decorators** are specialized records that can attach information to other existing objects. This can be very convenient; for example, you can store additional information about sprites (which are objects defined by the TouchDevelop environment) by attaching a decorator.",
+                "nodeType": "comment",
+                "id": "uKP20TNPXmK2s7JT5gh4hrWt"
+              },
+              {
+                "text": "We will now go through a couple scenarios to illustrate each of those types, showing you the most important features and how they are commonly used.",
+                "nodeType": "comment",
+                "id": "isLiXntdBMZk05DAQR1rWZ47"
+              },
+              {
+                "text": "## Tables",
+                "nodeType": "comment",
+                "id": "z0mQ0aRZ5LrCFOIygNFwBlVk"
+              },
+              {
+                "text": "`Tables` work pretty much like you would expect. They store your data organized into **rows** and **columns**. The columns have names and types, which you can edit in the script editor. Columns don’t change during script execution. Rows, on the other hand, are added and deleted by actions during execution of the script. Each row represents an individual record.",
+                "nodeType": "comment",
+                "id": "W1ESsx39epcKod6DCCh8FGGd"
+              },
+              {
+                "text": "For example, suppose we are creating a grocery list app. We can use a table to store each grocery item in a row.",
+                "nodeType": "comment",
+                "id": "qs436ZhyBogGe4Xiil3NUcLx"
+              },
+              {
+                "text": "{decl:grocery table}",
+                "nodeType": "comment",
+                "id": "xJ8bBuVALR2Vprok3DoIQXkM"
+              },
+              {
+                "text": "You will find the grocery table (and all other records you define) under the new top-level records name, which is abbreviated with the ⌹ symbol).",
+                "nodeType": "comment",
+                "id": "qKs4VCMy122VsX5zm8cMthoC"
+              },
+              {
+                "text": "* To create a row you, use the `add row` property on the `grocery` table.  It returns a `row`, which we can then use to fill in the columns .",
+                "nodeType": "comment",
+                "id": "vPFHdlg4RxEAuaWIuXEhcE83"
+              },
+              {
+                "expr": "$qDlzHgUEdt4Q90qWe246A04LL0 ,:= :records #kGt3Bh554qw1Ueye3TPvTQVM .add_row",
+                "nodeType": "exprStmt",
+                "id": "qDlzHgUEdt4Q90qWe246A04L",
+                "locals": [
+                  {
+                    "name": "row",
+                    "type": "{\"o\":\"grocery\"}",
+                    "nodeType": "localDef",
+                    "id": "qDlzHgUEdt4Q90qWe246A04LL0"
+                  }
+                ]
+              },
+              {
+                "text": "*  We use the `set` property to change the value of a column.",
+                "nodeType": "comment",
+                "id": "VCwCAcSOWjIZhJr0qELkY3kl"
+              },
+              {
+                "expr": "$qDlzHgUEdt4Q90qWe246A04LL0 .product .set ,( 'milk ,)",
+                "nodeType": "exprStmt",
+                "id": "hRGPg6LKpialp6OCXyKCjBSi",
+                "locals": []
+              },
+              {
+                "expr": "$qDlzHgUEdt4Q90qWe246A04LL0 .quantity .set ,( ,2 ,)",
+                "nodeType": "exprStmt",
+                "id": "xdhKopla008CPyt304dtfQQd",
+                "locals": []
+              },
+              {
+                "text": "* To access the value of a column, we use the 'get' property.",
+                "nodeType": "comment",
+                "id": "i4de0cKjC02D641rJVU9EzhG"
+              },
+              {
+                "expr": "$xzcTOx5VXyNQLxeRNvndxnBAL0 ,:= $qDlzHgUEdt4Q90qWe246A04LL0 .product .get",
+                "nodeType": "exprStmt",
+                "id": "xzcTOx5VXyNQLxeRNvndxnBA",
+                "locals": [
+                  {
+                    "name": "product",
+                    "type": "String",
+                    "nodeType": "localDef",
+                    "id": "xzcTOx5VXyNQLxeRNvndxnBAL0"
+                  }
+                ]
+              },
+              {
+                "expr": "$xzcTOx5VXyNQLxeRNvndxnBAL0 .post_to_wall",
+                "nodeType": "exprStmt",
+                "id": "AGnVoJEKpYgoyTjvyYzVxL4Y",
+                "locals": []
+              },
+              {
+                "text": "* We can iterate over all rows in a table using a [](/for each) loop.",
+                "nodeType": "comment",
+                "id": "wJgqrgrZOlruwfqs30GjWhCf"
+              },
+              {
+                "collection": ":records #kGt3Bh554qw1Ueye3TPvTQVM",
+                "conditions": [
+                  {
+                    "condition": "T",
+                    "nodeType": "where",
+                    "id": "x4XNkzdY7HR2KWuD0Za9J0Pp",
+                    "locals": []
+                  }
+                ],
+                "body": [
+                  {
+                    "expr": "$ZLcibkKTyKZWrebIR33SV2XRB0 .post_to_wall",
+                    "nodeType": "exprStmt",
+                    "id": "ximklfzPh2hszosqUwnCDZWW",
+                    "locals": []
+                  }
+                ],
+                "nodeType": "foreach",
+                "id": "ZLcibkKTyKZWrebIR33SV2XR",
+                "locals": [
+                  {
+                    "name": "g",
+                    "type": "{\"o\":\"grocery\"}",
+                    "nodeType": "localDef",
+                    "id": "ZLcibkKTyKZWrebIR33SV2XRB0"
+                  }
+                ]
+              },
+              {
+                "text": "### Some facts about tables",
+                "nodeType": "comment",
+                "id": "X5hr22wdVljAI0mjUzDP0Sbn"
+              },
+              {
+                "text": "* You can post individual rows to the wall, or even the entire table.",
+                "nodeType": "comment",
+                "id": "Bz5tta4ao4axFRQK4bIlR0rf"
+              },
+              {
+                "text": "* A row is displayed by stacking columns vertically (not horizontally as you may have expected) so you can see the entire row all at once even on a narrow screen.",
+                "nodeType": "comment",
+                "id": "kFrUJr77G2pKlSUry5v2WkMZ"
+              },
+              {
+                "text": "* Adding a new row always adds it at the bottom of the table.",
+                "nodeType": "comment",
+                "id": "xjPEQ0xp2d2nDcA9JZZdCcKx"
+              },
+              {
+                "text": "* When you iterate over rows, you always proceed from top to bottom.",
+                "nodeType": "comment",
+                "id": "sS5pfZXgNLUyyRE3b2W8ond4"
+              },
+              {
+                "text": "* When you create a new row, all columns are initialized to an initial value of invalid, following the same rules as for data variables. That is, the initial value is the invalid value except for [](/Number), [](/Boolean), [](/DateTime), and [](/String).",
+                "nodeType": "comment",
+                "id": "LJ5BiupgC0JXSGdbDXLfT0Hc"
+              },
+              {
+                "text": "* You can reset a column to the initial value using the clear property on the column.",
+                "nodeType": "comment",
+                "id": "qonlGocKVMTP4Ao34apdLhi3"
+              },
+              {
+                "text": "* You can store references to rows in other data structures (such as data variables, or other records). The kind of a row reference is named after the table containing the row, “grocery” in the example above.",
+                "nodeType": "comment",
+                "id": "R6KUjcl9XBaT8Kov1jSUblYI"
+              },
+              {
+                "text": "* You can delete a row using the delete row property on the row. When you delete a row, it is removed from the table, and all references to that row become invalid. This means you can no longer access the column values. You can check if a row reference is invalid using the `is invalid` property.",
+                "nodeType": "comment",
+                "id": "xSdsiwrpsqcJxjVZQ4iz3gAF"
+              },
+              {
+                "text": "* The `for each` loop supports filters: for example, you could replace the `where true` clause by  `where g->quantity->get > 0` to iterate only over entries with positive quantity.",
+                "nodeType": "comment",
+                "id": "uhVfO90gRMcUxvxmxT7x2SVC"
+              },
+              {
+                "collection": ":records #kGt3Bh554qw1Ueye3TPvTQVM",
+                "conditions": [
+                  {
+                    "condition": "$TdROGgVFDsZNQI68ai1jCtXgB0 .quantity .get ,> ,5",
+                    "nodeType": "where",
+                    "id": "xCDwzefqRTt2bvvU2YLGXlIy",
+                    "locals": []
+                  }
+                ],
+                "body": [
+                  {
+                    "expr": "",
+                    "nodeType": "exprStmt",
+                    "id": "seCqTsuPD9n86zyhjWijcpH1",
+                    "locals": []
+                  }
+                ],
+                "nodeType": "foreach",
+                "id": "TdROGgVFDsZNQI68ai1jCtXg",
+                "locals": [
+                  {
+                    "name": "gr",
+                    "type": "{\"o\":\"grocery\"}",
+                    "nodeType": "localDef",
+                    "id": "TdROGgVFDsZNQI68ai1jCtXgB0"
+                  }
+                ]
+              },
+              {
+                "text": "## Indexes",
+                "nodeType": "comment",
+                "id": "x60MpEYwqv8YoEKReOeFq085"
+              },
+              {
+                "text": "Sometimes we want to organize our records to make sure they meet some criteria; for example, we may want to sort our grocery items by name, and we may want to ensure that there are no duplicate rows (i.e. all rows should have a unique item name). This is where indexes come in: they keep your records sorted and avoid duplicates by using keys.",
+                "nodeType": "comment",
+                "id": "Ue1wECAbCYLJ4EmernsDn6OB"
+              },
+              {
+                "text": "To avoid confusion between tables and indexes, we chose a different terminology. We call individual records **entries** instead of rows. Also, instead of columns, we use **keys** and **fields**.",
+                "nodeType": "comment",
+                "id": "YgrCCHEuf1QaYZJKxeco6oze"
+              },
+              {
+                "text": "If we choose to organize our groceries using an index, we may do something like:",
+                "nodeType": "comment",
+                "id": "bAzsfbM80jzENh3G9Xo4erf6"
+              },
+              {
+                "text": "{decl:sorted grocery index}",
+                "nodeType": "comment",
+                "id": "lV4fPaVPEm4NdsVLSQAjUSqr"
+              },
+              {
+                "text": "So how is this different from using a table? Perhaps the biggest surprise is this: **You cannot add or remove entries!** This may seem strange at first, but there is a simple explanation: the index has been prefilled with entries for every possible key. This allows us to enforce a strong invariant: there exists exactly one entry for every key, always. Note that although you can call the clear property on an entry, it will just clear the fields, but not remove it from the index.",
+                "nodeType": "comment",
+                "id": "i0kQVIoe4M2C8kbQA5nxVc1U"
+              },
+              {
+                "text": "For our grocery list example, we have to rethink our logic a bit. When adding an item, the entry for the name is already there, so we can retrieve it using the at property, and then fill in the fields.",
+                "nodeType": "comment",
+                "id": "aWHjmKgQj3TeT4j9VmsDyqaG"
+              },
+              {
+                "text": "A bit more puzzling is the `for each` loop: Since the index contains one entry for each name, and there are infinitely many names, the index contains infinitely many entries. So will the loop go on forever? The answer is no: the `for each` loop is designed to iterate over entries with *interesting* content only, that is, entries for which at least one field has a different value than its initial value. So we can use the same code as before to sum up quantities.",
+                "nodeType": "comment",
+                "id": "y3hfFoeinV6vBDmpZ705NjLm"
+              },
+              {
+                "text": "### Some facts about indexes",
+                "nodeType": "comment",
+                "id": "XdbUDPISbqc0B3IZknW2QB0I"
+              },
+              {
+                "text": "* The `for each` loop returns index entries sorted by keys.",
+                "nodeType": "comment",
+                "id": "RkQVCoTYOTMSFWW2qnC88xFc"
+              },
+              {
+                "text": "* We currently support the following keys: Boolean, Color, DateTime, Location, Number, String, and Vector3. You can also use table rows as keys (but is usually makes more sense to add the fields directly as additional columns to the table).",
+                "nodeType": "comment",
+                "id": "HSkssa0eKmRDq28LZoqG0CFQ"
+              },
+              {
+                "text": "* You can use multiple keys.",
+                "nodeType": "comment",
+                "id": "q1lI6CEwx9HkFJkfP5yPgYkg"
+              },
+              {
+                "text": "* Sorting is in lexicographic order (sort by first key first, then by second key, and so on).",
+                "nodeType": "comment",
+                "id": "UK9z7zVblDCNlk3ukyPfFi8e"
+              },
+              {
+                "text": "* You can define an index with no keys. In that case the index is a singleton, i.e. there is exactly one entry.",
+                "nodeType": "comment",
+                "id": "mxVJO2Fb02pX3nH2HD7G0urp"
+              },
+              {
+                "text": "* You can pass index entries as parameters or return values, and store them in local variables. However, you cannot store them in permanent storage (data variables or records). If you feel like you need to do that, store the keys instead.",
+                "nodeType": "comment",
+                "id": "Ypg2079qpDL1lpCqwdI74l6w"
+              },
+              {
+                "text": "## Decorators",
+                "nodeType": "comment",
+                "id": "MRc1OfqB8AwMMK4M7C85A5LM"
+              },
+              {
+                "text": "**Decorators** let you associate extra information with existing data kinds. A decorator is really just a special kind of index, with exactly one key, namely the kind being decorated. Decorators make this scenario less verbose. E.g., you don’t even have to name the decorator, since the decorated kind uniquely identifies it. Another difference with indexes is that you cannot iterate over all decorated values. You can simply look up the decoration of a value.",
+                "nodeType": "comment",
+                "id": "xgeT3kdnDCaxiFs8uIUw2rpl"
+              },
+              {
+                "text": "E.g., in a game you can use a decorator on the Sprite kind to attach extra information to your sprites, such as the remaining strength of an enemy, etc.",
+                "nodeType": "comment",
+                "id": "j6zGtEB495yeVtjBt5GE4OB6"
+              },
+              {
+                "text": "## Objects",
+                "nodeType": "comment",
+                "id": "GWDVHdoKcaEV2Vpnn66X4x4B"
+              },
+              {
+                "text": "**Objects** are records that are created explicitly like table rows, but they differ from table rows in that there is no way to enumerate all objects (you have to have an object reference stored somewhere, e.g., a local variable or a global variable). This difference allows to reclaim an object (delete it) automatically when a script no longer has any reference to an object. In most programming languages this kind of record is called a **garbage collected object**.",
+                "nodeType": "comment",
+                "id": "o3hO8BDVpXgPW2KyKt1bFu4i"
+              },
+              {
+                "text": "{priority:50}",
+                "nodeType": "comment",
+                "id": "PAEA6LEEfrEsQdNDes7eb8j2"
+              }
+            ],
+            "id": "R7DIIsdybcUNBGvZiQsR6X76"
+          },
+          {
+            "nodeType": "record",
+            "name": "grocery",
+            "sourceName": "grocery table",
+            "comment": "",
+            "category": "table",
+            "isCloudEnabled": false,
+            "keys": [],
+            "fields": [
+              {
+                "nodeType": "recordField",
+                "name": "product",
+                "type": "String",
+                "id": "Mg0PxlEazVxjnFk4JCD006Cc"
+              },
+              {
+                "nodeType": "recordField",
+                "name": "quantity",
+                "type": "Number",
+                "id": "wtjbPTVbica2pNasr0FS2owR"
+              }
+            ],
+            "id": "kGt3Bh554qw1Ueye3TPvTQVM"
+          },
+          {
+            "nodeType": "record",
+            "name": "sorted grocery",
+            "sourceName": "sorted grocery index",
+            "comment": "",
+            "category": "index",
+            "isCloudEnabled": false,
+            "keys": [
+              {
+                "nodeType": "recordKey",
+                "name": "name",
+                "type": "String",
+                "id": "j24FUskg3UHrWo3vg2J323nC"
+              }
+            ],
+            "fields": [
+              {
+                "nodeType": "recordField",
+                "name": "quantity",
+                "type": "Number",
+                "id": "bUEW22erdhJjTBd52DFaCtZa"
+              }
+            ],
+            "id": "xMnw35iJRywyXepenUEVHbTH"
+          }
+        ],
+        "deletedDecls": [],
+        "nodeType": "app",
+        "id": "app"
+      }
+    },
+    {
+      "seqNo": 1,
+      "time": 1366144077,
+      "scriptId": "thyo",
+      "historyId": "25203615672287173837554f9c8-ab1a-4cd4-8ac4-c84161621ded",
+      "updateSize": 2,
+      "updates": {}
+    }
+  ]
+}

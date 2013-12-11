@@ -1,0 +1,584 @@
+{
+  "userid": "gxfb",
+  "guid": "cc59a2db-d1b7-47eb-bb97-052a53dfedac",
+  "lastStatus": "deleted",
+  "items": [
+    {
+      "seqNo": 0,
+      "time": 1349742215,
+      "scriptId": "kblp",
+      "historyId": "2520525585849443328252dc2c4-6eeb-4975-9fa5-ffabfb81a2ee",
+      "updateSize": 10950,
+      "ast": {
+        "textVersion": "v2.2,js,ctx",
+        "jsonVersion": "v1.0,resolved,short",
+        "name": "where am I ??",
+        "comment": "This Script reads your current GPS Position from your phone. It then shows you the distinct values on the screen.\n\nThese are: Longitude, Latitude, Altitude and Speed.\n\nAll Data remains on the phone. Your location will absolutely remain private to you.",
+        "icon": "target",
+        "color": "#ffff0038",
+        "autoIcon": "target",
+        "autoColor": "#ff0038",
+        "platform": "current",
+        "rootId": "L66vKm0Xjk7GHJO8kg2Y7nnR",
+        "showAd": true,
+        "isLibrary": false,
+        "allowExport": false,
+        "hasUniqueIds": false,
+        "decls": [
+          {
+            "name": "main",
+            "inParameters": [],
+            "outParameters": [],
+            "isPrivate": false,
+            "isOffloaded": false,
+            "isTest": false,
+            "isAsync": false,
+            "nodeType": "action",
+            "body": [
+              {
+                "expr": ":code #Vx4TzGJ2G9rPt9I3eN4xWhCE",
+                "nodeType": "exprStmt",
+                "id": "fWwe4c2TAjGz4gsd2CCUcAD1",
+                "locals": []
+              },
+              {
+                "expr": ":code #xdnb4aQEm3ZOWLOKjZB2wBbJ",
+                "nodeType": "exprStmt",
+                "id": "qhYDiiDdKeMkJkF1QPJAOZ2F",
+                "locals": []
+              },
+              {
+                "expr": ":code #V2ZHEj6UjS9SmILdoHMBsu2l ,( ,1 ,)",
+                "nodeType": "exprStmt",
+                "id": "XUnyba26ZsFH6fXm4wKB4FIz",
+                "locals": []
+              }
+            ],
+            "id": "DXLB3FLOzb2LI9Sf5RE6xlqa"
+          },
+          {
+            "name": "setup Wall",
+            "inParameters": [],
+            "outParameters": [],
+            "isPrivate": false,
+            "isOffloaded": false,
+            "isTest": false,
+            "isAsync": false,
+            "nodeType": "action",
+            "body": [
+              {
+                "text": "Wall einrichten",
+                "nodeType": "comment",
+                "id": "iBht83dH8oCB1hSvb2xXGPNn"
+              },
+              {
+                "expr": ":wall .set_background ,( :colors .background ,)",
+                "nodeType": "exprStmt",
+                "id": "wTH8Wb33vbD44wv9m3iLcO6f",
+                "locals": []
+              },
+              {
+                "expr": ":wall .set_foreground ,( :colors .accent ,)",
+                "nodeType": "exprStmt",
+                "id": "uPV35tGDPIsZ39PGKne6Eych",
+                "locals": []
+              },
+              {
+                "expr": ":wall .set_title ,( 'Where_am_I_/003f/003f ,)",
+                "nodeType": "exprStmt",
+                "id": "pyM0C5smDc2Rgwp5N4TO66ON",
+                "locals": []
+              },
+              {
+                "expr": ":wall .set_subtitle ,( 'According_to_your_GPS_you_are_here/003a_ ,)",
+                "nodeType": "exprStmt",
+                "id": "xBCgzK2XNoui1vvZji4ZBBjG",
+                "locals": []
+              },
+              {
+                "expr": ":wall .set_reversed ,( T ,)",
+                "nodeType": "exprStmt",
+                "id": "Dr2Jz6hoCft0lK6QzNsxEww2",
+                "locals": []
+              },
+              {
+                "expr": "'Initializing_GPS/002c_reading_Data .post_to_wall",
+                "nodeType": "exprStmt",
+                "id": "IfIRj2cn0yIO2ZzT4nD9phXv",
+                "locals": []
+              }
+            ],
+            "id": "Vx4TzGJ2G9rPt9I3eN4xWhCE"
+          },
+          {
+            "name": "show Map",
+            "inParameters": [
+              {
+                "name": "zoomin",
+                "type": "Number",
+                "nodeType": "localDef",
+                "id": "V2ZHEj6UjS9SmILdoHMBsu2lP0"
+              }
+            ],
+            "outParameters": [],
+            "isPrivate": false,
+            "isOffloaded": false,
+            "isTest": false,
+            "isAsync": false,
+            "nodeType": "action",
+            "body": [
+              {
+                "text": "Position bestimmen:",
+                "nodeType": "comment",
+                "id": "BUb3Uwj9TkBXDsIaZvnauZMx"
+              },
+              {
+                "expr": "$hh5Aoh322WooSoShncil1xkqL0 ,:= :senses .current_location_accurate",
+                "nodeType": "exprStmt",
+                "id": "hh5Aoh322WooSoShncil1xkq",
+                "locals": [
+                  {
+                    "name": "loc",
+                    "type": "Location",
+                    "nodeType": "localDef",
+                    "id": "hh5Aoh322WooSoShncil1xkqL0"
+                  }
+                ]
+              },
+              {
+                "text": "Karte einrichten und anzeigen",
+                "nodeType": "comment",
+                "id": "UA2aOHPwl74FKuS9IMBkCOds"
+              },
+              {
+                "expr": "$vzJoPIqAqzy7jwREke2pNy2cL0 ,:= :maps .create_map",
+                "nodeType": "exprStmt",
+                "id": "vzJoPIqAqzy7jwREke2pNy2c",
+                "locals": [
+                  {
+                    "name": "karte",
+                    "type": "Map",
+                    "nodeType": "localDef",
+                    "id": "vzJoPIqAqzy7jwREke2pNy2cL0"
+                  }
+                ]
+              },
+              {
+                "expr": "'Initializing_GPS/002c_reading_Data .post_to_wall",
+                "nodeType": "exprStmt",
+                "id": "W5CfOebE822Kv6o9DzHPddJo",
+                "locals": []
+              },
+              {
+                "expr": "$vzJoPIqAqzy7jwREke2pNy2cL0 .set_center ,( $hh5Aoh322WooSoShncil1xkqL0 ,)",
+                "nodeType": "exprStmt",
+                "id": "hj2VvrxnjklcBNkSsHtxT8Ai",
+                "locals": []
+              },
+              {
+                "expr": "$vzJoPIqAqzy7jwREke2pNy2cL0 .set_zoom ,( ,1 ,8 ,)",
+                "nodeType": "exprStmt",
+                "id": "C2S89qv95cVUN6Jh8Ada4lnD",
+                "locals": []
+              },
+              {
+                "expr": "$vzJoPIqAqzy7jwREke2pNy2cL0 .add_text ,( $hh5Aoh322WooSoShncil1xkqL0 ,, :locations .describe_location ,( $hh5Aoh322WooSoShncil1xkqL0 ,) ,, :colors .black ,, :colors .white ,)",
+                "nodeType": "exprStmt",
+                "id": "WBvdBaILwCDe61QO2sdC4JM0",
+                "locals": []
+              },
+              {
+                "expr": ":wall .clear",
+                "nodeType": "exprStmt",
+                "id": "bQXcRCF6ntUBIPcXOH4zNyBZ",
+                "locals": []
+              },
+              {
+                "expr": "$vzJoPIqAqzy7jwREke2pNy2cL0 .post_to_wall",
+                "nodeType": "exprStmt",
+                "id": "o7Nu7bmE1AJanY9JmYHtVZ94",
+                "locals": []
+              },
+              {
+                "text": "Langsam hineinzoomen",
+                "nodeType": "comment",
+                "id": "XmUdyPwtXzwbMbvj82foyTQZ"
+              },
+              {
+                "expr": "$PWOniuEFJWy2FpZlutFJlpfeL0 ,:= ,2",
+                "nodeType": "exprStmt",
+                "id": "PWOniuEFJWy2FpZlutFJlpfe",
+                "locals": [
+                  {
+                    "name": "zoomfaktor",
+                    "type": "Number",
+                    "nodeType": "localDef",
+                    "id": "PWOniuEFJWy2FpZlutFJlpfeL0"
+                  }
+                ]
+              },
+              {
+                "expr": "$IZwnAqnQs5p41LyTdtau47PGL0 ,:= ,6",
+                "nodeType": "exprStmt",
+                "id": "IZwnAqnQs5p41LyTdtau47PG",
+                "locals": [
+                  {
+                    "name": "zoomstart",
+                    "type": "Number",
+                    "nodeType": "localDef",
+                    "id": "IZwnAqnQs5p41LyTdtau47PGL0"
+                  }
+                ]
+              },
+              {
+                "nodeType": "if",
+                "condition": "$V2ZHEj6UjS9SmILdoHMBsu2lP0 ,= ,1",
+                "thenBody": [
+                  {
+                    "bound": ",7",
+                    "body": [
+                      {
+                        "expr": "$vzJoPIqAqzy7jwREke2pNy2cL0 .set_zoom ,( $MSHghqQddfP8Ns62FXpnsxxLB0 ,* $PWOniuEFJWy2FpZlutFJlpfeL0 ,+ $IZwnAqnQs5p41LyTdtau47PGL0 ,)",
+                        "nodeType": "exprStmt",
+                        "id": "j7VKP8WCoKsF0ZTd6ATH7XR2",
+                        "locals": []
+                      },
+                      {
+                        "expr": ":time .sleep ,( ,4 ,)",
+                        "nodeType": "exprStmt",
+                        "id": "SCYVjsGz0lxhP0O2oMCyUA3f",
+                        "locals": []
+                      }
+                    ],
+                    "nodeType": "for",
+                    "id": "MSHghqQddfP8Ns62FXpnsxxL",
+                    "locals": [
+                      {
+                        "name": "i1",
+                        "type": "Number",
+                        "nodeType": "localDef",
+                        "id": "MSHghqQddfP8Ns62FXpnsxxLB0"
+                      }
+                    ]
+                  }
+                ],
+                "elseBody": [
+                  {
+                    "expr": ":time .sleep ,( ,4 ,)",
+                    "nodeType": "exprStmt",
+                    "id": "ZdNCvtV8b7FRVMn4s0iW5Aw9",
+                    "locals": []
+                  }
+                ],
+                "isElseIf": false,
+                "id": "pDVMowpWUtbjKi5NBlRzLNVV",
+                "locals": []
+              }
+            ],
+            "id": "V2ZHEj6UjS9SmILdoHMBsu2l"
+          },
+          {
+            "name": "write to Wall",
+            "inParameters": [],
+            "outParameters": [],
+            "isPrivate": false,
+            "isOffloaded": false,
+            "isTest": false,
+            "isAsync": false,
+            "nodeType": "action",
+            "body": [
+              {
+                "text": "Position bestimmen:",
+                "nodeType": "comment",
+                "id": "v8Fyj09CPsb8ISEB2bTnDbIP"
+              },
+              {
+                "expr": "$HtePnACl1xwsYTuoe12U6e3jL0 ,:= :senses .current_location_accurate",
+                "nodeType": "exprStmt",
+                "id": "HtePnACl1xwsYTuoe12U6e3j",
+                "locals": [
+                  {
+                    "name": "loc",
+                    "type": "Location",
+                    "nodeType": "localDef",
+                    "id": "HtePnACl1xwsYTuoe12U6e3jL0"
+                  }
+                ]
+              },
+              {
+                "text": "Wall beschriften",
+                "nodeType": "comment",
+                "id": "e3Z6228GGNok9065nntMDCli"
+              },
+              {
+                "expr": ":wall .push_new_page",
+                "nodeType": "exprStmt",
+                "id": "xp2XKeiU42mkjPZ2RIhujsr7",
+                "locals": []
+              },
+              {
+                "expr": ":code #Vx4TzGJ2G9rPt9I3eN4xWhCE",
+                "nodeType": "exprStmt",
+                "id": "NB4r8Ip4u3jq6eNKWingLtwY",
+                "locals": []
+              },
+              {
+                "expr": ":wall .clear",
+                "nodeType": "exprStmt",
+                "id": "iYIHIMyram6OmAJc6RBpY4IJ",
+                "locals": []
+              },
+              {
+                "expr": "$x4CNJ2TR7jaDcFX73dmmOjeDL0 ,:= ,2 ,5",
+                "nodeType": "exprStmt",
+                "id": "x4CNJ2TR7jaDcFX73dmmOjeD",
+                "locals": [
+                  {
+                    "name": "fontsize",
+                    "type": "Number",
+                    "nodeType": "localDef",
+                    "id": "x4CNJ2TR7jaDcFX73dmmOjeDL0"
+                  }
+                ]
+              },
+              {
+                "expr": "'Your_Position_is/003a_ .post_to_wall",
+                "nodeType": "exprStmt",
+                "id": "dEVqLhC2HPBbhpE04at2MB2V",
+                "locals": []
+              },
+              {
+                "expr": ":wall .create_text_box ,( :locations .describe_location ,( $HtePnACl1xwsYTuoe12U6e3jL0 ,) ,, $x4CNJ2TR7jaDcFX73dmmOjeDL0 ,) .post_to_wall",
+                "nodeType": "exprStmt",
+                "id": "x4qECYqWAWjRIHHo0M2cPiCw",
+                "locals": []
+              },
+              {
+                "expr": ":wall .create_text_box ,( 'Latitude_/003a_ .concat ,( $HtePnACl1xwsYTuoe12U6e3jL0 .latitude .to_string ,) ,, $x4CNJ2TR7jaDcFX73dmmOjeDL0 ,) .post_to_wall",
+                "nodeType": "exprStmt",
+                "id": "caVaAg0ULjXMBzUR254bNlU9",
+                "locals": []
+              },
+              {
+                "expr": ":wall .create_text_box ,( 'Longitude_/003a_ .concat ,( $HtePnACl1xwsYTuoe12U6e3jL0 .longitude .to_string ,) ,, $x4CNJ2TR7jaDcFX73dmmOjeDL0 ,) .post_to_wall",
+                "nodeType": "exprStmt",
+                "id": "SnpHXkcIqgDBQqQ2eFHMlNz0",
+                "locals": []
+              },
+              {
+                "expr": ":wall .create_text_box ,( 'Horizontal_accuracy/003a_ .concat ,( $HtePnACl1xwsYTuoe12U6e3jL0 .hor_accuracy .to_string ,) ,, $x4CNJ2TR7jaDcFX73dmmOjeDL0 ,) .post_to_wall",
+                "nodeType": "exprStmt",
+                "id": "xi9RodKubkPmlui3rbNQOh53",
+                "locals": []
+              },
+              {
+                "expr": ":wall .create_text_box ,( 'Altitude_/003a_ .concat ,( $HtePnACl1xwsYTuoe12U6e3jL0 .altitude .to_string ,) ,, $x4CNJ2TR7jaDcFX73dmmOjeDL0 ,) .post_to_wall",
+                "nodeType": "exprStmt",
+                "id": "JSSuC2OKDUNzx98qcZnogaGW",
+                "locals": []
+              },
+              {
+                "expr": ":wall .create_text_box ,( 'Vertical_accuracy/003a_ .concat ,( $HtePnACl1xwsYTuoe12U6e3jL0 .vert_accuracy .to_string ,) ,, $x4CNJ2TR7jaDcFX73dmmOjeDL0 ,) .post_to_wall",
+                "nodeType": "exprStmt",
+                "id": "yOl633ARafr6YgUmeUzyOFsq",
+                "locals": []
+              },
+              {
+                "expr": ":wall .create_text_box ,( 'Speed/003a_ .concat ,( $HtePnACl1xwsYTuoe12U6e3jL0 .speed .to_string ,) ,, $x4CNJ2TR7jaDcFX73dmmOjeDL0 ,) .post_to_wall",
+                "nodeType": "exprStmt",
+                "id": "bf7rLXppyEdJ4X5fpjAUqJcz",
+                "locals": []
+              },
+              {
+                "expr": ":wall .create_text_box ,( 'Course_/003a_ .concat ,( $HtePnACl1xwsYTuoe12U6e3jL0 .course .to_string ,) ,, $x4CNJ2TR7jaDcFX73dmmOjeDL0 ,) .post_to_wall",
+                "nodeType": "exprStmt",
+                "id": "xDEdbtl9TNvqbuI4dwdjoHUf",
+                "locals": []
+              },
+              {
+                "expr": ":time .sleep ,( ,4 ,)",
+                "nodeType": "exprStmt",
+                "id": "OUedMeyBWyPxf5kfizmlTUCW",
+                "locals": []
+              },
+              {
+                "expr": ":wall .pop_page",
+                "nodeType": "exprStmt",
+                "id": "uTfxRQa1sGKRGRpF70GfhdW1",
+                "locals": []
+              },
+              {
+                "expr": ":code #V2ZHEj6UjS9SmILdoHMBsu2l ,( ,0 ,)",
+                "nodeType": "exprStmt",
+                "id": "xbo0RVUJJ2nkZaJd5HlcRsta",
+                "locals": []
+              }
+            ],
+            "id": "BjFYA1SmMsGqA2S54UQjfnID"
+          },
+          {
+            "name": "gameloop",
+            "inParameters": [],
+            "outParameters": [],
+            "isPrivate": true,
+            "isOffloaded": false,
+            "isTest": false,
+            "isAsync": true,
+            "nodeType": "event",
+            "eventName": "gameloop",
+            "eventVariableId": null,
+            "body": [
+              {
+                "expr": ":code #BjFYA1SmMsGqA2S54UQjfnID",
+                "nodeType": "exprStmt",
+                "id": "cu3o69MG5SOY1dxuPf5o2vg4",
+                "locals": []
+              }
+            ],
+            "id": "MxF2gv39tnJPMxGIJ3HZ472R"
+          },
+          {
+            "name": "show privacy notice",
+            "inParameters": [],
+            "outParameters": [],
+            "isPrivate": false,
+            "isOffloaded": false,
+            "isTest": false,
+            "isAsync": false,
+            "nodeType": "action",
+            "body": [
+              {
+                "expr": "$o0uML1WB1Trgnu5vNYuuY5PrL0 ,:= 'S",
+                "nodeType": "exprStmt",
+                "id": "o0uML1WB1Trgnu5vNYuuY5Pr",
+                "locals": [
+                  {
+                    "name": "continue",
+                    "type": "String",
+                    "nodeType": "localDef",
+                    "id": "o0uML1WB1Trgnu5vNYuuY5PrL0"
+                  }
+                ]
+              },
+              {
+                "expr": ":wall .set_foreground ,( :colors .foreground ,)",
+                "nodeType": "exprStmt",
+                "id": "oW1O2iL2oaWLScF3s3GtGduW",
+                "locals": []
+              },
+              {
+                "expr": ":wall .set_reversed ,( F ,)",
+                "nodeType": "exprStmt",
+                "id": "E5rQRv26hCJH6K0MKg1jVcKa",
+                "locals": []
+              },
+              {
+                "condition": ",not $o0uML1WB1Trgnu5vNYuuY5PrL0 .equals ,( 'N ,) ,and ,not $o0uML1WB1Trgnu5vNYuuY5PrL0 .equals ,( 'n ,) ,and ,not $o0uML1WB1Trgnu5vNYuuY5PrL0 .equals ,( 'Y ,) ,and ,not $o0uML1WB1Trgnu5vNYuuY5PrL0 .equals ,( 'y ,)",
+                "body": [
+                  {
+                    "expr": "'Privacy_notice/003a/000a/000aThis_Script_reads_your_current_GPS_Position_from_your_phone/002e_It_then_shows_you_the_distinct_values_on_the_screen/002e/000a/000aThese_are/003a_Longitude/002c_Latitude/002c_Altitude_and_Speed/002e/000a/000aAll_Data_remains_on_the_phone/002e_Your_location_will_absolutely_remain_private_to_you/002e .post_to_wall",
+                    "nodeType": "exprStmt",
+                    "id": "Q8kO7jjGOdzgp0ygex3UDPqy",
+                    "locals": []
+                  },
+                  {
+                    "expr": "$o0uML1WB1Trgnu5vNYuuY5PrL0 ,:= :wall .ask_string ,( 'continue/003f_/0028y/002fn/0029 ,)",
+                    "nodeType": "exprStmt",
+                    "id": "xxjrlIx2c29fvlQpV16cMGLL",
+                    "locals": []
+                  },
+                  {
+                    "expr": ":wall .clear",
+                    "nodeType": "exprStmt",
+                    "id": "xnNuekxaDQSJBsdaZxoY9pYj",
+                    "locals": []
+                  }
+                ],
+                "nodeType": "while",
+                "id": "I4Wm9EKiMkDhy1qEsQUbEIQf",
+                "locals": []
+              },
+              {
+                "expr": ":code #Vx4TzGJ2G9rPt9I3eN4xWhCE",
+                "nodeType": "exprStmt",
+                "id": "qZU0hG7pWzE0dmqL3Bvf16XP",
+                "locals": []
+              },
+              {
+                "nodeType": "if",
+                "condition": "$o0uML1WB1Trgnu5vNYuuY5PrL0 .equals ,( 'Y ,) ,or $o0uML1WB1Trgnu5vNYuuY5PrL0 .equals ,( 'y ,)",
+                "thenBody": [
+                  {
+                    "expr": "",
+                    "nodeType": "exprStmt",
+                    "id": "mOKlerYa4ac2IMGTBUcavk6y",
+                    "locals": []
+                  }
+                ],
+                "elseBody": [
+                  {
+                    "expr": ":time .stop",
+                    "nodeType": "exprStmt",
+                    "id": "xXSD4OPHkSWOCXvWzd3rFEsp",
+                    "locals": []
+                  }
+                ],
+                "isElseIf": false,
+                "id": "iAjqyocy2N6XqY1zWaU3fJoi",
+                "locals": []
+              }
+            ],
+            "id": "xdnb4aQEm3ZOWLOKjZB2wBbJ"
+          }
+        ],
+        "deletedDecls": [],
+        "nodeType": "app",
+        "id": "app"
+      }
+    },
+    {
+      "seqNo": 1,
+      "time": 1349742357,
+      "scriptId": "kblp",
+      "historyId": "25205255844234501720d936495-acf0-4feb-bfc2-4fa1ad8b5104",
+      "updateSize": 45,
+      "updates": {
+        "app": {
+          "rootId": "T9T4DvQEEBpOMT8O1q8zmEua"
+        }
+      }
+    },
+    {
+      "seqNo": 2,
+      "time": 1351272846,
+      "scriptId": "kblp",
+      "historyId": "252051027953064343938db30d3-eb61-4e0d-b597-1c0c1590c27c",
+      "updateSize": 45,
+      "updates": {
+        "app": {
+          "rootId": "L66vKm0Xjk7GHJO8kg2Y7nnR"
+        }
+      }
+    },
+    {
+      "seqNo": 3,
+      "time": 1352698528,
+      "scriptId": "kblp",
+      "historyId": "252049602271373517482877c73-08fa-4558-a68f-6686e4bb2879",
+      "updateSize": 45,
+      "updates": {
+        "app": {
+          "rootId": "T9T4DvQEEBpOMT8O1q8zmEua"
+        }
+      }
+    },
+    {
+      "seqNo": 4,
+      "time": 1354902933,
+      "scriptId": "kblp",
+      "historyId": "2520473978664014031097ef3b8-cd1b-45b0-a7a4-12794d3e7a08",
+      "updateSize": 2,
+      "updates": {}
+    }
+  ]
+}

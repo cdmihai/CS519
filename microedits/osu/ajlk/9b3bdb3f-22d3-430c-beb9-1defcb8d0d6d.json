@@ -1,0 +1,673 @@
+{
+  "userid": "ajlk",
+  "guid": "9b3bdb3f-22d3-430c-beb9-1defcb8d0d6d",
+  "lastStatus": "published",
+  "items": [
+    {
+      "seqNo": 0,
+      "time": 1350496162,
+      "scriptId": "hrvg",
+      "historyId": "2520518046370747120bc1ce106-c85a-43b5-9ec8-c29043b7a7f5",
+      "updateSize": 14974,
+      "ast": {
+        "textVersion": "v2.2,js,ctx",
+        "jsonVersion": "v1.0,resolved,short",
+        "name": "web stuff",
+        "comment": "Searching, browsing and processing pages from the web",
+        "icon": "Wifi",
+        "color": "#ffe25822",
+        "autoIcon": "Wifi",
+        "autoColor": "#e25822",
+        "platform": "current",
+        "rootId": "nqYBPyT2LhlTwC43ULkP72e0",
+        "showAd": false,
+        "isLibrary": false,
+        "allowExport": false,
+        "hasUniqueIds": false,
+        "decls": [
+          {
+            "name": "search Stackoverflow",
+            "inParameters": [],
+            "outParameters": [],
+            "isPrivate": false,
+            "isOffloaded": false,
+            "isTest": false,
+            "isAsync": false,
+            "nodeType": "action",
+            "body": [
+              {
+                "text": "Searches for tagged questions on stackoverflow...",
+                "nodeType": "comment",
+                "id": "BvRRmULvyvpto0mxY2JqrKUr"
+              },
+              {
+                "text": "We start by asking the user for a search term",
+                "nodeType": "comment",
+                "id": "xR1psdz20dfHNV0Q8AyAeBNQ"
+              },
+              {
+                "expr": "$qLaZlmJ2oKqOgIlTVFLzzzfmL0 ,:= :wall .ask_string ,( 'Search_stackoverflow/002ecom ,)",
+                "nodeType": "exprStmt",
+                "id": "qLaZlmJ2oKqOgIlTVFLzzzfm",
+                "locals": [
+                  {
+                    "name": "terms",
+                    "type": "String",
+                    "nodeType": "localDef",
+                    "id": "qLaZlmJ2oKqOgIlTVFLzzzfmL0"
+                  }
+                ]
+              },
+              {
+                "text": "We build the query url. note how we escape the terms using 'url encode'",
+                "nodeType": "comment",
+                "id": "ul5XbB2d04xUhzlZA4CPwGzN"
+              },
+              {
+                "expr": "$jxUayeeeUnZlmp4vAe5NBSrLL0 ,:= 'http/003a/002f/002fapi/002estackoverflow/002ecom/002f1/002e1/002fsearch/003ftagged/003d ,∥ :web .url_encode ,( $qLaZlmJ2oKqOgIlTVFLzzzfmL0 ,)",
+                "nodeType": "exprStmt",
+                "id": "jxUayeeeUnZlmp4vAe5NBSrL",
+                "locals": [
+                  {
+                    "name": "url",
+                    "type": "String",
+                    "nodeType": "localDef",
+                    "id": "jxUayeeeUnZlmp4vAe5NBSrLL0"
+                  }
+                ]
+              },
+              {
+                "text": "This line does 2 things: it downloads the result and parses it into a json data structure",
+                "nodeType": "comment",
+                "id": "Bct3fiifXspOfKxqRRjB2X6m"
+              },
+              {
+                "expr": "$dOixpS5JqN1rRMpkFueWmcA3L0 ,:= :web .json ,( :web .download ,( $jxUayeeeUnZlmp4vAe5NBSrLL0 ,) ,)",
+                "nodeType": "exprStmt",
+                "id": "dOixpS5JqN1rRMpkFueWmcA3",
+                "locals": [
+                  {
+                    "name": "json",
+                    "type": "Json Object",
+                    "nodeType": "localDef",
+                    "id": "dOixpS5JqN1rRMpkFueWmcA3L0"
+                  }
+                ]
+              },
+              {
+                "text": "We fetch the questions field from the json object. this should be an array of results that we can enumerate in a foreach loop",
+                "nodeType": "comment",
+                "id": "d5e2kBrWHmU54TwlaEcNjMjp"
+              },
+              {
+                "expr": "$lZsSmQiMoKC2SdVxTfMMaAW2L0 ,:= $dOixpS5JqN1rRMpkFueWmcA3L0 .field ,( 'questions ,)",
+                "nodeType": "exprStmt",
+                "id": "lZsSmQiMoKC2SdVxTfMMaAW2",
+                "locals": [
+                  {
+                    "name": "qs",
+                    "type": "Json Object",
+                    "nodeType": "localDef",
+                    "id": "lZsSmQiMoKC2SdVxTfMMaAW2L0"
+                  }
+                ]
+              },
+              {
+                "collection": "$lZsSmQiMoKC2SdVxTfMMaAW2L0",
+                "conditions": [
+                  {
+                    "condition": "T",
+                    "nodeType": "where",
+                    "id": "HQFp5Ht4zsZ5BYb9xlaYsn2d",
+                    "locals": []
+                  }
+                ],
+                "body": [
+                  {
+                    "text": "We create a message, the basic data structure to hold messages from social services",
+                    "nodeType": "comment",
+                    "id": "CFc2nmjl34Of3mANcSE4HvfN"
+                  },
+                  {
+                    "expr": "$O6N1HQWNIdsYshK6G695UX6DL0 ,:= :social .create_message ,( $Xhae1dmS2aljCy6c1cDQqnh9B0 .string ,( 'title ,) ,)",
+                    "nodeType": "exprStmt",
+                    "id": "O6N1HQWNIdsYshK6G695UX6D",
+                    "locals": [
+                      {
+                        "name": "msg",
+                        "type": "Message",
+                        "nodeType": "localDef",
+                        "id": "O6N1HQWNIdsYshK6G695UX6DL0"
+                      }
+                    ]
+                  },
+                  {
+                    "text": "The information about the author is stored in a nested field owner",
+                    "nodeType": "comment",
+                    "id": "M61a44EXbw7waOwtQr6W9TVo"
+                  },
+                  {
+                    "expr": "$KXKc0uywomwjevnQHgz4oFlpL0 ,:= $Xhae1dmS2aljCy6c1cDQqnh9B0 .field ,( 'owner ,)",
+                    "nodeType": "exprStmt",
+                    "id": "KXKc0uywomwjevnQHgz4oFlp",
+                    "locals": [
+                      {
+                        "name": "owner",
+                        "type": "Json Object",
+                        "nodeType": "localDef",
+                        "id": "KXKc0uywomwjevnQHgz4oFlpL0"
+                      }
+                    ]
+                  },
+                  {
+                    "expr": "$O6N1HQWNIdsYshK6G695UX6DL0 .set_from ,( $KXKc0uywomwjevnQHgz4oFlpL0 .string ,( 'display/005fname ,) ,)",
+                    "nodeType": "exprStmt",
+                    "id": "Bjbpi596XWu3ugYyIPv8MqVO",
+                    "locals": []
+                  },
+                  {
+                    "text": "The link to the question page can easily be recreated from the question id. we don't need to url escape the number as it has been converter to a Number by the json parser.",
+                    "nodeType": "comment",
+                    "id": "HT3kSrT65G93Y2kSHmMIoR4x"
+                  },
+                  {
+                    "expr": "$O6N1HQWNIdsYshK6G695UX6DL0 .set_link ,( 'http/003a/002f/002fwww/002estackoverflow/002ecom/002fquestions/002f ,∥ $Xhae1dmS2aljCy6c1cDQqnh9B0 .number ,( 'question/005fid ,) ,)",
+                    "nodeType": "exprStmt",
+                    "id": "xeB8D2PHEU9ZLOaeVyQU3iUI",
+                    "locals": []
+                  },
+                  {
+                    "text": "Gravatar is a web service that provides a unique and stable image for email addresses. it is used in many different web sites to associate a photo to a user email address. StackOverflow makes our life easier here by providing the hash of the email that can be used to get the gravatar easily.",
+                    "nodeType": "comment",
+                    "id": "jxFtuxEqIOXKT76mXZY47UWm"
+                  },
+                  {
+                    "expr": "$O6N1HQWNIdsYshK6G695UX6DL0 .set_picture_link ,( 'http/003a/002f/002fwww/002egravatar/002ecom/002favatar/002f ,∥ :web .url_encode ,( $KXKc0uywomwjevnQHgz4oFlpL0 .string ,( 'email/005fhash ,) ,) ,∥ '/003fs/003d72 ,)",
+                    "nodeType": "exprStmt",
+                    "id": "YyXkHFKZ8qWlXYINnkncK2SQ",
+                    "locals": []
+                  },
+                  {
+                    "expr": "$O6N1HQWNIdsYshK6G695UX6DL0 .set_source ,( 'StackOverflow ,)",
+                    "nodeType": "exprStmt",
+                    "id": "yz4jNi12qffWMZFmjMOTnWET",
+                    "locals": []
+                  },
+                  {
+                    "expr": "$O6N1HQWNIdsYshK6G695UX6DL0 .post_to_wall",
+                    "nodeType": "exprStmt",
+                    "id": "xSy8LCGOi9I60250IE5y2qA6",
+                    "locals": []
+                  }
+                ],
+                "nodeType": "foreach",
+                "id": "Xhae1dmS2aljCy6c1cDQqnh9",
+                "locals": [
+                  {
+                    "name": "q",
+                    "type": "Json Object",
+                    "nodeType": "localDef",
+                    "id": "Xhae1dmS2aljCy6c1cDQqnh9B0"
+                  }
+                ]
+              }
+            ],
+            "id": "BwPVi9z3jMZGEySIfvwZoLHm"
+          },
+          {
+            "name": "generate qrcode",
+            "inParameters": [],
+            "outParameters": [],
+            "isPrivate": false,
+            "isOffloaded": false,
+            "isTest": false,
+            "isAsync": false,
+            "nodeType": "action",
+            "body": [
+              {
+                "text": "Uses a web service to generate and read qr codes.",
+                "nodeType": "comment",
+                "id": "YKInEWlsgOeoSR5iZGy1qI8w"
+              },
+              {
+                "expr": "$Q87Wbck9cRtRsdUcWq0zWzWrL0 ,:= :wall .ask_string ,( 'Enter_the_text_to_be_translated_in_a_qr_code/002e ,)",
+                "nodeType": "exprStmt",
+                "id": "Q87Wbck9cRtRsdUcWq0zWzWr",
+                "locals": [
+                  {
+                    "name": "s",
+                    "type": "String",
+                    "nodeType": "localDef",
+                    "id": "Q87Wbck9cRtRsdUcWq0zWzWrL0"
+                  }
+                ]
+              },
+              {
+                "text": "s contains the text that the user wants to encode in a qr code... let's get to work!",
+                "nodeType": "comment",
+                "id": "ibyb7cUCOyPtjge3uG6BEMuP"
+              },
+              {
+                "expr": "$JXpSKxkZAFjMSSe2OW2D3uuDL0 ,:= :web .download_picture ,( 'http/003a/002f/002fqrcode/002egood/002dsurvey/002ecom/002fapi/002fv2/002fgenerate/003fformat/003djpg/0026content/003d ,∥ :web .url_encode ,( $Q87Wbck9cRtRsdUcWq0zWzWrL0 ,) ,)",
+                "nodeType": "exprStmt",
+                "id": "JXpSKxkZAFjMSSe2OW2D3uuD",
+                "locals": [
+                  {
+                    "name": "pic",
+                    "type": "Picture",
+                    "nodeType": "localDef",
+                    "id": "JXpSKxkZAFjMSSe2OW2D3uuDL0"
+                  }
+                ]
+              },
+              {
+                "text": "good-survey.com created a qrcode that represents s",
+                "nodeType": "comment",
+                "id": "TmdcRmZFd4i4koU7svmQgZ4R"
+              },
+              {
+                "expr": "$JXpSKxkZAFjMSSe2OW2D3uuDL0 .post_to_wall",
+                "nodeType": "exprStmt",
+                "id": "CGec4v7L4iyE5SS7SwzEenUa",
+                "locals": []
+              },
+              {
+                "text": "that's it!",
+                "nodeType": "comment",
+                "id": "xWbSRo0yYJ0dmxpe0vl8rpFR"
+              },
+              {
+                "expr": "$ELYjG95vrKf5FSkisJstt27AL0 ,:= :web .upload_picture ,( 'http/003a/002f/002fqrcode/002egood/002dsurvey/002ecom/002fapi/002fv2/002fdecode/003fformat/003djpg ,, $JXpSKxkZAFjMSSe2OW2D3uuDL0 ,)",
+                "nodeType": "exprStmt",
+                "id": "ELYjG95vrKf5FSkisJstt27A",
+                "locals": [
+                  {
+                    "name": "s1",
+                    "type": "String",
+                    "nodeType": "localDef",
+                    "id": "ELYjG95vrKf5FSkisJstt27AL0"
+                  }
+                ]
+              },
+              {
+                "expr": "$ELYjG95vrKf5FSkisJstt27AL0 .post_to_wall",
+                "nodeType": "exprStmt",
+                "id": "sxPTS2dQdott3vyQ8y7qEmb0",
+                "locals": []
+              },
+              {
+                "text": "if you are looking for more tagging features, try the 'tags' singleton",
+                "nodeType": "comment",
+                "id": "xq26mvOKH6P5mUcUjsCRqZ7b"
+              }
+            ],
+            "id": "lJ20aUuD2cIX7FABz968GdiP"
+          },
+          {
+            "name": "links",
+            "inParameters": [],
+            "outParameters": [],
+            "isPrivate": false,
+            "isOffloaded": false,
+            "isTest": false,
+            "isAsync": false,
+            "nodeType": "action",
+            "body": [
+              {
+                "text": "Shows how to display rich content on the wall.",
+                "nodeType": "comment",
+                "id": "vCDgrVsaC2hr5oTNNoVs7ek4"
+              },
+              {
+                "text": "This creates your basic internet link. click on the button launch it in the browser.",
+                "nodeType": "comment",
+                "id": "cFcUKX5D3VYrxht5K7Oo91kn"
+              },
+              {
+                "expr": ":web .link_url ,( 'This_a_link/002e ,, 'http/003a/002f/002ftouchdevelop/002ecom ,) .post_to_wall",
+                "nodeType": "exprStmt",
+                "id": "TL1WNOiqtaeFrfHu9LT2mY6F",
+                "locals": []
+              },
+              {
+                "text": "This will load an image from the web",
+                "nodeType": "comment",
+                "id": "xhM2wkm2fW2W1xQ7EOlt7SAL"
+              },
+              {
+                "expr": ":web .link_image ,( 'http/003a/002f/002fwww/002etouchdevelop/002ecom/002fImages/002ftitle1/002epng ,) .post_to_wall",
+                "nodeType": "exprStmt",
+                "id": "jkmU75QL9cyVg9N2ZE6YF4Zo",
+                "locals": []
+              },
+              {
+                "text": "When you need to see large images, create a deep zoom link that will display the image in a multi-scale viewer",
+                "nodeType": "comment",
+                "id": "mtzC6D7DuOzqaTBROiW3Iqx9"
+              },
+              {
+                "expr": ":web .link_deep_zoom ,( 'http/003a/002f/002fupload/002ewikimedia/002eorg/002fwikipedia/002fcommons/002f3/002f36/002fSeattleI5Skyline/002ejpg ,) .post_to_wall",
+                "nodeType": "exprStmt",
+                "id": "kNLqfKEmHu6xDESYmtTl2uxD",
+                "locals": []
+              },
+              {
+                "text": "You can also link to movies or sounds through the link media method",
+                "nodeType": "comment",
+                "id": "x1VUBwV0HgKoVECLs4OZM2Ka"
+              },
+              {
+                "expr": ":web .link_media ,( 'http/003a/002f/002fmedia/002ech9/002ems/002fch9/002f06b9/002f1669dae1/002d2b5f/002d4858/002dabee/002d9ea7018806b9/002fWP7Pex4FunPeliNikolai/005fch9/002ewmv ,) .post_to_wall",
+                "nodeType": "exprStmt",
+                "id": "RDcXctomztGt5a6ll75aY76a",
+                "locals": []
+              },
+              {
+                "expr": ":social .link_phone_number ,( '1235789 ,) .post_to_wall",
+                "nodeType": "exprStmt",
+                "id": "yoUw264A7nq4rsxqfJyQSBDn",
+                "locals": []
+              },
+              {
+                "expr": ":social .link_email ,( '/003f/003f/003f/0040/003f/003f/003f/002ecom ,) .post_to_wall",
+                "nodeType": "exprStmt",
+                "id": "yuD81w5xxnuRvULL6HNoJJCX",
+                "locals": []
+              },
+              {
+                "expr": ":radio .link_frequency ,( 'Current_radio ,, :radio .frequency ,) .post_to_wall",
+                "nodeType": "exprStmt",
+                "id": "FMmcqe28GDra7QfA0OuzJiId",
+                "locals": []
+              }
+            ],
+            "id": "YWxCPVbKukMvHZagd8Dkg4kw"
+          },
+          {
+            "name": "share link",
+            "inParameters": [],
+            "outParameters": [],
+            "isPrivate": false,
+            "isOffloaded": false,
+            "isTest": false,
+            "isAsync": false,
+            "nodeType": "action",
+            "body": [
+              {
+                "text": "Shows how to share a link to facebook.",
+                "nodeType": "comment",
+                "id": "VMM95C6E1TpcmWVna68bsyPZ"
+              },
+              {
+                "expr": "$MbY4f42VXE0GdLiWB2YUvRjNL0 ,:= :web .link_image ,( 'http/003a/002f/002fwww/002etouchdevelop/002ecom/002fImages/002ftitle1/002epng ,)",
+                "nodeType": "exprStmt",
+                "id": "MbY4f42VXE0GdLiWB2YUvRjN",
+                "locals": [
+                  {
+                    "name": "link",
+                    "type": "Link",
+                    "nodeType": "localDef",
+                    "id": "MbY4f42VXE0GdLiWB2YUvRjNL0"
+                  }
+                ]
+              },
+              {
+                "expr": "$MbY4f42VXE0GdLiWB2YUvRjNL0 .set_name ,( 'TouchDevelop_is_awesome/0021 ,)",
+                "nodeType": "exprStmt",
+                "id": "xts9jeHJ2fKwWpMvNAu1RvW0",
+                "locals": []
+              },
+              {
+                "text": "Share is a quick and easy way to publish your link to Facebook",
+                "nodeType": "comment",
+                "id": "UHYwnO6yzVg92XrHGHOxgjwQ"
+              },
+              {
+                "expr": "$MbY4f42VXE0GdLiWB2YUvRjNL0 .share ,( 'facebook ,)",
+                "nodeType": "exprStmt",
+                "id": "BQ6r5Fiptr5dB4L0wM2Eu27a",
+                "locals": []
+              }
+            ],
+            "id": "JR4ZtXEUt5I2FcjgAuz3E1TV"
+          },
+          {
+            "name": "channel9 rss",
+            "inParameters": [],
+            "outParameters": [],
+            "isPrivate": false,
+            "isOffloaded": false,
+            "isTest": false,
+            "isAsync": false,
+            "nodeType": "action",
+            "body": [
+              {
+                "text": "Downloads and displays the Channel9 RSS feed.",
+                "nodeType": "comment",
+                "id": "rYwJ9FfK4IflWXv3V0nsPu7o"
+              },
+              {
+                "expr": "$xu8p28l4Oudn1RmRIljbvJ28L0 ,:= :web .download ,( 'http/003a/002f/002fchannel9/002emsdn/002ecom/002ffeeds/002frss ,)",
+                "nodeType": "exprStmt",
+                "id": "xu8p28l4Oudn1RmRIljbvJ28",
+                "locals": [
+                  {
+                    "name": "rss",
+                    "type": "String",
+                    "nodeType": "localDef",
+                    "id": "xu8p28l4Oudn1RmRIljbvJ28L0"
+                  }
+                ]
+              },
+              {
+                "text": "downloads the RSS content from the Channel9 web site. Channel9 features movies about developers at Microsoft",
+                "nodeType": "comment",
+                "id": "FxqysaOjquL6HYOsPgHZR9wg"
+              },
+              {
+                "expr": "$QzZm2fyCWQX8I7WM9n1gdZQWL0 ,:= :web .rss ,( $xu8p28l4Oudn1RmRIljbvJ28L0 ,)",
+                "nodeType": "exprStmt",
+                "id": "QzZm2fyCWQX8I7WM9n1gdZQW",
+                "locals": [
+                  {
+                    "name": "entries",
+                    "type": "Message Collection",
+                    "nodeType": "localDef",
+                    "id": "QzZm2fyCWQX8I7WM9n1gdZQWL0"
+                  }
+                ]
+              },
+              {
+                "text": "transforms the RSS payload into a collection of messages",
+                "nodeType": "comment",
+                "id": "B4o2zighFz9hLgSU5ZUoGAGe"
+              },
+              {
+                "expr": "$QzZm2fyCWQX8I7WM9n1gdZQWL0 .post_to_wall",
+                "nodeType": "exprStmt",
+                "id": "U6PNI3usBHMOIhYJ82FxVypi",
+                "locals": []
+              }
+            ],
+            "id": "mFlnvpod2xZNEpVxca2GR4hk"
+          },
+          {
+            "name": "explain tag with tagdef",
+            "inParameters": [
+              {
+                "name": "tag",
+                "type": "String",
+                "nodeType": "localDef",
+                "id": "jMjfcZwko4WpJ2xJZLRssKuCP0"
+              }
+            ],
+            "outParameters": [],
+            "isPrivate": false,
+            "isOffloaded": false,
+            "isTest": false,
+            "isAsync": false,
+            "nodeType": "action",
+            "body": [
+              {
+                "text": "Calls a web service to explain a tag, then processes the xml result.",
+                "nodeType": "comment",
+                "id": "xw2KsdCpGdp33acGPrMFN8jY"
+              },
+              {
+                "expr": "$eL40X1Uu8i0uCm0UPSa1nLxHL0 ,:= :web .download ,( 'http/003a/002f/002fapi/002etagdef/002ecom/002f ,∥ :web .url_encode ,( $jMjfcZwko4WpJ2xJZLRssKuCP0 ,) ,)",
+                "nodeType": "exprStmt",
+                "id": "eL40X1Uu8i0uCm0UPSa1nLxH",
+                "locals": [
+                  {
+                    "name": "s",
+                    "type": "String",
+                    "nodeType": "localDef",
+                    "id": "eL40X1Uu8i0uCm0UPSa1nLxHL0"
+                  }
+                ]
+              },
+              {
+                "expr": "$eL40X1Uu8i0uCm0UPSa1nLxHL0 .post_to_wall",
+                "nodeType": "exprStmt",
+                "id": "mvG2CVPmH0BmSUcCsqY4qbma",
+                "locals": []
+              },
+              {
+                "expr": "$Hy9FEv5DANdv9EY5TqhkztuWL0 ,:= :web .xml ,( $eL40X1Uu8i0uCm0UPSa1nLxHL0 ,)",
+                "nodeType": "exprStmt",
+                "id": "Hy9FEv5DANdv9EY5TqhkztuW",
+                "locals": [
+                  {
+                    "name": "xml",
+                    "type": "Xml Object",
+                    "nodeType": "localDef",
+                    "id": "Hy9FEv5DANdv9EY5TqhkztuWL0"
+                  }
+                ]
+              },
+              {
+                "collection": "$Hy9FEv5DANdv9EY5TqhkztuWL0 .children ,( 'def ,)",
+                "conditions": [
+                  {
+                    "condition": "T",
+                    "nodeType": "where",
+                    "id": "zB6uY4302YCklHpRrlkRvrxi",
+                    "locals": []
+                  }
+                ],
+                "body": [
+                  {
+                    "expr": "$e4kOuM8QXSufJrZODROVwf4TL0 ,:= $S0DcIQwNYnMyAEPbmGGzHZ4kB0 .child ,( 'text ,) .value",
+                    "nodeType": "exprStmt",
+                    "id": "e4kOuM8QXSufJrZODROVwf4T",
+                    "locals": [
+                      {
+                        "name": "text",
+                        "type": "String",
+                        "nodeType": "localDef",
+                        "id": "e4kOuM8QXSufJrZODROVwf4TL0"
+                      }
+                    ]
+                  },
+                  {
+                    "expr": "$e4kOuM8QXSufJrZODROVwf4TL0 .post_to_wall",
+                    "nodeType": "exprStmt",
+                    "id": "ZprjB8Y7c2g1faxJaOxAPGgL",
+                    "locals": []
+                  }
+                ],
+                "nodeType": "foreach",
+                "id": "S0DcIQwNYnMyAEPbmGGzHZ4k",
+                "locals": [
+                  {
+                    "name": "def",
+                    "type": "Xml Object",
+                    "nodeType": "localDef",
+                    "id": "S0DcIQwNYnMyAEPbmGGzHZ4kB0"
+                  }
+                ]
+              }
+            ],
+            "id": "jMjfcZwko4WpJ2xJZLRssKuC"
+          },
+          {
+            "name": "tag stuff",
+            "inParameters": [],
+            "outParameters": [],
+            "isPrivate": false,
+            "isOffloaded": false,
+            "isTest": false,
+            "isAsync": false,
+            "nodeType": "action",
+            "body": [
+              {
+                "text": "Uses the Microsoft Tag services to generate tags from text or picture urls.",
+                "nodeType": "comment",
+                "id": "QJ2SJqRVUn2czvtN8dSC2QfK"
+              },
+              {
+                "expr": "$AkN5XaWm3VnpFBbH31Pmk2JVL0 ,:= :web .link_url ,( 'TouchDevelop ,, 'http/003a/002f/002ftouchdevelop/002ecom ,)",
+                "nodeType": "exprStmt",
+                "id": "AkN5XaWm3VnpFBbH31Pmk2JV",
+                "locals": [
+                  {
+                    "name": "a",
+                    "type": "Link",
+                    "nodeType": "localDef",
+                    "id": "AkN5XaWm3VnpFBbH31Pmk2JVL0"
+                  }
+                ]
+              },
+              {
+                "expr": "$AkN5XaWm3VnpFBbH31Pmk2JVL0 .post_to_wall",
+                "nodeType": "exprStmt",
+                "id": "yHXAIRpC92RwYUE5PAX5Uhp8",
+                "locals": []
+              },
+              {
+                "text": "You can easily create a tag from an url using the 'tag url' method. you can also specify the size and whether you want back and white as well. the generated tag can be printed or shared.",
+                "nodeType": "comment",
+                "id": "qTAcDHVFupzpjOm5qWJGNSv3"
+              },
+              {
+                "expr": ":tags .tag_url ,( $AkN5XaWm3VnpFBbH31Pmk2JVL0 .address ,, ,1 ,, F ,) .post_to_wall",
+                "nodeType": "exprStmt",
+                "id": "O1pn52L424fJYk2rEiw6WmsL",
+                "locals": []
+              },
+              {
+                "expr": "$kyR4NypaUpeI1NZWDVTmt9l8L0 ,:= 'Hello_world/0021",
+                "nodeType": "exprStmt",
+                "id": "kyR4NypaUpeI1NZWDVTmt9l8",
+                "locals": [
+                  {
+                    "name": "s",
+                    "type": "String",
+                    "nodeType": "localDef",
+                    "id": "kyR4NypaUpeI1NZWDVTmt9l8L0"
+                  }
+                ]
+              },
+              {
+                "expr": "$kyR4NypaUpeI1NZWDVTmt9l8L0 .post_to_wall",
+                "nodeType": "exprStmt",
+                "id": "cGFoP5MRBBQqXbRUZchfTJG2",
+                "locals": []
+              },
+              {
+                "expr": ":tags .tag_text ,( $kyR4NypaUpeI1NZWDVTmt9l8L0 ,, ,0 ,. ,7 ,5 ,, T ,) .post_to_wall",
+                "nodeType": "exprStmt",
+                "id": "x2Mm6xL8VCXIv6WLxiCSoYmS",
+                "locals": []
+              }
+            ],
+            "id": "V4I3pYEEsgcTn6oAKtSc8kWX"
+          }
+        ],
+        "deletedDecls": [],
+        "nodeType": "app",
+        "id": "app"
+      }
+    }
+  ]
+}

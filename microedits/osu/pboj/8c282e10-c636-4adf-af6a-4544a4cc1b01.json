@@ -1,0 +1,268 @@
+{
+  "userid": "pboj",
+  "guid": "8c282e10-c636-4adf-af6a-4544a4cc1b01",
+  "lastStatus": "published",
+  "items": [
+    {
+      "seqNo": 0,
+      "time": 1342466090,
+      "scriptId": "gtwl",
+      "historyId": "252059834709746260884bb0c8a-e92d-4fb8-9e22-72699af2fd98",
+      "updateSize": 3202,
+      "ast": {
+        "textVersion": "v2.2,js,ctx",
+        "jsonVersion": "v1.0,resolved,short",
+        "name": "hawaii vision",
+        "comment": "Live text recognition using camera previews and Hawaii ocr services.",
+        "icon": "eye",
+        "color": "#ff007fff",
+        "autoIcon": "eye",
+        "autoColor": "#007fff",
+        "platform": "current",
+        "rootId": "U4yVob4beGpvZh2kTJDFhdX4",
+        "showAd": false,
+        "isLibrary": false,
+        "allowExport": false,
+        "hasUniqueIds": false,
+        "decls": [
+          {
+            "name": "main",
+            "inParameters": [],
+            "outParameters": [],
+            "isPrivate": false,
+            "isOffloaded": false,
+            "isTest": false,
+            "isAsync": false,
+            "nodeType": "action",
+            "body": [
+              {
+                "text": "Creates a camera and a textbox.",
+                "nodeType": "comment",
+                "id": "KlG0tTk2gzA1S4oaRbtv4pXG"
+              },
+              {
+                "expr": ":data #UZK9V43Z4Gqc1ITZ7Y4nFP6i ,:= :senses .camera",
+                "nodeType": "exprStmt",
+                "id": "rvtuIhwsiugWl2Ga71hw95C4",
+                "locals": []
+              },
+              {
+                "expr": ":data #UZK9V43Z4Gqc1ITZ7Y4nFP6i .post_to_wall",
+                "nodeType": "exprStmt",
+                "id": "aSYMEYlG9JmRXbhkodm8KZpQ",
+                "locals": []
+              },
+              {
+                "expr": ":data #JFSKO34TQebofwLkqOAhIIw9 ,:= :wall .create_text_box ,( 'Scan_text_to_get_started/002e/002e/002e ,, ,1 ,8 ,)",
+                "nodeType": "exprStmt",
+                "id": "xjc35AoP621g44KG1zpau1p9",
+                "locals": []
+              },
+              {
+                "expr": ":data #JFSKO34TQebofwLkqOAhIIw9 .post_to_wall",
+                "nodeType": "exprStmt",
+                "id": "NsSpAmjiFj10FCKNEHrGXtGM",
+                "locals": []
+              }
+            ],
+            "id": "xHntkgXl29nBFKmLAQ8hgsAp"
+          },
+          {
+            "name": "camera",
+            "comment": "",
+            "type": "Camera",
+            "isReadonly": false,
+            "isTransient": true,
+            "nodeType": "data",
+            "id": "UZK9V43Z4Gqc1ITZ7Y4nFP6i"
+          },
+          {
+            "name": "board",
+            "comment": "",
+            "type": "Board",
+            "isReadonly": false,
+            "isTransient": true,
+            "nodeType": "data",
+            "id": "Y2B4SAaksk8WyzYKWkPlBerq"
+          },
+          {
+            "name": "gameloop",
+            "inParameters": [],
+            "outParameters": [],
+            "isPrivate": true,
+            "isOffloaded": false,
+            "isTest": false,
+            "isAsync": true,
+            "nodeType": "event",
+            "eventName": "gameloop",
+            "eventVariableId": null,
+            "body": [
+              {
+                "text": "Scans camera preview for text. If found displays it and copies it to the clipboard.",
+                "nodeType": "comment",
+                "id": "E9RCJEcwXYHATxhwHZvwFemm"
+              },
+              {
+                "expr": "$xtyjTmsHN4whh4OLLICl4ZrEL0 ,:= :data #UZK9V43Z4Gqc1ITZ7Y4nFP6i .preview",
+                "nodeType": "exprStmt",
+                "id": "xtyjTmsHN4whh4OLLICl4ZrE",
+                "locals": [
+                  {
+                    "name": "pic",
+                    "type": "Picture",
+                    "nodeType": "localDef",
+                    "id": "xtyjTmsHN4whh4OLLICl4ZrEL0"
+                  }
+                ]
+              },
+              {
+                "expr": "$xtyjTmsHN4whh4OLLICl4ZrEL0 .desaturate",
+                "nodeType": "exprStmt",
+                "id": "pe2jePez21zIeAhCHLp2s93D",
+                "locals": []
+              },
+              {
+                "expr": "$H0uiC3jQgp1AgHdgTiOEyPvnL0 ,:= :languages .picture_to_text ,( 'en ,, $xtyjTmsHN4whh4OLLICl4ZrEL0 ,)",
+                "nodeType": "exprStmt",
+                "id": "H0uiC3jQgp1AgHdgTiOEyPvn",
+                "locals": [
+                  {
+                    "name": "s",
+                    "type": "String",
+                    "nodeType": "localDef",
+                    "id": "H0uiC3jQgp1AgHdgTiOEyPvnL0"
+                  }
+                ]
+              },
+              {
+                "nodeType": "if",
+                "condition": ",not $H0uiC3jQgp1AgHdgTiOEyPvnL0 .is_empty",
+                "thenBody": [
+                  {
+                    "expr": ":data #JFSKO34TQebofwLkqOAhIIw9 .set_text ,( $H0uiC3jQgp1AgHdgTiOEyPvnL0 ,)",
+                    "nodeType": "exprStmt",
+                    "id": "YBVmRHOgn2JIWl9S5e3pfx3d",
+                    "locals": []
+                  },
+                  {
+                    "expr": "$H0uiC3jQgp1AgHdgTiOEyPvnL0 .copy_to_clipboard",
+                    "nodeType": "exprStmt",
+                    "id": "tuayKlSkHCnU1gF46MjY4AdK",
+                    "locals": []
+                  },
+                  {
+                    "expr": ":phone .vibrate ,( ,0 ,. ,1 ,)",
+                    "nodeType": "exprStmt",
+                    "id": "wf8jfPyVfBr9tPFVENu5S0mo",
+                    "locals": []
+                  }
+                ],
+                "isElseIf": false,
+                "id": "xCA69R2DLXezDBe6hOAldYSS",
+                "locals": []
+              }
+            ],
+            "id": "dVa6STzM4yXtaqK7QfII0lEy"
+          },
+          {
+            "name": "tb",
+            "comment": "",
+            "type": "TextBox",
+            "isReadonly": false,
+            "isTransient": true,
+            "nodeType": "data",
+            "id": "JFSKO34TQebofwLkqOAhIIw9"
+          }
+        ],
+        "deletedDecls": [],
+        "nodeType": "app",
+        "id": "app"
+      }
+    },
+    {
+      "seqNo": 1,
+      "time": 1343408233,
+      "scriptId": "jbuq",
+      "historyId": "2520588925663680749fbff9406-8918-4924-bc4e-d69a5537e304",
+      "updateSize": 122,
+      "updates": {
+        "app": {
+          "comment": "Live text recognition using camera previews and Hawaii services.",
+          "rootId": "bObm6ZXgihiV3RisD05JOmyC"
+        }
+      }
+    },
+    {
+      "seqNo": 2,
+      "time": 1343498450,
+      "scriptId": "gtwl",
+      "historyId": "25205880234964068383de4d35e-86b6-4528-9971-eba2fa09fc25",
+      "updateSize": 126,
+      "updates": {
+        "app": {
+          "comment": "Live text recognition using camera previews and Hawaii ocr services.",
+          "rootId": "U4yVob4beGpvZh2kTJDFhdX4"
+        }
+      }
+    },
+    {
+      "seqNo": 3,
+      "time": 1343741878,
+      "scriptId": "jbuq",
+      "historyId": "25205855892157996578c3af01a-6b6b-4df8-9289-00e962da1f0b",
+      "updateSize": 122,
+      "updates": {
+        "app": {
+          "comment": "Live text recognition using camera previews and Hawaii services.",
+          "rootId": "bObm6ZXgihiV3RisD05JOmyC"
+        }
+      }
+    },
+    {
+      "seqNo": 4,
+      "time": 1343756085,
+      "scriptId": "gtwl",
+      "historyId": "2520585447146971123c6ba04c9-89a9-4b77-b3b1-34d700430a16",
+      "updateSize": 126,
+      "updates": {
+        "app": {
+          "comment": "Live text recognition using camera previews and Hawaii ocr services.",
+          "rootId": "U4yVob4beGpvZh2kTJDFhdX4"
+        }
+      }
+    },
+    {
+      "seqNo": 5,
+      "time": 1343832895,
+      "scriptId": "jbuq",
+      "historyId": "2520584679047588784686ce56c-8f42-43a4-ab29-239e27bd40f8",
+      "updateSize": 122,
+      "updates": {
+        "app": {
+          "comment": "Live text recognition using camera previews and Hawaii services.",
+          "rootId": "bObm6ZXgihiV3RisD05JOmyC"
+        }
+      }
+    },
+    {
+      "seqNo": 6,
+      "time": 1346281483,
+      "scriptId": "jbuq",
+      "historyId": "252056019316696712933000864-0ca5-4754-8554-e2392b7e1268",
+      "updateSize": 45,
+      "updates": {
+        "app": {
+          "rootId": "RFjFCqC7yCGZUw8QLlfMRAUN"
+        }
+      }
+    },
+    {
+      "seqNo": 7,
+      "time": 1351360690,
+      "scriptId": "jbuq",
+      "historyId": "2520509401090551939835f5ffd-0899-4ce0-a8b8-7f96600367a0",
+      "updateSize": 2,
+      "updates": {}
+    }
+  ]
+}

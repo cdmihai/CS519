@@ -1,0 +1,571 @@
+{
+  "userid": "wonm",
+  "guid": "6670ce17-b097-4a76-4f82-6b575bc3f387",
+  "lastStatus": "deleted",
+  "items": [
+    {
+      "seqNo": 0,
+      "time": 1368833778,
+      "scriptId": "mdvf",
+      "historyId": "2520334670213303251853496fa-ff28-448f-bdbb-750f09e29bbb",
+      "updateSize": 10954,
+      "ast": {
+        "textVersion": "v2.2,js,ctx",
+        "jsonVersion": "v1.0,resolved,short",
+        "name": "twitter search",
+        "comment": "A library to search tweets.",
+        "icon": "search",
+        "color": "#ffa1caf1",
+        "autoIcon": "search",
+        "autoColor": "#a1caf1",
+        "platform": "current",
+        "rootId": "HXJUWVxWhI5L9bSuroPNBCQt",
+        "showAd": false,
+        "isLibrary": true,
+        "allowExport": true,
+        "hasUniqueIds": false,
+        "decls": [
+          {
+            "name": "search",
+            "inParameters": [
+              {
+                "name": "query",
+                "type": "String",
+                "nodeType": "localDef",
+                "id": "DD8CBLlqJLRvJMc5Er2AivxkP0"
+              },
+              {
+                "name": "near",
+                "type": "Boolean",
+                "nodeType": "localDef",
+                "id": "DD8CBLlqJLRvJMc5Er2AivxkP1"
+              }
+            ],
+            "outParameters": [
+              {
+                "name": "msgs",
+                "type": "Message Collection",
+                "nodeType": "localDef",
+                "id": "DD8CBLlqJLRvJMc5Er2AivxkP2"
+              }
+            ],
+            "isPrivate": false,
+            "isOffloaded": false,
+            "isTest": false,
+            "isAsync": false,
+            "nodeType": "action",
+            "body": [
+              {
+                "text": "Searches twitter with the given query. When near is true, use current location.",
+                "nodeType": "comment",
+                "id": "kX06YGiq61kEeEUgpz4uA45P"
+              },
+              {
+                "expr": "$DD8CBLlqJLRvJMc5Er2AivxkP2 ,:= :collections .create_message_collection",
+                "nodeType": "exprStmt",
+                "id": "PCecMu3dZMz14cXJxt45qjkd",
+                "locals": []
+              },
+              {
+                "expr": "$RgMEsYf8dhOiZfatSX8YA7HdL0 ,:= 'http/003a/002f/002fsearch/002etwitter/002ecom/002fsearch/002ejson/003finclude/005fentities/003dtrue/0026q/003d ,∥ :web .url_encode ,( $DD8CBLlqJLRvJMc5Er2AivxkP0 ,)",
+                "nodeType": "exprStmt",
+                "id": "RgMEsYf8dhOiZfatSX8YA7Hd",
+                "locals": [
+                  {
+                    "name": "url",
+                    "type": "String",
+                    "nodeType": "localDef",
+                    "id": "RgMEsYf8dhOiZfatSX8YA7HdL0"
+                  }
+                ]
+              },
+              {
+                "nodeType": "if",
+                "condition": "$DD8CBLlqJLRvJMc5Er2AivxkP1",
+                "thenBody": [
+                  {
+                    "expr": "$M6ApiY8EchdAHuAIsWuoY9cQL0 ,:= :senses .current_location_accurate",
+                    "nodeType": "exprStmt",
+                    "id": "M6ApiY8EchdAHuAIsWuoY9cQ",
+                    "locals": [
+                      {
+                        "name": "loc",
+                        "type": "Location",
+                        "nodeType": "localDef",
+                        "id": "M6ApiY8EchdAHuAIsWuoY9cQL0"
+                      }
+                    ]
+                  },
+                  {
+                    "nodeType": "if",
+                    "condition": ",not $M6ApiY8EchdAHuAIsWuoY9cQL0 .is_invalid",
+                    "thenBody": [
+                      {
+                        "expr": "$RgMEsYf8dhOiZfatSX8YA7HdL0 ,:= $RgMEsYf8dhOiZfatSX8YA7HdL0 ,∥ '/0026geocode/003d ,∥ $M6ApiY8EchdAHuAIsWuoY9cQL0 .latitude ,∥ '/002c ,∥ $M6ApiY8EchdAHuAIsWuoY9cQL0 .longitude ,∥ '/002c1mi",
+                        "nodeType": "exprStmt",
+                        "id": "xjSq6iMdVxbySR35n2RfcQcs",
+                        "locals": []
+                      }
+                    ],
+                    "isElseIf": false,
+                    "id": "Icxxa0mX6VohftFYxS6HRg0e",
+                    "locals": []
+                  }
+                ],
+                "isElseIf": false,
+                "id": "EXDWUBNLrS9hLEx1cZ5AJryn",
+                "locals": []
+              },
+              {
+                "expr": ":time .log ,( 'twitter_search/003a_ ,∥ $RgMEsYf8dhOiZfatSX8YA7HdL0 ,)",
+                "nodeType": "exprStmt",
+                "id": "yeHUzoa4Lhz6zbdqGjDt2Glx",
+                "locals": []
+              },
+              {
+                "expr": "$QZwQpB40Q3YPGapkJ7JhehiHL0 ,:= :web .download_json ,( $RgMEsYf8dhOiZfatSX8YA7HdL0 ,)",
+                "nodeType": "exprStmt",
+                "id": "QZwQpB40Q3YPGapkJ7JhehiH",
+                "locals": [
+                  {
+                    "name": "response",
+                    "type": "Json Object",
+                    "nodeType": "localDef",
+                    "id": "QZwQpB40Q3YPGapkJ7JhehiHL0"
+                  }
+                ]
+              },
+              {
+                "expr": ":time .log ,( 'twitter_search/003a_response_ ,∥ ,( ,not $QZwQpB40Q3YPGapkJ7JhehiHL0 .is_invalid ,) ,)",
+                "nodeType": "exprStmt",
+                "id": "IVSnO313mCy95KeueGP2Dk3n",
+                "locals": []
+              },
+              {
+                "nodeType": "if",
+                "condition": ",not $QZwQpB40Q3YPGapkJ7JhehiHL0 .is_invalid",
+                "thenBody": [
+                  {
+                    "expr": "$PosBrTm6TyQJBcOidSJt4HhWL0 ,:= $QZwQpB40Q3YPGapkJ7JhehiHL0 .field ,( 'results ,)",
+                    "nodeType": "exprStmt",
+                    "id": "PosBrTm6TyQJBcOidSJt4HhW",
+                    "locals": [
+                      {
+                        "name": "results",
+                        "type": "Json Object",
+                        "nodeType": "localDef",
+                        "id": "PosBrTm6TyQJBcOidSJt4HhWL0"
+                      }
+                    ]
+                  },
+                  {
+                    "nodeType": "if",
+                    "condition": ",not $PosBrTm6TyQJBcOidSJt4HhWL0 .is_invalid",
+                    "thenBody": [
+                      {
+                        "collection": "$PosBrTm6TyQJBcOidSJt4HhWL0",
+                        "conditions": [
+                          {
+                            "condition": "T",
+                            "nodeType": "where",
+                            "id": "Ve3m7iWYcookn3ilEA7Dcnr8",
+                            "locals": []
+                          }
+                        ],
+                        "body": [
+                          {
+                            "expr": "$S8ftl0l6bO7odO39YFZJwKLFL0 ,:= :code #xaTpw9v7bJCuChuErY4UilTy ,( $pNmpLQirjejWOlqqz8MYeYL9B0 ,)",
+                            "nodeType": "exprStmt",
+                            "id": "S8ftl0l6bO7odO39YFZJwKLF",
+                            "locals": [
+                              {
+                                "name": "msg",
+                                "type": "Message",
+                                "nodeType": "localDef",
+                                "id": "S8ftl0l6bO7odO39YFZJwKLFL0"
+                              }
+                            ]
+                          },
+                          {
+                            "expr": "$DD8CBLlqJLRvJMc5Er2AivxkP2 .add ,( $S8ftl0l6bO7odO39YFZJwKLFL0 ,)",
+                            "nodeType": "exprStmt",
+                            "id": "xELCt15MTSCtY40P5QUklwiy",
+                            "locals": []
+                          }
+                        ],
+                        "nodeType": "foreach",
+                        "id": "pNmpLQirjejWOlqqz8MYeYL9",
+                        "locals": [
+                          {
+                            "name": "result",
+                            "type": "Json Object",
+                            "nodeType": "localDef",
+                            "id": "pNmpLQirjejWOlqqz8MYeYL9B0"
+                          }
+                        ]
+                      }
+                    ],
+                    "isElseIf": false,
+                    "id": "lZ3ASlralEv1geMZj2bFzxEL",
+                    "locals": []
+                  }
+                ],
+                "isElseIf": false,
+                "id": "MvusjhCbFL24PhjSXKh6erm8",
+                "locals": []
+              }
+            ],
+            "id": "DD8CBLlqJLRvJMc5Er2Aivxk"
+          },
+          {
+            "name": "result to message",
+            "inParameters": [
+              {
+                "name": "result",
+                "type": "Json Object",
+                "nodeType": "localDef",
+                "id": "xaTpw9v7bJCuChuErY4UilTyP0"
+              }
+            ],
+            "outParameters": [
+              {
+                "name": "msg",
+                "type": "Message",
+                "nodeType": "localDef",
+                "id": "xaTpw9v7bJCuChuErY4UilTyP1"
+              }
+            ],
+            "isPrivate": true,
+            "isOffloaded": false,
+            "isTest": false,
+            "isAsync": false,
+            "nodeType": "action",
+            "body": [
+              {
+                "expr": "$tV7KVBqLOwhPypocai405s2uL0 ,:= $xaTpw9v7bJCuChuErY4UilTyP0 .string ,( 'text ,)",
+                "nodeType": "exprStmt",
+                "id": "tV7KVBqLOwhPypocai405s2u",
+                "locals": [
+                  {
+                    "name": "text",
+                    "type": "String",
+                    "nodeType": "localDef",
+                    "id": "tV7KVBqLOwhPypocai405s2uL0"
+                  }
+                ]
+              },
+              {
+                "expr": "$xaTpw9v7bJCuChuErY4UilTyP1 ,:= :social .create_message ,( $tV7KVBqLOwhPypocai405s2uL0 ,)",
+                "nodeType": "exprStmt",
+                "id": "HyJ5agsbcpOmDZ8ayZdRwFWU",
+                "locals": []
+              },
+              {
+                "expr": "$rn73JL4YlOkz8G16XuPAjma5L0 ,:= $xaTpw9v7bJCuChuErY4UilTyP0 .string ,( 'from/005fuser/005fname ,)",
+                "nodeType": "exprStmt",
+                "id": "rn73JL4YlOkz8G16XuPAjma5",
+                "locals": [
+                  {
+                    "name": "user",
+                    "type": "String",
+                    "nodeType": "localDef",
+                    "id": "rn73JL4YlOkz8G16XuPAjma5L0"
+                  }
+                ]
+              },
+              {
+                "expr": "$J98FHtLle65DTcfMtc49eKBWL0 ,:= $xaTpw9v7bJCuChuErY4UilTyP0 .time ,( 'created/005fat ,)",
+                "nodeType": "exprStmt",
+                "id": "J98FHtLle65DTcfMtc49eKBW",
+                "locals": [
+                  {
+                    "name": "created",
+                    "type": "DateTime",
+                    "nodeType": "localDef",
+                    "id": "J98FHtLle65DTcfMtc49eKBWL0"
+                  }
+                ]
+              },
+              {
+                "expr": "$cIW4Q2GGSffnNNe1GKgStMj9L0 ,:= $xaTpw9v7bJCuChuErY4UilTyP0 .field ,( 'entities ,)",
+                "nodeType": "exprStmt",
+                "id": "cIW4Q2GGSffnNNe1GKgStMj9",
+                "locals": [
+                  {
+                    "name": "entities",
+                    "type": "Json Object",
+                    "nodeType": "localDef",
+                    "id": "cIW4Q2GGSffnNNe1GKgStMj9L0"
+                  }
+                ]
+              },
+              {
+                "text": "get picture if any",
+                "nodeType": "comment",
+                "id": "N6L2Z2GPTBlJTo9VV9mtIC52"
+              },
+              {
+                "expr": "$W4ofD2yvGNpYn6oBsXN504yQL0 ,:= $cIW4Q2GGSffnNNe1GKgStMj9L0 .field ,( 'media ,)",
+                "nodeType": "exprStmt",
+                "id": "W4ofD2yvGNpYn6oBsXN504yQ",
+                "locals": [
+                  {
+                    "name": "media1",
+                    "type": "Json Object",
+                    "nodeType": "localDef",
+                    "id": "W4ofD2yvGNpYn6oBsXN504yQL0"
+                  }
+                ]
+              },
+              {
+                "nodeType": "if",
+                "condition": ",not $W4ofD2yvGNpYn6oBsXN504yQL0 .is_invalid ,and $W4ofD2yvGNpYn6oBsXN504yQL0 .count ,> ,0",
+                "thenBody": [
+                  {
+                    "expr": "$pe2U6TKn7rJu2M8YDTrGx00IL0 ,:= $W4ofD2yvGNpYn6oBsXN504yQL0 .at ,( ,0 ,) .string ,( 'media/005furl ,)",
+                    "nodeType": "exprStmt",
+                    "id": "pe2U6TKn7rJu2M8YDTrGx00I",
+                    "locals": [
+                      {
+                        "name": "media url",
+                        "type": "String",
+                        "nodeType": "localDef",
+                        "id": "pe2U6TKn7rJu2M8YDTrGx00IL0"
+                      }
+                    ]
+                  },
+                  {
+                    "expr": "$xaTpw9v7bJCuChuErY4UilTyP1 .set_link ,( $pe2U6TKn7rJu2M8YDTrGx00IL0 ,)",
+                    "nodeType": "exprStmt",
+                    "id": "efgec2I7OUk0eXnHazo7Qhj4",
+                    "locals": []
+                  }
+                ],
+                "isElseIf": false,
+                "id": "UF0fT2PStx6ruy3er9xAPT4h",
+                "locals": []
+              },
+              {
+                "expr": "$KKI2pDii0JTRjFbhgPGExtcLL0 ,:= $cIW4Q2GGSffnNNe1GKgStMj9L0 .field ,( 'urls ,)",
+                "nodeType": "exprStmt",
+                "id": "KKI2pDii0JTRjFbhgPGExtcL",
+                "locals": [
+                  {
+                    "name": "urls",
+                    "type": "Json Object",
+                    "nodeType": "localDef",
+                    "id": "KKI2pDii0JTRjFbhgPGExtcLL0"
+                  }
+                ]
+              },
+              {
+                "nodeType": "if",
+                "condition": ",not $KKI2pDii0JTRjFbhgPGExtcLL0 .is_invalid ,and $KKI2pDii0JTRjFbhgPGExtcLL0 .count ,> ,0",
+                "thenBody": [
+                  {
+                    "expr": "$V4y46K2wq3hhlYjXJxaeW8n6L0 ,:= $KKI2pDii0JTRjFbhgPGExtcLL0 .at ,( ,0 ,) .string ,( 'url ,)",
+                    "nodeType": "exprStmt",
+                    "id": "V4y46K2wq3hhlYjXJxaeW8n6",
+                    "locals": [
+                      {
+                        "name": "link",
+                        "type": "String",
+                        "nodeType": "localDef",
+                        "id": "V4y46K2wq3hhlYjXJxaeW8n6L0"
+                      }
+                    ]
+                  },
+                  {
+                    "expr": "$xaTpw9v7bJCuChuErY4UilTyP1 .set_link ,( $V4y46K2wq3hhlYjXJxaeW8n6L0 ,)",
+                    "nodeType": "exprStmt",
+                    "id": "Ypiwa8IKqF8Uf6tyVvQiLYRm",
+                    "locals": []
+                  }
+                ],
+                "isElseIf": false,
+                "id": "gRFsxlghg88ZaDZKlWkcBNYN",
+                "locals": []
+              },
+              {
+                "expr": "$xaTpw9v7bJCuChuErY4UilTyP1 .set_from ,( $rn73JL4YlOkz8G16XuPAjma5L0 ,)",
+                "nodeType": "exprStmt",
+                "id": "FzQ9eCtMWIEuqMMg6tRFswuW",
+                "locals": []
+              },
+              {
+                "expr": "$xaTpw9v7bJCuChuErY4UilTyP1 .set_time ,( $J98FHtLle65DTcfMtc49eKBWL0 ,)",
+                "nodeType": "exprStmt",
+                "id": "xrcGV3qbgqeJsnQ9c4PwnZvV",
+                "locals": []
+              },
+              {
+                "expr": "$ImPnW8AjI7rPpdUhLgAr16xWL0 ,:= $xaTpw9v7bJCuChuErY4UilTyP0 .string ,( 'profile/005fimage/005furl ,)",
+                "nodeType": "exprStmt",
+                "id": "ImPnW8AjI7rPpdUhLgAr16xW",
+                "locals": [
+                  {
+                    "name": "img",
+                    "type": "String",
+                    "nodeType": "localDef",
+                    "id": "ImPnW8AjI7rPpdUhLgAr16xWL0"
+                  }
+                ]
+              },
+              {
+                "nodeType": "if",
+                "condition": ",not $ImPnW8AjI7rPpdUhLgAr16xWL0 .is_invalid",
+                "thenBody": [
+                  {
+                    "expr": "$xaTpw9v7bJCuChuErY4UilTyP1 .set_picture_link ,( $ImPnW8AjI7rPpdUhLgAr16xWL0 ,)",
+                    "nodeType": "exprStmt",
+                    "id": "iWC0GZP2sEsq0b0eAKc6B4DL",
+                    "locals": []
+                  }
+                ],
+                "isElseIf": false,
+                "id": "x54rUbNyz1i9CyXdAqCDhmMn",
+                "locals": []
+              },
+              {
+                "expr": "$xaTpw9v7bJCuChuErY4UilTyP1 .set_source ,( 'Twitter ,)",
+                "nodeType": "exprStmt",
+                "id": "xedcVNwk3Se9sbdVy275Zawc",
+                "locals": []
+              },
+              {
+                "expr": "$xjhsxuU5a40TBChMUfPS9NMgL0 ,:= $xaTpw9v7bJCuChuErY4UilTyP0 .string ,( 'to/005fuser/005fname ,)",
+                "nodeType": "exprStmt",
+                "id": "xjhsxuU5a40TBChMUfPS9NMg",
+                "locals": [
+                  {
+                    "name": "to user",
+                    "type": "String",
+                    "nodeType": "localDef",
+                    "id": "xjhsxuU5a40TBChMUfPS9NMgL0"
+                  }
+                ]
+              },
+              {
+                "nodeType": "if",
+                "condition": ",not $xjhsxuU5a40TBChMUfPS9NMgL0 .is_invalid",
+                "thenBody": [
+                  {
+                    "expr": "$xaTpw9v7bJCuChuErY4UilTyP1 .set_to ,( $xjhsxuU5a40TBChMUfPS9NMgL0 ,)",
+                    "nodeType": "exprStmt",
+                    "id": "MgDeDHoCNRgei2zEN0mQyy76",
+                    "locals": []
+                  }
+                ],
+                "isElseIf": false,
+                "id": "liRAjU4FWfTVvzTtblrRQXNA",
+                "locals": []
+              }
+            ],
+            "id": "xaTpw9v7bJCuChuErY4UilTy"
+          },
+          {
+            "name": "example",
+            "inParameters": [],
+            "outParameters": [],
+            "isPrivate": false,
+            "isOffloaded": false,
+            "isTest": false,
+            "isAsync": false,
+            "nodeType": "action",
+            "body": [
+              {
+                "text": "This library uses the Twitter API to search for tweets. It does not require any key.",
+                "nodeType": "comment",
+                "id": "fnkjKxTVRUIYAEMRg6bROb8N"
+              },
+              {
+                "text": "## Search",
+                "nodeType": "comment",
+                "id": "KH46GJNQYVidlYxOqgAupqKn"
+              },
+              {
+                "text": "The `search` action takes a search term and queries twitter for related tweets.",
+                "nodeType": "comment",
+                "id": "xIPV0CNRIJ1f6ANadG2LHZeR"
+              },
+              {
+                "expr": "$MROGYseys6Bb6VtrSns6GPMfL0 ,:= :code #DD8CBLlqJLRvJMc5Er2Aivxk ,( 'pizza ,, F ,)",
+                "nodeType": "exprStmt",
+                "id": "MROGYseys6Bb6VtrSns6GPMf",
+                "locals": [
+                  {
+                    "name": "tweets",
+                    "type": "Message Collection",
+                    "nodeType": "localDef",
+                    "id": "MROGYseys6Bb6VtrSns6GPMfL0"
+                  }
+                ]
+              },
+              {
+                "text": "Each message in `tweets` contains the tweet message, author and possible geo location.",
+                "nodeType": "comment",
+                "id": "B4pUr2XUe6lb6v3ScCo8NSqG"
+              },
+              {
+                "expr": ",( 'pizza_tweets_found/003a_ ,∥ $MROGYseys6Bb6VtrSns6GPMfL0 .count ,) .post_to_wall",
+                "nodeType": "exprStmt",
+                "id": "HhuxlBcPwqaLcf0ycm2rUrVz",
+                "locals": []
+              },
+              {
+                "text": "## Search nearby",
+                "nodeType": "comment",
+                "id": "F4pgjKGZaE4Zs3k4YbVwMwJX"
+              },
+              {
+                "text": "You can specify that you want nearby tweets by passing `true` to the second argument.",
+                "nodeType": "comment",
+                "id": "r5Q1uji8KKIGVn3UzEVK0JV2"
+              },
+              {
+                "expr": "$vl3N2D3WItX1TezKH0SPbriRL0 ,:= :code #DD8CBLlqJLRvJMc5Er2Aivxk ,( 'pizza ,, T ,)",
+                "nodeType": "exprStmt",
+                "id": "vl3N2D3WItX1TezKH0SPbriR",
+                "locals": [
+                  {
+                    "name": "tweets nearby",
+                    "type": "Message Collection",
+                    "nodeType": "localDef",
+                    "id": "vl3N2D3WItX1TezKH0SPbriRL0"
+                  }
+                ]
+              },
+              {
+                "text": "Let's see how many we found.",
+                "nodeType": "comment",
+                "id": "vmkMxCVmUpxDI8G38G9zuXY4"
+              },
+              {
+                "expr": ",( 'pizza_tweets_nearby_found/003a ,∥ $vl3N2D3WItX1TezKH0SPbriRL0 .count ,) .post_to_wall",
+                "nodeType": "exprStmt",
+                "id": "xVpHdCYUeE6LTuJ4ZsmRaIEz",
+                "locals": []
+              }
+            ],
+            "id": "M4vvDjQ91sYS1vG7Ee1mEQt2"
+          }
+        ],
+        "deletedDecls": [],
+        "nodeType": "app",
+        "id": "app"
+      }
+    },
+    {
+      "seqNo": 1,
+      "time": 1368833847,
+      "scriptId": "mdvf",
+      "historyId": "25203346695272570143647ceec-d7d1-4f47-a339-df79a14d35f1",
+      "updateSize": 45,
+      "updates": {
+        "app": {
+          "rootId": "F1EjrIhTmIuPl9XR5x6Km9OV"
+        }
+      }
+    }
+  ]
+}
