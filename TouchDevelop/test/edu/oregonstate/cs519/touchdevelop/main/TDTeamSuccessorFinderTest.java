@@ -19,7 +19,7 @@ public class TDTeamSuccessorFinderTest {
 	@Test
 	public void testGetScriptIDs() throws IOException {
 		String content = new String(Files.readAllBytes(Paths.get("../testData/TDMicroEdits.json")));
-		Set<String> scriptIDs = new TDTeamSuccessorFinder().getScriptIDs(content);
+		Set<String> scriptIDs = new TDTeamSuccessorFinder().getScriptIDsFromFile(content);
 		assertEquals(3, scriptIDs.size());
 		assertTrue(scriptIDs.contains("bubu"));
 		assertTrue(scriptIDs.contains("bubu"));
