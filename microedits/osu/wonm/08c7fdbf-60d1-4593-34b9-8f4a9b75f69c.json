@@ -1,0 +1,1695 @@
+{
+  "userid": "wonm",
+  "guid": "08c7fdbf-60d1-4593-34b9-8f4a9b75f69c",
+  "lastStatus": "deleted",
+  "items": [
+    {
+      "seqNo": 0,
+      "time": 1368746213,
+      "scriptId": null,
+      "historyId": "25203355458660105622aa0116f-3097-4540-9069-28db97c79e8d",
+      "updateSize": 29342,
+      "ast": {
+        "textVersion": "v2.2,js,ctx",
+        "jsonVersion": "v1.0,resolved,short",
+        "name": "bubble popper tutorial",
+        "comment": "A tutorial to build a bubble popper game from scratch. #docs #tutorials #games",
+        "autoIcon": "Cactus",
+        "autoColor": "#85BB65",
+        "platform": "current",
+        "rootId": "JRdj0zSKp9ZdqNXJWgQneyIT",
+        "showAd": false,
+        "isLibrary": false,
+        "allowExport": false,
+        "hasUniqueIds": false,
+        "decls": [
+          {
+            "name": "main",
+            "inParameters": [],
+            "outParameters": [],
+            "isPrivate": false,
+            "isOffloaded": false,
+            "isTest": false,
+            "isAsync": false,
+            "nodeType": "action",
+            "body": [
+              {
+                "text": "{priority:100}",
+                "nodeType": "comment",
+                "id": "JdEfbModggClKL78urJfRM9I"
+              },
+              {
+                "text": "In this tutorial you will learn how to build a bubble popper game.",
+                "nodeType": "comment",
+                "id": "wiucXGBODko2LfZpgLeAGu2t"
+              },
+              {
+                "text": "### rules",
+                "nodeType": "comment",
+                "id": "xTWiXv3XzKH3Zv8ECOt6VHXd"
+              },
+              {
+                "text": "The game rules as follows:",
+                "nodeType": "comment",
+                "id": "oP1mPqaNI4OvTntp2rWSHuTv"
+              },
+              {
+                "text": "* good and bad bubbles fall down from the top of the screen",
+                "nodeType": "comment",
+                "id": "x8KPjrSGKcCMm1WYLddJNhgq"
+              },
+              {
+                "text": "* the player gets points for tapping a good bubble; the good bubble disappears when tapped",
+                "nodeType": "comment",
+                "id": "oCdarKeUmKU82Mr2jB94wNuM"
+              },
+              {
+                "text": "* the player looses a life when tapping a bad bubble;",
+                "nodeType": "comment",
+                "id": "GKF24tpSG2NNivDVy2Yn90vD"
+              },
+              {
+                "text": "* as time goes, there starts to be more bad bubble and their speed start to vary",
+                "nodeType": "comment",
+                "id": "ENBRrYXS7tZmPUv5PbfxV942"
+              },
+              {
+                "text": "Let's turn those rules into a game!",
+                "nodeType": "comment",
+                "id": "x5b4j2jKQZ4Ik1uQKvw4Chbz"
+              },
+              {
+                "text": "### let's get started",
+                "nodeType": "comment",
+                "id": "G9ZmC784FjqSyTSVkEScuUsP"
+              },
+              {
+                "text": "* open a browser and go to [touchdevelop.com/app](http://touchdevelop.com/app)",
+                "nodeType": "comment",
+                "id": "v8X5ruvB8SPtCpOJ7E9czTuD"
+              },
+              {
+                "text": "* tap **Create Script** and select the **bubble popper** template",
+                "nodeType": "comment",
+                "id": "xw9tfeP7f2zY6Arth2RIITIm"
+              },
+              {
+                "text": "The template comes with the code to setup a game engine and move objects using physics.",
+                "nodeType": "comment",
+                "id": "fCmKJNfCRzy2njUcRVc8hS4C"
+              },
+              {
+                "text": "* in the `main` action, a [board](/gameboard) is created and displayed on the screen",
+                "nodeType": "comment",
+                "id": "S4qqikbRRYm3BwUgZSA79Q3a"
+              },
+              {
+                "text": "{decl:main }",
+                "nodeType": "comment",
+                "id": "nVwK5ifQanhFUFE72C3P4NhU"
+              },
+              {
+                "text": "* in the `gameloop` event, the physics are _evolved_ and the board is redrawn on the wall.",
+                "nodeType": "comment",
+                "id": "eYS4n24TYFWI6zdpOqT2uUu1"
+              },
+              {
+                "text": "{decl:gameloop}",
+                "nodeType": "comment",
+                "id": "x8kAqXpnauAxJFftkhWjzZ6Z"
+              },
+              {
+                "text": "### organizing good bubbles",
+                "nodeType": "comment",
+                "id": "gpj7oWGA4KJQvL2kKv2B8tBZ"
+              },
+              {
+                "text": "Since we are going to deal with a large number of bubble sprites, we want to organize them in groups. The `board` provides the ability to create a [sprite set](/SpriteSet) which represents a collection of sprites. A sprite set lets you do all kinds of operations on multiple sprites at once. This is exactly what we need.",
+                "nodeType": "comment",
+                "id": "MXPLGH3KSVrKIYpiz2Q9aa1f"
+              },
+              {
+                "text": "So let's create a sprite set and store it into a `data` variable. `data` variables are global and can be accessed from any action or event.",
+                "nodeType": "comment",
+                "id": "nAYcZ9vk59sHYC4eQnl8QJJe"
+              },
+              {
+                "text": "* **go to** `[code->main]`",
+                "nodeType": "comment",
+                "id": "WdB3OhGQjl25KIFhY9SZDfAj"
+              },
+              {
+                "text": "* tap on the last line of code",
+                "nodeType": "comment",
+                "id": "wIB43CHBGuPijvpNrO5ewZ9X"
+              },
+              {
+                "text": "* tap on the bottom `[+]` button to add a new line",
+                "nodeType": "comment",
+                "id": "t1cHDLFOocHZ1q4Gi4wMhNbQ"
+              },
+              {
+                "text": "* tap on `[data-> data]`",
+                "nodeType": "comment",
+                "id": "LchwnRjz2K2RdjXvTEVuESa3"
+              },
+              {
+                "text": "* tap on `[board]`",
+                "nodeType": "comment",
+                "id": "vxWyxd4nMMe4m5QixKOG5iWt"
+              },
+              {
+                "text": "* tap on `[create sprite set]`",
+                "nodeType": "comment",
+                "id": "fq4E6CarmylZQn91WCldX6YH"
+              },
+              {
+                "text": "* tap on `[store in var]`",
+                "nodeType": "comment",
+                "id": "MOAyeY44mCSmcWgeLuhUNrMI"
+              },
+              {
+                "expr": "$sKa9H4ZG10NHSW0pkUlyOtR6L0 ,:= :data #KsreUS2jwRGYLKlUwDLR6Xh2 .create_sprite_set",
+                "nodeType": "exprStmt",
+                "id": "sKa9H4ZG10NHSW0pkUlyOtR6",
+                "locals": [
+                  {
+                    "name": "sprites",
+                    "type": "Sprite Set",
+                    "nodeType": "localDef",
+                    "id": "sKa9H4ZG10NHSW0pkUlyOtR6L0"
+                  }
+                ]
+              },
+              {
+                "text": "* tap on `sprites` and tap on the `[rename]` button",
+                "nodeType": "comment",
+                "id": "JMlzLE1lLK1NYhPXT4U5yfYv"
+              },
+              {
+                "text": "* rename `sprites` to ``good bubbles``",
+                "nodeType": "comment",
+                "id": "SJ2ORG3DjnnrUJZGmWiFrdjm"
+              },
+              {
+                "expr": "$ZjaGYxaOx4zVbJE2dnHC40wVL0 ,:= :data #KsreUS2jwRGYLKlUwDLR6Xh2 .create_sprite_set",
+                "nodeType": "exprStmt",
+                "id": "ZjaGYxaOx4zVbJE2dnHC40wV",
+                "locals": [
+                  {
+                    "name": "good bubbles",
+                    "type": "Sprite Set",
+                    "nodeType": "localDef",
+                    "id": "ZjaGYxaOx4zVbJE2dnHC40wVL0"
+                  }
+                ]
+              },
+              {
+                "text": "* tap on ``good bubbles`` and tap on the `[promote to data]` button",
+                "nodeType": "comment",
+                "id": "YvtXu8UgtE1AfO8UleDdXMGg"
+              },
+              {
+                "expr": ":data #yLE7rq9l9bPEjr3VoiULhH5z ,:= :data #KsreUS2jwRGYLKlUwDLR6Xh2 .create_sprite_set",
+                "nodeType": "exprStmt",
+                "id": "xgGeSwfbl4wcHwizqzHrYQMX",
+                "locals": []
+              },
+              {
+                "text": "### adding the good bubbles",
+                "nodeType": "comment",
+                "id": "fKOK2DE19ClsC4FxuQKMkYv5"
+              },
+              {
+                "text": "Now that we have the `data->good bubbles` sprite set, let's add a bunch of bubbles into it. Instead of typing the same code over and over again for each bubble, we are going to use a [](/for) loop to do this repetitive work.",
+                "nodeType": "comment",
+                "id": "k21gOJrBNLLtzA642Zni4OYG"
+              },
+              {
+                "text": "* **go to main**",
+                "nodeType": "comment",
+                "id": "lR1DWFj2kR2HF7P7pBkaxfx2"
+              },
+              {
+                "text": "* add a new line",
+                "nodeType": "comment",
+                "id": "wO8NoZFsBFnmKbGz4Mqe7N0T"
+              },
+              {
+                "text": "* select the `for` statement in the blue keyboard",
+                "nodeType": "comment",
+                "id": "AFDXswPt2dRuOSQGtO2i98YZ"
+              },
+              {
+                "bound": "",
+                "body": [
+                  {
+                    "expr": "",
+                    "nodeType": "exprStmt",
+                    "id": "xR4a0l7VjbirXXZaINJ48XrD",
+                    "locals": []
+                  }
+                ],
+                "nodeType": "for",
+                "id": "xHQoQ29jH5ARxOTllkibdXtx",
+                "locals": [
+                  {
+                    "name": "i",
+                    "type": "Number",
+                    "nodeType": "localDef",
+                    "id": "xHQoQ29jH5ARxOTllkibdXtxB0"
+                  }
+                ]
+              },
+              {
+                "text": "* let's start with 10 bubbles so add ``10`` where the `...` are",
+                "nodeType": "comment",
+                "id": "BaygB8lpUGUFAG5kYwy2KF9N"
+              },
+              {
+                "bound": ",1 ,0",
+                "body": [
+                  {
+                    "expr": "",
+                    "nodeType": "exprStmt",
+                    "id": "Ell92BCodZ4mBCtlTP7L1wem",
+                    "locals": []
+                  }
+                ],
+                "nodeType": "for",
+                "id": "xPzkqIiE2hHLWZPRZn14CmU0",
+                "locals": [
+                  {
+                    "name": "i ",
+                    "type": "Number",
+                    "nodeType": "localDef",
+                    "id": "xPzkqIiE2hHLWZPRZn14CmU0B0"
+                  }
+                ]
+              },
+              {
+                "text": "* **in the for loop**, add a line of code to create a picture sprite",
+                "nodeType": "comment",
+                "id": "ot5RTWQax6ZhMqUlBr2IjmQx"
+              },
+              {
+                "bound": ",1 ,0",
+                "body": [
+                  {
+                    "text": "{highlight}",
+                    "nodeType": "comment",
+                    "id": "h0ajO4AYtSJ9jQO4b85SBRln"
+                  },
+                  {
+                    "expr": ":data #KsreUS2jwRGYLKlUwDLR6Xh2 .create_picture ,( ?Picture: ,)",
+                    "nodeType": "exprStmt",
+                    "id": "b5pWhEyCy716x5JI68RAyXau",
+                    "locals": []
+                  },
+                  {
+                    "text": "{/highlight}",
+                    "nodeType": "comment",
+                    "id": "KdOte2Ew4ctPkoyud2JqtzNF"
+                  }
+                ],
+                "nodeType": "for",
+                "id": "zUjSOJ72fz3xCvUWHXtOJBwc",
+                "locals": [
+                  {
+                    "name": "i  ",
+                    "type": "Number",
+                    "nodeType": "localDef",
+                    "id": "zUjSOJ72fz3xCvUWHXtOJBwcB0"
+                  }
+                ]
+              },
+              {
+                "text": "* delete `need Picture`",
+                "nodeType": "comment",
+                "id": "Tn24JnA7EDsFdn33rZvrSKIa"
+              },
+              {
+                "text": "* type **bubble**, pick one of the bubble image",
+                "nodeType": "comment",
+                "id": "n6mDrmjeFJUNY4J2nBW4Bk05"
+              },
+              {
+                "expr": ":data #KsreUS2jwRGYLKlUwDLR6Xh2 .create_picture ,( :art #k2y3uhdBmv4EIka0diL08UOv ,)",
+                "nodeType": "exprStmt",
+                "id": "COPfh5ap9bTp0UdA1NPHmK2x",
+                "locals": []
+              },
+              {
+                "text": "* tap `store in var` to store the sprite into a local variable",
+                "nodeType": "comment",
+                "id": "KWE7A244vccUaogLRWnhYRru"
+              },
+              {
+                "text": "* rename the variable to `good bubble`",
+                "nodeType": "comment",
+                "id": "ondJTrlQEcSDJgHcFgN0YcDJ"
+              },
+              {
+                "text": "{hide}",
+                "nodeType": "comment",
+                "id": "xsfYciooDlK2KJtHJt8xSHzm"
+              },
+              {
+                "expr": "$z44tt2c3R3SH4WZKThRCZtXnL0 ,:= :data #KsreUS2jwRGYLKlUwDLR6Xh2 .create_picture ,( :art #k2y3uhdBmv4EIka0diL08UOv ,)",
+                "nodeType": "exprStmt",
+                "id": "z44tt2c3R3SH4WZKThRCZtXn",
+                "locals": [
+                  {
+                    "name": "good bubble ",
+                    "type": "Sprite",
+                    "nodeType": "localDef",
+                    "id": "z44tt2c3R3SH4WZKThRCZtXnL0"
+                  }
+                ]
+              },
+              {
+                "text": "{/hide}",
+                "nodeType": "comment",
+                "id": "KbBTdvUTRcRPgWq6b6GCwM63"
+              },
+              {
+                "bound": ",1 ,0",
+                "body": [
+                  {
+                    "text": "{highlight}",
+                    "nodeType": "comment",
+                    "id": "vyJwQxAjDq4CouOR9cCxZRt4"
+                  },
+                  {
+                    "expr": "$ZD6btQ6VYVn2YBGGTacxxUSOL0 ,:= :data #KsreUS2jwRGYLKlUwDLR6Xh2 .create_picture ,( :art #k2y3uhdBmv4EIka0diL08UOv ,)",
+                    "nodeType": "exprStmt",
+                    "id": "ZD6btQ6VYVn2YBGGTacxxUSO",
+                    "locals": [
+                      {
+                        "name": "good bubble",
+                        "type": "Sprite",
+                        "nodeType": "localDef",
+                        "id": "ZD6btQ6VYVn2YBGGTacxxUSOL0"
+                      }
+                    ]
+                  },
+                  {
+                    "text": "{/highlight}",
+                    "nodeType": "comment",
+                    "id": "qQu4iXbHiPIz8so0E4nPpAbr"
+                  }
+                ],
+                "nodeType": "for",
+                "id": "M4ZdlbK8a2eY2pqYZxh4YWDY",
+                "locals": [
+                  {
+                    "name": "i  ",
+                    "type": "Number",
+                    "nodeType": "localDef",
+                    "id": "M4ZdlbK8a2eY2pqYZxh4YWDYB0"
+                  }
+                ]
+              },
+              {
+                "text": "* add a new line in the `for` loop",
+                "nodeType": "comment",
+                "id": "TwfqCvaNb4sYtF1Fb2xyT1Xh"
+              },
+              {
+                "text": "* insert `data->good bubbles`",
+                "nodeType": "comment",
+                "id": "xVkqzfZOWEv0EKsCOpEDU2KJ"
+              },
+              {
+                "text": "* tap on `add` and the editor should automatically insert `good bubbles` as the argument.",
+                "nodeType": "comment",
+                "id": "Ioz2DnodHTpIDTOyOTNT7Y4j"
+              },
+              {
+                "bound": ",1 ,0",
+                "body": [
+                  {
+                    "expr": "$pIKi2g2TzdF4i8B4FU4U89HwL0 ,:= :data #KsreUS2jwRGYLKlUwDLR6Xh2 .create_picture ,( :art #k2y3uhdBmv4EIka0diL08UOv ,)",
+                    "nodeType": "exprStmt",
+                    "id": "pIKi2g2TzdF4i8B4FU4U89Hw",
+                    "locals": [
+                      {
+                        "name": "good bubble   ",
+                        "type": "Sprite",
+                        "nodeType": "localDef",
+                        "id": "pIKi2g2TzdF4i8B4FU4U89HwL0"
+                      }
+                    ]
+                  },
+                  {
+                    "text": "{highlight}",
+                    "nodeType": "comment",
+                    "id": "wt0VeRa5yVI2I472UYypZ7xM"
+                  },
+                  {
+                    "expr": ":data #yLE7rq9l9bPEjr3VoiULhH5z .add ,( $z44tt2c3R3SH4WZKThRCZtXnL0 ,)",
+                    "nodeType": "exprStmt",
+                    "id": "p4CCwH2xuzp6AUjKP4tijN4p",
+                    "locals": []
+                  },
+                  {
+                    "text": "{/highlight}",
+                    "nodeType": "comment",
+                    "id": "lo10F3Dogg1s4THk1rRY3Tg7"
+                  }
+                ],
+                "nodeType": "for",
+                "id": "EJ8P1NVOtbTePQG0DlPZR6tv",
+                "locals": [
+                  {
+                    "name": "i  ",
+                    "type": "Number",
+                    "nodeType": "localDef",
+                    "id": "EJ8P1NVOtbTePQG0DlPZR6tvB0"
+                  }
+                ]
+              },
+              {
+                "text": "* try to run your game and see what happens",
+                "nodeType": "comment",
+                "id": "s2UnDokUentB5o1t2hwkN4Ex"
+              },
+              {
+                "text": "### positioning the bubbles",
+                "nodeType": "comment",
+                "id": "kqrkyx0muWK0JbQqhViseWaX"
+              },
+              {
+                "text": "Oh no! The bubbles are all in the center and they all fall down together. Let's scatter the bubble all over the screen using `math->random range`.",
+                "nodeType": "comment",
+                "id": "xzJINCji90PP19jonKjdtzaM"
+              },
+              {
+                "text": "* **go to main**",
+                "nodeType": "comment",
+                "id": "oqdSQ2Nbj6bpmUhTuWBvoPt7"
+              },
+              {
+                "text": "* **in the for loop**, compute 2 random numbers for the `x` and `y` position of the bubble",
+                "nodeType": "comment",
+                "id": "Ynt6u2hb4mHhcu4sxkNLCSx9"
+              },
+              {
+                "text": "* use `set pos` to set the position of the good bubble",
+                "nodeType": "comment",
+                "id": "IBiVV6wpSq4kuoiRrR4TCIES"
+              },
+              {
+                "bound": ",1 ,0",
+                "body": [
+                  {
+                    "text": "...",
+                    "nodeType": "comment",
+                    "id": "f1zgQpjTpS8QnJL597c4W2ah"
+                  },
+                  {
+                    "text": "{highlight}",
+                    "nodeType": "comment",
+                    "id": "Fjw4GF7drUX457Ti4z214hDy"
+                  },
+                  {
+                    "expr": "$xmaVPnaW5azkgpT1FsbIPNNNL0 ,:= :math .random_range ,( ,0 ,, ,8 ,0 ,0 ,)",
+                    "nodeType": "exprStmt",
+                    "id": "xmaVPnaW5azkgpT1FsbIPNNN",
+                    "locals": [
+                      {
+                        "name": "x",
+                        "type": "Number",
+                        "nodeType": "localDef",
+                        "id": "xmaVPnaW5azkgpT1FsbIPNNNL0"
+                      }
+                    ]
+                  },
+                  {
+                    "expr": "$WVUrEOuu0Am82Dlxj6mP4ExmL0 ,:= :math .random_range ,( ,0 ,, ,4 ,8 ,0 ,)",
+                    "nodeType": "exprStmt",
+                    "id": "WVUrEOuu0Am82Dlxj6mP4Exm",
+                    "locals": [
+                      {
+                        "name": "y",
+                        "type": "Number",
+                        "nodeType": "localDef",
+                        "id": "WVUrEOuu0Am82Dlxj6mP4ExmL0"
+                      }
+                    ]
+                  },
+                  {
+                    "expr": "$z44tt2c3R3SH4WZKThRCZtXnL0 .set_pos ,( $xmaVPnaW5azkgpT1FsbIPNNNL0 ,, $WVUrEOuu0Am82Dlxj6mP4ExmL0 ,)",
+                    "nodeType": "exprStmt",
+                    "id": "s1FyVVjTOCGxP5Xaj9puMAQa",
+                    "locals": []
+                  },
+                  {
+                    "text": "{/highlight}",
+                    "nodeType": "comment",
+                    "id": "FcgaDAgJoRSwwjinzAtA6O4R"
+                  }
+                ],
+                "nodeType": "for",
+                "id": "TMbqE1p9Z5OS5YLJPBDq9Ven",
+                "locals": [
+                  {
+                    "name": "i   ",
+                    "type": "Number",
+                    "nodeType": "localDef",
+                    "id": "TMbqE1p9Z5OS5YLJPBDq9VenB0"
+                  }
+                ]
+              },
+              {
+                "text": "* try to run your game and see what happens",
+                "nodeType": "comment",
+                "id": "FQgW7bjS67rpqX2w1kUe1qJR"
+              },
+              {
+                "text": "### tweaking the physics",
+                "nodeType": "comment",
+                "id": "BQvzH270RBn08YCouHkZisHD"
+              },
+              {
+                "text": "Oh no! The bubble are not moving!",
+                "nodeType": "comment",
+                "id": "xPccgLpnBKOVGx3znfCa8E4v"
+              },
+              {
+                "text": "The bubbles are not moving because there are no forces applied to them and they have no initial speed. Let's set they vertical speed (`speed y`) while creating them in the loop.",
+                "nodeType": "comment",
+                "id": "ydCWuM6DQafmsuUyP4Lcbdt9"
+              },
+              {
+                "text": "* **go to main**",
+                "nodeType": "comment",
+                "id": "ff1PLH0ZApJgUT0KQBjUOnJl"
+              },
+              {
+                "text": "* **in the for loop,** set the **speed y** of ``good bubble`` to 150",
+                "nodeType": "comment",
+                "id": "WUZsj0F8NhKPY1jYR78STNZB"
+              },
+              {
+                "bound": ",1 ,0",
+                "body": [
+                  {
+                    "text": "...",
+                    "nodeType": "comment",
+                    "id": "f4UeDDpESu81Nj782mn0L37Z"
+                  },
+                  {
+                    "text": "{highlight}",
+                    "nodeType": "comment",
+                    "id": "lbw4nhW700Qpm2Q2nV9ON7e2"
+                  },
+                  {
+                    "expr": "$z44tt2c3R3SH4WZKThRCZtXnL0 .set_speed_y ,( ,1 ,5 ,0 ,)",
+                    "nodeType": "exprStmt",
+                    "id": "xEHEYihZ6ktkBy7rjfYSfCZa",
+                    "locals": []
+                  },
+                  {
+                    "text": "{/highlight}",
+                    "nodeType": "comment",
+                    "id": "u5TtI9ee22Bul8qH0FNOMUtY"
+                  }
+                ],
+                "nodeType": "for",
+                "id": "xwb6TiZ0ru0oQZd8KfqgEmwY",
+                "locals": [
+                  {
+                    "name": "i    ",
+                    "type": "Number",
+                    "nodeType": "localDef",
+                    "id": "xwb6TiZ0ru0oQZd8KfqgEmwYB0"
+                  }
+                ]
+              },
+              {
+                "text": "* set the width of `good bubble` to 100 as the image might be too big",
+                "nodeType": "comment",
+                "id": "FPvkF17Xhpeju4RlEfWuhOeq"
+              },
+              {
+                "bound": ",1 ,0",
+                "body": [
+                  {
+                    "text": "...",
+                    "nodeType": "comment",
+                    "id": "PDVrBMNVcQreXlJT06pc54zq"
+                  },
+                  {
+                    "expr": "$z44tt2c3R3SH4WZKThRCZtXnL0 .set_speed_y ,( ,1 ,5 ,0 ,)",
+                    "nodeType": "exprStmt",
+                    "id": "QvomZXhYe0bw8sDPglaBHS2d",
+                    "locals": []
+                  },
+                  {
+                    "text": "{highlight}",
+                    "nodeType": "comment",
+                    "id": "eE4ai21WZXSiqltfWu7GmjHZ"
+                  },
+                  {
+                    "expr": "$z44tt2c3R3SH4WZKThRCZtXnL0 .set_width ,( ,1 ,0 ,0 ,)",
+                    "nodeType": "exprStmt",
+                    "id": "ZfFSvM6VxB2cCgzkaDI96trV",
+                    "locals": []
+                  },
+                  {
+                    "text": "{/highlight}",
+                    "nodeType": "comment",
+                    "id": "x8gLYNQiGkM0ygqn10PehHfv"
+                  }
+                ],
+                "nodeType": "for",
+                "id": "xu8KX9JRg6QwQUCnPf6hbti1",
+                "locals": [
+                  {
+                    "name": "i    ",
+                    "type": "Number",
+                    "nodeType": "localDef",
+                    "id": "xu8KX9JRg6QwQUCnPf6hbti1B0"
+                  }
+                ]
+              },
+              {
+                "text": "* try the game and see what happens",
+                "nodeType": "comment",
+                "id": "imJ4zD6Gt8B2FvK6Qs0lewZi"
+              },
+              {
+                "text": "#### exercise variation",
+                "nodeType": "comment",
+                "id": "GGXoKmFTgXcn8i99h2ehxiM0"
+              },
+              {
+                "text": "* use `math->random range` and `set width` to create bubble of different sizes",
+                "nodeType": "comment",
+                "id": "mdy40f3DCSSVoBq3oTuo6VWX"
+              },
+              {
+                "text": "### an endless stream of bubbles",
+                "nodeType": "comment",
+                "id": "aDePiy1qvWxryHYNsAd28pPW"
+              },
+              {
+                "text": "Oh no! The bubble fall off the screen and never come back!",
+                "nodeType": "comment",
+                "id": "nmIAoUgbbs304yoPACqKO44K"
+              },
+              {
+                "text": "We want to create the effect that an infinite amount of bubbles is falling from the top of screen. Rather than creating more and more bubbles, we can simply re-position the bubbles that fell off the bottom of the screen to the top.",
+                "nodeType": "comment",
+                "id": "x8Aaa8yilvbG4Cf2V1Es1jz6"
+              },
+              {
+                "text": "If we had to break down this task into a sentence, it could look like this:",
+                "nodeType": "comment",
+                "id": "Ib8Kgwq4D8rJhW4204WbSD3v"
+              },
+              {
+                "text": "> _for each_ good bubble, _if off screen_ then _move to top_",
+                "nodeType": "comment",
+                "id": "yfXRGXoLDW0fZU2Sd2bj1gL4"
+              },
+              {
+                "text": "This sentence above almost reads like code, it is commonly called pseudo-code. Let's translate it into real code.",
+                "nodeType": "comment",
+                "id": "hZPHJBIp2cmHoIaD7rllrqzx"
+              },
+              {
+                "text": "#### for each",
+                "nodeType": "comment",
+                "id": "m1If4lHaAU2K23CDZDGYJP9X"
+              },
+              {
+                "text": "* **go to gameloop**",
+                "nodeType": "comment",
+                "id": "xD8wIy14CFakAXB59Uk931uO"
+              },
+              {
+                "text": "* add a new line and select **for each**",
+                "nodeType": "comment",
+                "id": "xIzj4OuoyzYVHxqlJRtQkl6W"
+              },
+              {
+                "text": "* add `data->good bubbles` in the `...` placeholder",
+                "nodeType": "comment",
+                "id": "tfE22g2VW5o4jVrCF0W5fD0D"
+              },
+              {
+                "collection": ":data #yLE7rq9l9bPEjr3VoiULhH5z",
+                "conditions": [
+                  {
+                    "condition": "T",
+                    "nodeType": "where",
+                    "id": "xSFcNdxonWKUBTi6B27ba8kR",
+                    "locals": []
+                  }
+                ],
+                "body": [
+                  {
+                    "expr": "",
+                    "nodeType": "exprStmt",
+                    "id": "eF6dnYjeEEoznx8uYG4nzw3r",
+                    "locals": []
+                  }
+                ],
+                "nodeType": "foreach",
+                "id": "QJ78AjZ1vJwJXR9F2yBvPgrw",
+                "locals": [
+                  {
+                    "name": "sprite",
+                    "type": "Sprite",
+                    "nodeType": "localDef",
+                    "id": "QJ78AjZ1vJwJXR9F2yBvPgrwB0"
+                  }
+                ]
+              },
+              {
+                "text": "The [for each](/foreach) loop will run the code nested for each good bubble in the set.",
+                "nodeType": "comment",
+                "id": "x9CoJTUR0DSMm14gkLNyJh3O"
+              },
+              {
+                "text": "### if off screen",
+                "nodeType": "comment",
+                "id": "KpnTfZDi9C9ooUJMyGL1VdCP"
+              },
+              {
+                "text": "The next step is to detect if a good bubble is off screen using an [](/if) statement. We can easily do that by using its `y` coordinate. Remember that the vertical coordinates are inverted and the origin is the top-left corner of the screen.",
+                "nodeType": "comment",
+                "id": "C9lpGUNj560Xz4dYzViwoG8g"
+              },
+              {
+                "text": "* **in the for each**, add an `if` statement to test if the sprite is off the screen",
+                "nodeType": "comment",
+                "id": "P2LsJhzyoBblJd4FQ4EzSo8x"
+              },
+              {
+                "collection": ":data #yLE7rq9l9bPEjr3VoiULhH5z",
+                "conditions": [
+                  {
+                    "condition": "T",
+                    "nodeType": "where",
+                    "id": "PzPritICTYez4Rti1swfiMiT",
+                    "locals": []
+                  }
+                ],
+                "body": [
+                  {
+                    "text": "{highlight}",
+                    "nodeType": "comment",
+                    "id": "x2VPh5mFX8KwDsHRMSNnAPQT"
+                  },
+                  {
+                    "nodeType": "if",
+                    "condition": "$x1qLiP49eT7N8grGDR78KLBDB0 .y ,> ,4 ,8 ,0",
+                    "thenBody": [
+                      {
+                        "expr": "",
+                        "nodeType": "exprStmt",
+                        "id": "nwF1LzH7Zu3c0Uv24PdiYJ0s",
+                        "locals": []
+                      }
+                    ],
+                    "isElseIf": false,
+                    "id": "V9RTv2NQ5etAwsE8kWplhTCh",
+                    "locals": []
+                  },
+                  {
+                    "text": "{/highlight}",
+                    "nodeType": "comment",
+                    "id": "evXr7JxKDM0UKi4AE95olTZN"
+                  }
+                ],
+                "nodeType": "foreach",
+                "id": "x1qLiP49eT7N8grGDR78KLBD",
+                "locals": [
+                  {
+                    "name": "sprite",
+                    "type": "Sprite",
+                    "nodeType": "localDef",
+                    "id": "x1qLiP49eT7N8grGDR78KLBDB0"
+                  }
+                ]
+              },
+              {
+                "text": "#### move to top",
+                "nodeType": "comment",
+                "id": "SRI1nG8uRQxTZbeYCzoCVjzy"
+              },
+              {
+                "text": "Once we detected that a good bubble is off screen, we can use `set pos` to re-position it at the top of the screen. We also use `math->random range` to move it horizontally.",
+                "nodeType": "comment",
+                "id": "RTxV7w50nm5lsqmmgxR1Ch2Z"
+              },
+              {
+                "text": "* **in the for each**, add the code to position the sprite on top of the screen",
+                "nodeType": "comment",
+                "id": "Fk7yGNwMY1pfHxzqCMQ4O6ew"
+              },
+              {
+                "collection": ":data #yLE7rq9l9bPEjr3VoiULhH5z",
+                "conditions": [
+                  {
+                    "condition": "T",
+                    "nodeType": "where",
+                    "id": "dUGWPgXX3UDq8sAC6KgLYmV3",
+                    "locals": []
+                  }
+                ],
+                "body": [
+                  {
+                    "nodeType": "if",
+                    "condition": "$P62r6Q6ddivSNgOgaLuYa9nhB0 .y ,> ,4 ,8 ,0",
+                    "thenBody": [
+                      {
+                        "text": "{highlight}",
+                        "nodeType": "comment",
+                        "id": "Y74JolQGq9KwH9WdDIMFmB2b"
+                      },
+                      {
+                        "expr": "$P62r6Q6ddivSNgOgaLuYa9nhB0 .set_pos ,( :math .random_range ,( ,0 ,, ,8 ,0 ,0 ,) ,, ,0 ,)",
+                        "nodeType": "exprStmt",
+                        "id": "bBzLehXfBuRcMrWr0Ao5vVjB",
+                        "locals": []
+                      },
+                      {
+                        "text": "{/highlight}",
+                        "nodeType": "comment",
+                        "id": "bXsjl7cT9rQVp2gHA4brfvkH"
+                      }
+                    ],
+                    "isElseIf": false,
+                    "id": "w59x4op2L7vU3vHApnk41skn",
+                    "locals": []
+                  }
+                ],
+                "nodeType": "foreach",
+                "id": "P62r6Q6ddivSNgOgaLuYa9nh",
+                "locals": [
+                  {
+                    "name": "sprite",
+                    "type": "Sprite",
+                    "nodeType": "localDef",
+                    "id": "P62r6Q6ddivSNgOgaLuYa9nhB0"
+                  }
+                ]
+              },
+              {
+                "text": "* try run the game and see what happens",
+                "nodeType": "comment",
+                "id": "x6cybBpvJIpN2VcHMizIKCsD"
+              },
+              {
+                "text": "### background picture",
+                "nodeType": "comment",
+                "id": "DIWHC3wUXQBm4prUUi9sQiYD"
+              },
+              {
+                "text": "The game is starting to shape. Let's make it more fun by adding a background picture.",
+                "nodeType": "comment",
+                "id": "P87mTHAz8UHzPHgiN8NDFOMN"
+              },
+              {
+                "text": "* **go to main**",
+                "nodeType": "comment",
+                "id": "h8uhzRkGpW8uIIatFXqqwacz"
+              },
+              {
+                "text": "* add a new line",
+                "nodeType": "comment",
+                "id": "Q83QZ1LHDFwGMk3fH03GYpzr"
+              },
+              {
+                "text": "* tap `wall`, tap `set background picture`",
+                "nodeType": "comment",
+                "id": "x5IJqY4tOCD7zaoNNm9UPN9I"
+              },
+              {
+                "expr": ":wall .set_background_picture ,( ?Picture: ,)",
+                "nodeType": "exprStmt",
+                "id": "Jt2WJ11q4cSYlEUqySS0EWtQ",
+                "locals": []
+              },
+              {
+                "text": "* delete `need Picture`",
+                "nodeType": "comment",
+                "id": "c41vUKYHNxHnMhm4fXkj07eh"
+              },
+              {
+                "text": "* type **nature** and select a picture",
+                "nodeType": "comment",
+                "id": "RL2tGTDWnPSXCHh20Ms7114G"
+              },
+              {
+                "expr": ":wall .set_background_picture ,( :art #x2xa69mmCpV6kcBgDyaMCK1C ,)",
+                "nodeType": "exprStmt",
+                "id": "xZYkdLTFJQ7voLstQOWdkUMi",
+                "locals": []
+              },
+              {
+                "text": "* try your game and see what happens",
+                "nodeType": "comment",
+                "id": "HW9rmG7ZqAVvAVia8a2OyWco"
+              },
+              {
+                "text": "### sounds",
+                "nodeType": "comment",
+                "id": "irEB98Oi7ocIW4LlGjqg7i6W"
+              },
+              {
+                "text": "Let's add a little popping sound whenever a bubble leaves the screen.",
+                "nodeType": "comment",
+                "id": "y4driCdjJVWKTQJeZMwXw5Z5"
+              },
+              {
+                "text": "* **go to gameloop**",
+                "nodeType": "comment",
+                "id": "oO34uvVo33D24ShidiHhLCHD"
+              },
+              {
+                "text": "* **in the if inside of the for each**, add a new line",
+                "nodeType": "comment",
+                "id": "uYOTWGuAm2xFjoikjuZ4z4FW"
+              },
+              {
+                "collection": ":data #yLE7rq9l9bPEjr3VoiULhH5z",
+                "conditions": [
+                  {
+                    "condition": "T",
+                    "nodeType": "where",
+                    "id": "mXGZgzyooQmtK1X8zHq7Zc36",
+                    "locals": []
+                  }
+                ],
+                "body": [
+                  {
+                    "nodeType": "if",
+                    "condition": "$aIi5M4B66Ix8PxSb0jE9gNeeB0 .y ,> ,4 ,8 ,0",
+                    "thenBody": [
+                      {
+                        "text": "...",
+                        "nodeType": "comment",
+                        "id": "ZKlpH4AwWBq2sGtSvyETZ8p2"
+                      },
+                      {
+                        "text": "{highlight}",
+                        "nodeType": "comment",
+                        "id": "I2vcioNcU0d63KJHSQiJqR04"
+                      },
+                      {
+                        "expr": "",
+                        "nodeType": "exprStmt",
+                        "id": "r24okr8PtWzWv2Efd9lFA2gi",
+                        "locals": []
+                      },
+                      {
+                        "text": "{/highlight}",
+                        "nodeType": "comment",
+                        "id": "VjKPNQO60OL2OlsRTh4OHQkm"
+                      }
+                    ],
+                    "isElseIf": false,
+                    "id": "xuiOHuXSJArwoz34Rds9Hlec",
+                    "locals": []
+                  }
+                ],
+                "nodeType": "foreach",
+                "id": "aIi5M4B66Ix8PxSb0jE9gNee",
+                "locals": [
+                  {
+                    "name": "sprite",
+                    "type": "Sprite",
+                    "nodeType": "localDef",
+                    "id": "aIi5M4B66Ix8PxSb0jE9gNeeB0"
+                  }
+                ]
+              },
+              {
+                "text": "* type **pop** and select **cheek pop**",
+                "nodeType": "comment",
+                "id": "f9dqMHeA2HNUXmiPkj2mzbYQ"
+              },
+              {
+                "text": "* tap **play**",
+                "nodeType": "comment",
+                "id": "KdTaD8fMjFene4Cqeqc1vns0"
+              },
+              {
+                "expr": ":art #VBhZOUYVTBRMwIw6HkCSfEnl .play",
+                "nodeType": "exprStmt",
+                "id": "brGM1B3LL3JUmkK61MhAhY3g",
+                "locals": []
+              },
+              {
+                "text": "* try to run your game and see what happens",
+                "nodeType": "comment",
+                "id": "SO3tjuDJzj9wva2pGD6TNi24"
+              },
+              {
+                "text": "### popping bubbles",
+                "nodeType": "comment",
+                "id": "xO44qb461XSxbse2NYw2GtDm"
+              },
+              {
+                "text": "Now that the bubbles are happily falling down the screen, we can work on popping them! To do so, we must add code that runs when the user taps one of them. Fortunately, this is pretty easy as we can register an _tap_ event to `data->good bubbles` sprite set.",
+                "nodeType": "comment",
+                "id": "hWM1avSiGZlCo4Jug4h23soN"
+              },
+              {
+                "text": "* **go to the script explorer**",
+                "nodeType": "comment",
+                "id": "xnsGzI3Wj4d8xD2Xree9eEvL"
+              },
+              {
+                "text": "* under **events**, tap the `+ new` button",
+                "nodeType": "comment",
+                "id": "auy44iED8z5Qho2XKtWh2o49"
+              },
+              {
+                "text": "* select **tap sprite in good bubbles** and the editor should display the following code",
+                "nodeType": "comment",
+                "id": "xdtj2xG5420RRUb8TdVbNYCa"
+              },
+              {
+                "text": "{decl:tap sprite in good bubbles}",
+                "nodeType": "comment",
+                "id": "S6MCegBMQmQozX42agLn6iFf"
+              },
+              {
+                "text": "The `tap sprite in good bubbles` event will be called whenever the user taps on a sprite that is part of the `data->good bubbles` sprite set. Let's start by re-positioning the bubble when it gets tapped.",
+                "nodeType": "comment",
+                "id": "z6xQF4jju43qvkYlSjo5mFDL"
+              },
+              {
+                "text": "{hide}",
+                "nodeType": "comment",
+                "id": "JEJkKR4WJtKUr0yoWG8bvc42"
+              },
+              {
+                "expr": "$MLYGtIpmLMxcBNRj00mgL3hEL0 ,:= :data #KsreUS2jwRGYLKlUwDLR6Xh2 .create_text ,( ,1 ,0 ,0 ,, ,2 ,0 ,, ,4 ,0 ,, ' ,)",
+                "nodeType": "exprStmt",
+                "id": "MLYGtIpmLMxcBNRj00mgL3hE",
+                "locals": [
+                  {
+                    "name": "sprite ",
+                    "type": "Sprite",
+                    "nodeType": "localDef",
+                    "id": "MLYGtIpmLMxcBNRj00mgL3hEL0"
+                  }
+                ]
+              },
+              {
+                "text": "{/hide}",
+                "nodeType": "comment",
+                "id": "NiG5YBL29w0PJSwvf4EzOFAD"
+              },
+              {
+                "text": "* **go to tap sprite in good bubbles**",
+                "nodeType": "comment",
+                "id": "Y2hPthleskNkiFYl3JTvqcXu"
+              },
+              {
+                "text": "* reset the bubble position",
+                "nodeType": "comment",
+                "id": "Ky8fIlNIy4L2BaTSxRzqXR7O"
+              },
+              {
+                "expr": "$GsctdP4r69VKdmeLMqWZSZOyL0 ,:= :math .random_range ,( ,0 ,, ,8 ,0 ,0 ,)",
+                "nodeType": "exprStmt",
+                "id": "GsctdP4r69VKdmeLMqWZSZOy",
+                "locals": [
+                  {
+                    "name": "x ",
+                    "type": "Number",
+                    "nodeType": "localDef",
+                    "id": "GsctdP4r69VKdmeLMqWZSZOyL0"
+                  }
+                ]
+              },
+              {
+                "expr": "$MLYGtIpmLMxcBNRj00mgL3hEL0 .set_pos ,( $GsctdP4r69VKdmeLMqWZSZOyL0 ,, ,0 ,)",
+                "nodeType": "exprStmt",
+                "id": "X20QROoh6vbabwoRxoTs1X95",
+                "locals": []
+              },
+              {
+                "text": "#### exercise variation",
+                "nodeType": "comment",
+                "id": "dr4544COJR4edth5RoEyI1J7"
+              },
+              {
+                "text": "* play a sound when popping a bubble",
+                "nodeType": "comment",
+                "id": "RSRblbLmDSw9rLzd5xcrmhg5"
+              },
+              {
+                "text": "### keeping the score",
+                "nodeType": "comment",
+                "id": "YrLqYVcI3TSnroVBfE1A1zKw"
+              },
+              {
+                "text": "Each time a bubble is popped, the user should receive some points. Let's start by keeping track of the score using a `data-> data` variable.",
+                "nodeType": "comment",
+                "id": "fi8r6nPdmpn5UDFjwC4EF4MD"
+              },
+              {
+                "text": "* **go to main**",
+                "nodeType": "comment",
+                "id": "r5CAWrISPwB2CRv0x1a5FmlQ"
+              },
+              {
+                "text": "* add a new line",
+                "nodeType": "comment",
+                "id": "qavhUckyFwRzZL45m9pc2VgQ"
+              },
+              {
+                "text": "* tap on `var`",
+                "nodeType": "comment",
+                "id": "xVMUR2G0KoKGZpAhe2pHXyqN"
+              },
+              {
+                "text": "* tap on `0`",
+                "nodeType": "comment",
+                "id": "LHsqkW8rqYZYlKuuiEuJurcT"
+              },
+              {
+                "text": "* rename the variable to `score` and promote it to `data`",
+                "nodeType": "comment",
+                "id": "J23fVS2GpRPygKkQvsG84vHZ"
+              },
+              {
+                "expr": ":data #uFMKTkBepehqmvowqK9pg4dz ,:= ,0",
+                "nodeType": "exprStmt",
+                "id": "xOZZTx3sAogVf7T81rFP8uIJ",
+                "locals": []
+              },
+              {
+                "text": "* **go to tap sprite in good bubbles**",
+                "nodeType": "comment",
+                "id": "yiF45LrEZ1ki59F2DbV3N4dU"
+              },
+              {
+                "text": "* add a new line and increment the score",
+                "nodeType": "comment",
+                "id": "Zfa36JIAm8QmMai4VkhH2aFQ"
+              },
+              {
+                "expr": ":data #uFMKTkBepehqmvowqK9pg4dz ,:= :data #uFMKTkBepehqmvowqK9pg4dz ,+ ,1",
+                "nodeType": "exprStmt",
+                "id": "xTu8gu22Vr3uEApOJNLLSRv4",
+                "locals": []
+              },
+              {
+                "text": "### displaying the score",
+                "nodeType": "comment",
+                "id": "QUpTi8ySsTTV8hDgz9FLCuSX"
+              },
+              {
+                "text": "We want to show the score to the user at all time. We will need to create a text sprite, position it into a corner of the screen and update its text each time we change the score.",
+                "nodeType": "comment",
+                "id": "lVmc7dWVT2pM810TesD2E18u"
+              },
+              {
+                "text": "* **go to main**",
+                "nodeType": "comment",
+                "id": "xNYL1Ac2R5AccNyxlg7v25u5"
+              },
+              {
+                "text": "* create a new text sprite and store it in a variable",
+                "nodeType": "comment",
+                "id": "airTZehF9xayAIqNd4yo9aXb"
+              },
+              {
+                "expr": "$HWty4UGfSEkT7lTbD1xgPKMJL0 ,:= :data #KsreUS2jwRGYLKlUwDLR6Xh2 .create_text ,( ,1 ,0 ,0 ,, ,2 ,0 ,, ,4 ,0 ,, 'scrub0 ,)",
+                "nodeType": "exprStmt",
+                "id": "HWty4UGfSEkT7lTbD1xgPKMJ",
+                "locals": [
+                  {
+                    "name": "sprite  ",
+                    "type": "Sprite",
+                    "nodeType": "localDef",
+                    "id": "HWty4UGfSEkT7lTbD1xgPKMJL0"
+                  }
+                ]
+              },
+              {
+                "text": "* rename `sprite` to `score sprite` and promote it",
+                "nodeType": "comment",
+                "id": "C3Nu4B6i4krfYGZjglT074qa"
+              },
+              {
+                "expr": ":data #xFFrL2NHCJDlxC47ErFXovIq ,:= :data #KsreUS2jwRGYLKlUwDLR6Xh2 .create_text ,( ,1 ,0 ,0 ,, ,2 ,0 ,, ,4 ,0 ,, 'scrub0 ,)",
+                "nodeType": "exprStmt",
+                "id": "MlLWIoGovujehnl4o33QUThD",
+                "locals": []
+              },
+              {
+                "text": "* position it on the upper left corner",
+                "nodeType": "comment",
+                "id": "ffEBwK15lX4D0E8M8mG4Pc5R"
+              },
+              {
+                "expr": ":data #xFFrL2NHCJDlxC47ErFXovIq .set_pos ,( ,5 ,0 ,, ,5 ,0 ,)",
+                "nodeType": "exprStmt",
+                "id": "MutRrGcYKepaOri74ZA1vZt7",
+                "locals": []
+              },
+              {
+                "text": "* **go to game loop**",
+                "nodeType": "comment",
+                "id": "kVmI5HeMWkeZXR93tPIQDx2Y"
+              },
+              {
+                "text": "* add new line to update the text. The text \"score: \" and the score are glued together using the || symbol.",
+                "nodeType": "comment",
+                "id": "fWLyG0KlehqSUtVaxXBLg428"
+              },
+              {
+                "expr": ":data #xFFrL2NHCJDlxC47ErFXovIq .set_text ,( 'scrub1 ,∥ :data #uFMKTkBepehqmvowqK9pg4dz ,)",
+                "nodeType": "exprStmt",
+                "id": "x2RVzRnX6x6rgayCg8NMmS5r",
+                "locals": []
+              },
+              {
+                "text": "### bad bubbles",
+                "nodeType": "comment",
+                "id": "xmSg4tR4MSU8puscOjLPMbgd"
+              },
+              {
+                "text": "Adding bad bubbles is very similar to the good bubbles. You need to create a new [sprite set](/spriteset), add the bad bubbles in a [](/for) loop and handle the `tap` event.",
+                "nodeType": "comment",
+                "id": "NDY613pRgJR9B6QT0AF2HraA"
+              }
+            ],
+            "id": "IeKsGMa8M2dr9dFbfONloZ2O"
+          },
+          {
+            "name": "board",
+            "comment": "",
+            "type": "Board",
+            "isReadonly": false,
+            "isTransient": true,
+            "nodeType": "data",
+            "id": "KsreUS2jwRGYLKlUwDLR6Xh2"
+          },
+          {
+            "name": "gameloop",
+            "inParameters": [],
+            "outParameters": [],
+            "isPrivate": true,
+            "isOffloaded": false,
+            "isTest": false,
+            "isAsync": true,
+            "nodeType": "event",
+            "eventName": "gameloop",
+            "eventVariableId": null,
+            "body": [
+              {
+                "expr": ":data #KsreUS2jwRGYLKlUwDLR6Xh2 .evolve",
+                "nodeType": "exprStmt",
+                "id": "xm5S3cK9138sPd2lToOB4DDT",
+                "locals": []
+              },
+              {
+                "expr": ":data #KsreUS2jwRGYLKlUwDLR6Xh2 .update_on_wall",
+                "nodeType": "exprStmt",
+                "id": "QO8O7ddXdZ6Osg0D3tiZlaVw",
+                "locals": []
+              }
+            ],
+            "id": "z1MPulOEQx46rnDsibFKikkI"
+          },
+          {
+            "name": "main ",
+            "inParameters": [],
+            "outParameters": [],
+            "isPrivate": false,
+            "isOffloaded": false,
+            "isTest": false,
+            "isAsync": false,
+            "nodeType": "action",
+            "body": [
+              {
+                "expr": ":data #KsreUS2jwRGYLKlUwDLR6Xh2 ,:= :media .create_landscape_board ,( ,8 ,0 ,0 ,, ,4 ,8 ,0 ,)",
+                "nodeType": "exprStmt",
+                "id": "xc3YpdV3XGtpY0gab23Mt662",
+                "locals": []
+              },
+              {
+                "expr": ":data #KsreUS2jwRGYLKlUwDLR6Xh2 .post_to_wall",
+                "nodeType": "exprStmt",
+                "id": "N2ZJoaOYRuE029eRoVD6KFfJ",
+                "locals": []
+              }
+            ],
+            "id": "L2W4vQqlxTehwb943kTr0oPe"
+          },
+          {
+            "name": "good bubbles",
+            "comment": "",
+            "type": "Sprite Set",
+            "isReadonly": false,
+            "isTransient": true,
+            "nodeType": "data",
+            "id": "yLE7rq9l9bPEjr3VoiULhH5z"
+          },
+          {
+            "name": "bubble",
+            "comment": "",
+            "type": "Picture",
+            "isReadonly": true,
+            "isTransient": true,
+            "nodeType": "art",
+            "url": "https://az31353.vo.msecnd.net/pub/adrthrzj",
+            "id": "k2y3uhdBmv4EIka0diL08UOv"
+          },
+          {
+            "name": "Nature",
+            "comment": "",
+            "type": "Picture",
+            "isReadonly": true,
+            "isTransient": true,
+            "nodeType": "art",
+            "url": "https://az31353.vo.msecnd.net/pub/hakgtzve",
+            "id": "x2xa69mmCpV6kcBgDyaMCK1C"
+          },
+          {
+            "name": "cheek pop",
+            "comment": "",
+            "type": "Sound",
+            "isReadonly": true,
+            "isTransient": true,
+            "nodeType": "art",
+            "url": "https://az31353.vo.msecnd.net/pub/aonptkth",
+            "id": "VBhZOUYVTBRMwIw6HkCSfEnl"
+          },
+          {
+            "name": "score",
+            "comment": "",
+            "type": "Number",
+            "isReadonly": false,
+            "isTransient": false,
+            "nodeType": "data",
+            "id": "uFMKTkBepehqmvowqK9pg4dz"
+          },
+          {
+            "name": "score sprite",
+            "comment": "",
+            "type": "Sprite",
+            "isReadonly": false,
+            "isTransient": true,
+            "nodeType": "data",
+            "id": "xFFrL2NHCJDlxC47ErFXovIq"
+          },
+          {
+            "name": "tap sprite in good bubbles",
+            "inParameters": [
+              {
+                "name": "sprite",
+                "type": "Sprite",
+                "nodeType": "localDef",
+                "id": "G20p2lEcxa2T4e4NhLRBz8o2P0"
+              },
+              {
+                "name": "index in set",
+                "type": "Number",
+                "nodeType": "localDef",
+                "id": "G20p2lEcxa2T4e4NhLRBz8o2P1"
+              },
+              {
+                "name": "x",
+                "type": "Number",
+                "nodeType": "localDef",
+                "id": "G20p2lEcxa2T4e4NhLRBz8o2P2"
+              },
+              {
+                "name": "y",
+                "type": "Number",
+                "nodeType": "localDef",
+                "id": "G20p2lEcxa2T4e4NhLRBz8o2P3"
+              }
+            ],
+            "outParameters": [],
+            "isPrivate": false,
+            "isOffloaded": false,
+            "isTest": false,
+            "isAsync": true,
+            "nodeType": "event",
+            "eventName": "tap sprite in ",
+            "eventVariableId": "yLE7rq9l9bPEjr3VoiULhH5z",
+            "body": [
+              {
+                "expr": "",
+                "nodeType": "exprStmt",
+                "id": "GdvyqebmlrmDhGNOUjkpmoHV",
+                "locals": []
+              }
+            ],
+            "id": "G20p2lEcxa2T4e4NhLRBz8o2"
+          }
+        ],
+        "deletedDecls": [],
+        "nodeType": "app",
+        "id": "app"
+      }
+    },
+    {
+      "seqNo": 1,
+      "time": 1368746483,
+      "scriptId": null,
+      "historyId": "25203355431601888566e896767-1c9b-4f2a-8ec5-479e4dcf8192",
+      "updateSize": 45,
+      "updates": {
+        "app": {
+          "rootId": "xKeu1nl49KjBDbsJscEd9AEV"
+        }
+      }
+    },
+    {
+      "seqNo": 2,
+      "time": 1368751787,
+      "scriptId": null,
+      "historyId": "2520335490121629517f81cf719-ae6b-403a-b614-dcd384f9da25",
+      "updateSize": 4479,
+      "updates": {
+        "GFwXLBEWU4oA2yAJObkpx5ui": {
+          "text": "{box:hint}",
+          "nodeType": "comment"
+        },
+        "gus7ycXXxSNX2YL5skFQDpGR": {
+          "text": "",
+          "nodeType": "comment"
+        },
+        "IeKsGMa8M2dr9dFbfONloZ2O": {
+          "body": [
+            "JdEfbModggClKL78urJfRM9I",
+            "wiucXGBODko2LfZpgLeAGu2t",
+            "xTWiXv3XzKH3Zv8ECOt6VHXd",
+            "oP1mPqaNI4OvTntp2rWSHuTv",
+            "x8KPjrSGKcCMm1WYLddJNhgq",
+            "oCdarKeUmKU82Mr2jB94wNuM",
+            "GKF24tpSG2NNivDVy2Yn90vD",
+            "ENBRrYXS7tZmPUv5PbfxV942",
+            "x5b4j2jKQZ4Ik1uQKvw4Chbz",
+            "G9ZmC784FjqSyTSVkEScuUsP",
+            "v8X5ruvB8SPtCpOJ7E9czTuD",
+            "xw9tfeP7f2zY6Arth2RIITIm",
+            "fCmKJNfCRzy2njUcRVc8hS4C",
+            "S4qqikbRRYm3BwUgZSA79Q3a",
+            "nVwK5ifQanhFUFE72C3P4NhU",
+            "eYS4n24TYFWI6zdpOqT2uUu1",
+            "x8kAqXpnauAxJFftkhWjzZ6Z",
+            "gpj7oWGA4KJQvL2kKv2B8tBZ",
+            "MXPLGH3KSVrKIYpiz2Q9aa1f",
+            "GFwXLBEWU4oA2yAJObkpx5ui",
+            "nAYcZ9vk59sHYC4eQnl8QJJe",
+            "WdB3OhGQjl25KIFhY9SZDfAj",
+            "wIB43CHBGuPijvpNrO5ewZ9X",
+            "t1cHDLFOocHZ1q4Gi4wMhNbQ",
+            "LchwnRjz2K2RdjXvTEVuESa3",
+            "vxWyxd4nMMe4m5QixKOG5iWt",
+            "fq4E6CarmylZQn91WCldX6YH",
+            "MOAyeY44mCSmcWgeLuhUNrMI",
+            "sKa9H4ZG10NHSW0pkUlyOtR6",
+            "gus7ycXXxSNX2YL5skFQDpGR",
+            "JMlzLE1lLK1NYhPXT4U5yfYv",
+            "SJ2ORG3DjnnrUJZGmWiFrdjm",
+            "ZjaGYxaOx4zVbJE2dnHC40wV",
+            "YvtXu8UgtE1AfO8UleDdXMGg",
+            "xgGeSwfbl4wcHwizqzHrYQMX",
+            "fKOK2DE19ClsC4FxuQKMkYv5",
+            "k21gOJrBNLLtzA642Zni4OYG",
+            "lR1DWFj2kR2HF7P7pBkaxfx2",
+            "wO8NoZFsBFnmKbGz4Mqe7N0T",
+            "AFDXswPt2dRuOSQGtO2i98YZ",
+            "xHQoQ29jH5ARxOTllkibdXtx",
+            "BaygB8lpUGUFAG5kYwy2KF9N",
+            "xPzkqIiE2hHLWZPRZn14CmU0",
+            "ot5RTWQax6ZhMqUlBr2IjmQx",
+            "zUjSOJ72fz3xCvUWHXtOJBwc",
+            "Tn24JnA7EDsFdn33rZvrSKIa",
+            "n6mDrmjeFJUNY4J2nBW4Bk05",
+            "COPfh5ap9bTp0UdA1NPHmK2x",
+            "KWE7A244vccUaogLRWnhYRru",
+            "ondJTrlQEcSDJgHcFgN0YcDJ",
+            "xsfYciooDlK2KJtHJt8xSHzm",
+            "z44tt2c3R3SH4WZKThRCZtXn",
+            "KbBTdvUTRcRPgWq6b6GCwM63",
+            "M4ZdlbK8a2eY2pqYZxh4YWDY",
+            "TwfqCvaNb4sYtF1Fb2xyT1Xh",
+            "xVkqzfZOWEv0EKsCOpEDU2KJ",
+            "Ioz2DnodHTpIDTOyOTNT7Y4j",
+            "EJ8P1NVOtbTePQG0DlPZR6tv",
+            "s2UnDokUentB5o1t2hwkN4Ex",
+            "kqrkyx0muWK0JbQqhViseWaX",
+            "xzJINCji90PP19jonKjdtzaM",
+            "oqdSQ2Nbj6bpmUhTuWBvoPt7",
+            "Ynt6u2hb4mHhcu4sxkNLCSx9",
+            "IBiVV6wpSq4kuoiRrR4TCIES",
+            "TMbqE1p9Z5OS5YLJPBDq9Ven",
+            "FQgW7bjS67rpqX2w1kUe1qJR",
+            "BQvzH270RBn08YCouHkZisHD",
+            "xPccgLpnBKOVGx3znfCa8E4v",
+            "ydCWuM6DQafmsuUyP4Lcbdt9",
+            "ff1PLH0ZApJgUT0KQBjUOnJl",
+            "WUZsj0F8NhKPY1jYR78STNZB",
+            "xwb6TiZ0ru0oQZd8KfqgEmwY",
+            "FPvkF17Xhpeju4RlEfWuhOeq",
+            "xu8KX9JRg6QwQUCnPf6hbti1",
+            "imJ4zD6Gt8B2FvK6Qs0lewZi",
+            "GGXoKmFTgXcn8i99h2ehxiM0",
+            "mdy40f3DCSSVoBq3oTuo6VWX",
+            "aDePiy1qvWxryHYNsAd28pPW",
+            "nmIAoUgbbs304yoPACqKO44K",
+            "x8Aaa8yilvbG4Cf2V1Es1jz6",
+            "Ib8Kgwq4D8rJhW4204WbSD3v",
+            "yfXRGXoLDW0fZU2Sd2bj1gL4",
+            "hZPHJBIp2cmHoIaD7rllrqzx",
+            "m1If4lHaAU2K23CDZDGYJP9X",
+            "xD8wIy14CFakAXB59Uk931uO",
+            "xIzj4OuoyzYVHxqlJRtQkl6W",
+            "tfE22g2VW5o4jVrCF0W5fD0D",
+            "QJ78AjZ1vJwJXR9F2yBvPgrw",
+            "x9CoJTUR0DSMm14gkLNyJh3O",
+            "KpnTfZDi9C9ooUJMyGL1VdCP",
+            "C9lpGUNj560Xz4dYzViwoG8g",
+            "P2LsJhzyoBblJd4FQ4EzSo8x",
+            "x1qLiP49eT7N8grGDR78KLBD",
+            "SRI1nG8uRQxTZbeYCzoCVjzy",
+            "RTxV7w50nm5lsqmmgxR1Ch2Z",
+            "Fk7yGNwMY1pfHxzqCMQ4O6ew",
+            "P62r6Q6ddivSNgOgaLuYa9nh",
+            "x6cybBpvJIpN2VcHMizIKCsD",
+            "DIWHC3wUXQBm4prUUi9sQiYD",
+            "P87mTHAz8UHzPHgiN8NDFOMN",
+            "h8uhzRkGpW8uIIatFXqqwacz",
+            "Q83QZ1LHDFwGMk3fH03GYpzr",
+            "x5IJqY4tOCD7zaoNNm9UPN9I",
+            "Jt2WJ11q4cSYlEUqySS0EWtQ",
+            "c41vUKYHNxHnMhm4fXkj07eh",
+            "RL2tGTDWnPSXCHh20Ms7114G",
+            "xZYkdLTFJQ7voLstQOWdkUMi",
+            "HW9rmG7ZqAVvAVia8a2OyWco",
+            "irEB98Oi7ocIW4LlGjqg7i6W",
+            "y4driCdjJVWKTQJeZMwXw5Z5",
+            "oO34uvVo33D24ShidiHhLCHD",
+            "uYOTWGuAm2xFjoikjuZ4z4FW",
+            "aIi5M4B66Ix8PxSb0jE9gNee",
+            "f9dqMHeA2HNUXmiPkj2mzbYQ",
+            "KdTaD8fMjFene4Cqeqc1vns0",
+            "brGM1B3LL3JUmkK61MhAhY3g",
+            "SO3tjuDJzj9wva2pGD6TNi24",
+            "xO44qb461XSxbse2NYw2GtDm",
+            "hWM1avSiGZlCo4Jug4h23soN",
+            "xnsGzI3Wj4d8xD2Xree9eEvL",
+            "auy44iED8z5Qho2XKtWh2o49",
+            "xdtj2xG5420RRUb8TdVbNYCa",
+            "S6MCegBMQmQozX42agLn6iFf",
+            "z6xQF4jju43qvkYlSjo5mFDL",
+            "JEJkKR4WJtKUr0yoWG8bvc42",
+            "MLYGtIpmLMxcBNRj00mgL3hE",
+            "NiG5YBL29w0PJSwvf4EzOFAD",
+            "Y2hPthleskNkiFYl3JTvqcXu",
+            "Ky8fIlNIy4L2BaTSxRzqXR7O",
+            "GsctdP4r69VKdmeLMqWZSZOy",
+            "X20QROoh6vbabwoRxoTs1X95",
+            "dr4544COJR4edth5RoEyI1J7",
+            "RSRblbLmDSw9rLzd5xcrmhg5",
+            "YrLqYVcI3TSnroVBfE1A1zKw",
+            "fi8r6nPdmpn5UDFjwC4EF4MD",
+            "r5CAWrISPwB2CRv0x1a5FmlQ",
+            "qavhUckyFwRzZL45m9pc2VgQ",
+            "xVMUR2G0KoKGZpAhe2pHXyqN",
+            "LHsqkW8rqYZYlKuuiEuJurcT",
+            "J23fVS2GpRPygKkQvsG84vHZ",
+            "xOZZTx3sAogVf7T81rFP8uIJ",
+            "yiF45LrEZ1ki59F2DbV3N4dU",
+            "Zfa36JIAm8QmMai4VkhH2aFQ",
+            "xTu8gu22Vr3uEApOJNLLSRv4",
+            "QUpTi8ySsTTV8hDgz9FLCuSX",
+            "lVmc7dWVT2pM810TesD2E18u",
+            "xNYL1Ac2R5AccNyxlg7v25u5",
+            "airTZehF9xayAIqNd4yo9aXb",
+            "HWty4UGfSEkT7lTbD1xgPKMJ",
+            "C3Nu4B6i4krfYGZjglT074qa",
+            "MlLWIoGovujehnl4o33QUThD",
+            "ffEBwK15lX4D0E8M8mG4Pc5R",
+            "MutRrGcYKepaOri74ZA1vZt7",
+            "kVmI5HeMWkeZXR93tPIQDx2Y",
+            "fWLyG0KlehqSUtVaxXBLg428",
+            "x2RVzRnX6x6rgayCg8NMmS5r",
+            "xmSg4tR4MSU8puscOjLPMbgd",
+            "NDY613pRgJR9B6QT0AF2HraA"
+          ]
+        },
+        "app": {
+          "rootId": "puowbEo4lNgfVWOAs4BHyuMK"
+        }
+      }
+    },
+    {
+      "seqNo": 3,
+      "time": 1368751797,
+      "scriptId": null,
+      "historyId": "25203354900267900163ce1b287-ba5d-44de-9700-8b80c2cdd37f",
+      "updateSize": 90,
+      "updates": {
+        "gus7ycXXxSNX2YL5skFQDpGR": {
+          "text": "{/box}"
+        },
+        "app": {
+          "rootId": "mWkL0LFXee94bijNxfDOervy"
+        }
+      }
+    },
+    {
+      "seqNo": 4,
+      "time": 1368751829,
+      "scriptId": null,
+      "historyId": "2520335489703212651c5dd1e51-d2cf-472e-b87b-a81c88577c29",
+      "updateSize": 45,
+      "updates": {
+        "app": {
+          "rootId": "bSrON7KgHTrHpgknYgKLyA0T"
+        }
+      }
+    },
+    {
+      "seqNo": 5,
+      "time": 1368752065,
+      "scriptId": null,
+      "historyId": "252033548734787581636c566f0-f20d-480d-9826-42da2a157e55",
+      "updateSize": 45,
+      "updates": {
+        "app": {
+          "rootId": "eUq4ADGdU1FRiADCNHmBtytT"
+        }
+      }
+    }
+  ]
+}

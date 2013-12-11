@@ -1,0 +1,193 @@
+{
+  "userid": "ajlk",
+  "guid": "f34119cb-ce76-4bbd-9fd5-206cd12fbcd2",
+  "lastStatus": "published",
+  "items": [
+    {
+      "seqNo": 0,
+      "time": 1350496176,
+      "scriptId": "egeb",
+      "historyId": "2520518046232465870ead4a620-1ec4-4bd9-9c56-7131c6aac080",
+      "updateSize": 3533,
+      "ast": {
+        "textVersion": "v2.2,js,ctx",
+        "jsonVersion": "v1.0,resolved,short",
+        "name": "WWII Online Status",
+        "comment": "Queries the WWII Online game server status using the 'wiretap' service.",
+        "icon": "QuestionCircleAlt",
+        "color": "#ffb7410e",
+        "autoIcon": "QuestionCircleAlt",
+        "autoColor": "#b7410e",
+        "platform": "current",
+        "rootId": "OcqUmgnS9g0vwmUg1uZ4krfq",
+        "showAd": false,
+        "isLibrary": false,
+        "allowExport": false,
+        "hasUniqueIds": false,
+        "decls": [
+          {
+            "name": "main",
+            "inParameters": [],
+            "outParameters": [],
+            "isPrivate": false,
+            "isOffloaded": false,
+            "isTest": false,
+            "isAsync": false,
+            "nodeType": "action",
+            "body": [
+              {
+                "text": "Query the WWIIONLINE 'wiretap' service for current game server status",
+                "nodeType": "comment",
+                "id": "xUiZ9DWRfBj8LPkNzfd2RCBp"
+              },
+              {
+                "expr": "$T5zKtCOQbm9sn642qpC56W8mL0 ,:= :web .download ,( 'http/003a/002f/002fwiretap/002ewwiionline/002ecom/002fxml/002fservers/002exml ,)",
+                "nodeType": "exprStmt",
+                "id": "T5zKtCOQbm9sn642qpC56W8m",
+                "locals": [
+                  {
+                    "name": "xmlData",
+                    "type": "String",
+                    "nodeType": "localDef",
+                    "id": "T5zKtCOQbm9sn642qpC56W8mL0"
+                  }
+                ]
+              },
+              {
+                "expr": "$wOPy1A4UMNVk9LSEsC1wC2uNL0 ,:= :web .xml ,( $T5zKtCOQbm9sn642qpC56W8mL0 ,)",
+                "nodeType": "exprStmt",
+                "id": "wOPy1A4UMNVk9LSEsC1wC2uN",
+                "locals": [
+                  {
+                    "name": "xmlRoot",
+                    "type": "Xml Object",
+                    "nodeType": "localDef",
+                    "id": "wOPy1A4UMNVk9LSEsC1wC2uNL0"
+                  }
+                ]
+              },
+              {
+                "text": "Servers are listed in <r/>containers.",
+                "nodeType": "comment",
+                "id": "xuFcsXGyT8xYmLj3sac126j6"
+              },
+              {
+                "collection": "$wOPy1A4UMNVk9LSEsC1wC2uNL0 .children ,( 'r ,)",
+                "conditions": [
+                  {
+                    "condition": "T",
+                    "nodeType": "where",
+                    "id": "prK0ZxzABaNdxbavk9RONkue",
+                    "locals": []
+                  }
+                ],
+                "body": [
+                  {
+                    "expr": "$h4A7514CJU4UwRtPWHIodTtiL0 ,:= $gnCpMTi2GP5VW6LMtKPa8Os7B0 .attr ,( 'name ,)",
+                    "nodeType": "exprStmt",
+                    "id": "h4A7514CJU4UwRtPWHIodTti",
+                    "locals": [
+                      {
+                        "name": "serverName",
+                        "type": "String",
+                        "nodeType": "localDef",
+                        "id": "h4A7514CJU4UwRtPWHIodTtiL0"
+                      }
+                    ]
+                  },
+                  {
+                    "expr": "$vNUOCjehSeFWU5W4cNC3tl42L0 ,:= $gnCpMTi2GP5VW6LMtKPa8Os7B0 .attr ,( 'state ,)",
+                    "nodeType": "exprStmt",
+                    "id": "vNUOCjehSeFWU5W4cNC3tl42",
+                    "locals": [
+                      {
+                        "name": "status",
+                        "type": "String",
+                        "nodeType": "localDef",
+                        "id": "vNUOCjehSeFWU5W4cNC3tl42L0"
+                      }
+                    ]
+                  },
+                  {
+                    "expr": "$x449PPp52nmcHFbsXoLHpgPxL0 ,:= $gnCpMTi2GP5VW6LMtKPa8Os7B0 .attr ,( 'pop ,)",
+                    "nodeType": "exprStmt",
+                    "id": "x449PPp52nmcHFbsXoLHpgPx",
+                    "locals": [
+                      {
+                        "name": "population",
+                        "type": "String",
+                        "nodeType": "localDef",
+                        "id": "x449PPp52nmcHFbsXoLHpgPxL0"
+                      }
+                    ]
+                  },
+                  {
+                    "expr": "$Njyvr2lhGAf27nwaXIGFKP9vL0 ,:= $h4A7514CJU4UwRtPWHIodTtiL0 ,∥ '/003a_ ,∥ $vNUOCjehSeFWU5W4cNC3tl42L0",
+                    "nodeType": "exprStmt",
+                    "id": "Njyvr2lhGAf27nwaXIGFKP9v",
+                    "locals": [
+                      {
+                        "name": "description",
+                        "type": "String",
+                        "nodeType": "localDef",
+                        "id": "Njyvr2lhGAf27nwaXIGFKP9vL0"
+                      }
+                    ]
+                  },
+                  {
+                    "text": "If the server is online it will come with a population description.",
+                    "nodeType": "comment",
+                    "id": "aJfTtTXH7vq4sZN1ZTrd6Rog"
+                  },
+                  {
+                    "nodeType": "if",
+                    "condition": "$vNUOCjehSeFWU5W4cNC3tl42L0 .equals ,( 'Online ,)",
+                    "thenBody": [
+                      {
+                        "expr": "$Njyvr2lhGAf27nwaXIGFKP9vL0 ,:= $Njyvr2lhGAf27nwaXIGFKP9vL0 ,∥ ,( '_/0028 ,∥ $x449PPp52nmcHFbsXoLHpgPxL0 ,∥ '/0029/002e ,)",
+                        "nodeType": "exprStmt",
+                        "id": "xad4R17rSKt82c5JP2CZxnNT",
+                        "locals": []
+                      }
+                    ],
+                    "elseBody": [
+                      {
+                        "expr": "$Njyvr2lhGAf27nwaXIGFKP9vL0 ,:= $Njyvr2lhGAf27nwaXIGFKP9vL0 ,∥ '/002e",
+                        "nodeType": "exprStmt",
+                        "id": "xiC0VQkUI2ov0SGE7KIP0xg3",
+                        "locals": []
+                      }
+                    ],
+                    "isElseIf": false,
+                    "id": "lun8Fr7UlS2xomBSJ594QOxr",
+                    "locals": []
+                  },
+                  {
+                    "expr": "$Njyvr2lhGAf27nwaXIGFKP9vL0 .post_to_wall",
+                    "nodeType": "exprStmt",
+                    "id": "xFsGMUZzKeZMKsIZ2whJCrH4",
+                    "locals": []
+                  }
+                ],
+                "nodeType": "foreach",
+                "id": "gnCpMTi2GP5VW6LMtKPa8Os7",
+                "locals": [
+                  {
+                    "name": "xml",
+                    "type": "Xml Object",
+                    "nodeType": "localDef",
+                    "id": "gnCpMTi2GP5VW6LMtKPa8Os7B0"
+                  }
+                ]
+              }
+            ],
+            "id": "U6jhLOq6icKUQCUukKrLTvEz"
+          }
+        ],
+        "deletedDecls": [],
+        "nodeType": "app",
+        "id": "app"
+      }
+    }
+  ]
+}

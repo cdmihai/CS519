@@ -1,0 +1,2787 @@
+{
+  "userid": "wonm",
+  "guid": "2e260219-4a70-495d-9054-c7893ddf52c8",
+  "lastStatus": "deleted",
+  "items": [
+    {
+      "seqNo": 0,
+      "time": 1370542312,
+      "scriptId": null,
+      "historyId": "2520317584874095960e03a0895-71d9-4c7e-a209-c232820e18fa",
+      "updateSize": 63818,
+      "ast": {
+        "textVersion": "v2.2,js,ctx",
+        "jsonVersion": "v1.0,resolved,short",
+        "name": "Win Lotto",
+        "comment": "Overview:\nThis is a very basic 'scratchy' based lottery app. It is not completely functional, as there are some bizarre or entirely missing calculations for wins. Otherwise, and besides eye catching designs, it works completely.\n\nIMPORTANT: This script is actually based on another chain of scripts that belong to me, the latest at: www.touchdevelop.com/aucl\n\nThere was an issue that was preventing the script from running on Windows Phone, and the resolution ended up being duplicating the code directly rather than the entire script.\n\nAll of the code in this script is my own work. It was mostly based on trial and error to learn what functions do what, and what others caused problems.\n\nThe only part of this script that does not belong to me are the symbols used. They were taken from Microsoft Office Webdings or Wingdings as images.\n\nThere was, however, a minor issue that was resolved fairly early on with the help of the community, and aided in my learning. Multiple commenters pointed out that this was the cause of an error I was having early on.\n\nFeatures:\n*Randomly generated scratchy tickets. A total of 12 symbols with a range of monetary values according to weight.\n*'Reverse Side' instructions. See the basic game instructions by clicking 'Instructions', and return to your scratching by clicking 'Back'. This is a little more realistic than having instructions in the 'main menu'\n*Available funds. More specifically: current balance, balance deductions on ticket purchases (from $1-$5), inappropriate additions when a win is actually calculated, and a 'cheat' feature to add another $10 to current balance.\n*Tickets cannot be saved for later. In order to return to the main menu, you must completely reveal the game panel and check for a winning ticket. At this point it may or may not alter your available balance, and you are returned to the menu screen.\n*The symbol counter collection does not function correctly. Issues arise when resetting it after or before a game, and the total of the counters end up out of bounds if they are not reset. This does not cause any crashes.\n\nFuture Potential:\nAside from fixing the",
+        "icon": "Dollar",
+        "color": "#ffFDEE00",
+        "autoIcon": "Dollar",
+        "autoColor": "#FDEE00",
+        "platform": "location,maps,search,speech,translation",
+        "rootId": "IpfV9KKvrS2NHPXDBUyj4hro",
+        "showAd": false,
+        "isLibrary": false,
+        "allowExport": false,
+        "hasUniqueIds": false,
+        "decls": [
+          {
+            "name": "main",
+            "inParameters": [],
+            "outParameters": [],
+            "isPrivate": false,
+            "isOffloaded": false,
+            "isTest": false,
+            "isAsync": false,
+            "nodeType": "action",
+            "body": [
+              {
+                "text": "All of the actual code in this script is original and my own work.",
+                "nodeType": "comment",
+                "id": "LCjJZ8tV0RlvzgS6P4c23U7m"
+              },
+              {
+                "expr": ":code #MKRCSWsgeRDDXkXwN7W4h662",
+                "nodeType": "exprStmt",
+                "id": "A44EsGSlmy22e4db4qwWY6a2",
+                "locals": []
+              },
+              {
+                "expr": ":code #n7Q6Z5DWDcd2594ooXt3bA4x",
+                "nodeType": "exprStmt",
+                "id": "oD5dgkGFHC2m1jWGEoo4D3MH",
+                "locals": []
+              },
+              {
+                "expr": ":wall .prompt ,( 'scrub0 ,)",
+                "nodeType": "exprStmt",
+                "id": "Y8lyL6IosYIxIm2piqZxO0WM",
+                "locals": []
+              },
+              {
+                "expr": ":code #dEPnXkT2vWijCuFD1kPauP6l",
+                "nodeType": "exprStmt",
+                "id": "x8kuZnxCozvBOz7qO9g2U92O",
+                "locals": []
+              }
+            ],
+            "id": "bxXgQGRqEFCmyrphjnkVbtOt"
+          },
+          {
+            "name": "createInstructionsPanel",
+            "inParameters": [],
+            "outParameters": [],
+            "isPrivate": true,
+            "isOffloaded": false,
+            "isTest": false,
+            "isAsync": false,
+            "nodeType": "action",
+            "body": [
+              {
+                "text": "A lot more text and picture sprites used to create the 'reverse side' instructions. A lot of alignment finetuning involved to attempt a scalable approach.",
+                "nodeType": "comment",
+                "id": "Euyi6oqtRL2K4czdG9FEP5b8"
+              },
+              {
+                "expr": ":data #xYNo1IPbn2pIohYdGnoJ2F3x .set_background ,( :colors .white ,)",
+                "nodeType": "exprStmt",
+                "id": "RjHoSPLG2bQZApaG8iHOH4Mb",
+                "locals": []
+              },
+              {
+                "expr": ":code #KmsOp1rtPN82X24jDaM8dMfL",
+                "nodeType": "exprStmt",
+                "id": "pizwKOZiY9Ak7hks3uP2SZDz",
+                "locals": []
+              },
+              {
+                "expr": "$pxvDKvG2Y29NjCq7G1omdWNrL0 ,:= :data #xYNo1IPbn2pIohYdGnoJ2F3x .create_text ,( ,3 ,0 ,0 ,, ,2 ,0 ,, ,2 ,8 ,, 'scrub1 ,)",
+                "nodeType": "exprStmt",
+                "id": "pxvDKvG2Y29NjCq7G1omdWNr",
+                "locals": [
+                  {
+                    "name": "instructionsHead",
+                    "type": "Sprite",
+                    "nodeType": "localDef",
+                    "id": "pxvDKvG2Y29NjCq7G1omdWNrL0"
+                  }
+                ]
+              },
+              {
+                "expr": "$pxvDKvG2Y29NjCq7G1omdWNrL0 .set_color ,( :colors .black ,)",
+                "nodeType": "exprStmt",
+                "id": "XAiKY28Vd3O7ObFa4Bu5hGBy",
+                "locals": []
+              },
+              {
+                "expr": "$pxvDKvG2Y29NjCq7G1omdWNrL0 .set_y ,( ,2 ,5 ,)",
+                "nodeType": "exprStmt",
+                "id": "H6pIfiZVU2J6AEUY23kgAoAr",
+                "locals": []
+              },
+              {
+                "expr": ":data #jezfEEtbMbjJFnOKwSPoUX82 ,:= :data #xYNo1IPbn2pIohYdGnoJ2F3x .create_text ,( ,1 ,0 ,0 ,, ,3 ,0 ,, ,2 ,8 ,, 'scrub2 ,)",
+                "nodeType": "exprStmt",
+                "id": "EpSvTmIfGpDTxntnAF2CNX7X",
+                "locals": []
+              },
+              {
+                "expr": ":data #jezfEEtbMbjJFnOKwSPoUX82 .set_pos ,( :data #xYNo1IPbn2pIohYdGnoJ2F3x .width ,- ,6 ,5 ,, :data #xYNo1IPbn2pIohYdGnoJ2F3x .height ,- ,1 ,2 ,0 ,)",
+                "nodeType": "exprStmt",
+                "id": "SL43uXbbiseA2dhPvQzi7FPM",
+                "locals": []
+              },
+              {
+                "expr": ":data #jezfEEtbMbjJFnOKwSPoUX82 .set_color ,( :colors .black ,)",
+                "nodeType": "exprStmt",
+                "id": "VRSyByUFTaf4mFojfCUfbZCa",
+                "locals": []
+              },
+              {
+                "expr": "$c5SWnpPvqYbfsTvK0njGfL32L0 ,:= :data #xYNo1IPbn2pIohYdGnoJ2F3x .create_text ,( ,4 ,0 ,0 ,, ,2 ,0 ,, ,1 ,8 ,, 'scrub3 ,)",
+                "nodeType": "exprStmt",
+                "id": "c5SWnpPvqYbfsTvK0njGfL32",
+                "locals": [
+                  {
+                    "name": "instructionsBody",
+                    "type": "Sprite",
+                    "nodeType": "localDef",
+                    "id": "c5SWnpPvqYbfsTvK0njGfL32L0"
+                  }
+                ]
+              },
+              {
+                "expr": "$c5SWnpPvqYbfsTvK0njGfL32L0 .set_color ,( :colors .black ,)",
+                "nodeType": "exprStmt",
+                "id": "xxM59Sc9Qw82R8yReAHIkPwt",
+                "locals": []
+              },
+              {
+                "expr": "$c5SWnpPvqYbfsTvK0njGfL32L0 .set_y ,( ,8 ,0 ,)",
+                "nodeType": "exprStmt",
+                "id": "x0AJ0Azx7SlsGschqtjp7d2H",
+                "locals": []
+              },
+              {
+                "expr": "$OW9rYv7TwNsI8joYan1O07CxL0 ,:= :data #xYNo1IPbn2pIohYdGnoJ2F3x .create_text ,( ,4 ,0 ,0 ,, ,2 ,0 ,, ,1 ,8 ,, 'scrub4 ,)",
+                "nodeType": "exprStmt",
+                "id": "OW9rYv7TwNsI8joYan1O07Cx",
+                "locals": [
+                  {
+                    "name": "instructionsExample",
+                    "type": "Sprite",
+                    "nodeType": "localDef",
+                    "id": "OW9rYv7TwNsI8joYan1O07CxL0"
+                  }
+                ]
+              },
+              {
+                "expr": "$OW9rYv7TwNsI8joYan1O07CxL0 .set_y ,( :data #xYNo1IPbn2pIohYdGnoJ2F3x .height ,/ ,3 ,* ,2 ,+ ,4 ,0 ,)",
+                "nodeType": "exprStmt",
+                "id": "xW5PzWzHF5KlPPHQ3wwjsZdQ",
+                "locals": []
+              },
+              {
+                "expr": "$OW9rYv7TwNsI8joYan1O07CxL0 .set_color ,( :colors .black ,)",
+                "nodeType": "exprStmt",
+                "id": "NntZKqdRzqOqcG27aRgmPNeN",
+                "locals": []
+              },
+              {
+                "expr": ":data #xYNo1IPbn2pIohYdGnoJ2F3x .post_to_wall",
+                "nodeType": "exprStmt",
+                "id": "j2RDIemdNJR40KuO4hdcmqcZ",
+                "locals": []
+              }
+            ],
+            "id": "fuzbgRT4WS2ktUpbSEcZZwCk"
+          },
+          {
+            "name": "createSymbolList",
+            "inParameters": [],
+            "outParameters": [],
+            "isPrivate": true,
+            "isOffloaded": false,
+            "isTest": false,
+            "isAsync": false,
+            "nodeType": "action",
+            "body": [
+              {
+                "text": "This action basically just sets up all of the symbol art in a sprite array (symbolsList) so they can be duplicated for scratchy generation",
+                "nodeType": "comment",
+                "id": "lowKcrdIGUnZbV7G9QPKDybw"
+              },
+              {
+                "text": "First set is for game symbol generation",
+                "nodeType": "comment",
+                "id": "vzhMgu92nt7b4fYulVFsjmc3"
+              },
+              {
+                "expr": ":data #MTUQ2cVTq4euE43DWczd2XZl ,:= :data #f6LgrThJHNCTAy0SiG4PHbqV .create_picture ,( :art #RUmlTgaAYhgubyaPZVL0A2cu ,)",
+                "nodeType": "exprStmt",
+                "id": "Zv7MmE8GXRIkBMFcWB2WJlVJ",
+                "locals": []
+              },
+              {
+                "expr": ":data #xvgjgnxUMW66PTu51vSKu25I ,:= :data #f6LgrThJHNCTAy0SiG4PHbqV .create_picture ,( :art #xVLCuPBi38VRSOCVWW2XUglH ,)",
+                "nodeType": "exprStmt",
+                "id": "mVEJscWCB8ECFDTKZzhyJFgN",
+                "locals": []
+              },
+              {
+                "expr": ":data #xc03IBBLIu161uk2iP9KJkAP ,:= :data #f6LgrThJHNCTAy0SiG4PHbqV .create_picture ,( :art #L4RKyztFfBddZYHW4UgBq6lg ,)",
+                "nodeType": "exprStmt",
+                "id": "xYP5SRdAwAsqZAzzWF6neDWV",
+                "locals": []
+              },
+              {
+                "expr": ":data #xTQ5ecJ3plbpw3kCHUPySHRf ,:= :data #f6LgrThJHNCTAy0SiG4PHbqV .create_picture ,( :art #EwvdwOBEs5YY0gwaFlvbytMH ,)",
+                "nodeType": "exprStmt",
+                "id": "OpLaafJi4Gq2HPyUbBMf45D0",
+                "locals": []
+              },
+              {
+                "expr": ":data #nz7sREyQwiqkMgvlJFN0gIg1 ,:= :data #f6LgrThJHNCTAy0SiG4PHbqV .create_picture ,( :art #BTP4Pd3ZaqyFSxZQWdPsPuni ,)",
+                "nodeType": "exprStmt",
+                "id": "AVlTvF3iommu3fH5oYvOVP2b",
+                "locals": []
+              },
+              {
+                "expr": ":data #LrO7baGYPifiMg2Ax0JfrQGo ,:= :data #f6LgrThJHNCTAy0SiG4PHbqV .create_picture ,( :art #xPCOnp4G4i2I52Fi3x474YI0 ,)",
+                "nodeType": "exprStmt",
+                "id": "xNv1tP4DX7Vd0X6tn8p2ZD14",
+                "locals": []
+              },
+              {
+                "expr": ":data #PSYgowRkM1Iy2RlknzIvvRSD ,:= :data #f6LgrThJHNCTAy0SiG4PHbqV .create_picture ,( :art #TCXi2RWl94QJd4uZ7C7wNvaJ ,)",
+                "nodeType": "exprStmt",
+                "id": "VceLC1yRbqCxj55k3jVytL4E",
+                "locals": []
+              },
+              {
+                "expr": ":data #wnpcldkDbnR54LrMD4hW42dA ,:= :data #f6LgrThJHNCTAy0SiG4PHbqV .create_picture ,( :art #L22Nfkihk6mkUmMEvnZnumYa ,)",
+                "nodeType": "exprStmt",
+                "id": "bBEm3CuVEa2BHximZkfz8RiW",
+                "locals": []
+              },
+              {
+                "expr": ":data #OQCmTIO0UwXs2OTfujMA0QYB ,:= :data #f6LgrThJHNCTAy0SiG4PHbqV .create_picture ,( :art #H1eSHiKF40iLuM9xlEEPNzb6 ,)",
+                "nodeType": "exprStmt",
+                "id": "TROO3wskf2tLDKN7PbTHXiCM",
+                "locals": []
+              },
+              {
+                "expr": ":data #xjPbOuHpgXHVTXb7Y42IDTDA ,:= :data #f6LgrThJHNCTAy0SiG4PHbqV .create_picture ,( :art #KJb4Aiica4vo4DY2mHYTM67T ,)",
+                "nodeType": "exprStmt",
+                "id": "h7M61s4wWqg6Is2oTW9K84QZ",
+                "locals": []
+              },
+              {
+                "expr": ":data #WAojxjCPgLKA4bjqyaznN6qk ,:= :data #f6LgrThJHNCTAy0SiG4PHbqV .create_picture ,( :art #ql52rUF2EFWk8MhmQF8AcLgF ,)",
+                "nodeType": "exprStmt",
+                "id": "Qa3EkYV36D4Sw4JMv3RfV7f4",
+                "locals": []
+              },
+              {
+                "expr": ":data #VbPx3enTaQD3lgE8fOfxZliM ,:= :data #f6LgrThJHNCTAy0SiG4PHbqV .create_picture ,( :art #Lv4BEgCfQ4peQeSjs5DARmWt ,)",
+                "nodeType": "exprStmt",
+                "id": "u23hL2a70s0Yx21Nzl82SBxk",
+                "locals": []
+              },
+              {
+                "text": "Adding game panel sprites to a collection",
+                "nodeType": "comment",
+                "id": "DfXfluxBV24f06HZTpz7a2c0"
+              },
+              {
+                "expr": ":data #n2yAk96iwd7y2lOT5xnhDv37 .add ,( :data #MTUQ2cVTq4euE43DWczd2XZl ,)",
+                "nodeType": "exprStmt",
+                "id": "x0TTL7DLALST3Hb6R1LJkefy",
+                "locals": []
+              },
+              {
+                "expr": ":data #n2yAk96iwd7y2lOT5xnhDv37 .add ,( :data #xvgjgnxUMW66PTu51vSKu25I ,)",
+                "nodeType": "exprStmt",
+                "id": "pm14qqCb9FJ74QWuhWO4MdE2",
+                "locals": []
+              },
+              {
+                "expr": ":data #n2yAk96iwd7y2lOT5xnhDv37 .add ,( :data #xc03IBBLIu161uk2iP9KJkAP ,)",
+                "nodeType": "exprStmt",
+                "id": "f3BwTcfs4sRmtPD85dALSNYt",
+                "locals": []
+              },
+              {
+                "expr": ":data #n2yAk96iwd7y2lOT5xnhDv37 .add ,( :data #xTQ5ecJ3plbpw3kCHUPySHRf ,)",
+                "nodeType": "exprStmt",
+                "id": "x2zmqLKcRpc9j81buuLtgSws",
+                "locals": []
+              },
+              {
+                "expr": ":data #n2yAk96iwd7y2lOT5xnhDv37 .add ,( :data #nz7sREyQwiqkMgvlJFN0gIg1 ,)",
+                "nodeType": "exprStmt",
+                "id": "AxdoAaU4ROmhpIUdHlA7Y3Bk",
+                "locals": []
+              },
+              {
+                "expr": ":data #n2yAk96iwd7y2lOT5xnhDv37 .add ,( :data #LrO7baGYPifiMg2Ax0JfrQGo ,)",
+                "nodeType": "exprStmt",
+                "id": "aMjmbgGoUkv0un9mscHkXmWe",
+                "locals": []
+              },
+              {
+                "expr": ":data #n2yAk96iwd7y2lOT5xnhDv37 .add ,( :data #PSYgowRkM1Iy2RlknzIvvRSD ,)",
+                "nodeType": "exprStmt",
+                "id": "UB1ZsYEqD5yt68QJYCtIsNK4",
+                "locals": []
+              },
+              {
+                "expr": ":data #n2yAk96iwd7y2lOT5xnhDv37 .add ,( :data #wnpcldkDbnR54LrMD4hW42dA ,)",
+                "nodeType": "exprStmt",
+                "id": "dWkQH21offi6ii13Bn5N4cUu",
+                "locals": []
+              },
+              {
+                "expr": ":data #n2yAk96iwd7y2lOT5xnhDv37 .add ,( :data #OQCmTIO0UwXs2OTfujMA0QYB ,)",
+                "nodeType": "exprStmt",
+                "id": "xGp1Nzr3e6boS2BPdZYEDPf4",
+                "locals": []
+              },
+              {
+                "expr": ":data #n2yAk96iwd7y2lOT5xnhDv37 .add ,( :data #xjPbOuHpgXHVTXb7Y42IDTDA ,)",
+                "nodeType": "exprStmt",
+                "id": "YQoIE4xRr8gxPu4ymsb52zX6",
+                "locals": []
+              },
+              {
+                "expr": ":data #n2yAk96iwd7y2lOT5xnhDv37 .add ,( :data #WAojxjCPgLKA4bjqyaznN6qk ,)",
+                "nodeType": "exprStmt",
+                "id": "vPqzhURPUTv2t8vc5LU8Olv4",
+                "locals": []
+              },
+              {
+                "expr": ":data #n2yAk96iwd7y2lOT5xnhDv37 .add ,( :data #VbPx3enTaQD3lgE8fOfxZliM ,)",
+                "nodeType": "exprStmt",
+                "id": "xs9ifwuQbNArGySSN2JYgMxZ",
+                "locals": []
+              },
+              {
+                "text": "For each symbol there is a corresponding monetary value",
+                "nodeType": "comment",
+                "id": "PeJntn8Rqoisxz3MX8E27lni"
+              },
+              {
+                "expr": ":data #fTT2spJSt2rWgFw5bKjKxz44 .add ,( ,0 ,. ,2 ,)",
+                "nodeType": "exprStmt",
+                "id": "CIeZY5gcnNqXjGO1MQIOw2zX",
+                "locals": []
+              },
+              {
+                "expr": ":data #fTT2spJSt2rWgFw5bKjKxz44 .add ,( ,0 ,. ,2 ,5 ,)",
+                "nodeType": "exprStmt",
+                "id": "YSTn5rMJs60HfCaTWfMF4Xqm",
+                "locals": []
+              },
+              {
+                "expr": ":data #fTT2spJSt2rWgFw5bKjKxz44 .add ,( ,0 ,. ,3 ,5 ,)",
+                "nodeType": "exprStmt",
+                "id": "e4i5nVXQ6LDWpbbZ3uHcapiA",
+                "locals": []
+              },
+              {
+                "expr": ":data #fTT2spJSt2rWgFw5bKjKxz44 .add ,( ,0 ,. ,5 ,)",
+                "nodeType": "exprStmt",
+                "id": "zoqvKnyigNtDRb8Xpu1iM4gH",
+                "locals": []
+              },
+              {
+                "expr": ":data #fTT2spJSt2rWgFw5bKjKxz44 .add ,( ,0 ,. ,7 ,5 ,)",
+                "nodeType": "exprStmt",
+                "id": "QeIPP5CdFqVfoxg4iwW8ye1X",
+                "locals": []
+              },
+              {
+                "expr": ":data #fTT2spJSt2rWgFw5bKjKxz44 .add ,( ,1 ,)",
+                "nodeType": "exprStmt",
+                "id": "KpuadXYLT4T0fY02dS0nQxG7",
+                "locals": []
+              },
+              {
+                "expr": ":data #fTT2spJSt2rWgFw5bKjKxz44 .add ,( ,1 ,. ,3 ,)",
+                "nodeType": "exprStmt",
+                "id": "xVikaQfczIqwu34q2Kkdu7Bc",
+                "locals": []
+              },
+              {
+                "expr": ":data #fTT2spJSt2rWgFw5bKjKxz44 .add ,( ,1 ,. ,7 ,5 ,)",
+                "nodeType": "exprStmt",
+                "id": "tycSaaIwGXNPLF4LsNo0OeUk",
+                "locals": []
+              },
+              {
+                "expr": ":data #fTT2spJSt2rWgFw5bKjKxz44 .add ,( ,2 ,. ,2 ,5 ,)",
+                "nodeType": "exprStmt",
+                "id": "xU5QPINAZMONro5Qln2ELRlu",
+                "locals": []
+              },
+              {
+                "expr": ":data #fTT2spJSt2rWgFw5bKjKxz44 .add ,( ,3 ,)",
+                "nodeType": "exprStmt",
+                "id": "FbXvO4xHVe4GiamXnic546j7",
+                "locals": []
+              },
+              {
+                "expr": ":data #fTT2spJSt2rWgFw5bKjKxz44 .add ,( ,5 ,)",
+                "nodeType": "exprStmt",
+                "id": "c70D4fwf76ZPh28H3gE1dGMt",
+                "locals": []
+              },
+              {
+                "expr": ":data #fTT2spJSt2rWgFw5bKjKxz44 .add ,( ,1 ,0 ,)",
+                "nodeType": "exprStmt",
+                "id": "E7J3DL6FgraSk9syf3BnevM5",
+                "locals": []
+              },
+              {
+                "text": "Hide the original sprites and create a counter position for each symbol in symbolCount",
+                "nodeType": "comment",
+                "id": "j0fi6MBOhDD0Vxno8PpHhBK0"
+              },
+              {
+                "collection": ":data #n2yAk96iwd7y2lOT5xnhDv37",
+                "conditions": [
+                  {
+                    "condition": "T",
+                    "nodeType": "where",
+                    "id": "ngDwUH4qNmNC8lNGzmMfz0GY",
+                    "locals": []
+                  }
+                ],
+                "body": [
+                  {
+                    "expr": "$qPMcUClAujeif9lMsHzxXB2eB0 .hide",
+                    "nodeType": "exprStmt",
+                    "id": "fjUii4s2bre5nKnx4j2QLyFP",
+                    "locals": []
+                  },
+                  {
+                    "expr": ":data #y2ZV233eOC1CXspGIyWLRlSO .add ,( ,0 ,)",
+                    "nodeType": "exprStmt",
+                    "id": "L5wcKyzmundFr2NbWlC05rYX",
+                    "locals": []
+                  }
+                ],
+                "nodeType": "foreach",
+                "id": "qPMcUClAujeif9lMsHzxXB2e",
+                "locals": [
+                  {
+                    "name": "sprite",
+                    "type": "Sprite",
+                    "nodeType": "localDef",
+                    "id": "qPMcUClAujeif9lMsHzxXB2eB0"
+                  }
+                ]
+              }
+            ],
+            "id": "n7Q6Z5DWDcd2594ooXt3bA4x"
+          },
+          {
+            "name": "generateScratchy",
+            "inParameters": [],
+            "outParameters": [],
+            "isPrivate": true,
+            "isOffloaded": false,
+            "isTest": false,
+            "isAsync": false,
+            "nodeType": "action",
+            "body": [
+              {
+                "text": "A greater design change was not implemented. This has not affected the basic premise of the app and would only offer a more eye pleasing experience.",
+                "nodeType": "comment",
+                "id": "pYYeh9xcbInIC19JtdavwUF6"
+              },
+              {
+                "expr": ":data #f6LgrThJHNCTAy0SiG4PHbqV .set_background ,( :colors .black ,)",
+                "nodeType": "exprStmt",
+                "id": "A6P1CDaY5JtJs4qi3hGC8t3l",
+                "locals": []
+              },
+              {
+                "expr": "$D3T73jSLwX401Wi02LeE9bNgL0 ,:= :data #f6LgrThJHNCTAy0SiG4PHbqV .create_text ,( ,2 ,0 ,0 ,, ,4 ,0 ,, ,4 ,0 ,, 'scrub5 ,)",
+                "nodeType": "exprStmt",
+                "id": "D3T73jSLwX401Wi02LeE9bNg",
+                "locals": [
+                  {
+                    "name": "title",
+                    "type": "Sprite",
+                    "nodeType": "localDef",
+                    "id": "D3T73jSLwX401Wi02LeE9bNgL0"
+                  }
+                ]
+              },
+              {
+                "expr": "$D3T73jSLwX401Wi02LeE9bNgL0 .set_pos ,( :data #f6LgrThJHNCTAy0SiG4PHbqV .width ,/ ,2 ,, ,8 ,0 ,)",
+                "nodeType": "exprStmt",
+                "id": "OYiPbf9jXdermZbmZc5Gb7dE",
+                "locals": []
+              },
+              {
+                "expr": "$D3T73jSLwX401Wi02LeE9bNgL0 .set_color ,( :colors .white ,)",
+                "nodeType": "exprStmt",
+                "id": "qRSQAHIpM2TxP2HKVPrk3mZe",
+                "locals": []
+              },
+              {
+                "text": "generatedSymbolSet - stores all symbols for a specific game instance",
+                "nodeType": "comment",
+                "id": "kP0W9yhCnObRpDHQt8Yqt1Ps"
+              },
+              {
+                "expr": ":data #wRLS2UtbGlrOsxGRuJgxXsPY ,:= :data #f6LgrThJHNCTAy0SiG4PHbqV .create_sprite_set",
+                "nodeType": "exprStmt",
+                "id": "MtXf2wQPeohzm9jZNfJxBuF1",
+                "locals": []
+              },
+              {
+                "text": "symbolMaskSet - stores scratch panel sections for each symbol position",
+                "nodeType": "comment",
+                "id": "NDqI28FwjYM405gH6LuAEPwv"
+              },
+              {
+                "expr": ":data #xW22v9JRF2EDDCE0978ZAbT0 ,:= :data #f6LgrThJHNCTAy0SiG4PHbqV .create_sprite_set",
+                "nodeType": "exprStmt",
+                "id": "WAhvzpOKt8vNhew8TQrvSpjI",
+                "locals": []
+              },
+              {
+                "expr": ":data #bTIAHAqxXDS9YtYpBwDEhm2D ,:= :data #f6LgrThJHNCTAy0SiG4PHbqV .create_text ,( ,1 ,6 ,0 ,, ,3 ,0 ,, ,2 ,8 ,, 'scrub6 ,)",
+                "nodeType": "exprStmt",
+                "id": "ZmtIGmulGzVVD0fHYPpYK1b4",
+                "locals": []
+              },
+              {
+                "expr": ":data #bTIAHAqxXDS9YtYpBwDEhm2D .set_pos ,( :data #f6LgrThJHNCTAy0SiG4PHbqV .width ,- ,1 ,0 ,5 ,, :data #f6LgrThJHNCTAy0SiG4PHbqV .height ,- ,1 ,2 ,0 ,)",
+                "nodeType": "exprStmt",
+                "id": "xQpQYPgoGfZ20evMEuVXl1gr",
+                "locals": []
+              },
+              {
+                "expr": ":data #xoymJr2MdH2LJLjVDwfDXMrU ,:= :data #f6LgrThJHNCTAy0SiG4PHbqV .create_text ,( ,1 ,6 ,0 ,, ,3 ,0 ,, ,2 ,8 ,, 'scrub7 ,)",
+                "nodeType": "exprStmt",
+                "id": "mMwy9Nu4OuEZVjloWrY201RI",
+                "locals": []
+              },
+              {
+                "expr": ":data #xoymJr2MdH2LJLjVDwfDXMrU .set_pos ,( ,1 ,0 ,0 ,, :data #f6LgrThJHNCTAy0SiG4PHbqV .height ,- ,1 ,2 ,0 ,)",
+                "nodeType": "exprStmt",
+                "id": "aSTYdhjrhNRsas74gVM3Wx68",
+                "locals": []
+              },
+              {
+                "expr": ":data #f6LgrThJHNCTAy0SiG4PHbqV .post_to_wall",
+                "nodeType": "exprStmt",
+                "id": "q4P355XQmMlfAo1vMAyXIS42",
+                "locals": []
+              },
+              {
+                "expr": ":data #pHS4aFJEo0KtW6kZHLS5HID8 ,:= ,0",
+                "nodeType": "exprStmt",
+                "id": "vvxM1nLWitULkIkqKvLDydHY",
+                "locals": []
+              },
+              {
+                "text": "Creating 4 x 3 scratch panel",
+                "nodeType": "comment",
+                "id": "h96eQ4jZvpcLP2r2SUvGdPcO"
+              },
+              {
+                "bound": ",3",
+                "body": [
+                  {
+                    "bound": ",4",
+                    "body": [
+                      {
+                        "text": "There are currently 16 symbols set up for random generation",
+                        "nodeType": "comment",
+                        "id": "cxOPp1Z188OtVi204EOW9upb"
+                      },
+                      {
+                        "expr": "$kzZD0gNK3j0sZohBrj2wZpZfL0 ,:= :math .random ,( ,3 ,0 ,0 ,)",
+                        "nodeType": "exprStmt",
+                        "id": "kzZD0gNK3j0sZohBrj2wZpZf",
+                        "locals": [
+                          {
+                            "name": "weightedRandom",
+                            "type": "Number",
+                            "nodeType": "localDef",
+                            "id": "kzZD0gNK3j0sZohBrj2wZpZfL0"
+                          }
+                        ]
+                      },
+                      {
+                        "expr": "$JOnVwIRr6J8oEoHJUEidiptXL0 ,:= :code #kgvDNohsuN5TOWKshuHKBHKI ,( $kzZD0gNK3j0sZohBrj2wZpZfL0 ,)",
+                        "nodeType": "exprStmt",
+                        "id": "JOnVwIRr6J8oEoHJUEidiptX",
+                        "locals": [
+                          {
+                            "name": "nextSymbol",
+                            "type": "Number",
+                            "nodeType": "localDef",
+                            "id": "JOnVwIRr6J8oEoHJUEidiptXL0"
+                          }
+                        ]
+                      },
+                      {
+                        "expr": "$Pk9p7t42kJt402h04pjfCZpjL0 ,:= :data #f6LgrThJHNCTAy0SiG4PHbqV .create_picture ,( :data #n2yAk96iwd7y2lOT5xnhDv37 .at ,( $JOnVwIRr6J8oEoHJUEidiptXL0 ,) .picture ,)",
+                        "nodeType": "exprStmt",
+                        "id": "Pk9p7t42kJt402h04pjfCZpj",
+                        "locals": [
+                          {
+                            "name": "symbol",
+                            "type": "Sprite",
+                            "nodeType": "localDef",
+                            "id": "Pk9p7t42kJt402h04pjfCZpjL0"
+                          }
+                        ]
+                      },
+                      {
+                        "expr": ":data #y2ZV233eOC1CXspGIyWLRlSO .set_at ,( $JOnVwIRr6J8oEoHJUEidiptXL0 ,, :data #y2ZV233eOC1CXspGIyWLRlSO .at ,( $JOnVwIRr6J8oEoHJUEidiptXL0 ,) ,+ ,1 ,)",
+                        "nodeType": "exprStmt",
+                        "id": "UwQ4VUVpyrb4wySkRAID7Xca",
+                        "locals": []
+                      },
+                      {
+                        "expr": "$Pk9p7t42kJt402h04pjfCZpjL0 .set_width ,( ,( :data #f6LgrThJHNCTAy0SiG4PHbqV .width ,- ,8 ,0 ,) ,/ ,4 ,)",
+                        "nodeType": "exprStmt",
+                        "id": "Wy2ifp5aZl5O2jEFfqNN3MHz",
+                        "locals": []
+                      },
+                      {
+                        "expr": "$Pk9p7t42kJt402h04pjfCZpjL0 .set_height ,( $Pk9p7t42kJt402h04pjfCZpjL0 .width ,)",
+                        "nodeType": "exprStmt",
+                        "id": "KsI47YfB46YsgLAj3hyUYhCI",
+                        "locals": []
+                      },
+                      {
+                        "expr": "$Pk9p7t42kJt402h04pjfCZpjL0 .set_pos ,( $DFI8euqld254SGlRGf5eixQTB0 ,* $Pk9p7t42kJt402h04pjfCZpjL0 .width ,+ :data #f6LgrThJHNCTAy0SiG4PHbqV .width ,* ,0 ,. ,1 ,8 ,, $aAyC2i44XlPT9f0XHc4mRABSB0 ,* $Pk9p7t42kJt402h04pjfCZpjL0 .height ,+ :data #f6LgrThJHNCTAy0SiG4PHbqV .height ,* ,0 ,. ,4 ,)",
+                        "nodeType": "exprStmt",
+                        "id": "xZaG0YOh6e9hLi4zzEFUiZts",
+                        "locals": []
+                      },
+                      {
+                        "text": "Adds the last generated symbol to an array (for when prize checking is implemented)",
+                        "nodeType": "comment",
+                        "id": "zgcOz2tZhS1WkmUjz28K1hgB"
+                      },
+                      {
+                        "expr": ":data #wRLS2UtbGlrOsxGRuJgxXsPY .add ,( $Pk9p7t42kJt402h04pjfCZpjL0 ,)",
+                        "nodeType": "exprStmt",
+                        "id": "vamNn7uWgo14sGnw2REtchDx",
+                        "locals": []
+                      },
+                      {
+                        "text": "Symbol masks form the scratch panel, and will later be replaced with designs",
+                        "nodeType": "comment",
+                        "id": "sB74w6DX5i7HHu44iQun3q5F"
+                      },
+                      {
+                        "expr": "$fu7VOpXbfGkCazGsb0j3udj4L0 ,:= :data #f6LgrThJHNCTAy0SiG4PHbqV .create_rectangle ,( ,6 ,4 ,, ,6 ,4 ,)",
+                        "nodeType": "exprStmt",
+                        "id": "fu7VOpXbfGkCazGsb0j3udj4",
+                        "locals": [
+                          {
+                            "name": "symbolMask",
+                            "type": "Sprite",
+                            "nodeType": "localDef",
+                            "id": "fu7VOpXbfGkCazGsb0j3udj4L0"
+                          }
+                        ]
+                      },
+                      {
+                        "expr": "$fu7VOpXbfGkCazGsb0j3udj4L0 .set_color ,( :colors .light_gray ,)",
+                        "nodeType": "exprStmt",
+                        "id": "xIUpnez3t9TB446MJTkUY16d",
+                        "locals": []
+                      },
+                      {
+                        "expr": "$fu7VOpXbfGkCazGsb0j3udj4L0 .set_width ,( ,( :data #f6LgrThJHNCTAy0SiG4PHbqV .width ,- ,8 ,0 ,) ,/ ,4 ,)",
+                        "nodeType": "exprStmt",
+                        "id": "l6wk2vkFlRNvwdPLl3i7lpYA",
+                        "locals": []
+                      },
+                      {
+                        "expr": "$fu7VOpXbfGkCazGsb0j3udj4L0 .set_height ,( $fu7VOpXbfGkCazGsb0j3udj4L0 .width ,)",
+                        "nodeType": "exprStmt",
+                        "id": "S4LtR87LXGGhGfWC6ou5f619",
+                        "locals": []
+                      },
+                      {
+                        "expr": "$fu7VOpXbfGkCazGsb0j3udj4L0 .set_pos ,( $DFI8euqld254SGlRGf5eixQTB0 ,* $Pk9p7t42kJt402h04pjfCZpjL0 .width ,+ :data #f6LgrThJHNCTAy0SiG4PHbqV .width ,* ,0 ,. ,1 ,8 ,, $aAyC2i44XlPT9f0XHc4mRABSB0 ,* $Pk9p7t42kJt402h04pjfCZpjL0 .height ,+ :data #f6LgrThJHNCTAy0SiG4PHbqV .height ,* ,0 ,. ,4 ,)",
+                        "nodeType": "exprStmt",
+                        "id": "GZ8lM4LxKeFheMm9USht5LUQ",
+                        "locals": []
+                      },
+                      {
+                        "text": "Each symbol mask section is added to an array so it can be 'scratched' section by section",
+                        "nodeType": "comment",
+                        "id": "WWse30kLGsvRZ9qyzaM4iYhL"
+                      },
+                      {
+                        "expr": ":data #xW22v9JRF2EDDCE0978ZAbT0 .add ,( $fu7VOpXbfGkCazGsb0j3udj4L0 ,)",
+                        "nodeType": "exprStmt",
+                        "id": "x6Vb92LOmRQ9AetYa1zVdcl4",
+                        "locals": []
+                      },
+                      {
+                        "text": "Each symbolMask is currently hidden for development purposes ('scratching' a section will yield no visible results)",
+                        "nodeType": "comment",
+                        "id": "yCsh8bV0ojs8Of4nEGLAeoPq"
+                      }
+                    ],
+                    "nodeType": "for",
+                    "id": "DFI8euqld254SGlRGf5eixQT",
+                    "locals": [
+                      {
+                        "name": "j",
+                        "type": "Number",
+                        "nodeType": "localDef",
+                        "id": "DFI8euqld254SGlRGf5eixQTB0"
+                      }
+                    ]
+                  }
+                ],
+                "nodeType": "for",
+                "id": "aAyC2i44XlPT9f0XHc4mRABS",
+                "locals": [
+                  {
+                    "name": "i",
+                    "type": "Number",
+                    "nodeType": "localDef",
+                    "id": "aAyC2i44XlPT9f0XHc4mRABSB0"
+                  }
+                ]
+              },
+              {
+                "expr": ":data #f6LgrThJHNCTAy0SiG4PHbqV .update_on_wall",
+                "nodeType": "exprStmt",
+                "id": "LSZX1MM4uuaqt6vlvwq6jpqk",
+                "locals": []
+              }
+            ],
+            "id": "FZ1RCVPEOUGYAXc9YdKrrGdm"
+          },
+          {
+            "name": "mainMenu",
+            "inParameters": [],
+            "outParameters": [],
+            "isPrivate": true,
+            "isOffloaded": false,
+            "isTest": false,
+            "isAsync": false,
+            "nodeType": "action",
+            "body": [
+              {
+                "text": "All of this simply creates text sprites and positions them appropriately for a menu screen",
+                "nodeType": "comment",
+                "id": "pdQpqfpj2BOZv4FIqyJ2XIoX"
+              },
+              {
+                "expr": ":data #x0C8ajC7p4mCFORVtHoyaK6l .create_text ,( ,3 ,0 ,0 ,, ,2 ,0 ,, ,2 ,8 ,, 'scrub8 ,) .set_y ,( ,1 ,2 ,5 ,)",
+                "nodeType": "exprStmt",
+                "id": "xXitmi42sZCPUGzvNurFongG",
+                "locals": []
+              },
+              {
+                "expr": ":data #x0C8ajC7p4mCFORVtHoyaK6l .create_text ,( ,5 ,0 ,0 ,, ,2 ,0 ,, ,3 ,0 ,, 'scrub9 ,) .set_y ,( ,1 ,7 ,0 ,)",
+                "nodeType": "exprStmt",
+                "id": "gQCU489i2KEHKkY5ijvZ4krE",
+                "locals": []
+              },
+              {
+                "expr": ":data #KaxlNcIPrqCDQReOOaZqh6CT ,:= :data #x0C8ajC7p4mCFORVtHoyaK6l .create_text ,( ,2 ,0 ,0 ,, ,3 ,0 ,, ,2 ,5 ,, 'scrub10 ,)",
+                "nodeType": "exprStmt",
+                "id": "fxMjz3jtGr2CQGSIolp8JZIX",
+                "locals": []
+              },
+              {
+                "expr": ":data #KaxlNcIPrqCDQReOOaZqh6CT .set_y ,( :data #x0C8ajC7p4mCFORVtHoyaK6l .height ,/ ,2 ,)",
+                "nodeType": "exprStmt",
+                "id": "lvhVknpmwUGGkHjlseNPLj4X",
+                "locals": []
+              },
+              {
+                "expr": ":data #XhoQqjLJXfPeY2wKxwxIdTCK ,:= :data #x0C8ajC7p4mCFORVtHoyaK6l .create_text ,( ,2 ,0 ,0 ,, ,3 ,0 ,, ,2 ,5 ,, 'scrub11 ,)",
+                "nodeType": "exprStmt",
+                "id": "SVDd6lxlW7Umv7HhluN9VUen",
+                "locals": []
+              },
+              {
+                "expr": ":data #XhoQqjLJXfPeY2wKxwxIdTCK .set_y ,( :data #x0C8ajC7p4mCFORVtHoyaK6l .height ,/ ,2 ,+ ,1 ,0 ,0 ,)",
+                "nodeType": "exprStmt",
+                "id": "xLmHgPGlflYHwhRO4aSVjp21",
+                "locals": []
+              },
+              {
+                "expr": ":data #D2Tzj0FKBdK9ure6m6zUleNx ,:= :data #x0C8ajC7p4mCFORVtHoyaK6l .create_text ,( ,2 ,0 ,0 ,, ,3 ,0 ,, ,2 ,5 ,, 'scrub12 ,)",
+                "nodeType": "exprStmt",
+                "id": "jqDPEw4HCWTkXhBpd2upBTiG",
+                "locals": []
+              },
+              {
+                "expr": ":data #D2Tzj0FKBdK9ure6m6zUleNx .set_y ,( :data #x0C8ajC7p4mCFORVtHoyaK6l .height ,/ ,2 ,+ ,2 ,0 ,0 ,)",
+                "nodeType": "exprStmt",
+                "id": "LN59fHqJUv8GBKKCN8xKsxrV",
+                "locals": []
+              },
+              {
+                "expr": ":data #x0C8ajC7p4mCFORVtHoyaK6l .set_background ,( :colors .black ,)",
+                "nodeType": "exprStmt",
+                "id": "ESSd3xq5n6dOavTZrFvvlqYB",
+                "locals": []
+              },
+              {
+                "expr": ":data #x0C8ajC7p4mCFORVtHoyaK6l .post_to_wall",
+                "nodeType": "exprStmt",
+                "id": "yUg4cbQ7G8WlTL4vyCY3tyk0",
+                "locals": []
+              }
+            ],
+            "id": "dEPnXkT2vWijCuFD1kPauP6l"
+          },
+          {
+            "name": "symbolSelection",
+            "inParameters": [
+              {
+                "name": "weightedRandom",
+                "type": "Number",
+                "nodeType": "localDef",
+                "id": "kgvDNohsuN5TOWKshuHKBHKIP0"
+              }
+            ],
+            "outParameters": [
+              {
+                "name": "symbolIndex",
+                "type": "Number",
+                "nodeType": "localDef",
+                "id": "kgvDNohsuN5TOWKshuHKBHKIP1"
+              }
+            ],
+            "isPrivate": true,
+            "isOffloaded": false,
+            "isTest": false,
+            "isAsync": false,
+            "nodeType": "action",
+            "body": [
+              {
+                "text": "This forms a somewhat random method of selecting symbols, weighted slightly by their value and significance. The lower value symbols generally have a broader range, and the higher value ones a far narrower range. This means that the odds of getting multiples of the higher symbols are exponentially smaller than multiples of any other lower symbols, and is a small step towards realistic odds.",
+                "nodeType": "comment",
+                "id": "D4rGFTYR7jzlGRzNFZzqxSxg"
+              },
+              {
+                "nodeType": "if",
+                "condition": "$kgvDNohsuN5TOWKshuHKBHKIP0 ,> ,2 ,4 ,2",
+                "thenBody": [
+                  {
+                    "expr": "$kgvDNohsuN5TOWKshuHKBHKIP1 ,:= ,0",
+                    "nodeType": "exprStmt",
+                    "id": "noJ7JIQ1XosL9SMX3gkcW52H",
+                    "locals": []
+                  }
+                ],
+                "isElseIf": false,
+                "id": "J5CcBHjCX291MFEYBi02f22S",
+                "locals": []
+              },
+              {
+                "nodeType": "if",
+                "condition": "$kgvDNohsuN5TOWKshuHKBHKIP0 ,> ,1 ,9 ,8",
+                "thenBody": [
+                  {
+                    "expr": "$kgvDNohsuN5TOWKshuHKBHKIP1 ,:= ,1",
+                    "nodeType": "exprStmt",
+                    "id": "Cfw1MpkpNYPqGfUAKxtpUZud",
+                    "locals": []
+                  }
+                ],
+                "isElseIf": true,
+                "id": "ZSTFw0vJYEPefExqApehX8aU",
+                "locals": []
+              },
+              {
+                "nodeType": "if",
+                "condition": "$kgvDNohsuN5TOWKshuHKBHKIP0 ,> ,1 ,6 ,3",
+                "thenBody": [
+                  {
+                    "expr": "$kgvDNohsuN5TOWKshuHKBHKIP1 ,:= ,2",
+                    "nodeType": "exprStmt",
+                    "id": "EzmSrzjphnFNnYPZIR2v6kVV",
+                    "locals": []
+                  }
+                ],
+                "isElseIf": true,
+                "id": "BLEtnWUmZmVrMDhakJ3bDGJS",
+                "locals": []
+              },
+              {
+                "nodeType": "if",
+                "condition": "$kgvDNohsuN5TOWKshuHKBHKIP0 ,> ,1 ,3 ,5",
+                "thenBody": [
+                  {
+                    "expr": "$kgvDNohsuN5TOWKshuHKBHKIP1 ,:= ,3",
+                    "nodeType": "exprStmt",
+                    "id": "Kj7GSxegUC7U2B07dcL4ziPR",
+                    "locals": []
+                  }
+                ],
+                "isElseIf": true,
+                "id": "zuBPpy4d0sVstS0XtIS9fb45",
+                "locals": []
+              },
+              {
+                "nodeType": "if",
+                "condition": "$kgvDNohsuN5TOWKshuHKBHKIP0 ,> ,1 ,1 ,1",
+                "thenBody": [
+                  {
+                    "expr": "$kgvDNohsuN5TOWKshuHKBHKIP1 ,:= ,4",
+                    "nodeType": "exprStmt",
+                    "id": "VpG5E4ZQL9ckohEokYpUSTDb",
+                    "locals": []
+                  }
+                ],
+                "isElseIf": true,
+                "id": "mUtby7EzavWgx2a6qvODGEpN",
+                "locals": []
+              },
+              {
+                "nodeType": "if",
+                "condition": "$kgvDNohsuN5TOWKshuHKBHKIP0 ,> ,8 ,9",
+                "thenBody": [
+                  {
+                    "expr": "$kgvDNohsuN5TOWKshuHKBHKIP1 ,:= ,5",
+                    "nodeType": "exprStmt",
+                    "id": "WWa9AbgVNfSsSBgHuLxmmMjy",
+                    "locals": []
+                  }
+                ],
+                "isElseIf": true,
+                "id": "EaK3EFpk2nYw4B7PmG72hQum",
+                "locals": []
+              },
+              {
+                "nodeType": "if",
+                "condition": "$kgvDNohsuN5TOWKshuHKBHKIP0 ,> ,6 ,9",
+                "thenBody": [
+                  {
+                    "expr": "$kgvDNohsuN5TOWKshuHKBHKIP1 ,:= ,6",
+                    "nodeType": "exprStmt",
+                    "id": "RyEDVr8pLWTaBDNn71FcruQ4",
+                    "locals": []
+                  }
+                ],
+                "isElseIf": true,
+                "id": "t5Aknv5a8A1MapB4aC22XYiH",
+                "locals": []
+              },
+              {
+                "nodeType": "if",
+                "condition": "$kgvDNohsuN5TOWKshuHKBHKIP0 ,> ,5 ,1",
+                "thenBody": [
+                  {
+                    "expr": "$kgvDNohsuN5TOWKshuHKBHKIP1 ,:= ,7",
+                    "nodeType": "exprStmt",
+                    "id": "xy5J1EHib0E5TQKriH2UgXVy",
+                    "locals": []
+                  }
+                ],
+                "isElseIf": true,
+                "id": "an3tJ3bOcnhI68GJs0hZFqxJ",
+                "locals": []
+              },
+              {
+                "nodeType": "if",
+                "condition": "$kgvDNohsuN5TOWKshuHKBHKIP0 ,> ,3 ,5",
+                "thenBody": [
+                  {
+                    "expr": "$kgvDNohsuN5TOWKshuHKBHKIP1 ,:= ,8",
+                    "nodeType": "exprStmt",
+                    "id": "xkndNe4xFh0c407gey0ih4Ne",
+                    "locals": []
+                  }
+                ],
+                "isElseIf": true,
+                "id": "s0XB4cnugNxelSOdOf9mnOLS",
+                "locals": []
+              },
+              {
+                "nodeType": "if",
+                "condition": "$kgvDNohsuN5TOWKshuHKBHKIP0 ,> ,2 ,1",
+                "thenBody": [
+                  {
+                    "expr": "$kgvDNohsuN5TOWKshuHKBHKIP1 ,:= ,9",
+                    "nodeType": "exprStmt",
+                    "id": "WVRo5Kdd88QD2WeSSPRFjqgI",
+                    "locals": []
+                  }
+                ],
+                "isElseIf": true,
+                "id": "F6viAcB72Ouu2DriY4MJPgcc",
+                "locals": []
+              },
+              {
+                "nodeType": "if",
+                "condition": "$kgvDNohsuN5TOWKshuHKBHKIP0 ,> ,9",
+                "thenBody": [
+                  {
+                    "expr": "$kgvDNohsuN5TOWKshuHKBHKIP1 ,:= ,1 ,0",
+                    "nodeType": "exprStmt",
+                    "id": "x65RLuV3SuEU92KLcYOwW3SI",
+                    "locals": []
+                  }
+                ],
+                "elseBody": [
+                  {
+                    "expr": "$kgvDNohsuN5TOWKshuHKBHKIP1 ,:= ,1 ,1",
+                    "nodeType": "exprStmt",
+                    "id": "fvCSAUdIEYTjbeZFtmtKpcu4",
+                    "locals": []
+                  }
+                ],
+                "isElseIf": true,
+                "id": "GuNCS6RAQGfKGT7xixahWFiZ",
+                "locals": []
+              }
+            ],
+            "id": "kgvDNohsuN5TOWKshuHKBHKI"
+          },
+          {
+            "name": "addFundsSprite",
+            "comment": "",
+            "type": "Sprite",
+            "isReadonly": false,
+            "isTransient": true,
+            "nodeType": "data",
+            "id": "XhoQqjLJXfPeY2wKxwxIdTCK"
+          },
+          {
+            "name": "boatSprite",
+            "comment": "",
+            "type": "Sprite",
+            "isReadonly": false,
+            "isTransient": true,
+            "nodeType": "data",
+            "id": "nz7sREyQwiqkMgvlJFN0gIg1"
+          },
+          {
+            "name": "busSprite",
+            "comment": "",
+            "type": "Sprite",
+            "isReadonly": false,
+            "isTransient": true,
+            "nodeType": "data",
+            "id": "xTQ5ecJ3plbpw3kCHUPySHRf"
+          },
+          {
+            "name": "buyTicketSprite",
+            "comment": "",
+            "type": "Sprite",
+            "isReadonly": false,
+            "isTransient": true,
+            "nodeType": "data",
+            "id": "KaxlNcIPrqCDQReOOaZqh6CT"
+          },
+          {
+            "name": "checkFundsSprite",
+            "comment": "",
+            "type": "Sprite",
+            "isReadonly": false,
+            "isTransient": true,
+            "nodeType": "data",
+            "id": "D2Tzj0FKBdK9ure6m6zUleNx"
+          },
+          {
+            "name": "checkWinSprite",
+            "comment": "",
+            "type": "Sprite",
+            "isReadonly": false,
+            "isTransient": true,
+            "nodeType": "data",
+            "id": "xoymJr2MdH2LJLjVDwfDXMrU"
+          },
+          {
+            "name": "chilliSprite",
+            "comment": "",
+            "type": "Sprite",
+            "isReadonly": false,
+            "isTransient": true,
+            "nodeType": "data",
+            "id": "xvgjgnxUMW66PTu51vSKu25I"
+          },
+          {
+            "name": "compassSprite",
+            "comment": "",
+            "type": "Sprite",
+            "isReadonly": false,
+            "isTransient": true,
+            "nodeType": "data",
+            "id": "PSYgowRkM1Iy2RlknzIvvRSD"
+          },
+          {
+            "name": "currentBalance",
+            "comment": "",
+            "type": "Number",
+            "isReadonly": false,
+            "isTransient": false,
+            "nodeType": "data",
+            "id": "yoJbrWoFjvxW82HLe4CCBCBj"
+          },
+          {
+            "name": "flowerSprite",
+            "comment": "",
+            "type": "Sprite",
+            "isReadonly": false,
+            "isTransient": true,
+            "nodeType": "data",
+            "id": "MTUQ2cVTq4euE43DWczd2XZl"
+          },
+          {
+            "name": "generatedSymbolSet",
+            "comment": "",
+            "type": "Sprite Set",
+            "isReadonly": false,
+            "isTransient": true,
+            "nodeType": "data",
+            "id": "wRLS2UtbGlrOsxGRuJgxXsPY"
+          },
+          {
+            "name": "giftSprite",
+            "comment": "",
+            "type": "Sprite",
+            "isReadonly": false,
+            "isTransient": true,
+            "nodeType": "data",
+            "id": "xjPbOuHpgXHVTXb7Y42IDTDA"
+          },
+          {
+            "name": "instructions",
+            "comment": "",
+            "type": "Board",
+            "isReadonly": false,
+            "isTransient": true,
+            "nodeType": "data",
+            "id": "xYNo1IPbn2pIohYdGnoJ2F3x"
+          },
+          {
+            "name": "instructionsSet",
+            "comment": "",
+            "type": "Sprite Set",
+            "isReadonly": false,
+            "isTransient": true,
+            "nodeType": "data",
+            "id": "KUOOBaUIojYvlYgHMynoTBWm"
+          },
+          {
+            "name": "instructionsButton",
+            "comment": "",
+            "type": "Sprite",
+            "isReadonly": false,
+            "isTransient": true,
+            "nodeType": "data",
+            "id": "bTIAHAqxXDS9YtYpBwDEhm2D"
+          },
+          {
+            "name": "medalSprite",
+            "comment": "",
+            "type": "Sprite",
+            "isReadonly": false,
+            "isTransient": true,
+            "nodeType": "data",
+            "id": "WAojxjCPgLKA4bjqyaznN6qk"
+          },
+          {
+            "name": "planeSprite",
+            "comment": "",
+            "type": "Sprite",
+            "isReadonly": false,
+            "isTransient": true,
+            "nodeType": "data",
+            "id": "LrO7baGYPifiMg2Ax0JfrQGo"
+          },
+          {
+            "name": "revealedCount",
+            "comment": "",
+            "type": "Number",
+            "isReadonly": false,
+            "isTransient": false,
+            "nodeType": "data",
+            "id": "pHS4aFJEo0KtW6kZHLS5HID8"
+          },
+          {
+            "name": "ribbonSprite",
+            "comment": "",
+            "type": "Sprite",
+            "isReadonly": false,
+            "isTransient": true,
+            "nodeType": "data",
+            "id": "OQCmTIO0UwXs2OTfujMA0QYB"
+          },
+          {
+            "name": "scratchy",
+            "comment": "",
+            "type": "Board",
+            "isReadonly": false,
+            "isTransient": true,
+            "nodeType": "data",
+            "id": "f6LgrThJHNCTAy0SiG4PHbqV"
+          },
+          {
+            "name": "spiderSprite",
+            "comment": "",
+            "type": "Sprite",
+            "isReadonly": false,
+            "isTransient": true,
+            "nodeType": "data",
+            "id": "xc03IBBLIu161uk2iP9KJkAP"
+          },
+          {
+            "name": "symbolCount",
+            "comment": "",
+            "type": "Number Collection",
+            "isReadonly": false,
+            "isTransient": false,
+            "nodeType": "data",
+            "id": "y2ZV233eOC1CXspGIyWLRlSO"
+          },
+          {
+            "name": "symbolsList",
+            "comment": "",
+            "type": "Sprite Set",
+            "isReadonly": false,
+            "isTransient": true,
+            "nodeType": "data",
+            "id": "n2yAk96iwd7y2lOT5xnhDv37"
+          },
+          {
+            "name": "ticketPriceCollection",
+            "comment": "",
+            "type": "String Collection",
+            "isReadonly": false,
+            "isTransient": false,
+            "nodeType": "data",
+            "id": "LzQLmOu1fHmynvM4w0Srw9Fe"
+          },
+          {
+            "name": "toolsSprite",
+            "comment": "",
+            "type": "Sprite",
+            "isReadonly": false,
+            "isTransient": true,
+            "nodeType": "data",
+            "id": "wnpcldkDbnR54LrMD4hW42dA"
+          },
+          {
+            "name": "trophySprite",
+            "comment": "",
+            "type": "Sprite",
+            "isReadonly": false,
+            "isTransient": true,
+            "nodeType": "data",
+            "id": "VbPx3enTaQD3lgE8fOfxZliM"
+          },
+          {
+            "name": "winMultiplier",
+            "comment": "",
+            "type": "Number",
+            "isReadonly": false,
+            "isTransient": false,
+            "nodeType": "data",
+            "id": "fBBHAok4gW3A8sET2dTo3Ua0"
+          },
+          {
+            "name": "symbolMaskSet",
+            "comment": "",
+            "type": "Sprite Set",
+            "isReadonly": false,
+            "isTransient": true,
+            "nodeType": "data",
+            "id": "xW22v9JRF2EDDCE0978ZAbT0"
+          },
+          {
+            "name": "symbolPictures",
+            "comment": "",
+            "type": "Pictures",
+            "isReadonly": false,
+            "isTransient": true,
+            "nodeType": "data",
+            "id": "YTrDxy8FHCNHWKcwAoxHvQAB"
+          },
+          {
+            "name": "tap sprite in symbolMaskSet",
+            "inParameters": [
+              {
+                "name": "sprite",
+                "type": "Sprite",
+                "nodeType": "localDef",
+                "id": "xSh0Ulhb3BQI3c5E5PIlqOTnP0"
+              },
+              {
+                "name": "index in set",
+                "type": "Number",
+                "nodeType": "localDef",
+                "id": "xSh0Ulhb3BQI3c5E5PIlqOTnP1"
+              },
+              {
+                "name": "x",
+                "type": "Number",
+                "nodeType": "localDef",
+                "id": "xSh0Ulhb3BQI3c5E5PIlqOTnP2"
+              },
+              {
+                "name": "y",
+                "type": "Number",
+                "nodeType": "localDef",
+                "id": "xSh0Ulhb3BQI3c5E5PIlqOTnP3"
+              }
+            ],
+            "outParameters": [],
+            "isPrivate": false,
+            "isOffloaded": false,
+            "isTest": false,
+            "isAsync": true,
+            "nodeType": "event",
+            "eventName": "tap sprite in ",
+            "eventVariableId": "xW22v9JRF2EDDCE0978ZAbT0",
+            "body": [
+              {
+                "text": "When grey mask is tapped, reveal symbol behind it",
+                "nodeType": "comment",
+                "id": "MvTX2dnBnG8U47eJJMiFso4V"
+              },
+              {
+                "expr": ":data #xW22v9JRF2EDDCE0978ZAbT0 .at ,( $xSh0Ulhb3BQI3c5E5PIlqOTnP1 ,) .hide",
+                "nodeType": "exprStmt",
+                "id": "x6iaaFgd0FzjbfABmsf4JnVG",
+                "locals": []
+              },
+              {
+                "expr": ":data #pHS4aFJEo0KtW6kZHLS5HID8 ,:= :data #pHS4aFJEo0KtW6kZHLS5HID8 ,+ ,1",
+                "nodeType": "exprStmt",
+                "id": "yIIAwlxsn4yHkcTwcLLcESqi",
+                "locals": []
+              },
+              {
+                "expr": ":data #f6LgrThJHNCTAy0SiG4PHbqV .update_on_wall",
+                "nodeType": "exprStmt",
+                "id": "LbL7CmLdtb8LEnKvT6q2DItI",
+                "locals": []
+              }
+            ],
+            "id": "xSh0Ulhb3BQI3c5E5PIlqOTn"
+          },
+          {
+            "name": "tap sprite: addFundsSprite",
+            "inParameters": [
+              {
+                "name": "sprite",
+                "type": "Sprite",
+                "nodeType": "localDef",
+                "id": "fV0LsaZgPb0LIpRCg21FeLccP0"
+              },
+              {
+                "name": "x",
+                "type": "Number",
+                "nodeType": "localDef",
+                "id": "fV0LsaZgPb0LIpRCg21FeLccP1"
+              },
+              {
+                "name": "y",
+                "type": "Number",
+                "nodeType": "localDef",
+                "id": "fV0LsaZgPb0LIpRCg21FeLccP2"
+              }
+            ],
+            "outParameters": [],
+            "isPrivate": false,
+            "isOffloaded": false,
+            "isTest": false,
+            "isAsync": true,
+            "nodeType": "event",
+            "eventName": "tap sprite: ",
+            "eventVariableId": "XhoQqjLJXfPeY2wKxwxIdTCK",
+            "body": [
+              {
+                "text": "Simply a cheat/shortcut to add more funds to your balance",
+                "nodeType": "comment",
+                "id": "nbRubyQgcVmGYqjsZ0i6OImw"
+              },
+              {
+                "expr": "$XgyuJMiN4EnP9GEOmhl4dYS4L0 ,:= :data #yoJbrWoFjvxW82HLe4CCBCBj ,+ ,1 ,0",
+                "nodeType": "exprStmt",
+                "id": "XgyuJMiN4EnP9GEOmhl4dYS4",
+                "locals": [
+                  {
+                    "name": "newBalance",
+                    "type": "Number",
+                    "nodeType": "localDef",
+                    "id": "XgyuJMiN4EnP9GEOmhl4dYS4L0"
+                  }
+                ]
+              },
+              {
+                "expr": "$xVUJySwYDCaplW4rjZ4qKsW4L0 ,:= :wall .ask_boolean ,( 'scrub13 ,∥ $XgyuJMiN4EnP9GEOmhl4dYS4L0 ,, 'scrub14 ,)",
+                "nodeType": "exprStmt",
+                "id": "xVUJySwYDCaplW4rjZ4qKsW4",
+                "locals": [
+                  {
+                    "name": "proceed",
+                    "type": "Boolean",
+                    "nodeType": "localDef",
+                    "id": "xVUJySwYDCaplW4rjZ4qKsW4L0"
+                  }
+                ]
+              },
+              {
+                "nodeType": "if",
+                "condition": "$xVUJySwYDCaplW4rjZ4qKsW4L0",
+                "thenBody": [
+                  {
+                    "expr": ":data #yoJbrWoFjvxW82HLe4CCBCBj ,:= $XgyuJMiN4EnP9GEOmhl4dYS4L0",
+                    "nodeType": "exprStmt",
+                    "id": "xoXtsJT7u4YzGZ13t2mvRtLX",
+                    "locals": []
+                  }
+                ],
+                "isElseIf": false,
+                "id": "Uuis2Nby7Kth88C442kpl5wc",
+                "locals": []
+              }
+            ],
+            "id": "fV0LsaZgPb0LIpRCg21FeLcc"
+          },
+          {
+            "name": "tap sprite: buyTicketSprite",
+            "inParameters": [
+              {
+                "name": "sprite",
+                "type": "Sprite",
+                "nodeType": "localDef",
+                "id": "TMrw6IQayDuU199VX0rHXPDRP0"
+              },
+              {
+                "name": "x",
+                "type": "Number",
+                "nodeType": "localDef",
+                "id": "TMrw6IQayDuU199VX0rHXPDRP1"
+              },
+              {
+                "name": "y",
+                "type": "Number",
+                "nodeType": "localDef",
+                "id": "TMrw6IQayDuU199VX0rHXPDRP2"
+              }
+            ],
+            "outParameters": [],
+            "isPrivate": false,
+            "isOffloaded": false,
+            "isTest": false,
+            "isAsync": true,
+            "nodeType": "event",
+            "eventName": "tap sprite: ",
+            "eventVariableId": "KaxlNcIPrqCDQReOOaZqh6CT",
+            "body": [
+              {
+                "expr": ":data #eUedF4E3JXbn21c7KXTvxIEG ,:= :wall .pick_string ,( 'scrub15 ,, ' ,, :data #LzQLmOu1fHmynvM4w0Srw9Fe ,)",
+                "nodeType": "exprStmt",
+                "id": "fpi2wilIYbMKALwVc9Lja4c6",
+                "locals": []
+              },
+              {
+                "nodeType": "if",
+                "condition": ":data #eUedF4E3JXbn21c7KXTvxIEG ,≥ ,0",
+                "thenBody": [
+                  {
+                    "expr": "$ai1BG6eYPOBaPE5wVe2eYh1ZL0 ,:= :wall .ask_boolean ,( 'scrub16 ,∥ ,( :data #eUedF4E3JXbn21c7KXTvxIEG ,+ ,1 ,) ,∥ 'scrub17 ,, 'scrub14 ,)",
+                    "nodeType": "exprStmt",
+                    "id": "ai1BG6eYPOBaPE5wVe2eYh1Z",
+                    "locals": [
+                      {
+                        "name": "transactionOK",
+                        "type": "Boolean",
+                        "nodeType": "localDef",
+                        "id": "ai1BG6eYPOBaPE5wVe2eYh1ZL0"
+                      }
+                    ]
+                  },
+                  {
+                    "nodeType": "if",
+                    "condition": "$ai1BG6eYPOBaPE5wVe2eYh1ZL0 ,and :data #yoJbrWoFjvxW82HLe4CCBCBj ,> ,( :data #eUedF4E3JXbn21c7KXTvxIEG ,+ ,1 ,)",
+                    "thenBody": [
+                      {
+                        "text": "Checks that your balance is higher than the cost of the ticket you selected, and proceeds to 'purchase' it if true. i.e. deduct cost of ticket and display scratchy",
+                        "nodeType": "comment",
+                        "id": "IT427Nv9HOuMXR8kW4LH5VU2"
+                      },
+                      {
+                        "expr": ":wall .prompt ,( 'scrub18 ,∥ :data #yoJbrWoFjvxW82HLe4CCBCBj ,- ,( :data #eUedF4E3JXbn21c7KXTvxIEG ,+ ,1 ,) ,)",
+                        "nodeType": "exprStmt",
+                        "id": "x0vBjFtqVY76gfKv14vf1ZTo",
+                        "locals": []
+                      },
+                      {
+                        "expr": ":data #yoJbrWoFjvxW82HLe4CCBCBj ,:= :data #yoJbrWoFjvxW82HLe4CCBCBj ,- ,( :data #eUedF4E3JXbn21c7KXTvxIEG ,+ ,1 ,)",
+                        "nodeType": "exprStmt",
+                        "id": "qUee15LEViBDeK7Nj46BM6s3",
+                        "locals": []
+                      },
+                      {
+                        "expr": ":data #fBBHAok4gW3A8sET2dTo3Ua0 ,:= ,( :data #eUedF4E3JXbn21c7KXTvxIEG ,+ ,1 ,)",
+                        "nodeType": "exprStmt",
+                        "id": "x4F9t1j7444CvKAXXB2rYmB2",
+                        "locals": []
+                      },
+                      {
+                        "expr": ":wall .clear",
+                        "nodeType": "exprStmt",
+                        "id": "xk3LbMMgIKjOYEhFIL6MJFh5",
+                        "locals": []
+                      },
+                      {
+                        "expr": ":code #FZ1RCVPEOUGYAXc9YdKrrGdm",
+                        "nodeType": "exprStmt",
+                        "id": "xB4yxNlubLnpXvD2m2pTP9ad",
+                        "locals": []
+                      },
+                      {
+                        "expr": ":data #f6LgrThJHNCTAy0SiG4PHbqV .update_on_wall",
+                        "nodeType": "exprStmt",
+                        "id": "O8waVCS2M6YJmHhx6yMCicwa",
+                        "locals": []
+                      }
+                    ],
+                    "isElseIf": false,
+                    "id": "OmoCYgLOuoDOb682Tuh4daQl",
+                    "locals": []
+                  }
+                ],
+                "isElseIf": false,
+                "id": "me4qU6VXsqDZSlJ1oiw4LdbP",
+                "locals": []
+              }
+            ],
+            "id": "TMrw6IQayDuU199VX0rHXPDR"
+          },
+          {
+            "name": "tap sprite: checkFundsSprite",
+            "inParameters": [
+              {
+                "name": "sprite",
+                "type": "Sprite",
+                "nodeType": "localDef",
+                "id": "UAxb8T4qZnLsyWv1RkJKw4FZP0"
+              },
+              {
+                "name": "x",
+                "type": "Number",
+                "nodeType": "localDef",
+                "id": "UAxb8T4qZnLsyWv1RkJKw4FZP1"
+              },
+              {
+                "name": "y",
+                "type": "Number",
+                "nodeType": "localDef",
+                "id": "UAxb8T4qZnLsyWv1RkJKw4FZP2"
+              }
+            ],
+            "outParameters": [],
+            "isPrivate": false,
+            "isOffloaded": false,
+            "isTest": false,
+            "isAsync": true,
+            "nodeType": "event",
+            "eventName": "tap sprite: ",
+            "eventVariableId": "D2Tzj0FKBdK9ure6m6zUleNx",
+            "body": [
+              {
+                "text": "A simple balance check displayed through a prompt",
+                "nodeType": "comment",
+                "id": "K12SWUE7lJC9kqAgGFlnkvcG"
+              },
+              {
+                "expr": ":wall .prompt ,( 'scrub19 ,∥ :data #yoJbrWoFjvxW82HLe4CCBCBj ,)",
+                "nodeType": "exprStmt",
+                "id": "sl2d8w7wBJDGTF5glYFrD1s1",
+                "locals": []
+              }
+            ],
+            "id": "UAxb8T4qZnLsyWv1RkJKw4FZ"
+          },
+          {
+            "name": "tap sprite: checkWinSprite",
+            "inParameters": [
+              {
+                "name": "sprite",
+                "type": "Sprite",
+                "nodeType": "localDef",
+                "id": "xQqCsjelB6fBT8wztWN68k2dP0"
+              },
+              {
+                "name": "x",
+                "type": "Number",
+                "nodeType": "localDef",
+                "id": "xQqCsjelB6fBT8wztWN68k2dP1"
+              },
+              {
+                "name": "y",
+                "type": "Number",
+                "nodeType": "localDef",
+                "id": "xQqCsjelB6fBT8wztWN68k2dP2"
+              }
+            ],
+            "outParameters": [],
+            "isPrivate": false,
+            "isOffloaded": false,
+            "isTest": false,
+            "isAsync": true,
+            "nodeType": "event",
+            "eventName": "tap sprite: ",
+            "eventVariableId": "xoymJr2MdH2LJLjVDwfDXMrU",
+            "body": [
+              {
+                "text": "If 'Check Win' is touched, check for a winning ticket only if all symbols have been revealed, otherwise continue.",
+                "nodeType": "comment",
+                "id": "h7V37LKGWUTUUnYMOSpqzRud"
+              },
+              {
+                "nodeType": "if",
+                "condition": ":data #pHS4aFJEo0KtW6kZHLS5HID8 ,= ,1 ,2",
+                "thenBody": [
+                  {
+                    "expr": ":wall .prompt ,( 'scrub20 ,∥ :code #xlEg5PDUl7UlVBIW5SMH2RFR ,)",
+                    "nodeType": "exprStmt",
+                    "id": "gVZOZwIcdI49KJzRIJ20pWXd",
+                    "locals": []
+                  },
+                  {
+                    "expr": ":data #yoJbrWoFjvxW82HLe4CCBCBj ,:= :data #yoJbrWoFjvxW82HLe4CCBCBj ,+ :code #xlEg5PDUl7UlVBIW5SMH2RFR",
+                    "nodeType": "exprStmt",
+                    "id": "igAIOSaUneCj4R5thb4tG447",
+                    "locals": []
+                  },
+                  {
+                    "expr": ":wall .clear",
+                    "nodeType": "exprStmt",
+                    "id": "xFJfz2iKhZ7Eeje8ebtv2NFo",
+                    "locals": []
+                  },
+                  {
+                    "expr": ":data #x0C8ajC7p4mCFORVtHoyaK6l .post_to_wall",
+                    "nodeType": "exprStmt",
+                    "id": "OltM7bhcKp4v1dvqB68r1sc1",
+                    "locals": []
+                  }
+                ],
+                "elseBody": [
+                  {
+                    "expr": ":wall .prompt ,( 'scrub21 ,)",
+                    "nodeType": "exprStmt",
+                    "id": "WvpRQhYSMJUqK9jiBZcNoY9v",
+                    "locals": []
+                  }
+                ],
+                "isElseIf": false,
+                "id": "vRl09bFY8IfPzAQamnmGcTgl",
+                "locals": []
+              }
+            ],
+            "id": "xQqCsjelB6fBT8wztWN68k2d"
+          },
+          {
+            "name": "tap sprite: instructionsButton",
+            "inParameters": [
+              {
+                "name": "sprite",
+                "type": "Sprite",
+                "nodeType": "localDef",
+                "id": "n3R5HJEvLZNURBsRujqZEqq9P0"
+              },
+              {
+                "name": "x",
+                "type": "Number",
+                "nodeType": "localDef",
+                "id": "n3R5HJEvLZNURBsRujqZEqq9P1"
+              },
+              {
+                "name": "y",
+                "type": "Number",
+                "nodeType": "localDef",
+                "id": "n3R5HJEvLZNURBsRujqZEqq9P2"
+              }
+            ],
+            "outParameters": [],
+            "isPrivate": false,
+            "isOffloaded": false,
+            "isTest": false,
+            "isAsync": true,
+            "nodeType": "event",
+            "eventName": "tap sprite: ",
+            "eventVariableId": "bTIAHAqxXDS9YtYpBwDEhm2D",
+            "body": [
+              {
+                "text": "Flips the ticket to display the 'instructions' side",
+                "nodeType": "comment",
+                "id": "ACol1KuB5LXo6DTsMjcILk4V"
+              },
+              {
+                "expr": ":wall .clear",
+                "nodeType": "exprStmt",
+                "id": "EMo0n0SOvUwm4FJJgJ408a0M",
+                "locals": []
+              },
+              {
+                "expr": ":code #fuzbgRT4WS2ktUpbSEcZZwCk",
+                "nodeType": "exprStmt",
+                "id": "arxmuvxCaTwcWjJ35ok4QhBq",
+                "locals": []
+              }
+            ],
+            "id": "n3R5HJEvLZNURBsRujqZEqq9"
+          },
+          {
+            "name": "boat",
+            "comment": "",
+            "type": "Picture",
+            "isReadonly": true,
+            "isTransient": true,
+            "nodeType": "art",
+            "url": "https://az31353.vo.msecnd.net/pub/pmyigrbh",
+            "id": "BTP4Pd3ZaqyFSxZQWdPsPuni"
+          },
+          {
+            "name": "bus",
+            "comment": "",
+            "type": "Picture",
+            "isReadonly": true,
+            "isTransient": true,
+            "nodeType": "art",
+            "url": "https://az31353.vo.msecnd.net/pub/boxzbakz",
+            "id": "EwvdwOBEs5YY0gwaFlvbytMH"
+          },
+          {
+            "name": "chilli",
+            "comment": "",
+            "type": "Picture",
+            "isReadonly": true,
+            "isTransient": true,
+            "nodeType": "art",
+            "url": "https://az31353.vo.msecnd.net/pub/exdvajdm",
+            "id": "xVLCuPBi38VRSOCVWW2XUglH"
+          },
+          {
+            "name": "compass",
+            "comment": "",
+            "type": "Picture",
+            "isReadonly": true,
+            "isTransient": true,
+            "nodeType": "art",
+            "url": "https://az31353.vo.msecnd.net/pub/xcvokzjq",
+            "id": "TCXi2RWl94QJd4uZ7C7wNvaJ"
+          },
+          {
+            "name": "flower",
+            "comment": "",
+            "type": "Picture",
+            "isReadonly": true,
+            "isTransient": true,
+            "nodeType": "art",
+            "url": "https://az31353.vo.msecnd.net/pub/wmwommmz",
+            "id": "RUmlTgaAYhgubyaPZVL0A2cu"
+          },
+          {
+            "name": "gift",
+            "comment": "",
+            "type": "Picture",
+            "isReadonly": true,
+            "isTransient": true,
+            "nodeType": "art",
+            "url": "https://az31353.vo.msecnd.net/pub/uqwzqquj",
+            "id": "KJb4Aiica4vo4DY2mHYTM67T"
+          },
+          {
+            "name": "medal",
+            "comment": "",
+            "type": "Picture",
+            "isReadonly": true,
+            "isTransient": true,
+            "nodeType": "art",
+            "url": "https://az31353.vo.msecnd.net/pub/lhngjmws",
+            "id": "ql52rUF2EFWk8MhmQF8AcLgF"
+          },
+          {
+            "name": "plane",
+            "comment": "",
+            "type": "Picture",
+            "isReadonly": true,
+            "isTransient": true,
+            "nodeType": "art",
+            "url": "https://az31353.vo.msecnd.net/pub/qyhenxey",
+            "id": "xPCOnp4G4i2I52Fi3x474YI0"
+          },
+          {
+            "name": "ribbon",
+            "comment": "",
+            "type": "Picture",
+            "isReadonly": true,
+            "isTransient": true,
+            "nodeType": "art",
+            "url": "https://az31353.vo.msecnd.net/pub/exsxppyc",
+            "id": "H1eSHiKF40iLuM9xlEEPNzb6"
+          },
+          {
+            "name": "spider",
+            "comment": "",
+            "type": "Picture",
+            "isReadonly": true,
+            "isTransient": true,
+            "nodeType": "art",
+            "url": "https://az31353.vo.msecnd.net/pub/sajhnpls",
+            "id": "L4RKyztFfBddZYHW4UgBq6lg"
+          },
+          {
+            "name": "tools",
+            "comment": "",
+            "type": "Picture",
+            "isReadonly": true,
+            "isTransient": true,
+            "nodeType": "art",
+            "url": "https://az31353.vo.msecnd.net/pub/aykowdlv",
+            "id": "L22Nfkihk6mkUmMEvnZnumYa"
+          },
+          {
+            "name": "trophy",
+            "comment": "",
+            "type": "Picture",
+            "isReadonly": true,
+            "isTransient": true,
+            "nodeType": "art",
+            "url": "https://az31353.vo.msecnd.net/pub/frqeiryz",
+            "id": "Lv4BEgCfQ4peQeSjs5DARmWt"
+          },
+          {
+            "name": "back",
+            "comment": "",
+            "type": "Sprite",
+            "isReadonly": false,
+            "isTransient": true,
+            "nodeType": "data",
+            "id": "jezfEEtbMbjJFnOKwSPoUX82"
+          },
+          {
+            "name": "tap sprite: back",
+            "inParameters": [
+              {
+                "name": "sprite",
+                "type": "Sprite",
+                "nodeType": "localDef",
+                "id": "xB2guCPFY2OYcun2TGfQYVvkP0"
+              },
+              {
+                "name": "x",
+                "type": "Number",
+                "nodeType": "localDef",
+                "id": "xB2guCPFY2OYcun2TGfQYVvkP1"
+              },
+              {
+                "name": "y",
+                "type": "Number",
+                "nodeType": "localDef",
+                "id": "xB2guCPFY2OYcun2TGfQYVvkP2"
+              }
+            ],
+            "outParameters": [],
+            "isPrivate": false,
+            "isOffloaded": false,
+            "isTest": false,
+            "isAsync": true,
+            "nodeType": "event",
+            "eventName": "tap sprite: ",
+            "eventVariableId": "jezfEEtbMbjJFnOKwSPoUX82",
+            "body": [
+              {
+                "text": "A back button to switch from the instructions board to the scratchy board",
+                "nodeType": "comment",
+                "id": "L4Fqx1Wd2HrAcZG2526yJFfN"
+              },
+              {
+                "expr": ":wall .clear",
+                "nodeType": "exprStmt",
+                "id": "T1wvJN9AtLIPRPXNNKhPcdmE",
+                "locals": []
+              },
+              {
+                "expr": ":data #f6LgrThJHNCTAy0SiG4PHbqV .post_to_wall",
+                "nodeType": "exprStmt",
+                "id": "iFAHe3pY3DL4ZuvGR24CQPZq",
+                "locals": []
+              }
+            ],
+            "id": "xB2guCPFY2OYcun2TGfQYVvk"
+          },
+          {
+            "name": "symbolPrizes",
+            "comment": "List of prize values per symbol\n",
+            "type": "Number Collection",
+            "isReadonly": false,
+            "isTransient": false,
+            "nodeType": "data",
+            "id": "fTT2spJSt2rWgFw5bKjKxz44"
+          },
+          {
+            "name": "calculatePrize",
+            "inParameters": [],
+            "outParameters": [
+              {
+                "name": "winAmount",
+                "type": "Number",
+                "nodeType": "localDef",
+                "id": "xlEg5PDUl7UlVBIW5SMH2RFRP0"
+              }
+            ],
+            "isPrivate": true,
+            "isOffloaded": false,
+            "isTest": false,
+            "isAsync": false,
+            "nodeType": "action",
+            "body": [
+              {
+                "text": "Incomplete functionality. Used to calculate the win amount in dollars of the current ticket. Reliance on another incomplete feature is partly the reason it is incomplete.",
+                "nodeType": "comment",
+                "id": "TlsmrZAL9ve2NKrDkbtJlqKq"
+              },
+              {
+                "text": "Where there are 3 or more of any given symbol on the scratch panel, count them towards the win total by multiplying their quantity by monetary value by ticket value.",
+                "nodeType": "comment",
+                "id": "xDUgab2bWmnOQCBp1GWp3U5q"
+              },
+              {
+                "expr": "$xlEg5PDUl7UlVBIW5SMH2RFRP0 ,:= ,0",
+                "nodeType": "exprStmt",
+                "id": "KTQsCC482Q6oDfSfu7hbFljS",
+                "locals": []
+              },
+              {
+                "collection": ":data #y2ZV233eOC1CXspGIyWLRlSO",
+                "conditions": [
+                  {
+                    "condition": ":data #y2ZV233eOC1CXspGIyWLRlSO .at ,( $Y4ngsIdvE5MaIyYUdCEYNXNNB0 ,) ,≥ ,3",
+                    "nodeType": "where",
+                    "id": "CpqaoY9a0rYivXUsDvGFtn2Z",
+                    "locals": []
+                  }
+                ],
+                "body": [
+                  {
+                    "expr": "$xlEg5PDUl7UlVBIW5SMH2RFRP0 ,:= $xlEg5PDUl7UlVBIW5SMH2RFRP0 ,+ :data #y2ZV233eOC1CXspGIyWLRlSO .at ,( $Y4ngsIdvE5MaIyYUdCEYNXNNB0 ,) ,* :data #fTT2spJSt2rWgFw5bKjKxz44 .at ,( $Y4ngsIdvE5MaIyYUdCEYNXNNB0 ,) ,* :data #fBBHAok4gW3A8sET2dTo3Ua0",
+                    "nodeType": "exprStmt",
+                    "id": "tPxn428JL2RyLbAweJFDPM8r",
+                    "locals": []
+                  }
+                ],
+                "nodeType": "foreach",
+                "id": "Y4ngsIdvE5MaIyYUdCEYNXNN",
+                "locals": [
+                  {
+                    "name": "x",
+                    "type": "Number",
+                    "nodeType": "localDef",
+                    "id": "Y4ngsIdvE5MaIyYUdCEYNXNNB0"
+                  }
+                ]
+              }
+            ],
+            "id": "xlEg5PDUl7UlVBIW5SMH2RFR"
+          },
+          {
+            "name": "totalWin",
+            "comment": "",
+            "type": "Number",
+            "isReadonly": false,
+            "isTransient": false,
+            "nodeType": "data",
+            "id": "u2eMiVh6HzxbGdZaWExv01Yf"
+          },
+          {
+            "name": "menuBoard",
+            "comment": "",
+            "type": "Board",
+            "isReadonly": false,
+            "isTransient": true,
+            "nodeType": "data",
+            "id": "x0C8ajC7p4mCFORVtHoyaK6l"
+          },
+          {
+            "name": "drawInstructionsSymbols",
+            "inParameters": [],
+            "outParameters": [],
+            "isPrivate": true,
+            "isOffloaded": false,
+            "isTest": false,
+            "isAsync": false,
+            "nodeType": "action",
+            "body": [
+              {
+                "text": "This unnecessarily long action is used by createInstructionsPanel to place the symbol art and their values in appropriate positions between the description and example.",
+                "nodeType": "comment",
+                "id": "N2JJwdHFHNSar8iP9WHBg1Fm"
+              },
+              {
+                "expr": "$xbi6iCqmKS4bLApWjgyKxaEIL0 ,:= :data #xYNo1IPbn2pIohYdGnoJ2F3x .create_picture ,( :art #RUmlTgaAYhgubyaPZVL0A2cu ,)",
+                "nodeType": "exprStmt",
+                "id": "xbi6iCqmKS4bLApWjgyKxaEI",
+                "locals": [
+                  {
+                    "name": "flower",
+                    "type": "Sprite",
+                    "nodeType": "localDef",
+                    "id": "xbi6iCqmKS4bLApWjgyKxaEIL0"
+                  }
+                ]
+              },
+              {
+                "expr": "$xbi6iCqmKS4bLApWjgyKxaEIL0 .set_height ,( ,4 ,5 ,)",
+                "nodeType": "exprStmt",
+                "id": "xaZZy4xp2EP0hizVHcH9iCWV",
+                "locals": []
+              },
+              {
+                "expr": "$xbi6iCqmKS4bLApWjgyKxaEIL0 .set_pos ,( :data #xYNo1IPbn2pIohYdGnoJ2F3x .width ,/ ,5 ,, :data #xYNo1IPbn2pIohYdGnoJ2F3x .height ,/ ,3 ,)",
+                "nodeType": "exprStmt",
+                "id": "ox4KHmVUvRzGhK5BzKF7bquo",
+                "locals": []
+              },
+              {
+                "expr": "$m0A7OEJonpY5F2CNJR15rEoML0 ,:= :data #xYNo1IPbn2pIohYdGnoJ2F3x .create_text ,( ,1 ,0 ,0 ,, ,2 ,0 ,, ,1 ,0 ,, '20c ,)",
+                "nodeType": "exprStmt",
+                "id": "m0A7OEJonpY5F2CNJR15rEoM",
+                "locals": [
+                  {
+                    "name": "flowerValue",
+                    "type": "Sprite",
+                    "nodeType": "localDef",
+                    "id": "m0A7OEJonpY5F2CNJR15rEoML0"
+                  }
+                ]
+              },
+              {
+                "expr": "$m0A7OEJonpY5F2CNJR15rEoML0 .set_pos ,( $xbi6iCqmKS4bLApWjgyKxaEIL0 .x ,+ ,4 ,5 ,, $xbi6iCqmKS4bLApWjgyKxaEIL0 .y ,)",
+                "nodeType": "exprStmt",
+                "id": "UBopX3rlKXQ72GrlcnPyFXUy",
+                "locals": []
+              },
+              {
+                "expr": "$m0A7OEJonpY5F2CNJR15rEoML0 .set_color ,( :colors .black ,)",
+                "nodeType": "exprStmt",
+                "id": "K4T4SYd3Tgo6iarI1zGjqxnK",
+                "locals": []
+              },
+              {
+                "expr": "$Tp6E1n3pNMF5NvPQKube4OCxL0 ,:= :data #xYNo1IPbn2pIohYdGnoJ2F3x .create_picture ,( :art #xVLCuPBi38VRSOCVWW2XUglH ,)",
+                "nodeType": "exprStmt",
+                "id": "Tp6E1n3pNMF5NvPQKube4OCx",
+                "locals": [
+                  {
+                    "name": "chilli",
+                    "type": "Sprite",
+                    "nodeType": "localDef",
+                    "id": "Tp6E1n3pNMF5NvPQKube4OCxL0"
+                  }
+                ]
+              },
+              {
+                "expr": "$Tp6E1n3pNMF5NvPQKube4OCxL0 .set_height ,( ,4 ,5 ,)",
+                "nodeType": "exprStmt",
+                "id": "gprAdbjWu4xw4PG24tX4cyx8",
+                "locals": []
+              },
+              {
+                "expr": "$Tp6E1n3pNMF5NvPQKube4OCxL0 .set_pos ,( :data #xYNo1IPbn2pIohYdGnoJ2F3x .width ,/ ,5 ,, :data #xYNo1IPbn2pIohYdGnoJ2F3x .height ,/ ,3 ,+ ,4 ,5 ,)",
+                "nodeType": "exprStmt",
+                "id": "NLRVDDQ3E5jUWn96ipsmb9IO",
+                "locals": []
+              },
+              {
+                "expr": "$AD94qkMXLDM9qhBBDa29jyPaL0 ,:= :data #xYNo1IPbn2pIohYdGnoJ2F3x .create_text ,( ,1 ,0 ,0 ,, ,2 ,0 ,, ,1 ,0 ,, '25c ,)",
+                "nodeType": "exprStmt",
+                "id": "AD94qkMXLDM9qhBBDa29jyPa",
+                "locals": [
+                  {
+                    "name": "chilliValue",
+                    "type": "Sprite",
+                    "nodeType": "localDef",
+                    "id": "AD94qkMXLDM9qhBBDa29jyPaL0"
+                  }
+                ]
+              },
+              {
+                "expr": "$AD94qkMXLDM9qhBBDa29jyPaL0 .set_pos ,( $Tp6E1n3pNMF5NvPQKube4OCxL0 .x ,+ ,4 ,5 ,, $Tp6E1n3pNMF5NvPQKube4OCxL0 .y ,)",
+                "nodeType": "exprStmt",
+                "id": "e2eF2xoMaZRU324QOCxovG4t",
+                "locals": []
+              },
+              {
+                "expr": "$AD94qkMXLDM9qhBBDa29jyPaL0 .set_color ,( :colors .black ,)",
+                "nodeType": "exprStmt",
+                "id": "HJ2r44UcRCpn0Wo2IE4f2v3R",
+                "locals": []
+              },
+              {
+                "expr": "$c01AnyclxF5JffKE3M43cj9YL0 ,:= :data #xYNo1IPbn2pIohYdGnoJ2F3x .create_picture ,( :art #L4RKyztFfBddZYHW4UgBq6lg ,)",
+                "nodeType": "exprStmt",
+                "id": "c01AnyclxF5JffKE3M43cj9Y",
+                "locals": [
+                  {
+                    "name": "spider",
+                    "type": "Sprite",
+                    "nodeType": "localDef",
+                    "id": "c01AnyclxF5JffKE3M43cj9YL0"
+                  }
+                ]
+              },
+              {
+                "expr": "$c01AnyclxF5JffKE3M43cj9YL0 .set_height ,( ,4 ,5 ,)",
+                "nodeType": "exprStmt",
+                "id": "XZ2Vulz2BhFMnioXjkRuzy4y",
+                "locals": []
+              },
+              {
+                "expr": "$c01AnyclxF5JffKE3M43cj9YL0 .set_pos ,( :data #xYNo1IPbn2pIohYdGnoJ2F3x .width ,/ ,5 ,, :data #xYNo1IPbn2pIohYdGnoJ2F3x .height ,/ ,3 ,+ ,9 ,0 ,)",
+                "nodeType": "exprStmt",
+                "id": "IqE1bRMPFayC4f3mFQHOkQdC",
+                "locals": []
+              },
+              {
+                "expr": "$zyrHECalYIZRerj8YO5mLoItL0 ,:= :data #xYNo1IPbn2pIohYdGnoJ2F3x .create_text ,( ,1 ,0 ,0 ,, ,2 ,0 ,, ,1 ,0 ,, '35c ,)",
+                "nodeType": "exprStmt",
+                "id": "zyrHECalYIZRerj8YO5mLoIt",
+                "locals": [
+                  {
+                    "name": "spiderValue",
+                    "type": "Sprite",
+                    "nodeType": "localDef",
+                    "id": "zyrHECalYIZRerj8YO5mLoItL0"
+                  }
+                ]
+              },
+              {
+                "expr": "$zyrHECalYIZRerj8YO5mLoItL0 .set_pos ,( $c01AnyclxF5JffKE3M43cj9YL0 .x ,+ ,4 ,5 ,, $c01AnyclxF5JffKE3M43cj9YL0 .y ,)",
+                "nodeType": "exprStmt",
+                "id": "xjwd9XwvvvFc9o6KkGJoh3p7",
+                "locals": []
+              },
+              {
+                "expr": "$zyrHECalYIZRerj8YO5mLoItL0 .set_color ,( :colors .black ,)",
+                "nodeType": "exprStmt",
+                "id": "lDwbL2F4eFDSpP2v55agfzjY",
+                "locals": []
+              },
+              {
+                "expr": "$xrh26eqS8RoW499f9NzPrpqlL0 ,:= :data #xYNo1IPbn2pIohYdGnoJ2F3x .create_picture ,( :art #EwvdwOBEs5YY0gwaFlvbytMH ,)",
+                "nodeType": "exprStmt",
+                "id": "xrh26eqS8RoW499f9NzPrpql",
+                "locals": [
+                  {
+                    "name": "bus",
+                    "type": "Sprite",
+                    "nodeType": "localDef",
+                    "id": "xrh26eqS8RoW499f9NzPrpqlL0"
+                  }
+                ]
+              },
+              {
+                "expr": "$xrh26eqS8RoW499f9NzPrpqlL0 .set_height ,( ,4 ,5 ,)",
+                "nodeType": "exprStmt",
+                "id": "gSU74MiZNyfZtphqLTCSsude",
+                "locals": []
+              },
+              {
+                "expr": "$xrh26eqS8RoW499f9NzPrpqlL0 .set_pos ,( :data #xYNo1IPbn2pIohYdGnoJ2F3x .width ,/ ,5 ,, :data #xYNo1IPbn2pIohYdGnoJ2F3x .height ,/ ,3 ,+ ,1 ,3 ,5 ,)",
+                "nodeType": "exprStmt",
+                "id": "PyI2sqhANd0sU042pbxpqzQY",
+                "locals": []
+              },
+              {
+                "expr": "$UDA3xpx6hruw0ue2X7MCbJtFL0 ,:= :data #xYNo1IPbn2pIohYdGnoJ2F3x .create_text ,( ,1 ,0 ,0 ,, ,2 ,0 ,, ,1 ,0 ,, '50c ,)",
+                "nodeType": "exprStmt",
+                "id": "UDA3xpx6hruw0ue2X7MCbJtF",
+                "locals": [
+                  {
+                    "name": "busValue",
+                    "type": "Sprite",
+                    "nodeType": "localDef",
+                    "id": "UDA3xpx6hruw0ue2X7MCbJtFL0"
+                  }
+                ]
+              },
+              {
+                "expr": "$UDA3xpx6hruw0ue2X7MCbJtFL0 .set_pos ,( $xrh26eqS8RoW499f9NzPrpqlL0 .x ,+ ,4 ,5 ,, $xrh26eqS8RoW499f9NzPrpqlL0 .y ,)",
+                "nodeType": "exprStmt",
+                "id": "p4kjW1lvD3Y9qCsM7497MKlX",
+                "locals": []
+              },
+              {
+                "expr": "$UDA3xpx6hruw0ue2X7MCbJtFL0 .set_color ,( :colors .black ,)",
+                "nodeType": "exprStmt",
+                "id": "jhQ5IOhRCsTAhwQUx18xJyTQ",
+                "locals": []
+              },
+              {
+                "expr": "$fOHMaOhbgYmisSAbNyH69ARDL0 ,:= :data #xYNo1IPbn2pIohYdGnoJ2F3x .create_picture ,( :art #BTP4Pd3ZaqyFSxZQWdPsPuni ,)",
+                "nodeType": "exprStmt",
+                "id": "fOHMaOhbgYmisSAbNyH69ARD",
+                "locals": [
+                  {
+                    "name": "boat",
+                    "type": "Sprite",
+                    "nodeType": "localDef",
+                    "id": "fOHMaOhbgYmisSAbNyH69ARDL0"
+                  }
+                ]
+              },
+              {
+                "expr": "$fOHMaOhbgYmisSAbNyH69ARDL0 .set_height ,( ,4 ,5 ,)",
+                "nodeType": "exprStmt",
+                "id": "RbhrIKWm1iKRIIK2x4qeC4Dw",
+                "locals": []
+              },
+              {
+                "expr": "$fOHMaOhbgYmisSAbNyH69ARDL0 .set_pos ,( :data #xYNo1IPbn2pIohYdGnoJ2F3x .width ,/ ,5 ,, :data #xYNo1IPbn2pIohYdGnoJ2F3x .height ,/ ,3 ,+ ,1 ,8 ,0 ,)",
+                "nodeType": "exprStmt",
+                "id": "BVqzvAXzZfctod5XpdbC20tW",
+                "locals": []
+              },
+              {
+                "expr": "$OJIsosiwjD3iscT2bpfg675OL0 ,:= :data #xYNo1IPbn2pIohYdGnoJ2F3x .create_text ,( ,1 ,0 ,0 ,, ,2 ,0 ,, ,1 ,0 ,, '75c ,)",
+                "nodeType": "exprStmt",
+                "id": "OJIsosiwjD3iscT2bpfg675O",
+                "locals": [
+                  {
+                    "name": "boatValue",
+                    "type": "Sprite",
+                    "nodeType": "localDef",
+                    "id": "OJIsosiwjD3iscT2bpfg675OL0"
+                  }
+                ]
+              },
+              {
+                "expr": "$OJIsosiwjD3iscT2bpfg675OL0 .set_pos ,( $fOHMaOhbgYmisSAbNyH69ARDL0 .x ,+ ,4 ,5 ,, $fOHMaOhbgYmisSAbNyH69ARDL0 .y ,)",
+                "nodeType": "exprStmt",
+                "id": "eDGW6jGVGzQkTjsm3p3V2fq2",
+                "locals": []
+              },
+              {
+                "expr": "$OJIsosiwjD3iscT2bpfg675OL0 .set_color ,( :colors .black ,)",
+                "nodeType": "exprStmt",
+                "id": "xs1Rzn1CCLGO1mWMypfR9RcN",
+                "locals": []
+              },
+              {
+                "expr": "$IFNm4qcD6yNRxM7QWf6YpNyIL0 ,:= :data #xYNo1IPbn2pIohYdGnoJ2F3x .create_picture ,( :art #xPCOnp4G4i2I52Fi3x474YI0 ,)",
+                "nodeType": "exprStmt",
+                "id": "IFNm4qcD6yNRxM7QWf6YpNyI",
+                "locals": [
+                  {
+                    "name": "plane",
+                    "type": "Sprite",
+                    "nodeType": "localDef",
+                    "id": "IFNm4qcD6yNRxM7QWf6YpNyIL0"
+                  }
+                ]
+              },
+              {
+                "expr": "$IFNm4qcD6yNRxM7QWf6YpNyIL0 .set_height ,( ,4 ,5 ,)",
+                "nodeType": "exprStmt",
+                "id": "DjtjTZG52sOZ050FLuV4inkX",
+                "locals": []
+              },
+              {
+                "expr": "$IFNm4qcD6yNRxM7QWf6YpNyIL0 .set_pos ,( :data #xYNo1IPbn2pIohYdGnoJ2F3x .width ,/ ,5 ,, :data #xYNo1IPbn2pIohYdGnoJ2F3x .height ,/ ,3 ,+ ,2 ,2 ,5 ,)",
+                "nodeType": "exprStmt",
+                "id": "aCbaZSyuvFFrXBRzMhB3MQuC",
+                "locals": []
+              },
+              {
+                "expr": "$IcA0WGSK5Gv2o8bg8HUocXHML0 ,:= :data #xYNo1IPbn2pIohYdGnoJ2F3x .create_text ,( ,1 ,0 ,0 ,, ,2 ,0 ,, ,1 ,0 ,, '/00241 ,)",
+                "nodeType": "exprStmt",
+                "id": "IcA0WGSK5Gv2o8bg8HUocXHM",
+                "locals": [
+                  {
+                    "name": "planeValue",
+                    "type": "Sprite",
+                    "nodeType": "localDef",
+                    "id": "IcA0WGSK5Gv2o8bg8HUocXHML0"
+                  }
+                ]
+              },
+              {
+                "expr": "$IcA0WGSK5Gv2o8bg8HUocXHML0 .set_pos ,( $IFNm4qcD6yNRxM7QWf6YpNyIL0 .x ,+ ,4 ,5 ,, $IFNm4qcD6yNRxM7QWf6YpNyIL0 .y ,)",
+                "nodeType": "exprStmt",
+                "id": "MgGMZeFRI83Dl2GMAT3tjLcL",
+                "locals": []
+              },
+              {
+                "expr": "$IcA0WGSK5Gv2o8bg8HUocXHML0 .set_color ,( :colors .black ,)",
+                "nodeType": "exprStmt",
+                "id": "Iu2IpiUm485VScAaNBbI3lyf",
+                "locals": []
+              },
+              {
+                "expr": "$kgCoY2Y6xZ88tOriPIoJeAvcL0 ,:= :data #xYNo1IPbn2pIohYdGnoJ2F3x .create_picture ,( :art #TCXi2RWl94QJd4uZ7C7wNvaJ ,)",
+                "nodeType": "exprStmt",
+                "id": "kgCoY2Y6xZ88tOriPIoJeAvc",
+                "locals": [
+                  {
+                    "name": "compass",
+                    "type": "Sprite",
+                    "nodeType": "localDef",
+                    "id": "kgCoY2Y6xZ88tOriPIoJeAvcL0"
+                  }
+                ]
+              },
+              {
+                "expr": "$kgCoY2Y6xZ88tOriPIoJeAvcL0 .set_height ,( ,4 ,5 ,)",
+                "nodeType": "exprStmt",
+                "id": "VJ6U881VY2tRgpQVgR2xfpsy",
+                "locals": []
+              },
+              {
+                "expr": "$kgCoY2Y6xZ88tOriPIoJeAvcL0 .set_pos ,( :data #xYNo1IPbn2pIohYdGnoJ2F3x .width ,/ ,5 ,* ,3 ,, :data #xYNo1IPbn2pIohYdGnoJ2F3x .height ,/ ,3 ,)",
+                "nodeType": "exprStmt",
+                "id": "oHyxMd9Hk9P1IjbPw14ZS3gn",
+                "locals": []
+              },
+              {
+                "expr": "$EYzlETjGGsoTnuv5ntGDexx2L0 ,:= :data #xYNo1IPbn2pIohYdGnoJ2F3x .create_text ,( ,1 ,0 ,0 ,, ,2 ,0 ,, ,1 ,0 ,, 'scrub22 ,)",
+                "nodeType": "exprStmt",
+                "id": "EYzlETjGGsoTnuv5ntGDexx2",
+                "locals": [
+                  {
+                    "name": "compassValue",
+                    "type": "Sprite",
+                    "nodeType": "localDef",
+                    "id": "EYzlETjGGsoTnuv5ntGDexx2L0"
+                  }
+                ]
+              },
+              {
+                "expr": "$EYzlETjGGsoTnuv5ntGDexx2L0 .set_pos ,( $kgCoY2Y6xZ88tOriPIoJeAvcL0 .x ,+ ,4 ,5 ,, $kgCoY2Y6xZ88tOriPIoJeAvcL0 .y ,)",
+                "nodeType": "exprStmt",
+                "id": "P69R0dz2rBOLog7JCAvM20LU",
+                "locals": []
+              },
+              {
+                "expr": "$EYzlETjGGsoTnuv5ntGDexx2L0 .set_color ,( :colors .black ,)",
+                "nodeType": "exprStmt",
+                "id": "nHBZqTOkts65bpLtWamGE4Jh",
+                "locals": []
+              },
+              {
+                "expr": "$gUvGB1gCCf24sKxNJhmD40xCL0 ,:= :data #xYNo1IPbn2pIohYdGnoJ2F3x .create_picture ,( :art #L22Nfkihk6mkUmMEvnZnumYa ,)",
+                "nodeType": "exprStmt",
+                "id": "gUvGB1gCCf24sKxNJhmD40xC",
+                "locals": [
+                  {
+                    "name": "tools",
+                    "type": "Sprite",
+                    "nodeType": "localDef",
+                    "id": "gUvGB1gCCf24sKxNJhmD40xCL0"
+                  }
+                ]
+              },
+              {
+                "expr": "$gUvGB1gCCf24sKxNJhmD40xCL0 .set_height ,( ,4 ,5 ,)",
+                "nodeType": "exprStmt",
+                "id": "xV2s6cckt2Ar3VeuFQivNX0x",
+                "locals": []
+              },
+              {
+                "expr": "$gUvGB1gCCf24sKxNJhmD40xCL0 .set_pos ,( :data #xYNo1IPbn2pIohYdGnoJ2F3x .width ,/ ,5 ,* ,3 ,, :data #xYNo1IPbn2pIohYdGnoJ2F3x .height ,/ ,3 ,+ ,4 ,5 ,)",
+                "nodeType": "exprStmt",
+                "id": "zioec425pds4HZ1s22TrrUoE",
+                "locals": []
+              },
+              {
+                "expr": "$cpnOxGsgD3ZEZj4FAW0o69LCL0 ,:= :data #xYNo1IPbn2pIohYdGnoJ2F3x .create_text ,( ,1 ,0 ,0 ,, ,2 ,0 ,, ,1 ,0 ,, 'scrub23 ,)",
+                "nodeType": "exprStmt",
+                "id": "cpnOxGsgD3ZEZj4FAW0o69LC",
+                "locals": [
+                  {
+                    "name": "toolsValue",
+                    "type": "Sprite",
+                    "nodeType": "localDef",
+                    "id": "cpnOxGsgD3ZEZj4FAW0o69LCL0"
+                  }
+                ]
+              },
+              {
+                "expr": "$cpnOxGsgD3ZEZj4FAW0o69LCL0 .set_pos ,( $gUvGB1gCCf24sKxNJhmD40xCL0 .x ,+ ,4 ,5 ,, $gUvGB1gCCf24sKxNJhmD40xCL0 .y ,)",
+                "nodeType": "exprStmt",
+                "id": "iQUuz4aAwfKOdPPhhWjwa4SV",
+                "locals": []
+              },
+              {
+                "expr": "$cpnOxGsgD3ZEZj4FAW0o69LCL0 .set_color ,( :colors .black ,)",
+                "nodeType": "exprStmt",
+                "id": "yqD11tK3n3Zww8qfyfyAzr2I",
+                "locals": []
+              },
+              {
+                "expr": "$vMZ4hm1HA8aSGhxKv1kGNpeGL0 ,:= :data #xYNo1IPbn2pIohYdGnoJ2F3x .create_picture ,( :art #H1eSHiKF40iLuM9xlEEPNzb6 ,)",
+                "nodeType": "exprStmt",
+                "id": "vMZ4hm1HA8aSGhxKv1kGNpeG",
+                "locals": [
+                  {
+                    "name": "ribbon",
+                    "type": "Sprite",
+                    "nodeType": "localDef",
+                    "id": "vMZ4hm1HA8aSGhxKv1kGNpeGL0"
+                  }
+                ]
+              },
+              {
+                "expr": "$vMZ4hm1HA8aSGhxKv1kGNpeGL0 .set_height ,( ,4 ,5 ,)",
+                "nodeType": "exprStmt",
+                "id": "xR2EToUkoXiepYasQ5TncbQY",
+                "locals": []
+              },
+              {
+                "expr": "$vMZ4hm1HA8aSGhxKv1kGNpeGL0 .set_pos ,( :data #xYNo1IPbn2pIohYdGnoJ2F3x .width ,/ ,5 ,* ,3 ,, :data #xYNo1IPbn2pIohYdGnoJ2F3x .height ,/ ,3 ,+ ,9 ,0 ,)",
+                "nodeType": "exprStmt",
+                "id": "dCGsaxum5x93I6U2GfmlCa6v",
+                "locals": []
+              },
+              {
+                "expr": "$s3dGmcVBcwCNdoOpwP93K25UL0 ,:= :data #xYNo1IPbn2pIohYdGnoJ2F3x .create_text ,( ,1 ,0 ,0 ,, ,2 ,0 ,, ,1 ,0 ,, 'scrub24 ,)",
+                "nodeType": "exprStmt",
+                "id": "s3dGmcVBcwCNdoOpwP93K25U",
+                "locals": [
+                  {
+                    "name": "ribbonValue",
+                    "type": "Sprite",
+                    "nodeType": "localDef",
+                    "id": "s3dGmcVBcwCNdoOpwP93K25UL0"
+                  }
+                ]
+              },
+              {
+                "expr": "$s3dGmcVBcwCNdoOpwP93K25UL0 .set_pos ,( $vMZ4hm1HA8aSGhxKv1kGNpeGL0 .x ,+ ,4 ,5 ,, $vMZ4hm1HA8aSGhxKv1kGNpeGL0 .y ,)",
+                "nodeType": "exprStmt",
+                "id": "b9mka8ynMzrKd9idezeA4Tkp",
+                "locals": []
+              },
+              {
+                "expr": "$s3dGmcVBcwCNdoOpwP93K25UL0 .set_color ,( :colors .black ,)",
+                "nodeType": "exprStmt",
+                "id": "xvU1hPhADLGfnaUcVvfat8kj",
+                "locals": []
+              },
+              {
+                "expr": "$srL2GQHu53Ismbr0siBCBJaeL0 ,:= :data #xYNo1IPbn2pIohYdGnoJ2F3x .create_picture ,( :art #KJb4Aiica4vo4DY2mHYTM67T ,)",
+                "nodeType": "exprStmt",
+                "id": "srL2GQHu53Ismbr0siBCBJae",
+                "locals": [
+                  {
+                    "name": "gift",
+                    "type": "Sprite",
+                    "nodeType": "localDef",
+                    "id": "srL2GQHu53Ismbr0siBCBJaeL0"
+                  }
+                ]
+              },
+              {
+                "expr": "$srL2GQHu53Ismbr0siBCBJaeL0 .set_height ,( ,4 ,5 ,)",
+                "nodeType": "exprStmt",
+                "id": "deFk0axCkYjf5f6PD2daDeDP",
+                "locals": []
+              },
+              {
+                "expr": "$srL2GQHu53Ismbr0siBCBJaeL0 .set_pos ,( :data #xYNo1IPbn2pIohYdGnoJ2F3x .width ,/ ,5 ,* ,3 ,, :data #xYNo1IPbn2pIohYdGnoJ2F3x .height ,/ ,3 ,+ ,1 ,3 ,5 ,)",
+                "nodeType": "exprStmt",
+                "id": "Ood2vRzuZy51XlVOQOQHWLkM",
+                "locals": []
+              },
+              {
+                "expr": "$xtqH4tLNgR4a4SWXBpNo1vxYL0 ,:= :data #xYNo1IPbn2pIohYdGnoJ2F3x .create_text ,( ,1 ,0 ,0 ,, ,2 ,0 ,, ,1 ,0 ,, '/00243 ,)",
+                "nodeType": "exprStmt",
+                "id": "xtqH4tLNgR4a4SWXBpNo1vxY",
+                "locals": [
+                  {
+                    "name": "giftValue",
+                    "type": "Sprite",
+                    "nodeType": "localDef",
+                    "id": "xtqH4tLNgR4a4SWXBpNo1vxYL0"
+                  }
+                ]
+              },
+              {
+                "expr": "$xtqH4tLNgR4a4SWXBpNo1vxYL0 .set_pos ,( $srL2GQHu53Ismbr0siBCBJaeL0 .x ,+ ,4 ,5 ,, $srL2GQHu53Ismbr0siBCBJaeL0 .y ,)",
+                "nodeType": "exprStmt",
+                "id": "qTX3y7UHK8NcLbq2xqTJsbmR",
+                "locals": []
+              },
+              {
+                "expr": "$xtqH4tLNgR4a4SWXBpNo1vxYL0 .set_color ,( :colors .black ,)",
+                "nodeType": "exprStmt",
+                "id": "WVn91RxcoL8mvxemU38OsEP7",
+                "locals": []
+              },
+              {
+                "expr": "$aibxewoTT9oLST8gLA2KUpbaL0 ,:= :data #xYNo1IPbn2pIohYdGnoJ2F3x .create_picture ,( :art #ql52rUF2EFWk8MhmQF8AcLgF ,)",
+                "nodeType": "exprStmt",
+                "id": "aibxewoTT9oLST8gLA2KUpba",
+                "locals": [
+                  {
+                    "name": "medal",
+                    "type": "Sprite",
+                    "nodeType": "localDef",
+                    "id": "aibxewoTT9oLST8gLA2KUpbaL0"
+                  }
+                ]
+              },
+              {
+                "expr": "$aibxewoTT9oLST8gLA2KUpbaL0 .set_height ,( ,4 ,5 ,)",
+                "nodeType": "exprStmt",
+                "id": "GcjBatB5aXEGvOh4i5tngZh4",
+                "locals": []
+              },
+              {
+                "expr": "$aibxewoTT9oLST8gLA2KUpbaL0 .set_pos ,( :data #xYNo1IPbn2pIohYdGnoJ2F3x .width ,/ ,5 ,* ,3 ,, :data #xYNo1IPbn2pIohYdGnoJ2F3x .height ,/ ,3 ,+ ,1 ,8 ,0 ,)",
+                "nodeType": "exprStmt",
+                "id": "ad4Zw0WYBXtlfquurw2DWDhY",
+                "locals": []
+              },
+              {
+                "expr": "$yKtw9Byz96C9M1pcXSSEHSZUL0 ,:= :data #xYNo1IPbn2pIohYdGnoJ2F3x .create_text ,( ,1 ,0 ,0 ,, ,2 ,0 ,, ,1 ,0 ,, '/00245 ,)",
+                "nodeType": "exprStmt",
+                "id": "yKtw9Byz96C9M1pcXSSEHSZU",
+                "locals": [
+                  {
+                    "name": "medalValue",
+                    "type": "Sprite",
+                    "nodeType": "localDef",
+                    "id": "yKtw9Byz96C9M1pcXSSEHSZUL0"
+                  }
+                ]
+              },
+              {
+                "expr": "$yKtw9Byz96C9M1pcXSSEHSZUL0 .set_pos ,( $aibxewoTT9oLST8gLA2KUpbaL0 .x ,+ ,4 ,5 ,, $aibxewoTT9oLST8gLA2KUpbaL0 .y ,)",
+                "nodeType": "exprStmt",
+                "id": "x8VWmhufRIp6px2Hqf5GAHUw",
+                "locals": []
+              },
+              {
+                "expr": "$yKtw9Byz96C9M1pcXSSEHSZUL0 .set_color ,( :colors .black ,)",
+                "nodeType": "exprStmt",
+                "id": "pG3tUyqHTLmAx923fldEK0rf",
+                "locals": []
+              },
+              {
+                "expr": "$fob2xrgHn9PtToWvk25LI7AdL0 ,:= :data #xYNo1IPbn2pIohYdGnoJ2F3x .create_picture ,( :art #Lv4BEgCfQ4peQeSjs5DARmWt ,)",
+                "nodeType": "exprStmt",
+                "id": "fob2xrgHn9PtToWvk25LI7Ad",
+                "locals": [
+                  {
+                    "name": "trophy",
+                    "type": "Sprite",
+                    "nodeType": "localDef",
+                    "id": "fob2xrgHn9PtToWvk25LI7AdL0"
+                  }
+                ]
+              },
+              {
+                "expr": "$fob2xrgHn9PtToWvk25LI7AdL0 .set_height ,( ,4 ,5 ,)",
+                "nodeType": "exprStmt",
+                "id": "iBm0eivxdDKTnz5eMgrPMWLY",
+                "locals": []
+              },
+              {
+                "expr": "$fob2xrgHn9PtToWvk25LI7AdL0 .set_pos ,( :data #xYNo1IPbn2pIohYdGnoJ2F3x .width ,/ ,5 ,* ,3 ,, :data #xYNo1IPbn2pIohYdGnoJ2F3x .height ,/ ,3 ,+ ,2 ,2 ,5 ,)",
+                "nodeType": "exprStmt",
+                "id": "yGKwUbcwKF3zhSlzQ058aqTO",
+                "locals": []
+              },
+              {
+                "expr": "$LzDGWDSIMDiBpI2rcIlcwdimL0 ,:= :data #xYNo1IPbn2pIohYdGnoJ2F3x .create_text ,( ,1 ,0 ,0 ,, ,2 ,0 ,, ,1 ,0 ,, '/002410 ,)",
+                "nodeType": "exprStmt",
+                "id": "LzDGWDSIMDiBpI2rcIlcwdim",
+                "locals": [
+                  {
+                    "name": "trophyValue",
+                    "type": "Sprite",
+                    "nodeType": "localDef",
+                    "id": "LzDGWDSIMDiBpI2rcIlcwdimL0"
+                  }
+                ]
+              },
+              {
+                "expr": "$LzDGWDSIMDiBpI2rcIlcwdimL0 .set_pos ,( $fob2xrgHn9PtToWvk25LI7AdL0 .x ,+ ,4 ,5 ,, $fob2xrgHn9PtToWvk25LI7AdL0 .y ,)",
+                "nodeType": "exprStmt",
+                "id": "aLhuncRR8fcaeZ65OmACztzp",
+                "locals": []
+              },
+              {
+                "expr": "$LzDGWDSIMDiBpI2rcIlcwdimL0 .set_color ,( :colors .black ,)",
+                "nodeType": "exprStmt",
+                "id": "YKjS0KplWJxLEgmS0p4gYzcK",
+                "locals": []
+              }
+            ],
+            "id": "KmsOp1rtPN82X24jDaM8dMfL"
+          },
+          {
+            "name": "initialise",
+            "inParameters": [],
+            "outParameters": [],
+            "isPrivate": true,
+            "isOffloaded": false,
+            "isTest": false,
+            "isAsync": false,
+            "nodeType": "action",
+            "body": [
+              {
+                "text": "This action sets up the three game boards, and all the collections that are used.",
+                "nodeType": "comment",
+                "id": "zPjcc4B34xIDGcL5YR2raQb9"
+              },
+              {
+                "expr": ":data #f6LgrThJHNCTAy0SiG4PHbqV ,:= :media .create_portrait_board ,( ,4 ,8 ,0 ,, ,8 ,0 ,0 ,)",
+                "nodeType": "exprStmt",
+                "id": "ltCPmH7jD4ih9GW2XPfDGg2t",
+                "locals": []
+              },
+              {
+                "expr": ":data #x0C8ajC7p4mCFORVtHoyaK6l ,:= :media .create_portrait_board ,( ,4 ,8 ,0 ,, ,8 ,0 ,0 ,)",
+                "nodeType": "exprStmt",
+                "id": "r5VdiLWlpui90yRN3kvnhJon",
+                "locals": []
+              },
+              {
+                "expr": ":data #xYNo1IPbn2pIohYdGnoJ2F3x ,:= :media .create_portrait_board ,( ,4 ,8 ,0 ,, ,8 ,0 ,0 ,)",
+                "nodeType": "exprStmt",
+                "id": "xZWGQSYitYD15hci1wft9u24",
+                "locals": []
+              },
+              {
+                "expr": ":data #n2yAk96iwd7y2lOT5xnhDv37 ,:= :data #f6LgrThJHNCTAy0SiG4PHbqV .create_sprite_set",
+                "nodeType": "exprStmt",
+                "id": "xdwAs1Sctb4833qEr8N1SPlI",
+                "locals": []
+              },
+              {
+                "expr": ":data #KUOOBaUIojYvlYgHMynoTBWm ,:= :data #xYNo1IPbn2pIohYdGnoJ2F3x .create_sprite_set",
+                "nodeType": "exprStmt",
+                "id": "WdrcmsmE16klKfi21lwS8iYK",
+                "locals": []
+              },
+              {
+                "expr": ":data #y2ZV233eOC1CXspGIyWLRlSO ,:= :collections .create_number_collection",
+                "nodeType": "exprStmt",
+                "id": "QUeGbmPqU4RGDy6GAvlBYHC2",
+                "locals": []
+              },
+              {
+                "expr": ":data #fTT2spJSt2rWgFw5bKjKxz44 ,:= :collections .create_number_collection",
+                "nodeType": "exprStmt",
+                "id": "MHppeDnr5gaJNwmO4bRFsZC8",
+                "locals": []
+              },
+              {
+                "expr": ":data #LzQLmOu1fHmynvM4w0Srw9Fe ,:= :collections .create_string_collection",
+                "nodeType": "exprStmt",
+                "id": "OKIt2Eow3xYkpHqkUVJ4Gwer",
+                "locals": []
+              },
+              {
+                "text": "Add ticket prices $1-$5 for different ticket values",
+                "nodeType": "comment",
+                "id": "QS2bMkz6p8huZavBXtpKE7TK"
+              },
+              {
+                "expr": ":data #LzQLmOu1fHmynvM4w0Srw9Fe .add ,( '/00241 ,)",
+                "nodeType": "exprStmt",
+                "id": "IkLqta1Kz3ERz4KUeRYE6vuB",
+                "locals": []
+              },
+              {
+                "expr": ":data #LzQLmOu1fHmynvM4w0Srw9Fe .add ,( '/00242 ,)",
+                "nodeType": "exprStmt",
+                "id": "XA61yVDIcjboY4TJ6O2zUQJ2",
+                "locals": []
+              },
+              {
+                "expr": ":data #LzQLmOu1fHmynvM4w0Srw9Fe .add ,( '/00243 ,)",
+                "nodeType": "exprStmt",
+                "id": "hUgs5LxqTaxyd7XnRgVCWwUT",
+                "locals": []
+              },
+              {
+                "expr": ":data #LzQLmOu1fHmynvM4w0Srw9Fe .add ,( '/00244 ,)",
+                "nodeType": "exprStmt",
+                "id": "xQHKVlKtU0qyd6H6FstyoQ44",
+                "locals": []
+              },
+              {
+                "expr": ":data #LzQLmOu1fHmynvM4w0Srw9Fe .add ,( '/00245 ,)",
+                "nodeType": "exprStmt",
+                "id": "AbPRYUipLLHKtLCEBRC7m075",
+                "locals": []
+              },
+              {
+                "text": "Starting balance for the game",
+                "nodeType": "comment",
+                "id": "gC0G0UMOnIXGdAqBgQwsdeJP"
+              },
+              {
+                "expr": ":data #yoJbrWoFjvxW82HLe4CCBCBj ,:= ,1 ,0",
+                "nodeType": "exprStmt",
+                "id": "r4WtSCQ7hgK3MAWznPleRLjo",
+                "locals": []
+              }
+            ],
+            "id": "MKRCSWsgeRDDXkXwN7W4h662"
+          },
+          {
+            "name": "ticketValue",
+            "comment": "",
+            "type": "Number",
+            "isReadonly": false,
+            "isTransient": false,
+            "nodeType": "data",
+            "id": "eUedF4E3JXbn21c7KXTvxIEG"
+          },
+          {
+            "name": "thisPrize",
+            "comment": "Current ticket prize value\n",
+            "type": "Number",
+            "isReadonly": false,
+            "isTransient": false,
+            "nodeType": "data",
+            "id": "oESAjoFNZQj94ONrNS98rgCi"
+          }
+        ],
+        "deletedDecls": [],
+        "nodeType": "app",
+        "id": "app"
+      }
+    },
+    {
+      "seqNo": 1,
+      "time": 1370544996,
+      "scriptId": null,
+      "historyId": "25203175580383164461d926989-62ef-442d-8a64-734291ececa4",
+      "updateSize": 45,
+      "updates": {
+        "app": {
+          "rootId": "qN8obFXECWjy4unmgUEwYV9b"
+        }
+      }
+    }
+  ]
+}

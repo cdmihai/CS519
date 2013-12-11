@@ -1,0 +1,550 @@
+{
+  "userid": "pboj",
+  "guid": "42fa71d0-922c-447a-916c-4afc98da8569",
+  "lastStatus": "published",
+  "items": [
+    {
+      "seqNo": 0,
+      "time": 1342466088,
+      "scriptId": "frks",
+      "historyId": "2520598347111992463d9bf29a6-252b-4b3b-95e9-cab9db738cd3",
+      "updateSize": 9648,
+      "ast": {
+        "textVersion": "v2.2,js,ctx",
+        "jsonVersion": "v1.0,resolved,short",
+        "name": "songs and pictures",
+        "comment": "Playing with the media library of your phone",
+        "icon": "VideoCam",
+        "color": "#ffff2800",
+        "autoIcon": "VideoCam",
+        "autoColor": "#ff2800",
+        "platform": "current",
+        "rootId": "rEr6cFLh1STKzI4R9KwzO39p",
+        "showAd": false,
+        "isLibrary": false,
+        "allowExport": false,
+        "hasUniqueIds": false,
+        "decls": [
+          {
+            "name": "find short songs",
+            "inParameters": [],
+            "outParameters": [],
+            "isPrivate": false,
+            "isOffloaded": false,
+            "isTest": false,
+            "isAsync": false,
+            "nodeType": "action",
+            "body": [
+              {
+                "collection": ":media .songs",
+                "conditions": [
+                  {
+                    "condition": "T",
+                    "nodeType": "where",
+                    "id": "oxVHBgouPp8rpW9USuK7JyB6",
+                    "locals": []
+                  }
+                ],
+                "body": [
+                  {
+                    "nodeType": "if",
+                    "condition": "$hmBc82c8WSPHKH44IGGnIYT6B0 .duration ,< ,1 ,8 ,0",
+                    "thenBody": [
+                      {
+                        "expr": "$hmBc82c8WSPHKH44IGGnIYT6B0 .post_to_wall",
+                        "nodeType": "exprStmt",
+                        "id": "xQ3PC50OK32qXc4xh7eSXmrT",
+                        "locals": []
+                      }
+                    ],
+                    "isElseIf": false,
+                    "id": "w8VmwoEkYwo260wyh1JkDWlS",
+                    "locals": []
+                  }
+                ],
+                "nodeType": "foreach",
+                "id": "hmBc82c8WSPHKH44IGGnIYT6",
+                "locals": [
+                  {
+                    "name": "song",
+                    "type": "Song",
+                    "nodeType": "localDef",
+                    "id": "hmBc82c8WSPHKH44IGGnIYT6B0"
+                  }
+                ]
+              }
+            ],
+            "id": "xnnIP4VnvxugLcidCYq0ty20"
+          },
+          {
+            "name": "radio tuner",
+            "inParameters": [],
+            "outParameters": [],
+            "isPrivate": false,
+            "isOffloaded": false,
+            "isTest": false,
+            "isAsync": false,
+            "nodeType": "action",
+            "body": [
+              {
+                "text": "Tilt your phone to tune radio station frequency up or down",
+                "nodeType": "comment",
+                "id": "ny6KD07eLcattPyO4WhguFon"
+              },
+              {
+                "expr": ":wall .prompt ,( 'Connect_headphones/002e_They_serve_as_antenna/002e_Tilt_phone_left_to_tune_down/002c_right_to_tune_up/002e ,)",
+                "nodeType": "exprStmt",
+                "id": "lIS3OoiWJlBCG1PxvXCNcEJB",
+                "locals": []
+              },
+              {
+                "expr": ":radio .set_frequency ,( ,9 ,8 ,. ,3 ,)",
+                "nodeType": "exprStmt",
+                "id": "PwVBXDWzHb9mgMnZBChxh4GH",
+                "locals": []
+              },
+              {
+                "expr": "$efDkO2mCXdP4hgWiPP0zFaT8L0 ,:= :radio .frequency",
+                "nodeType": "exprStmt",
+                "id": "efDkO2mCXdP4hgWiPP0zFaT8",
+                "locals": [
+                  {
+                    "name": "f",
+                    "type": "Number",
+                    "nodeType": "localDef",
+                    "id": "efDkO2mCXdP4hgWiPP0zFaT8L0"
+                  }
+                ]
+              },
+              {
+                "expr": ":radio .set_frequency ,( $efDkO2mCXdP4hgWiPP0zFaT8L0 ,)",
+                "nodeType": "exprStmt",
+                "id": "e9VoCFYpnu2LUuqIov8Qtfd8",
+                "locals": []
+              },
+              {
+                "condition": "T",
+                "body": [
+                  {
+                    "expr": "$mEr6D51kei9KqxQ8ZO4LqW2oL0 ,:= :senses .acceleration_smooth",
+                    "nodeType": "exprStmt",
+                    "id": "mEr6D51kei9KqxQ8ZO4LqW2o",
+                    "locals": [
+                      {
+                        "name": "p",
+                        "type": "Vector3",
+                        "nodeType": "localDef",
+                        "id": "mEr6D51kei9KqxQ8ZO4LqW2oL0"
+                      }
+                    ]
+                  },
+                  {
+                    "nodeType": "if",
+                    "condition": "$mEr6D51kei9KqxQ8ZO4LqW2oL0 .x ,> ,0 ,. ,5 ,and $efDkO2mCXdP4hgWiPP0zFaT8L0 ,< ,1 ,0 ,8",
+                    "thenBody": [
+                      {
+                        "expr": "$efDkO2mCXdP4hgWiPP0zFaT8L0 ,:= $efDkO2mCXdP4hgWiPP0zFaT8L0 ,+ ,0 ,. ,2",
+                        "nodeType": "exprStmt",
+                        "id": "DLjoMvGq2Xy2zG21JEHjTXZN",
+                        "locals": []
+                      },
+                      {
+                        "expr": ":radio .set_frequency ,( $efDkO2mCXdP4hgWiPP0zFaT8L0 ,)",
+                        "nodeType": "exprStmt",
+                        "id": "xxwxHWIb5Uxvh0gMyUPSKn2x",
+                        "locals": []
+                      },
+                      {
+                        "expr": ":radio .frequency .post_to_wall",
+                        "nodeType": "exprStmt",
+                        "id": "x7yqqI46OJh18WXQhgSsLZf4",
+                        "locals": []
+                      },
+                      {
+                        "expr": ":time .sleep ,( ,0 ,. ,5 ,)",
+                        "nodeType": "exprStmt",
+                        "id": "x2bdGaiURdhTIlHXsQmLVz4K",
+                        "locals": []
+                      }
+                    ],
+                    "isElseIf": false,
+                    "id": "p93B33vGgj4Yz1XMrV02TGON",
+                    "locals": []
+                  },
+                  {
+                    "nodeType": "if",
+                    "condition": "$mEr6D51kei9KqxQ8ZO4LqW2oL0 .x ,< ,- ,0 ,. ,5 ,and $efDkO2mCXdP4hgWiPP0zFaT8L0 ,> ,8 ,7 ,. ,5",
+                    "thenBody": [
+                      {
+                        "expr": "$efDkO2mCXdP4hgWiPP0zFaT8L0 ,:= $efDkO2mCXdP4hgWiPP0zFaT8L0 ,- ,0 ,. ,2",
+                        "nodeType": "exprStmt",
+                        "id": "bEA260Tyar493FbS85bEO0qZ",
+                        "locals": []
+                      },
+                      {
+                        "expr": ":radio .set_frequency ,( $efDkO2mCXdP4hgWiPP0zFaT8L0 ,)",
+                        "nodeType": "exprStmt",
+                        "id": "XReeQdSpFsHGAOCr4pu6Uv2K",
+                        "locals": []
+                      },
+                      {
+                        "expr": ":radio .frequency .post_to_wall",
+                        "nodeType": "exprStmt",
+                        "id": "xT34f3ft0fbqmBqWkXcZI0VN",
+                        "locals": []
+                      },
+                      {
+                        "expr": ":time .sleep ,( ,0 ,. ,5 ,)",
+                        "nodeType": "exprStmt",
+                        "id": "SpsZ2oWX1sKaMb2cvtAU4WfI",
+                        "locals": []
+                      }
+                    ],
+                    "isElseIf": false,
+                    "id": "IciHNsDhePDlrPkhA2ota515",
+                    "locals": []
+                  }
+                ],
+                "nodeType": "while",
+                "id": "xEAOs6GTGxoVQ9EBEwfgy2De",
+                "locals": []
+              }
+            ],
+            "id": "Tg4q5dp4fUC96y62w0Idg6vR"
+          },
+          {
+            "name": "radio scanner",
+            "inParameters": [],
+            "outParameters": [],
+            "isPrivate": false,
+            "isOffloaded": false,
+            "isTest": false,
+            "isAsync": false,
+            "nodeType": "action",
+            "body": [
+              {
+                "text": "Scans all frequencies to find radio stations with enough signal strength",
+                "nodeType": "comment",
+                "id": "xM91Mt6FY0hmebBzJ7FEnqDc"
+              },
+              {
+                "expr": ":wall .prompt ,( 'Connect_headphones/002e_They_serve_as_antenna/002e ,)",
+                "nodeType": "exprStmt",
+                "id": "V8VeraZD4WGfGsf3haPyio3G",
+                "locals": []
+              },
+              {
+                "expr": "'Scanning_for_stations/002e/002e/002e .post_to_wall",
+                "nodeType": "exprStmt",
+                "id": "bR4N3XJBOhlS4z9jgg13pTZ5",
+                "locals": []
+              },
+              {
+                "expr": "$xdBdePu3AjBm1ZlYt4y3qBRPL0 ,:= ,8 ,7 ,. ,9",
+                "nodeType": "exprStmt",
+                "id": "xdBdePu3AjBm1ZlYt4y3qBRP",
+                "locals": [
+                  {
+                    "name": "f",
+                    "type": "Number",
+                    "nodeType": "localDef",
+                    "id": "xdBdePu3AjBm1ZlYt4y3qBRPL0"
+                  }
+                ]
+              },
+              {
+                "condition": "$xdBdePu3AjBm1ZlYt4y3qBRPL0 ,< ,1 ,0 ,7 ,. ,9",
+                "body": [
+                  {
+                    "expr": ":radio .set_frequency ,( $xdBdePu3AjBm1ZlYt4y3qBRPL0 ,)",
+                    "nodeType": "exprStmt",
+                    "id": "xJb26n4gk0IvHK9JzlPfO2nR",
+                    "locals": []
+                  },
+                  {
+                    "expr": ":time .sleep ,( ,0 ,. ,2 ,5 ,)",
+                    "nodeType": "exprStmt",
+                    "id": "wh06jI6SRR4rfn5A5ayD0jjg",
+                    "locals": []
+                  },
+                  {
+                    "expr": "$TILyYDDQ3d9yUVoBA0qjfooGL0 ,:= :radio .signal_strength",
+                    "nodeType": "exprStmt",
+                    "id": "TILyYDDQ3d9yUVoBA0qjfooG",
+                    "locals": [
+                      {
+                        "name": "strength",
+                        "type": "Number",
+                        "nodeType": "localDef",
+                        "id": "TILyYDDQ3d9yUVoBA0qjfooGL0"
+                      }
+                    ]
+                  },
+                  {
+                    "nodeType": "if",
+                    "condition": "$TILyYDDQ3d9yUVoBA0qjfooGL0 ,> ,0 ,. ,3 ,5",
+                    "thenBody": [
+                      {
+                        "expr": "$mzdI4OIiy26QP5ULmzDzXPlLL0 ,:= :code #ttkEXOA7dZ907Pjl2WWptlBF ,( :radio .frequency ,)",
+                        "nodeType": "exprStmt",
+                        "id": "mzdI4OIiy26QP5ULmzDzXPlL",
+                        "locals": [
+                          {
+                            "name": "s",
+                            "type": "String",
+                            "nodeType": "localDef",
+                            "id": "mzdI4OIiy26QP5ULmzDzXPlLL0"
+                          }
+                        ]
+                      },
+                      {
+                        "expr": ":radio .link_frequency ,( $mzdI4OIiy26QP5ULmzDzXPlLL0 ,, :radio .frequency ,) .post_to_wall",
+                        "nodeType": "exprStmt",
+                        "id": "Q5t6uLJseMvjFDIECWJjYGcW",
+                        "locals": []
+                      }
+                    ],
+                    "isElseIf": false,
+                    "id": "AfW4vP2miTFuHbkxi2NFha8j",
+                    "locals": []
+                  },
+                  {
+                    "expr": "$xdBdePu3AjBm1ZlYt4y3qBRPL0 ,:= $xdBdePu3AjBm1ZlYt4y3qBRPL0 ,+ ,0 ,. ,2",
+                    "nodeType": "exprStmt",
+                    "id": "I78VwhvSB5rzFiJQfF4ZIcTg",
+                    "locals": []
+                  }
+                ],
+                "nodeType": "while",
+                "id": "Ce4BJTcak3mFM9QZz54TnJxV",
+                "locals": []
+              },
+              {
+                "expr": ":radio .stop",
+                "nodeType": "exprStmt",
+                "id": "xLYDvCvoLGk322IwCmBvHgC4",
+                "locals": []
+              }
+            ],
+            "id": "uzUAe2y464WqUrted4Gbh58E"
+          },
+          {
+            "name": "station info",
+            "inParameters": [
+              {
+                "name": "freq",
+                "type": "Number",
+                "nodeType": "localDef",
+                "id": "thZdI2ayuWy4VN5NZ6krpUjqP0"
+              }
+            ],
+            "outParameters": [
+              {
+                "name": "result",
+                "type": "Json Object",
+                "nodeType": "localDef",
+                "id": "thZdI2ayuWy4VN5NZ6krpUjqP1"
+              }
+            ],
+            "isPrivate": true,
+            "isOffloaded": false,
+            "isTest": false,
+            "isAsync": false,
+            "nodeType": "action",
+            "body": [
+              {
+                "text": "Uses a web service (yes.com) to find information about radio station at a given frequency",
+                "nodeType": "comment",
+                "id": "iRZri23YcE6d1GuAU5RIsoNI"
+              },
+              {
+                "expr": "$RtQN5muKZtuXJwX5pAor0b6QL0 ,:= :senses .current_location",
+                "nodeType": "exprStmt",
+                "id": "RtQN5muKZtuXJwX5pAor0b6Q",
+                "locals": [
+                  {
+                    "name": "loc",
+                    "type": "Location",
+                    "nodeType": "localDef",
+                    "id": "RtQN5muKZtuXJwX5pAor0b6QL0"
+                  }
+                ]
+              },
+              {
+                "text": "need to use our location to narrow down which stations are relevant",
+                "nodeType": "comment",
+                "id": "ETkshCjkKsqr4zRSf5BKbvwY"
+              },
+              {
+                "expr": "$ML8yRXAM49ehY3PFliyY7WUfL0 ,:= :web .download ,( 'HTTP/003a/002f/002fapi/002eyes/002ecom/002f1/002fstations/003ffreq/003d .concat ,( $thZdI2ayuWy4VN5NZ6krpUjqP0 ,∥ ' ,) .concat ,( '/0026loc/003d ,) .concat ,( $RtQN5muKZtuXJwX5pAor0b6QL0 .latitude ,∥ ' ,) .concat ,( '/002c ,) .concat ,( $RtQN5muKZtuXJwX5pAor0b6QL0 .longitude ,∥ ' ,) ,)",
+                "nodeType": "exprStmt",
+                "id": "ML8yRXAM49ehY3PFliyY7WUf",
+                "locals": [
+                  {
+                    "name": "call",
+                    "type": "String",
+                    "nodeType": "localDef",
+                    "id": "ML8yRXAM49ehY3PFliyY7WUfL0"
+                  }
+                ]
+              },
+              {
+                "expr": "$thZdI2ayuWy4VN5NZ6krpUjqP1 ,:= :web .json ,( $ML8yRXAM49ehY3PFliyY7WUfL0 ,)",
+                "nodeType": "exprStmt",
+                "id": "x7LYZaIRc1QiuqhKlc1DL76r",
+                "locals": []
+              }
+            ],
+            "id": "thZdI2ayuWy4VN5NZ6krpUjq"
+          },
+          {
+            "name": "station name",
+            "inParameters": [
+              {
+                "name": "freq",
+                "type": "Number",
+                "nodeType": "localDef",
+                "id": "ttkEXOA7dZ907Pjl2WWptlBFP0"
+              }
+            ],
+            "outParameters": [
+              {
+                "name": "result",
+                "type": "String",
+                "nodeType": "localDef",
+                "id": "ttkEXOA7dZ907Pjl2WWptlBFP1"
+              }
+            ],
+            "isPrivate": true,
+            "isOffloaded": false,
+            "isTest": false,
+            "isAsync": false,
+            "nodeType": "action",
+            "body": [
+              {
+                "text": "Returns the first station name among all stations found for this frequency",
+                "nodeType": "comment",
+                "id": "xe9zoAneEDeAuGCo2JH7OiOF"
+              },
+              {
+                "expr": "$x3Fo5S1O42GBFu6Anlza9LRmL0 ,:= :code #thZdI2ayuWy4VN5NZ6krpUjq ,( $ttkEXOA7dZ907Pjl2WWptlBFP0 ,)",
+                "nodeType": "exprStmt",
+                "id": "x3Fo5S1O42GBFu6Anlza9LRm",
+                "locals": [
+                  {
+                    "name": "rv",
+                    "type": "Json Object",
+                    "nodeType": "localDef",
+                    "id": "x3Fo5S1O42GBFu6Anlza9LRmL0"
+                  }
+                ]
+              },
+              {
+                "expr": "$iN3RP2hnzMVkJXjv4r7sVu7QL0 ,:= $x3Fo5S1O42GBFu6Anlza9LRmL0 .field ,( 'stations ,)",
+                "nodeType": "exprStmt",
+                "id": "iN3RP2hnzMVkJXjv4r7sVu7Q",
+                "locals": [
+                  {
+                    "name": "stations",
+                    "type": "Json Object",
+                    "nodeType": "localDef",
+                    "id": "iN3RP2hnzMVkJXjv4r7sVu7QL0"
+                  }
+                ]
+              },
+              {
+                "expr": "$ttkEXOA7dZ907Pjl2WWptlBFP1 ,:= 'Station",
+                "nodeType": "exprStmt",
+                "id": "TWaltXxoA4L6KllHkeLzFpk4",
+                "locals": []
+              },
+              {
+                "collection": "$iN3RP2hnzMVkJXjv4r7sVu7QL0",
+                "conditions": [
+                  {
+                    "condition": "T",
+                    "nodeType": "where",
+                    "id": "a81Ln9imBBMc9h8srKbHJGBq",
+                    "locals": []
+                  }
+                ],
+                "body": [
+                  {
+                    "expr": "$ttkEXOA7dZ907Pjl2WWptlBFP1 ,:= $xlYv2DULODlM8pmbc2f0AvBcB0 .string ,( 'name ,)",
+                    "nodeType": "exprStmt",
+                    "id": "vHDiz2kql3Nur4leeTHrLYJW",
+                    "locals": []
+                  }
+                ],
+                "nodeType": "foreach",
+                "id": "xlYv2DULODlM8pmbc2f0AvBc",
+                "locals": [
+                  {
+                    "name": "json1",
+                    "type": "Json Object",
+                    "nodeType": "localDef",
+                    "id": "xlYv2DULODlM8pmbc2f0AvBcB0"
+                  }
+                ]
+              }
+            ],
+            "id": "ttkEXOA7dZ907Pjl2WWptlBF"
+          },
+          {
+            "name": "search marketplace",
+            "inParameters": [
+              {
+                "name": "terms",
+                "type": "String",
+                "nodeType": "localDef",
+                "id": "jAxWSYGcA2Ku3bE1paGlrK8GP0"
+              }
+            ],
+            "outParameters": [],
+            "isPrivate": false,
+            "isOffloaded": false,
+            "isTest": false,
+            "isAsync": false,
+            "nodeType": "action",
+            "body": [
+              {
+                "expr": ":media .search_marketplace ,( $jAxWSYGcA2Ku3bE1paGlrK8GP0 ,, 'music ,)",
+                "nodeType": "exprStmt",
+                "id": "vLb4O4NZ2DlEvxFiCc0ugWTe",
+                "locals": []
+              }
+            ],
+            "id": "jAxWSYGcA2Ku3bE1paGlrK8G"
+          }
+        ],
+        "deletedDecls": [],
+        "nodeType": "app",
+        "id": "app"
+      }
+    },
+    {
+      "seqNo": 1,
+      "time": 1346281478,
+      "scriptId": "frks",
+      "historyId": "252056019321946276167e4bf6f-ab09-46d4-90c0-eb096e352210",
+      "updateSize": 45,
+      "updates": {
+        "app": {
+          "rootId": "HKPC3zjVYO62tqqWV4a3kyzX"
+        }
+      }
+    },
+    {
+      "seqNo": 2,
+      "time": 1351360690,
+      "scriptId": "frks",
+      "historyId": "2520509401097430987ef002752-80a5-4416-aada-1990726551f6",
+      "updateSize": 45,
+      "updates": {
+        "app": {
+          "rootId": "rEr6cFLh1STKzI4R9KwzO39p"
+        }
+      }
+    }
+  ]
+}

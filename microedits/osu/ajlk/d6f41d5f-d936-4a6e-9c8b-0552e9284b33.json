@@ -1,0 +1,202 @@
+{
+  "userid": "ajlk",
+  "guid": "d6f41d5f-d936-4a6e-9c8b-0552e9284b33",
+  "lastStatus": "published",
+  "items": [
+    {
+      "seqNo": 0,
+      "time": 1350496167,
+      "scriptId": "xfcs",
+      "historyId": "25205180463255908703a31f6f5-cc72-48df-b66e-f81e1157b27a",
+      "updateSize": 3907,
+      "ast": {
+        "textVersion": "v2.2,js,ctx",
+        "jsonVersion": "v1.0,resolved,short",
+        "name": "meeting-o-meter",
+        "comment": "Count the number of hours spent in meetings since last month.",
+        "icon": "piechart",
+        "color": "#ff008080",
+        "autoIcon": "piechart",
+        "autoColor": "#008080",
+        "platform": "current",
+        "rootId": "u8QbkduUqLc2NukmmxySDX6h",
+        "showAd": false,
+        "isLibrary": false,
+        "allowExport": false,
+        "hasUniqueIds": false,
+        "decls": [
+          {
+            "name": "main",
+            "inParameters": [],
+            "outParameters": [],
+            "isPrivate": false,
+            "isOffloaded": false,
+            "isTest": false,
+            "isAsync": false,
+            "nodeType": "action",
+            "body": [
+              {
+                "text": "Counts the number of hours in meetings since the last month...",
+                "nodeType": "comment",
+                "id": "OzYYReNR24KUXvj4v44eXShZ"
+              },
+              {
+                "expr": "$xQN3i5wgxhQ17pb4nJfc9bE7L0 ,:= :time .now .add_months ,( ,- ,1 ,)",
+                "nodeType": "exprStmt",
+                "id": "xQN3i5wgxhQ17pb4nJfc9bE7",
+                "locals": [
+                  {
+                    "name": "start",
+                    "type": "DateTime",
+                    "nodeType": "localDef",
+                    "id": "xQN3i5wgxhQ17pb4nJfc9bE7L0"
+                  }
+                ]
+              },
+              {
+                "expr": "$bBpPqOyyC9SSoUr3cXT84KXkL0 ,:= :time .today",
+                "nodeType": "exprStmt",
+                "id": "bBpPqOyyC9SSoUr3cXT84KXk",
+                "locals": [
+                  {
+                    "name": "end",
+                    "type": "DateTime",
+                    "nodeType": "localDef",
+                    "id": "bBpPqOyyC9SSoUr3cXT84KXkL0"
+                  }
+                ]
+              },
+              {
+                "expr": ",( 'Counting_meeting_hours_from_ ,∥ $xQN3i5wgxhQ17pb4nJfc9bE7L0 ,) .post_to_wall",
+                "nodeType": "exprStmt",
+                "id": "q9zyCeMcgTpSlDG22B5OFKvL",
+                "locals": []
+              },
+              {
+                "expr": "$pnmABrcvGd9MZh1tiQYp5rbnL0 ,:= :social .search_appointments ,( $xQN3i5wgxhQ17pb4nJfc9bE7L0 ,, $bBpPqOyyC9SSoUr3cXT84KXkL0 ,)",
+                "nodeType": "exprStmt",
+                "id": "pnmABrcvGd9MZh1tiQYp5rbn",
+                "locals": [
+                  {
+                    "name": "aps",
+                    "type": "Appointment Collection",
+                    "nodeType": "localDef",
+                    "id": "pnmABrcvGd9MZh1tiQYp5rbnL0"
+                  }
+                ]
+              },
+              {
+                "expr": "$x1TVWvAunA4EIDBNi2wxApDRL0 ,:= ,0",
+                "nodeType": "exprStmt",
+                "id": "x1TVWvAunA4EIDBNi2wxApDR",
+                "locals": [
+                  {
+                    "name": "hours",
+                    "type": "Number",
+                    "nodeType": "localDef",
+                    "id": "x1TVWvAunA4EIDBNi2wxApDRL0"
+                  }
+                ]
+              },
+              {
+                "text": "Accumulating time, excluding all day and and private events.",
+                "nodeType": "comment",
+                "id": "C4xTbJyb2q5Bmonbkrde2qRM"
+              },
+              {
+                "collection": "$pnmABrcvGd9MZh1tiQYp5rbnL0",
+                "conditions": [
+                  {
+                    "condition": ",not $HfxiqRklwpVjtmnkVrpjikxrB0 .is_private",
+                    "nodeType": "where",
+                    "id": "jDcb3Agn67v42wvDLFnNhVbw",
+                    "locals": []
+                  },
+                  {
+                    "condition": ",not $HfxiqRklwpVjtmnkVrpjikxrB0 .is_all_day_event",
+                    "nodeType": "where",
+                    "id": "R693KSfGpfpJlFoK32zSr8bz",
+                    "locals": []
+                  },
+                  {
+                    "condition": "$HfxiqRklwpVjtmnkVrpjikxrB0 .status .equals ,( 'busy ,)",
+                    "nodeType": "where",
+                    "id": "xtKYJ72e5tQoXz6dyk48ycY4",
+                    "locals": []
+                  }
+                ],
+                "body": [
+                  {
+                    "expr": "$x1TVWvAunA4EIDBNi2wxApDRL0 ,:= $x1TVWvAunA4EIDBNi2wxApDRL0 ,+ $HfxiqRklwpVjtmnkVrpjikxrB0 .end_time .subtract ,( $HfxiqRklwpVjtmnkVrpjikxrB0 .start_time ,) ,/ ,3 ,6 ,0 ,0",
+                    "nodeType": "exprStmt",
+                    "id": "rxQzPOhwBOqIgIqCR0jG8zqA",
+                    "locals": []
+                  }
+                ],
+                "nodeType": "foreach",
+                "id": "HfxiqRklwpVjtmnkVrpjikxr",
+                "locals": [
+                  {
+                    "name": "a",
+                    "type": "Appointment",
+                    "nodeType": "localDef",
+                    "id": "HfxiqRklwpVjtmnkVrpjikxrB0"
+                  }
+                ]
+              },
+              {
+                "text": "Create a big textbox...",
+                "nodeType": "comment",
+                "id": "oe9htsF8GpZ2BCfDKzbZEV0m"
+              },
+              {
+                "expr": "$f15sEAsGWPh8sD29Cz9Q6RQpL0 ,:= 'Last_month/002c_you_spent_ ,∥ :math .round ,( $x1TVWvAunA4EIDBNi2wxApDRL0 ,) ,∥ '_hours_in_meetings/0021",
+                "nodeType": "exprStmt",
+                "id": "f15sEAsGWPh8sD29Cz9Q6RQp",
+                "locals": [
+                  {
+                    "name": "msg",
+                    "type": "String",
+                    "nodeType": "localDef",
+                    "id": "f15sEAsGWPh8sD29Cz9Q6RQpL0"
+                  }
+                ]
+              },
+              {
+                "expr": ":wall .create_text_box ,( $f15sEAsGWPh8sD29Cz9Q6RQpL0 ,, ,3 ,6 ,) .post_to_wall",
+                "nodeType": "exprStmt",
+                "id": "xpe9Zj3CUocZbC2vyLJ1L5Jo",
+                "locals": []
+              },
+              {
+                "nodeType": "if",
+                "condition": ":wall .ask_boolean ,( 'Do_you_want_to_save_your_score_in_the_leaderboards/003f ,, 'Your_number_of_meeting_hours_will_be_visible_to_others_in_the_leaderboard/002e ,)",
+                "thenBody": [
+                  {
+                    "expr": ":bazaar .post_leaderboard_score ,( $x1TVWvAunA4EIDBNi2wxApDRL0 ,)",
+                    "nodeType": "exprStmt",
+                    "id": "xtUfqiWnYksTFHl8glmQ8Gfz",
+                    "locals": []
+                  },
+                  {
+                    "expr": ":bazaar .post_leaderboard_to_wall",
+                    "nodeType": "exprStmt",
+                    "id": "xFB85zRfuircD9PpvvxAJTH2",
+                    "locals": []
+                  }
+                ],
+                "isElseIf": false,
+                "id": "rMOAZPCuo2amTm3euBufMur7",
+                "locals": []
+              }
+            ],
+            "id": "ynCzPC55PA5etJzi0hKlGHTw"
+          }
+        ],
+        "deletedDecls": [],
+        "nodeType": "app",
+        "id": "app"
+      }
+    }
+  ]
+}

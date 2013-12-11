@@ -1,0 +1,246 @@
+{
+  "userid": "pboj",
+  "guid": "be8242a2-e108-40d2-9a07-793f21fae7cd",
+  "lastStatus": "published",
+  "items": [
+    {
+      "seqNo": 0,
+      "time": 1342466090,
+      "scriptId": "pjih",
+      "historyId": "2520598347092820135b78e5c02-ffb1-4a34-a67e-3bae2d663c10",
+      "updateSize": 4401,
+      "ast": {
+        "textVersion": "v2.2,js,ctx",
+        "jsonVersion": "v1.0,resolved,short",
+        "name": "meet now",
+        "comment": "Finds the active online meeting and joins it through the Lync app.",
+        "icon": "bullseye",
+        "color": "#ffeedc82",
+        "autoIcon": "bullseye",
+        "autoColor": "#eedc82",
+        "platform": "current",
+        "rootId": "j4K8IrEZDp1LsT0Jnd4ng34S",
+        "showAd": false,
+        "isLibrary": false,
+        "allowExport": false,
+        "hasUniqueIds": false,
+        "decls": [
+          {
+            "name": "main",
+            "inParameters": [],
+            "outParameters": [],
+            "isPrivate": false,
+            "isOffloaded": false,
+            "isTest": false,
+            "isAsync": false,
+            "nodeType": "action",
+            "body": [
+              {
+                "text": "Finds the online meeting that is on right now and joins it. Requires Lync installed.",
+                "nodeType": "comment",
+                "id": "gpq3hn154GWF9cdtw0basWs5"
+              },
+              {
+                "expr": "$xm0fRp4lqDA1o8p4M9pURUrBL0 ,:= 'Join_online_meeting/003c",
+                "nodeType": "exprStmt",
+                "id": "xm0fRp4lqDA1o8p4M9pURUrB",
+                "locals": [
+                  {
+                    "name": "marker",
+                    "type": "String",
+                    "nodeType": "localDef",
+                    "id": "xm0fRp4lqDA1o8p4M9pURUrBL0"
+                  }
+                ]
+              },
+              {
+                "text": "Finds the appointment active now",
+                "nodeType": "comment",
+                "id": "bbdPzlagVhucwKaePTEYvCS6"
+              },
+              {
+                "expr": "$q71e9fNxOrMmsRA5o1fPC4K5L0 ,:= :social .search_appointments ,( :time .now ,, :time .now .add_minutes ,( ,5 ,) ,)",
+                "nodeType": "exprStmt",
+                "id": "q71e9fNxOrMmsRA5o1fPC4K5",
+                "locals": [
+                  {
+                    "name": "aps",
+                    "type": "Appointment Collection",
+                    "nodeType": "localDef",
+                    "id": "q71e9fNxOrMmsRA5o1fPC4K5L0"
+                  }
+                ]
+              },
+              {
+                "expr": ",( 'found_ ,∥ $q71e9fNxOrMmsRA5o1fPC4K5L0 .count ,∥ '_appointments/002e/002e/002e ,) .post_to_wall",
+                "nodeType": "exprStmt",
+                "id": "UB26jkThXl8h1X6ohn63gD4O",
+                "locals": []
+              },
+              {
+                "text": "Filter out online meetings.",
+                "nodeType": "comment",
+                "id": "bVD9eP3PiaLa9kMBOf95Ehk4"
+              },
+              {
+                "collection": "$q71e9fNxOrMmsRA5o1fPC4K5L0",
+                "conditions": [
+                  {
+                    "condition": ",not $xBpf2nMPY8CD75D2Gv4bfUjdB0 .is_all_day_event",
+                    "nodeType": "where",
+                    "id": "ExI72WxT5X4Ll3yakNsiJJah",
+                    "locals": []
+                  },
+                  {
+                    "condition": ",not $xBpf2nMPY8CD75D2Gv4bfUjdB0 .details .is_invalid",
+                    "nodeType": "where",
+                    "id": "eFUZz9g6Qs0nG1eTdmLt2xNm",
+                    "locals": []
+                  },
+                  {
+                    "condition": "$xBpf2nMPY8CD75D2Gv4bfUjdB0 .details .contains ,( $xm0fRp4lqDA1o8p4M9pURUrBL0 ,)",
+                    "nodeType": "where",
+                    "id": "KUDpSRS7Qi1e2NxpgdaViCu4",
+                    "locals": []
+                  }
+                ],
+                "body": [
+                  {
+                    "text": "Extract the URL to the meeting and let the Lync app di the work.",
+                    "nodeType": "comment",
+                    "id": "hginJofhjkrL5j72r4gYtGA0"
+                  },
+                  {
+                    "expr": "$xBpf2nMPY8CD75D2Gv4bfUjdB0 .post_to_wall",
+                    "nodeType": "exprStmt",
+                    "id": "FihERx8AFNstvH8nH2THqhgJ",
+                    "locals": []
+                  },
+                  {
+                    "expr": ":wall .set_background ,( :art #dcAOCHLVhn4TsZdEhuqcTHx6 ,)",
+                    "nodeType": "exprStmt",
+                    "id": "soUh02pK8fvf0rkKUPsJa91C",
+                    "locals": []
+                  },
+                  {
+                    "expr": "'Connecting_Lync/002e/002e/002e .post_to_wall",
+                    "nodeType": "exprStmt",
+                    "id": "yGXS5ziK4E7mdGANsSqnaCKf",
+                    "locals": []
+                  },
+                  {
+                    "expr": ":time .sleep ,( ,2 ,)",
+                    "nodeType": "exprStmt",
+                    "id": "hABLRlHwhLw1rKUKSkIo3gBP",
+                    "locals": []
+                  },
+                  {
+                    "text": "Extract the URL.",
+                    "nodeType": "comment",
+                    "id": "T8Y6cKSyO23H2vm0G4tEpYhA"
+                  },
+                  {
+                    "expr": "$EeuyU62q55jkIivLh88onbQrL0 ,:= $xBpf2nMPY8CD75D2Gv4bfUjdB0 .details .index_of ,( $xm0fRp4lqDA1o8p4M9pURUrBL0 ,, ,0 ,) ,+ $xm0fRp4lqDA1o8p4M9pURUrBL0 .count",
+                    "nodeType": "exprStmt",
+                    "id": "EeuyU62q55jkIivLh88onbQr",
+                    "locals": [
+                      {
+                        "name": "start",
+                        "type": "Number",
+                        "nodeType": "localDef",
+                        "id": "EeuyU62q55jkIivLh88onbQrL0"
+                      }
+                    ]
+                  },
+                  {
+                    "expr": "$APhs1EGcuN8NzzPdGuPqiV7lL0 ,:= $xBpf2nMPY8CD75D2Gv4bfUjdB0 .details .index_of ,( '/003e ,, $EeuyU62q55jkIivLh88onbQrL0 ,+ ,1 ,)",
+                    "nodeType": "exprStmt",
+                    "id": "APhs1EGcuN8NzzPdGuPqiV7l",
+                    "locals": [
+                      {
+                        "name": "end",
+                        "type": "Number",
+                        "nodeType": "localDef",
+                        "id": "APhs1EGcuN8NzzPdGuPqiV7lL0"
+                      }
+                    ]
+                  },
+                  {
+                    "expr": "$DRpnhPW4PhK3OMgWoBpCfnZ2L0 ,:= $xBpf2nMPY8CD75D2Gv4bfUjdB0 .details .substring ,( $EeuyU62q55jkIivLh88onbQrL0 ,, $APhs1EGcuN8NzzPdGuPqiV7lL0 ,- $EeuyU62q55jkIivLh88onbQrL0 ,)",
+                    "nodeType": "exprStmt",
+                    "id": "DRpnhPW4PhK3OMgWoBpCfnZ2",
+                    "locals": [
+                      {
+                        "name": "url",
+                        "type": "String",
+                        "nodeType": "localDef",
+                        "id": "DRpnhPW4PhK3OMgWoBpCfnZ2L0"
+                      }
+                    ]
+                  },
+                  {
+                    "text": "Lync will connect the meeting automatically...",
+                    "nodeType": "comment",
+                    "id": "gE0NMuAPnZuNOd0yJzOGQFB3"
+                  },
+                  {
+                    "expr": ":web .browse ,( $DRpnhPW4PhK3OMgWoBpCfnZ2L0 ,)",
+                    "nodeType": "exprStmt",
+                    "id": "Agh95fVWOQJN86wizbaWQEZa",
+                    "locals": []
+                  },
+                  {
+                    "expr": ":time .stop",
+                    "nodeType": "exprStmt",
+                    "id": "xcK3Hw771LlseZaKlJZYAYj2",
+                    "locals": []
+                  }
+                ],
+                "nodeType": "foreach",
+                "id": "xBpf2nMPY8CD75D2Gv4bfUjd",
+                "locals": [
+                  {
+                    "name": "a",
+                    "type": "Appointment",
+                    "nodeType": "localDef",
+                    "id": "xBpf2nMPY8CD75D2Gv4bfUjdB0"
+                  }
+                ]
+              }
+            ],
+            "id": "Oz1bYv8NvClisVlL2VLfDD2u"
+          },
+          {
+            "name": "c",
+            "comment": "",
+            "type": "Color",
+            "isReadonly": true,
+            "isTransient": false,
+            "nodeType": "art",
+            "url": "#ff153013",
+            "id": "dcAOCHLVhn4TsZdEhuqcTHx6"
+          }
+        ],
+        "deletedDecls": [],
+        "nodeType": "app",
+        "id": "app"
+      }
+    },
+    {
+      "seqNo": 1,
+      "time": 1346281482,
+      "scriptId": "pjih",
+      "historyId": "252056019317165423986972413-80a8-476a-8853-63b2a01e34ed",
+      "updateSize": 2,
+      "updates": {}
+    },
+    {
+      "seqNo": 2,
+      "time": 1351360690,
+      "scriptId": "pjih",
+      "historyId": "2520509401093209753818745c5-9e6d-4171-8f48-2066a35f2982",
+      "updateSize": 2,
+      "updates": {}
+    }
+  ]
+}

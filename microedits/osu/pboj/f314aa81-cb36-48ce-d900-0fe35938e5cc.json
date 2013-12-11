@@ -1,0 +1,4704 @@
+{
+  "userid": "pboj",
+  "guid": "f314aa81-cb36-48ce-d900-0fe35938e5cc",
+  "lastStatus": "published",
+  "items": [
+    {
+      "seqNo": 0,
+      "time": 1378708347,
+      "scriptId": "lxqk",
+      "historyId": "2520235924520170210b6f46f34-3718-46ed-8a8a-6c1bb9a7bd45",
+      "updateSize": 80934,
+      "ast": {
+        "textVersion": "v2.2,js,ctx",
+        "jsonVersion": "v1.0,resolved,short",
+        "name": "Cloud Checkers",
+        "comment": "Wabbit Apps: Ported code to use TouchDevelop boxes instead of game board.\n\nThis is an 8x8 implementation of Checkers a.k.a English Draughts.\n\nTo make a move, player will tap the piece (which will highlight the box) and then tap the box where he/she wants to move the piece.\n\nFollowing features are planned till project submission date:\n1. Piece capture.\n2. The game will restrict illegal moves.\n3. Highlight legal moves.\n4. King pieces\n\nFollowing features might not be implemented due to time constraints (although I would try my best to include them):\n1. Graphics and sounds\n2. Settings page (customisations such as board color, men color)\n3. Mandatory piece capture\n\nNo graphics or images has been used till now. The board and pieces are all created through code. Game works best in portrait mode.\n\nThe game is written without any game programming experience, so please excuse the abnormalities :)\n\nNone of the code is copied from any source!\n\nNote: Throughout comments and descriptions, 'Pieces and Men' and 'Tiles and Boxes'are used interchangeably.",
+        "icon": "Sun",
+        "color": "#ff007FFF",
+        "autoIcon": "Sun",
+        "autoColor": "#007FFF",
+        "platform": "current,media",
+        "rootId": "jnWfrzIjgFgpCEvz64e5LQy0",
+        "showAd": false,
+        "isLibrary": false,
+        "allowExport": false,
+        "hasUniqueIds": true,
+        "decls": [
+          {
+            "name": "lastSelection",
+            "comment": "Stores the checkerBoxes table record corresponding to the last selection\n",
+            "type": "Number",
+            "isReadonly": false,
+            "isTransient": true,
+            "nodeType": "data",
+            "id": "xn7BMXM9CjcvPNpjQcrbDX3K"
+          },
+          {
+            "name": "Initialise",
+            "inParameters": [],
+            "outParameters": [],
+            "isPrivate": true,
+            "isOffloaded": false,
+            "isTest": false,
+            "isAsync": false,
+            "nodeType": "action",
+            "body": [
+              {
+                "text": "This function is used to initialise some of the important global variables",
+                "nodeType": "comment",
+                "id": "up5rB1PAo7ZJsdgAsaFSe6su"
+              },
+              {
+                "text": "Clear required tables and collections",
+                "nodeType": "comment",
+                "id": "BYi8L9zL7p5D2lJD02EYfr5b"
+              },
+              {
+                "expr": ":records #x553ka3R9OGnko4eNBRQ4jXl .clear",
+                "nodeType": "exprStmt",
+                "id": "pv9XMCXTTOzEWfY2SGHH42Ec",
+                "locals": []
+              },
+              {
+                "expr": ":data #xn7BMXM9CjcvPNpjQcrbDX3K ,:= ,- ,1",
+                "nodeType": "exprStmt",
+                "id": "UXi0X0WVAfNJQfag64QLyAqw",
+                "locals": []
+              },
+              {
+                "expr": ":data #LAP2EWaO3RwqQahzmuN3Xe4D ,:= F",
+                "nodeType": "exprStmt",
+                "id": "yo3UoZqCE88uOcX2kH1LXenM",
+                "locals": []
+              }
+            ],
+            "id": "x3lZ0CV24Ku71GF174gPkdRW"
+          },
+          {
+            "name": "Make Capture",
+            "inParameters": [
+              {
+                "name": "index",
+                "type": "Number",
+                "nodeType": "localDef",
+                "id": "OkkysQyfe4cUQKZBMQEs6YqqP0"
+              },
+              {
+                "name": "far",
+                "type": "Number Collection",
+                "nodeType": "localDef",
+                "id": "OkkysQyfe4cUQKZBMQEs6YqqP1"
+              }
+            ],
+            "outParameters": [],
+            "isPrivate": true,
+            "isOffloaded": false,
+            "isTest": false,
+            "isAsync": false,
+            "nodeType": "action",
+            "body": [
+              {
+                "expr": "$xjHsPO5du3FaeEzFyeFlwApLL0 ,:= ,0",
+                "nodeType": "exprStmt",
+                "id": "xjHsPO5du3FaeEzFyeFlwApL",
+                "locals": [
+                  {
+                    "name": "capturedMan",
+                    "type": "Number",
+                    "nodeType": "localDef",
+                    "id": "xjHsPO5du3FaeEzFyeFlwApLL0"
+                  }
+                ]
+              },
+              {
+                "bound": ",4",
+                "body": [
+                  {
+                    "nodeType": "if",
+                    "condition": ",not $OkkysQyfe4cUQKZBMQEs6YqqP1 .is_invalid ,and $OkkysQyfe4cUQKZBMQEs6YqqP0 ,= $OkkysQyfe4cUQKZBMQEs6YqqP1 .at ,( $zijXVPmpUX4Q3ppdQ5do9d6bB0 ,)",
+                    "thenBody": [
+                      {
+                        "nodeType": "if",
+                        "condition": ":records #mkvHgFI0R8yxWEfvc4oE4lzF .singleton .turn .get",
+                        "thenBody": [
+                          {
+                            "expr": "$xjHsPO5du3FaeEzFyeFlwApLL0 ,:= $OkkysQyfe4cUQKZBMQEs6YqqP0 ,+ ,( ,( :data #xn7BMXM9CjcvPNpjQcrbDX3K ,- $OkkysQyfe4cUQKZBMQEs6YqqP0 ,) ,/ ,2 ,)",
+                            "nodeType": "exprStmt",
+                            "id": "xE4QTxAZ5ry44BYipLjManRb",
+                            "locals": []
+                          }
+                        ],
+                        "elseBody": [
+                          {
+                            "expr": "$xjHsPO5du3FaeEzFyeFlwApLL0 ,:= :data #xn7BMXM9CjcvPNpjQcrbDX3K ,+ ,( ,( $OkkysQyfe4cUQKZBMQEs6YqqP0 ,- :data #xn7BMXM9CjcvPNpjQcrbDX3K ,) ,/ ,2 ,)",
+                            "nodeType": "exprStmt",
+                            "id": "xllS8Qxlsj2WWHY52prsVZDc",
+                            "locals": []
+                          }
+                        ],
+                        "isElseIf": false,
+                        "id": "r4hRjhEzVdXrNEkYoQzdgFAX",
+                        "locals": []
+                      },
+                      {
+                        "expr": ":code #BgWVhuKAaPa3ZLLU5KEfJtcA ,( $xjHsPO5du3FaeEzFyeFlwApLL0 ,)",
+                        "nodeType": "exprStmt",
+                        "id": "xzpm58O3PVc0wWZlH6S3FkBD",
+                        "locals": []
+                      }
+                    ],
+                    "isElseIf": false,
+                    "id": "htZ4iNkYVxLrYPXlHAF8A72I",
+                    "locals": []
+                  }
+                ],
+                "nodeType": "for",
+                "id": "zijXVPmpUX4Q3ppdQ5do9d6b",
+                "locals": [
+                  {
+                    "name": "i",
+                    "type": "Number",
+                    "nodeType": "localDef",
+                    "id": "zijXVPmpUX4Q3ppdQ5do9d6bB0"
+                  }
+                ]
+              }
+            ],
+            "id": "OkkysQyfe4cUQKZBMQEs6Yqq"
+          },
+          {
+            "name": "HighlightValidMoves",
+            "inParameters": [
+              {
+                "name": "highlight",
+                "type": "Boolean",
+                "nodeType": "localDef",
+                "id": "ppqo904AK8SKL4lMWuhXcg4yP0"
+              },
+              {
+                "name": "valid",
+                "type": "Number Collection",
+                "nodeType": "localDef",
+                "id": "ppqo904AK8SKL4lMWuhXcg4yP1"
+              }
+            ],
+            "outParameters": [],
+            "isPrivate": true,
+            "isOffloaded": false,
+            "isTest": false,
+            "isAsync": false,
+            "nodeType": "action",
+            "body": [
+              {
+                "text": "highlight = True [Highlights the valid moves]",
+                "nodeType": "comment",
+                "id": "yxIgkQR6rRd4Et2vApCHqBhT"
+              },
+              {
+                "text": "highlight = False [Restore the original colors]",
+                "nodeType": "comment",
+                "id": "F4dHpcBy5h5swazDviF2m7Jp"
+              },
+              {
+                "nodeType": "if",
+                "condition": ",not $ppqo904AK8SKL4lMWuhXcg4yP1 .is_invalid",
+                "thenBody": [
+                  {
+                    "collection": "$ppqo904AK8SKL4lMWuhXcg4yP1",
+                    "conditions": [
+                      {
+                        "condition": "T",
+                        "nodeType": "where",
+                        "id": "ujgNtMQtH8MQCHMB3i7LgVAW",
+                        "locals": []
+                      }
+                    ],
+                    "body": [
+                      {
+                        "expr": "$U2WbjAA5fFrx7l19OTRgfbwwL0 ,:= :records #x553ka3R9OGnko4eNBRQ4jXl .at ,( $LnBJbo1Hec4PFWXyKvMw2RRkB0 ,)",
+                        "nodeType": "exprStmt",
+                        "id": "U2WbjAA5fFrx7l19OTRgfbww",
+                        "locals": [
+                          {
+                            "name": "entry",
+                            "type": "{\"o\":\"board\"}",
+                            "nodeType": "localDef",
+                            "id": "U2WbjAA5fFrx7l19OTRgfbwwL0"
+                          }
+                        ]
+                      },
+                      {
+                        "nodeType": "if",
+                        "condition": "$ppqo904AK8SKL4lMWuhXcg4yP0",
+                        "thenBody": [
+                          {
+                            "expr": "$U2WbjAA5fFrx7l19OTRgfbwwL0 .box_color .set ,( :colors .yellow ,)",
+                            "nodeType": "exprStmt",
+                            "id": "dnWpQq8nhQra4vPeANVWRcXt",
+                            "locals": []
+                          }
+                        ],
+                        "elseBody": [
+                          {
+                            "expr": "$U2WbjAA5fFrx7l19OTRgfbwwL0 .box_color .set ,( $U2WbjAA5fFrx7l19OTRgfbwwL0 .backup .get ,)",
+                            "nodeType": "exprStmt",
+                            "id": "qI7Ql8CjXODrXDT3Q40u0yga",
+                            "locals": []
+                          }
+                        ],
+                        "isElseIf": false,
+                        "id": "o2j3kQdTICNfx0IPl4lqoE2I",
+                        "locals": []
+                      }
+                    ],
+                    "nodeType": "foreach",
+                    "id": "LnBJbo1Hec4PFWXyKvMw2RRk",
+                    "locals": [
+                      {
+                        "name": "x",
+                        "type": "Number",
+                        "nodeType": "localDef",
+                        "id": "LnBJbo1Hec4PFWXyKvMw2RRkB0"
+                      }
+                    ]
+                  }
+                ],
+                "isElseIf": false,
+                "id": "xt4GA02dbduZswI2K7tRI1OJ",
+                "locals": []
+              }
+            ],
+            "id": "ppqo904AK8SKL4lMWuhXcg4y"
+          },
+          {
+            "name": "ChangeTurn",
+            "inParameters": [],
+            "outParameters": [],
+            "isPrivate": true,
+            "isOffloaded": false,
+            "isTest": false,
+            "isAsync": false,
+            "nodeType": "action",
+            "body": [
+              {
+                "text": "Function name is self explanatory.",
+                "nodeType": "comment",
+                "id": "Yj49GJ6pUKIRtb242UwyBA9r"
+              },
+              {
+                "expr": ":records #mkvHgFI0R8yxWEfvc4oE4lzF .singleton .turn .set ,( ,not :records #mkvHgFI0R8yxWEfvc4oE4lzF .singleton .turn .get ,)",
+                "nodeType": "exprStmt",
+                "id": "xS4CFzmSBjozmwyV6S4xE4P8",
+                "locals": []
+              }
+            ],
+            "id": "tpuVxtsTvvYmIqmPP6DJqSPZ"
+          },
+          {
+            "name": "KingWhite",
+            "comment": "Image for the White King\n[This image is not copied from any source, image was created from scratch in Adobe Photoshop]\n",
+            "type": "Picture",
+            "isReadonly": true,
+            "isTransient": true,
+            "nodeType": "art",
+            "url": "https://az31353.vo.msecnd.net/pub/blrvxzpr",
+            "id": "rGKCSxLuuqqpR0mniU649r9m"
+          },
+          {
+            "name": "KingBlack",
+            "comment": "Image for the Red King\n[This image is not copied from any source, image was created from scratch in Adobe Photoshop]\n",
+            "type": "Picture",
+            "isReadonly": true,
+            "isTransient": true,
+            "nodeType": "art",
+            "url": "https://az31353.vo.msecnd.net/pub/qvptdrqy",
+            "id": "R4vqK4bjXHK80HqbtCiL62jY"
+          },
+          {
+            "name": "PieceLight",
+            "comment": "Image for the White Piece\n[This image is not copied from any source, image was created from scratch in Adobe Photoshop]\n",
+            "type": "Picture",
+            "isReadonly": true,
+            "isTransient": true,
+            "nodeType": "art",
+            "url": "https://az31353.vo.msecnd.net/pub/jkyfcxyx",
+            "id": "zvZ8F4wgWUKiA4YGWTTByFnS"
+          },
+          {
+            "name": "PieceDark",
+            "comment": "Image for the Red Piece\n[This image is not copied from any source, image was created from scratch in Adobe Photoshop]\n",
+            "type": "Picture",
+            "isReadonly": true,
+            "isTransient": true,
+            "nodeType": "art",
+            "url": "https://az31353.vo.msecnd.net/pub/rdfbpcot",
+            "id": "zqebQf2TM1mJn94J6Fj1yPc5"
+          },
+          {
+            "name": "justCaptured",
+            "comment": "Determines if player has just captured a piece. Used for multiple capture scenarios\n",
+            "type": "Boolean",
+            "isReadonly": false,
+            "isTransient": true,
+            "nodeType": "data",
+            "id": "LAP2EWaO3RwqQahzmuN3Xe4D"
+          },
+          {
+            "name": "CheckForGameEnd",
+            "inParameters": [],
+            "outParameters": [],
+            "isPrivate": true,
+            "isOffloaded": false,
+            "isTest": false,
+            "isAsync": false,
+            "nodeType": "action",
+            "body": [
+              {
+                "text": "If all the men (pieces) are captured for a player, raise the flag.",
+                "nodeType": "comment",
+                "id": "OqsY2oi2uGdgW2z2JDCa4y73"
+              },
+              {
+                "expr": "$cQ31E1ffWFEk4JPb6aLhV4OKL0 ,, $cQ31E1ffWFEk4JPb6aLhV4OKL1 ,:= :code #d1eiUjtwYznGCgHKo2KW9ORf",
+                "nodeType": "exprStmt",
+                "id": "cQ31E1ffWFEk4JPb6aLhV4OK",
+                "locals": [
+                  {
+                    "name": "red",
+                    "type": "Number",
+                    "nodeType": "localDef",
+                    "id": "cQ31E1ffWFEk4JPb6aLhV4OKL0"
+                  },
+                  {
+                    "name": "white",
+                    "type": "Number",
+                    "nodeType": "localDef",
+                    "id": "cQ31E1ffWFEk4JPb6aLhV4OKL1"
+                  }
+                ]
+              },
+              {
+                "nodeType": "if",
+                "condition": "$cQ31E1ffWFEk4JPb6aLhV4OKL0 ,= ,1 ,2",
+                "thenBody": [
+                  {
+                    "expr": ":code #d0xzC4bz2oZRXTx3CN4xQp0I ,( T ,)",
+                    "nodeType": "exprStmt",
+                    "id": "dCqUIQwuHGaR739AAcNaHHnQ",
+                    "locals": []
+                  }
+                ],
+                "isElseIf": false,
+                "id": "yrAFgQKIMfanQkFQl2kZUxkP",
+                "locals": []
+              },
+              {
+                "nodeType": "if",
+                "condition": "$cQ31E1ffWFEk4JPb6aLhV4OKL1 ,= ,1 ,2",
+                "thenBody": [
+                  {
+                    "expr": ":code #d0xzC4bz2oZRXTx3CN4xQp0I ,( F ,)",
+                    "nodeType": "exprStmt",
+                    "id": "QT541YmFLT408DtqkPNGjCEy",
+                    "locals": []
+                  }
+                ],
+                "isElseIf": true,
+                "id": "Gi6d2vus8twRuF2hO4GdApYp",
+                "locals": []
+              },
+              {
+                "nodeType": "if",
+                "condition": ":code #BgLPSWbjXyPyVlXy3Ha4rEJr ,( T ,)",
+                "thenBody": [
+                  {
+                    "expr": ":code #d0xzC4bz2oZRXTx3CN4xQp0I ,( F ,)",
+                    "nodeType": "exprStmt",
+                    "id": "xY2t0yDByFvUVlLpftF40eip",
+                    "locals": []
+                  }
+                ],
+                "isElseIf": true,
+                "id": "Uw2qD4PP7ca04vaud3DEsEQU",
+                "locals": []
+              },
+              {
+                "nodeType": "if",
+                "condition": ":code #BgLPSWbjXyPyVlXy3Ha4rEJr ,( F ,)",
+                "thenBody": [
+                  {
+                    "expr": ":code #d0xzC4bz2oZRXTx3CN4xQp0I ,( T ,)",
+                    "nodeType": "exprStmt",
+                    "id": "x742r1LQliZcgG24qSrC6eho",
+                    "locals": []
+                  }
+                ],
+                "isElseIf": true,
+                "id": "x8eEnNqD2wv7M5HwDWg3Axw4",
+                "locals": []
+              }
+            ],
+            "id": "yF1oAp8Mc4cRE8GGst4eFttt"
+          },
+          {
+            "name": "EndGame",
+            "inParameters": [
+              {
+                "name": "whoWon",
+                "type": "Boolean",
+                "nodeType": "localDef",
+                "id": "d0xzC4bz2oZRXTx3CN4xQp0IP0"
+              }
+            ],
+            "outParameters": [],
+            "isPrivate": true,
+            "isOffloaded": false,
+            "isTest": false,
+            "isAsync": false,
+            "nodeType": "action",
+            "body": [
+              {
+                "text": "Ends the game. The 'man' field of the checkerBoxes table is cleared to make sure players are not able to select any box after the game is finished.",
+                "nodeType": "comment",
+                "id": "DM879wR21QpMRNW2MeKsVm9G"
+              },
+              {
+                "nodeType": "if",
+                "condition": "$d0xzC4bz2oZRXTx3CN4xQp0IP0",
+                "thenBody": [
+                  {
+                    "expr": ":wall .prompt ,( 'Red_won/0021 ,)",
+                    "nodeType": "exprStmt",
+                    "id": "JCxifgW3tApxvVWPaUf2Rm6h",
+                    "locals": []
+                  }
+                ],
+                "elseBody": [
+                  {
+                    "expr": ":wall .prompt ,( 'White_won/0021 ,)",
+                    "nodeType": "exprStmt",
+                    "id": "Dbj1h5oqCI2lW8J3Wd2IH5xg",
+                    "locals": []
+                  }
+                ],
+                "isElseIf": false,
+                "id": "xTF53AP0D6LuOJT7QtzRNeWN",
+                "locals": []
+              },
+              {
+                "text": "",
+                "nodeType": "comment",
+                "id": "R274nHEiViSe20GCiMkYYS4Y"
+              },
+              {
+                "text": "",
+                "nodeType": "comment",
+                "id": "EVzKETB8XvAB2cf8gwQmdKGY"
+              }
+            ],
+            "id": "d0xzC4bz2oZRXTx3CN4xQp0I"
+          },
+          {
+            "name": "NoManCanMove",
+            "inParameters": [
+              {
+                "name": "whichPlayer",
+                "type": "Boolean",
+                "nodeType": "localDef",
+                "id": "BgLPSWbjXyPyVlXy3Ha4rEJrP0"
+              }
+            ],
+            "outParameters": [
+              {
+                "name": "noManCanMove",
+                "type": "Boolean",
+                "nodeType": "localDef",
+                "id": "BgLPSWbjXyPyVlXy3Ha4rEJrP1"
+              }
+            ],
+            "isPrivate": true,
+            "isOffloaded": false,
+            "isTest": false,
+            "isAsync": false,
+            "nodeType": "action",
+            "body": [
+              {
+                "text": "",
+                "nodeType": "comment",
+                "id": "eX2sxjUmiKCll95Uucx7LqpG"
+              },
+              {
+                "expr": "$BgLPSWbjXyPyVlXy3Ha4rEJrP1 ,:= T",
+                "nodeType": "exprStmt",
+                "id": "KCmA7YJIj35yrWKLXe4hMhW4",
+                "locals": []
+              },
+              {
+                "collection": ":records #x553ka3R9OGnko4eNBRQ4jXl",
+                "conditions": [
+                  {
+                    "condition": "T",
+                    "nodeType": "where",
+                    "id": "ozGzsIrHVxHs1iP1qePcbtAR",
+                    "locals": []
+                  }
+                ],
+                "body": [
+                  {
+                    "nodeType": "if",
+                    "condition": ":code #N5Nf6ZWhA1w5ZIBPQwShOsrv ,( $aWkgArj4QcNONB5bOkuxkHxOB0 .index ,) ,and :code #y0PMqNQlOUPFsm4rMnGjjoth ,( $aWkgArj4QcNONB5bOkuxkHxOB0 .index ,) .equals ,( $BgLPSWbjXyPyVlXy3Ha4rEJrP0 ,) ,and $BgLPSWbjXyPyVlXy3Ha4rEJrP1 .equals ,( T ,)",
+                    "thenBody": [
+                      {
+                        "expr": "$xLwC67S4pzOKLPME74FFo5ZOL0 ,, $xLwC67S4pzOKLPME74FFo5ZOL1 ,:= :code #OA9hvnENEFyq4lPWtoRAMoBx ,( $aWkgArj4QcNONB5bOkuxkHxOB0 .index ,)",
+                        "nodeType": "exprStmt",
+                        "id": "xLwC67S4pzOKLPME74FFo5ZO",
+                        "locals": [
+                          {
+                            "name": "valid",
+                            "type": "Number Collection",
+                            "nodeType": "localDef",
+                            "id": "xLwC67S4pzOKLPME74FFo5ZOL0"
+                          },
+                          {
+                            "name": "far2",
+                            "type": "Number Collection",
+                            "nodeType": "localDef",
+                            "id": "xLwC67S4pzOKLPME74FFo5ZOL1"
+                          }
+                        ]
+                      },
+                      {
+                        "nodeType": "if",
+                        "condition": "$xLwC67S4pzOKLPME74FFo5ZOL0 .count ,> ,0",
+                        "thenBody": [
+                          {
+                            "expr": "$BgLPSWbjXyPyVlXy3Ha4rEJrP1 ,:= F",
+                            "nodeType": "exprStmt",
+                            "id": "WA8K4dV3oX87JWJlhrZNv5Ap",
+                            "locals": []
+                          }
+                        ],
+                        "isElseIf": false,
+                        "id": "iSjDja2mR25IbyaaSTh5h2jL",
+                        "locals": []
+                      }
+                    ],
+                    "isElseIf": false,
+                    "id": "QSys2AQYFXxSRGmr0p0ay5U2",
+                    "locals": []
+                  }
+                ],
+                "nodeType": "foreach",
+                "id": "aWkgArj4QcNONB5bOkuxkHxO",
+                "locals": [
+                  {
+                    "name": "sq",
+                    "type": "{\"o\":\"board\"}",
+                    "nodeType": "localDef",
+                    "id": "aWkgArj4QcNONB5bOkuxkHxOB0"
+                  }
+                ]
+              }
+            ],
+            "id": "BgLPSWbjXyPyVlXy3Ha4rEJr"
+          },
+          {
+            "name": "chess board",
+            "inParameters": [],
+            "outParameters": [],
+            "isPrivate": true,
+            "isOffloaded": false,
+            "isTest": false,
+            "isAsync": false,
+            "nodeType": "page",
+            "initBody": [
+              {
+                "expr": "",
+                "nodeType": "exprStmt",
+                "id": "VpKNY62pkLuYD4O4GGNU32EN",
+                "locals": []
+              },
+              {
+                "expr": ":code #mDa2D9KkoPWq1picUnnI4Od4",
+                "nodeType": "exprStmt",
+                "id": "x1qIsfA5pxVY52hHdD046dny",
+                "locals": []
+              }
+            ],
+            "displayBody": [
+              {
+                "expr": "$tBLpIYPRAL4IJk00OAZPp2NGL0 ,, $tBLpIYPRAL4IJk00OAZPp2NGL1 ,:= :code #d1eiUjtwYznGCgHKo2KW9ORf",
+                "nodeType": "exprStmt",
+                "id": "tBLpIYPRAL4IJk00OAZPp2NG",
+                "locals": [
+                  {
+                    "name": "red",
+                    "type": "Number",
+                    "nodeType": "localDef",
+                    "id": "tBLpIYPRAL4IJk00OAZPp2NGL0"
+                  },
+                  {
+                    "name": "white",
+                    "type": "Number",
+                    "nodeType": "localDef",
+                    "id": "tBLpIYPRAL4IJk00OAZPp2NGL1"
+                  }
+                ]
+              },
+              {
+                "expr": ":code #BHHFJidoa8lm0xCytIeh0RD4 ,( $tBLpIYPRAL4IJk00OAZPp2NGL0 ,, $tBLpIYPRAL4IJk00OAZPp2NGL1 ,)",
+                "nodeType": "exprStmt",
+                "id": "wmNZj2DYjl2zUHAxUbEIC6VA",
+                "locals": []
+              },
+              {
+                "body": [
+                  {
+                    "expr": ":box .set_width ,( :box .page_width ,)",
+                    "nodeType": "exprStmt",
+                    "id": "w2HnKTyTjisnEcf6sNLKwYjU",
+                    "locals": []
+                  },
+                  {
+                    "expr": ":box .set_horizontal_align ,( 'center ,)",
+                    "nodeType": "exprStmt",
+                    "id": "c05cZF3vvnCP525Br2E25be0",
+                    "locals": []
+                  },
+                  {
+                    "body": [
+                      {
+                        "expr": ":box .set_horizontal_stretch ,( ,0 ,)",
+                        "nodeType": "exprStmt",
+                        "id": "gW1POnO2v4SCB4v2fz1f4Ie7",
+                        "locals": []
+                      },
+                      {
+                        "expr": ":code #FoyL72MgrUts3bnXC6iHbA2Z",
+                        "nodeType": "exprStmt",
+                        "id": "TQaweeIPbr1YF2vNZC4am1XF",
+                        "locals": []
+                      },
+                      {
+                        "expr": ":code #spP7nJToxwBQlM7vBrD1p4fP ,( $tBLpIYPRAL4IJk00OAZPp2NGL0 ,, $tBLpIYPRAL4IJk00OAZPp2NGL1 ,)",
+                        "nodeType": "exprStmt",
+                        "id": "xUZ9mBxym4oo0Rqv4z20VJv0",
+                        "locals": []
+                      },
+                      {
+                        "expr": ":code #wpQvQZKStxOydm7QHEIvPRc0",
+                        "nodeType": "exprStmt",
+                        "id": "EkgZBiIKOt1p43QkG9aFWshh",
+                        "locals": []
+                      }
+                    ],
+                    "nodeType": "boxed",
+                    "id": "fzMotmNbOn5Hxbo2qpP4x8ZF"
+                  },
+                  {
+                    "expr": "",
+                    "nodeType": "exprStmt",
+                    "id": "xl538ZtkOZdYzk2ocqrKZQwT",
+                    "locals": []
+                  }
+                ],
+                "nodeType": "boxed",
+                "id": "Ta4v2ggtqjz4p4eXpXiqScm8"
+              }
+            ],
+            "id": "c1HztlYfQLvXSUEy2ZwMwifJ"
+          },
+          {
+            "name": "InitCheckerBoxes",
+            "inParameters": [],
+            "outParameters": [],
+            "isPrivate": true,
+            "isOffloaded": false,
+            "isTest": false,
+            "isAsync": false,
+            "nodeType": "action",
+            "body": [
+              {
+                "expr": "$xMJR6p7jTHGk9ehzGUsvwpjLL0 ,:= ,1",
+                "nodeType": "exprStmt",
+                "id": "xMJR6p7jTHGk9ehzGUsvwpjL",
+                "locals": [
+                  {
+                    "name": "count",
+                    "type": "Number",
+                    "nodeType": "localDef",
+                    "id": "xMJR6p7jTHGk9ehzGUsvwpjLL0"
+                  }
+                ]
+              },
+              {
+                "expr": "$ml4nwSw4anDNSLI2oMpmhxxoL0 ,:= F",
+                "nodeType": "exprStmt",
+                "id": "ml4nwSw4anDNSLI2oMpmhxxo",
+                "locals": [
+                  {
+                    "name": "alternateColor",
+                    "type": "Boolean",
+                    "nodeType": "localDef",
+                    "id": "ml4nwSw4anDNSLI2oMpmhxxoL0"
+                  }
+                ]
+              },
+              {
+                "bound": ",8",
+                "body": [
+                  {
+                    "expr": "$ml4nwSw4anDNSLI2oMpmhxxoL0 ,:= ,not $ml4nwSw4anDNSLI2oMpmhxxoL0",
+                    "nodeType": "exprStmt",
+                    "id": "LVthfu813gB2l32k6F9kpzXK",
+                    "locals": []
+                  },
+                  {
+                    "bound": ",8",
+                    "body": [
+                      {
+                        "expr": "$DgJpXKHiG2EdVhmuFeb2SMvCL0 ,:= :records #x553ka3R9OGnko4eNBRQ4jXl .at ,( $xMJR6p7jTHGk9ehzGUsvwpjLL0 ,)",
+                        "nodeType": "exprStmt",
+                        "id": "DgJpXKHiG2EdVhmuFeb2SMvC",
+                        "locals": [
+                          {
+                            "name": "checkerBox",
+                            "type": "{\"o\":\"board\"}",
+                            "nodeType": "localDef",
+                            "id": "DgJpXKHiG2EdVhmuFeb2SMvCL0"
+                          }
+                        ]
+                      },
+                      {
+                        "nodeType": "if",
+                        "condition": "$ml4nwSw4anDNSLI2oMpmhxxoL0",
+                        "thenBody": [
+                          {
+                            "expr": "$DgJpXKHiG2EdVhmuFeb2SMvCL0 .box_color .set ,( :colors .black ,)",
+                            "nodeType": "exprStmt",
+                            "id": "PHSJbl7zcaI4WrT2fjTy4xIT",
+                            "locals": []
+                          }
+                        ],
+                        "elseBody": [
+                          {
+                            "expr": "$DgJpXKHiG2EdVhmuFeb2SMvCL0 .box_color .set ,( :colors .white ,)",
+                            "nodeType": "exprStmt",
+                            "id": "GmFnGw1TLMy2G2iao4k1Tm5W",
+                            "locals": []
+                          }
+                        ],
+                        "isElseIf": false,
+                        "id": "ksQIv3m2mnPF7HRVvfY9vHRa",
+                        "locals": []
+                      },
+                      {
+                        "expr": "$DgJpXKHiG2EdVhmuFeb2SMvCL0 .backup .set ,( $DgJpXKHiG2EdVhmuFeb2SMvCL0 .box_color .get ,)",
+                        "nodeType": "exprStmt",
+                        "id": "jY4D4t8KrXQ0O2kvgjGxk7zW",
+                        "locals": []
+                      },
+                      {
+                        "expr": "$ml4nwSw4anDNSLI2oMpmhxxoL0 ,:= ,not $ml4nwSw4anDNSLI2oMpmhxxoL0",
+                        "nodeType": "exprStmt",
+                        "id": "jyhCuEjZBOiJuiMAh2cdMfbq",
+                        "locals": []
+                      },
+                      {
+                        "expr": "$xMJR6p7jTHGk9ehzGUsvwpjLL0 ,:= $xMJR6p7jTHGk9ehzGUsvwpjLL0 ,+ ,1",
+                        "nodeType": "exprStmt",
+                        "id": "E965jfctjbvHoW2J5XZPHCbn",
+                        "locals": []
+                      }
+                    ],
+                    "nodeType": "for",
+                    "id": "ToEMQitf2hTl17t84unfhcC4",
+                    "locals": [
+                      {
+                        "name": "j",
+                        "type": "Number",
+                        "nodeType": "localDef",
+                        "id": "ToEMQitf2hTl17t84unfhcC4B0"
+                      }
+                    ]
+                  }
+                ],
+                "nodeType": "for",
+                "id": "pBJLRyciu3yJZTVDceUAtolZ",
+                "locals": [
+                  {
+                    "name": "i",
+                    "type": "Number",
+                    "nodeType": "localDef",
+                    "id": "pBJLRyciu3yJZTVDceUAtolZB0"
+                  }
+                ]
+              }
+            ],
+            "id": "FJDzPB2rWhYeIC4p8Gvcpzpe"
+          },
+          {
+            "nodeType": "record",
+            "name": "board",
+            "sourceName": "board index",
+            "comment": "",
+            "category": "index",
+            "isCloudEnabled": false,
+            "keys": [
+              {
+                "nodeType": "recordKey",
+                "name": "index",
+                "type": "Number",
+                "id": "bVcwVaDLl4iTcA1iLD8YBRy5"
+              }
+            ],
+            "fields": [
+              {
+                "nodeType": "recordField",
+                "name": "box color",
+                "type": "Color",
+                "id": "C5oihp45Rgyqk1a5L4xAMrs4"
+              },
+              {
+                "nodeType": "recordField",
+                "name": "backup",
+                "type": "Color",
+                "id": "H6ze4bO614tNvgsABwv3K2pi"
+              }
+            ],
+            "id": "x553ka3R9OGnko4eNBRQ4jXl"
+          },
+          {
+            "name": "AnyManCanCapture",
+            "inParameters": [
+              {
+                "name": "selected",
+                "type": "Number",
+                "nodeType": "localDef",
+                "id": "D7TeMKvoYbfNN59wErm0rUL4P0"
+              }
+            ],
+            "outParameters": [
+              {
+                "name": "anyManCanCapture",
+                "type": "Boolean",
+                "nodeType": "localDef",
+                "id": "D7TeMKvoYbfNN59wErm0rUL4P1"
+              }
+            ],
+            "isPrivate": true,
+            "isOffloaded": false,
+            "isTest": false,
+            "isAsync": false,
+            "nodeType": "action",
+            "body": [
+              {
+                "text": "The function checks if there's any piece capturing opponent's piece. This is used to enforce the mandatory capture",
+                "nodeType": "comment",
+                "id": "wf8xxCcvuuQ1RTbtqdLA46au"
+              },
+              {
+                "expr": "$xhJzmrzaLADAtfqOcIHlwn7lL0 ,:= :collections .create_number_collection",
+                "nodeType": "exprStmt",
+                "id": "xhJzmrzaLADAtfqOcIHlwn7l",
+                "locals": [
+                  {
+                    "name": "capturingMen",
+                    "type": "Number Collection",
+                    "nodeType": "localDef",
+                    "id": "xhJzmrzaLADAtfqOcIHlwn7lL0"
+                  }
+                ]
+              },
+              {
+                "collection": ":records #x553ka3R9OGnko4eNBRQ4jXl",
+                "conditions": [
+                  {
+                    "condition": "T",
+                    "nodeType": "where",
+                    "id": "pvmgg5qWWi2XABi6PWy1kLxg",
+                    "locals": []
+                  }
+                ],
+                "body": [
+                  {
+                    "expr": "$gWqLDp96vnw6igPH7Yd2dIAyL0 ,, $gWqLDp96vnw6igPH7Yd2dIAyL1 ,, $gWqLDp96vnw6igPH7Yd2dIAyL2 ,:= :code #wxT1FQzLJgaMPo5erPijUQLk ,( $f7E2d0AS4dhsNDTIS0VobA8mB0 .index ,)",
+                    "nodeType": "exprStmt",
+                    "id": "gWqLDp96vnw6igPH7Yd2dIAy",
+                    "locals": [
+                      {
+                        "name": "bool",
+                        "type": "Boolean",
+                        "nodeType": "localDef",
+                        "id": "gWqLDp96vnw6igPH7Yd2dIAyL0"
+                      },
+                      {
+                        "name": "near",
+                        "type": "Number Collection",
+                        "nodeType": "localDef",
+                        "id": "gWqLDp96vnw6igPH7Yd2dIAyL1"
+                      },
+                      {
+                        "name": "far",
+                        "type": "Number Collection",
+                        "nodeType": "localDef",
+                        "id": "gWqLDp96vnw6igPH7Yd2dIAyL2"
+                      }
+                    ]
+                  },
+                  {
+                    "nodeType": "if",
+                    "condition": ":code #N5Nf6ZWhA1w5ZIBPQwShOsrv ,( $f7E2d0AS4dhsNDTIS0VobA8mB0 .index ,) ,and :code #y0PMqNQlOUPFsm4rMnGjjoth ,( $f7E2d0AS4dhsNDTIS0VobA8mB0 .index ,) .equals ,( :records #mkvHgFI0R8yxWEfvc4oE4lzF .singleton .turn .get ,) ,and $gWqLDp96vnw6igPH7Yd2dIAyL0",
+                    "thenBody": [
+                      {
+                        "expr": "$xhJzmrzaLADAtfqOcIHlwn7lL0 .add ,( $f7E2d0AS4dhsNDTIS0VobA8mB0 .index ,)",
+                        "nodeType": "exprStmt",
+                        "id": "xsvtQLZKGnf3c8F7gyi6HrdW",
+                        "locals": []
+                      }
+                    ],
+                    "isElseIf": false,
+                    "id": "MeBWwUmSP9F6bZn44xnpU0o4",
+                    "locals": []
+                  }
+                ],
+                "nodeType": "foreach",
+                "id": "f7E2d0AS4dhsNDTIS0VobA8m",
+                "locals": [
+                  {
+                    "name": "sq",
+                    "type": "{\"o\":\"board\"}",
+                    "nodeType": "localDef",
+                    "id": "f7E2d0AS4dhsNDTIS0VobA8mB0"
+                  }
+                ]
+              },
+              {
+                "text": "",
+                "nodeType": "comment",
+                "id": "r5575z56mWwrZsSUzXVhIhPa"
+              },
+              {
+                "nodeType": "if",
+                "condition": "$xhJzmrzaLADAtfqOcIHlwn7lL0 .count ,> ,0",
+                "thenBody": [
+                  {
+                    "expr": "$D7TeMKvoYbfNN59wErm0rUL4P1 ,:= $xhJzmrzaLADAtfqOcIHlwn7lL0 .contains ,( $D7TeMKvoYbfNN59wErm0rUL4P0 ,)",
+                    "nodeType": "exprStmt",
+                    "id": "qyKUscVoqPQn7aLQfotxhMnZ",
+                    "locals": []
+                  }
+                ],
+                "elseBody": [
+                  {
+                    "expr": "$D7TeMKvoYbfNN59wErm0rUL4P1 ,:= T",
+                    "nodeType": "exprStmt",
+                    "id": "t2pSyvYFYJm6OGGjp1czmYYq",
+                    "locals": []
+                  }
+                ],
+                "isElseIf": false,
+                "id": "efvuHP2rWEpwTR2dpndngWEc",
+                "locals": []
+              }
+            ],
+            "id": "D7TeMKvoYbfNN59wErm0rUL4"
+          },
+          {
+            "name": "CanCapture",
+            "inParameters": [
+              {
+                "name": "index",
+                "type": "Number",
+                "nodeType": "localDef",
+                "id": "wxT1FQzLJgaMPo5erPijUQLkP0"
+              }
+            ],
+            "outParameters": [
+              {
+                "name": "return",
+                "type": "Boolean",
+                "nodeType": "localDef",
+                "id": "wxT1FQzLJgaMPo5erPijUQLkP1"
+              },
+              {
+                "name": "near",
+                "type": "Number Collection",
+                "nodeType": "localDef",
+                "id": "wxT1FQzLJgaMPo5erPijUQLkP2"
+              },
+              {
+                "name": "far",
+                "type": "Number Collection",
+                "nodeType": "localDef",
+                "id": "wxT1FQzLJgaMPo5erPijUQLkP3"
+              }
+            ],
+            "isPrivate": true,
+            "isOffloaded": false,
+            "isTest": false,
+            "isAsync": false,
+            "nodeType": "action",
+            "body": [
+              {
+                "text": "Provided a box, the function determines if there's a possibility of capture",
+                "nodeType": "comment",
+                "id": "Z9DdbiECmfoD9FadmP0gLUSS"
+              },
+              {
+                "expr": "$wxT1FQzLJgaMPo5erPijUQLkP1 ,:= F",
+                "nodeType": "exprStmt",
+                "id": "LlXqz2Ou0FMtpmor4t2gWgB2",
+                "locals": []
+              },
+              {
+                "expr": "$wxT1FQzLJgaMPo5erPijUQLkP2 ,:= :code #xZuS9fLDnc9mDCJD7mX4IuAz ,( $wxT1FQzLJgaMPo5erPijUQLkP0 ,)",
+                "nodeType": "exprStmt",
+                "id": "EDLiuRfZMYXTB29G0FOYzSvB",
+                "locals": []
+              },
+              {
+                "expr": "$wxT1FQzLJgaMPo5erPijUQLkP3 ,:= :code #aClvHWIgAS6FbLdNSbQJz1X9 ,( $wxT1FQzLJgaMPo5erPijUQLkP0 ,)",
+                "nodeType": "exprStmt",
+                "id": "AwU5xumYjh3jjYFFAhW4njG5",
+                "locals": []
+              },
+              {
+                "bound": ",4",
+                "body": [
+                  {
+                    "nodeType": "if",
+                    "condition": ",not $wxT1FQzLJgaMPo5erPijUQLkP1 ,and $wxT1FQzLJgaMPo5erPijUQLkP2 .at ,( $JoxQbLE6suvzSRY0mMM84q2pB0 ,) ,= ,0",
+                    "thenBody": [
+                      {
+                        "nodeType": "if",
+                        "condition": "$wxT1FQzLJgaMPo5erPijUQLkP3 .at ,( $JoxQbLE6suvzSRY0mMM84q2pB0 ,) ,> ,0",
+                        "thenBody": [
+                          {
+                            "expr": "$wxT1FQzLJgaMPo5erPijUQLkP1 ,:= T",
+                            "nodeType": "exprStmt",
+                            "id": "fTZU2XljGnIA0S7fsJ6H862e",
+                            "locals": []
+                          }
+                        ],
+                        "isElseIf": false,
+                        "id": "x2F3KbByh68q7rylClrdQp6x",
+                        "locals": []
+                      }
+                    ],
+                    "isElseIf": false,
+                    "id": "Jh8m5gdj3Q8D4js9oJCRb2Ao",
+                    "locals": []
+                  }
+                ],
+                "nodeType": "for",
+                "id": "JoxQbLE6suvzSRY0mMM84q2p",
+                "locals": [
+                  {
+                    "name": "i",
+                    "type": "Number",
+                    "nodeType": "localDef",
+                    "id": "JoxQbLE6suvzSRY0mMM84q2pB0"
+                  }
+                ]
+              }
+            ],
+            "id": "wxT1FQzLJgaMPo5erPijUQLk"
+          },
+          {
+            "name": "GetNearDiagonals",
+            "inParameters": [
+              {
+                "name": "index",
+                "type": "Number",
+                "nodeType": "localDef",
+                "id": "xZuS9fLDnc9mDCJD7mX4IuAzP0"
+              }
+            ],
+            "outParameters": [
+              {
+                "name": "r",
+                "type": "Number Collection",
+                "nodeType": "localDef",
+                "id": "xZuS9fLDnc9mDCJD7mX4IuAzP1"
+              }
+            ],
+            "isPrivate": true,
+            "isOffloaded": false,
+            "isTest": false,
+            "isAsync": false,
+            "nodeType": "action",
+            "body": [
+              {
+                "text": "For a piece, there could be maximum 4 valid moves. These moves can either be in the near diagonals or (in case of capture) far diagonals. This function gets all the near diagonals and stores the diagonal numbers in a number collection",
+                "nodeType": "comment",
+                "id": "B5UXXY9SVxskhR66OKwMmJzq"
+              },
+              {
+                "text": "nearDiagonals -> at(i) = A number greater than 0 [Valid near diagonal]",
+                "nodeType": "comment",
+                "id": "Eb8uC4I2i7u1L2JWTt9J4UET"
+              },
+              {
+                "text": "nearDiagonals -> at(i) =  0 [Opponent's piece on the diagonal] nearDiagonals -> at(i) = -1 [Invalid near diagonal]",
+                "nodeType": "comment",
+                "id": "kWTccTY4E9fNKVL8itQ3Wlbu"
+              },
+              {
+                "text": "Black",
+                "nodeType": "comment",
+                "id": "o3U6WzzjJyH2xlcSCvCi8PJv"
+              },
+              {
+                "nodeType": "if",
+                "condition": ":code #y0PMqNQlOUPFsm4rMnGjjoth ,( $xZuS9fLDnc9mDCJD7mX4IuAzP0 ,) .equals ,( T ,)",
+                "thenBody": [
+                  {
+                    "expr": "$xZuS9fLDnc9mDCJD7mX4IuAzP1 ,:= :code #yywoX3vS2SxLIsuQL9Nxd8Xr ,( $xZuS9fLDnc9mDCJD7mX4IuAzP0 ,, ,- ,7 ,, ,- ,9 ,)",
+                    "nodeType": "exprStmt",
+                    "id": "vnkwP4gvD4NN7w4lGhop96Yr",
+                    "locals": []
+                  }
+                ],
+                "elseBody": [
+                  {
+                    "expr": "$xZuS9fLDnc9mDCJD7mX4IuAzP1 ,:= :code #yywoX3vS2SxLIsuQL9Nxd8Xr ,( $xZuS9fLDnc9mDCJD7mX4IuAzP0 ,, ,7 ,, ,9 ,)",
+                    "nodeType": "exprStmt",
+                    "id": "l225Jioq4bGOPvjuc1nqI8WC",
+                    "locals": []
+                  }
+                ],
+                "isElseIf": false,
+                "id": "ph4Xxil8Lfmc14mR9LetjK7E",
+                "locals": []
+              }
+            ],
+            "id": "xZuS9fLDnc9mDCJD7mX4IuAz"
+          },
+          {
+            "name": "GetFarDiagonals",
+            "inParameters": [
+              {
+                "name": "index",
+                "type": "Number",
+                "nodeType": "localDef",
+                "id": "aClvHWIgAS6FbLdNSbQJz1X9P0"
+              }
+            ],
+            "outParameters": [
+              {
+                "name": "r",
+                "type": "Number Collection",
+                "nodeType": "localDef",
+                "id": "aClvHWIgAS6FbLdNSbQJz1X9P1"
+              }
+            ],
+            "isPrivate": true,
+            "isOffloaded": false,
+            "isTest": false,
+            "isAsync": false,
+            "nodeType": "action",
+            "body": [
+              {
+                "text": "For a piece, there could be maximum 4 valid moves. These moves can either be in the near diagonals or (in case of capture) far diagonals. This function gets all the far diagonals and stores the diagonal numbers in a number collection",
+                "nodeType": "comment",
+                "id": "jevEhYaHdnr5Tx8yqg4Yaece"
+              },
+              {
+                "text": "farDiagonals -> at(i) = A number greater than 0 [Valid far diagonal]",
+                "nodeType": "comment",
+                "id": "PEuAwCRPlhe4V8PDlRGgQyFL"
+              },
+              {
+                "text": "farDiagonals -> at(i) =  0 [Opponent's piece on the diagonal]",
+                "nodeType": "comment",
+                "id": "WwGM4TigD6fAMU53THfDuPhg"
+              },
+              {
+                "text": "farDiagonals -> at(i) = -1 [Invalid far diagonal]",
+                "nodeType": "comment",
+                "id": "kwYjBMiJFK3wwwNYP4UwRELi"
+              },
+              {
+                "text": "",
+                "nodeType": "comment",
+                "id": "BPYx2rDfOb4liiJ4IVIG3MBh"
+              },
+              {
+                "text": "Black",
+                "nodeType": "comment",
+                "id": "jSnmJiCrg2wMuN19TvsSv1Sn"
+              },
+              {
+                "nodeType": "if",
+                "condition": ":code #y0PMqNQlOUPFsm4rMnGjjoth ,( $aClvHWIgAS6FbLdNSbQJz1X9P0 ,) .equals ,( T ,)",
+                "thenBody": [
+                  {
+                    "expr": "$aClvHWIgAS6FbLdNSbQJz1X9P1 ,:= :code #yywoX3vS2SxLIsuQL9Nxd8Xr ,( $aClvHWIgAS6FbLdNSbQJz1X9P0 ,, ,- ,1 ,4 ,, ,- ,1 ,8 ,)",
+                    "nodeType": "exprStmt",
+                    "id": "xYHXLQAXoEbbECcCu65juVOl",
+                    "locals": []
+                  }
+                ],
+                "elseBody": [
+                  {
+                    "expr": "$aClvHWIgAS6FbLdNSbQJz1X9P1 ,:= :code #yywoX3vS2SxLIsuQL9Nxd8Xr ,( $aClvHWIgAS6FbLdNSbQJz1X9P0 ,, ,1 ,4 ,, ,1 ,8 ,)",
+                    "nodeType": "exprStmt",
+                    "id": "F2J2cZQsahSMcfYV0lRa3h7F",
+                    "locals": []
+                  }
+                ],
+                "isElseIf": false,
+                "id": "y4IVdWQcUHaJ2PmL5f9WV4IZ",
+                "locals": []
+              }
+            ],
+            "id": "aClvHWIgAS6FbLdNSbQJz1X9"
+          },
+          {
+            "name": "CaptureMan",
+            "inParameters": [
+              {
+                "name": "index",
+                "type": "Number",
+                "nodeType": "localDef",
+                "id": "BgWVhuKAaPa3ZLLU5KEfJtcAP0"
+              }
+            ],
+            "outParameters": [],
+            "isPrivate": true,
+            "isOffloaded": false,
+            "isTest": false,
+            "isAsync": false,
+            "nodeType": "action",
+            "body": [
+              {
+                "text": "Captures a man!",
+                "nodeType": "comment",
+                "id": "x4O8mhjnJTuoaZgjXkIC4X4i"
+              },
+              {
+                "expr": ":records #f9Pjs1RlOlLy7bnoU3pI8rXM .at ,( $BgWVhuKAaPa3ZLLU5KEfJtcAP0 ,) .manKind .set ,( ' ,)",
+                "nodeType": "exprStmt",
+                "id": "OisC1CrF3tBAoRr95WuWs32i",
+                "locals": []
+              },
+              {
+                "expr": ":data #LAP2EWaO3RwqQahzmuN3Xe4D ,:= T",
+                "nodeType": "exprStmt",
+                "id": "GXfGWO4mIaM68U2z2yT0UxI9",
+                "locals": []
+              },
+              {
+                "text": "",
+                "nodeType": "comment",
+                "id": "N2LvlPuqQyfsuLs2Acorekty"
+              }
+            ],
+            "id": "BgWVhuKAaPa3ZLLU5KEfJtcA"
+          },
+          {
+            "name": "GetValidMoves",
+            "inParameters": [
+              {
+                "name": "selected",
+                "type": "Number",
+                "nodeType": "localDef",
+                "id": "OA9hvnENEFyq4lPWtoRAMoBxP0"
+              }
+            ],
+            "outParameters": [
+              {
+                "name": "valid",
+                "type": "Number Collection",
+                "nodeType": "localDef",
+                "id": "OA9hvnENEFyq4lPWtoRAMoBxP1"
+              },
+              {
+                "name": "far2",
+                "type": "Number Collection",
+                "nodeType": "localDef",
+                "id": "OA9hvnENEFyq4lPWtoRAMoBxP2"
+              }
+            ],
+            "isPrivate": true,
+            "isOffloaded": false,
+            "isTest": false,
+            "isAsync": false,
+            "nodeType": "action",
+            "body": [
+              {
+                "text": "Given a box, calculates all the valid moves and populates the 'validMoves' collection",
+                "nodeType": "comment",
+                "id": "gvaTIxl3hGVcZB9s2CtFQNEE"
+              },
+              {
+                "expr": "$OA9hvnENEFyq4lPWtoRAMoBxP1 ,:= :collections .create_number_collection",
+                "nodeType": "exprStmt",
+                "id": "x1DDfJmQTH8wcK4crtE0086K",
+                "locals": []
+              },
+              {
+                "expr": "$xDF2ZNcGuDquQWrn1Er2YFRYL0 ,, $xDF2ZNcGuDquQWrn1Er2YFRYL1 ,, $xDF2ZNcGuDquQWrn1Er2YFRYL2 ,:= :code #wxT1FQzLJgaMPo5erPijUQLk ,( $OA9hvnENEFyq4lPWtoRAMoBxP0 ,)",
+                "nodeType": "exprStmt",
+                "id": "xDF2ZNcGuDquQWrn1Er2YFRY",
+                "locals": [
+                  {
+                    "name": "bool",
+                    "type": "Boolean",
+                    "nodeType": "localDef",
+                    "id": "xDF2ZNcGuDquQWrn1Er2YFRYL0"
+                  },
+                  {
+                    "name": "near",
+                    "type": "Number Collection",
+                    "nodeType": "localDef",
+                    "id": "xDF2ZNcGuDquQWrn1Er2YFRYL1"
+                  },
+                  {
+                    "name": "far",
+                    "type": "Number Collection",
+                    "nodeType": "localDef",
+                    "id": "xDF2ZNcGuDquQWrn1Er2YFRYL2"
+                  }
+                ]
+              },
+              {
+                "expr": "$OA9hvnENEFyq4lPWtoRAMoBxP2 ,:= $xDF2ZNcGuDquQWrn1Er2YFRYL2",
+                "nodeType": "exprStmt",
+                "id": "KfLEV46vNeaPDm244dmAbomg",
+                "locals": []
+              },
+              {
+                "nodeType": "if",
+                "condition": "$xDF2ZNcGuDquQWrn1Er2YFRYL0",
+                "thenBody": [
+                  {
+                    "bound": ",4",
+                    "body": [
+                      {
+                        "nodeType": "if",
+                        "condition": "$xDF2ZNcGuDquQWrn1Er2YFRYL1 .at ,( $TvJfpsAXwVvggeuTWDM7cyfhB0 ,) ,= ,0 ,and $xDF2ZNcGuDquQWrn1Er2YFRYL2 .at ,( $TvJfpsAXwVvggeuTWDM7cyfhB0 ,) ,> ,0",
+                        "thenBody": [
+                          {
+                            "expr": "$OA9hvnENEFyq4lPWtoRAMoBxP1 .add ,( $xDF2ZNcGuDquQWrn1Er2YFRYL2 .at ,( $TvJfpsAXwVvggeuTWDM7cyfhB0 ,) ,)",
+                            "nodeType": "exprStmt",
+                            "id": "xVXkp2GIl2TIhvMc69MDCocp",
+                            "locals": []
+                          }
+                        ],
+                        "isElseIf": false,
+                        "id": "YGi8EwWVcEl2XEzkuH4Db6H0",
+                        "locals": []
+                      }
+                    ],
+                    "nodeType": "for",
+                    "id": "TvJfpsAXwVvggeuTWDM7cyfh",
+                    "locals": [
+                      {
+                        "name": "i",
+                        "type": "Number",
+                        "nodeType": "localDef",
+                        "id": "TvJfpsAXwVvggeuTWDM7cyfhB0"
+                      }
+                    ]
+                  }
+                ],
+                "elseBody": [
+                  {
+                    "bound": ",4",
+                    "body": [
+                      {
+                        "nodeType": "if",
+                        "condition": "$xDF2ZNcGuDquQWrn1Er2YFRYL1 .at ,( $pn7m52YuZGzg0W7rpik1RKKzB0 ,) ,> ,0",
+                        "thenBody": [
+                          {
+                            "expr": "$OA9hvnENEFyq4lPWtoRAMoBxP1 .add ,( $xDF2ZNcGuDquQWrn1Er2YFRYL1 .at ,( $pn7m52YuZGzg0W7rpik1RKKzB0 ,) ,)",
+                            "nodeType": "exprStmt",
+                            "id": "bZv8ieNXQ0lXzyU2NYGzRqnT",
+                            "locals": []
+                          }
+                        ],
+                        "isElseIf": false,
+                        "id": "o29sxjMtUEUlF8Pfpf16D6iK",
+                        "locals": []
+                      }
+                    ],
+                    "nodeType": "for",
+                    "id": "pn7m52YuZGzg0W7rpik1RKKz",
+                    "locals": [
+                      {
+                        "name": "j",
+                        "type": "Number",
+                        "nodeType": "localDef",
+                        "id": "pn7m52YuZGzg0W7rpik1RKKzB0"
+                      }
+                    ]
+                  }
+                ],
+                "isElseIf": false,
+                "id": "VUsNfQlNEY2r3t0KhvsMLUd9",
+                "locals": []
+              },
+              {
+                "text": "",
+                "nodeType": "comment",
+                "id": "QV2pvB09cJFMjEqZJe4uO1R0"
+              }
+            ],
+            "id": "OA9hvnENEFyq4lPWtoRAMoBx"
+          },
+          {
+            "name": "ConvertToKing",
+            "inParameters": [
+              {
+                "name": "index",
+                "type": "Number",
+                "nodeType": "localDef",
+                "id": "M3gaOaR8219iYVz4meY2ecyGP0"
+              }
+            ],
+            "outParameters": [],
+            "isPrivate": true,
+            "isOffloaded": false,
+            "isTest": false,
+            "isAsync": false,
+            "nodeType": "action",
+            "body": [
+              {
+                "text": "Given a box, converts the piece to a King.",
+                "nodeType": "comment",
+                "id": "D5MjUWqoHs0NdfpMNaUWMWwv"
+              },
+              {
+                "nodeType": "if",
+                "condition": ":code #y0PMqNQlOUPFsm4rMnGjjoth ,( $M3gaOaR8219iYVz4meY2ecyGP0 ,) .equals ,( T ,)",
+                "thenBody": [
+                  {
+                    "expr": ":records #f9Pjs1RlOlLy7bnoU3pI8rXM .at ,( $M3gaOaR8219iYVz4meY2ecyGP0 ,) .manKind .set ,( 'KB ,)",
+                    "nodeType": "exprStmt",
+                    "id": "xpQ24j7zW3QNXPpmnOgX24OA",
+                    "locals": []
+                  }
+                ],
+                "elseBody": [
+                  {
+                    "expr": ":records #f9Pjs1RlOlLy7bnoU3pI8rXM .at ,( $M3gaOaR8219iYVz4meY2ecyGP0 ,) .manKind .set ,( 'KW ,)",
+                    "nodeType": "exprStmt",
+                    "id": "wvdPPTYNKGkEeFAQMnvFRzFg",
+                    "locals": []
+                  }
+                ],
+                "isElseIf": false,
+                "id": "x2Ed4mBnaXt1njfYsPrmEjUb",
+                "locals": []
+              }
+            ],
+            "id": "M3gaOaR8219iYVz4meY2ecyG"
+          },
+          {
+            "name": "PositionMen",
+            "inParameters": [],
+            "outParameters": [],
+            "isPrivate": true,
+            "isOffloaded": false,
+            "isTest": false,
+            "isAsync": false,
+            "nodeType": "action",
+            "body": [
+              {
+                "text": "Function loops through all the positions defined in 'InitialPositions' string collection and creates the piece (man) at the center of the box according to the position.",
+                "nodeType": "comment",
+                "id": "YqcTEfjRpFDsc4CifOEwN4Or"
+              },
+              {
+                "expr": "$QjMr7FKI2gn264bfrzMbV8GTL0 ,:= '1/003b3/003b5/003b7/003b10/003b12/003b14/003b16/003b17/003b19/003b21/003b23/003b42/003b44/003b46/003b48/003b49/003b51/003b53/003b55/003b58/003b60/003b62/003b64 .split ,( '/003b ,)",
+                "nodeType": "exprStmt",
+                "id": "QjMr7FKI2gn264bfrzMbV8GT",
+                "locals": [
+                  {
+                    "name": "initialPositions",
+                    "type": "String Collection",
+                    "nodeType": "localDef",
+                    "id": "QjMr7FKI2gn264bfrzMbV8GTL0"
+                  }
+                ]
+              },
+              {
+                "collection": "$QjMr7FKI2gn264bfrzMbV8GTL0",
+                "conditions": [
+                  {
+                    "condition": "T",
+                    "nodeType": "where",
+                    "id": "OK21sivHcempsyJBexjsueJH",
+                    "locals": []
+                  }
+                ],
+                "body": [
+                  {
+                    "expr": "$x5fBXPglM0u3Qzk9u0ab25DaL0 ,:= :records #f9Pjs1RlOlLy7bnoU3pI8rXM .at ,( $dqQJXOGqPX16kf7HVzAVZrYgB0 .to_number ,)",
+                    "nodeType": "exprStmt",
+                    "id": "x5fBXPglM0u3Qzk9u0ab25Da",
+                    "locals": [
+                      {
+                        "name": "game",
+                        "type": "{\"o\":\"game\"}",
+                        "nodeType": "localDef",
+                        "id": "x5fBXPglM0u3Qzk9u0ab25DaL0"
+                      }
+                    ]
+                  },
+                  {
+                    "nodeType": "if",
+                    "condition": "$dqQJXOGqPX16kf7HVzAVZrYgB0 .to_number ,≥ ,4 ,0",
+                    "thenBody": [
+                      {
+                        "expr": "$x5fBXPglM0u3Qzk9u0ab25DaL0 .manKind .set ,( 'PD ,)",
+                        "nodeType": "exprStmt",
+                        "id": "JfF3F2I2wDCagXTyK26Vrclx",
+                        "locals": []
+                      }
+                    ],
+                    "elseBody": [
+                      {
+                        "expr": "$x5fBXPglM0u3Qzk9u0ab25DaL0 .manKind .set ,( 'PL ,)",
+                        "nodeType": "exprStmt",
+                        "id": "k6i816s5HUcvNuPJfWuZFLkJ",
+                        "locals": []
+                      }
+                    ],
+                    "isElseIf": false,
+                    "id": "iqrkFfRrMGIBLanjsMwxXNBO",
+                    "locals": []
+                  }
+                ],
+                "nodeType": "foreach",
+                "id": "dqQJXOGqPX16kf7HVzAVZrYg",
+                "locals": [
+                  {
+                    "name": "s",
+                    "type": "String",
+                    "nodeType": "localDef",
+                    "id": "dqQJXOGqPX16kf7HVzAVZrYgB0"
+                  }
+                ]
+              }
+            ],
+            "id": "xENi5fRiLnflL6ps0roO2F4C"
+          },
+          {
+            "name": "MoveMan",
+            "inParameters": [
+              {
+                "name": "src",
+                "type": "Number",
+                "nodeType": "localDef",
+                "id": "JN0dSSwQEg7SIzwra6xOMbMNP0"
+              },
+              {
+                "name": "dst",
+                "type": "Number",
+                "nodeType": "localDef",
+                "id": "JN0dSSwQEg7SIzwra6xOMbMNP1"
+              }
+            ],
+            "outParameters": [],
+            "isPrivate": true,
+            "isOffloaded": false,
+            "isTest": false,
+            "isAsync": false,
+            "nodeType": "action",
+            "body": [
+              {
+                "text": "Moves the piece from 'source' to 'destination'",
+                "nodeType": "comment",
+                "id": "OFYP2CqJWHwF4xMMYkKeeLdb"
+              },
+              {
+                "expr": "$oti3FcoaS6uTsS2jy5HILBNyL0 ,:= :records #f9Pjs1RlOlLy7bnoU3pI8rXM .at ,( $JN0dSSwQEg7SIzwra6xOMbMNP0 ,)",
+                "nodeType": "exprStmt",
+                "id": "oti3FcoaS6uTsS2jy5HILBNy",
+                "locals": [
+                  {
+                    "name": "game src",
+                    "type": "{\"o\":\"game\"}",
+                    "nodeType": "localDef",
+                    "id": "oti3FcoaS6uTsS2jy5HILBNyL0"
+                  }
+                ]
+              },
+              {
+                "expr": "$oJjb8aEI2DgXHgZcrWbtIV5BL0 ,:= :records #f9Pjs1RlOlLy7bnoU3pI8rXM .at ,( $JN0dSSwQEg7SIzwra6xOMbMNP1 ,)",
+                "nodeType": "exprStmt",
+                "id": "oJjb8aEI2DgXHgZcrWbtIV5B",
+                "locals": [
+                  {
+                    "name": "game dst",
+                    "type": "{\"o\":\"game\"}",
+                    "nodeType": "localDef",
+                    "id": "oJjb8aEI2DgXHgZcrWbtIV5BL0"
+                  }
+                ]
+              },
+              {
+                "expr": "$oJjb8aEI2DgXHgZcrWbtIV5BL0 .manKind .set ,( $oti3FcoaS6uTsS2jy5HILBNyL0 .manKind .get ,)",
+                "nodeType": "exprStmt",
+                "id": "uVZBc2zSQwdWqFmhlZY4rg12",
+                "locals": []
+              },
+              {
+                "expr": "$oti3FcoaS6uTsS2jy5HILBNyL0 .manKind .set ,( ' ,)",
+                "nodeType": "exprStmt",
+                "id": "SiBs4xmJjwwhz4IKDsyWTXkD",
+                "locals": []
+              },
+              {
+                "text": "Check if piece is eligible to become King",
+                "nodeType": "comment",
+                "id": "NEhFrvmIOgsqL3Q8h48FP1oi"
+              },
+              {
+                "expr": "$m5ncCNQmCqk4hGoD6PalXxzAL0 ,:= F",
+                "nodeType": "exprStmt",
+                "id": "m5ncCNQmCqk4hGoD6PalXxzA",
+                "locals": [
+                  {
+                    "name": "kingMade",
+                    "type": "Boolean",
+                    "nodeType": "localDef",
+                    "id": "m5ncCNQmCqk4hGoD6PalXxzAL0"
+                  }
+                ]
+              },
+              {
+                "nodeType": "if",
+                "condition": ",not :code #xsA9QLHNqDrd5XWpZXmPN0Ja ,( $JN0dSSwQEg7SIzwra6xOMbMNP1 ,)",
+                "thenBody": [
+                  {
+                    "nodeType": "if",
+                    "condition": ",( :code #y0PMqNQlOUPFsm4rMnGjjoth ,( $JN0dSSwQEg7SIzwra6xOMbMNP1 ,) .equals ,( T ,) ,and $JN0dSSwQEg7SIzwra6xOMbMNP1 ,< ,8 ,) ,or ,( :code #y0PMqNQlOUPFsm4rMnGjjoth ,( $JN0dSSwQEg7SIzwra6xOMbMNP1 ,) .equals ,( F ,) ,and $JN0dSSwQEg7SIzwra6xOMbMNP1 ,> ,5 ,7 ,)",
+                    "thenBody": [
+                      {
+                        "expr": ":code #M3gaOaR8219iYVz4meY2ecyG ,( $JN0dSSwQEg7SIzwra6xOMbMNP1 ,)",
+                        "nodeType": "exprStmt",
+                        "id": "RpPpscfUZQxlQNo8MM2m6KDd",
+                        "locals": []
+                      },
+                      {
+                        "expr": "$m5ncCNQmCqk4hGoD6PalXxzAL0 ,:= T",
+                        "nodeType": "exprStmt",
+                        "id": "qGZ69RWMM5sG2YT1vk7p4zvA",
+                        "locals": []
+                      }
+                    ],
+                    "isElseIf": false,
+                    "id": "BNAqBfMU0zNtE9ZiW319AlwR",
+                    "locals": []
+                  }
+                ],
+                "isElseIf": false,
+                "id": "xwxMinzHSidBSFLQIZFzp4Nv",
+                "locals": []
+              },
+              {
+                "text": "Continue player's turn for multiple capture",
+                "nodeType": "comment",
+                "id": "uUoLf8Odv0VEbbQEoInH0okf"
+              },
+              {
+                "nodeType": "if",
+                "condition": ",not $m5ncCNQmCqk4hGoD6PalXxzAL0",
+                "thenBody": [
+                  {
+                    "expr": "$K4gkJ3zr4a9ccOchzdFWDCkuL0 ,, $K4gkJ3zr4a9ccOchzdFWDCkuL1 ,, $K4gkJ3zr4a9ccOchzdFWDCkuL2 ,:= :code #wxT1FQzLJgaMPo5erPijUQLk ,( $JN0dSSwQEg7SIzwra6xOMbMNP1 ,)",
+                    "nodeType": "exprStmt",
+                    "id": "K4gkJ3zr4a9ccOchzdFWDCku",
+                    "locals": [
+                      {
+                        "name": "bool",
+                        "type": "Boolean",
+                        "nodeType": "localDef",
+                        "id": "K4gkJ3zr4a9ccOchzdFWDCkuL0"
+                      },
+                      {
+                        "name": "near",
+                        "type": "Number Collection",
+                        "nodeType": "localDef",
+                        "id": "K4gkJ3zr4a9ccOchzdFWDCkuL1"
+                      },
+                      {
+                        "name": "far",
+                        "type": "Number Collection",
+                        "nodeType": "localDef",
+                        "id": "K4gkJ3zr4a9ccOchzdFWDCkuL2"
+                      }
+                    ]
+                  },
+                  {
+                    "nodeType": "if",
+                    "condition": ",not ,( :data #LAP2EWaO3RwqQahzmuN3Xe4D ,and $K4gkJ3zr4a9ccOchzdFWDCkuL0 ,)",
+                    "thenBody": [
+                      {
+                        "expr": ":code #tpuVxtsTvvYmIqmPP6DJqSPZ",
+                        "nodeType": "exprStmt",
+                        "id": "Bq2otgDwkZQha7SE602GgocU",
+                        "locals": []
+                      }
+                    ],
+                    "elseBody": [
+                      {
+                        "text": "still your turn message",
+                        "nodeType": "comment",
+                        "id": "U1DDeN0OBVX3zetne8LQgG4a"
+                      }
+                    ],
+                    "isElseIf": false,
+                    "id": "xlwa4j3wvtXmLc4WVU5dGdlq",
+                    "locals": []
+                  }
+                ],
+                "elseBody": [
+                  {
+                    "expr": ":code #tpuVxtsTvvYmIqmPP6DJqSPZ",
+                    "nodeType": "exprStmt",
+                    "id": "sEND4iGCPPKW32wRk1TgfY5w",
+                    "locals": []
+                  }
+                ],
+                "isElseIf": false,
+                "id": "Zmh9PVC4GH9cE3O8K1enl4QT",
+                "locals": []
+              }
+            ],
+            "id": "JN0dSSwQEg7SIzwra6xOMbMN"
+          },
+          {
+            "name": "BoxHandler",
+            "inParameters": [
+              {
+                "name": "index",
+                "type": "Number",
+                "nodeType": "localDef",
+                "id": "ym8mOIYr2aPwi2jfu3SKitR2P0"
+              }
+            ],
+            "outParameters": [],
+            "isPrivate": true,
+            "isOffloaded": false,
+            "isTest": false,
+            "isAsync": false,
+            "nodeType": "action",
+            "body": [
+              {
+                "text": "This event is the heart of the app. Event handles taps on the boxes.",
+                "nodeType": "comment",
+                "id": "zHfkSFcmuQ7CU71Ajyd4j9VB"
+              },
+              {
+                "text": "When the user taps on a box, the code Check if user is 'selecting a piece' OR 'making the move'. If the user is selecting a piece, check if he/she can select the piece. If the selection is valid, highlight the selected box and also highlight the available valid moves.",
+                "nodeType": "comment",
+                "id": "XuqHji79lW1ditGUu6S2MLyP"
+              },
+              {
+                "text": "If the user is making a move, check if the move is valid. Making an invalid move or tapping on the already selected box will cancel the move. If everything's good, move the piece. While moving the piece check if the user is capturing opponent's piece.",
+                "nodeType": "comment",
+                "id": "klsds5lKPVU8Ha4ldc7v7Y45"
+              },
+              {
+                "expr": "$pbJaYLEgF1B4KwHo2lTRgOTLL0 ,:= :records #mkvHgFI0R8yxWEfvc4oE4lzF .singleton .turn .get",
+                "nodeType": "exprStmt",
+                "id": "pbJaYLEgF1B4KwHo2lTRgOTL",
+                "locals": [
+                  {
+                    "name": "turn",
+                    "type": "Boolean",
+                    "nodeType": "localDef",
+                    "id": "pbJaYLEgF1B4KwHo2lTRgOTLL0"
+                  }
+                ]
+              },
+              {
+                "text": "If Box is not already selected",
+                "nodeType": "comment",
+                "id": "xPvJepnyj3IDwCd371thpZV4"
+              },
+              {
+                "nodeType": "if",
+                "condition": ":data #xn7BMXM9CjcvPNpjQcrbDX3K ,= ,- ,1",
+                "thenBody": [
+                  {
+                    "text": "Box will be selected only if there's a man on that box and it's that color's turn",
+                    "nodeType": "comment",
+                    "id": "nG51nFadUiu27NGG9WzJKgM4"
+                  },
+                  {
+                    "nodeType": "if",
+                    "condition": ":code #N5Nf6ZWhA1w5ZIBPQwShOsrv ,( $ym8mOIYr2aPwi2jfu3SKitR2P0 ,) ,and :code #D7TeMKvoYbfNN59wErm0rUL4 ,( $ym8mOIYr2aPwi2jfu3SKitR2P0 ,)",
+                    "thenBody": [
+                      {
+                        "nodeType": "if",
+                        "condition": ",( ,not :data #QyJljmyglow1c4LHSxES2xe6 ,and :code #y0PMqNQlOUPFsm4rMnGjjoth ,( $ym8mOIYr2aPwi2jfu3SKitR2P0 ,) .equals ,( :data #l65zqyT8OQmqVRJkTO3gIjSd ,) ,) ,or ,( :data #QyJljmyglow1c4LHSxES2xe6 ,and :code #y0PMqNQlOUPFsm4rMnGjjoth ,( $ym8mOIYr2aPwi2jfu3SKitR2P0 ,) .equals ,( $pbJaYLEgF1B4KwHo2lTRgOTLL0 ,) ,)",
+                        "thenBody": [
+                          {
+                            "expr": ":data #xn7BMXM9CjcvPNpjQcrbDX3K ,:= $ym8mOIYr2aPwi2jfu3SKitR2P0",
+                            "nodeType": "exprStmt",
+                            "id": "Dbdnaf3pcvNgb6KTmZ0y08EX",
+                            "locals": []
+                          },
+                          {
+                            "expr": "$xikubZU5ZDMs1TVBy8Z32D0XL0 ,:= :records #x553ka3R9OGnko4eNBRQ4jXl .at ,( $ym8mOIYr2aPwi2jfu3SKitR2P0 ,)",
+                            "nodeType": "exprStmt",
+                            "id": "xikubZU5ZDMs1TVBy8Z32D0X",
+                            "locals": [
+                              {
+                                "name": "current",
+                                "type": "{\"o\":\"board\"}",
+                                "nodeType": "localDef",
+                                "id": "xikubZU5ZDMs1TVBy8Z32D0XL0"
+                              }
+                            ]
+                          },
+                          {
+                            "expr": "$xikubZU5ZDMs1TVBy8Z32D0XL0 .box_color .set ,( :colors .orange ,)",
+                            "nodeType": "exprStmt",
+                            "id": "KSdgNFZ2bv7szRQgrLwQvlgm",
+                            "locals": []
+                          },
+                          {
+                            "expr": "$x7YxPN27vH44jY8uwJbGiHw4L0 ,, $x7YxPN27vH44jY8uwJbGiHw4L1 ,:= :code #OA9hvnENEFyq4lPWtoRAMoBx ,( $ym8mOIYr2aPwi2jfu3SKitR2P0 ,)",
+                            "nodeType": "exprStmt",
+                            "id": "x7YxPN27vH44jY8uwJbGiHw4",
+                            "locals": [
+                              {
+                                "name": "valid2",
+                                "type": "Number Collection",
+                                "nodeType": "localDef",
+                                "id": "x7YxPN27vH44jY8uwJbGiHw4L0"
+                              },
+                              {
+                                "name": "far",
+                                "type": "Number Collection",
+                                "nodeType": "localDef",
+                                "id": "x7YxPN27vH44jY8uwJbGiHw4L1"
+                              }
+                            ]
+                          },
+                          {
+                            "expr": ":code #ppqo904AK8SKL4lMWuhXcg4y ,( T ,, $x7YxPN27vH44jY8uwJbGiHw4L0 ,)",
+                            "nodeType": "exprStmt",
+                            "id": "xAFRuUWjNh2Zdo7MfnJ47ihv",
+                            "locals": []
+                          },
+                          {
+                            "expr": ":data #LAP2EWaO3RwqQahzmuN3Xe4D ,:= F",
+                            "nodeType": "exprStmt",
+                            "id": "xat1sF0rvf4m0j0T3SsGXcUC",
+                            "locals": []
+                          }
+                        ],
+                        "isElseIf": false,
+                        "id": "ljhKyG3dok1MtGodUa7cZXv9",
+                        "locals": []
+                      }
+                    ],
+                    "isElseIf": false,
+                    "id": "ysCmoffR7dvPwZvPvqjaPrwp",
+                    "locals": []
+                  }
+                ],
+                "elseBody": [
+                  {
+                    "text": "If box was already selected (the user is making a move)",
+                    "nodeType": "comment",
+                    "id": "ToTB98MOu0Vdo4Kx2SMTXzIK"
+                  },
+                  {
+                    "text": "If the user taps the selected box again, the box will be deselected",
+                    "nodeType": "comment",
+                    "id": "jDRcyydVXzCscokVEe2s0gOx"
+                  },
+                  {
+                    "expr": "$kZWYV2m4JTFuyXyR2CLQiF6CL0 ,, $kZWYV2m4JTFuyXyR2CLQiF6CL1 ,:= :code #OA9hvnENEFyq4lPWtoRAMoBx ,( :data #xn7BMXM9CjcvPNpjQcrbDX3K ,)",
+                    "nodeType": "exprStmt",
+                    "id": "kZWYV2m4JTFuyXyR2CLQiF6C",
+                    "locals": [
+                      {
+                        "name": "valid",
+                        "type": "Number Collection",
+                        "nodeType": "localDef",
+                        "id": "kZWYV2m4JTFuyXyR2CLQiF6CL0"
+                      },
+                      {
+                        "name": "far2",
+                        "type": "Number Collection",
+                        "nodeType": "localDef",
+                        "id": "kZWYV2m4JTFuyXyR2CLQiF6CL1"
+                      }
+                    ]
+                  },
+                  {
+                    "nodeType": "if",
+                    "condition": ":data #xn7BMXM9CjcvPNpjQcrbDX3K ,≠ $ym8mOIYr2aPwi2jfu3SKitR2P0",
+                    "thenBody": [
+                      {
+                        "expr": "$jrRjL1KF84pjkNzDCSYBKsPtL0 ,:= $kZWYV2m4JTFuyXyR2CLQiF6CL0 .contains ,( $ym8mOIYr2aPwi2jfu3SKitR2P0 ,) ,and ,not :code #FKtLuQSxJRtpHikn4D2212wD",
+                        "nodeType": "exprStmt",
+                        "id": "jrRjL1KF84pjkNzDCSYBKsPt",
+                        "locals": [
+                          {
+                            "name": "b",
+                            "type": "Boolean",
+                            "nodeType": "localDef",
+                            "id": "jrRjL1KF84pjkNzDCSYBKsPtL0"
+                          }
+                        ]
+                      },
+                      {
+                        "nodeType": "if",
+                        "condition": ",not :data #QyJljmyglow1c4LHSxES2xe6 ,and :data #l65zqyT8OQmqVRJkTO3gIjSd .equals ,( $pbJaYLEgF1B4KwHo2lTRgOTLL0 ,) ,and $jrRjL1KF84pjkNzDCSYBKsPtL0",
+                        "thenBody": [
+                          {
+                            "expr": ":code #OkkysQyfe4cUQKZBMQEs6Yqq ,( $ym8mOIYr2aPwi2jfu3SKitR2P0 ,, $kZWYV2m4JTFuyXyR2CLQiF6CL1 ,)",
+                            "nodeType": "exprStmt",
+                            "id": "xZEsqWa7TRdXCVmQ8As89inm",
+                            "locals": []
+                          },
+                          {
+                            "expr": ":code #JN0dSSwQEg7SIzwra6xOMbMN ,( :data #xn7BMXM9CjcvPNpjQcrbDX3K ,, $ym8mOIYr2aPwi2jfu3SKitR2P0 ,)",
+                            "nodeType": "exprStmt",
+                            "id": "i4Ag4mZHL5IOKT3yGTBcl8AH",
+                            "locals": []
+                          }
+                        ],
+                        "isElseIf": false,
+                        "id": "SJvUVd2FUM9cr44cyJcZHH8X",
+                        "locals": []
+                      },
+                      {
+                        "nodeType": "if",
+                        "condition": ":data #QyJljmyglow1c4LHSxES2xe6 ,and $jrRjL1KF84pjkNzDCSYBKsPtL0",
+                        "thenBody": [
+                          {
+                            "expr": ":code #OkkysQyfe4cUQKZBMQEs6Yqq ,( $ym8mOIYr2aPwi2jfu3SKitR2P0 ,, $kZWYV2m4JTFuyXyR2CLQiF6CL1 ,)",
+                            "nodeType": "exprStmt",
+                            "id": "P7OIJiPf2qFGP2VmfQrQUsQh",
+                            "locals": []
+                          },
+                          {
+                            "expr": ":code #JN0dSSwQEg7SIzwra6xOMbMN ,( :data #xn7BMXM9CjcvPNpjQcrbDX3K ,, $ym8mOIYr2aPwi2jfu3SKitR2P0 ,)",
+                            "nodeType": "exprStmt",
+                            "id": "xfJm1DDTFw2OLutCqVNe4r3a",
+                            "locals": []
+                          }
+                        ],
+                        "isElseIf": true,
+                        "id": "DSpiVYwdtwShMkvrI2guKnRL",
+                        "locals": []
+                      }
+                    ],
+                    "isElseIf": false,
+                    "id": "Qc34MFZW7SVAYmbunBOW4sm9",
+                    "locals": []
+                  },
+                  {
+                    "text": "Remove the highlight",
+                    "nodeType": "comment",
+                    "id": "RGBzlyqxrOnR6vorf75XyhgZ"
+                  },
+                  {
+                    "expr": ":code #ppqo904AK8SKL4lMWuhXcg4y ,( F ,, $kZWYV2m4JTFuyXyR2CLQiF6CL0 ,)",
+                    "nodeType": "exprStmt",
+                    "id": "mgJ5CkYh7wEIvS1SD2SX2zPL",
+                    "locals": []
+                  },
+                  {
+                    "expr": "$h9pn2b4MUCCd0ZxTppQ252KFL0 ,:= :records #x553ka3R9OGnko4eNBRQ4jXl .at ,( :data #xn7BMXM9CjcvPNpjQcrbDX3K ,)",
+                    "nodeType": "exprStmt",
+                    "id": "h9pn2b4MUCCd0ZxTppQ252KF",
+                    "locals": [
+                      {
+                        "name": "entry",
+                        "type": "{\"o\":\"board\"}",
+                        "nodeType": "localDef",
+                        "id": "h9pn2b4MUCCd0ZxTppQ252KFL0"
+                      }
+                    ]
+                  },
+                  {
+                    "expr": "$h9pn2b4MUCCd0ZxTppQ252KFL0 .box_color .set ,( $h9pn2b4MUCCd0ZxTppQ252KFL0 .backup .get ,)",
+                    "nodeType": "exprStmt",
+                    "id": "CkuIhGxqkZt1sAd7Mr2EURn4",
+                    "locals": []
+                  },
+                  {
+                    "expr": ":data #xn7BMXM9CjcvPNpjQcrbDX3K ,:= ,- ,1",
+                    "nodeType": "exprStmt",
+                    "id": "xChrJu4COOKNoVUnJ4pubGzh",
+                    "locals": []
+                  },
+                  {
+                    "expr": ":code #yF1oAp8Mc4cRE8GGst4eFttt",
+                    "nodeType": "exprStmt",
+                    "id": "VEr1niSCWF4YIrSCpBzC3CTN",
+                    "locals": []
+                  }
+                ],
+                "isElseIf": false,
+                "id": "Kc0HDMhjmqNlX4iws77M0fSv",
+                "locals": []
+              }
+            ],
+            "id": "ym8mOIYr2aPwi2jfu3SKitR2"
+          },
+          {
+            "name": "play single device",
+            "inParameters": [],
+            "outParameters": [],
+            "isPrivate": true,
+            "isOffloaded": false,
+            "isTest": false,
+            "isAsync": false,
+            "nodeType": "action",
+            "body": [
+              {
+                "expr": ":data #QyJljmyglow1c4LHSxES2xe6 ,:= T",
+                "nodeType": "exprStmt",
+                "id": "D311B4fVo1m8gqraK4Uj505j",
+                "locals": []
+              },
+              {
+                "expr": ":cloud_data .switch_to_session ,( :cloud_data .just_me_session ,)",
+                "nodeType": "exprStmt",
+                "id": "xoHS7AVhTXI1aY4ETZIWzcjo",
+                "locals": []
+              },
+              {
+                "expr": ":code #xMRUXnJkveow4MORBz21aID7",
+                "nodeType": "exprStmt",
+                "id": "IMiK8K6aOjPV5tLPjGG2AqmY",
+                "locals": []
+              },
+              {
+                "expr": ":code #c1HztlYfQLvXSUEy2ZwMwifJ",
+                "nodeType": "exprStmt",
+                "id": "U4kKn5ncWtCpCt92nsLeA7wM",
+                "locals": []
+              }
+            ],
+            "id": "illZcK47HCewGvJBeBtr7010"
+          },
+          {
+            "name": "ResetGame?",
+            "inParameters": [],
+            "outParameters": [],
+            "isPrivate": true,
+            "isOffloaded": false,
+            "isTest": false,
+            "isAsync": false,
+            "nodeType": "action",
+            "body": [
+              {
+                "nodeType": "if",
+                "condition": ":data #QyJljmyglow1c4LHSxES2xe6",
+                "thenBody": [
+                  {
+                    "expr": ":code #xR6W3w3518eGuyPdxEDgUEyi ,( 'OK_to_reset_game/003f ,)",
+                    "nodeType": "exprStmt",
+                    "id": "t4gTTtUvGJ3TFn4HgQAzttHU",
+                    "locals": []
+                  },
+                  {
+                    "expr": "$OdwtHZngnq62Xh2tV2N6eAoyL0 ,:= :records #xiv642C7Iqpr0DKQQIWT26kl .at ,( F ,) .wants_to_reset .get ,∥ :records #xiv642C7Iqpr0DKQQIWT26kl .at ,( T ,) .wants_to_reset .get",
+                    "nodeType": "exprStmt",
+                    "id": "OdwtHZngnq62Xh2tV2N6eAoy",
+                    "locals": [
+                      {
+                        "name": "s",
+                        "type": "String",
+                        "nodeType": "localDef",
+                        "id": "OdwtHZngnq62Xh2tV2N6eAoyL0"
+                      }
+                    ]
+                  },
+                  {
+                    "nodeType": "if",
+                    "condition": "$OdwtHZngnq62Xh2tV2N6eAoyL0 .contains ,( 'Y ,)",
+                    "thenBody": [
+                      {
+                        "expr": ":code #mDa2D9KkoPWq1picUnnI4Od4",
+                        "nodeType": "exprStmt",
+                        "id": "OqjbvGyhjjXMZ4pWSELOzfkd",
+                        "locals": []
+                      },
+                      {
+                        "expr": ":code #xMRUXnJkveow4MORBz21aID7",
+                        "nodeType": "exprStmt",
+                        "id": "i8OgcuiPsBKkPdwBD63DAELK",
+                        "locals": []
+                      }
+                    ],
+                    "isElseIf": false,
+                    "id": "kE0StFHbaMJHEFigOd1sVU89",
+                    "locals": []
+                  },
+                  {
+                    "expr": ":records #xiv642C7Iqpr0DKQQIWT26kl .clear",
+                    "nodeType": "exprStmt",
+                    "id": "A4Ozuw8tN5HzkQdNGg2XEe0t",
+                    "locals": []
+                  }
+                ],
+                "elseBody": [
+                  {
+                    "expr": "$IGu4hZkeWYHrD0k5AV6dz2fZL0 ,:= :records #xiv642C7Iqpr0DKQQIWT26kl .at ,( F ,) .wants_to_reset .get ,∥ :records #xiv642C7Iqpr0DKQQIWT26kl .at ,( T ,) .wants_to_reset .get",
+                    "nodeType": "exprStmt",
+                    "id": "IGu4hZkeWYHrD0k5AV6dz2fZ",
+                    "locals": [
+                      {
+                        "name": "s",
+                        "type": "String",
+                        "nodeType": "localDef",
+                        "id": "IGu4hZkeWYHrD0k5AV6dz2fZL0"
+                      }
+                    ]
+                  },
+                  {
+                    "nodeType": "if",
+                    "condition": "$IGu4hZkeWYHrD0k5AV6dz2fZL0 .equals ,( ' ,)",
+                    "thenBody": [
+                      {
+                        "expr": ":records #xiv642C7Iqpr0DKQQIWT26kl .at ,( :data #l65zqyT8OQmqVRJkTO3gIjSd ,) .wants_to_reset .set ,( 'Y ,)",
+                        "nodeType": "exprStmt",
+                        "id": "SQGboj4RC2Hl6MwhAvEWhDxR",
+                        "locals": []
+                      }
+                    ],
+                    "isElseIf": false,
+                    "id": "Rp8AD2nsG7hlIc9uZruNskpc",
+                    "locals": []
+                  },
+                  {
+                    "nodeType": "if",
+                    "condition": "$IGu4hZkeWYHrD0k5AV6dz2fZL0 .equals ,( 'Y ,)",
+                    "thenBody": [
+                      {
+                        "text": "there is a Y, but don't have other response",
+                        "nodeType": "comment",
+                        "id": "uUYknMA3s56Nih46nS0xdHar"
+                      },
+                      {
+                        "nodeType": "if",
+                        "condition": ":records #xiv642C7Iqpr0DKQQIWT26kl .at ,( :data #l65zqyT8OQmqVRJkTO3gIjSd ,) .wants_to_reset .get .equals ,( ' ,)",
+                        "thenBody": [
+                          {
+                            "expr": ":code #xR6W3w3518eGuyPdxEDgUEyi ,( 'Do_you_agree_to_reset/003f ,)",
+                            "nodeType": "exprStmt",
+                            "id": "bc4qwHczKUzW5u2a9ssm4FIN",
+                            "locals": []
+                          },
+                          {
+                            "expr": "$IGu4hZkeWYHrD0k5AV6dz2fZL0 ,:= :records #xiv642C7Iqpr0DKQQIWT26kl .at ,( F ,) .wants_to_reset .get ,∥ :records #xiv642C7Iqpr0DKQQIWT26kl .at ,( T ,) .wants_to_reset .get",
+                            "nodeType": "exprStmt",
+                            "id": "x5Z4bib7CO55tbBpsodhnhZY",
+                            "locals": []
+                          },
+                          {
+                            "nodeType": "if",
+                            "condition": "$IGu4hZkeWYHrD0k5AV6dz2fZL0 .equals ,( 'YY ,)",
+                            "thenBody": [
+                              {
+                                "expr": ":code #mDa2D9KkoPWq1picUnnI4Od4",
+                                "nodeType": "exprStmt",
+                                "id": "aBT0NBYkGXMF3j1ndD2VEG9P",
+                                "locals": []
+                              },
+                              {
+                                "expr": ":code #xMRUXnJkveow4MORBz21aID7",
+                                "nodeType": "exprStmt",
+                                "id": "xMnADJfSFEXXwy5PMBfVYKNR",
+                                "locals": []
+                              }
+                            ],
+                            "elseBody": [
+                              {
+                                "expr": ":records #xiv642C7Iqpr0DKQQIWT26kl .clear",
+                                "nodeType": "exprStmt",
+                                "id": "lRzBKAzI0uExBbjh9a2qBJlU",
+                                "locals": []
+                              }
+                            ],
+                            "isElseIf": false,
+                            "id": "scQHbzB8X3YSgiOOjm2hFVYe",
+                            "locals": []
+                          }
+                        ],
+                        "elseBody": [
+                          {
+                            "expr": ":records #xiv642C7Iqpr0DKQQIWT26kl .at ,( :data #l65zqyT8OQmqVRJkTO3gIjSd ,) .wants_to_reset .set ,( ' ,)",
+                            "nodeType": "exprStmt",
+                            "id": "MYqbTT3tt4aRwwvG7bZjZ1D4",
+                            "locals": []
+                          }
+                        ],
+                        "isElseIf": false,
+                        "id": "x4OKC7Z4SWqsIx7oi5LhrBnx",
+                        "locals": []
+                      }
+                    ],
+                    "isElseIf": true,
+                    "id": "Da0FKIs7jNKcUel4ZXgRfrwe",
+                    "locals": []
+                  }
+                ],
+                "isElseIf": false,
+                "id": "mXVSInh2hbP2JW14JPDlPiqs",
+                "locals": []
+              }
+            ],
+            "id": "Jo7Bnmu1Ndt6Vnov8miwSpyQ"
+          },
+          {
+            "name": "to pic",
+            "inParameters": [
+              {
+                "name": "index",
+                "type": "Number",
+                "nodeType": "localDef",
+                "id": "xRZcVvHvTLLZ4pxGztUl2lhWP0"
+              }
+            ],
+            "outParameters": [
+              {
+                "name": "pic2",
+                "type": "Picture",
+                "nodeType": "localDef",
+                "id": "xRZcVvHvTLLZ4pxGztUl2lhWP1"
+              }
+            ],
+            "isPrivate": true,
+            "isOffloaded": false,
+            "isTest": false,
+            "isAsync": false,
+            "nodeType": "action",
+            "body": [
+              {
+                "expr": "$xRZcVvHvTLLZ4pxGztUl2lhWP1 ,:= :invalid .picture",
+                "nodeType": "exprStmt",
+                "id": "iO3y2dRDxxOkLbM9AqPDuOyc",
+                "locals": []
+              },
+              {
+                "expr": "$dJbSTlbgaReU3dbsIQ9t4Ws4L0 ,:= :records #f9Pjs1RlOlLy7bnoU3pI8rXM .at ,( $xRZcVvHvTLLZ4pxGztUl2lhWP0 ,) .manKind .get",
+                "nodeType": "exprStmt",
+                "id": "dJbSTlbgaReU3dbsIQ9t4Ws4",
+                "locals": [
+                  {
+                    "name": "s",
+                    "type": "String",
+                    "nodeType": "localDef",
+                    "id": "dJbSTlbgaReU3dbsIQ9t4Ws4L0"
+                  }
+                ]
+              },
+              {
+                "nodeType": "if",
+                "condition": "$dJbSTlbgaReU3dbsIQ9t4Ws4L0 .equals ,( 'PL ,)",
+                "thenBody": [
+                  {
+                    "expr": "$xRZcVvHvTLLZ4pxGztUl2lhWP1 ,:= :art #zvZ8F4wgWUKiA4YGWTTByFnS",
+                    "nodeType": "exprStmt",
+                    "id": "U46ITVqPQ4D0NQ2hlqxgRc4x",
+                    "locals": []
+                  }
+                ],
+                "isElseIf": false,
+                "id": "WgqTqBOJYNV9FuuzMTG4yUS6",
+                "locals": []
+              },
+              {
+                "nodeType": "if",
+                "condition": "$dJbSTlbgaReU3dbsIQ9t4Ws4L0 .equals ,( 'PD ,)",
+                "thenBody": [
+                  {
+                    "expr": "$xRZcVvHvTLLZ4pxGztUl2lhWP1 ,:= :art #zqebQf2TM1mJn94J6Fj1yPc5",
+                    "nodeType": "exprStmt",
+                    "id": "e9FKdYbf04FJBLXyN1ib12ac",
+                    "locals": []
+                  }
+                ],
+                "isElseIf": true,
+                "id": "Sh2r3qaHXJsCX60cZEBwkkDz",
+                "locals": []
+              },
+              {
+                "nodeType": "if",
+                "condition": "$dJbSTlbgaReU3dbsIQ9t4Ws4L0 .equals ,( 'KW ,)",
+                "thenBody": [
+                  {
+                    "expr": "$xRZcVvHvTLLZ4pxGztUl2lhWP1 ,:= :art #rGKCSxLuuqqpR0mniU649r9m",
+                    "nodeType": "exprStmt",
+                    "id": "N17z9f93abenxuYyDybEARSM",
+                    "locals": []
+                  }
+                ],
+                "isElseIf": true,
+                "id": "CoUwA4qzr0cpVBSIfYw4fy5M",
+                "locals": []
+              },
+              {
+                "nodeType": "if",
+                "condition": "$dJbSTlbgaReU3dbsIQ9t4Ws4L0 .equals ,( 'KB ,)",
+                "thenBody": [
+                  {
+                    "expr": "$xRZcVvHvTLLZ4pxGztUl2lhWP1 ,:= :art #R4vqK4bjXHK80HqbtCiL62jY",
+                    "nodeType": "exprStmt",
+                    "id": "n62ZMfzk73GYtWGLt7EZ5jOl",
+                    "locals": []
+                  }
+                ],
+                "isElseIf": true,
+                "id": "m5USvb3YkXVA86YwH4gzRMKD",
+                "locals": []
+              }
+            ],
+            "id": "xRZcVvHvTLLZ4pxGztUl2lhW"
+          },
+          {
+            "name": "has piece?",
+            "inParameters": [
+              {
+                "name": "index",
+                "type": "Number",
+                "nodeType": "localDef",
+                "id": "N5Nf6ZWhA1w5ZIBPQwShOsrvP0"
+              }
+            ],
+            "outParameters": [
+              {
+                "name": "r",
+                "type": "Boolean",
+                "nodeType": "localDef",
+                "id": "N5Nf6ZWhA1w5ZIBPQwShOsrvP1"
+              }
+            ],
+            "isPrivate": true,
+            "isOffloaded": false,
+            "isTest": false,
+            "isAsync": false,
+            "nodeType": "action",
+            "body": [
+              {
+                "expr": "$N5Nf6ZWhA1w5ZIBPQwShOsrvP1 ,:= ,not :records #f9Pjs1RlOlLy7bnoU3pI8rXM .at ,( $N5Nf6ZWhA1w5ZIBPQwShOsrvP0 ,) .manKind .get .equals ,( ' ,)",
+                "nodeType": "exprStmt",
+                "id": "N5EYvck4TNdGl0GKdtc88SIP",
+                "locals": []
+              }
+            ],
+            "id": "N5Nf6ZWhA1w5ZIBPQwShOsrv"
+          },
+          {
+            "name": "InitGameBoard",
+            "inParameters": [],
+            "outParameters": [],
+            "isPrivate": true,
+            "isOffloaded": false,
+            "isTest": false,
+            "isAsync": false,
+            "nodeType": "action",
+            "body": [
+              {
+                "expr": ":code #x3lZ0CV24Ku71GF174gPkdRW",
+                "nodeType": "exprStmt",
+                "id": "p1x2kZnicrBv6una7Esyp2Em",
+                "locals": []
+              },
+              {
+                "expr": ":code #FJDzPB2rWhYeIC4p8Gvcpzpe",
+                "nodeType": "exprStmt",
+                "id": "xx4nZv2Tp9xKesdiHeworsXD",
+                "locals": []
+              }
+            ],
+            "id": "mDa2D9KkoPWq1picUnnI4Od4"
+          },
+          {
+            "name": "who am i?",
+            "comment": "",
+            "type": "Boolean",
+            "isReadonly": false,
+            "isTransient": true,
+            "nodeType": "data",
+            "id": "l65zqyT8OQmqVRJkTO3gIjSd"
+          },
+          {
+            "nodeType": "record",
+            "name": "game",
+            "sourceName": "game index",
+            "comment": "",
+            "category": "index",
+            "isCloudEnabled": true,
+            "keys": [
+              {
+                "nodeType": "recordKey",
+                "name": "index",
+                "type": "Number",
+                "id": "fc2fI1rtreYLLmbQ5XZx51yY"
+              }
+            ],
+            "fields": [
+              {
+                "nodeType": "recordField",
+                "name": "manKind",
+                "type": "String",
+                "id": "rqzy4wbsk8LFwJW18vYjP7gt"
+              }
+            ],
+            "id": "f9Pjs1RlOlLy7bnoU3pI8rXM"
+          },
+          {
+            "name": "has king?",
+            "inParameters": [
+              {
+                "name": "index",
+                "type": "Number",
+                "nodeType": "localDef",
+                "id": "xsA9QLHNqDrd5XWpZXmPN0JaP0"
+              }
+            ],
+            "outParameters": [
+              {
+                "name": "b",
+                "type": "Boolean",
+                "nodeType": "localDef",
+                "id": "xsA9QLHNqDrd5XWpZXmPN0JaP1"
+              }
+            ],
+            "isPrivate": true,
+            "isOffloaded": false,
+            "isTest": false,
+            "isAsync": false,
+            "nodeType": "action",
+            "body": [
+              {
+                "expr": "$xsA9QLHNqDrd5XWpZXmPN0JaP1 ,:= :records #f9Pjs1RlOlLy7bnoU3pI8rXM .at ,( $xsA9QLHNqDrd5XWpZXmPN0JaP0 ,) .manKind .get .contains ,( 'K ,)",
+                "nodeType": "exprStmt",
+                "id": "B5r2i45ChSLvaZMtXyPOug6k",
+                "locals": []
+              }
+            ],
+            "id": "xsA9QLHNqDrd5XWpZXmPN0Ja"
+          },
+          {
+            "name": "set neighbor",
+            "inParameters": [
+              {
+                "name": "index",
+                "type": "Number",
+                "nodeType": "localDef",
+                "id": "XcK41DJmXW9gH3fZ5rSo4BsyP0"
+              },
+              {
+                "name": "p",
+                "type": "Number",
+                "nodeType": "localDef",
+                "id": "XcK41DJmXW9gH3fZ5rSo4BsyP1"
+              },
+              {
+                "name": "v2",
+                "type": "Number Collection",
+                "nodeType": "localDef",
+                "id": "XcK41DJmXW9gH3fZ5rSo4BsyP2"
+              }
+            ],
+            "outParameters": [],
+            "isPrivate": true,
+            "isOffloaded": false,
+            "isTest": false,
+            "isAsync": false,
+            "nodeType": "action",
+            "body": [
+              {
+                "expr": "$f0uNnlwqXp0CnkM1ljKy69KiL0 ,:= $XcK41DJmXW9gH3fZ5rSo4BsyP0 ,+ $XcK41DJmXW9gH3fZ5rSo4BsyP1",
+                "nodeType": "exprStmt",
+                "id": "f0uNnlwqXp0CnkM1ljKy69Ki",
+                "locals": [
+                  {
+                    "name": "neighbor",
+                    "type": "Number",
+                    "nodeType": "localDef",
+                    "id": "f0uNnlwqXp0CnkM1ljKy69KiL0"
+                  }
+                ]
+              },
+              {
+                "nodeType": "if",
+                "condition": "$f0uNnlwqXp0CnkM1ljKy69KiL0 ,≥ ,1 ,and $f0uNnlwqXp0CnkM1ljKy69KiL0 ,≤ ,6 ,4 ,and :code #iAghm3HHmj2dHF2DYDFwNsiC ,( $f0uNnlwqXp0CnkM1ljKy69KiL0 ,) .equals ,( :colors .black ,)",
+                "thenBody": [
+                  {
+                    "nodeType": "if",
+                    "condition": ",not :code #N5Nf6ZWhA1w5ZIBPQwShOsrv ,( $f0uNnlwqXp0CnkM1ljKy69KiL0 ,)",
+                    "thenBody": [
+                      {
+                        "expr": "$XcK41DJmXW9gH3fZ5rSo4BsyP2 .add ,( $XcK41DJmXW9gH3fZ5rSo4BsyP0 ,+ $XcK41DJmXW9gH3fZ5rSo4BsyP1 ,)",
+                        "nodeType": "exprStmt",
+                        "id": "ZtWNfe4K73i2t2qBAT34x6NG",
+                        "locals": []
+                      }
+                    ],
+                    "isElseIf": false,
+                    "id": "gnN02qxsIZ1o12g2JlxryUnv",
+                    "locals": []
+                  },
+                  {
+                    "nodeType": "if",
+                    "condition": ":code #y0PMqNQlOUPFsm4rMnGjjoth ,( $f0uNnlwqXp0CnkM1ljKy69KiL0 ,) .equals ,( ,not :code #y0PMqNQlOUPFsm4rMnGjjoth ,( $XcK41DJmXW9gH3fZ5rSo4BsyP0 ,) ,)",
+                    "thenBody": [
+                      {
+                        "expr": "$XcK41DJmXW9gH3fZ5rSo4BsyP2 .add ,( ,0 ,)",
+                        "nodeType": "exprStmt",
+                        "id": "RRmSEpIMSz6SzFBFCB2eP0zK",
+                        "locals": []
+                      }
+                    ],
+                    "elseBody": [
+                      {
+                        "expr": "$XcK41DJmXW9gH3fZ5rSo4BsyP2 .add ,( ,- ,1 ,)",
+                        "nodeType": "exprStmt",
+                        "id": "WVXTvnFJg5VQu4YGtaKTPEmP",
+                        "locals": []
+                      }
+                    ],
+                    "isElseIf": true,
+                    "id": "UcDINYHA24kX5hTcJeIz64tl",
+                    "locals": []
+                  }
+                ],
+                "elseBody": [
+                  {
+                    "expr": "$XcK41DJmXW9gH3fZ5rSo4BsyP2 .add ,( ,- ,1 ,)",
+                    "nodeType": "exprStmt",
+                    "id": "EkHyLzY3XvNDrAr4NugbnD22",
+                    "locals": []
+                  }
+                ],
+                "isElseIf": false,
+                "id": "gcuZQFpqTpTTtL2YowiHexiE",
+                "locals": []
+              }
+            ],
+            "id": "XcK41DJmXW9gH3fZ5rSo4Bsy"
+          },
+          {
+            "name": "set 4 neighbors",
+            "inParameters": [
+              {
+                "name": "index",
+                "type": "Number",
+                "nodeType": "localDef",
+                "id": "yywoX3vS2SxLIsuQL9Nxd8XrP0"
+              },
+              {
+                "name": "diag1",
+                "type": "Number",
+                "nodeType": "localDef",
+                "id": "yywoX3vS2SxLIsuQL9Nxd8XrP1"
+              },
+              {
+                "name": "diag2",
+                "type": "Number",
+                "nodeType": "localDef",
+                "id": "yywoX3vS2SxLIsuQL9Nxd8XrP2"
+              }
+            ],
+            "outParameters": [
+              {
+                "name": "v2",
+                "type": "Number Collection",
+                "nodeType": "localDef",
+                "id": "yywoX3vS2SxLIsuQL9Nxd8XrP3"
+              }
+            ],
+            "isPrivate": true,
+            "isOffloaded": false,
+            "isTest": false,
+            "isAsync": false,
+            "nodeType": "action",
+            "body": [
+              {
+                "expr": "$yywoX3vS2SxLIsuQL9Nxd8XrP3 ,:= :collections .create_number_collection",
+                "nodeType": "exprStmt",
+                "id": "U6o72nS4RfFD93DjbrZLcXS4",
+                "locals": []
+              },
+              {
+                "expr": ":code #XcK41DJmXW9gH3fZ5rSo4Bsy ,( $yywoX3vS2SxLIsuQL9Nxd8XrP0 ,, $yywoX3vS2SxLIsuQL9Nxd8XrP1 ,, $yywoX3vS2SxLIsuQL9Nxd8XrP3 ,)",
+                "nodeType": "exprStmt",
+                "id": "rd0tybIfZ9FDVXf3lCTXyoV2",
+                "locals": []
+              },
+              {
+                "text": "Top Right",
+                "nodeType": "comment",
+                "id": "xyFanRMjzxVygKzrukpLyRI6"
+              },
+              {
+                "expr": ":code #XcK41DJmXW9gH3fZ5rSo4Bsy ,( $yywoX3vS2SxLIsuQL9Nxd8XrP0 ,, $yywoX3vS2SxLIsuQL9Nxd8XrP2 ,, $yywoX3vS2SxLIsuQL9Nxd8XrP3 ,)",
+                "nodeType": "exprStmt",
+                "id": "Gqbwwl3qAjaHH0uXcjx80yj9",
+                "locals": []
+              },
+              {
+                "text": "Bottom Left (for Kings only)",
+                "nodeType": "comment",
+                "id": "CXDXQmY22ilz30dixCaZ82z4"
+              },
+              {
+                "nodeType": "if",
+                "condition": ":code #xsA9QLHNqDrd5XWpZXmPN0Ja ,( $yywoX3vS2SxLIsuQL9Nxd8XrP0 ,)",
+                "thenBody": [
+                  {
+                    "expr": ":code #XcK41DJmXW9gH3fZ5rSo4Bsy ,( $yywoX3vS2SxLIsuQL9Nxd8XrP0 ,, ,- $yywoX3vS2SxLIsuQL9Nxd8XrP1 ,, $yywoX3vS2SxLIsuQL9Nxd8XrP3 ,)",
+                    "nodeType": "exprStmt",
+                    "id": "CfVIIXAvnpJv8qXUr3fzuK9W",
+                    "locals": []
+                  },
+                  {
+                    "expr": ":code #XcK41DJmXW9gH3fZ5rSo4Bsy ,( $yywoX3vS2SxLIsuQL9Nxd8XrP0 ,, ,- $yywoX3vS2SxLIsuQL9Nxd8XrP2 ,, $yywoX3vS2SxLIsuQL9Nxd8XrP3 ,)",
+                    "nodeType": "exprStmt",
+                    "id": "BxVqWXHaYPGY4UsoPz4Efprs",
+                    "locals": []
+                  }
+                ],
+                "elseBody": [
+                  {
+                    "expr": "$yywoX3vS2SxLIsuQL9Nxd8XrP3 .add ,( ,- ,1 ,)",
+                    "nodeType": "exprStmt",
+                    "id": "WNRHl2eJGvOrFMFjYzAss9uc",
+                    "locals": []
+                  },
+                  {
+                    "expr": "$yywoX3vS2SxLIsuQL9Nxd8XrP3 .add ,( ,- ,1 ,)",
+                    "nodeType": "exprStmt",
+                    "id": "HVENQDzNDkXuoAE3OcvBJW1R",
+                    "locals": []
+                  }
+                ],
+                "isElseIf": false,
+                "id": "bw9HfsgM5p46n91i6vzRIOWf",
+                "locals": []
+              }
+            ],
+            "id": "yywoX3vS2SxLIsuQL9Nxd8Xr"
+          },
+          {
+            "name": "single device",
+            "comment": "",
+            "type": "Boolean",
+            "isReadonly": false,
+            "isTransient": true,
+            "nodeType": "data",
+            "id": "QyJljmyglow1c4LHSxES2xe6"
+          },
+          {
+            "name": "piece color",
+            "inParameters": [
+              {
+                "name": "index",
+                "type": "Number",
+                "nodeType": "localDef",
+                "id": "y0PMqNQlOUPFsm4rMnGjjothP0"
+              }
+            ],
+            "outParameters": [
+              {
+                "name": "r",
+                "type": "Boolean",
+                "nodeType": "localDef",
+                "id": "y0PMqNQlOUPFsm4rMnGjjothP1"
+              }
+            ],
+            "isPrivate": true,
+            "isOffloaded": false,
+            "isTest": false,
+            "isAsync": false,
+            "nodeType": "action",
+            "body": [
+              {
+                "expr": "$RH9JT9Qj0oSUixacb9xDUUcML0 ,:= :records #f9Pjs1RlOlLy7bnoU3pI8rXM .at ,( $y0PMqNQlOUPFsm4rMnGjjothP0 ,) .manKind .get",
+                "nodeType": "exprStmt",
+                "id": "RH9JT9Qj0oSUixacb9xDUUcM",
+                "locals": [
+                  {
+                    "name": "s",
+                    "type": "String",
+                    "nodeType": "localDef",
+                    "id": "RH9JT9Qj0oSUixacb9xDUUcML0"
+                  }
+                ]
+              },
+              {
+                "expr": "$y0PMqNQlOUPFsm4rMnGjjothP1 ,:= $RH9JT9Qj0oSUixacb9xDUUcML0 .contains ,( 'D ,) ,or $RH9JT9Qj0oSUixacb9xDUUcML0 .contains ,( 'B ,)",
+                "nodeType": "exprStmt",
+                "id": "LEQ23qzfr2CRs1EJC6eJEgqv",
+                "locals": []
+              }
+            ],
+            "id": "y0PMqNQlOUPFsm4rMnGjjoth"
+          },
+          {
+            "name": "ResetCurrentGame",
+            "inParameters": [],
+            "outParameters": [],
+            "isPrivate": true,
+            "isOffloaded": false,
+            "isTest": false,
+            "isAsync": false,
+            "nodeType": "action",
+            "body": [
+              {
+                "expr": ":records #f9Pjs1RlOlLy7bnoU3pI8rXM .clear",
+                "nodeType": "exprStmt",
+                "id": "dWVCtsPSAL9ve5MjLFqVPLIO",
+                "locals": []
+              },
+              {
+                "expr": ":records #mkvHgFI0R8yxWEfvc4oE4lzF .clear",
+                "nodeType": "exprStmt",
+                "id": "l0rxxA14xa0o5BJikFJTzSGM",
+                "locals": []
+              },
+              {
+                "expr": ":records #mkvHgFI0R8yxWEfvc4oE4lzF .singleton .turn .set ,( T ,)",
+                "nodeType": "exprStmt",
+                "id": "WyxqYkoUg8ANJ04mX9mWoKI8",
+                "locals": []
+              },
+              {
+                "expr": ":records #xiv642C7Iqpr0DKQQIWT26kl .clear",
+                "nodeType": "exprStmt",
+                "id": "fTirzx02xg0kQoXhdKNjPcOb",
+                "locals": []
+              },
+              {
+                "expr": ":code #xENi5fRiLnflL6ps0roO2F4C",
+                "nodeType": "exprStmt",
+                "id": "xmcevXFm8sfu30ZdQDHO0YNs",
+                "locals": []
+              }
+            ],
+            "id": "xMRUXnJkveow4MORBz21aID7"
+          },
+          {
+            "name": "captured counts",
+            "inParameters": [],
+            "outParameters": [
+              {
+                "name": "red",
+                "type": "Number",
+                "nodeType": "localDef",
+                "id": "d1eiUjtwYznGCgHKo2KW9ORfP0"
+              },
+              {
+                "name": "white",
+                "type": "Number",
+                "nodeType": "localDef",
+                "id": "d1eiUjtwYznGCgHKo2KW9ORfP1"
+              }
+            ],
+            "isPrivate": true,
+            "isOffloaded": false,
+            "isTest": false,
+            "isAsync": false,
+            "nodeType": "action",
+            "body": [
+              {
+                "expr": "$d1eiUjtwYznGCgHKo2KW9ORfP0 ,:= ,1 ,2",
+                "nodeType": "exprStmt",
+                "id": "gMG6Wj2Z2QrVu64FpYr8MYlL",
+                "locals": []
+              },
+              {
+                "expr": "$d1eiUjtwYznGCgHKo2KW9ORfP1 ,:= ,1 ,2",
+                "nodeType": "exprStmt",
+                "id": "xJJ48QrnTXInhvJv5s9JugMP",
+                "locals": []
+              },
+              {
+                "collection": ":records #f9Pjs1RlOlLy7bnoU3pI8rXM",
+                "conditions": [
+                  {
+                    "condition": ",not $hajUYyBch6YZtLtOSBKK2YRMB0 .manKind .get .equals ,( ' ,)",
+                    "nodeType": "where",
+                    "id": "x2zY5iLl5NmUmxtvhYg1DCXo",
+                    "locals": []
+                  }
+                ],
+                "body": [
+                  {
+                    "nodeType": "if",
+                    "condition": ":code #y0PMqNQlOUPFsm4rMnGjjoth ,( $hajUYyBch6YZtLtOSBKK2YRMB0 .index ,)",
+                    "thenBody": [
+                      {
+                        "expr": "$d1eiUjtwYznGCgHKo2KW9ORfP0 ,:= $d1eiUjtwYznGCgHKo2KW9ORfP0 ,- ,1",
+                        "nodeType": "exprStmt",
+                        "id": "i2mr9YQOkh5w0lmaxan5rWMF",
+                        "locals": []
+                      }
+                    ],
+                    "elseBody": [
+                      {
+                        "expr": "$d1eiUjtwYznGCgHKo2KW9ORfP1 ,:= $d1eiUjtwYznGCgHKo2KW9ORfP1 ,- ,1",
+                        "nodeType": "exprStmt",
+                        "id": "xaRe0aw2yjphmDOldyvzrS38",
+                        "locals": []
+                      }
+                    ],
+                    "isElseIf": false,
+                    "id": "S9FZQj5Lsaz21prvZCbia9Cl",
+                    "locals": []
+                  }
+                ],
+                "nodeType": "foreach",
+                "id": "hajUYyBch6YZtLtOSBKK2YRM",
+                "locals": [
+                  {
+                    "name": "game",
+                    "type": "{\"o\":\"game\"}",
+                    "nodeType": "localDef",
+                    "id": "hajUYyBch6YZtLtOSBKK2YRMB0"
+                  }
+                ]
+              }
+            ],
+            "id": "d1eiUjtwYznGCgHKo2KW9ORf"
+          },
+          {
+            "nodeType": "record",
+            "name": "turn",
+            "sourceName": "turn index",
+            "comment": "",
+            "category": "index",
+            "isCloudEnabled": true,
+            "keys": [],
+            "fields": [
+              {
+                "nodeType": "recordField",
+                "name": "turn",
+                "type": "Boolean",
+                "id": "HFcv7DwOFJff8khRHoTGhcoY"
+              }
+            ],
+            "id": "mkvHgFI0R8yxWEfvc4oE4lzF"
+          },
+          {
+            "nodeType": "record",
+            "name": "agreement",
+            "sourceName": "agreement index",
+            "comment": "",
+            "category": "index",
+            "isCloudEnabled": true,
+            "keys": [
+              {
+                "nodeType": "recordKey",
+                "name": "who",
+                "type": "Boolean",
+                "id": "x20hQPpjkb22evUpfFVfwnyn"
+              }
+            ],
+            "fields": [
+              {
+                "nodeType": "recordField",
+                "name": "wants to reset",
+                "type": "String",
+                "id": "xTSN97TqkYsK0hprjE3HkdVi"
+              }
+            ],
+            "id": "xiv642C7Iqpr0DKQQIWT26kl"
+          },
+          {
+            "name": "ask reset",
+            "inParameters": [
+              {
+                "name": "message",
+                "type": "String",
+                "nodeType": "localDef",
+                "id": "xR6W3w3518eGuyPdxEDgUEyiP0"
+              }
+            ],
+            "outParameters": [],
+            "isPrivate": true,
+            "isOffloaded": false,
+            "isTest": false,
+            "isAsync": false,
+            "nodeType": "action",
+            "body": [
+              {
+                "expr": "$xBvRAS7eolPq82ox90p7nrdhL0 ,:= :wall .ask_boolean ,( $xR6W3w3518eGuyPdxEDgUEyiP0 ,, ' ,)",
+                "nodeType": "exprStmt",
+                "id": "xBvRAS7eolPq82ox90p7nrdh",
+                "locals": [
+                  {
+                    "name": "b",
+                    "type": "Boolean",
+                    "nodeType": "localDef",
+                    "id": "xBvRAS7eolPq82ox90p7nrdhL0"
+                  }
+                ]
+              },
+              {
+                "nodeType": "if",
+                "condition": "$xBvRAS7eolPq82ox90p7nrdhL0",
+                "thenBody": [
+                  {
+                    "expr": ":records #xiv642C7Iqpr0DKQQIWT26kl .at ,( :data #l65zqyT8OQmqVRJkTO3gIjSd ,) .wants_to_reset .set ,( 'Y ,)",
+                    "nodeType": "exprStmt",
+                    "id": "gS0gkdtUObjEYzSeo3BaScid",
+                    "locals": []
+                  }
+                ],
+                "elseBody": [
+                  {
+                    "expr": ":records #xiv642C7Iqpr0DKQQIWT26kl .at ,( :data #l65zqyT8OQmqVRJkTO3gIjSd ,) .wants_to_reset .set ,( 'N ,)",
+                    "nodeType": "exprStmt",
+                    "id": "xirgiKTt1K1nW22S9PdU462t",
+                    "locals": []
+                  }
+                ],
+                "isElseIf": false,
+                "id": "xNJZoPittcdtGAhElD0NX4b6",
+                "locals": []
+              }
+            ],
+            "id": "xR6W3w3518eGuyPdxEDgUEyi"
+          },
+          {
+            "name": "get reset message",
+            "inParameters": [],
+            "outParameters": [
+              {
+                "name": "r",
+                "type": "String",
+                "nodeType": "localDef",
+                "id": "C6MP4517stbCU91130KL9QIeP0"
+              }
+            ],
+            "isPrivate": true,
+            "isOffloaded": false,
+            "isTest": false,
+            "isAsync": false,
+            "nodeType": "action",
+            "body": [
+              {
+                "expr": "$C6MP4517stbCU91130KL9QIeP0 ,:= 'Reset_Game",
+                "nodeType": "exprStmt",
+                "id": "WOZ2SjC7CZHMbDysUA1aDKtL",
+                "locals": []
+              },
+              {
+                "expr": "$rNXvuBnZ1vnGfq7CwvGZ8CefL0 ,:= :records #xiv642C7Iqpr0DKQQIWT26kl .at ,( F ,) .wants_to_reset .get ,∥ :records #xiv642C7Iqpr0DKQQIWT26kl .at ,( T ,) .wants_to_reset .get",
+                "nodeType": "exprStmt",
+                "id": "rNXvuBnZ1vnGfq7CwvGZ8Cef",
+                "locals": [
+                  {
+                    "name": "s",
+                    "type": "String",
+                    "nodeType": "localDef",
+                    "id": "rNXvuBnZ1vnGfq7CwvGZ8CefL0"
+                  }
+                ]
+              },
+              {
+                "nodeType": "if",
+                "condition": "$rNXvuBnZ1vnGfq7CwvGZ8CefL0 .equals ,( 'Y ,)",
+                "thenBody": [
+                  {
+                    "text": "there is a Y, but don't have other response",
+                    "nodeType": "comment",
+                    "id": "KZkoD8iCF1M2pLIvqIicyVhj"
+                  },
+                  {
+                    "nodeType": "if",
+                    "condition": ":records #xiv642C7Iqpr0DKQQIWT26kl .at ,( :data #l65zqyT8OQmqVRJkTO3gIjSd ,) .wants_to_reset .get .equals ,( 'Y ,)",
+                    "thenBody": [
+                      {
+                        "expr": "$C6MP4517stbCU91130KL9QIeP0 ,:= 'Waiting_for_opponent_to_respond/002e_Press_to_cancel/002e",
+                        "nodeType": "exprStmt",
+                        "id": "gTyu8ae4g53lJnnh8lrMsLIB",
+                        "locals": []
+                      }
+                    ],
+                    "elseBody": [
+                      {
+                        "expr": "$C6MP4517stbCU91130KL9QIeP0 ,:= 'Opponent_wants_to_reset/002e_Press_to_respond/002e",
+                        "nodeType": "exprStmt",
+                        "id": "zc9A5bLhmT39q7kPmJ7TGU55",
+                        "locals": []
+                      }
+                    ],
+                    "isElseIf": false,
+                    "id": "XOU7P3iU2Lp2spxqg7xU43YM",
+                    "locals": []
+                  }
+                ],
+                "isElseIf": false,
+                "id": "qzsgZfJFp2byFxIb01G7YhMi",
+                "locals": []
+              }
+            ],
+            "id": "C6MP4517stbCU91130KL9QIe"
+          },
+          {
+            "name": "square color",
+            "inParameters": [
+              {
+                "name": "p",
+                "type": "Number",
+                "nodeType": "localDef",
+                "id": "iAghm3HHmj2dHF2DYDFwNsiCP0"
+              }
+            ],
+            "outParameters": [
+              {
+                "name": "c",
+                "type": "Color",
+                "nodeType": "localDef",
+                "id": "iAghm3HHmj2dHF2DYDFwNsiCP1"
+              }
+            ],
+            "isPrivate": true,
+            "isOffloaded": false,
+            "isTest": false,
+            "isAsync": false,
+            "nodeType": "action",
+            "body": [
+              {
+                "expr": "$iAghm3HHmj2dHF2DYDFwNsiCP1 ,:= :records #x553ka3R9OGnko4eNBRQ4jXl .at ,( $iAghm3HHmj2dHF2DYDFwNsiCP0 ,) .backup .get",
+                "nodeType": "exprStmt",
+                "id": "FjKkbZll8LlZUB23F580Q27T",
+                "locals": []
+              }
+            ],
+            "id": "iAghm3HHmj2dHF2DYDFwNsiC"
+          },
+          {
+            "name": "agreement dialog?",
+            "inParameters": [],
+            "outParameters": [
+              {
+                "name": "b2",
+                "type": "Boolean",
+                "nodeType": "localDef",
+                "id": "FKtLuQSxJRtpHikn4D2212wDP0"
+              }
+            ],
+            "isPrivate": true,
+            "isOffloaded": false,
+            "isTest": false,
+            "isAsync": false,
+            "nodeType": "action",
+            "body": [
+              {
+                "expr": "$HAqkwW2oEX6gWFRSdd8ON6IDL0 ,:= :records #xiv642C7Iqpr0DKQQIWT26kl .at ,( F ,) .wants_to_reset .get ,∥ :records #xiv642C7Iqpr0DKQQIWT26kl .at ,( T ,) .wants_to_reset .get",
+                "nodeType": "exprStmt",
+                "id": "HAqkwW2oEX6gWFRSdd8ON6ID",
+                "locals": [
+                  {
+                    "name": "s",
+                    "type": "String",
+                    "nodeType": "localDef",
+                    "id": "HAqkwW2oEX6gWFRSdd8ON6IDL0"
+                  }
+                ]
+              },
+              {
+                "expr": "$FKtLuQSxJRtpHikn4D2212wDP0 ,:= ,not $HAqkwW2oEX6gWFRSdd8ON6IDL0 .equals ,( ' ,)",
+                "nodeType": "exprStmt",
+                "id": "HTpfj7EOeRyhl6jf8y2FWYtY",
+                "locals": []
+              }
+            ],
+            "id": "FKtLuQSxJRtpHikn4D2212wD"
+          },
+          {
+            "name": "splash screen",
+            "inParameters": [],
+            "outParameters": [],
+            "isPrivate": false,
+            "isOffloaded": false,
+            "isTest": false,
+            "isAsync": false,
+            "nodeType": "page",
+            "initBody": [
+              {
+                "expr": ":code #BHYwyHTonvLJfV2B8FnfGbI4",
+                "nodeType": "exprStmt",
+                "id": "RDf5jhsNSO2S9rM4GCttjYUw",
+                "locals": []
+              }
+            ],
+            "displayBody": [
+              {
+                "expr": ":box .set_horizontal_align ,( 'left ,)",
+                "nodeType": "exprStmt",
+                "id": "SIn8WRKXiGZCBKFYvvr148qz",
+                "locals": []
+              },
+              {
+                "expr": "'Cloud_Checkers .post_to_wall",
+                "nodeType": "exprStmt",
+                "id": "Gg4mUOWuk8e7XRShY4QwMzJj",
+                "locals": []
+              },
+              {
+                "expr": "'_ .post_to_wall",
+                "nodeType": "exprStmt",
+                "id": "e2oSWyS6A2yXgJNJCPRLm38Y",
+                "locals": []
+              },
+              {
+                "expr": ":/267b #jRjm8VD4gWJ8WKiQSJ0QPelq #J4moY4aXWyc9I7sCsl0Qr4Lk ,( $IYSEYsWmzCLKlIXt6SLhtk12B0 ,, $O5xaH1EG26YQTZHdm9jqyKZaB0 ,)",
+                "actions": [
+                  {
+                    "inParameters": [],
+                    "outParameters": [],
+                    "body": [
+                      {
+                        "expr": ":code #xL22OFQ86lwn4zPR5lFLkBE5",
+                        "nodeType": "exprStmt",
+                        "id": "DXz4mElwjhWYet1nFPl9jCFo",
+                        "locals": []
+                      }
+                    ],
+                    "nodeType": "inlineAction",
+                    "id": "IYSEYsWmzCLKlIXt6SLhtk12",
+                    "locals": [
+                      {
+                        "name": "init",
+                        "type": "Action",
+                        "nodeType": "localDef",
+                        "id": "IYSEYsWmzCLKlIXt6SLhtk12B0"
+                      }
+                    ]
+                  },
+                  {
+                    "inParameters": [],
+                    "outParameters": [],
+                    "body": [
+                      {
+                        "expr": ":code #lraiXFCKGC6lCQ18CQBlgE83",
+                        "nodeType": "exprStmt",
+                        "id": "frW5K1TEiYy9kpK32gny4D2M",
+                        "locals": []
+                      }
+                    ],
+                    "nodeType": "inlineAction",
+                    "id": "O5xaH1EG26YQTZHdm9jqyKZa",
+                    "locals": [
+                      {
+                        "name": "play",
+                        "type": "Action",
+                        "nodeType": "localDef",
+                        "id": "O5xaH1EG26YQTZHdm9jqyKZaB0"
+                      }
+                    ]
+                  }
+                ],
+                "nodeType": "inlineActions",
+                "id": "Le7wIG35P6RNKeAgGgyr38TY",
+                "locals": []
+              }
+            ],
+            "id": "ScaOyGa0w6XHO1dnVaZCpeh2"
+          },
+          {
+            "name": "my name",
+            "comment": "",
+            "type": "String",
+            "isReadonly": false,
+            "isTransient": true,
+            "nodeType": "data",
+            "id": "bDuarf92xWEps2EhjcvDeQd1"
+          },
+          {
+            "name": "my pic",
+            "comment": "",
+            "type": "Picture",
+            "isReadonly": false,
+            "isTransient": true,
+            "nodeType": "data",
+            "id": "xYpAkvM8fN7UICPQdSc14L3T"
+          },
+          {
+            "name": "show me",
+            "inParameters": [],
+            "outParameters": [],
+            "isPrivate": true,
+            "isOffloaded": false,
+            "isTest": false,
+            "isAsync": false,
+            "nodeType": "action",
+            "body": [
+              {
+                "body": [
+                  {
+                    "expr": ":box .set_horizontal_align ,( 'center ,)",
+                    "nodeType": "exprStmt",
+                    "id": "Vc4HJlxum89DwH3qawREWeEW",
+                    "locals": []
+                  },
+                  {
+                    "nodeType": "if",
+                    "condition": ",not :data #xYpAkvM8fN7UICPQdSc14L3T .is_invalid",
+                    "thenBody": [
+                      {
+                        "expr": ":data #xYpAkvM8fN7UICPQdSc14L3T .post_to_wall",
+                        "nodeType": "exprStmt",
+                        "id": "gMA6MEw2shAIHNzo8s1CnHgK",
+                        "locals": []
+                      }
+                    ],
+                    "isElseIf": false,
+                    "id": "uvqscF0DDUIzJYwY2NFoJrPJ",
+                    "locals": []
+                  },
+                  {
+                    "expr": ":data #bDuarf92xWEps2EhjcvDeQd1 .post_to_wall",
+                    "nodeType": "exprStmt",
+                    "id": "xwLDGjaMOcPPmdaEiiwc7DQd",
+                    "locals": []
+                  }
+                ],
+                "nodeType": "boxed",
+                "id": "xz4v54Exuw21C3JDk2I2RJZ6"
+              }
+            ],
+            "id": "Pt1fM4BHmPD7fIV2bys20o3s"
+          },
+          {
+            "name": "set me",
+            "inParameters": [],
+            "outParameters": [],
+            "isPrivate": true,
+            "isOffloaded": false,
+            "isTest": false,
+            "isAsync": false,
+            "nodeType": "action",
+            "body": [
+              {
+                "expr": ":data #bDuarf92xWEps2EhjcvDeQd1 ,:= :bazaar .current_user .name",
+                "nodeType": "exprStmt",
+                "id": "lffWnZCh3SXvhMLnCbNvPwEk",
+                "locals": []
+              },
+              {
+                "nodeType": "if",
+                "condition": ":bazaar .current_user .has_picture",
+                "thenBody": [
+                  {
+                    "expr": ":data #xYpAkvM8fN7UICPQdSc14L3T ,:= :bazaar .current_user .picture ,( 'square ,)",
+                    "nodeType": "exprStmt",
+                    "id": "xDKG0MvHmDlmD9anUoe6kvFE",
+                    "locals": []
+                  }
+                ],
+                "elseBody": [
+                  {
+                    "expr": ":data #xYpAkvM8fN7UICPQdSc14L3T ,:= :invalid .picture",
+                    "nodeType": "exprStmt",
+                    "id": "iX8yyolm1Nc5eUvXDnw0qRcX",
+                    "locals": []
+                  }
+                ],
+                "isElseIf": false,
+                "id": "A3u90sN9zcq6eGGWc2EiGFvf",
+                "locals": []
+              }
+            ],
+            "id": "BHYwyHTonvLJfV2B8FnfGbI4"
+          },
+          {
+            "name": "show user",
+            "inParameters": [
+              {
+                "name": "s",
+                "type": "String",
+                "nodeType": "localDef",
+                "id": "K9utERZAJTbDAO66WO4txhe3P0"
+              }
+            ],
+            "outParameters": [],
+            "isPrivate": true,
+            "isOffloaded": false,
+            "isTest": false,
+            "isAsync": false,
+            "nodeType": "action",
+            "body": [
+              {
+                "body": [
+                  {
+                    "expr": ":box .set_horizontal_align ,( 'center ,)",
+                    "nodeType": "exprStmt",
+                    "id": "ltrqM1RT4Qxy1AbbVKPVFHNA",
+                    "locals": []
+                  },
+                  {
+                    "expr": "",
+                    "nodeType": "exprStmt",
+                    "id": "I7jQsGa0wVYMwdjZiuwl42Jm",
+                    "locals": []
+                  },
+                  {
+                    "expr": "$PbvQPx6Y0fuB6qVWEjH1lPKPL0 ,:= :bazaar .user_of ,( $K9utERZAJTbDAO66WO4txhe3P0 ,)",
+                    "nodeType": "exprStmt",
+                    "id": "PbvQPx6Y0fuB6qVWEjH1lPKP",
+                    "locals": [
+                      {
+                        "name": "user",
+                        "type": "User",
+                        "nodeType": "localDef",
+                        "id": "PbvQPx6Y0fuB6qVWEjH1lPKPL0"
+                      }
+                    ]
+                  },
+                  {
+                    "nodeType": "if",
+                    "condition": "$PbvQPx6Y0fuB6qVWEjH1lPKPL0 .is_invalid",
+                    "thenBody": [
+                      {
+                        "expr": ":box .set_foreground ,( :colors .light_gray ,)",
+                        "nodeType": "exprStmt",
+                        "id": "r4nVZhCPvD2xUAtrC072qxYv",
+                        "locals": []
+                      },
+                      {
+                        "expr": "'/002e/002ewaiting/002e/002e/002e .post_to_wall",
+                        "nodeType": "exprStmt",
+                        "id": "JEUoypfm0Qa04joLBdwOQVtg",
+                        "locals": []
+                      }
+                    ],
+                    "isElseIf": false,
+                    "id": "vz0H1c1wx0y0S6KaNWskE2j4",
+                    "locals": []
+                  },
+                  {
+                    "nodeType": "if",
+                    "condition": "$PbvQPx6Y0fuB6qVWEjH1lPKPL0 .has_picture",
+                    "thenBody": [
+                      {
+                        "expr": "$PbvQPx6Y0fuB6qVWEjH1lPKPL0 .picture ,( 'square ,) .post_to_wall",
+                        "nodeType": "exprStmt",
+                        "id": "iY3tWlHUqc3UQGBwS404l2rz",
+                        "locals": []
+                      },
+                      {
+                        "expr": "$PbvQPx6Y0fuB6qVWEjH1lPKPL0 .name .post_to_wall",
+                        "nodeType": "exprStmt",
+                        "id": "ez9LW9EO7P7y6tpaCABfTVUr",
+                        "locals": []
+                      }
+                    ],
+                    "isElseIf": true,
+                    "id": "xZOkfT7o2S5NFkYCGq3tvX37",
+                    "locals": []
+                  }
+                ],
+                "nodeType": "boxed",
+                "id": "M75yBSRTecihHd3OGt6AbSL3"
+              }
+            ],
+            "id": "K9utERZAJTbDAO66WO4txhe3"
+          },
+          {
+            "name": "game_play",
+            "inParameters": [],
+            "outParameters": [],
+            "isPrivate": true,
+            "isOffloaded": false,
+            "isTest": false,
+            "isAsync": false,
+            "nodeType": "action",
+            "body": [
+              {
+                "expr": ":data #l65zqyT8OQmqVRJkTO3gIjSd ,:= :/267b #jRjm8VD4gWJ8WKiQSJ0QPelq #KHzG7SikOe4Uyestl4qCLQK2 .equals ,( :bazaar .current_user .id ,)",
+                "nodeType": "exprStmt",
+                "id": "HJzGOoqUTWhvlMOw5JxjdDkl",
+                "locals": []
+              },
+              {
+                "expr": ":data #QyJljmyglow1c4LHSxES2xe6 ,:= F",
+                "nodeType": "exprStmt",
+                "id": "cZQ0i2lHWZKXfv7a1bhkipsI",
+                "locals": []
+              },
+              {
+                "expr": ":code #c1HztlYfQLvXSUEy2ZwMwifJ",
+                "nodeType": "exprStmt",
+                "id": "JANGoHbHF9AcC4Wgyu41avXW",
+                "locals": []
+              }
+            ],
+            "id": "lraiXFCKGC6lCQ18CQBlgE83"
+          },
+          {
+            "name": "game_init",
+            "inParameters": [],
+            "outParameters": [],
+            "isPrivate": true,
+            "isOffloaded": false,
+            "isTest": false,
+            "isAsync": false,
+            "nodeType": "action",
+            "body": [
+              {
+                "expr": ":code #xMRUXnJkveow4MORBz21aID7",
+                "nodeType": "exprStmt",
+                "id": "j37LxuAplB1tyBYq8piC2rUf",
+                "locals": []
+              }
+            ],
+            "id": "xL22OFQ86lwn4zPR5lFLkBE5"
+          },
+          {
+            "nodeType": "library",
+            "name": "Cloud Pairing",
+            "libIdentifier": "pcab",
+            "libIsPublished": true,
+            "scriptName": null,
+            "exportedTypes": "",
+            "exportedActions": [
+              {
+                "name": "pairing UI",
+                "inParameters": [
+                  {
+                    "name": "init",
+                    "type": "Action",
+                    "nodeType": "localDef",
+                    "id": "J4moY4aXWyc9I7sCsl0Qr4LkP0"
+                  },
+                  {
+                    "name": "play",
+                    "type": "Action",
+                    "nodeType": "localDef",
+                    "id": "J4moY4aXWyc9I7sCsl0Qr4LkP1"
+                  }
+                ],
+                "outParameters": [],
+                "isPrivate": false,
+                "isOffloaded": false,
+                "isTest": false,
+                "isAsync": false,
+                "nodeType": "libAction",
+                "parentLibId": "jRjm8VD4gWJ8WKiQSJ0QPelq",
+                "id": "J4moY4aXWyc9I7sCsl0Qr4Lk"
+              },
+              {
+                "name": "get first user id",
+                "inParameters": [],
+                "outParameters": [
+                  {
+                    "name": "s",
+                    "type": "String",
+                    "nodeType": "localDef",
+                    "id": "KHzG7SikOe4Uyestl4qCLQK2P0"
+                  }
+                ],
+                "isPrivate": false,
+                "isOffloaded": false,
+                "isTest": false,
+                "isAsync": false,
+                "nodeType": "libAction",
+                "parentLibId": "jRjm8VD4gWJ8WKiQSJ0QPelq",
+                "id": "KHzG7SikOe4Uyestl4qCLQK2"
+              },
+              {
+                "name": "get second user id",
+                "inParameters": [],
+                "outParameters": [
+                  {
+                    "name": "s",
+                    "type": "String",
+                    "nodeType": "localDef",
+                    "id": "PX6TFs0mysCrmObZWgnEU8CnP0"
+                  }
+                ],
+                "isPrivate": false,
+                "isOffloaded": false,
+                "isTest": false,
+                "isAsync": false,
+                "nodeType": "libAction",
+                "parentLibId": "jRjm8VD4gWJ8WKiQSJ0QPelq",
+                "id": "PX6TFs0mysCrmObZWgnEU8Cn"
+              },
+              {
+                "name": "example show ",
+                "inParameters": [],
+                "outParameters": [],
+                "isPrivate": false,
+                "isOffloaded": false,
+                "isTest": false,
+                "isAsync": false,
+                "nodeType": "libAction",
+                "parentLibId": "jRjm8VD4gWJ8WKiQSJ0QPelq",
+                "id": "l8IEhToSRM37M2WDCKQHfaSJ"
+              }
+            ],
+            "resolveClauses": [],
+            "id": "jRjm8VD4gWJ8WKiQSJ0QPelq"
+          },
+          {
+            "name": "game over",
+            "inParameters": [
+              {
+                "name": "red",
+                "type": "Number",
+                "nodeType": "localDef",
+                "id": "BHHFJidoa8lm0xCytIeh0RD4P0"
+              },
+              {
+                "name": "white",
+                "type": "Number",
+                "nodeType": "localDef",
+                "id": "BHHFJidoa8lm0xCytIeh0RD4P1"
+              }
+            ],
+            "outParameters": [],
+            "isPrivate": true,
+            "isOffloaded": false,
+            "isTest": false,
+            "isAsync": false,
+            "nodeType": "action",
+            "body": [
+              {
+                "nodeType": "if",
+                "condition": "$BHHFJidoa8lm0xCytIeh0RD4P0 ,= ,1 ,2 ,or $BHHFJidoa8lm0xCytIeh0RD4P1 ,= ,1 ,2",
+                "thenBody": [
+                  {
+                    "body": [
+                      {
+                        "expr": ":box .use_vertical_layout",
+                        "nodeType": "exprStmt",
+                        "id": "FepSrZbev7I0bUunKS64TqmO",
+                        "locals": []
+                      },
+                      {
+                        "expr": ":box .set_margins ,( ,0 ,, ,0 ,, ,0 ,, ,2 ,)",
+                        "nodeType": "exprStmt",
+                        "id": "vOOKfKDRvHryWhH4HrGeTT6O",
+                        "locals": []
+                      },
+                      {
+                        "expr": ":box .set_border ,( :colors .red ,, ,0 ,. ,2 ,)",
+                        "nodeType": "exprStmt",
+                        "id": "xiIxe0EN2EKQ1uDCE5oTAEBu",
+                        "locals": []
+                      },
+                      {
+                        "expr": ":box .set_padding ,( ,. ,2 ,, ,. ,2 ,, ,. ,2 ,, ,. ,2 ,)",
+                        "nodeType": "exprStmt",
+                        "id": "n7WM8IppBSp1aHvf7J0P4n6X",
+                        "locals": []
+                      },
+                      {
+                        "body": [
+                          {
+                            "expr": ":box .set_margins ,( ,0 ,, ,0 ,, ,0 ,, ,0 ,)",
+                            "nodeType": "exprStmt",
+                            "id": "RpHhmdOsLI54oCgaggw2DA07",
+                            "locals": []
+                          },
+                          {
+                            "expr": "'Would_you_like_to_play_again/003f .post_to_wall",
+                            "nodeType": "exprStmt",
+                            "id": "xcV62ccw8MEs5lRnoO8hbr8E",
+                            "locals": []
+                          }
+                        ],
+                        "nodeType": "boxed",
+                        "id": "n4J834HHWZRMT69BHdJjj3Ng"
+                      },
+                      {
+                        "body": [
+                          {
+                            "expr": ":box .use_horizontal_layout",
+                            "nodeType": "exprStmt",
+                            "id": "udwjysMvTtamJbWt1VyOpfO1",
+                            "locals": []
+                          },
+                          {
+                            "body": [
+                              {
+                                "expr": ":box .set_margins ,( ,1 ,, ,0 ,, ,0 ,, ,4 ,)",
+                                "nodeType": "exprStmt",
+                                "id": "xhidS0mp18cPyyax5NxQo2Ab",
+                                "locals": []
+                              },
+                              {
+                                "expr": "'Yes .post_to_wall",
+                                "nodeType": "exprStmt",
+                                "id": "vzWNd9Krq1wLdY8o6sKZEUJT",
+                                "locals": []
+                              },
+                              {
+                                "expr": ":box .set_border ,( :colors .foreground ,, ,0 ,. ,1 ,)",
+                                "nodeType": "exprStmt",
+                                "id": "MwK5bWKyUDoKih4BJ4MajAAQ",
+                                "locals": []
+                              },
+                              {
+                                "expr": ":box .set_padding ,( ,. ,2 ,, ,. ,2 ,, ,. ,2 ,, ,. ,2 ,)",
+                                "nodeType": "exprStmt",
+                                "id": "d2v0rDKeWXH4U0Sr7M42dc2o",
+                                "locals": []
+                              },
+                              {
+                                "expr": ":box .on_tapped ,( $xLL7vRbntLPNBDXPCvZ4d7spB0 ,)",
+                                "actions": [
+                                  {
+                                    "inParameters": [],
+                                    "outParameters": [],
+                                    "body": [
+                                      {
+                                        "expr": ":code #xL22OFQ86lwn4zPR5lFLkBE5",
+                                        "nodeType": "exprStmt",
+                                        "id": "iT47OXgGEoe0fc7QoR448PEt",
+                                        "locals": []
+                                      }
+                                    ],
+                                    "nodeType": "inlineAction",
+                                    "id": "xLL7vRbntLPNBDXPCvZ4d7sp",
+                                    "locals": [
+                                      {
+                                        "name": "handler",
+                                        "type": "Action",
+                                        "nodeType": "localDef",
+                                        "id": "xLL7vRbntLPNBDXPCvZ4d7spB0"
+                                      }
+                                    ]
+                                  }
+                                ],
+                                "nodeType": "inlineActions",
+                                "id": "vsH4qLM87rQqTalEUuFUQeqB",
+                                "locals": []
+                              }
+                            ],
+                            "nodeType": "boxed",
+                            "id": "VhV5AEQ3f3xjKxWd5i6RqjOU"
+                          },
+                          {
+                            "body": [
+                              {
+                                "expr": ":box .set_margins ,( ,1 ,, ,0 ,, ,0 ,, ,1 ,)",
+                                "nodeType": "exprStmt",
+                                "id": "as5gkxK3czWxE4f5nBShlQa6",
+                                "locals": []
+                              },
+                              {
+                                "expr": "'No .post_to_wall",
+                                "nodeType": "exprStmt",
+                                "id": "xbdYKDtMy9Xr9bM6B4hWYLiY",
+                                "locals": []
+                              },
+                              {
+                                "expr": ":box .set_border ,( :colors .foreground ,, ,0 ,. ,1 ,)",
+                                "nodeType": "exprStmt",
+                                "id": "dE54iKy9dfd6imvjVwSzVXfo",
+                                "locals": []
+                              },
+                              {
+                                "expr": ":box .set_padding ,( ,. ,2 ,, ,. ,2 ,, ,. ,2 ,, ,. ,2 ,)",
+                                "nodeType": "exprStmt",
+                                "id": "EkWPVV5Qa2R49rvjAI167J0S",
+                                "locals": []
+                              },
+                              {
+                                "expr": ":box .on_tapped ,( $xx4DkCFzO1eYgfbXbTc8AmE7B0 ,)",
+                                "actions": [
+                                  {
+                                    "inParameters": [],
+                                    "outParameters": [],
+                                    "body": [
+                                      {
+                                        "expr": ":wall .pop_page",
+                                        "nodeType": "exprStmt",
+                                        "id": "x4AhEag9Tw3eSKVdUOES2XpP",
+                                        "locals": []
+                                      }
+                                    ],
+                                    "nodeType": "inlineAction",
+                                    "id": "xx4DkCFzO1eYgfbXbTc8AmE7",
+                                    "locals": [
+                                      {
+                                        "name": "handler2",
+                                        "type": "Action",
+                                        "nodeType": "localDef",
+                                        "id": "xx4DkCFzO1eYgfbXbTc8AmE7B0"
+                                      }
+                                    ]
+                                  }
+                                ],
+                                "nodeType": "inlineActions",
+                                "id": "xcb3hgJjHAwU3ZXSAev3JaNy",
+                                "locals": []
+                              }
+                            ],
+                            "nodeType": "boxed",
+                            "id": "RDsyK1XRFdwAhFoAy2siJ32g"
+                          }
+                        ],
+                        "nodeType": "boxed",
+                        "id": "x60b6K4bj3920QzrNhPDzVqN"
+                      }
+                    ],
+                    "nodeType": "boxed",
+                    "id": "bn1CIti9JIw4obFTeUuMcm5J"
+                  }
+                ],
+                "isElseIf": false,
+                "id": "GR4I5logU8PKpGV3GMcyV0Oo",
+                "locals": []
+              }
+            ],
+            "id": "BHHFJidoa8lm0xCytIeh0RD4"
+          },
+          {
+            "name": "stats ",
+            "inParameters": [
+              {
+                "name": "red",
+                "type": "Number",
+                "nodeType": "localDef",
+                "id": "spP7nJToxwBQlM7vBrD1p4fPP0"
+              },
+              {
+                "name": "white",
+                "type": "Number",
+                "nodeType": "localDef",
+                "id": "spP7nJToxwBQlM7vBrD1p4fPP1"
+              }
+            ],
+            "outParameters": [],
+            "isPrivate": true,
+            "isOffloaded": false,
+            "isTest": false,
+            "isAsync": false,
+            "nodeType": "action",
+            "body": [
+              {
+                "body": [
+                  {
+                    "expr": ":box .set_height ,( ,. ,5 ,)",
+                    "nodeType": "exprStmt",
+                    "id": "UZIIo2W5R2FmK3bkQr1esTBq",
+                    "locals": []
+                  }
+                ],
+                "nodeType": "boxed",
+                "id": "N1OJDzcO3migKrA60ZOSGJ1o"
+              },
+              {
+                "body": [
+                  {
+                    "expr": ":box .set_background ,( :colors .sepia ,)",
+                    "nodeType": "exprStmt",
+                    "id": "sHesZLfH4K9FALW4cG480Ibt",
+                    "locals": []
+                  },
+                  {
+                    "expr": ":box .set_foreground ,( :colors .white ,)",
+                    "nodeType": "exprStmt",
+                    "id": "xbFdU6HkflaLdciJR7WRLv40",
+                    "locals": []
+                  },
+                  {
+                    "expr": ":box .set_horizontal_stretch ,( ,1 ,)",
+                    "nodeType": "exprStmt",
+                    "id": "yMGk22VZ1429O96ZRFPo2854",
+                    "locals": []
+                  },
+                  {
+                    "expr": ":box .set_padding ,( ,0 ,. ,4 ,, ,0 ,. ,4 ,, ,0 ,. ,4 ,, ,0 ,. ,4 ,)",
+                    "nodeType": "exprStmt",
+                    "id": "HRobu5SHQWxxdIMOunSQEm26",
+                    "locals": []
+                  },
+                  {
+                    "expr": ":box .set_horizontal_align ,( 'center ,)",
+                    "nodeType": "exprStmt",
+                    "id": "pHdQbbPnzIm1fesyyOOh3MD5",
+                    "locals": []
+                  },
+                  {
+                    "expr": ",( 'Captured/003a ,∥ ,( '_Red_ ,∥ $spP7nJToxwBQlM7vBrD1p4fPP0 ,) ,∥ ,( '_White_ ,∥ $spP7nJToxwBQlM7vBrD1p4fPP1 ,) ,) .post_to_wall",
+                    "nodeType": "exprStmt",
+                    "id": "kKSP5ihwiABh61ULHLFt2iUx",
+                    "locals": []
+                  }
+                ],
+                "nodeType": "boxed",
+                "id": "ngvTMRpGL68n36P4Pc0QLNYB"
+              },
+              {
+                "body": [
+                  {
+                    "expr": ":box .set_height ,( ,. ,5 ,)",
+                    "nodeType": "exprStmt",
+                    "id": "ZCxjkHmJ2lak50QCHlPw4dLQ",
+                    "locals": []
+                  }
+                ],
+                "nodeType": "boxed",
+                "id": "KLEb64XFhR1an2dw2kf1o2lK"
+              },
+              {
+                "body": [
+                  {
+                    "expr": ":box .use_horizontal_layout",
+                    "nodeType": "exprStmt",
+                    "id": "xTI0DIn4IjIPll2Cs24cX3Mk",
+                    "locals": []
+                  },
+                  {
+                    "body": [
+                      {
+                        "nodeType": "if",
+                        "condition": ",( ,not :data #QyJljmyglow1c4LHSxES2xe6 ,and :data #l65zqyT8OQmqVRJkTO3gIjSd ,) ,or ,( :data #QyJljmyglow1c4LHSxES2xe6 ,and :records #mkvHgFI0R8yxWEfvc4oE4lzF .singleton .turn .get ,)",
+                        "thenBody": [
+                          {
+                            "expr": ":box .set_border ,( :colors .red ,, ,0 ,. ,5 ,)",
+                            "nodeType": "exprStmt",
+                            "id": "k32N5FkOvzIgTZcAZfbm1Fj9",
+                            "locals": []
+                          }
+                        ],
+                        "elseBody": [
+                          {
+                            "expr": ":box .set_border ,( :colors .gray ,, ,0 ,. ,5 ,)",
+                            "nodeType": "exprStmt",
+                            "id": "bV2Iwj0m1js8irxCvlLxz3JX",
+                            "locals": []
+                          }
+                        ],
+                        "isElseIf": false,
+                        "id": "CvrDS21ZVRHqKDU461W0vd5B",
+                        "locals": []
+                      },
+                      {
+                        "expr": ":code #Pt1fM4BHmPD7fIV2bys20o3s",
+                        "nodeType": "exprStmt",
+                        "id": "weXDrCPdV1WhMkdAeIginPTH",
+                        "locals": []
+                      }
+                    ],
+                    "nodeType": "boxed",
+                    "id": "CEmBSjQjhakl2yZSYpQJBkLf"
+                  },
+                  {
+                    "body": [
+                      {
+                        "expr": ":box .set_horizontal_stretch ,( ,1 ,)",
+                        "nodeType": "exprStmt",
+                        "id": "V7ra895ObYzle4CXaasOKpoE",
+                        "locals": []
+                      },
+                      {
+                        "expr": ":box .set_padding ,( ,0 ,. ,4 ,, ,0 ,. ,4 ,, ,0 ,. ,4 ,, ,0 ,. ,4 ,)",
+                        "nodeType": "exprStmt",
+                        "id": "YSwe5fY0ADw9KryvOmMf2w0a",
+                        "locals": []
+                      },
+                      {
+                        "expr": ":box .set_horizontal_align ,( 'center ,)",
+                        "nodeType": "exprStmt",
+                        "id": "WeS6JQbBiHeTjZ1hjC2EAsrP",
+                        "locals": []
+                      },
+                      {
+                        "expr": ":box .set_vertical_align ,( 'center ,)",
+                        "nodeType": "exprStmt",
+                        "id": "r1Qx6wQSAdQIdUb7yXlGCnk7",
+                        "locals": []
+                      },
+                      {
+                        "nodeType": "if",
+                        "condition": ":records #mkvHgFI0R8yxWEfvc4oE4lzF .singleton .turn .get",
+                        "thenBody": [
+                          {
+                            "expr": ":box .set_background ,( :colors .red ,)",
+                            "nodeType": "exprStmt",
+                            "id": "xdIyDpDaX6kniwnzRTYiFF78",
+                            "locals": []
+                          },
+                          {
+                            "expr": ":box .set_foreground ,( :colors .white ,)",
+                            "nodeType": "exprStmt",
+                            "id": "su0Sgq1qdfn9sswRhbYGYK0B",
+                            "locals": []
+                          },
+                          {
+                            "expr": "'Red/0027s_turn .post_to_wall",
+                            "nodeType": "exprStmt",
+                            "id": "vOi7o4WmFh0yxBZjBCnuYmjg",
+                            "locals": []
+                          }
+                        ],
+                        "elseBody": [
+                          {
+                            "expr": "'White/0027s_turn .post_to_wall",
+                            "nodeType": "exprStmt",
+                            "id": "djF69q3I4a7nJVufO1u4wJNG",
+                            "locals": []
+                          },
+                          {
+                            "expr": ":box .set_background ,( :colors .gray ,)",
+                            "nodeType": "exprStmt",
+                            "id": "F51ulFSyXf8bm447jaVxFk0k",
+                            "locals": []
+                          },
+                          {
+                            "expr": ":box .set_foreground ,( :colors .white ,)",
+                            "nodeType": "exprStmt",
+                            "id": "Q50tBluE2oD0qVSRpaQkppr1",
+                            "locals": []
+                          }
+                        ],
+                        "isElseIf": false,
+                        "id": "vkh5jzT1lSo0eg0ZQDk5exdV",
+                        "locals": []
+                      }
+                    ],
+                    "nodeType": "boxed",
+                    "id": "SbyVeypFwTZLJQybKXdVdtco"
+                  }
+                ],
+                "nodeType": "boxed",
+                "id": "xKM9EK6fNH3mbCp8BnzXrWC2"
+              }
+            ],
+            "id": "spP7nJToxwBQlM7vBrD1p4fP"
+          },
+          {
+            "name": "reset",
+            "inParameters": [],
+            "outParameters": [],
+            "isPrivate": true,
+            "isOffloaded": false,
+            "isTest": false,
+            "isAsync": false,
+            "nodeType": "action",
+            "body": [
+              {
+                "body": [
+                  {
+                    "expr": ":box .set_height ,( ,. ,5 ,)",
+                    "nodeType": "exprStmt",
+                    "id": "PIA90RnW9RlpK1vy33VjR0Jc",
+                    "locals": []
+                  }
+                ],
+                "nodeType": "boxed",
+                "id": "gMNNZMqMxmL4CSIqpzV5O3QP"
+              },
+              {
+                "body": [
+                  {
+                    "expr": ":box .set_background ,( :colors .blue ,)",
+                    "nodeType": "exprStmt",
+                    "id": "t2RrD2xEEtZiedBdjP8508ND",
+                    "locals": []
+                  },
+                  {
+                    "expr": ":box .set_foreground ,( :colors .white ,)",
+                    "nodeType": "exprStmt",
+                    "id": "Mqq7P22tMi95eL2cjFfFitiZ",
+                    "locals": []
+                  },
+                  {
+                    "expr": ":box .set_horizontal_stretch ,( ,1 ,)",
+                    "nodeType": "exprStmt",
+                    "id": "x7LEoSQCxE30hCHnIpLn0s3b",
+                    "locals": []
+                  },
+                  {
+                    "expr": ":box .set_padding ,( ,0 ,. ,4 ,, ,0 ,. ,4 ,, ,0 ,. ,4 ,, ,0 ,. ,4 ,)",
+                    "nodeType": "exprStmt",
+                    "id": "EtZM4FCfjCStL4jTtfdVrtsM",
+                    "locals": []
+                  },
+                  {
+                    "expr": ":box .set_horizontal_align ,( 'center ,)",
+                    "nodeType": "exprStmt",
+                    "id": "xFtygpimrn2Fzc6Jr6SWQrU2",
+                    "locals": []
+                  },
+                  {
+                    "expr": ":code #C6MP4517stbCU91130KL9QIe .post_to_wall",
+                    "nodeType": "exprStmt",
+                    "id": "aFHTDjTo42s2ST4YHk4DJS1q",
+                    "locals": []
+                  },
+                  {
+                    "expr": ":box .on_tapped ,( $fGdq47ZfZiB75cN1p3QNHYjSB0 ,)",
+                    "actions": [
+                      {
+                        "inParameters": [],
+                        "outParameters": [],
+                        "body": [
+                          {
+                            "expr": ":code #Jo7Bnmu1Ndt6Vnov8miwSpyQ ,( ,)",
+                            "nodeType": "exprStmt",
+                            "id": "jdnyJc2gSXNcEnsY2Sc1fvng",
+                            "locals": []
+                          }
+                        ],
+                        "nodeType": "inlineAction",
+                        "id": "fGdq47ZfZiB75cN1p3QNHYjS",
+                        "locals": [
+                          {
+                            "name": "handler2",
+                            "type": "Action",
+                            "nodeType": "localDef",
+                            "id": "fGdq47ZfZiB75cN1p3QNHYjSB0"
+                          }
+                        ]
+                      }
+                    ],
+                    "nodeType": "inlineActions",
+                    "id": "PmiVYq0gjlxak2w5aGRkO4Nm",
+                    "locals": []
+                  }
+                ],
+                "nodeType": "boxed",
+                "id": "swtQnu9q2CAaaFz2E9HY1YGa"
+              }
+            ],
+            "id": "wpQvQZKStxOydm7QHEIvPRc0"
+          },
+          {
+            "name": "checkers board",
+            "inParameters": [],
+            "outParameters": [],
+            "isPrivate": true,
+            "isOffloaded": false,
+            "isTest": false,
+            "isAsync": false,
+            "nodeType": "action",
+            "body": [
+              {
+                "body": [
+                  {
+                    "expr": ":box .set_border ,( :colors .sepia ,, ,0 ,. ,5 ,)",
+                    "nodeType": "exprStmt",
+                    "id": "TpOppQrg1ckY2vLokkPTRzFR",
+                    "locals": []
+                  },
+                  {
+                    "bound": ",8",
+                    "body": [
+                      {
+                        "body": [
+                          {
+                            "expr": ":box .use_horizontal_layout",
+                            "nodeType": "exprStmt",
+                            "id": "zQa1h34xyImfTxwqsUHzhbND",
+                            "locals": []
+                          },
+                          {
+                            "bound": ",8",
+                            "body": [
+                              {
+                                "body": [
+                                  {
+                                    "expr": ":box .set_height ,( ,2 ,)",
+                                    "nodeType": "exprStmt",
+                                    "id": "xYXtsZllJrqRCxRSG25V2pm1",
+                                    "locals": []
+                                  },
+                                  {
+                                    "expr": ":box .set_width ,( ,2 ,)",
+                                    "nodeType": "exprStmt",
+                                    "id": "pTkuWk8e2zVVMw42BtBbXB0L",
+                                    "locals": []
+                                  },
+                                  {
+                                    "expr": "$xAXgbhTcicIqwiJ621MNBezML0 ,:= $xV7XyXpWPDPYE2fHa31pqtzJB0 ,* ,8 ,+ $A2jq2Tz0NMBguLv6fgoPLzcFB0 ,+ ,1",
+                                    "nodeType": "exprStmt",
+                                    "id": "xAXgbhTcicIqwiJ621MNBezM",
+                                    "locals": [
+                                      {
+                                        "name": "index",
+                                        "type": "Number",
+                                        "nodeType": "localDef",
+                                        "id": "xAXgbhTcicIqwiJ621MNBezML0"
+                                      }
+                                    ]
+                                  },
+                                  {
+                                    "expr": "$a666pO4Jn8ONNvE8Kvb7ciIhL0 ,:= :records #x553ka3R9OGnko4eNBRQ4jXl .at ,( $xAXgbhTcicIqwiJ621MNBezML0 ,)",
+                                    "nodeType": "exprStmt",
+                                    "id": "a666pO4Jn8ONNvE8Kvb7ciIh",
+                                    "locals": [
+                                      {
+                                        "name": "entry",
+                                        "type": "{\"o\":\"board\"}",
+                                        "nodeType": "localDef",
+                                        "id": "a666pO4Jn8ONNvE8Kvb7ciIhL0"
+                                      }
+                                    ]
+                                  },
+                                  {
+                                    "expr": ":box .set_background ,( $a666pO4Jn8ONNvE8Kvb7ciIhL0 .box_color .get ,)",
+                                    "nodeType": "exprStmt",
+                                    "id": "I5XUE94cczMHTI0465quK99a",
+                                    "locals": []
+                                  },
+                                  {
+                                    "nodeType": "if",
+                                    "condition": ":code #N5Nf6ZWhA1w5ZIBPQwShOsrv ,( $xAXgbhTcicIqwiJ621MNBezML0 ,)",
+                                    "thenBody": [
+                                      {
+                                        "expr": ":code #xRZcVvHvTLLZ4pxGztUl2lhW ,( $xAXgbhTcicIqwiJ621MNBezML0 ,) .post_to_wall",
+                                        "nodeType": "exprStmt",
+                                        "id": "rLl428ZlgKljCt4MGsz0fvy3",
+                                        "locals": []
+                                      }
+                                    ],
+                                    "isElseIf": false,
+                                    "id": "qFS1WPVKzkHVj7pO2WsXi3cy",
+                                    "locals": []
+                                  },
+                                  {
+                                    "expr": ":box .on_tapped ,( $Z98wEFpoo3Sn234DThXZO6NsB0 ,)",
+                                    "actions": [
+                                      {
+                                        "inParameters": [],
+                                        "outParameters": [],
+                                        "body": [
+                                          {
+                                            "expr": ":code #ym8mOIYr2aPwi2jfu3SKitR2 ,( $xAXgbhTcicIqwiJ621MNBezML0 ,)",
+                                            "nodeType": "exprStmt",
+                                            "id": "xRjj3F2yOdAA2RlwoWZcoNwU",
+                                            "locals": []
+                                          }
+                                        ],
+                                        "nodeType": "inlineAction",
+                                        "id": "Z98wEFpoo3Sn234DThXZO6Ns",
+                                        "locals": [
+                                          {
+                                            "name": "handler",
+                                            "type": "Action",
+                                            "nodeType": "localDef",
+                                            "id": "Z98wEFpoo3Sn234DThXZO6NsB0"
+                                          }
+                                        ]
+                                      }
+                                    ],
+                                    "nodeType": "inlineActions",
+                                    "id": "CdfO6qjwqMA5ew9D0fkCDzzj",
+                                    "locals": []
+                                  }
+                                ],
+                                "nodeType": "boxed",
+                                "id": "pJ2UV8bcj2I5QVO5VBYr84h1"
+                              }
+                            ],
+                            "nodeType": "for",
+                            "id": "A2jq2Tz0NMBguLv6fgoPLzcF",
+                            "locals": [
+                              {
+                                "name": "j",
+                                "type": "Number",
+                                "nodeType": "localDef",
+                                "id": "A2jq2Tz0NMBguLv6fgoPLzcFB0"
+                              }
+                            ]
+                          }
+                        ],
+                        "nodeType": "boxed",
+                        "id": "aMFeofNMIDNkoN2XVpsPWdLV"
+                      }
+                    ],
+                    "nodeType": "for",
+                    "id": "xV7XyXpWPDPYE2fHa31pqtzJ",
+                    "locals": [
+                      {
+                        "name": "i",
+                        "type": "Number",
+                        "nodeType": "localDef",
+                        "id": "xV7XyXpWPDPYE2fHa31pqtzJB0"
+                      }
+                    ]
+                  }
+                ],
+                "nodeType": "boxed",
+                "id": "bsIKX8VqY47Ho2StvSZ8JImF"
+              }
+            ],
+            "id": "FoyL72MgrUts3bnXC6iHbA2Z"
+          }
+        ],
+        "deletedDecls": [],
+        "nodeType": "app",
+        "id": "app"
+      }
+    },
+    {
+      "seqNo": 1,
+      "time": 1378873366,
+      "scriptId": "bosx",
+      "historyId": "2520234274338950358225df721-97b3-42de-8368-babe4cc7208f",
+      "updateSize": 2283,
+      "updates": {
+        "Le7wIG35P6RNKeAgGgyr38TY": {
+          "expr": ":/267b #jRjm8VD4gWJ8WKiQSJ0QPelq #LDY3Vy7NRPbmm6J2UHaMJ77W ,( $IYSEYsWmzCLKlIXt6SLhtk12B0 ,, $O5xaH1EG26YQTZHdm9jqyKZaB0 ,)"
+        },
+        "ScaOyGa0w6XHO1dnVaZCpeh2": {
+          "displayBody": [
+            "SIn8WRKXiGZCBKFYvvr148qz",
+            "Le7wIG35P6RNKeAgGgyr38TY"
+          ]
+        },
+        "HJzGOoqUTWhvlMOw5JxjdDkl": {
+          "expr": ":data #l65zqyT8OQmqVRJkTO3gIjSd ,:= :/267b #jRjm8VD4gWJ8WKiQSJ0QPelq #NpLHzRNXRtLJkyZnkcrSp6CD .equals ,( :bazaar .current_user .id ,)"
+        },
+        "LDY3Vy7NRPbmm6J2UHaMJ77WP0": {
+          "name": "initialize session",
+          "type": "Action",
+          "nodeType": "localDef"
+        },
+        "LDY3Vy7NRPbmm6J2UHaMJ77WP1": {
+          "name": "play",
+          "type": "Action",
+          "nodeType": "localDef"
+        },
+        "LDY3Vy7NRPbmm6J2UHaMJ77W": {
+          "name": "show pairing dialog",
+          "inParameters": [
+            "LDY3Vy7NRPbmm6J2UHaMJ77WP0",
+            "LDY3Vy7NRPbmm6J2UHaMJ77WP1"
+          ],
+          "outParameters": [],
+          "isPrivate": false,
+          "isOffloaded": false,
+          "isTest": false,
+          "isAsync": false,
+          "nodeType": "libAction",
+          "parentLibId": "jRjm8VD4gWJ8WKiQSJ0QPelq"
+        },
+        "NpLHzRNXRtLJkyZnkcrSp6CDP0": {
+          "name": "s",
+          "type": "String",
+          "nodeType": "localDef"
+        },
+        "NpLHzRNXRtLJkyZnkcrSp6CD": {
+          "name": "first user id",
+          "inParameters": [],
+          "outParameters": [
+            "NpLHzRNXRtLJkyZnkcrSp6CDP0"
+          ],
+          "isPrivate": false,
+          "isOffloaded": false,
+          "isTest": false,
+          "isAsync": false,
+          "nodeType": "libAction",
+          "parentLibId": "jRjm8VD4gWJ8WKiQSJ0QPelq"
+        },
+        "gKRBsKyQ04m9ROPq4HrH436nP0": {
+          "name": "s",
+          "type": "String",
+          "nodeType": "localDef"
+        },
+        "gKRBsKyQ04m9ROPq4HrH436n": {
+          "name": "second user id",
+          "inParameters": [],
+          "outParameters": [
+            "gKRBsKyQ04m9ROPq4HrH436nP0"
+          ],
+          "isPrivate": false,
+          "isOffloaded": false,
+          "isTest": false,
+          "isAsync": false,
+          "nodeType": "libAction",
+          "parentLibId": "jRjm8VD4gWJ8WKiQSJ0QPelq"
+        },
+        "FpqdYO1uPA2qA0vBON2F8RdQ": {
+          "name": "show",
+          "inParameters": [],
+          "outParameters": [],
+          "isPrivate": false,
+          "isOffloaded": false,
+          "isTest": false,
+          "isAsync": false,
+          "nodeType": "libAction",
+          "parentLibId": "jRjm8VD4gWJ8WKiQSJ0QPelq"
+        },
+        "jRjm8VD4gWJ8WKiQSJ0QPelq": {
+          "libIdentifier": "xhuza",
+          "exportedActions": [
+            "LDY3Vy7NRPbmm6J2UHaMJ77W",
+            "NpLHzRNXRtLJkyZnkcrSp6CD",
+            "gKRBsKyQ04m9ROPq4HrH436n",
+            "FpqdYO1uPA2qA0vBON2F8RdQ"
+          ]
+        },
+        "Gg4mUOWuk8e7XRShY4QwMzJj": null,
+        "e2oSWyS6A2yXgJNJCPRLm38Y": null,
+        "J4moY4aXWyc9I7sCsl0Qr4Lk": null,
+        "J4moY4aXWyc9I7sCsl0Qr4LkP0": null,
+        "J4moY4aXWyc9I7sCsl0Qr4LkP1": null,
+        "KHzG7SikOe4Uyestl4qCLQK2": null,
+        "KHzG7SikOe4Uyestl4qCLQK2P0": null,
+        "PX6TFs0mysCrmObZWgnEU8Cn": null,
+        "PX6TFs0mysCrmObZWgnEU8CnP0": null,
+        "l8IEhToSRM37M2WDCKQHfaSJ": null
+      }
+    },
+    {
+      "seqNo": 2,
+      "time": 1378873377,
+      "scriptId": "bosx",
+      "historyId": "25202342742255198791767e416-2a18-434c-a20d-5b0660b8b478",
+      "updateSize": 2,
+      "updates": {}
+    },
+    {
+      "seqNo": 3,
+      "time": 1380089495,
+      "scriptId": "kxri",
+      "historyId": "2520222113049832004dc2fec74-34c0-4f20-9e9d-ffba9d2f32f0",
+      "updateSize": 6835,
+      "updates": {
+        "qzSZtlekw9VY4mJyKDuc4yo5": {
+          "expr": ":data #l65zqyT8OQmqVRJkTO3gIjSd ,:= :/267b #jRjm8VD4gWJ8WKiQSJ0QPelq #VETjHCXcKMLA1ezLJcvLkCck",
+          "nodeType": "exprStmt",
+          "locals": []
+        },
+        "lraiXFCKGC6lCQ18CQBlgE83": {
+          "body": [
+            "qzSZtlekw9VY4mJyKDuc4yo5",
+            "cZQ0i2lHWZKXfv7a1bhkipsI",
+            "JANGoHbHF9AcC4Wgyu41avXW"
+          ]
+        },
+        "ywkVaMv6H1IKjnqjTAKYnwsIP0": {
+          "name": "i",
+          "type": "Number",
+          "nodeType": "localDef"
+        },
+        "ywkVaMv6H1IKjnqjTAKYnwsIP1": {
+          "name": "s",
+          "type": "String",
+          "nodeType": "localDef"
+        },
+        "ywkVaMv6H1IKjnqjTAKYnwsI": {
+          "name": "get player id",
+          "inParameters": [
+            "ywkVaMv6H1IKjnqjTAKYnwsIP0"
+          ],
+          "outParameters": [
+            "ywkVaMv6H1IKjnqjTAKYnwsIP1"
+          ],
+          "isPrivate": false,
+          "isOffloaded": false,
+          "isTest": false,
+          "isAsync": false,
+          "nodeType": "libAction",
+          "parentLibId": "jRjm8VD4gWJ8WKiQSJ0QPelq"
+        },
+        "eAy1dyLpj2hw6TLImhI1Ks8E": {
+          "name": "main",
+          "inParameters": [],
+          "outParameters": [],
+          "isPrivate": false,
+          "isOffloaded": false,
+          "isTest": false,
+          "isAsync": false,
+          "nodeType": "libAction",
+          "parentLibId": "jRjm8VD4gWJ8WKiQSJ0QPelq"
+        },
+        "xLBKOhfqWUqEN2tb9yGz2eotP0": {
+          "name": "user id",
+          "type": "String",
+          "nodeType": "localDef"
+        },
+        "xLBKOhfqWUqEN2tb9yGz2eotP1": {
+          "name": "name",
+          "type": "String",
+          "nodeType": "localDef"
+        },
+        "xLBKOhfqWUqEN2tb9yGz2eot": {
+          "name": "get player name",
+          "inParameters": [
+            "xLBKOhfqWUqEN2tb9yGz2eotP0"
+          ],
+          "outParameters": [
+            "xLBKOhfqWUqEN2tb9yGz2eotP1"
+          ],
+          "isPrivate": false,
+          "isOffloaded": false,
+          "isTest": false,
+          "isAsync": false,
+          "nodeType": "libAction",
+          "parentLibId": "jRjm8VD4gWJ8WKiQSJ0QPelq"
+        },
+        "VETjHCXcKMLA1ezLJcvLkCckP0": {
+          "name": "b",
+          "type": "Boolean",
+          "nodeType": "localDef"
+        },
+        "VETjHCXcKMLA1ezLJcvLkCck": {
+          "name": "am I first player?",
+          "inParameters": [],
+          "outParameters": [
+            "VETjHCXcKMLA1ezLJcvLkCckP0"
+          ],
+          "isPrivate": false,
+          "isOffloaded": false,
+          "isTest": false,
+          "isAsync": false,
+          "nodeType": "libAction",
+          "parentLibId": "jRjm8VD4gWJ8WKiQSJ0QPelq"
+        },
+        "C3gsq16ShAnsM9K1C4ncyd0bP0": {
+          "name": "r",
+          "type": "Number",
+          "nodeType": "localDef"
+        },
+        "C3gsq16ShAnsM9K1C4ncyd0b": {
+          "name": "number of players",
+          "inParameters": [],
+          "outParameters": [
+            "C3gsq16ShAnsM9K1C4ncyd0bP0"
+          ],
+          "isPrivate": false,
+          "isOffloaded": false,
+          "isTest": false,
+          "isAsync": false,
+          "nodeType": "libAction",
+          "parentLibId": "jRjm8VD4gWJ8WKiQSJ0QPelq"
+        },
+        "Jl0nl1KgRdJgg0OpZx7FJhNr": {
+          "name": "clear cloud state",
+          "inParameters": [],
+          "outParameters": [],
+          "isPrivate": false,
+          "isOffloaded": false,
+          "isTest": false,
+          "isAsync": false,
+          "nodeType": "libAction",
+          "parentLibId": "jRjm8VD4gWJ8WKiQSJ0QPelq"
+        },
+        "mgZ5wYpGLMlcXqIPDis6WR6ZP0": {
+          "name": "initialize game",
+          "type": "Action",
+          "nodeType": "localDef"
+        },
+        "mgZ5wYpGLMlcXqIPDis6WR6ZP1": {
+          "name": "play",
+          "type": "Action",
+          "nodeType": "localDef"
+        },
+        "mgZ5wYpGLMlcXqIPDis6WR6ZP2": {
+          "name": "minimum players",
+          "type": "Number",
+          "nodeType": "localDef"
+        },
+        "mgZ5wYpGLMlcXqIPDis6WR6ZP3": {
+          "name": "maximum players",
+          "type": "Number",
+          "nodeType": "localDef"
+        },
+        "mgZ5wYpGLMlcXqIPDis6WR6Z": {
+          "name": "show game selection",
+          "inParameters": [
+            "mgZ5wYpGLMlcXqIPDis6WR6ZP0",
+            "mgZ5wYpGLMlcXqIPDis6WR6ZP1",
+            "mgZ5wYpGLMlcXqIPDis6WR6ZP2",
+            "mgZ5wYpGLMlcXqIPDis6WR6ZP3"
+          ],
+          "outParameters": [],
+          "isPrivate": false,
+          "isOffloaded": false,
+          "isTest": false,
+          "isAsync": false,
+          "nodeType": "libAction",
+          "parentLibId": "jRjm8VD4gWJ8WKiQSJ0QPelq"
+        },
+        "jRjm8VD4gWJ8WKiQSJ0QPelq": {
+          "name": "Cloud Game Selector",
+          "libIdentifier": "ixgz",
+          "exportedActions": [
+            "ywkVaMv6H1IKjnqjTAKYnwsI",
+            "eAy1dyLpj2hw6TLImhI1Ks8E",
+            "xLBKOhfqWUqEN2tb9yGz2eot",
+            "VETjHCXcKMLA1ezLJcvLkCck",
+            "C3gsq16ShAnsM9K1C4ncyd0b",
+            "Jl0nl1KgRdJgg0OpZx7FJhNr",
+            "mgZ5wYpGLMlcXqIPDis6WR6Z"
+          ]
+        },
+        "HHFVyycEUIRN0hjJG1x7B8iM": {
+          "expr": ":code #BHYwyHTonvLJfV2B8FnfGbI4",
+          "nodeType": "exprStmt",
+          "locals": []
+        },
+        "rGAnPSYKrDJrUlRPfqiTfp5X": {
+          "expr": ":code #xL22OFQ86lwn4zPR5lFLkBE5",
+          "nodeType": "exprStmt",
+          "locals": []
+        },
+        "aqTm4KYLKS6EdbTJjnVBiLd3B0": {
+          "name": "init",
+          "type": "Action",
+          "nodeType": "localDef"
+        },
+        "aqTm4KYLKS6EdbTJjnVBiLd3": {
+          "inParameters": [],
+          "outParameters": [],
+          "body": [
+            "rGAnPSYKrDJrUlRPfqiTfp5X"
+          ],
+          "nodeType": "inlineAction",
+          "locals": [
+            "aqTm4KYLKS6EdbTJjnVBiLd3B0"
+          ]
+        },
+        "eBllKbf9gUjcRkWmqb10dHuX": {
+          "expr": ":code #lraiXFCKGC6lCQ18CQBlgE83",
+          "nodeType": "exprStmt",
+          "locals": []
+        },
+        "T1CLrGjG3V2h8YVj4V6e46HTB0": {
+          "name": "play",
+          "type": "Action",
+          "nodeType": "localDef"
+        },
+        "T1CLrGjG3V2h8YVj4V6e46HT": {
+          "inParameters": [],
+          "outParameters": [],
+          "body": [
+            "eBllKbf9gUjcRkWmqb10dHuX"
+          ],
+          "nodeType": "inlineAction",
+          "locals": [
+            "T1CLrGjG3V2h8YVj4V6e46HTB0"
+          ]
+        },
+        "h4207TlK2TjnZYBZw3Tz1hdt": {
+          "expr": ":/267b #jRjm8VD4gWJ8WKiQSJ0QPelq #mgZ5wYpGLMlcXqIPDis6WR6Z ,( $aqTm4KYLKS6EdbTJjnVBiLd3B0 ,, $T1CLrGjG3V2h8YVj4V6e46HTB0 ,, ,2 ,, ,2 ,)",
+          "actions": [
+            "aqTm4KYLKS6EdbTJjnVBiLd3",
+            "T1CLrGjG3V2h8YVj4V6e46HT"
+          ],
+          "nodeType": "inlineActions",
+          "locals": []
+        },
+        "I4qrP14augVmpxZR4fdCBwnW": {
+          "name": "go",
+          "inParameters": [],
+          "outParameters": [],
+          "isPrivate": false,
+          "isOffloaded": false,
+          "isTest": false,
+          "isAsync": false,
+          "nodeType": "action",
+          "body": [
+            "HHFVyycEUIRN0hjJG1x7B8iM",
+            "h4207TlK2TjnZYBZw3Tz1hdt"
+          ]
+        },
+        "app": {
+          "decls": [
+            "xn7BMXM9CjcvPNpjQcrbDX3K",
+            "x3lZ0CV24Ku71GF174gPkdRW",
+            "OkkysQyfe4cUQKZBMQEs6Yqq",
+            "ppqo904AK8SKL4lMWuhXcg4y",
+            "tpuVxtsTvvYmIqmPP6DJqSPZ",
+            "rGKCSxLuuqqpR0mniU649r9m",
+            "R4vqK4bjXHK80HqbtCiL62jY",
+            "zvZ8F4wgWUKiA4YGWTTByFnS",
+            "zqebQf2TM1mJn94J6Fj1yPc5",
+            "LAP2EWaO3RwqQahzmuN3Xe4D",
+            "yF1oAp8Mc4cRE8GGst4eFttt",
+            "d0xzC4bz2oZRXTx3CN4xQp0I",
+            "BgLPSWbjXyPyVlXy3Ha4rEJr",
+            "c1HztlYfQLvXSUEy2ZwMwifJ",
+            "FJDzPB2rWhYeIC4p8Gvcpzpe",
+            "x553ka3R9OGnko4eNBRQ4jXl",
+            "D7TeMKvoYbfNN59wErm0rUL4",
+            "wxT1FQzLJgaMPo5erPijUQLk",
+            "xZuS9fLDnc9mDCJD7mX4IuAz",
+            "aClvHWIgAS6FbLdNSbQJz1X9",
+            "BgWVhuKAaPa3ZLLU5KEfJtcA",
+            "OA9hvnENEFyq4lPWtoRAMoBx",
+            "M3gaOaR8219iYVz4meY2ecyG",
+            "xENi5fRiLnflL6ps0roO2F4C",
+            "JN0dSSwQEg7SIzwra6xOMbMN",
+            "ym8mOIYr2aPwi2jfu3SKitR2",
+            "illZcK47HCewGvJBeBtr7010",
+            "Jo7Bnmu1Ndt6Vnov8miwSpyQ",
+            "xRZcVvHvTLLZ4pxGztUl2lhW",
+            "N5Nf6ZWhA1w5ZIBPQwShOsrv",
+            "mDa2D9KkoPWq1picUnnI4Od4",
+            "l65zqyT8OQmqVRJkTO3gIjSd",
+            "f9Pjs1RlOlLy7bnoU3pI8rXM",
+            "xsA9QLHNqDrd5XWpZXmPN0Ja",
+            "XcK41DJmXW9gH3fZ5rSo4Bsy",
+            "yywoX3vS2SxLIsuQL9Nxd8Xr",
+            "QyJljmyglow1c4LHSxES2xe6",
+            "y0PMqNQlOUPFsm4rMnGjjoth",
+            "xMRUXnJkveow4MORBz21aID7",
+            "d1eiUjtwYznGCgHKo2KW9ORf",
+            "mkvHgFI0R8yxWEfvc4oE4lzF",
+            "xiv642C7Iqpr0DKQQIWT26kl",
+            "xR6W3w3518eGuyPdxEDgUEyi",
+            "C6MP4517stbCU91130KL9QIe",
+            "iAghm3HHmj2dHF2DYDFwNsiC",
+            "FKtLuQSxJRtpHikn4D2212wD",
+            "bDuarf92xWEps2EhjcvDeQd1",
+            "xYpAkvM8fN7UICPQdSc14L3T",
+            "Pt1fM4BHmPD7fIV2bys20o3s",
+            "BHYwyHTonvLJfV2B8FnfGbI4",
+            "K9utERZAJTbDAO66WO4txhe3",
+            "lraiXFCKGC6lCQ18CQBlgE83",
+            "xL22OFQ86lwn4zPR5lFLkBE5",
+            "jRjm8VD4gWJ8WKiQSJ0QPelq",
+            "BHHFJidoa8lm0xCytIeh0RD4",
+            "spP7nJToxwBQlM7vBrD1p4fP",
+            "wpQvQZKStxOydm7QHEIvPRc0",
+            "FoyL72MgrUts3bnXC6iHbA2Z",
+            "I4qrP14augVmpxZR4fdCBwnW"
+          ]
+        },
+        "ScaOyGa0w6XHO1dnVaZCpeh2": null,
+        "RDf5jhsNSO2S9rM4GCttjYUw": null,
+        "SIn8WRKXiGZCBKFYvvr148qz": null,
+        "Le7wIG35P6RNKeAgGgyr38TY": null,
+        "IYSEYsWmzCLKlIXt6SLhtk12": null,
+        "DXz4mElwjhWYet1nFPl9jCFo": null,
+        "IYSEYsWmzCLKlIXt6SLhtk12B0": null,
+        "O5xaH1EG26YQTZHdm9jqyKZa": null,
+        "frW5K1TEiYy9kpK32gny4D2M": null,
+        "O5xaH1EG26YQTZHdm9jqyKZaB0": null,
+        "HJzGOoqUTWhvlMOw5JxjdDkl": null,
+        "LDY3Vy7NRPbmm6J2UHaMJ77W": null,
+        "LDY3Vy7NRPbmm6J2UHaMJ77WP0": null,
+        "LDY3Vy7NRPbmm6J2UHaMJ77WP1": null,
+        "NpLHzRNXRtLJkyZnkcrSp6CD": null,
+        "NpLHzRNXRtLJkyZnkcrSp6CDP0": null,
+        "gKRBsKyQ04m9ROPq4HrH436n": null,
+        "gKRBsKyQ04m9ROPq4HrH436nP0": null,
+        "FpqdYO1uPA2qA0vBON2F8RdQ": null
+      }
+    },
+    {
+      "seqNo": 4,
+      "time": 1380089532,
+      "scriptId": "kxri",
+      "historyId": "25202221126717159304a6bec85-76ca-48e9-94e2-39e08ff73ee2",
+      "updateSize": 2,
+      "updates": {}
+    }
+  ]
+}

@@ -1,0 +1,196 @@
+{
+  "userid": "ajlk",
+  "guid": "097c330e-b2aa-4a8a-bfe3-72460ab081ef",
+  "lastStatus": "published",
+  "items": [
+    {
+      "seqNo": 0,
+      "time": 1350496139,
+      "scriptId": "gtwl",
+      "historyId": "2520518046604809620f40026c6-4e6c-4021-8010-aa4cf3436be4",
+      "updateSize": 3202,
+      "ast": {
+        "textVersion": "v2.2,js,ctx",
+        "jsonVersion": "v1.0,resolved,short",
+        "name": "hawaii vision",
+        "comment": "Live text recognition using camera previews and Hawaii ocr services.",
+        "icon": "eye",
+        "color": "#ff007fff",
+        "autoIcon": "eye",
+        "autoColor": "#007fff",
+        "platform": "current",
+        "rootId": "VJQAcCzYFhykkjqsVSbQmMBo",
+        "showAd": false,
+        "isLibrary": false,
+        "allowExport": false,
+        "hasUniqueIds": false,
+        "decls": [
+          {
+            "name": "main",
+            "inParameters": [],
+            "outParameters": [],
+            "isPrivate": false,
+            "isOffloaded": false,
+            "isTest": false,
+            "isAsync": false,
+            "nodeType": "action",
+            "body": [
+              {
+                "text": "Creates a camera and a textbox.",
+                "nodeType": "comment",
+                "id": "eMJjy1aPVyl1ssxN92VOSzu0"
+              },
+              {
+                "expr": ":data #BJixR5KndXo7vUaIOZIAl6c5 ,:= :senses .camera",
+                "nodeType": "exprStmt",
+                "id": "LtwUifrDajwQ6Zur2K5CCckO",
+                "locals": []
+              },
+              {
+                "expr": ":data #BJixR5KndXo7vUaIOZIAl6c5 .post_to_wall",
+                "nodeType": "exprStmt",
+                "id": "hBgp94xTwJTIzD5yYOR9fE54",
+                "locals": []
+              },
+              {
+                "expr": ":data #PPVdfCdr4JSLEaqO14o4N4MU ,:= :wall .create_text_box ,( 'Scan_text_to_get_started/002e/002e/002e ,, ,1 ,8 ,)",
+                "nodeType": "exprStmt",
+                "id": "OJB0mVdTgkrjeMo4003JDYEE",
+                "locals": []
+              },
+              {
+                "expr": ":data #PPVdfCdr4JSLEaqO14o4N4MU .post_to_wall",
+                "nodeType": "exprStmt",
+                "id": "MOtioMMKXqA7Mrd6Vfk2DQ9J",
+                "locals": []
+              }
+            ],
+            "id": "HnkD1Kr0kb9gmeowivZPgk4p"
+          },
+          {
+            "name": "camera",
+            "comment": "",
+            "type": "Camera",
+            "isReadonly": false,
+            "isTransient": true,
+            "nodeType": "data",
+            "id": "BJixR5KndXo7vUaIOZIAl6c5"
+          },
+          {
+            "name": "board",
+            "comment": "",
+            "type": "Board",
+            "isReadonly": false,
+            "isTransient": true,
+            "nodeType": "data",
+            "id": "SY2MDVRJ2bTuKb3V0fo4FfGX"
+          },
+          {
+            "name": "gameloop",
+            "inParameters": [],
+            "outParameters": [],
+            "isPrivate": true,
+            "isOffloaded": false,
+            "isTest": false,
+            "isAsync": true,
+            "nodeType": "event",
+            "eventName": "gameloop",
+            "eventVariableId": null,
+            "body": [
+              {
+                "text": "Scans camera preview for text. If found displays it and copies it to the clipboard.",
+                "nodeType": "comment",
+                "id": "xvwI8Kib2mk4IyidfdHEr1OX"
+              },
+              {
+                "expr": "$TJrVMtkFxiWeRyGec2Zqun45L0 ,:= :data #BJixR5KndXo7vUaIOZIAl6c5 .preview",
+                "nodeType": "exprStmt",
+                "id": "TJrVMtkFxiWeRyGec2Zqun45",
+                "locals": [
+                  {
+                    "name": "pic",
+                    "type": "Picture",
+                    "nodeType": "localDef",
+                    "id": "TJrVMtkFxiWeRyGec2Zqun45L0"
+                  }
+                ]
+              },
+              {
+                "expr": "$TJrVMtkFxiWeRyGec2Zqun45L0 .desaturate",
+                "nodeType": "exprStmt",
+                "id": "xHJ2eLduWPtoVoNn5Uf62hcs",
+                "locals": []
+              },
+              {
+                "expr": "$KRQnuGOot9Kko37gpVjeR0ZtL0 ,:= :languages .picture_to_text ,( 'en ,, $TJrVMtkFxiWeRyGec2Zqun45L0 ,)",
+                "nodeType": "exprStmt",
+                "id": "KRQnuGOot9Kko37gpVjeR0Zt",
+                "locals": [
+                  {
+                    "name": "s",
+                    "type": "String",
+                    "nodeType": "localDef",
+                    "id": "KRQnuGOot9Kko37gpVjeR0ZtL0"
+                  }
+                ]
+              },
+              {
+                "nodeType": "if",
+                "condition": ",not $KRQnuGOot9Kko37gpVjeR0ZtL0 .is_empty",
+                "thenBody": [
+                  {
+                    "expr": ":data #PPVdfCdr4JSLEaqO14o4N4MU .set_text ,( $KRQnuGOot9Kko37gpVjeR0ZtL0 ,)",
+                    "nodeType": "exprStmt",
+                    "id": "pc4Lk3ZUfbarcuMBYws0Ttef",
+                    "locals": []
+                  },
+                  {
+                    "expr": "$KRQnuGOot9Kko37gpVjeR0ZtL0 .copy_to_clipboard",
+                    "nodeType": "exprStmt",
+                    "id": "cibYIjOUPd9oLp03iy088o1B",
+                    "locals": []
+                  },
+                  {
+                    "expr": ":phone .vibrate ,( ,0 ,. ,1 ,)",
+                    "nodeType": "exprStmt",
+                    "id": "WoCXYLSCLYDeFf7zPI3ip2xj",
+                    "locals": []
+                  }
+                ],
+                "isElseIf": false,
+                "id": "r9qMvjTAGw0G4oHZATP4Qgue",
+                "locals": []
+              }
+            ],
+            "id": "oDuPjzhdgsQ0uN4S7K1K8J7I"
+          },
+          {
+            "name": "tb",
+            "comment": "",
+            "type": "TextBox",
+            "isReadonly": false,
+            "isTransient": true,
+            "nodeType": "data",
+            "id": "PPVdfCdr4JSLEaqO14o4N4MU"
+          }
+        ],
+        "deletedDecls": [],
+        "nodeType": "app",
+        "id": "app"
+      }
+    },
+    {
+      "seqNo": 1,
+      "time": 1351473322,
+      "scriptId": "jbuq",
+      "historyId": "25205082747733732419f212130-4f27-44fd-ae5e-b52a88406b07",
+      "updateSize": 122,
+      "updates": {
+        "app": {
+          "comment": "Live text recognition using camera previews and Hawaii services.",
+          "rootId": "oWdeTPhUCPfNofsYAvRdsU7f"
+        }
+      }
+    }
+  ]
+}

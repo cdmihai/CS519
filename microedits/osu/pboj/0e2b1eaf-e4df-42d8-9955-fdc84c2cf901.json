@@ -1,0 +1,924 @@
+{
+  "userid": "pboj",
+  "guid": "0e2b1eaf-e4df-42d8-9955-fdc84c2cf901",
+  "lastStatus": "published",
+  "items": [
+    {
+      "seqNo": 0,
+      "time": 1342466087,
+      "scriptId": "xxnu",
+      "historyId": "252059834712558490822c19196-b602-42b8-9657-1e362da1c4b5",
+      "updateSize": 5780,
+      "ast": {
+        "textVersion": "v2.2,js,ctx",
+        "jsonVersion": "v1.0,resolved,short",
+        "name": "beat board",
+        "comment": "Little game that moves a picture of a friend in the screen.",
+        "icon": "joystick",
+        "color": "#ff9955bb",
+        "autoIcon": "joystick",
+        "autoColor": "#9955bb",
+        "platform": "current",
+        "rootId": "pKlJuW11gEtHB2VeWjB2nOQ0",
+        "showAd": false,
+        "isLibrary": false,
+        "allowExport": false,
+        "hasUniqueIds": false,
+        "decls": [
+          {
+            "name": "main",
+            "inParameters": [],
+            "outParameters": [],
+            "isPrivate": false,
+            "isOffloaded": false,
+            "isTest": false,
+            "isAsync": false,
+            "nodeType": "action",
+            "body": [
+              {
+                "text": "Sets up the board and sound.",
+                "nodeType": "comment",
+                "id": "ljG5Kdl5BTZyr8WRakWrvtlY"
+              },
+              {
+                "expr": ":data #eWCAduzfoUZ1M5j3jdt4f613 ,:= :senses .record_microphone",
+                "nodeType": "exprStmt",
+                "id": "c4XhPMCh4S9CnHhGFytD324n",
+                "locals": []
+              },
+              {
+                "expr": ":data #eWCAduzfoUZ1M5j3jdt4f613 .set_pitch ,( ,1 ,)",
+                "nodeType": "exprStmt",
+                "id": "AOhEJ3mPky2GFHqW1BJBl42X",
+                "locals": []
+              },
+              {
+                "expr": ":wall .clear",
+                "nodeType": "exprStmt",
+                "id": "VBUOpbEQqPtKWNPDgVXQHLYP",
+                "locals": []
+              },
+              {
+                "expr": ":data #J1ve3TukL13bC88uFZma7hqR ,:= :media .create_full_board",
+                "nodeType": "exprStmt",
+                "id": "z0uyuBBVa5MIMZVlJ2vKD4hD",
+                "locals": []
+              },
+              {
+                "expr": ":data #J1ve3TukL13bC88uFZma7hqR .set_background_camera ,( :senses .camera ,)",
+                "nodeType": "exprStmt",
+                "id": "Vne0WiLDKJj16S3VnCTcgU1E",
+                "locals": []
+              },
+              {
+                "expr": ":data #J1ve3TukL13bC88uFZma7hqR .create_boundary ,( ,0 ,)",
+                "nodeType": "exprStmt",
+                "id": "f4FIzI92g6U6qsT46jrk4493",
+                "locals": []
+              },
+              {
+                "text": "Let the user pick a contact and user the picture as thumbnail",
+                "nodeType": "comment",
+                "id": "sZKA56cLzLRAK3JUFGvSWODG"
+              },
+              {
+                "expr": "$pzZ9k6Rp93pTR2AtDYgzVWcxL0 ,:= :social .choose_contact .picture",
+                "nodeType": "exprStmt",
+                "id": "pzZ9k6Rp93pTR2AtDYgzVWcx",
+                "locals": [
+                  {
+                    "name": "pic",
+                    "type": "Picture",
+                    "nodeType": "localDef",
+                    "id": "pzZ9k6Rp93pTR2AtDYgzVWcxL0"
+                  }
+                ]
+              },
+              {
+                "nodeType": "if",
+                "condition": "$pzZ9k6Rp93pTR2AtDYgzVWcxL0 .is_invalid",
+                "thenBody": [
+                  {
+                    "expr": ":wall .prompt ,( 'Please_pick_a_contact_with_a_picture ,)",
+                    "nodeType": "exprStmt",
+                    "id": "xQR6MUKe18bIBOkRPCrGVtcw",
+                    "locals": []
+                  },
+                  {
+                    "expr": ":time .stop",
+                    "nodeType": "exprStmt",
+                    "id": "F67Nm0AvTe45a46D4quUzCOT",
+                    "locals": []
+                  }
+                ],
+                "isElseIf": false,
+                "id": "h6znuaYK0pQwNy2p2tk63DdB",
+                "locals": []
+              },
+              {
+                "expr": ":data #SrEnYb1q7Fq4i0D6822YYGRP ,:= :data #J1ve3TukL13bC88uFZma7hqR .create_picture ,( $pzZ9k6Rp93pTR2AtDYgzVWcxL0 ,)",
+                "nodeType": "exprStmt",
+                "id": "JcO7LYXs9H5MDEEVHqcpR2HR",
+                "locals": []
+              },
+              {
+                "expr": ":data #SrEnYb1q7Fq4i0D6822YYGRP .set_friction ,( :math .rand_norm ,* ,0 ,. ,0 ,2 ,+ ,0 ,. ,0 ,0 ,1 ,)",
+                "nodeType": "exprStmt",
+                "id": "v64AOWVJNFM4XGFppYVo39vT",
+                "locals": []
+              },
+              {
+                "expr": ":data #SrEnYb1q7Fq4i0D6822YYGRP .set_angular_speed ,( ,6 ,0 ,)",
+                "nodeType": "exprStmt",
+                "id": "gjjiBItt4egi4vkj8K5NcSZp",
+                "locals": []
+              },
+              {
+                "expr": ":data #SrEnYb1q7Fq4i0D6822YYGRP .set_elasticity ,( ,0 ,. ,9 ,)",
+                "nodeType": "exprStmt",
+                "id": "xkMDccPebVPYtJOZeETFQ9Nv",
+                "locals": []
+              },
+              {
+                "expr": ":data #J1ve3TukL13bC88uFZma7hqR .post_to_wall",
+                "nodeType": "exprStmt",
+                "id": "fRONUJVWqLRsEpdu5VmmvvMG",
+                "locals": []
+              }
+            ],
+            "id": "cM3SMi8h2MrCHo0qVjvBI273"
+          },
+          {
+            "name": "sound",
+            "comment": "",
+            "type": "Sound",
+            "isReadonly": false,
+            "isTransient": true,
+            "nodeType": "data",
+            "id": "eWCAduzfoUZ1M5j3jdt4f613"
+          },
+          {
+            "name": "board",
+            "comment": "",
+            "type": "Board",
+            "isReadonly": false,
+            "isTransient": true,
+            "nodeType": "data",
+            "id": "J1ve3TukL13bC88uFZma7hqR"
+          },
+          {
+            "name": "sprite",
+            "comment": "",
+            "type": "Sprite",
+            "isReadonly": false,
+            "isTransient": true,
+            "nodeType": "data",
+            "id": "SrEnYb1q7Fq4i0D6822YYGRP"
+          },
+          {
+            "name": "gameloop",
+            "inParameters": [],
+            "outParameters": [],
+            "isPrivate": true,
+            "isOffloaded": false,
+            "isTest": false,
+            "isAsync": true,
+            "nodeType": "event",
+            "eventName": "gameloop",
+            "eventVariableId": null,
+            "body": [
+              {
+                "text": "Plays a sound when the sprit is near the edge.",
+                "nodeType": "comment",
+                "id": "o1aFkXjYH7WgTapTR9yYVOf8"
+              },
+              {
+                "expr": "$tpZZi2422Dvq7yQ3CRpbGVlZL0 ,:= :data #SrEnYb1q7Fq4i0D6822YYGRP",
+                "nodeType": "exprStmt",
+                "id": "tpZZi2422Dvq7yQ3CRpbGVlZ",
+                "locals": [
+                  {
+                    "name": "sprite",
+                    "type": "Sprite",
+                    "nodeType": "localDef",
+                    "id": "tpZZi2422Dvq7yQ3CRpbGVlZL0"
+                  }
+                ]
+              },
+              {
+                "expr": "$WDcM45aLGs2uSCg24CmXvcDqL0 ,:= :data #J1ve3TukL13bC88uFZma7hqR",
+                "nodeType": "exprStmt",
+                "id": "WDcM45aLGs2uSCg24CmXvcDq",
+                "locals": [
+                  {
+                    "name": "board",
+                    "type": "Board",
+                    "nodeType": "localDef",
+                    "id": "WDcM45aLGs2uSCg24CmXvcDqL0"
+                  }
+                ]
+              },
+              {
+                "expr": "$yXkIInXJwIVmWgx8wH7l5eYzL0 ,:= :senses .acceleration_quick .scale ,( ,1 ,5 ,0 ,0 ,)",
+                "nodeType": "exprStmt",
+                "id": "yXkIInXJwIVmWgx8wH7l5eYz",
+                "locals": [
+                  {
+                    "name": "p",
+                    "type": "Vector3",
+                    "nodeType": "localDef",
+                    "id": "yXkIInXJwIVmWgx8wH7l5eYzL0"
+                  }
+                ]
+              },
+              {
+                "expr": "$WDcM45aLGs2uSCg24CmXvcDqL0 .set_gravity ,( $yXkIInXJwIVmWgx8wH7l5eYzL0 .x ,, $yXkIInXJwIVmWgx8wH7l5eYzL0 .y ,- ,0 ,. ,5 ,)",
+                "nodeType": "exprStmt",
+                "id": "eVz8b2MyeMAZcUWBGa1r4Njd",
+                "locals": []
+              },
+              {
+                "expr": "$WDcM45aLGs2uSCg24CmXvcDqL0 .evolve",
+                "nodeType": "exprStmt",
+                "id": "uynDT4n2glQh7CXpmR8d6IFd",
+                "locals": []
+              },
+              {
+                "expr": "$qd5eVTrHkYEIWcgMI0GSKbeCL0 ,:= $tpZZi2422Dvq7yQ3CRpbGVlZL0 .width ,+ ,3",
+                "nodeType": "exprStmt",
+                "id": "qd5eVTrHkYEIWcgMI0GSKbeC",
+                "locals": [
+                  {
+                    "name": "c",
+                    "type": "Number",
+                    "nodeType": "localDef",
+                    "id": "qd5eVTrHkYEIWcgMI0GSKbeCL0"
+                  }
+                ]
+              },
+              {
+                "nodeType": "if",
+                "condition": "$tpZZi2422Dvq7yQ3CRpbGVlZL0 .x ,< $qd5eVTrHkYEIWcgMI0GSKbeCL0 ,or $tpZZi2422Dvq7yQ3CRpbGVlZL0 .x ,> $WDcM45aLGs2uSCg24CmXvcDqL0 .width ,- $qd5eVTrHkYEIWcgMI0GSKbeCL0 ,or $tpZZi2422Dvq7yQ3CRpbGVlZL0 .y ,< $qd5eVTrHkYEIWcgMI0GSKbeCL0 ,or $tpZZi2422Dvq7yQ3CRpbGVlZL0 .y ,> $WDcM45aLGs2uSCg24CmXvcDqL0 .height ,- $qd5eVTrHkYEIWcgMI0GSKbeCL0",
+                "thenBody": [
+                  {
+                    "expr": ":data #eWCAduzfoUZ1M5j3jdt4f613 .play",
+                    "nodeType": "exprStmt",
+                    "id": "sqP8HFhrT5vfigcZFKiYRp7z",
+                    "locals": []
+                  },
+                  {
+                    "expr": ":phone .vibrate ,( ,0 ,. ,0 ,2 ,)",
+                    "nodeType": "exprStmt",
+                    "id": "tH6dHWggBAVAOWRKcZ7mhimA",
+                    "locals": []
+                  }
+                ],
+                "isElseIf": false,
+                "id": "VrltM7M6vC2sHjh23LYCNEZi",
+                "locals": []
+              },
+              {
+                "expr": ":data #J1ve3TukL13bC88uFZma7hqR .update_on_wall",
+                "nodeType": "exprStmt",
+                "id": "VbMUCRoyZKYbVx3uxOl2p7pG",
+                "locals": []
+              }
+            ],
+            "id": "oyGaoSVTvRVxkjyZNrbG2cAg"
+          }
+        ],
+        "deletedDecls": [],
+        "nodeType": "app",
+        "id": "app"
+      }
+    },
+    {
+      "seqNo": 1,
+      "time": 1343097251,
+      "scriptId": "lzth",
+      "historyId": "25205920354856902476f11ae69-1d86-42a7-96b7-5e9c87400956",
+      "updateSize": 2064,
+      "updates": {
+        "sZKA56cLzLRAK3JUFGvSWODG": {
+          "text": "Create sprite from random thunbnail"
+        },
+        "pzZ9k6Rp93pTR2AtDYgzVWcx": {
+          "expr": "$pzZ9k6Rp93pTR2AtDYgzVWcxL0 ,:= :code #OFhuiLqrJ7LNq7PJTPFn0y6u"
+        },
+        "cM3SMi8h2MrCHo0qVjvBI273": {
+          "body": [
+            "ljG5Kdl5BTZyr8WRakWrvtlY",
+            "c4XhPMCh4S9CnHhGFytD324n",
+            "AOhEJ3mPky2GFHqW1BJBl42X",
+            "VBUOpbEQqPtKWNPDgVXQHLYP",
+            "z0uyuBBVa5MIMZVlJ2vKD4hD",
+            "Vne0WiLDKJj16S3VnCTcgU1E",
+            "f4FIzI92g6U6qsT46jrk4493",
+            "sZKA56cLzLRAK3JUFGvSWODG",
+            "pzZ9k6Rp93pTR2AtDYgzVWcx",
+            "JcO7LYXs9H5MDEEVHqcpR2HR",
+            "v64AOWVJNFM4XGFppYVo39vT",
+            "gjjiBItt4egi4vkj8K5NcSZp",
+            "xkMDccPebVPYtJOZeETFQ9Nv",
+            "fRONUJVWqLRsEpdu5VmmvvMG"
+          ]
+        },
+        "OFhuiLqrJ7LNq7PJTPFn0y6uP0": {
+          "name": "pic",
+          "type": "Picture",
+          "nodeType": "localDef"
+        },
+        "wNnvNN9y79ZIHsxrHIrunaT9L0": {
+          "name": "contacts",
+          "type": "Contact Collection",
+          "nodeType": "localDef"
+        },
+        "wNnvNN9y79ZIHsxrHIrunaT9": {
+          "expr": "$wNnvNN9y79ZIHsxrHIrunaT9L0 ,:= :social .search_contacts ,( ' ,)",
+          "nodeType": "exprStmt",
+          "locals": [
+            "wNnvNN9y79ZIHsxrHIrunaT9L0"
+          ]
+        },
+        "KkZXOEWoeaxRWgpbrb1rmtKTL0": {
+          "name": "contact",
+          "type": "Contact",
+          "nodeType": "localDef"
+        },
+        "KkZXOEWoeaxRWgpbrb1rmtKT": {
+          "expr": "$KkZXOEWoeaxRWgpbrb1rmtKTL0 ,:= $wNnvNN9y79ZIHsxrHIrunaT9L0 .at ,( :math .rand ,( $wNnvNN9y79ZIHsxrHIrunaT9L0 .count ,) ,)",
+          "nodeType": "exprStmt",
+          "locals": [
+            "KkZXOEWoeaxRWgpbrb1rmtKTL0"
+          ]
+        },
+        "Ppf7nZ4YJB4R1HVg4EAh0DO0": {
+          "expr": "$OFhuiLqrJ7LNq7PJTPFn0y6uP0 ,:= $KkZXOEWoeaxRWgpbrb1rmtKTL0 .picture",
+          "nodeType": "exprStmt",
+          "locals": []
+        },
+        "OFhuiLqrJ7LNq7PJTPFn0y6u": {
+          "name": "random pic",
+          "inParameters": [],
+          "outParameters": [
+            "OFhuiLqrJ7LNq7PJTPFn0y6uP0"
+          ],
+          "isPrivate": true,
+          "isOffloaded": false,
+          "isTest": false,
+          "isAsync": false,
+          "nodeType": "action",
+          "body": [
+            "wNnvNN9y79ZIHsxrHIrunaT9",
+            "KkZXOEWoeaxRWgpbrb1rmtKT",
+            "Ppf7nZ4YJB4R1HVg4EAh0DO0"
+          ]
+        },
+        "app": {
+          "comment": "Little game that a picture of your friend in the screen.",
+          "rootId": "i0axIWOqYkXg6JRvp30gqjoN",
+          "decls": [
+            "cM3SMi8h2MrCHo0qVjvBI273",
+            "eWCAduzfoUZ1M5j3jdt4f613",
+            "J1ve3TukL13bC88uFZma7hqR",
+            "SrEnYb1q7Fq4i0D6822YYGRP",
+            "oyGaoSVTvRVxkjyZNrbG2cAg",
+            "OFhuiLqrJ7LNq7PJTPFn0y6u"
+          ]
+        },
+        "h6znuaYK0pQwNy2p2tk63DdB": null,
+        "xQR6MUKe18bIBOkRPCrGVtcw": null,
+        "F67Nm0AvTe45a46D4quUzCOT": null
+      }
+    },
+    {
+      "seqNo": 2,
+      "time": 1343097343,
+      "scriptId": "xxnu",
+      "historyId": "2520592034568452351c550ad61-8eb8-4067-93a2-ee186891c103",
+      "updateSize": 1547,
+      "updates": {
+        "sZKA56cLzLRAK3JUFGvSWODG": {
+          "text": "Let the user pick a contact and user the picture as thumbnail"
+        },
+        "pzZ9k6Rp93pTR2AtDYgzVWcx": {
+          "expr": "$pzZ9k6Rp93pTR2AtDYgzVWcxL0 ,:= :social .choose_contact .picture"
+        },
+        "ySj0D6iVBnQTUuyozhAWwUzd": {
+          "expr": ":wall .prompt ,( 'Please_pick_a_contact_with_a_picture ,)",
+          "nodeType": "exprStmt",
+          "locals": []
+        },
+        "z4qQO24JrFblQBKUtWDd2b3Z": {
+          "expr": ":time .stop",
+          "nodeType": "exprStmt",
+          "locals": []
+        },
+        "xH6ZbPkBBj8rZD78taFRr2dN": {
+          "nodeType": "if",
+          "condition": "$pzZ9k6Rp93pTR2AtDYgzVWcxL0 .is_invalid",
+          "thenBody": [
+            "ySj0D6iVBnQTUuyozhAWwUzd",
+            "z4qQO24JrFblQBKUtWDd2b3Z"
+          ],
+          "isElseIf": false,
+          "locals": []
+        },
+        "cM3SMi8h2MrCHo0qVjvBI273": {
+          "body": [
+            "ljG5Kdl5BTZyr8WRakWrvtlY",
+            "c4XhPMCh4S9CnHhGFytD324n",
+            "AOhEJ3mPky2GFHqW1BJBl42X",
+            "VBUOpbEQqPtKWNPDgVXQHLYP",
+            "z0uyuBBVa5MIMZVlJ2vKD4hD",
+            "Vne0WiLDKJj16S3VnCTcgU1E",
+            "f4FIzI92g6U6qsT46jrk4493",
+            "sZKA56cLzLRAK3JUFGvSWODG",
+            "pzZ9k6Rp93pTR2AtDYgzVWcx",
+            "xH6ZbPkBBj8rZD78taFRr2dN",
+            "JcO7LYXs9H5MDEEVHqcpR2HR",
+            "v64AOWVJNFM4XGFppYVo39vT",
+            "gjjiBItt4egi4vkj8K5NcSZp",
+            "xkMDccPebVPYtJOZeETFQ9Nv",
+            "fRONUJVWqLRsEpdu5VmmvvMG"
+          ]
+        },
+        "app": {
+          "comment": "Little game that moves a picture of a friend in the screen.",
+          "rootId": "pKlJuW11gEtHB2VeWjB2nOQ0",
+          "decls": [
+            "cM3SMi8h2MrCHo0qVjvBI273",
+            "eWCAduzfoUZ1M5j3jdt4f613",
+            "J1ve3TukL13bC88uFZma7hqR",
+            "SrEnYb1q7Fq4i0D6822YYGRP",
+            "oyGaoSVTvRVxkjyZNrbG2cAg"
+          ]
+        },
+        "OFhuiLqrJ7LNq7PJTPFn0y6u": null,
+        "OFhuiLqrJ7LNq7PJTPFn0y6uP0": null,
+        "wNnvNN9y79ZIHsxrHIrunaT9": null,
+        "wNnvNN9y79ZIHsxrHIrunaT9L0": null,
+        "KkZXOEWoeaxRWgpbrb1rmtKT": null,
+        "KkZXOEWoeaxRWgpbrb1rmtKTL0": null,
+        "Ppf7nZ4YJB4R1HVg4EAh0DO0": null
+      }
+    },
+    {
+      "seqNo": 3,
+      "time": 1343408234,
+      "scriptId": "lzth",
+      "historyId": "2520588925658993639ac5009db-a30f-42a7-ac9c-3efb43ef8929",
+      "updateSize": 2064,
+      "updates": {
+        "sZKA56cLzLRAK3JUFGvSWODG": {
+          "text": "Create sprite from random thunbnail"
+        },
+        "pzZ9k6Rp93pTR2AtDYgzVWcx": {
+          "expr": "$pzZ9k6Rp93pTR2AtDYgzVWcxL0 ,:= :code #wpRdUSoajRx3EfYvV1G23rRd"
+        },
+        "cM3SMi8h2MrCHo0qVjvBI273": {
+          "body": [
+            "ljG5Kdl5BTZyr8WRakWrvtlY",
+            "c4XhPMCh4S9CnHhGFytD324n",
+            "AOhEJ3mPky2GFHqW1BJBl42X",
+            "VBUOpbEQqPtKWNPDgVXQHLYP",
+            "z0uyuBBVa5MIMZVlJ2vKD4hD",
+            "Vne0WiLDKJj16S3VnCTcgU1E",
+            "f4FIzI92g6U6qsT46jrk4493",
+            "sZKA56cLzLRAK3JUFGvSWODG",
+            "pzZ9k6Rp93pTR2AtDYgzVWcx",
+            "JcO7LYXs9H5MDEEVHqcpR2HR",
+            "v64AOWVJNFM4XGFppYVo39vT",
+            "gjjiBItt4egi4vkj8K5NcSZp",
+            "xkMDccPebVPYtJOZeETFQ9Nv",
+            "fRONUJVWqLRsEpdu5VmmvvMG"
+          ]
+        },
+        "wpRdUSoajRx3EfYvV1G23rRdP0": {
+          "name": "pic",
+          "type": "Picture",
+          "nodeType": "localDef"
+        },
+        "KFqssoVNNyUzxga0BpsRCFVbL0": {
+          "name": "contacts",
+          "type": "Contact Collection",
+          "nodeType": "localDef"
+        },
+        "KFqssoVNNyUzxga0BpsRCFVb": {
+          "expr": "$KFqssoVNNyUzxga0BpsRCFVbL0 ,:= :social .search_contacts ,( ' ,)",
+          "nodeType": "exprStmt",
+          "locals": [
+            "KFqssoVNNyUzxga0BpsRCFVbL0"
+          ]
+        },
+        "DHwwEaz1uBqueT1bgvwjglZLL0": {
+          "name": "contact",
+          "type": "Contact",
+          "nodeType": "localDef"
+        },
+        "DHwwEaz1uBqueT1bgvwjglZL": {
+          "expr": "$DHwwEaz1uBqueT1bgvwjglZLL0 ,:= $KFqssoVNNyUzxga0BpsRCFVbL0 .at ,( :math .rand ,( $KFqssoVNNyUzxga0BpsRCFVbL0 .count ,) ,)",
+          "nodeType": "exprStmt",
+          "locals": [
+            "DHwwEaz1uBqueT1bgvwjglZLL0"
+          ]
+        },
+        "bo4tHA0YocR2hgnK19ogHvl4": {
+          "expr": "$wpRdUSoajRx3EfYvV1G23rRdP0 ,:= $DHwwEaz1uBqueT1bgvwjglZLL0 .picture",
+          "nodeType": "exprStmt",
+          "locals": []
+        },
+        "wpRdUSoajRx3EfYvV1G23rRd": {
+          "name": "random pic",
+          "inParameters": [],
+          "outParameters": [
+            "wpRdUSoajRx3EfYvV1G23rRdP0"
+          ],
+          "isPrivate": true,
+          "isOffloaded": false,
+          "isTest": false,
+          "isAsync": false,
+          "nodeType": "action",
+          "body": [
+            "KFqssoVNNyUzxga0BpsRCFVb",
+            "DHwwEaz1uBqueT1bgvwjglZL",
+            "bo4tHA0YocR2hgnK19ogHvl4"
+          ]
+        },
+        "app": {
+          "comment": "Little game that a picture of your friend in the screen.",
+          "rootId": "dzWua4aN4CVoW4xRTN9DbXni",
+          "decls": [
+            "cM3SMi8h2MrCHo0qVjvBI273",
+            "eWCAduzfoUZ1M5j3jdt4f613",
+            "J1ve3TukL13bC88uFZma7hqR",
+            "SrEnYb1q7Fq4i0D6822YYGRP",
+            "oyGaoSVTvRVxkjyZNrbG2cAg",
+            "wpRdUSoajRx3EfYvV1G23rRd"
+          ]
+        },
+        "xH6ZbPkBBj8rZD78taFRr2dN": null,
+        "ySj0D6iVBnQTUuyozhAWwUzd": null,
+        "z4qQO24JrFblQBKUtWDd2b3Z": null
+      }
+    },
+    {
+      "seqNo": 4,
+      "time": 1343498447,
+      "scriptId": "xxnu",
+      "historyId": "2520588023527897193e89d6696-79e4-4ff5-b548-4dfdfffaa7b2",
+      "updateSize": 1547,
+      "updates": {
+        "sZKA56cLzLRAK3JUFGvSWODG": {
+          "text": "Let the user pick a contact and user the picture as thumbnail"
+        },
+        "pzZ9k6Rp93pTR2AtDYgzVWcx": {
+          "expr": "$pzZ9k6Rp93pTR2AtDYgzVWcxL0 ,:= :social .choose_contact .picture"
+        },
+        "iaBH1OcggLWQKtQIqnYcoutd": {
+          "expr": ":wall .prompt ,( 'Please_pick_a_contact_with_a_picture ,)",
+          "nodeType": "exprStmt",
+          "locals": []
+        },
+        "Oy3LUehJe2jfu1mv7jMvaiXp": {
+          "expr": ":time .stop",
+          "nodeType": "exprStmt",
+          "locals": []
+        },
+        "yF0ZHLp4Q0fYM2qtgdTe6Oib": {
+          "nodeType": "if",
+          "condition": "$pzZ9k6Rp93pTR2AtDYgzVWcxL0 .is_invalid",
+          "thenBody": [
+            "iaBH1OcggLWQKtQIqnYcoutd",
+            "Oy3LUehJe2jfu1mv7jMvaiXp"
+          ],
+          "isElseIf": false,
+          "locals": []
+        },
+        "cM3SMi8h2MrCHo0qVjvBI273": {
+          "body": [
+            "ljG5Kdl5BTZyr8WRakWrvtlY",
+            "c4XhPMCh4S9CnHhGFytD324n",
+            "AOhEJ3mPky2GFHqW1BJBl42X",
+            "VBUOpbEQqPtKWNPDgVXQHLYP",
+            "z0uyuBBVa5MIMZVlJ2vKD4hD",
+            "Vne0WiLDKJj16S3VnCTcgU1E",
+            "f4FIzI92g6U6qsT46jrk4493",
+            "sZKA56cLzLRAK3JUFGvSWODG",
+            "pzZ9k6Rp93pTR2AtDYgzVWcx",
+            "yF0ZHLp4Q0fYM2qtgdTe6Oib",
+            "JcO7LYXs9H5MDEEVHqcpR2HR",
+            "v64AOWVJNFM4XGFppYVo39vT",
+            "gjjiBItt4egi4vkj8K5NcSZp",
+            "xkMDccPebVPYtJOZeETFQ9Nv",
+            "fRONUJVWqLRsEpdu5VmmvvMG"
+          ]
+        },
+        "app": {
+          "comment": "Little game that moves a picture of a friend in the screen.",
+          "rootId": "pKlJuW11gEtHB2VeWjB2nOQ0",
+          "decls": [
+            "cM3SMi8h2MrCHo0qVjvBI273",
+            "eWCAduzfoUZ1M5j3jdt4f613",
+            "J1ve3TukL13bC88uFZma7hqR",
+            "SrEnYb1q7Fq4i0D6822YYGRP",
+            "oyGaoSVTvRVxkjyZNrbG2cAg"
+          ]
+        },
+        "wpRdUSoajRx3EfYvV1G23rRd": null,
+        "wpRdUSoajRx3EfYvV1G23rRdP0": null,
+        "KFqssoVNNyUzxga0BpsRCFVb": null,
+        "KFqssoVNNyUzxga0BpsRCFVbL0": null,
+        "DHwwEaz1uBqueT1bgvwjglZL": null,
+        "DHwwEaz1uBqueT1bgvwjglZLL0": null,
+        "bo4tHA0YocR2hgnK19ogHvl4": null
+      }
+    },
+    {
+      "seqNo": 5,
+      "time": 1343741878,
+      "scriptId": "lzth",
+      "historyId": "2520585589215487181b36afd9d-179d-49ad-9ff2-823fd5b3dda2",
+      "updateSize": 2064,
+      "updates": {
+        "sZKA56cLzLRAK3JUFGvSWODG": {
+          "text": "Create sprite from random thunbnail"
+        },
+        "pzZ9k6Rp93pTR2AtDYgzVWcx": {
+          "expr": "$pzZ9k6Rp93pTR2AtDYgzVWcxL0 ,:= :code #XTzdg8RjGyVxyBvMOfIEmq4b"
+        },
+        "cM3SMi8h2MrCHo0qVjvBI273": {
+          "body": [
+            "ljG5Kdl5BTZyr8WRakWrvtlY",
+            "c4XhPMCh4S9CnHhGFytD324n",
+            "AOhEJ3mPky2GFHqW1BJBl42X",
+            "VBUOpbEQqPtKWNPDgVXQHLYP",
+            "z0uyuBBVa5MIMZVlJ2vKD4hD",
+            "Vne0WiLDKJj16S3VnCTcgU1E",
+            "f4FIzI92g6U6qsT46jrk4493",
+            "sZKA56cLzLRAK3JUFGvSWODG",
+            "pzZ9k6Rp93pTR2AtDYgzVWcx",
+            "JcO7LYXs9H5MDEEVHqcpR2HR",
+            "v64AOWVJNFM4XGFppYVo39vT",
+            "gjjiBItt4egi4vkj8K5NcSZp",
+            "xkMDccPebVPYtJOZeETFQ9Nv",
+            "fRONUJVWqLRsEpdu5VmmvvMG"
+          ]
+        },
+        "XTzdg8RjGyVxyBvMOfIEmq4bP0": {
+          "name": "pic",
+          "type": "Picture",
+          "nodeType": "localDef"
+        },
+        "drsuRvx6MmLAHWgOU893BR5cL0": {
+          "name": "contacts",
+          "type": "Contact Collection",
+          "nodeType": "localDef"
+        },
+        "drsuRvx6MmLAHWgOU893BR5c": {
+          "expr": "$drsuRvx6MmLAHWgOU893BR5cL0 ,:= :social .search_contacts ,( ' ,)",
+          "nodeType": "exprStmt",
+          "locals": [
+            "drsuRvx6MmLAHWgOU893BR5cL0"
+          ]
+        },
+        "fEexvMgrbitgV9Tn2Cx6rYkbL0": {
+          "name": "contact",
+          "type": "Contact",
+          "nodeType": "localDef"
+        },
+        "fEexvMgrbitgV9Tn2Cx6rYkb": {
+          "expr": "$fEexvMgrbitgV9Tn2Cx6rYkbL0 ,:= $drsuRvx6MmLAHWgOU893BR5cL0 .at ,( :math .rand ,( $drsuRvx6MmLAHWgOU893BR5cL0 .count ,) ,)",
+          "nodeType": "exprStmt",
+          "locals": [
+            "fEexvMgrbitgV9Tn2Cx6rYkbL0"
+          ]
+        },
+        "zlRGeOys4fYkU2B52k8JuntD": {
+          "expr": "$XTzdg8RjGyVxyBvMOfIEmq4bP0 ,:= $fEexvMgrbitgV9Tn2Cx6rYkbL0 .picture",
+          "nodeType": "exprStmt",
+          "locals": []
+        },
+        "XTzdg8RjGyVxyBvMOfIEmq4b": {
+          "name": "random pic",
+          "inParameters": [],
+          "outParameters": [
+            "XTzdg8RjGyVxyBvMOfIEmq4bP0"
+          ],
+          "isPrivate": true,
+          "isOffloaded": false,
+          "isTest": false,
+          "isAsync": false,
+          "nodeType": "action",
+          "body": [
+            "drsuRvx6MmLAHWgOU893BR5c",
+            "fEexvMgrbitgV9Tn2Cx6rYkb",
+            "zlRGeOys4fYkU2B52k8JuntD"
+          ]
+        },
+        "app": {
+          "comment": "Little game that a picture of your friend in the screen.",
+          "rootId": "dzWua4aN4CVoW4xRTN9DbXni",
+          "decls": [
+            "cM3SMi8h2MrCHo0qVjvBI273",
+            "eWCAduzfoUZ1M5j3jdt4f613",
+            "J1ve3TukL13bC88uFZma7hqR",
+            "SrEnYb1q7Fq4i0D6822YYGRP",
+            "oyGaoSVTvRVxkjyZNrbG2cAg",
+            "XTzdg8RjGyVxyBvMOfIEmq4b"
+          ]
+        },
+        "yF0ZHLp4Q0fYM2qtgdTe6Oib": null,
+        "iaBH1OcggLWQKtQIqnYcoutd": null,
+        "Oy3LUehJe2jfu1mv7jMvaiXp": null
+      }
+    },
+    {
+      "seqNo": 6,
+      "time": 1343756084,
+      "scriptId": "xxnu",
+      "historyId": "25205854471518160797d54316b-b4bb-408e-9aeb-2d49908e9591",
+      "updateSize": 1547,
+      "updates": {
+        "sZKA56cLzLRAK3JUFGvSWODG": {
+          "text": "Let the user pick a contact and user the picture as thumbnail"
+        },
+        "pzZ9k6Rp93pTR2AtDYgzVWcx": {
+          "expr": "$pzZ9k6Rp93pTR2AtDYgzVWcxL0 ,:= :social .choose_contact .picture"
+        },
+        "KhUimWXrY2QwMcKyw4Kh8veL": {
+          "expr": ":wall .prompt ,( 'Please_pick_a_contact_with_a_picture ,)",
+          "nodeType": "exprStmt",
+          "locals": []
+        },
+        "pqOiWDNLJ0kLi3DEd22tz8LF": {
+          "expr": ":time .stop",
+          "nodeType": "exprStmt",
+          "locals": []
+        },
+        "P4MrHI8em4DzERKGNapfaHhU": {
+          "nodeType": "if",
+          "condition": "$pzZ9k6Rp93pTR2AtDYgzVWcxL0 .is_invalid",
+          "thenBody": [
+            "KhUimWXrY2QwMcKyw4Kh8veL",
+            "pqOiWDNLJ0kLi3DEd22tz8LF"
+          ],
+          "isElseIf": false,
+          "locals": []
+        },
+        "cM3SMi8h2MrCHo0qVjvBI273": {
+          "body": [
+            "ljG5Kdl5BTZyr8WRakWrvtlY",
+            "c4XhPMCh4S9CnHhGFytD324n",
+            "AOhEJ3mPky2GFHqW1BJBl42X",
+            "VBUOpbEQqPtKWNPDgVXQHLYP",
+            "z0uyuBBVa5MIMZVlJ2vKD4hD",
+            "Vne0WiLDKJj16S3VnCTcgU1E",
+            "f4FIzI92g6U6qsT46jrk4493",
+            "sZKA56cLzLRAK3JUFGvSWODG",
+            "pzZ9k6Rp93pTR2AtDYgzVWcx",
+            "P4MrHI8em4DzERKGNapfaHhU",
+            "JcO7LYXs9H5MDEEVHqcpR2HR",
+            "v64AOWVJNFM4XGFppYVo39vT",
+            "gjjiBItt4egi4vkj8K5NcSZp",
+            "xkMDccPebVPYtJOZeETFQ9Nv",
+            "fRONUJVWqLRsEpdu5VmmvvMG"
+          ]
+        },
+        "app": {
+          "comment": "Little game that moves a picture of a friend in the screen.",
+          "rootId": "bax5V1IMMdwzx22ysXQM6eUq",
+          "decls": [
+            "cM3SMi8h2MrCHo0qVjvBI273",
+            "eWCAduzfoUZ1M5j3jdt4f613",
+            "J1ve3TukL13bC88uFZma7hqR",
+            "SrEnYb1q7Fq4i0D6822YYGRP",
+            "oyGaoSVTvRVxkjyZNrbG2cAg"
+          ]
+        },
+        "XTzdg8RjGyVxyBvMOfIEmq4b": null,
+        "XTzdg8RjGyVxyBvMOfIEmq4bP0": null,
+        "drsuRvx6MmLAHWgOU893BR5c": null,
+        "drsuRvx6MmLAHWgOU893BR5cL0": null,
+        "fEexvMgrbitgV9Tn2Cx6rYkb": null,
+        "fEexvMgrbitgV9Tn2Cx6rYkbL0": null,
+        "zlRGeOys4fYkU2B52k8JuntD": null
+      }
+    },
+    {
+      "seqNo": 7,
+      "time": 1343832894,
+      "scriptId": "lzth",
+      "historyId": "2520584679055523975f6c315ec-9d7f-4eb4-b757-29e6ebdfd3e7",
+      "updateSize": 2064,
+      "updates": {
+        "sZKA56cLzLRAK3JUFGvSWODG": {
+          "text": "Create sprite from random thunbnail"
+        },
+        "pzZ9k6Rp93pTR2AtDYgzVWcx": {
+          "expr": "$pzZ9k6Rp93pTR2AtDYgzVWcxL0 ,:= :code #TQDmSoP7q9G2oh1L3y1zQGXl"
+        },
+        "cM3SMi8h2MrCHo0qVjvBI273": {
+          "body": [
+            "ljG5Kdl5BTZyr8WRakWrvtlY",
+            "c4XhPMCh4S9CnHhGFytD324n",
+            "AOhEJ3mPky2GFHqW1BJBl42X",
+            "VBUOpbEQqPtKWNPDgVXQHLYP",
+            "z0uyuBBVa5MIMZVlJ2vKD4hD",
+            "Vne0WiLDKJj16S3VnCTcgU1E",
+            "f4FIzI92g6U6qsT46jrk4493",
+            "sZKA56cLzLRAK3JUFGvSWODG",
+            "pzZ9k6Rp93pTR2AtDYgzVWcx",
+            "JcO7LYXs9H5MDEEVHqcpR2HR",
+            "v64AOWVJNFM4XGFppYVo39vT",
+            "gjjiBItt4egi4vkj8K5NcSZp",
+            "xkMDccPebVPYtJOZeETFQ9Nv",
+            "fRONUJVWqLRsEpdu5VmmvvMG"
+          ]
+        },
+        "TQDmSoP7q9G2oh1L3y1zQGXlP0": {
+          "name": "pic",
+          "type": "Picture",
+          "nodeType": "localDef"
+        },
+        "xkTrdo0a9uTY2oU0Xxskx5KGL0": {
+          "name": "contacts",
+          "type": "Contact Collection",
+          "nodeType": "localDef"
+        },
+        "xkTrdo0a9uTY2oU0Xxskx5KG": {
+          "expr": "$xkTrdo0a9uTY2oU0Xxskx5KGL0 ,:= :social .search_contacts ,( ' ,)",
+          "nodeType": "exprStmt",
+          "locals": [
+            "xkTrdo0a9uTY2oU0Xxskx5KGL0"
+          ]
+        },
+        "pBeUZZ9sBDYOR12K62dYK5twL0": {
+          "name": "contact",
+          "type": "Contact",
+          "nodeType": "localDef"
+        },
+        "pBeUZZ9sBDYOR12K62dYK5tw": {
+          "expr": "$pBeUZZ9sBDYOR12K62dYK5twL0 ,:= $xkTrdo0a9uTY2oU0Xxskx5KGL0 .at ,( :math .rand ,( $xkTrdo0a9uTY2oU0Xxskx5KGL0 .count ,) ,)",
+          "nodeType": "exprStmt",
+          "locals": [
+            "pBeUZZ9sBDYOR12K62dYK5twL0"
+          ]
+        },
+        "xhcCaic45qwRVdbRaqdWrqaZ": {
+          "expr": "$TQDmSoP7q9G2oh1L3y1zQGXlP0 ,:= $pBeUZZ9sBDYOR12K62dYK5twL0 .picture",
+          "nodeType": "exprStmt",
+          "locals": []
+        },
+        "TQDmSoP7q9G2oh1L3y1zQGXl": {
+          "name": "random pic",
+          "inParameters": [],
+          "outParameters": [
+            "TQDmSoP7q9G2oh1L3y1zQGXlP0"
+          ],
+          "isPrivate": true,
+          "isOffloaded": false,
+          "isTest": false,
+          "isAsync": false,
+          "nodeType": "action",
+          "body": [
+            "xkTrdo0a9uTY2oU0Xxskx5KG",
+            "pBeUZZ9sBDYOR12K62dYK5tw",
+            "xhcCaic45qwRVdbRaqdWrqaZ"
+          ]
+        },
+        "app": {
+          "comment": "Little game that a picture of your friend in the screen.",
+          "rootId": "dzWua4aN4CVoW4xRTN9DbXni",
+          "decls": [
+            "cM3SMi8h2MrCHo0qVjvBI273",
+            "eWCAduzfoUZ1M5j3jdt4f613",
+            "J1ve3TukL13bC88uFZma7hqR",
+            "SrEnYb1q7Fq4i0D6822YYGRP",
+            "oyGaoSVTvRVxkjyZNrbG2cAg",
+            "TQDmSoP7q9G2oh1L3y1zQGXl"
+          ]
+        },
+        "P4MrHI8em4DzERKGNapfaHhU": null,
+        "KhUimWXrY2QwMcKyw4Kh8veL": null,
+        "pqOiWDNLJ0kLi3DEd22tz8LF": null
+      }
+    },
+    {
+      "seqNo": 8,
+      "time": 1346281472,
+      "scriptId": "lzth",
+      "historyId": "2520560193273514046519862c4-b0dc-4157-8a9c-2bac57255a87",
+      "updateSize": 2,
+      "updates": {}
+    },
+    {
+      "seqNo": 9,
+      "time": 1351360689,
+      "scriptId": "lzth",
+      "historyId": "2520509401106655165433edd8a-c1a5-4af2-8e06-fccf0357631b",
+      "updateSize": 2,
+      "updates": {}
+    }
+  ]
+}

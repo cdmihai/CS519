@@ -1,0 +1,1166 @@
+{
+  "userid": "pboj",
+  "guid": "59ae3fe9-07a8-4e20-b556-ad22535475a5",
+  "lastStatus": "published",
+  "items": [
+    {
+      "seqNo": 0,
+      "time": 1342466089,
+      "scriptId": "kvmi",
+      "historyId": "2520598347101256825e4bc3f9a-1c75-4f84-894c-26ba72636472",
+      "updateSize": 6510,
+      "ast": {
+        "textVersion": "v2.2,js,ctx",
+        "jsonVersion": "v1.0,resolved,short",
+        "name": "park and find",
+        "comment": "get help finding where you parked your car",
+        "icon": "ArrowDotted",
+        "color": "#ff004b49",
+        "autoIcon": "ArrowDotted",
+        "autoColor": "#004b49",
+        "platform": "current",
+        "rootId": "xhLajnRg2shQcm3QMQ19EY5v",
+        "showAd": false,
+        "isLibrary": false,
+        "allowExport": false,
+        "hasUniqueIds": false,
+        "decls": [
+          {
+            "name": "park",
+            "inParameters": [],
+            "outParameters": [],
+            "isPrivate": false,
+            "isOffloaded": false,
+            "isTest": false,
+            "isAsync": false,
+            "nodeType": "action",
+            "body": [
+              {
+                "text": "Snaps a picture and records your current location for later user. It also updates the find tile.",
+                "nodeType": "comment",
+                "id": "sPAVenjXpTgquZLuoVos7HTi"
+              },
+              {
+                "expr": ":data #atKAU42Nom1u9sJcpO8YaCE2 ,:= :senses .current_location",
+                "nodeType": "exprStmt",
+                "id": "osyoqrr42H7dan5ADhdEgfMU",
+                "locals": []
+              },
+              {
+                "expr": ":data #NvccS7L2NJDrd7v9x2lkGeh5 ,:= :senses .take_camera_picture",
+                "nodeType": "exprStmt",
+                "id": "ca1AfHvXIIw4HEwM9PWcYD9H",
+                "locals": []
+              },
+              {
+                "text": "loc and pic are state variable, i.e. they are stored in the phone so that we can use them later",
+                "nodeType": "comment",
+                "id": "MVwg7rMlkiCtDbUBW1X7eu6B"
+              },
+              {
+                "expr": ":wall .prompt ,( 'The_current_location_and_picture_has_been_successfully_saved/002e_Use_the_/0027find/0027_action_to_see_them_again/002e ,)",
+                "nodeType": "exprStmt",
+                "id": "I92vYFhGYldhJsAfjFY23v1y",
+                "locals": []
+              },
+              {
+                "expr": ":code #nW9emgJU4exenpW34IYxe3dz ,( ,)",
+                "nodeType": "exprStmt",
+                "id": "gQvgcs2YqQ039KVVgm4eF0Bo",
+                "locals": []
+              }
+            ],
+            "id": "ekJuWYHDpb00HRNPoNyPj8mj"
+          },
+          {
+            "name": "update tile",
+            "inParameters": [],
+            "outParameters": [],
+            "isPrivate": false,
+            "isOffloaded": false,
+            "isTest": false,
+            "isAsync": false,
+            "nodeType": "action",
+            "body": [
+              {
+                "text": "Updates the 'find' tile with the current picture",
+                "nodeType": "comment",
+                "id": "q5232BK22y6rAZJnXKsSbF3z"
+              },
+              {
+                "text": "There might not be a picture so we check for it first.",
+                "nodeType": "comment",
+                "id": "vtvo8XsQ4o4cJTwhL3IYVC9f"
+              },
+              {
+                "nodeType": "if",
+                "condition": ",not :data #NvccS7L2NJDrd7v9x2lkGeh5 .is_invalid",
+                "thenBody": [
+                  {
+                    "expr": ":data #NvccS7L2NJDrd7v9x2lkGeh5 .post_to_wall",
+                    "nodeType": "exprStmt",
+                    "id": "Dou3YFwlSZ2hnti9vTRZHgmN",
+                    "locals": []
+                  },
+                  {
+                    "text": "When assigning an image to a tile, the tile will extract a 173x173 image from the center of the picture without resizing. Therefore, we resize the picture first for best visual aspect.",
+                    "nodeType": "comment",
+                    "id": "yxskhX7xsRcAmismTF7y1Jp4"
+                  },
+                  {
+                    "expr": "$VRFLLrp4NfnJiBS7On2gKRcSL0 ,:= :data #NvccS7L2NJDrd7v9x2lkGeh5 .clone",
+                    "nodeType": "exprStmt",
+                    "id": "VRFLLrp4NfnJiBS7On2gKRcS",
+                    "locals": [
+                      {
+                        "name": "icon",
+                        "type": "Picture",
+                        "nodeType": "localDef",
+                        "id": "VRFLLrp4NfnJiBS7On2gKRcSL0"
+                      }
+                    ]
+                  },
+                  {
+                    "text": "icon is a copy of pic which allows us to resize it without modifying the original",
+                    "nodeType": "comment",
+                    "id": "xo8KK9VRpnXvWhW4JALWWLTJ"
+                  },
+                  {
+                    "expr": "$VRFLLrp4NfnJiBS7On2gKRcSL0 .resize ,( :data #NvccS7L2NJDrd7v9x2lkGeh5 .width ,/ ,3 ,, ,- ,1 ,)",
+                    "nodeType": "exprStmt",
+                    "id": "L7SnuFeo2EZmM9bObPIKXxlX",
+                    "locals": []
+                  },
+                  {
+                    "expr": ":data #Rv4q4DWFgTkhL4cWaaIGbz4E .set_panorama ,( T ,)",
+                    "nodeType": "exprStmt",
+                    "id": "Bu16jeiKqbu3gzGHcMbvpv6H",
+                    "locals": []
+                  },
+                  {
+                    "expr": ":data #Rv4q4DWFgTkhL4cWaaIGbz4E .set_icon ,( $VRFLLrp4NfnJiBS7On2gKRcSL0 ,)",
+                    "nodeType": "exprStmt",
+                    "id": "ISTIjgH7sgWrj8Rr1myQvAya",
+                    "locals": []
+                  }
+                ],
+                "isElseIf": false,
+                "id": "njvBGhZs5OhcLvGkuanELjmu",
+                "locals": []
+              }
+            ],
+            "id": "nW9emgJU4exenpW34IYxe3dz"
+          },
+          {
+            "name": "loc",
+            "comment": "last known position of the car\n",
+            "type": "Location",
+            "isReadonly": false,
+            "isTransient": false,
+            "nodeType": "data",
+            "id": "atKAU42Nom1u9sJcpO8YaCE2"
+          },
+          {
+            "name": "pic",
+            "comment": "last picture of the car\n",
+            "type": "Picture",
+            "isReadonly": false,
+            "isTransient": true,
+            "nodeType": "data",
+            "id": "NvccS7L2NJDrd7v9x2lkGeh5"
+          },
+          {
+            "name": "find",
+            "inParameters": [],
+            "outParameters": [],
+            "isPrivate": false,
+            "isOffloaded": false,
+            "isTest": false,
+            "isAsync": false,
+            "nodeType": "action",
+            "body": [
+              {
+                "text": "Displays the store location and picture to help the user recorver his car.",
+                "nodeType": "comment",
+                "id": "x6kDTzpx3lCfbNMfOOSFrBhn"
+              },
+              {
+                "text": "Check that park has been called and we have a location.",
+                "nodeType": "comment",
+                "id": "q8ZqJSWNhcuXV0dE0OKyeUYQ"
+              },
+              {
+                "nodeType": "if",
+                "condition": ":data #atKAU42Nom1u9sJcpO8YaCE2 .is_invalid",
+                "thenBody": [
+                  {
+                    "expr": ":wall .prompt ,( 'Humm/002c_could_not_find_the_location_of_your_car/002e_Call_the_/0027find/0027_action_first_to_store_your_car/0027s_location/002e ,)",
+                    "nodeType": "exprStmt",
+                    "id": "y9NsbNBraPY4fVFHXsVe2I5Z",
+                    "locals": []
+                  },
+                  {
+                    "expr": ":time .stop",
+                    "nodeType": "exprStmt",
+                    "id": "vncW2E6PHK0uSwDXGR2e6Hrj",
+                    "locals": []
+                  }
+                ],
+                "isElseIf": false,
+                "id": "TrryYn2HnNiUdsr0xBP4pO3H",
+                "locals": []
+              },
+              {
+                "expr": ":data #NvccS7L2NJDrd7v9x2lkGeh5 .post_to_wall",
+                "nodeType": "exprStmt",
+                "id": "xXghk4WkrFTsO1mwY2sSTdwY",
+                "locals": []
+              },
+              {
+                "text": "Compute the direction between the current location and the stored location and display it in a map.",
+                "nodeType": "comment",
+                "id": "YtAEuhwH2RlZ6fcAN2nFwzuX"
+              },
+              {
+                "expr": "$ulqp43olpqjxUmPuU1IkPxDsL0 ,:= :maps .create_map",
+                "nodeType": "exprStmt",
+                "id": "ulqp43olpqjxUmPuU1IkPxDs",
+                "locals": [
+                  {
+                    "name": "map",
+                    "type": "Map",
+                    "nodeType": "localDef",
+                    "id": "ulqp43olpqjxUmPuU1IkPxDsL0"
+                  }
+                ]
+              },
+              {
+                "expr": "$ulqp43olpqjxUmPuU1IkPxDsL0 .post_to_wall",
+                "nodeType": "exprStmt",
+                "id": "NAUTzRV1C9wBXiDNPymspryM",
+                "locals": []
+              },
+              {
+                "expr": "$hwpo0uqA3ZnRfzeXcJJAsBw3L0 ,:= :maps .directions ,( :senses .current_location ,, :data #atKAU42Nom1u9sJcpO8YaCE2 ,, F ,)",
+                "nodeType": "exprStmt",
+                "id": "hwpo0uqA3ZnRfzeXcJJAsBw3",
+                "locals": [
+                  {
+                    "name": "ls",
+                    "type": "Location Collection",
+                    "nodeType": "localDef",
+                    "id": "hwpo0uqA3ZnRfzeXcJJAsBw3L0"
+                  }
+                ]
+              },
+              {
+                "expr": "$ulqp43olpqjxUmPuU1IkPxDsL0 .add_line ,( $hwpo0uqA3ZnRfzeXcJJAsBw3L0 ,, :colors .accent ,, ,6 ,)",
+                "nodeType": "exprStmt",
+                "id": "nyU5790bb1AXj8utCwQtL2rz",
+                "locals": []
+              },
+              {
+                "expr": "$ulqp43olpqjxUmPuU1IkPxDsL0 .add_text ,( :data #atKAU42Nom1u9sJcpO8YaCE2 ,, 'park ,, :colors .background ,, :colors .foreground ,)",
+                "nodeType": "exprStmt",
+                "id": "ZGJnVXwbuHFnbiUnOkr0jPi3",
+                "locals": []
+              },
+              {
+                "text": "Search for the address (street, city, etc...) that matches the location.",
+                "nodeType": "comment",
+                "id": "QKQuL5x054Tf6PEH2ImMDkO3"
+              },
+              {
+                "expr": "$k2O09RjCuGVPcxPV4pHxV7LwL0 ,:= :locations .describe_location ,( :data #atKAU42Nom1u9sJcpO8YaCE2 ,)",
+                "nodeType": "exprStmt",
+                "id": "k2O09RjCuGVPcxPV4pHxV7Lw",
+                "locals": [
+                  {
+                    "name": "address",
+                    "type": "String",
+                    "nodeType": "localDef",
+                    "id": "k2O09RjCuGVPcxPV4pHxV7LwL0"
+                  }
+                ]
+              },
+              {
+                "expr": "$k2O09RjCuGVPcxPV4pHxV7LwL0 .post_to_wall",
+                "nodeType": "exprStmt",
+                "id": "giCh2LFAUPSvCylT449Upm2T",
+                "locals": []
+              }
+            ],
+            "id": "AjPowUcj4F2uzBh3YWPH2mfI"
+          },
+          {
+            "name": "find tile",
+            "comment": "",
+            "type": "Tile",
+            "isReadonly": true,
+            "isTransient": true,
+            "nodeType": "data",
+            "id": "Rv4q4DWFgTkhL4cWaaIGbz4E"
+          }
+        ],
+        "deletedDecls": [],
+        "nodeType": "app",
+        "id": "app"
+      }
+    },
+    {
+      "seqNo": 1,
+      "time": 1343408233,
+      "scriptId": "bbzp",
+      "historyId": "2520588925660712246aa2e42af-b371-4a58-ba45-b1283a6f9d4e",
+      "updateSize": 3869,
+      "updates": {
+        "hXlQseUSQslHl3Uwl6U2GIMD": {
+          "expr": ":data #u1Wjax39xJ4j20vEgDs58qNd ,:= :locations .describe_location ,( :data #atKAU42Nom1u9sJcpO8YaCE2 ,)",
+          "nodeType": "exprStmt",
+          "locals": []
+        },
+        "ekJuWYHDpb00HRNPoNyPj8mj": {
+          "body": [
+            "sPAVenjXpTgquZLuoVos7HTi",
+            "osyoqrr42H7dan5ADhdEgfMU",
+            "hXlQseUSQslHl3Uwl6U2GIMD",
+            "ca1AfHvXIIw4HEwM9PWcYD9H",
+            "MVwg7rMlkiCtDbUBW1X7eu6B",
+            "I92vYFhGYldhJsAfjFY23v1y",
+            "gQvgcs2YqQ039KVVgm4eF0Bo"
+          ]
+        },
+        "H5ooaAvb8H1y4VORm6UGWROf": {
+          "expr": ":data #Rv4q4DWFgTkhL4cWaaIGbz4E .set_content ,( :data #u1Wjax39xJ4j20vEgDs58qNd ,)",
+          "nodeType": "exprStmt",
+          "locals": []
+        },
+        "xVGWcjUnSTnp47ISfKcHQ0no": {
+          "expr": ":data #Rv4q4DWFgTkhL4cWaaIGbz4E .set_content ,( :data #atKAU42Nom1u9sJcpO8YaCE2 ,∥ ' ,)",
+          "nodeType": "exprStmt",
+          "locals": []
+        },
+        "vtvo8XsQ4o4cJTwhL3IYVC9f": {
+          "text": "When assigning an image to a tile, the tile will extract a 173x173 image from the center of the picture without resizing. Therefore, we resize the picture first for best visual aspect."
+        },
+        "mmp92UTihkJEsQT25tSqhll9L0": {
+          "name": "icon",
+          "type": "Picture",
+          "nodeType": "localDef"
+        },
+        "mmp92UTihkJEsQT25tSqhll9": {
+          "expr": "$mmp92UTihkJEsQT25tSqhll9L0 ,:= :data #NvccS7L2NJDrd7v9x2lkGeh5 .clone",
+          "nodeType": "exprStmt",
+          "locals": [
+            "mmp92UTihkJEsQT25tSqhll9L0"
+          ]
+        },
+        "eX44XNgnr4D9l32LbFTyRGBK": {
+          "text": "icon is a copy of pic which allows us to resize it without modifying the original",
+          "nodeType": "comment"
+        },
+        "iYb0hehgTJHzYMK82jLs0R50": {
+          "expr": "$mmp92UTihkJEsQT25tSqhll9L0 .resize ,( :data #NvccS7L2NJDrd7v9x2lkGeh5 .width ,/ ,3 ,, ,- ,1 ,)",
+          "nodeType": "exprStmt",
+          "locals": []
+        },
+        "U7SgsLv4LSGkgLL7gnWElFy2": {
+          "expr": ":data #Rv4q4DWFgTkhL4cWaaIGbz4E .set_icon ,( $mmp92UTihkJEsQT25tSqhll9L0 ,)",
+          "nodeType": "exprStmt",
+          "locals": []
+        },
+        "nW9emgJU4exenpW34IYxe3dz": {
+          "isPrivate": true,
+          "body": [
+            "q5232BK22y6rAZJnXKsSbF3z",
+            "H5ooaAvb8H1y4VORm6UGWROf",
+            "xVGWcjUnSTnp47ISfKcHQ0no",
+            "vtvo8XsQ4o4cJTwhL3IYVC9f",
+            "mmp92UTihkJEsQT25tSqhll9",
+            "eX44XNgnr4D9l32LbFTyRGBK",
+            "iYb0hehgTJHzYMK82jLs0R50",
+            "U7SgsLv4LSGkgLL7gnWElFy2"
+          ]
+        },
+        "ulqp43olpqjxUmPuU1IkPxDs": {
+          "expr": ":data #atKAU42Nom1u9sJcpO8YaCE2 .post_to_wall",
+          "locals": []
+        },
+        "giCh2LFAUPSvCylT449Upm2T": {
+          "expr": ":data #u1Wjax39xJ4j20vEgDs58qNd .post_to_wall"
+        },
+        "YtAEuhwH2RlZ6fcAN2nFwzuX": {
+          "text": "Asks if the user wants to be taken to the Bing maps app"
+        },
+        "WkEpgoj7Jygl93tHEBUicAxL": {
+          "expr": ":maps .open_directions ,( ' ,, :senses .current_location ,, ' ,, :data #atKAU42Nom1u9sJcpO8YaCE2 ,)",
+          "nodeType": "exprStmt",
+          "locals": []
+        },
+        "Tn0tDVdpSCVExsBzFO224EPZ": {
+          "nodeType": "if",
+          "condition": ":wall .ask_boolean ,( 'Do_you_want_to_get_directions/003f ,, 'Get_the_turn_by_turn_instructions_to_find_your_car/002e ,)",
+          "thenBody": [
+            "WkEpgoj7Jygl93tHEBUicAxL"
+          ],
+          "isElseIf": false,
+          "locals": []
+        },
+        "AjPowUcj4F2uzBh3YWPH2mfI": {
+          "body": [
+            "x6kDTzpx3lCfbNMfOOSFrBhn",
+            "q8ZqJSWNhcuXV0dE0OKyeUYQ",
+            "TrryYn2HnNiUdsr0xBP4pO3H",
+            "xXghk4WkrFTsO1mwY2sSTdwY",
+            "ulqp43olpqjxUmPuU1IkPxDs",
+            "giCh2LFAUPSvCylT449Upm2T",
+            "YtAEuhwH2RlZ6fcAN2nFwzuX",
+            "Tn0tDVdpSCVExsBzFO224EPZ"
+          ]
+        },
+        "u1Wjax39xJ4j20vEgDs58qNd": {
+          "name": "address",
+          "comment": "",
+          "type": "String",
+          "isReadonly": false,
+          "isTransient": false,
+          "nodeType": "data"
+        },
+        "app": {
+          "icon": "anchor",
+          "autoIcon": "anchor",
+          "rootId": "A5BK7ViGbL4t7yZ4LRsZZ6g5",
+          "decls": [
+            "ekJuWYHDpb00HRNPoNyPj8mj",
+            "nW9emgJU4exenpW34IYxe3dz",
+            "atKAU42Nom1u9sJcpO8YaCE2",
+            "NvccS7L2NJDrd7v9x2lkGeh5",
+            "AjPowUcj4F2uzBh3YWPH2mfI",
+            "Rv4q4DWFgTkhL4cWaaIGbz4E",
+            "u1Wjax39xJ4j20vEgDs58qNd"
+          ]
+        },
+        "njvBGhZs5OhcLvGkuanELjmu": null,
+        "Dou3YFwlSZ2hnti9vTRZHgmN": null,
+        "yxskhX7xsRcAmismTF7y1Jp4": null,
+        "VRFLLrp4NfnJiBS7On2gKRcS": null,
+        "VRFLLrp4NfnJiBS7On2gKRcSL0": null,
+        "xo8KK9VRpnXvWhW4JALWWLTJ": null,
+        "L7SnuFeo2EZmM9bObPIKXxlX": null,
+        "Bu16jeiKqbu3gzGHcMbvpv6H": null,
+        "ISTIjgH7sgWrj8Rr1myQvAya": null,
+        "ulqp43olpqjxUmPuU1IkPxDsL0": null,
+        "NAUTzRV1C9wBXiDNPymspryM": null,
+        "hwpo0uqA3ZnRfzeXcJJAsBw3": null,
+        "hwpo0uqA3ZnRfzeXcJJAsBw3L0": null,
+        "nyU5790bb1AXj8utCwQtL2rz": null,
+        "ZGJnVXwbuHFnbiUnOkr0jPi3": null,
+        "QKQuL5x054Tf6PEH2ImMDkO3": null,
+        "k2O09RjCuGVPcxPV4pHxV7Lw": null,
+        "k2O09RjCuGVPcxPV4pHxV7LwL0": null
+      }
+    },
+    {
+      "seqNo": 2,
+      "time": 1343498449,
+      "scriptId": "kvmi",
+      "historyId": "25205880235058679171dc787c4-6f19-4fe6-828d-eb7c6ccd84d3",
+      "updateSize": 4620,
+      "updates": {
+        "ekJuWYHDpb00HRNPoNyPj8mj": {
+          "body": [
+            "sPAVenjXpTgquZLuoVos7HTi",
+            "osyoqrr42H7dan5ADhdEgfMU",
+            "ca1AfHvXIIw4HEwM9PWcYD9H",
+            "MVwg7rMlkiCtDbUBW1X7eu6B",
+            "I92vYFhGYldhJsAfjFY23v1y",
+            "gQvgcs2YqQ039KVVgm4eF0Bo"
+          ]
+        },
+        "vtvo8XsQ4o4cJTwhL3IYVC9f": {
+          "text": "There might not be a picture so we check for it first."
+        },
+        "shXrnlHvCYNX9HeGbPK7UgCx": {
+          "expr": ":data #NvccS7L2NJDrd7v9x2lkGeh5 .post_to_wall",
+          "nodeType": "exprStmt",
+          "locals": []
+        },
+        "uhYncjpOZbfpmy45m1x6ARGP": {
+          "text": "When assigning an image to a tile, the tile will extract a 173x173 image from the center of the picture without resizing. Therefore, we resize the picture first for best visual aspect.",
+          "nodeType": "comment"
+        },
+        "EoFuQPhqXoU1V0EuoipbmGbhL0": {
+          "name": "icon",
+          "type": "Picture",
+          "nodeType": "localDef"
+        },
+        "EoFuQPhqXoU1V0EuoipbmGbh": {
+          "expr": "$EoFuQPhqXoU1V0EuoipbmGbhL0 ,:= :data #NvccS7L2NJDrd7v9x2lkGeh5 .clone",
+          "nodeType": "exprStmt",
+          "locals": [
+            "EoFuQPhqXoU1V0EuoipbmGbhL0"
+          ]
+        },
+        "xbtcqIHeUfFZv61yxJTAoQU2": {
+          "text": "icon is a copy of pic which allows us to resize it without modifying the original",
+          "nodeType": "comment"
+        },
+        "x2Z5jx2VvrSdxOdVUYdk1w6Z": {
+          "expr": "$EoFuQPhqXoU1V0EuoipbmGbhL0 .resize ,( :data #NvccS7L2NJDrd7v9x2lkGeh5 .width ,/ ,3 ,, ,- ,1 ,)",
+          "nodeType": "exprStmt",
+          "locals": []
+        },
+        "K7H2h4T2rIMBl2Yepk6CdTKa": {
+          "expr": ":data #Rv4q4DWFgTkhL4cWaaIGbz4E .set_panorama ,( T ,)",
+          "nodeType": "exprStmt",
+          "locals": []
+        },
+        "oUhNBCmzwrxsUrwH2R214Q5t": {
+          "expr": ":data #Rv4q4DWFgTkhL4cWaaIGbz4E .set_icon ,( $EoFuQPhqXoU1V0EuoipbmGbhL0 ,)",
+          "nodeType": "exprStmt",
+          "locals": []
+        },
+        "xv9rccnsTo01fKeT1Xgj5Bhh": {
+          "nodeType": "if",
+          "condition": ",not :data #NvccS7L2NJDrd7v9x2lkGeh5 .is_invalid",
+          "thenBody": [
+            "shXrnlHvCYNX9HeGbPK7UgCx",
+            "uhYncjpOZbfpmy45m1x6ARGP",
+            "EoFuQPhqXoU1V0EuoipbmGbh",
+            "xbtcqIHeUfFZv61yxJTAoQU2",
+            "x2Z5jx2VvrSdxOdVUYdk1w6Z",
+            "K7H2h4T2rIMBl2Yepk6CdTKa",
+            "oUhNBCmzwrxsUrwH2R214Q5t"
+          ],
+          "isElseIf": false,
+          "locals": []
+        },
+        "nW9emgJU4exenpW34IYxe3dz": {
+          "isPrivate": false,
+          "body": [
+            "q5232BK22y6rAZJnXKsSbF3z",
+            "vtvo8XsQ4o4cJTwhL3IYVC9f",
+            "xv9rccnsTo01fKeT1Xgj5Bhh"
+          ]
+        },
+        "YtAEuhwH2RlZ6fcAN2nFwzuX": {
+          "text": "Compute the direction between the current location and the stored location and display it in a map."
+        },
+        "ulqp43olpqjxUmPuU1IkPxDsL0": {
+          "name": "map",
+          "type": "Map",
+          "nodeType": "localDef"
+        },
+        "ulqp43olpqjxUmPuU1IkPxDs": {
+          "expr": "$ulqp43olpqjxUmPuU1IkPxDsL0 ,:= :maps .create_map",
+          "locals": [
+            "ulqp43olpqjxUmPuU1IkPxDsL0"
+          ]
+        },
+        "HRg4K1Ky7iwErRKvSKg4wixW": {
+          "expr": "$ulqp43olpqjxUmPuU1IkPxDsL0 .post_to_wall",
+          "nodeType": "exprStmt",
+          "locals": []
+        },
+        "vPMjcfReh9CNmSKeh5fDgYAcL0": {
+          "name": "ls",
+          "type": "Location Collection",
+          "nodeType": "localDef"
+        },
+        "vPMjcfReh9CNmSKeh5fDgYAc": {
+          "expr": "$vPMjcfReh9CNmSKeh5fDgYAcL0 ,:= :maps .directions ,( :senses .current_location ,, :data #atKAU42Nom1u9sJcpO8YaCE2 ,, F ,)",
+          "nodeType": "exprStmt",
+          "locals": [
+            "vPMjcfReh9CNmSKeh5fDgYAcL0"
+          ]
+        },
+        "AVYXcut0sQndMiW9NqJdL0Ql": {
+          "expr": "$ulqp43olpqjxUmPuU1IkPxDsL0 .add_line ,( $vPMjcfReh9CNmSKeh5fDgYAcL0 ,, :colors .accent ,, ,6 ,)",
+          "nodeType": "exprStmt",
+          "locals": []
+        },
+        "bqL0vQRuchqV4qpdjBQpqxou": {
+          "expr": "$ulqp43olpqjxUmPuU1IkPxDsL0 .add_text ,( :data #atKAU42Nom1u9sJcpO8YaCE2 ,, 'park ,, :colors .background ,, :colors .foreground ,)",
+          "nodeType": "exprStmt",
+          "locals": []
+        },
+        "Hlji6tZcFDOxvWnP7BEKSTKG": {
+          "text": "Search for the address (street, city, etc...) that matches the location.",
+          "nodeType": "comment"
+        },
+        "bVQOaa3e12AAJk8OWlghvafBL0": {
+          "name": "address",
+          "type": "String",
+          "nodeType": "localDef"
+        },
+        "bVQOaa3e12AAJk8OWlghvafB": {
+          "expr": "$bVQOaa3e12AAJk8OWlghvafBL0 ,:= :locations .describe_location ,( :data #atKAU42Nom1u9sJcpO8YaCE2 ,)",
+          "nodeType": "exprStmt",
+          "locals": [
+            "bVQOaa3e12AAJk8OWlghvafBL0"
+          ]
+        },
+        "giCh2LFAUPSvCylT449Upm2T": {
+          "expr": "$bVQOaa3e12AAJk8OWlghvafBL0 .post_to_wall"
+        },
+        "AjPowUcj4F2uzBh3YWPH2mfI": {
+          "body": [
+            "x6kDTzpx3lCfbNMfOOSFrBhn",
+            "q8ZqJSWNhcuXV0dE0OKyeUYQ",
+            "TrryYn2HnNiUdsr0xBP4pO3H",
+            "xXghk4WkrFTsO1mwY2sSTdwY",
+            "YtAEuhwH2RlZ6fcAN2nFwzuX",
+            "ulqp43olpqjxUmPuU1IkPxDs",
+            "HRg4K1Ky7iwErRKvSKg4wixW",
+            "vPMjcfReh9CNmSKeh5fDgYAc",
+            "AVYXcut0sQndMiW9NqJdL0Ql",
+            "bqL0vQRuchqV4qpdjBQpqxou",
+            "Hlji6tZcFDOxvWnP7BEKSTKG",
+            "bVQOaa3e12AAJk8OWlghvafB",
+            "giCh2LFAUPSvCylT449Upm2T"
+          ]
+        },
+        "app": {
+          "icon": "ArrowDotted",
+          "autoIcon": "ArrowDotted",
+          "rootId": "xhLajnRg2shQcm3QMQ19EY5v",
+          "decls": [
+            "ekJuWYHDpb00HRNPoNyPj8mj",
+            "nW9emgJU4exenpW34IYxe3dz",
+            "atKAU42Nom1u9sJcpO8YaCE2",
+            "NvccS7L2NJDrd7v9x2lkGeh5",
+            "AjPowUcj4F2uzBh3YWPH2mfI",
+            "Rv4q4DWFgTkhL4cWaaIGbz4E"
+          ]
+        },
+        "hXlQseUSQslHl3Uwl6U2GIMD": null,
+        "H5ooaAvb8H1y4VORm6UGWROf": null,
+        "xVGWcjUnSTnp47ISfKcHQ0no": null,
+        "mmp92UTihkJEsQT25tSqhll9": null,
+        "mmp92UTihkJEsQT25tSqhll9L0": null,
+        "eX44XNgnr4D9l32LbFTyRGBK": null,
+        "iYb0hehgTJHzYMK82jLs0R50": null,
+        "U7SgsLv4LSGkgLL7gnWElFy2": null,
+        "Tn0tDVdpSCVExsBzFO224EPZ": null,
+        "WkEpgoj7Jygl93tHEBUicAxL": null,
+        "u1Wjax39xJ4j20vEgDs58qNd": null
+      }
+    },
+    {
+      "seqNo": 3,
+      "time": 1343741877,
+      "scriptId": "bbzp",
+      "historyId": "2520585589220997832dcc06211-e5a6-44d5-ae81-b2966f326677",
+      "updateSize": 3869,
+      "updates": {
+        "LFap2bUX5yOIK86pBIJ8ltCC": {
+          "expr": ":data #Wz7yIvJU5g4dyLmtsHkDycxV ,:= :locations .describe_location ,( :data #atKAU42Nom1u9sJcpO8YaCE2 ,)",
+          "nodeType": "exprStmt",
+          "locals": []
+        },
+        "ekJuWYHDpb00HRNPoNyPj8mj": {
+          "body": [
+            "sPAVenjXpTgquZLuoVos7HTi",
+            "osyoqrr42H7dan5ADhdEgfMU",
+            "LFap2bUX5yOIK86pBIJ8ltCC",
+            "ca1AfHvXIIw4HEwM9PWcYD9H",
+            "MVwg7rMlkiCtDbUBW1X7eu6B",
+            "I92vYFhGYldhJsAfjFY23v1y",
+            "gQvgcs2YqQ039KVVgm4eF0Bo"
+          ]
+        },
+        "x9ecu3400UhMcJFn2ERsWUiN": {
+          "expr": ":data #Rv4q4DWFgTkhL4cWaaIGbz4E .set_content ,( :data #Wz7yIvJU5g4dyLmtsHkDycxV ,)",
+          "nodeType": "exprStmt",
+          "locals": []
+        },
+        "xm7RHyyPp3N4yaQdrjldwzIq": {
+          "expr": ":data #Rv4q4DWFgTkhL4cWaaIGbz4E .set_content ,( :data #atKAU42Nom1u9sJcpO8YaCE2 ,∥ ' ,)",
+          "nodeType": "exprStmt",
+          "locals": []
+        },
+        "vtvo8XsQ4o4cJTwhL3IYVC9f": {
+          "text": "When assigning an image to a tile, the tile will extract a 173x173 image from the center of the picture without resizing. Therefore, we resize the picture first for best visual aspect."
+        },
+        "Zp09Y1YVmW4B4sm5BFSzOfEwL0": {
+          "name": "icon",
+          "type": "Picture",
+          "nodeType": "localDef"
+        },
+        "Zp09Y1YVmW4B4sm5BFSzOfEw": {
+          "expr": "$Zp09Y1YVmW4B4sm5BFSzOfEwL0 ,:= :data #NvccS7L2NJDrd7v9x2lkGeh5 .clone",
+          "nodeType": "exprStmt",
+          "locals": [
+            "Zp09Y1YVmW4B4sm5BFSzOfEwL0"
+          ]
+        },
+        "eZlTPxdL402WKXJaIAYi62gz": {
+          "text": "icon is a copy of pic which allows us to resize it without modifying the original",
+          "nodeType": "comment"
+        },
+        "lx8eth2EOFM079Ttpt3IKH0L": {
+          "expr": "$Zp09Y1YVmW4B4sm5BFSzOfEwL0 .resize ,( :data #NvccS7L2NJDrd7v9x2lkGeh5 .width ,/ ,3 ,, ,- ,1 ,)",
+          "nodeType": "exprStmt",
+          "locals": []
+        },
+        "INFKOECQHrPr0JfEa1BbWK2a": {
+          "expr": ":data #Rv4q4DWFgTkhL4cWaaIGbz4E .set_icon ,( $Zp09Y1YVmW4B4sm5BFSzOfEwL0 ,)",
+          "nodeType": "exprStmt",
+          "locals": []
+        },
+        "nW9emgJU4exenpW34IYxe3dz": {
+          "isPrivate": true,
+          "body": [
+            "q5232BK22y6rAZJnXKsSbF3z",
+            "x9ecu3400UhMcJFn2ERsWUiN",
+            "xm7RHyyPp3N4yaQdrjldwzIq",
+            "vtvo8XsQ4o4cJTwhL3IYVC9f",
+            "Zp09Y1YVmW4B4sm5BFSzOfEw",
+            "eZlTPxdL402WKXJaIAYi62gz",
+            "lx8eth2EOFM079Ttpt3IKH0L",
+            "INFKOECQHrPr0JfEa1BbWK2a"
+          ]
+        },
+        "ulqp43olpqjxUmPuU1IkPxDs": {
+          "expr": ":data #atKAU42Nom1u9sJcpO8YaCE2 .post_to_wall",
+          "locals": []
+        },
+        "giCh2LFAUPSvCylT449Upm2T": {
+          "expr": ":data #Wz7yIvJU5g4dyLmtsHkDycxV .post_to_wall"
+        },
+        "YtAEuhwH2RlZ6fcAN2nFwzuX": {
+          "text": "Asks if the user wants to be taken to the Bing maps app"
+        },
+        "aTcokG4HUrrDdveeQEMRCRc1": {
+          "expr": ":maps .open_directions ,( ' ,, :senses .current_location ,, ' ,, :data #atKAU42Nom1u9sJcpO8YaCE2 ,)",
+          "nodeType": "exprStmt",
+          "locals": []
+        },
+        "qWEIaLqxB2TfRDq4q94uHom0": {
+          "nodeType": "if",
+          "condition": ":wall .ask_boolean ,( 'Do_you_want_to_get_directions/003f ,, 'Get_the_turn_by_turn_instructions_to_find_your_car/002e ,)",
+          "thenBody": [
+            "aTcokG4HUrrDdveeQEMRCRc1"
+          ],
+          "isElseIf": false,
+          "locals": []
+        },
+        "AjPowUcj4F2uzBh3YWPH2mfI": {
+          "body": [
+            "x6kDTzpx3lCfbNMfOOSFrBhn",
+            "q8ZqJSWNhcuXV0dE0OKyeUYQ",
+            "TrryYn2HnNiUdsr0xBP4pO3H",
+            "xXghk4WkrFTsO1mwY2sSTdwY",
+            "ulqp43olpqjxUmPuU1IkPxDs",
+            "giCh2LFAUPSvCylT449Upm2T",
+            "YtAEuhwH2RlZ6fcAN2nFwzuX",
+            "qWEIaLqxB2TfRDq4q94uHom0"
+          ]
+        },
+        "Wz7yIvJU5g4dyLmtsHkDycxV": {
+          "name": "address",
+          "comment": "",
+          "type": "String",
+          "isReadonly": false,
+          "isTransient": false,
+          "nodeType": "data"
+        },
+        "app": {
+          "icon": "anchor",
+          "autoIcon": "anchor",
+          "rootId": "xeKKXWRyd5tLlU8hB2RLIyEg",
+          "decls": [
+            "ekJuWYHDpb00HRNPoNyPj8mj",
+            "nW9emgJU4exenpW34IYxe3dz",
+            "atKAU42Nom1u9sJcpO8YaCE2",
+            "NvccS7L2NJDrd7v9x2lkGeh5",
+            "AjPowUcj4F2uzBh3YWPH2mfI",
+            "Rv4q4DWFgTkhL4cWaaIGbz4E",
+            "Wz7yIvJU5g4dyLmtsHkDycxV"
+          ]
+        },
+        "xv9rccnsTo01fKeT1Xgj5Bhh": null,
+        "shXrnlHvCYNX9HeGbPK7UgCx": null,
+        "uhYncjpOZbfpmy45m1x6ARGP": null,
+        "EoFuQPhqXoU1V0EuoipbmGbh": null,
+        "EoFuQPhqXoU1V0EuoipbmGbhL0": null,
+        "xbtcqIHeUfFZv61yxJTAoQU2": null,
+        "x2Z5jx2VvrSdxOdVUYdk1w6Z": null,
+        "K7H2h4T2rIMBl2Yepk6CdTKa": null,
+        "oUhNBCmzwrxsUrwH2R214Q5t": null,
+        "ulqp43olpqjxUmPuU1IkPxDsL0": null,
+        "HRg4K1Ky7iwErRKvSKg4wixW": null,
+        "vPMjcfReh9CNmSKeh5fDgYAc": null,
+        "vPMjcfReh9CNmSKeh5fDgYAcL0": null,
+        "AVYXcut0sQndMiW9NqJdL0Ql": null,
+        "bqL0vQRuchqV4qpdjBQpqxou": null,
+        "Hlji6tZcFDOxvWnP7BEKSTKG": null,
+        "bVQOaa3e12AAJk8OWlghvafB": null,
+        "bVQOaa3e12AAJk8OWlghvafBL0": null
+      }
+    },
+    {
+      "seqNo": 4,
+      "time": 1343756083,
+      "scriptId": "kvmi",
+      "historyId": "25205854471694692512351008e-6388-45a8-8967-53c4cea5c02b",
+      "updateSize": 4620,
+      "updates": {
+        "ekJuWYHDpb00HRNPoNyPj8mj": {
+          "body": [
+            "sPAVenjXpTgquZLuoVos7HTi",
+            "osyoqrr42H7dan5ADhdEgfMU",
+            "ca1AfHvXIIw4HEwM9PWcYD9H",
+            "MVwg7rMlkiCtDbUBW1X7eu6B",
+            "I92vYFhGYldhJsAfjFY23v1y",
+            "gQvgcs2YqQ039KVVgm4eF0Bo"
+          ]
+        },
+        "vtvo8XsQ4o4cJTwhL3IYVC9f": {
+          "text": "There might not be a picture so we check for it first."
+        },
+        "h6Ydmagtni5BzSlnxK1tqHyJ": {
+          "expr": ":data #NvccS7L2NJDrd7v9x2lkGeh5 .post_to_wall",
+          "nodeType": "exprStmt",
+          "locals": []
+        },
+        "F3p52HBlRzov2IWCXBkESOij": {
+          "text": "When assigning an image to a tile, the tile will extract a 173x173 image from the center of the picture without resizing. Therefore, we resize the picture first for best visual aspect.",
+          "nodeType": "comment"
+        },
+        "WTq50ImE4hk0zUtLW2IQxRbDL0": {
+          "name": "icon",
+          "type": "Picture",
+          "nodeType": "localDef"
+        },
+        "WTq50ImE4hk0zUtLW2IQxRbD": {
+          "expr": "$WTq50ImE4hk0zUtLW2IQxRbDL0 ,:= :data #NvccS7L2NJDrd7v9x2lkGeh5 .clone",
+          "nodeType": "exprStmt",
+          "locals": [
+            "WTq50ImE4hk0zUtLW2IQxRbDL0"
+          ]
+        },
+        "M01kYHSES7uem9n6u7b46mYJ": {
+          "text": "icon is a copy of pic which allows us to resize it without modifying the original",
+          "nodeType": "comment"
+        },
+        "Jr2Y9wFGo5uL4U9qRl8VMzko": {
+          "expr": "$WTq50ImE4hk0zUtLW2IQxRbDL0 .resize ,( :data #NvccS7L2NJDrd7v9x2lkGeh5 .width ,/ ,3 ,, ,- ,1 ,)",
+          "nodeType": "exprStmt",
+          "locals": []
+        },
+        "PMuyDUpPuYG7hL464QERjgOO": {
+          "expr": ":data #Rv4q4DWFgTkhL4cWaaIGbz4E .set_panorama ,( T ,)",
+          "nodeType": "exprStmt",
+          "locals": []
+        },
+        "tD4ib4Qf47nTwVqwkxW9pTTg": {
+          "expr": ":data #Rv4q4DWFgTkhL4cWaaIGbz4E .set_icon ,( $WTq50ImE4hk0zUtLW2IQxRbDL0 ,)",
+          "nodeType": "exprStmt",
+          "locals": []
+        },
+        "xE7OujpKzqtVhYvg9h60rLEH": {
+          "nodeType": "if",
+          "condition": ",not :data #NvccS7L2NJDrd7v9x2lkGeh5 .is_invalid",
+          "thenBody": [
+            "h6Ydmagtni5BzSlnxK1tqHyJ",
+            "F3p52HBlRzov2IWCXBkESOij",
+            "WTq50ImE4hk0zUtLW2IQxRbD",
+            "M01kYHSES7uem9n6u7b46mYJ",
+            "Jr2Y9wFGo5uL4U9qRl8VMzko",
+            "PMuyDUpPuYG7hL464QERjgOO",
+            "tD4ib4Qf47nTwVqwkxW9pTTg"
+          ],
+          "isElseIf": false,
+          "locals": []
+        },
+        "nW9emgJU4exenpW34IYxe3dz": {
+          "isPrivate": false,
+          "body": [
+            "q5232BK22y6rAZJnXKsSbF3z",
+            "vtvo8XsQ4o4cJTwhL3IYVC9f",
+            "xE7OujpKzqtVhYvg9h60rLEH"
+          ]
+        },
+        "YtAEuhwH2RlZ6fcAN2nFwzuX": {
+          "text": "Compute the direction between the current location and the stored location and display it in a map."
+        },
+        "ulqp43olpqjxUmPuU1IkPxDsL0": {
+          "name": "map",
+          "type": "Map",
+          "nodeType": "localDef"
+        },
+        "ulqp43olpqjxUmPuU1IkPxDs": {
+          "expr": "$ulqp43olpqjxUmPuU1IkPxDsL0 ,:= :maps .create_map",
+          "locals": [
+            "ulqp43olpqjxUmPuU1IkPxDsL0"
+          ]
+        },
+        "cmIUzLq2T1Ec1HUdHPmfyLbh": {
+          "expr": "$ulqp43olpqjxUmPuU1IkPxDsL0 .post_to_wall",
+          "nodeType": "exprStmt",
+          "locals": []
+        },
+        "zJv3JDP2WRcmA4uYKWl25Tj6L0": {
+          "name": "ls",
+          "type": "Location Collection",
+          "nodeType": "localDef"
+        },
+        "zJv3JDP2WRcmA4uYKWl25Tj6": {
+          "expr": "$zJv3JDP2WRcmA4uYKWl25Tj6L0 ,:= :maps .directions ,( :senses .current_location ,, :data #atKAU42Nom1u9sJcpO8YaCE2 ,, F ,)",
+          "nodeType": "exprStmt",
+          "locals": [
+            "zJv3JDP2WRcmA4uYKWl25Tj6L0"
+          ]
+        },
+        "sQwtD2VUDDw4XmEbTUUfMjDa": {
+          "expr": "$ulqp43olpqjxUmPuU1IkPxDsL0 .add_line ,( $zJv3JDP2WRcmA4uYKWl25Tj6L0 ,, :colors .accent ,, ,6 ,)",
+          "nodeType": "exprStmt",
+          "locals": []
+        },
+        "HyqsWWE4uOuBsWRwxG32TB8u": {
+          "expr": "$ulqp43olpqjxUmPuU1IkPxDsL0 .add_text ,( :data #atKAU42Nom1u9sJcpO8YaCE2 ,, 'park ,, :colors .background ,, :colors .foreground ,)",
+          "nodeType": "exprStmt",
+          "locals": []
+        },
+        "FhJuObDNjyv7TVO9gZkh8UT9": {
+          "text": "Search for the address (street, city, etc...) that matches the location.",
+          "nodeType": "comment"
+        },
+        "xqHxuD5cN9h4HdCvxJqGI454L0": {
+          "name": "address",
+          "type": "String",
+          "nodeType": "localDef"
+        },
+        "xqHxuD5cN9h4HdCvxJqGI454": {
+          "expr": "$xqHxuD5cN9h4HdCvxJqGI454L0 ,:= :locations .describe_location ,( :data #atKAU42Nom1u9sJcpO8YaCE2 ,)",
+          "nodeType": "exprStmt",
+          "locals": [
+            "xqHxuD5cN9h4HdCvxJqGI454L0"
+          ]
+        },
+        "giCh2LFAUPSvCylT449Upm2T": {
+          "expr": "$xqHxuD5cN9h4HdCvxJqGI454L0 .post_to_wall"
+        },
+        "AjPowUcj4F2uzBh3YWPH2mfI": {
+          "body": [
+            "x6kDTzpx3lCfbNMfOOSFrBhn",
+            "q8ZqJSWNhcuXV0dE0OKyeUYQ",
+            "TrryYn2HnNiUdsr0xBP4pO3H",
+            "xXghk4WkrFTsO1mwY2sSTdwY",
+            "YtAEuhwH2RlZ6fcAN2nFwzuX",
+            "ulqp43olpqjxUmPuU1IkPxDs",
+            "cmIUzLq2T1Ec1HUdHPmfyLbh",
+            "zJv3JDP2WRcmA4uYKWl25Tj6",
+            "sQwtD2VUDDw4XmEbTUUfMjDa",
+            "HyqsWWE4uOuBsWRwxG32TB8u",
+            "FhJuObDNjyv7TVO9gZkh8UT9",
+            "xqHxuD5cN9h4HdCvxJqGI454",
+            "giCh2LFAUPSvCylT449Upm2T"
+          ]
+        },
+        "app": {
+          "icon": "ArrowDotted",
+          "autoIcon": "ArrowDotted",
+          "rootId": "xF7jinoTnyoWY442X7hUY4GR",
+          "decls": [
+            "ekJuWYHDpb00HRNPoNyPj8mj",
+            "nW9emgJU4exenpW34IYxe3dz",
+            "atKAU42Nom1u9sJcpO8YaCE2",
+            "NvccS7L2NJDrd7v9x2lkGeh5",
+            "AjPowUcj4F2uzBh3YWPH2mfI",
+            "Rv4q4DWFgTkhL4cWaaIGbz4E"
+          ]
+        },
+        "LFap2bUX5yOIK86pBIJ8ltCC": null,
+        "x9ecu3400UhMcJFn2ERsWUiN": null,
+        "xm7RHyyPp3N4yaQdrjldwzIq": null,
+        "Zp09Y1YVmW4B4sm5BFSzOfEw": null,
+        "Zp09Y1YVmW4B4sm5BFSzOfEwL0": null,
+        "eZlTPxdL402WKXJaIAYi62gz": null,
+        "lx8eth2EOFM079Ttpt3IKH0L": null,
+        "INFKOECQHrPr0JfEa1BbWK2a": null,
+        "qWEIaLqxB2TfRDq4q94uHom0": null,
+        "aTcokG4HUrrDdveeQEMRCRc1": null,
+        "Wz7yIvJU5g4dyLmtsHkDycxV": null
+      }
+    },
+    {
+      "seqNo": 5,
+      "time": 1343832895,
+      "scriptId": "bbzp",
+      "historyId": "25205846790446202627163481f-6bc4-498d-91f8-cf2635359c55",
+      "updateSize": 3869,
+      "updates": {
+        "xSjt0wcJbxBdpj9Rw8YF3iPC": {
+          "expr": ":data #VeFLrLR32pQfkIwqXLuzNEaD ,:= :locations .describe_location ,( :data #atKAU42Nom1u9sJcpO8YaCE2 ,)",
+          "nodeType": "exprStmt",
+          "locals": []
+        },
+        "ekJuWYHDpb00HRNPoNyPj8mj": {
+          "body": [
+            "sPAVenjXpTgquZLuoVos7HTi",
+            "osyoqrr42H7dan5ADhdEgfMU",
+            "xSjt0wcJbxBdpj9Rw8YF3iPC",
+            "ca1AfHvXIIw4HEwM9PWcYD9H",
+            "MVwg7rMlkiCtDbUBW1X7eu6B",
+            "I92vYFhGYldhJsAfjFY23v1y",
+            "gQvgcs2YqQ039KVVgm4eF0Bo"
+          ]
+        },
+        "wP2qUid4zSxlgZ4DeG20lZb0": {
+          "expr": ":data #Rv4q4DWFgTkhL4cWaaIGbz4E .set_content ,( :data #VeFLrLR32pQfkIwqXLuzNEaD ,)",
+          "nodeType": "exprStmt",
+          "locals": []
+        },
+        "ps1vTpDgwcdlkWZzhuFjDuIo": {
+          "expr": ":data #Rv4q4DWFgTkhL4cWaaIGbz4E .set_content ,( :data #atKAU42Nom1u9sJcpO8YaCE2 ,∥ ' ,)",
+          "nodeType": "exprStmt",
+          "locals": []
+        },
+        "vtvo8XsQ4o4cJTwhL3IYVC9f": {
+          "text": "When assigning an image to a tile, the tile will extract a 173x173 image from the center of the picture without resizing. Therefore, we resize the picture first for best visual aspect."
+        },
+        "QKFHcCOocc2KDE24zjunfgC5L0": {
+          "name": "icon",
+          "type": "Picture",
+          "nodeType": "localDef"
+        },
+        "QKFHcCOocc2KDE24zjunfgC5": {
+          "expr": "$QKFHcCOocc2KDE24zjunfgC5L0 ,:= :data #NvccS7L2NJDrd7v9x2lkGeh5 .clone",
+          "nodeType": "exprStmt",
+          "locals": [
+            "QKFHcCOocc2KDE24zjunfgC5L0"
+          ]
+        },
+        "U4ItpKnCy9PveKPhVnuMnS5M": {
+          "text": "icon is a copy of pic which allows us to resize it without modifying the original",
+          "nodeType": "comment"
+        },
+        "uEKjG2G4Ii8s68Kp74CyHK1Y": {
+          "expr": "$QKFHcCOocc2KDE24zjunfgC5L0 .resize ,( :data #NvccS7L2NJDrd7v9x2lkGeh5 .width ,/ ,3 ,, ,- ,1 ,)",
+          "nodeType": "exprStmt",
+          "locals": []
+        },
+        "ZcEXj87RE99vRrp2FATmYJAd": {
+          "expr": ":data #Rv4q4DWFgTkhL4cWaaIGbz4E .set_icon ,( $QKFHcCOocc2KDE24zjunfgC5L0 ,)",
+          "nodeType": "exprStmt",
+          "locals": []
+        },
+        "nW9emgJU4exenpW34IYxe3dz": {
+          "isPrivate": true,
+          "body": [
+            "q5232BK22y6rAZJnXKsSbF3z",
+            "wP2qUid4zSxlgZ4DeG20lZb0",
+            "ps1vTpDgwcdlkWZzhuFjDuIo",
+            "vtvo8XsQ4o4cJTwhL3IYVC9f",
+            "QKFHcCOocc2KDE24zjunfgC5",
+            "U4ItpKnCy9PveKPhVnuMnS5M",
+            "uEKjG2G4Ii8s68Kp74CyHK1Y",
+            "ZcEXj87RE99vRrp2FATmYJAd"
+          ]
+        },
+        "ulqp43olpqjxUmPuU1IkPxDs": {
+          "expr": ":data #atKAU42Nom1u9sJcpO8YaCE2 .post_to_wall",
+          "locals": []
+        },
+        "giCh2LFAUPSvCylT449Upm2T": {
+          "expr": ":data #VeFLrLR32pQfkIwqXLuzNEaD .post_to_wall"
+        },
+        "YtAEuhwH2RlZ6fcAN2nFwzuX": {
+          "text": "Asks if the user wants to be taken to the Bing maps app"
+        },
+        "xJh2fYlYh0bIa2iQcHZLAYVt": {
+          "expr": ":maps .open_directions ,( ' ,, :senses .current_location ,, ' ,, :data #atKAU42Nom1u9sJcpO8YaCE2 ,)",
+          "nodeType": "exprStmt",
+          "locals": []
+        },
+        "TdAFnSPzsdfQQ5Yf6oG3BsZ1": {
+          "nodeType": "if",
+          "condition": ":wall .ask_boolean ,( 'Do_you_want_to_get_directions/003f ,, 'Get_the_turn_by_turn_instructions_to_find_your_car/002e ,)",
+          "thenBody": [
+            "xJh2fYlYh0bIa2iQcHZLAYVt"
+          ],
+          "isElseIf": false,
+          "locals": []
+        },
+        "AjPowUcj4F2uzBh3YWPH2mfI": {
+          "body": [
+            "x6kDTzpx3lCfbNMfOOSFrBhn",
+            "q8ZqJSWNhcuXV0dE0OKyeUYQ",
+            "TrryYn2HnNiUdsr0xBP4pO3H",
+            "xXghk4WkrFTsO1mwY2sSTdwY",
+            "ulqp43olpqjxUmPuU1IkPxDs",
+            "giCh2LFAUPSvCylT449Upm2T",
+            "YtAEuhwH2RlZ6fcAN2nFwzuX",
+            "TdAFnSPzsdfQQ5Yf6oG3BsZ1"
+          ]
+        },
+        "VeFLrLR32pQfkIwqXLuzNEaD": {
+          "name": "address",
+          "comment": "",
+          "type": "String",
+          "isReadonly": false,
+          "isTransient": false,
+          "nodeType": "data"
+        },
+        "app": {
+          "icon": "anchor",
+          "autoIcon": "anchor",
+          "rootId": "xeKKXWRyd5tLlU8hB2RLIyEg",
+          "decls": [
+            "ekJuWYHDpb00HRNPoNyPj8mj",
+            "nW9emgJU4exenpW34IYxe3dz",
+            "atKAU42Nom1u9sJcpO8YaCE2",
+            "NvccS7L2NJDrd7v9x2lkGeh5",
+            "AjPowUcj4F2uzBh3YWPH2mfI",
+            "Rv4q4DWFgTkhL4cWaaIGbz4E",
+            "VeFLrLR32pQfkIwqXLuzNEaD"
+          ]
+        },
+        "xE7OujpKzqtVhYvg9h60rLEH": null,
+        "h6Ydmagtni5BzSlnxK1tqHyJ": null,
+        "F3p52HBlRzov2IWCXBkESOij": null,
+        "WTq50ImE4hk0zUtLW2IQxRbD": null,
+        "WTq50ImE4hk0zUtLW2IQxRbDL0": null,
+        "M01kYHSES7uem9n6u7b46mYJ": null,
+        "Jr2Y9wFGo5uL4U9qRl8VMzko": null,
+        "PMuyDUpPuYG7hL464QERjgOO": null,
+        "tD4ib4Qf47nTwVqwkxW9pTTg": null,
+        "ulqp43olpqjxUmPuU1IkPxDsL0": null,
+        "cmIUzLq2T1Ec1HUdHPmfyLbh": null,
+        "zJv3JDP2WRcmA4uYKWl25Tj6": null,
+        "zJv3JDP2WRcmA4uYKWl25Tj6L0": null,
+        "sQwtD2VUDDw4XmEbTUUfMjDa": null,
+        "HyqsWWE4uOuBsWRwxG32TB8u": null,
+        "FhJuObDNjyv7TVO9gZkh8UT9": null,
+        "xqHxuD5cN9h4HdCvxJqGI454": null,
+        "xqHxuD5cN9h4HdCvxJqGI454L0": null
+      }
+    },
+    {
+      "seqNo": 6,
+      "time": 1346281476,
+      "scriptId": "bbzp",
+      "historyId": "2520560193233204126316ca6c6-49a4-4ed7-9b9e-24cef5e62ece",
+      "updateSize": 45,
+      "updates": {
+        "app": {
+          "rootId": "A5BK7ViGbL4t7yZ4LRsZZ6g5"
+        }
+      }
+    },
+    {
+      "seqNo": 7,
+      "time": 1351360689,
+      "scriptId": "bbzp",
+      "historyId": "2520509401109374891cef22e76-7261-4e2f-87f9-b35b95633ec8",
+      "updateSize": 45,
+      "updates": {
+        "app": {
+          "rootId": "xeKKXWRyd5tLlU8hB2RLIyEg"
+        }
+      }
+    }
+  ]
+}

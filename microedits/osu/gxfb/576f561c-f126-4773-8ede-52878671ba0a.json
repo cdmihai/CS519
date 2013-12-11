@@ -1,0 +1,228 @@
+{
+  "userid": "gxfb",
+  "guid": "576f561c-f126-4773-8ede-52878671ba0a",
+  "lastStatus": "published",
+  "items": [
+    {
+      "seqNo": 0,
+      "time": 1369105840,
+      "scriptId": "ekfza",
+      "historyId": "2520331949596327607576f561c-f126-4773-8ede-52878671ba0a",
+      "updateSize": 4391,
+      "ast": {
+        "textVersion": "v2.2,js,ctx",
+        "jsonVersion": "v1.0,resolved,short",
+        "name": "Bazaar → ast of",
+        "comment": "#docs #BazaarAstOf",
+        "icon": "Farm",
+        "color": "#A1CAF1",
+        "autoIcon": "Farm",
+        "autoColor": "#A1CAF1",
+        "platform": "current",
+        "rootId": "HMrXybJc6NCc4EjQeVag7EI4",
+        "showAd": false,
+        "isLibrary": false,
+        "allowExport": false,
+        "hasUniqueIds": false,
+        "decls": [
+          {
+            "name": "main",
+            "inParameters": [],
+            "outParameters": [],
+            "isPrivate": false,
+            "isOffloaded": false,
+            "isTest": false,
+            "isAsync": false,
+            "nodeType": "action",
+            "body": [
+              {
+                "text": "**Preliminary and subject to change.**",
+                "nodeType": "comment",
+                "id": "B8pejoeL4xSYH25EnLwz6Kn7"
+              },
+              {
+                "text": "This API is not fully settled yet. In particular, the JSON schema of objects will change.",
+                "nodeType": "comment",
+                "id": "JqAeV1vETwOIr4ON4U1cWY2W"
+              },
+              {
+                "text": "This API allows for Abstract Syntax Tree (AST) reflection over current script and other scripts. As you might have already guessed, it's rather advanced. It expects the id of the script - this can be either id of a published script or GUID of installed script. See `bazaar->script id` for ways of obtaining these.",
+                "nodeType": "comment",
+                "id": "Zf2GQsds9Njuu8OYqy4g4k7p"
+              },
+              {
+                "text": "This API returns a `Json Object`. The schema is [documented here] (http://www.touchdevelop.com/api/language/webast). For scripts, it returns an instance of `JApp`.",
+                "nodeType": "comment",
+                "id": "F1vQfZdrkiQkJ83JNqzg2B4Z"
+              },
+              {
+                "text": "### getting API list",
+                "nodeType": "comment",
+                "id": "DiI0IhOTPvw5c9nC1nvXw9yC"
+              },
+              {
+                "text": "You can also pass `\"api\"` as the id of script. This will return a JSON object with the list of types/properties in TouchDevelop. See `JApis` in the schema documentation.",
+                "nodeType": "comment",
+                "id": "QV8TTa0mMrv81mbXacdHjuL3"
+              },
+              {
+                "text": "### security",
+                "nodeType": "comment",
+                "id": "pvAaKTizKVNS2i4NqzIm5183"
+              },
+              {
+                "text": "If you'll ask for GUID of something that is not the current script or one of its libraries, the user will be prompted for consent. Asking for AST of published scripts is always OK.",
+                "nodeType": "comment",
+                "id": "soTQwyPw1kxO6L22NDowozEk"
+              },
+              {
+                "text": "### online REST endpoints",
+                "nodeType": "comment",
+                "id": "CwYCL4rc0L3WKZuLeCTsX7Aq"
+              },
+              {
+                "text": "TouchDevelop also exposes REST end points where you can fetch ASTs of published scripts. These all sit under `http://www.touchdevelop.com/api/<id>/`, for example http://www.touchdevelop.com/api/mpuj/webast. They are:",
+                "nodeType": "comment",
+                "id": "xmALdTMwiMjxo6iFoU1SZ6hl"
+              },
+              {
+                "text": "* `/<id>/webast` - a `JApp` just like the one returned `ast of`",
+                "nodeType": "comment",
+                "id": "pSUJfeD2aa3CeNP4USbWJHW7"
+              },
+              {
+                "text": "* `/<id>/text` and `/<id>/text?original=true` - text of the script in internal TouchDevelop syntax; better not rely on that not changing",
+                "nodeType": "comment",
+                "id": "xVada9voXp6s46R65a5KA2wg"
+              },
+              {
+                "text": "* `/<id>/pretty` - pretty-printed text of the script",
+                "nodeType": "comment",
+                "id": "oBMsfrOt4Ml70lXijMKv2RlV"
+              },
+              {
+                "text": "* `/<id>/pretty-docs` - script pretty-printed as documentation",
+                "nodeType": "comment",
+                "id": "v4wJ9dMTa3krQjx2Aifg1uh1"
+              },
+              {
+                "text": "Additionally, there is a number of endpoints under `/api/language`:",
+                "nodeType": "comment",
+                "id": "e8MdIkMatm2yHXR2M3kIF2X8"
+              },
+              {
+                "text": "* `/api/language/webast` - the schema of the JSON ASTs (text file in [TypeScript] (http://www.typescriptlang.org/) syntax)",
+                "nodeType": "comment",
+                "id": "xyvBT9WaqlG8pcdZ8s84vbDb"
+              },
+              {
+                "text": "* `/api/language/apis` - `JApis` listing all TouchDevelop properties (same as `bazaar->ast_of(\"api\")`)",
+                "nodeType": "comment",
+                "id": "zpHdblPfxaBulg2bJb2gQgvY"
+              },
+              {
+                "text": "* `/api/langauge/version` - a JSON object listing current version of the runtime on the server",
+                "nodeType": "comment",
+                "id": "xp8e83OY4QKiAls3F68W81ud"
+              },
+              {
+                "text": "All the REST end-points returning JSON accept additional parameter `?format=true`, to indent resulting JSON.",
+                "nodeType": "comment",
+                "id": "YR5o8uwExw9t6fv1UivqKDkk"
+              },
+              {
+                "text": "All the REST end-points accept `?releaseid=<releaseid>` parameter. This lets you use a specific version of the runtime on the server. You can find release id of the current TouchDevelop release by looking at the source TouchDevelop editor (particularly, look at the `manifest=` on the `<html>`). You can also use `/api/language/version`.",
+                "nodeType": "comment",
+                "id": "k46U2rEbkc5a78x7Fq4iQrZ4"
+              },
+              {
+                "text": "See also [other TouchDevelop cloud APIs] (https://www.touchdevelop.com/help/cloudservices).",
+                "nodeType": "comment",
+                "id": "xyHQuUZjqyajlDBEZ6hKxdyx"
+              }
+            ],
+            "id": "MwzFfQx6uYIrJw5xlu7I5UKU"
+          }
+        ],
+        "deletedDecls": [],
+        "nodeType": "app",
+        "id": "app"
+      }
+    },
+    {
+      "seqNo": 1,
+      "time": 1373744478,
+      "scriptId": "uplz",
+      "historyId": "252028556321260508935d2c576-4558-44dd-a089-721fe95bde21",
+      "updateSize": 1565,
+      "updates": {
+        "Zf2GQsds9Njuu8OYqy4g4k7p": {
+          "text": "This API allows for Abstract Syntax Tree (AST) reflection over current script and other scripts. As you might have already guessed, it's rather advanced. It expects the id of the script - this can be either id of a published script or GUID of installed script. See `bazaar->script id` and `bazaar->pick script` for ways of obtaining these."
+        },
+        "bFBaMLcH7cAEuDwfMAe0xtiB": {
+          "text": "If you obtained the script id from `bazaar->pick script`, this count as prompting and we will not prompt again.",
+          "nodeType": "comment"
+        },
+        "x6kfGx4QpnBTO8Q2jWZLaU2x": {
+          "text": "* `/<id>/platforms` - run platform capability detector on a script (this information is also available under `/<id>`)",
+          "nodeType": "comment"
+        },
+        "ntFWKY4IV0iZ4vxSpjKYQ1IZ": {
+          "text": "* `/<id>/compile` - compile script to JavaScript",
+          "nodeType": "comment"
+        },
+        "MwzFfQx6uYIrJw5xlu7I5UKU": {
+          "body": [
+            "B8pejoeL4xSYH25EnLwz6Kn7",
+            "JqAeV1vETwOIr4ON4U1cWY2W",
+            "Zf2GQsds9Njuu8OYqy4g4k7p",
+            "F1vQfZdrkiQkJ83JNqzg2B4Z",
+            "DiI0IhOTPvw5c9nC1nvXw9yC",
+            "QV8TTa0mMrv81mbXacdHjuL3",
+            "pvAaKTizKVNS2i4NqzIm5183",
+            "soTQwyPw1kxO6L22NDowozEk",
+            "bFBaMLcH7cAEuDwfMAe0xtiB",
+            "CwYCL4rc0L3WKZuLeCTsX7Aq",
+            "xmALdTMwiMjxo6iFoU1SZ6hl",
+            "pSUJfeD2aa3CeNP4USbWJHW7",
+            "xVada9voXp6s46R65a5KA2wg",
+            "oBMsfrOt4Ml70lXijMKv2RlV",
+            "v4wJ9dMTa3krQjx2Aifg1uh1",
+            "x6kfGx4QpnBTO8Q2jWZLaU2x",
+            "ntFWKY4IV0iZ4vxSpjKYQ1IZ",
+            "e8MdIkMatm2yHXR2M3kIF2X8",
+            "xyvBT9WaqlG8pcdZ8s84vbDb",
+            "zpHdblPfxaBulg2bJb2gQgvY",
+            "xp8e83OY4QKiAls3F68W81ud",
+            "YR5o8uwExw9t6fv1UivqKDkk",
+            "k46U2rEbkc5a78x7Fq4iQrZ4",
+            "xyHQuUZjqyajlDBEZ6hKxdyx"
+          ]
+        },
+        "app": {
+          "rootId": "xVzukRSqusK5I4vz6446AGgd"
+        }
+      }
+    },
+    {
+      "seqNo": 2,
+      "time": 1373744503,
+      "scriptId": "uplz",
+      "historyId": "25202855629651968023a3b33b8-75c4-41ec-827b-4f75e9a9d400",
+      "updateSize": 45,
+      "updates": {
+        "app": {
+          "rootId": "dklUF3MDgztSC749PPgohnrQ"
+        }
+      }
+    },
+    {
+      "seqNo": 3,
+      "time": 1374032497,
+      "scriptId": "uplz",
+      "historyId": "2520282683024891506250a322b-b109-4592-988e-60a35a79ed55",
+      "updateSize": 2,
+      "updates": {}
+    }
+  ]
+}
