@@ -2,6 +2,7 @@ package edu.oregonstate.cs519.touchdevelop;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
@@ -21,6 +22,13 @@ public class Script {
 
 	public Script(Map<String, Object> hashMap) {
 		this.hashMap = hashMap;
+	}
+	
+	public Script(String scriptID) {
+		Map<String, Object> map = new HashMap<>();
+		map.put(Script.ID, scriptID);
+		
+		this.hashMap = map;
 	}
 
 	public String getName() {
